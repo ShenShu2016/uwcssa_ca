@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
  * @LastEditors: Shikai Jin
- * @LastEditTime: 2022-06-04 18:11:56
+ * @LastEditTime: 2022-06-04 21:46:51
  * @FilePath: /uwcssa_ca/src/views/ViewRoutes.tsx
  * @Description:
  *
@@ -217,6 +217,7 @@ function ViewRoutes(): Array<{
       renderer: (params = {}): JSX.Element => <AboutView {...params} />,
       isAllowed: true,
       redirectPath: undefined,
+      colorInvert: true,
     },
     {
       path: '/developers',
