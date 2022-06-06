@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-29 22:42:19
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-06 15:49:29
+ * @LastEditTime: 2022-06-06 19:35:07
  * @FilePath: /uwcssa_ca/src/redux/uwcssaMember/uwcssaMemberSlice.tsx
  * @Description:
  * import uwcssaMemberReducer from './uwcssaMember/uwcssaMemberSlice';
@@ -15,15 +15,20 @@ import {
   createEntityAdapter,
   createSlice,
 } from '@reduxjs/toolkit';
-import { createUwcssaMember, updateUwcssaMember } from 'graphql/mutations';
-import { getUwcssaMember, listUwcssaMembers } from 'graphql/queries';
+import {
+  createUwcssaMember,
+  deleteUwcssaMember,
+  updateUwcssaMember,
+} from 'graphql/mutations';
 
 import API from '@aws-amplify/api';
 import { RootState } from 'redux/store';
 import { UserImage } from 'redux/userImage/userImageSlice';
 import { UserProfile } from 'redux/userProfile/userProfileSlice';
 import { UwcssaDepartment } from 'redux/uwcssaDepartment/uwcssaDepartmentSlice';
+import { getUwcssaMember } from 'graphql/queries';
 import { graphqlOperation } from '@aws-amplify/api-graphql';
+import { listUwcssaMembers } from './custom_q_m_s';
 
 export type UwcssaMember = {
   id: string;
@@ -61,6 +66,8 @@ const initialState = uwcssaMemberAdapter.getInitialState({
   postUwcssaMemberImgError: null,
   updateUwcssaMemberDetailStatus: 'idle',
   updateUwcssaMemberDetailError: null,
+  removeUwcssaMemberStatus: 'idle',
+  removeUwcssaMemberError: null,
 });
 
 export const fetchUwcssaMemberList = createAsyncThunk(
@@ -140,6 +147,12 @@ export const updateUwcssaMemberDetail = createAsyncThunk(
   }: {
     updateUwcssaMemberInput: UpdateUwcssaMemberInput;
   }) => {
+    Object.keys(updateUwcssaMemberInput).forEach((key) =>
+      updateUwcssaMemberInput[key] === null ||
+      updateUwcssaMemberInput[key] === ''
+        ? delete updateUwcssaMemberInput[key]
+        : {},
+    );
     try {
       const result: any = await API.graphql(
         graphqlOperation(updateUwcssaMember, {
@@ -147,6 +160,23 @@ export const updateUwcssaMemberDetail = createAsyncThunk(
         }),
       );
       return result.data.updateUwcssaMember;
+    } catch (error) {
+      console.log(error);
+    }
+  },
+);
+
+export const removeUwcssaMember = createAsyncThunk(
+  'uwcssaMember/removeUwcssaMember',
+  async ({ id }: { id: string }) => {
+    try {
+      const result: any = await API.graphql(
+        graphqlOperation(deleteUwcssaMember, {
+          input: { id },
+        }),
+      );
+      console.log(result);
+      return result.data.deleteUwcssaMember.id;
     } catch (error) {
       console.log(error);
     }
@@ -204,15 +234,30 @@ const uwcssaMemberSlice = createSlice({
       .addCase(updateUwcssaMemberDetail.pending, (state) => {
         state.updateUwcssaMemberDetailStatus = 'loading';
       })
-      .addCase(updateUwcssaMemberDetail.fulfilled, (state) => {
+      .addCase(updateUwcssaMemberDetail.fulfilled, (state, action) => {
         state.updateUwcssaMemberDetailStatus = 'succeed';
         //state.uwcssaMembers.unshift(action.payload.data.createUwcssaMember);
-        //uwcssaMemberAdapter.upsertOne(state, action.payload);
+        uwcssaMemberAdapter.upsertOne(state, action.payload);
         // state.updateUwcssaMemberStatus = "idle";
       })
       .addCase(updateUwcssaMemberDetail.rejected, (state, action) => {
         state.updateUwcssaMemberDetailStatus = 'failed';
         state.updateUwcssaMemberDetailError = action.error.message;
+      })
+      // Cases for status of updateUwcssaMember (pending, fulfilled, and rejected)
+      .addCase(removeUwcssaMember.pending, (state) => {
+        state.removeUwcssaMemberStatus = 'loading';
+      })
+      .addCase(removeUwcssaMember.fulfilled, (state, action) => {
+        state.removeUwcssaMemberStatus = 'succeed';
+        console.log(action.payload);
+        //state.uwcssaMembers.unshift(action.payload.data.createUwcssaMember);
+        uwcssaMemberAdapter.removeOne(state, action.payload);
+        // state.updateUwcssaMemberStatus = "idle";
+      })
+      .addCase(removeUwcssaMember.rejected, (state, action) => {
+        state.removeUwcssaMemberStatus = 'failed';
+        state.removeUwcssaMemberError = action.error.message;
       });
   },
 });

@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-29 22:42:19
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-06 16:17:45
+ * @LastEditTime: 2022-06-06 19:36:08
  * @FilePath: /uwcssa_ca/src/redux/researchDevelopmentTeam/researchDevelopmentTeamSlice.tsx
  * @Description:
  * import researchDevelopmentTeamReducer from './researchDevelopmentTeam/researchDevelopmentTeamSlice';
@@ -20,6 +20,7 @@ import {
 } from '@reduxjs/toolkit';
 import {
   createResearchDevelopmentTeam,
+  deleteResearchDevelopmentTeam,
   updateResearchDevelopmentTeam,
 } from 'graphql/mutations';
 
@@ -66,6 +67,8 @@ const initialState = researchDevelopmentTeamAdapter.getInitialState({
   postResearchDevelopmentTeamImgError: null,
   updateResearchDevelopmentTeamDetailStatus: 'idle',
   updateResearchDevelopmentTeamDetailError: null,
+  removeResearchDevelopmentTeamStatus: 'idle',
+  removeResearchDevelopmentTeamError: null,
 });
 
 export const fetchResearchDevelopmentTeamList = createAsyncThunk(
@@ -164,6 +167,23 @@ export const updateResearchDevelopmentTeamDetail = createAsyncThunk(
   },
 );
 
+export const removeResearchDevelopmentTeam = createAsyncThunk(
+  'researchDevelopmentTeam/removeResearchDevelopmentTeam',
+  async ({ id }: { id: string }) => {
+    try {
+      const result: any = await API.graphql(
+        graphqlOperation(deleteResearchDevelopmentTeam, {
+          input: { id },
+        }),
+      );
+      console.log(result);
+      return result.data.deleteResearchDevelopmentTeam.id;
+    } catch (error) {
+      console.log(error);
+    }
+  },
+);
+
 const researchDevelopmentTeamSlice = createSlice({
   name: 'researchDevelopmentTeam',
   initialState,
@@ -228,7 +248,21 @@ const researchDevelopmentTeamSlice = createSlice({
           state.updateResearchDevelopmentTeamDetailStatus = 'failed';
           state.updateResearchDevelopmentTeamDetailError = action.error.message;
         },
-      );
+      )
+      .addCase(removeResearchDevelopmentTeam.pending, (state) => {
+        state.removeResearchDevelopmentTeamStatus = 'loading';
+      })
+      .addCase(removeResearchDevelopmentTeam.fulfilled, (state, action) => {
+        state.removeResearchDevelopmentTeamStatus = 'succeed';
+        console.log(action.payload);
+        //state.uwcssaMembers.unshift(action.payload.data.createUwcssaMember);
+        researchDevelopmentTeamAdapter.removeOne(state, action.payload);
+        // state.updateUwcssaMemberStatus = "idle";
+      })
+      .addCase(removeResearchDevelopmentTeam.rejected, (state, action) => {
+        state.removeResearchDevelopmentTeamStatus = 'failed';
+        state.removeResearchDevelopmentTeamError = action.error.message;
+      });
   },
 });
 

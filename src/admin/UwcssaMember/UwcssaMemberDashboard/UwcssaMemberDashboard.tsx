@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-30 14:17:41
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-06 15:25:38
+ * @LastEditTime: 2022-06-06 17:05:54
  * @FilePath: /uwcssa_ca/src/admin/UwcssaMember/UwcssaMemberDashboard/UwcssaMemberDashboard.tsx
  * @Description:
  *
@@ -10,14 +10,16 @@
 
 import { Button, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
+import {
+  fetchUwcssaMemberList,
+  selectAllUwcssaMembers,
+} from 'redux/uwcssaMember/uwcssaMemberSlice';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 
-import { AddResearchDevelopmentTeamForm } from './components/AddUwcssaMemberTeam';
+import AddUwcssaMemberForm from './components/AddUwcssaMember';
 import Container from 'components/Container';
 import SimpleStriped from './components/SimpleStriped';
-import { fetchResearchDevelopmentTeamList } from 'redux/researchDevelopmentTeam/researchDevelopmentTeamSlice';
 import { getAuthState } from 'redux/auth/authSlice';
-import { selectAllUwcssaMembers } from 'redux/uwcssaMember/uwcssaMemberSlice';
 
 function UwcssaMemberDashboard() {
   const dispatch = useAppDispatch();
@@ -28,16 +30,13 @@ function UwcssaMemberDashboard() {
   );
   const uwcssaMemberList = useAppSelector(selectAllUwcssaMembers);
   useEffect(() => {
-    const getUwcssaDepartments = async () => {
-      if (isAuth !== null && fetchUwcssaMemberListStatus === 'idle') {
-        await dispatch(
-          fetchResearchDevelopmentTeamList({
-            isAuth,
-          }),
-        );
-      }
-    };
-    getUwcssaDepartments();
+    if (isAuth !== null && fetchUwcssaMemberListStatus === 'idle') {
+      dispatch(
+        fetchUwcssaMemberList({
+          isAuth,
+        }),
+      );
+    }
   }, [isAuth, fetchUwcssaMemberListStatus]);
 
   return (
@@ -47,10 +46,7 @@ function UwcssaMemberDashboard() {
         Add 学生会成员
       </Button>
       <SimpleStriped uwcssaMemberList={uwcssaMemberList} />
-      <AddResearchDevelopmentTeamForm
-        open={open}
-        onClose={() => setOpen(false)}
-      />
+      <AddUwcssaMemberForm open={open} onClose={() => setOpen(false)} />
     </Container>
   );
 }

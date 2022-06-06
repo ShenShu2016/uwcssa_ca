@@ -2,8 +2,8 @@
  * @Author: Shen Shu
  * @Date: 2022-05-30 15:13:57
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-06 15:38:05
- * @FilePath: /uwcssa_ca/src/admin/UwcssaMember/UwcssaMemberDashboard/components/AddUwcssaMemberTeam/AddResearchDevelopmentTeamForm/AddResearchDevelopmentTeamForm.tsx
+ * @LastEditTime: 2022-06-06 17:35:46
+ * @FilePath: /uwcssa_ca/src/admin/UwcssaMember/UwcssaMemberDashboard/components/AddUwcssaMember/AddUwcssaMemberForm/AddUwcssaMemberForm.tsx
  * @Description:
  *
  */
@@ -49,7 +49,8 @@ const validationSchema = yup.object({
   uwcssaDepartmentUwcssaMembersId: yup
     .string()
     .trim()
-    .required('Name is required'),
+    .required('Department is required'),
+  name: yup.string().trim(),
   title: yup.string().trim(),
   subTitle: yup.string().trim(),
   content: yup.string().trim(),
@@ -83,10 +84,7 @@ interface Props {
   open: boolean;
 }
 
-const AddResearchDevelopmentTeamForm = ({
-  onClose,
-  open,
-}: Props): JSX.Element => {
+const AddUwcssaMemberForm = ({ onClose, open }: Props): JSX.Element => {
   const dispatch = useAppDispatch();
   const [expanded, setExpanded] = useState<true | false>(false);
   const isAuth = useAppSelector(getAuthState);
@@ -121,11 +119,11 @@ const AddResearchDevelopmentTeamForm = ({
   }, [isAuth, fetchUserProfileListStatus]);
 
   const initialValues = {
-    uwcssaDepartmentUwcssaMembersId: '',
     title: '',
     subTitle: '',
     content: '',
     email: '',
+    uwcssaDepartmentUwcssaMembersId: '',
     linkedIn: '',
     github: '',
     website: '',
@@ -216,6 +214,7 @@ const AddResearchDevelopmentTeamForm = ({
                     }
                   >
                     {uwcssaDepartmentList.map((option, index) => {
+                      console.log();
                       return (
                         <MenuItem key={index} value={option.id}>
                           {option.id}
@@ -278,7 +277,15 @@ const AddResearchDevelopmentTeamForm = ({
                               component={LazyLoadImage}
                               effect="blur"
                               src="/assets/images/icons/google-1.svg"
-                              sx={{ mx: '0.5rem' }}
+                              sx={{ mx: '0.5rem', height: '20px' }}
+                            />
+                          )}
+                          {option.email.includes('@uwindsor.ca') && (
+                            <Box
+                              component={LazyLoadImage}
+                              effect="blur"
+                              src="/assets/images/icons/uwindsor_shield.svg"
+                              sx={{ mx: '0.5rem', height: '20px' }}
                             />
                           )}
                         </MenuItem>
@@ -446,6 +453,14 @@ const AddResearchDevelopmentTeamForm = ({
                 <Button size={'large'} variant={'contained'} type={'submit'}>
                   Submit
                 </Button>
+                <Button
+                  size={'large'}
+                  variant={'text'}
+                  sx={{ ml: '2rem' }}
+                  onClick={() => onClose()}
+                >
+                  Cancel
+                </Button>
               </Grid>
             </Grid>
           </form>
@@ -455,4 +470,4 @@ const AddResearchDevelopmentTeamForm = ({
   );
 };
 
-export default AddResearchDevelopmentTeamForm;
+export default AddUwcssaMemberForm;

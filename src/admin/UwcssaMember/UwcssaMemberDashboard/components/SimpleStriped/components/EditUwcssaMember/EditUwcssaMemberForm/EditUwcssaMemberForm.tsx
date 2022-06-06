@@ -2,8 +2,8 @@
  * @Author: Shen Shu
  * @Date: 2022-05-30 15:13:57
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-05 22:36:39
- * @FilePath: /uwcssa_ca/src/admin/UwcssaMember/UwcssaMemberDashboard/components/SimpleStriped/components/EditResearchDevelopmentTeam/EditUwcssaMemberTeamForm/EditUwcssaMemberTeamForm.tsx
+ * @LastEditTime: 2022-06-06 17:18:33
+ * @FilePath: /uwcssa_ca/src/admin/UwcssaMember/UwcssaMemberDashboard/components/SimpleStriped/components/EditUwcssaMember/EditUwcssaMemberForm/EditUwcssaMemberForm.tsx
  * @Description:
  *
  */
@@ -14,28 +14,36 @@ import {
   Box,
   Button,
   Dialog,
+  FormControl,
+  FormHelperText,
   Grid,
+  InputLabel,
+  MenuItem,
+  Select,
   TextField,
   Typography,
 } from '@mui/material';
+import React, { useEffect } from 'react';
+import {
+  fetchUwcssaDepartmentList,
+  selectAllUwcssaDepartments,
+} from 'redux/uwcssaDepartment/uwcssaDepartmentSlice';
+import { useAppDispatch, useAppSelector } from 'redux/hooks';
 
-import React from 'react';
+import { getAuthState } from 'redux/auth/authSlice';
 import { updateResearchDevelopmentTeamDetail } from 'redux/researchDevelopmentTeam/researchDevelopmentTeamSlice';
-import { useAppDispatch } from 'redux/hooks';
+import { updateUwcssaMemberDetail } from 'redux/uwcssaMember/uwcssaMemberSlice';
 import { useFormik } from 'formik';
 
 const validationSchema = yup.object({
-  name: yup.string().trim().required('Name is required'),
+  uwcssaDepartmentUwcssaMembersId: yup
+    .string()
+    .trim()
+    .required('Department is required'),
+  name: yup.string().trim(),
   title: yup.string().trim(),
   subTitle: yup.string().trim(),
   content: yup.string().trim(),
-  imgURL: yup
-    .string()
-    .matches(
-      /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
-      'Enter correct url!',
-    )
-    .trim(),
   email: yup.string().email(),
   linkedIn: yup
     .string()
@@ -58,7 +66,6 @@ const validationSchema = yup.object({
       'Enter correct url!',
     )
     .trim(),
-  owner: yup.string().trim().required('Owner is required'),
 });
 interface Props {
   // eslint-disable-next-line @typescript-eslint/ban-types
@@ -70,8 +77,8 @@ interface Props {
     title?: string | null;
     subTitle?: string | null;
     content?: string | null;
-    //imgURL?: string | null;
     email?: string | null;
+    uwcssaDepartmentUwcssaMembersId?: string;
     linkedIn?: string | null;
     website?: string | null;
     github?: string | null;
@@ -79,12 +86,23 @@ interface Props {
   };
 }
 
-const EditUwcssaMemberTeamForm = ({
-  onClose,
-  open,
-  item,
-}: Props): JSX.Element => {
+const EditUwcssaMemberForm = ({ onClose, open, item }: Props): JSX.Element => {
   const dispatch = useAppDispatch();
+  const isAuth = useAppSelector(getAuthState);
+  const { fetchUwcssaDepartmentListStatus } = useAppSelector(
+    (state) => state.uwcssaDepartment,
+  );
+  const uwcssaDepartmentList = useAppSelector(selectAllUwcssaDepartments);
+
+  useEffect(() => {
+    if (isAuth !== null && fetchUwcssaDepartmentListStatus === 'idle') {
+      dispatch(
+        fetchUwcssaDepartmentList({
+          isAuth,
+        }),
+      );
+    }
+  }, [isAuth, fetchUwcssaDepartmentListStatus]);
 
   const initialValues = {
     id: item?.id || '',
@@ -92,23 +110,23 @@ const EditUwcssaMemberTeamForm = ({
     title: item?.title || '',
     subTitle: item?.subTitle || '',
     content: item?.content || '',
-    //imgURL: item?.imgURL || '',
     email: item?.email || '',
+    uwcssaDepartmentUwcssaMembersId:
+      item?.uwcssaDepartmentUwcssaMembersId || '',
     linkedIn: item?.linkedIn || '',
     website: item?.website || '',
     github: item?.github || '',
-    owner: item?.owner || '',
   };
 
   const onSubmit = async (values) => {
     console.log(JSON.stringify(values));
-    const updateResearchDevelopmentTeamInput = {
+    const updateUwcssaMemberInput = {
       ...values,
     };
-    console.log(updateResearchDevelopmentTeamInput);
+    console.log(updateUwcssaMemberInput);
     const response = await dispatch(
-      updateResearchDevelopmentTeamDetail({
-        updateResearchDevelopmentTeamInput,
+      updateUwcssaMemberDetail({
+        updateUwcssaMemberInput,
       }),
     );
     if (response.meta.requestStatus === 'fulfilled') {
@@ -141,7 +159,7 @@ const EditUwcssaMemberTeamForm = ({
       <Box paddingY={2} paddingX={4}>
         <Box paddingY={2} display={'flex'} justifyContent={'space-between'}>
           <Typography variant={'h5'} fontWeight={700}>
-            Add a new Developer
+            编辑成员
           </Typography>
           <Box
             component={'svg'}
@@ -167,10 +185,44 @@ const EditUwcssaMemberTeamForm = ({
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <Typography variant={'subtitle2'} sx={{ marginBottom: 1 }}>
+                  部门
+                </Typography>
+                <FormControl fullWidth>
+                  <InputLabel id={'getDepartment-label-id'}>
+                    {'选择部门'}
+                  </InputLabel>
+                  <Select
+                    labelId={'getDepartment-label-id'}
+                    //id={getInputFieldName({ order: formItem.order })}
+                    name={'uwcssaDepartmentUwcssaMembersId'}
+                    value={formik.values.uwcssaDepartmentUwcssaMembersId}
+                    label={'部门'}
+                    onChange={formik.handleChange}
+                    error={
+                      formik.touched.uwcssaDepartmentUwcssaMembersId &&
+                      Boolean(formik.errors.uwcssaDepartmentUwcssaMembersId)
+                    }
+                  >
+                    {uwcssaDepartmentList.map((option, index) => {
+                      return (
+                        <MenuItem key={index} value={option.id}>
+                          {option.id}
+                        </MenuItem>
+                      );
+                    })}
+                  </Select>
+                  <FormHelperText>
+                    {formik.touched.uwcssaDepartmentUwcssaMembersId &&
+                      Boolean(formik.errors.uwcssaDepartmentUwcssaMembersId)}
+                  </FormHelperText>
+                </FormControl>
+              </Grid>
+              <Grid item xs={12}>
+                <Typography variant={'subtitle2'} sx={{ marginBottom: 1 }}>
                   Name
                 </Typography>
                 <TextField
-                  label="成员名字 *"
+                  label="成员名字"
                   variant="outlined"
                   name={'name'}
                   fullWidth
@@ -178,21 +230,6 @@ const EditUwcssaMemberTeamForm = ({
                   onChange={formik.handleChange}
                   error={formik.touched.name && Boolean(formik.errors.name)}
                   helperText={formik.touched.name && formik.errors.name}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <Typography variant={'subtitle2'} sx={{ marginBottom: 1 }}>
-                  Uwcssa ID
-                </Typography>
-                <TextField
-                  label="userName uuid"
-                  variant="outlined"
-                  name={'owner'}
-                  fullWidth
-                  value={formik.values.owner}
-                  onChange={formik.handleChange}
-                  error={formik.touched.owner && Boolean(formik.errors.owner)}
-                  helperText={formik.touched.owner && formik.errors.owner}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -262,24 +299,6 @@ const EditUwcssaMemberTeamForm = ({
                 </Grid>
                 <Grid item xs={12}>
                   <Typography variant={'subtitle2'} sx={{ my: 1 }}>
-                    个人照片
-                  </Typography>
-                  <TextField
-                    label="imgURL"
-                    variant="outlined"
-                    name={'imgURL'}
-                    fullWidth
-                    value={formik.values.imgURL}
-                    onChange={formik.handleChange}
-                    error={
-                      formik.touched.imgURL && Boolean(formik.errors.imgURL)
-                    }
-                    helperText={formik.touched.imgURL && formik.errors.imgURL}
-                  />
-                </Grid>
-
-                <Grid item xs={12}>
-                  <Typography variant={'subtitle2'} sx={{ my: 1 }}>
                     LinkedIn
                   </Typography>
                   <TextField
@@ -337,6 +356,14 @@ const EditUwcssaMemberTeamForm = ({
                 <Button size={'large'} variant={'contained'} type={'submit'}>
                   Submit
                 </Button>
+                <Button
+                  size={'large'}
+                  variant={'text'}
+                  sx={{ ml: '2rem' }}
+                  onClick={() => onClose()}
+                >
+                  Cancel
+                </Button>
               </Grid>
             </Grid>
           </form>
@@ -346,4 +373,4 @@ const EditUwcssaMemberTeamForm = ({
   );
 };
 
-export default EditUwcssaMemberTeamForm;
+export default EditUwcssaMemberForm;

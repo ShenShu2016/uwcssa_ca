@@ -12,23 +12,46 @@ import {
   useTheme,
 } from '@mui/material';
 import React, { useState } from 'react';
+import {
+  ResearchDevelopmentTeam,
+  removeResearchDevelopmentTeam,
+} from 'redux/researchDevelopmentTeam/researchDevelopmentTeamSlice';
 
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import EditUwcssaDepartmentForm from './components/EditResearchDevelopmentTeam/';
-import { ResearchDevelopmentTeam } from 'redux/researchDevelopmentTeam/researchDevelopmentTeamSlice';
 import { stringAvatar } from 'components/Avatar/AvatarFunction';
+import { useAppDispatch } from 'redux/hooks';
+import { useConfirm } from 'material-ui-confirm';
 
 const SimpleStriped = ({
   researchDevelopmentTeamList,
 }: {
   researchDevelopmentTeamList: Array<ResearchDevelopmentTeam>;
 }): JSX.Element => {
+  const confirm = useConfirm();
   const theme = useTheme();
-  const [open, setOpen] = useState(false);
+  const dispatch = useAppDispatch();
+  const [editOpen, setEditOpen] = useState(false);
   const [researchDevelopmentMember, setResearchDevelopmentMember] =
     useState<ResearchDevelopmentTeam | null>(null);
 
+  const handleDeleteResearchDevelopmentMember = async ({ item }) => {
+    console.log(item);
+    await confirm({
+      description: `This will permanently delete ${item.name}.`,
+    });
+    const response = await dispatch(
+      removeResearchDevelopmentTeam({
+        id: item.id,
+      }),
+    );
+    if (response.meta.requestStatus === 'fulfilled') {
+      return true;
+    } else {
+      return false;
+    }
+  };
   return (
     <>
       <TableContainer component={Paper}>
@@ -213,7 +236,7 @@ const SimpleStriped = ({
                     startIcon={<EditIcon />}
                     sx={{ p: '4px', mr: '4px' }}
                     onClick={() => {
-                      setResearchDevelopmentMember(item), setOpen(true);
+                      setResearchDevelopmentMember(item), setEditOpen(true);
                     }}
                   >
                     Edit
@@ -222,6 +245,9 @@ const SimpleStriped = ({
                     sx={{ p: '4px' }}
                     variant="text"
                     startIcon={<DeleteIcon />}
+                    onClick={() => {
+                      handleDeleteResearchDevelopmentMember({ item });
+                    }}
                   >
                     Delete
                   </Button>
@@ -232,9 +258,9 @@ const SimpleStriped = ({
         </Table>
       </TableContainer>
       <EditUwcssaDepartmentForm
-        open={open}
+        open={editOpen}
         item={researchDevelopmentMember}
-        onClose={() => setOpen(false)}
+        onClose={() => setEditOpen(false)}
       />
     </>
   );

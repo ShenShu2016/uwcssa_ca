@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-30 15:13:57
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-06 16:14:07
+ * @LastEditTime: 2022-06-06 17:16:40
  * @FilePath: /uwcssa_ca/src/admin/ResearchDevelopmentTeam/ResearchDevelopmentTeamDashboard/components/SimpleStriped/components/EditResearchDevelopmentTeam/EditResearchDevelopmentTeamForm/EditResearchDevelopmentTeamForm.tsx
  * @Description:
  *
@@ -284,6 +284,14 @@ const EditResearchDevelopmentTeamForm = ({
               <Grid item container xs={12}>
                 <Button size={'large'} variant={'contained'} type={'submit'}>
                   Submit
+                </Button>
+                <Button
+                  size={'large'}
+                  variant={'text'}
+                  sx={{ ml: '2rem' }}
+                  onClick={() => onClose()}
+                >
+                  Cancel
                 </Button>
               </Grid>
             </Grid>
