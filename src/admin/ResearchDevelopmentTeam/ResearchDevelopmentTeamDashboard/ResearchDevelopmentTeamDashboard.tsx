@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-30 14:17:41
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-30 22:15:45
+ * @LastEditTime: 2022-06-06 15:25:51
  * @FilePath: /uwcssa_ca/src/admin/ResearchDevelopmentTeam/ResearchDevelopmentTeamDashboard/ResearchDevelopmentTeamDashboard.tsx
  * @Description:
  *
@@ -32,19 +32,13 @@ function ResearchDevelopmentTeamDashboard() {
     selectAllResearchDevelopmentTeams,
   );
   useEffect(() => {
-    const getUwcssaDepartments = async () => {
-      if (
-        isAuth !== null &&
-        fetchResearchDevelopmentTeamListStatus === 'idle'
-      ) {
-        await dispatch(
-          fetchResearchDevelopmentTeamList({
-            isAuth,
-          }),
-        );
-      }
-    };
-    getUwcssaDepartments();
+    if (isAuth !== null && fetchResearchDevelopmentTeamListStatus === 'idle') {
+      dispatch(
+        fetchResearchDevelopmentTeamList({
+          isAuth,
+        }),
+      );
+    }
   }, [isAuth, fetchResearchDevelopmentTeamListStatus]);
 
   return (

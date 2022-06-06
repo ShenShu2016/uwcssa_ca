@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-30 15:13:57
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-05 23:44:08
+ * @LastEditTime: 2022-06-06 15:38:05
  * @FilePath: /uwcssa_ca/src/admin/UwcssaMember/UwcssaMemberDashboard/components/AddUwcssaMemberTeam/AddResearchDevelopmentTeamForm/AddResearchDevelopmentTeamForm.tsx
  * @Description:
  *
@@ -28,20 +28,28 @@ import {
   Typography,
 } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { fetchUserProfileList, selectAllUserProfiles } from 'redux/userProfile/userProfileSlice';
-import { fetchUwcssaDepartmentList, selectAllUwcssaDepartments } from 'redux/uwcssaDepartment/uwcssaDepartmentSlice';
+import {
+  fetchUserProfileList,
+  selectAllUserProfiles,
+} from 'redux/userProfile/userProfileSlice';
+import {
+  fetchUwcssaDepartmentList,
+  selectAllUwcssaDepartments,
+} from 'redux/uwcssaDepartment/uwcssaDepartmentSlice';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { getAuthState } from 'redux/auth/authSlice';
-import { postResearchDevelopmentTeam } from 'redux/researchDevelopmentTeam/researchDevelopmentTeamSlice';
 import { postUwcssaMember } from 'redux/uwcssaMember/uwcssaMemberSlice';
 import { stringAvatar } from 'components/Avatar/AvatarFunction';
 import { useFormik } from 'formik';
 
 const validationSchema = yup.object({
-  uwcssaDepartmentUwcssaMembersId: yup.string().trim().required('Name is required'),
+  uwcssaDepartmentUwcssaMembersId: yup
+    .string()
+    .trim()
+    .required('Name is required'),
   title: yup.string().trim(),
   subTitle: yup.string().trim(),
   content: yup.string().trim(),
@@ -80,7 +88,7 @@ const AddResearchDevelopmentTeamForm = ({
   open,
 }: Props): JSX.Element => {
   const dispatch = useAppDispatch();
-  const [expanded, setExpanded] = useState<true | false>(false); 
+  const [expanded, setExpanded] = useState<true | false>(false);
   const isAuth = useAppSelector(getAuthState);
   const { fetchUwcssaDepartmentListStatus } = useAppSelector(
     (state) => state.uwcssaDepartment,
@@ -88,7 +96,6 @@ const AddResearchDevelopmentTeamForm = ({
   const uwcssaDepartmentList = useAppSelector(selectAllUwcssaDepartments);
 
   useEffect(() => {
-
     if (isAuth !== null && fetchUwcssaDepartmentListStatus === 'idle') {
       dispatch(
         fetchUwcssaDepartmentList({
@@ -96,7 +103,6 @@ const AddResearchDevelopmentTeamForm = ({
         }),
       );
     }
-
   }, [isAuth, fetchUwcssaDepartmentListStatus]);
 
   const { fetchUserProfileListStatus } = useAppSelector(
@@ -105,7 +111,6 @@ const AddResearchDevelopmentTeamForm = ({
   const userProfileList = useAppSelector(selectAllUserProfiles);
 
   useEffect(() => {
-
     if (isAuth !== null && fetchUserProfileListStatus === 'idle') {
       dispatch(
         fetchUserProfileList({
@@ -113,10 +118,7 @@ const AddResearchDevelopmentTeamForm = ({
         }),
       );
     }
-
-
   }, [isAuth, fetchUserProfileListStatus]);
-
 
   const initialValues = {
     uwcssaDepartmentUwcssaMembersId: '',
@@ -133,7 +135,7 @@ const AddResearchDevelopmentTeamForm = ({
   const onSubmit = async (values) => {
     console.log(JSON.stringify(values));
     const createUwcssaMemberInput = {
-      id:'UwcssaMember-'+values.owner, //用来防止重复提交
+      id: 'UwcssaMember-' + values.owner, //用来防止重复提交
       ...values,
     };
     console.log(createUwcssaMemberInput);
@@ -208,7 +210,10 @@ const AddResearchDevelopmentTeamForm = ({
                     value={formik.values.uwcssaDepartmentUwcssaMembersId}
                     label={'部门'}
                     onChange={formik.handleChange}
-                    error={formik.touched.uwcssaDepartmentUwcssaMembersId && Boolean(formik.errors.uwcssaDepartmentUwcssaMembersId)}
+                    error={
+                      formik.touched.uwcssaDepartmentUwcssaMembersId &&
+                      Boolean(formik.errors.uwcssaDepartmentUwcssaMembersId)
+                    }
                   >
                     {uwcssaDepartmentList.map((option, index) => {
                       return (
@@ -219,7 +224,8 @@ const AddResearchDevelopmentTeamForm = ({
                     })}
                   </Select>
                   <FormHelperText>
-                    {formik.touched.uwcssaDepartmentUwcssaMembersId && Boolean(formik.errors.uwcssaDepartmentUwcssaMembersId)}
+                    {formik.touched.uwcssaDepartmentUwcssaMembersId &&
+                      Boolean(formik.errors.uwcssaDepartmentUwcssaMembersId)}
                   </FormHelperText>
                 </FormControl>
               </Grid>
@@ -258,18 +264,23 @@ const AddResearchDevelopmentTeamForm = ({
                             src={option.avatarURL?.objectThumbnailURL}
                             {...stringAvatar(option.name, {
                               width: 30,
-                              height: 30,mr:'1rem'
+                              height: 30,
+                              mr: '1rem',
                             })}
                           />
-                          {option.name} 
+                          {option.name}
 
-                          <Typography variant={'caption'} sx={{ml:'1rem'}}>{option.email}</Typography>
-                          {option.id.slice(0,6) === 'google'&& <Box
-                            component={LazyLoadImage}
-                            effect="blur"
-                            src="/assets/images/icons/google-1.svg"
-                            sx={{mx:'0.5rem'}}
-                          />}
+                          <Typography variant={'caption'} sx={{ ml: '1rem' }}>
+                            {option.email}
+                          </Typography>
+                          {option.id.slice(0, 6) === 'google' && (
+                            <Box
+                              component={LazyLoadImage}
+                              effect="blur"
+                              src="/assets/images/icons/google-1.svg"
+                              sx={{ mx: '0.5rem' }}
+                            />
+                          )}
                         </MenuItem>
                       );
                     })}
@@ -279,21 +290,24 @@ const AddResearchDevelopmentTeamForm = ({
                   </FormHelperText>
                 </FormControl>
               </Grid>
-              <Accordion disableGutters expanded={expanded} onChange={()=>setExpanded(!expanded )} sx={{width:'100%',px:'16px',mt:'1rem',ml:'1rem'}}>
+              <Accordion
+                disableGutters
+                expanded={expanded}
+                onChange={() => setExpanded(!expanded)}
+                sx={{ width: '100%', px: '16px', mt: '1rem', ml: '1rem' }}
+              >
                 <AccordionSummary
                   expandIcon={<ExpandMoreIcon />}
                   aria-controls="panel1bh-content"
                   id="panel1bh-header"
                 >
-                  <Typography sx={{  flexShrink: 0 }}>
-                  填写更多选项
-                  </Typography>
+                  <Typography sx={{ flexShrink: 0 }}>填写更多选项</Typography>
                   {/* <Typography sx={{ color: 'text.secondary' }}>一般来说不用自己填写</Typography> */}
                 </AccordionSummary>
                 <AccordionDetails>
                   <Grid item xs={12}>
                     <Typography variant={'subtitle2'} sx={{ marginBottom: 1 }}>
-                  Title
+                      Title
                     </Typography>
                     <TextField
                       label="Title"
@@ -302,13 +316,15 @@ const AddResearchDevelopmentTeamForm = ({
                       fullWidth
                       value={formik.values.title}
                       onChange={formik.handleChange}
-                      error={formik.touched.title && Boolean(formik.errors.title)}
+                      error={
+                        formik.touched.title && Boolean(formik.errors.title)
+                      }
                       helperText={formik.touched.title && formik.errors.title}
                     />
                   </Grid>
                   <Grid item xs={12}>
                     <Typography variant={'subtitle2'} sx={{ marginBottom: 1 }}>
-                  Sub Title
+                      Sub Title
                     </Typography>
                     <TextField
                       label="Sub Title"
@@ -318,14 +334,17 @@ const AddResearchDevelopmentTeamForm = ({
                       value={formik.values.subTitle}
                       onChange={formik.handleChange}
                       error={
-                        formik.touched.subTitle && Boolean(formik.errors.subTitle)
+                        formik.touched.subTitle &&
+                        Boolean(formik.errors.subTitle)
                       }
-                      helperText={formik.touched.subTitle && formik.errors.subTitle}
+                      helperText={
+                        formik.touched.subTitle && formik.errors.subTitle
+                      }
                     />
                   </Grid>
                   <Grid item xs={12}>
                     <Typography variant={'subtitle2'} sx={{ marginBottom: 1 }}>
-                  Introduce your self
+                      Introduce your self
                     </Typography>
                     <TextField
                       label="个人简介"
@@ -339,11 +358,13 @@ const AddResearchDevelopmentTeamForm = ({
                       error={
                         formik.touched.content && Boolean(formik.errors.content)
                       }
-                      helperText={formik.touched.content && formik.errors.content}
+                      helperText={
+                        formik.touched.content && formik.errors.content
+                      }
                     />
                     <Grid item xs={12}>
                       <Typography variant={'subtitle2'} sx={{ my: 1 }}>
-                    联系 Email
+                        联系 Email
                       </Typography>
                       <TextField
                         label="Email"
@@ -352,15 +373,16 @@ const AddResearchDevelopmentTeamForm = ({
                         fullWidth
                         value={formik.values.email}
                         onChange={formik.handleChange}
-                        error={formik.touched.email && Boolean(formik.errors.email)}
+                        error={
+                          formik.touched.email && Boolean(formik.errors.email)
+                        }
                         helperText={formik.touched.email && formik.errors.email}
                       />
                     </Grid>
 
-
                     <Grid item xs={12}>
                       <Typography variant={'subtitle2'} sx={{ my: 1 }}>
-                    LinkedIn
+                        LinkedIn
                       </Typography>
                       <TextField
                         label="linkedIn"
@@ -370,7 +392,8 @@ const AddResearchDevelopmentTeamForm = ({
                         value={formik.values.linkedIn}
                         onChange={formik.handleChange}
                         error={
-                          formik.touched.linkedIn && Boolean(formik.errors.linkedIn)
+                          formik.touched.linkedIn &&
+                          Boolean(formik.errors.linkedIn)
                         }
                         helperText={
                           formik.touched.linkedIn && formik.errors.linkedIn
@@ -379,7 +402,7 @@ const AddResearchDevelopmentTeamForm = ({
                     </Grid>
                     <Grid item xs={12}>
                       <Typography variant={'subtitle2'} sx={{ my: 1 }}>
-                    Github
+                        Github
                       </Typography>
                       <TextField
                         label="github"
@@ -391,12 +414,14 @@ const AddResearchDevelopmentTeamForm = ({
                         error={
                           formik.touched.github && Boolean(formik.errors.github)
                         }
-                        helperText={formik.touched.github && formik.errors.github}
+                        helperText={
+                          formik.touched.github && formik.errors.github
+                        }
                       />
                     </Grid>
                     <Grid item xs={12}>
                       <Typography variant={'subtitle2'} sx={{ my: 1 }}>
-                    Website
+                        Website
                       </Typography>
                       <TextField
                         label="website"
@@ -406,9 +431,12 @@ const AddResearchDevelopmentTeamForm = ({
                         value={formik.values.website}
                         onChange={formik.handleChange}
                         error={
-                          formik.touched.website && Boolean(formik.errors.website)
+                          formik.touched.website &&
+                          Boolean(formik.errors.website)
                         }
-                        helperText={formik.touched.website && formik.errors.website}
+                        helperText={
+                          formik.touched.website && formik.errors.website
+                        }
                       />
                     </Grid>
                   </Grid>

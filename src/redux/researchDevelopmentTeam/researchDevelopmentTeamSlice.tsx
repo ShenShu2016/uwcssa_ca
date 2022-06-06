@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-29 22:42:19
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-30 22:13:29
+ * @LastEditTime: 2022-06-06 16:17:45
  * @FilePath: /uwcssa_ca/src/redux/researchDevelopmentTeam/researchDevelopmentTeamSlice.tsx
  * @Description:
  * import researchDevelopmentTeamReducer from './researchDevelopmentTeam/researchDevelopmentTeamSlice';
@@ -22,20 +22,31 @@ import {
   createResearchDevelopmentTeam,
   updateResearchDevelopmentTeam,
 } from 'graphql/mutations';
-import {
-  getResearchDevelopmentTeam,
-  listResearchDevelopmentTeams,
-} from 'graphql/queries';
 
 import API from '@aws-amplify/api';
 import { RootState } from 'redux/store';
+import { UserImage } from 'redux/userImage/userImageSlice';
+import { UserProfile } from 'redux/userProfile/userProfileSlice';
+import { getResearchDevelopmentTeam } from 'graphql/queries';
 import { graphqlOperation } from '@aws-amplify/api-graphql';
+import { listResearchDevelopmentTeams } from './custom_q_m_s';
 
 export type ResearchDevelopmentTeam = {
   id: string;
-  createdAt?: string;
-  updatedAt?: string;
+  name?: string | null;
+  title?: string | null;
+  subTitle?: string | null;
+  content?: string | null;
+  imgURL?: UserImage | null;
+  email?: string | null;
+  linkedIn?: string | null;
+  website?: string | null;
+  github?: string | null;
+  createdAt: string;
+  updatedAt: string;
   owner: string;
+  user?: UserProfile | null;
+  researchDevelopmentTeamImgURLId?: string | null;
 };
 
 const researchDevelopmentTeamAdapter =
@@ -208,7 +219,7 @@ const researchDevelopmentTeamSlice = createSlice({
         updateResearchDevelopmentTeamDetail.fulfilled,
         (state, action) => {
           state.updateResearchDevelopmentTeamDetailStatus = 'succeed';
-          researchDevelopmentTeamAdapter.upsertOne(state, action.payload);
+          researchDevelopmentTeamAdapter.upsertOne(state, action.payload); //!! 這裏有問題，比如説我update了，頭像會沒
         },
       )
       .addCase(

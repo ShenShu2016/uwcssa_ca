@@ -1,8 +1,8 @@
 /*
  * @Author: Shikai Jin
  * @Date: 2022-06-05 19:59:54
- * @LastEditors: Shikai Jin
- * @LastEditTime: 2022-06-05 20:42:59
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-06-06 16:19:26
  * @FilePath: /uwcssa_ca/src/views/Developers/components/Team/componments/DeveloperCard.tsx
  * @Description:
  *
@@ -13,34 +13,21 @@ import {
   Box,
   Card,
   CardContent,
+  Grid,
   IconButton,
   ListItemText,
   Typography,
+  useTheme,
 } from '@mui/material';
 
 import EmailIcon from '@mui/icons-material/Email';
 import GitHubIcon from '@mui/icons-material/GitHub';
-import Grid from '@mui/material/Grid';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import React from 'react';
-import { useTheme } from '@mui/material/styles';
-
-interface Developers {
-  id: string;
-  name?: string | null;
-  title?: string | null;
-  subTitle?: string | null;
-  content?: string | null;
-  imgURL?: string | null;
-  email?: string | null;
-  linkedIn?: string | null;
-  github?: string | null;
-  website?: string | null;
-  owner?: string;
-}
+import { ResearchDevelopmentTeam } from 'redux/researchDevelopmentTeam/researchDevelopmentTeamSlice';
 
 type Props = {
-  developers: Developers[];
+  developers: ResearchDevelopmentTeam[];
 };
 
 const DevelopCard: React.FC<Props> = (props): JSX.Element => {
@@ -63,7 +50,7 @@ const DevelopCard: React.FC<Props> = (props): JSX.Element => {
             <CardContent>
               <Box
                 component={Avatar}
-                src={item.imgURL}
+                src={item.user.avatarURL.objectCompressedURL}
                 height={80}
                 width={80}
               />

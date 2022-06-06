@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-30 14:17:41
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-05 22:37:06
+ * @LastEditTime: 2022-06-06 15:25:38
  * @FilePath: /uwcssa_ca/src/admin/UwcssaMember/UwcssaMemberDashboard/UwcssaMemberDashboard.tsx
  * @Description:
  *
@@ -15,9 +15,7 @@ import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { AddResearchDevelopmentTeamForm } from './components/AddUwcssaMemberTeam';
 import Container from 'components/Container';
 import SimpleStriped from './components/SimpleStriped';
-import {
-  fetchResearchDevelopmentTeamList,
-} from 'redux/researchDevelopmentTeam/researchDevelopmentTeamSlice';
+import { fetchResearchDevelopmentTeamList } from 'redux/researchDevelopmentTeam/researchDevelopmentTeamSlice';
 import { getAuthState } from 'redux/auth/authSlice';
 import { selectAllUwcssaMembers } from 'redux/uwcssaMember/uwcssaMemberSlice';
 
@@ -28,15 +26,10 @@ function UwcssaMemberDashboard() {
   const { fetchUwcssaMemberListStatus } = useAppSelector(
     (state) => state.uwcssaMember,
   );
-  const uwcssaMemberList = useAppSelector(
-    selectAllUwcssaMembers,
-  );
+  const uwcssaMemberList = useAppSelector(selectAllUwcssaMembers);
   useEffect(() => {
     const getUwcssaDepartments = async () => {
-      if (
-        isAuth !== null &&
-        fetchUwcssaMemberListStatus === 'idle'
-      ) {
+      if (isAuth !== null && fetchUwcssaMemberListStatus === 'idle') {
         await dispatch(
           fetchResearchDevelopmentTeamList({
             isAuth,
@@ -53,9 +46,7 @@ function UwcssaMemberDashboard() {
       <Button variant="contained" size={'small'} onClick={() => setOpen(true)}>
         Add 学生会成员
       </Button>
-      <SimpleStriped
-        uwcssaMemberList={uwcssaMemberList}
-      />
+      <SimpleStriped uwcssaMemberList={uwcssaMemberList} />
       <AddResearchDevelopmentTeamForm
         open={open}
         onClose={() => setOpen(false)}

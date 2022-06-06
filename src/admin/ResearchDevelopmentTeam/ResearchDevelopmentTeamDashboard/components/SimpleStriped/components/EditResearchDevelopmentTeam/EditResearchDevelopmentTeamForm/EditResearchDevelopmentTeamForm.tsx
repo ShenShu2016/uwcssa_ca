@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-30 15:13:57
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-30 22:13:10
+ * @LastEditTime: 2022-06-06 16:14:07
  * @FilePath: /uwcssa_ca/src/admin/ResearchDevelopmentTeam/ResearchDevelopmentTeamDashboard/components/SimpleStriped/components/EditResearchDevelopmentTeam/EditResearchDevelopmentTeamForm/EditResearchDevelopmentTeamForm.tsx
  * @Description:
  *
@@ -18,24 +18,20 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
+import {
+  ResearchDevelopmentTeam,
+  updateResearchDevelopmentTeamDetail,
+} from 'redux/researchDevelopmentTeam/researchDevelopmentTeamSlice';
 
 import React from 'react';
-import { updateResearchDevelopmentTeamDetail } from 'redux/researchDevelopmentTeam/researchDevelopmentTeamSlice';
 import { useAppDispatch } from 'redux/hooks';
 import { useFormik } from 'formik';
 
 const validationSchema = yup.object({
-  name: yup.string().trim().required('Name is required'),
+  name: yup.string().trim(),
   title: yup.string().trim(),
   subTitle: yup.string().trim(),
   content: yup.string().trim(),
-  imgURL: yup
-    .string()
-    .matches(
-      /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
-      'Enter correct url!',
-    )
-    .trim(),
   email: yup.string().email(),
   linkedIn: yup
     .string()
@@ -58,25 +54,12 @@ const validationSchema = yup.object({
       'Enter correct url!',
     )
     .trim(),
-  owner: yup.string().trim().required('Owner is required'),
 });
 interface Props {
   // eslint-disable-next-line @typescript-eslint/ban-types
   onClose: () => void;
   open: boolean;
-  item: {
-    id: string;
-    name?: string | null;
-    title?: string | null;
-    subTitle?: string | null;
-    content?: string | null;
-    imgURL?: string | null;
-    email?: string | null;
-    linkedIn?: string | null;
-    github?: string | null;
-    website?: string | null;
-    owner?: string;
-  };
+  item: ResearchDevelopmentTeam;
 }
 
 const EditResearchDevelopmentTeamForm = ({
@@ -92,12 +75,10 @@ const EditResearchDevelopmentTeamForm = ({
     title: item?.title || '',
     subTitle: item?.subTitle || '',
     content: item?.content || '',
-    imgURL: item?.imgURL || '',
     email: item?.email || '',
     linkedIn: item?.linkedIn || '',
     github: item?.github || '',
     website: item?.website || '',
-    owner: item?.owner || '',
   };
 
   const onSubmit = async (values) => {
@@ -141,7 +122,7 @@ const EditResearchDevelopmentTeamForm = ({
       <Box paddingY={2} paddingX={4}>
         <Box paddingY={2} display={'flex'} justifyContent={'space-between'}>
           <Typography variant={'h5'} fontWeight={700}>
-            Add a new Developer
+            Edit Developer
           </Typography>
           <Box
             component={'svg'}
@@ -178,21 +159,6 @@ const EditResearchDevelopmentTeamForm = ({
                   onChange={formik.handleChange}
                   error={formik.touched.name && Boolean(formik.errors.name)}
                   helperText={formik.touched.name && formik.errors.name}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <Typography variant={'subtitle2'} sx={{ marginBottom: 1 }}>
-                  Uwcssa ID
-                </Typography>
-                <TextField
-                  label="userName uuid"
-                  variant="outlined"
-                  name={'owner'}
-                  fullWidth
-                  value={formik.values.owner}
-                  onChange={formik.handleChange}
-                  error={formik.touched.owner && Boolean(formik.errors.owner)}
-                  helperText={formik.touched.owner && formik.errors.owner}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -260,24 +226,6 @@ const EditResearchDevelopmentTeamForm = ({
                     helperText={formik.touched.email && formik.errors.email}
                   />
                 </Grid>
-                <Grid item xs={12}>
-                  <Typography variant={'subtitle2'} sx={{ my: 1 }}>
-                    个人照片
-                  </Typography>
-                  <TextField
-                    label="imgURL"
-                    variant="outlined"
-                    name={'imgURL'}
-                    fullWidth
-                    value={formik.values.imgURL}
-                    onChange={formik.handleChange}
-                    error={
-                      formik.touched.imgURL && Boolean(formik.errors.imgURL)
-                    }
-                    helperText={formik.touched.imgURL && formik.errors.imgURL}
-                  />
-                </Grid>
-
                 <Grid item xs={12}>
                   <Typography variant={'subtitle2'} sx={{ my: 1 }}>
                     LinkedIn
