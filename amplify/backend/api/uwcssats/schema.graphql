@@ -298,13 +298,12 @@ type UwcssaMember
     ]
   ) {
   id: ID!
-  name: String
   title: String
   subTitle: String
   content: String
   imgURL: UserImage @hasOne
   email: AWSEmail
-  department: UwcssaDepartment @belongsTo
+  department: UwcssaDepartment! @belongsTo
   linkedIn: AWSURL
   website: AWSURL
   github: AWSURL

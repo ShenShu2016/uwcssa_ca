@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-28 16:58:31
- * @LastEditTime: 2022-06-02 18:14:31
+ * @LastEditTime: 2022-06-05 22:11:21
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/admin/AdminRoutes.tsx
  */
@@ -15,6 +15,7 @@ import {
   FormTest as FormTestView,
   ResearchDevelopmentTeamDashboard as ResearchDevelopmentTeamDashboardView,
   UserProfileDashboard as UserProfileDashboardView,
+  UwcssaMemberDashboard as UwcssaMemberDashboardView,
 } from 'admin';
 
 import React from 'react';
@@ -81,6 +82,11 @@ function AdminRoutes(): Array<{
     {
       path: '/admin/uwcssa-department',
       renderer: (): JSX.Element => <DepartmentDashboardView />,
+      isAllowed: isAdmin,
+      redirectPath: '/404',
+    },    {
+      path: '/admin/uwcssa-member',
+      renderer: (): JSX.Element => <UwcssaMemberDashboardView />,
       isAllowed: isAdmin,
       redirectPath: '/404',
     },

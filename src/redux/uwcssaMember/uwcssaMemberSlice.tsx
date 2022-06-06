@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-29 22:42:19
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-29 22:52:27
+ * @LastEditTime: 2022-06-05 23:29:34
  * @FilePath: /uwcssa_ca/src/redux/uwcssaMember/uwcssaMemberSlice.tsx
  * @Description:
  * import uwcssaMemberReducer from './uwcssaMember/uwcssaMemberSlice';
@@ -20,13 +20,29 @@ import { getUwcssaMember, listUwcssaMembers } from 'graphql/queries';
 
 import API from '@aws-amplify/api';
 import { RootState } from 'redux/store';
+import { UserImage } from 'redux/userImage/userImageSlice';
+import { UserProfile } from 'redux/userProfile/userProfileSlice';
+import { UwcssaDepartment } from 'redux/uwcssaDepartment/uwcssaDepartmentSlice';
 import { graphqlOperation } from '@aws-amplify/api-graphql';
 
 export type UwcssaMember = {
-  id: string;
-  createdAt?: string;
-  updatedAt?: string;
-  owner: string;
+  id: string,
+  name?: string | null,
+  title?: string | null,
+  subTitle?: string | null,
+  content?: string | null,
+  imgURL?: UserImage | null,
+  email?: string | null,
+  department?: UwcssaDepartment | null,
+  linkedIn?: string | null,
+  website?: string | null,
+  github?: string | null,
+  createdAt: string,
+  updatedAt: string,
+  owner: string,
+  user?: UserProfile | null,
+  uwcssaDepartmentUwcssaMembersId?: string | null,
+  uwcssaMemberImgURLId?: string | null,
 };
 
 const uwcssaMemberAdapter = createEntityAdapter<UwcssaMember>({
@@ -98,6 +114,12 @@ export const postUwcssaMember = createAsyncThunk(
   }: {
     createUwcssaMemberInput: CreateUwcssaMemberInput;
   }) => {
+    Object.keys(createUwcssaMemberInput).forEach((key) =>
+      createUwcssaMemberInput[key] === null ||
+    createUwcssaMemberInput[key] === ''
+        ? delete createUwcssaMemberInput[key]
+        : {},
+    );
     try {
       const result: any = await API.graphql(
         graphqlOperation(createUwcssaMember, {

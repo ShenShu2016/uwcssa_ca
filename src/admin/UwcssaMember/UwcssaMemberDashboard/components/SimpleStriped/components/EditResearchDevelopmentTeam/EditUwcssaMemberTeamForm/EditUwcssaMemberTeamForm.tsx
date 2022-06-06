@@ -2,8 +2,8 @@
  * @Author: Shen Shu
  * @Date: 2022-05-30 15:13:57
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-30 22:14:27
- * @FilePath: /uwcssa_ca/src/admin/ResearchDevelopmentTeam/ResearchDevelopmentTeamDashboard/components/AddResearchDevelopmentTeamForm/AddResearchDevelopmentTeamForm/AddResearchDevelopmentTeamForm.tsx
+ * @LastEditTime: 2022-06-05 22:36:39
+ * @FilePath: /uwcssa_ca/src/admin/UwcssaMember/UwcssaMemberDashboard/components/SimpleStriped/components/EditResearchDevelopmentTeam/EditUwcssaMemberTeamForm/EditUwcssaMemberTeamForm.tsx
  * @Description:
  *
  */
@@ -20,7 +20,7 @@ import {
 } from '@mui/material';
 
 import React from 'react';
-import { postResearchDevelopmentTeam } from 'redux/researchDevelopmentTeam/researchDevelopmentTeamSlice';
+import { updateResearchDevelopmentTeamDetail } from 'redux/researchDevelopmentTeam/researchDevelopmentTeamSlice';
 import { useAppDispatch } from 'redux/hooks';
 import { useFormik } from 'formik';
 
@@ -64,35 +64,52 @@ interface Props {
   // eslint-disable-next-line @typescript-eslint/ban-types
   onClose: () => void;
   open: boolean;
+  item: {
+    id: string;
+    name?: string | null;
+    title?: string | null;
+    subTitle?: string | null;
+    content?: string | null;
+    //imgURL?: string | null;
+    email?: string | null;
+    linkedIn?: string | null;
+    website?: string | null;
+    github?: string | null;
+    owner?: string;
+  };
 }
 
-const AddResearchDevelopmentTeamForm = ({
+const EditUwcssaMemberTeamForm = ({
   onClose,
   open,
+  item,
 }: Props): JSX.Element => {
   const dispatch = useAppDispatch();
 
   const initialValues = {
-    name: '',
-    title: '',
-    subTitle: '',
-    content: '',
-    imgURL: '',
-    email: '',
-    linkedIn: '',
-    github: '',
-    website: '',
-    owner: '',
+    id: item?.id || '',
+    name: item?.name || '',
+    title: item?.title || '',
+    subTitle: item?.subTitle || '',
+    content: item?.content || '',
+    //imgURL: item?.imgURL || '',
+    email: item?.email || '',
+    linkedIn: item?.linkedIn || '',
+    website: item?.website || '',
+    github: item?.github || '',
+    owner: item?.owner || '',
   };
 
   const onSubmit = async (values) => {
     console.log(JSON.stringify(values));
-    const createResearchDevelopmentTeamInput = {
+    const updateResearchDevelopmentTeamInput = {
       ...values,
     };
-    console.log(createResearchDevelopmentTeamInput);
+    console.log(updateResearchDevelopmentTeamInput);
     const response = await dispatch(
-      postResearchDevelopmentTeam({ createResearchDevelopmentTeamInput }),
+      updateResearchDevelopmentTeamDetail({
+        updateResearchDevelopmentTeamInput,
+      }),
     );
     if (response.meta.requestStatus === 'fulfilled') {
       onClose();
@@ -105,6 +122,7 @@ const AddResearchDevelopmentTeamForm = ({
 
   const formik = useFormik({
     initialValues,
+    enableReinitialize: true,
     validationSchema: validationSchema,
     onSubmit,
   });
@@ -328,4 +346,4 @@ const AddResearchDevelopmentTeamForm = ({
   );
 };
 
-export default AddResearchDevelopmentTeamForm;
+export default EditUwcssaMemberTeamForm;

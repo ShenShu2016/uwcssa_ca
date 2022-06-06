@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-26 13:57:44
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-02 18:14:10
+ * @LastEditTime: 2022-06-05 22:12:52
  * @FilePath: /uwcssa_ca/src/layouts/navigation--admin.ts
  * @Description:
  *
@@ -64,6 +64,16 @@ const pages = [
       {
         title: 'Department',
         href: '/admin/uwcssa-department',
+      },
+    ],
+  },
+  {
+    groupTitle: 'UWCSSA Member',
+    id: 'uwcssa-member',
+    pages: [
+      {
+        title: '学生会成员管理',
+        href: '/admin/uwcssa-member',
       },
     ],
   },

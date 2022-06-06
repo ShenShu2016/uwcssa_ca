@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-18 13:56:14
- * @LastEditTime: 2022-06-02 18:12:48
+ * @LastEditTime: 2022-06-05 22:11:00
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/admin/index.ts
  */
@@ -14,3 +14,4 @@ export { default as DepartmentDashboard } from './Department/DepartmentDashboard
 export { default as UserProfileDashboard } from './UserProfile/UserProfileDashboard';
 export { default as ResearchDevelopmentTeamDashboard } from './ResearchDevelopmentTeam/ResearchDevelopmentTeamDashboard';
 export { default as FormTest } from './Activity/Form/FormTest';
+export  { default as UwcssaMemberDashboard } from './UwcssaMember/UwcssaMemberDashboard';
