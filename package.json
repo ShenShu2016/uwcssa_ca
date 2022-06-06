@@ -71,6 +71,7 @@
     "react-router-dom": "^6.1.1",
     "react-scripts": "5.0.0",
     "react-slick": "^0.28.1",
+    "react-sortable-hoc": "^2.0.0",
     "react-syntax-highlighter": "^15.4.5",
     "react-typed": "^1.2.0",
     "react-visibility-sensor": "^5.1.1",

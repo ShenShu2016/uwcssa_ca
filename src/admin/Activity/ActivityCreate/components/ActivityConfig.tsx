@@ -1,11 +1,11 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-01 09:18:34
- * @LastEditTime: 2022-06-05 16:24:21
+ * @LastEditTime: 2022-06-06 09:05:43
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/admin/Activity/ActivityCreate/components/ActivityConfig.tsx
  */
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
@@ -27,8 +27,8 @@ import { useSwiper } from 'swiper/react';
 import { removeQuestion, reorderQuestion } from 'redux/form/formSlice';
 import Tooltip from '@mui/material/Tooltip';
 import { fetchFormItemList } from 'redux/form/formSlice';
-import TextField from '@mui/material/TextField';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
+import {SortableContainer, SortableElement, SortEnd} from 'react-sortable-hoc';
 
 const ActivityConfig: React.FC = () => {
   const swiper = useSwiper();
@@ -39,7 +39,10 @@ const ActivityConfig: React.FC = () => {
   rederList.sort((prev, next) => prev.order - next.order);
   console.log(rederList);
   
-  const handleRemoveQuestion = (item) => {
+  const handleRemoveQuestion = (e, item) => {
+    e.preventDefault();
+    e.stopPropagation();
+    e.nativeEvent.stopImmediatePropagation();
     dispatch(removeQuestion(item));
   };
 
@@ -47,15 +50,104 @@ const ActivityConfig: React.FC = () => {
     dispatch(fetchFormItemList({ isAuth: true }));
   };
 
-  const handleOrderChange = (e, item) => {
-    if (e.target.value !== '') {
-      dispatch(reorderQuestion({
-        order: e.target.value,
-        item
-      }));
-    }
-    console.log(e.target.value, item);
+  const handleSortEnd = (sort: SortEnd) => {
+    dispatch(reorderQuestion({
+      newOrder: sort.newIndex,
+      oldOrder: sort.oldIndex
+    }));
   };
+
+  const SortableItem = SortableElement(({ item }) => {
+    return (
+      <Tooltip title="拖动元素以排序" placement="top" enterNextDelay={1500}>
+        <Box
+          mt={1}
+          paddingY={2}
+          paddingX={4}
+          display='flex'
+          borderRadius={'12px'}
+          sx={{
+            cursor: 'move',
+            '&:hover': {
+              background: '#e1f5fe',
+              '& .remove_icon': {
+                display: 'flex'
+              }
+            }
+          }}
+        >
+          <Box width={'calc(100% - 50px)'}>
+            {
+              item.formType === FormType.TextFieldShort ?
+                <TextFieldShort item={item}/> : null
+            }
+  
+            {
+              item.formType === FormType.TextFieldLong ?
+                <TextFieldLong item={item}/> : null
+            }
+  
+            {
+              item.formType === FormType.Select || item.formType === FormType.MultipleSelect ?
+                <Select item={item}/> : null
+            }
+  
+            {
+              item.formType === FormType.DatePicker ?
+                <DatePicker item={item}/> : null
+            }
+  
+            {
+              item.formType === FormType.TimePicker ?
+                <TimePicker item={item}/> : null
+            }
+  
+            {
+              item.formType === FormType.DateTimePicker ?
+                <DateTimePicker item={item}/> : null
+            }
+  
+            {
+              item.formType === FormType.RadioGroupH ||
+            item.formType === FormType.RadioGroupV ||
+            item.formType === FormType.Boolean ?
+                <RadioGroup item={item}/> : null
+            }
+  
+            {
+              item.formType === FormType.Checkbox ?
+                <CheckBoxGroup item={item}/> : null
+            }
+          </Box>
+          <Box
+            className='remove_icon'
+            width='50px'
+            display='none'
+            alignItems='center'
+            justifyContent='flex-end'
+          >
+            <Tooltip title={'移除问题'} placement="top" arrow>
+              <RemoveCircleIcon
+                sx={{color: '#e53935', cursor: 'pointer'}}
+                onClick={(e) => handleRemoveQuestion(e, item)}
+              />
+            </Tooltip>
+          </Box>
+        </Box>
+      </Tooltip>
+    );
+  });
+
+  const SortableList = SortableContainer(() => {
+    return (
+      <ul>
+        {rederList.map((item, index) => (
+          <SortableItem key={item.id} index={index} item={item} />
+        ))}
+      </ul>
+    );
+  });
+  
 
   return (
     <Box p={'2px'}>
@@ -96,104 +188,7 @@ const ActivityConfig: React.FC = () => {
               活动报名表单
           </Typography>
           <Box width={'100%'}  boxSizing='border-box'>
-            {
-              rederList.map(item => (
-                <Box
-                  key={item.id}
-                  mt={1}
-                  padding={2}
-                  display='flex'
-                  borderRadius={'12px'}
-                  sx={{
-                    '&:hover': {
-                      background: '#e1f5fe',
-                      '& .remove_icon': {
-                        display: 'flex'
-                      }
-                    }
-                  }}
-                >
-                  <Box
-                    width='100px'
-                    display={'flex'}
-                    p={2}
-                    alignItems={'center'}
-                  >
-                    <TextField
-                      id="outlined-multiline-flexible"
-                      type='number'
-                      label="排序"
-                      size='small'
-                      inputProps={{ min: 1, max: rederList.length }}
-                      value={item.order}
-                      onChange={(e) => handleOrderChange(e, item)}
-                      InputLabelProps={{
-                        sx: {
-                          fontSize: '12px'
-                        }
-                      }}
-                    />
-                  </Box>
-                  <Box width={'calc(100% - 150px)'}>
-                    {
-                      item.formType === FormType.TextFieldShort ?
-                        <TextFieldShort item={item}/> : null
-                    }
-
-                    {
-                      item.formType === FormType.TextFieldLong ?
-                        <TextFieldLong item={item}/> : null
-                    }
-             
-                    {
-                      item.formType === FormType.Select || item.formType === FormType.MultipleSelect ?
-                        <Select item={item}/> : null
-                    }
-
-                    {
-                      item.formType === FormType.DatePicker ?
-                        <DatePicker item={item}/> : null
-                    }
-
-                    {
-                      item.formType === FormType.TimePicker ?
-                        <TimePicker item={item}/> : null
-                    }
-
-                    {
-                      item.formType === FormType.DateTimePicker ?
-                        <DateTimePicker item={item}/> : null
-                    }
-
-                    {
-                      item.formType === FormType.RadioGroupH ||
-                  item.formType === FormType.RadioGroupV ||
-                  item.formType === FormType.Boolean ?
-                        <RadioGroup item={item}/> : null
-                    }
-
-                    {
-                      item.formType === FormType.Checkbox ?
-                        <CheckBoxGroup item={item}/> : null
-                    }
-                  </Box>
-                  <Box
-                    className='remove_icon'
-                    width='50px'
-                    display='none'
-                    alignItems='center'
-                    justifyContent='flex-end'
-                  >
-                    <Tooltip title={'移除问题'} placement="top" arrow>
-                      <RemoveCircleIcon
-                        sx={{color: '#e53935', cursor: 'pointer'}}
-                        onClick={() => handleRemoveQuestion(item)}
-                      />
-                    </Tooltip>
-                  </Box>
-                </Box>
-              ))
-            }
+            <SortableList onSortEnd={handleSortEnd} distance={1}/>
           </Box>
           <Button
             variant="contained"

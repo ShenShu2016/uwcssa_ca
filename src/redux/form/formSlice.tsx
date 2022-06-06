@@ -1,8 +1,8 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-06-02 17:10:21
- * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-05 13:15:52
+ * @LastEditors: 李佳修
+ * @LastEditTime: 2022-06-06 08:37:56
  * @FilePath: /uwcssa_ca/src/redux/form/formSlice.tsx
  * @Description:
  *
@@ -308,14 +308,14 @@ const formSlice = createSlice({
     },
 
     reorderQuestion(state, action) {
-      const { order, item } = action.payload;
-      const currentItem = { ...item };
+      const { newOrder, oldOrder } = action.payload;
+      const currentItem = state.createData.selectedQuestions[oldOrder];
       // 首先从数组里剔除需要排序的那一项
       const current = state.createData.selectedQuestions.filter(
         (question) => question.id !== currentItem.id,
       );
       // 然后再把他插入到相应的位置
-      current.splice(order - 1, 0, currentItem);
+      current.splice(newOrder, 0, currentItem);
       // 最后重新给order
       current.forEach((item, index) => (item.order = index + 1));
       state.createData.selectedQuestions = current;
