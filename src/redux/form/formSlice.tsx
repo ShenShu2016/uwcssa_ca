@@ -1,8 +1,8 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-06-02 17:10:21
- * @LastEditors: 李佳修
- * @LastEditTime: 2022-06-05 16:07:17
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-06-05 13:15:52
  * @FilePath: /uwcssa_ca/src/redux/form/formSlice.tsx
  * @Description:
  *
@@ -205,7 +205,7 @@ export const fetchFormItemList = createAsyncThunk(
       const result: any = await API.graphql({
         query: listFormItems,
         variables: {
-          limit: 10,
+          limit: 19,
         },
         authMode: isAuth ? undefined : 'AWS_IAM',
       });
@@ -293,29 +293,33 @@ const formSlice = createSlice({
       // 有新的被选中的问题塞进数组的时候 首先添加order 默认排在最后一个
       const selected = {
         ...action.payload,
-        order: state.createData.selectedQuestions.length + 1
+        order: state.createData.selectedQuestions.length + 1,
       };
       state.createData.selectedQuestions.push(selected);
     },
 
     removeQuestion(state, action) {
       // 删除元素之后 重新赋值order
-      const current = state.createData.selectedQuestions.filter(item => item.id !== action.payload.id);
-      current.forEach((item, index) => item.order = index + 1);
+      const current = state.createData.selectedQuestions.filter(
+        (item) => item.id !== action.payload.id,
+      );
+      current.forEach((item, index) => (item.order = index + 1));
       state.createData.selectedQuestions = current;
     },
 
     reorderQuestion(state, action) {
       const { order, item } = action.payload;
-      const currentItem = {...item};
+      const currentItem = { ...item };
       // 首先从数组里剔除需要排序的那一项
-      const current = state.createData.selectedQuestions.filter(question => question.id !== currentItem.id);
+      const current = state.createData.selectedQuestions.filter(
+        (question) => question.id !== currentItem.id,
+      );
       // 然后再把他插入到相应的位置
       current.splice(order - 1, 0, currentItem);
       // 最后重新给order
-      current.forEach((item, index) => item.order = index + 1);
+      current.forEach((item, index) => (item.order = index + 1));
       state.createData.selectedQuestions = current;
-    }
+    },
   },
   extraReducers(builder) {
     builder
@@ -440,7 +444,8 @@ const formSlice = createSlice({
   },
 });
 
-export const { setBasicInfo, addQuestion, removeQuestion, reorderQuestion } = formSlice.actions;
+export const { setBasicInfo, addQuestion, removeQuestion, reorderQuestion } =
+  formSlice.actions;
 
 export const {
   selectAll: selectAllForms,
