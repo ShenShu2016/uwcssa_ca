@@ -57,6 +57,7 @@
     "formik": "^2.2.9",
     "htmlparser2": "^8.0.1",
     "jarallax": "^1.12.8",
+    "material-ui-confirm": "^3.0.4",
     "moment": "^2.29.3",
     "react": "^17.0.1",
     "react-countup": "^6.1.0",

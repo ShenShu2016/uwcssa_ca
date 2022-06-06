@@ -1,6 +1,17 @@
+/*
+ * @Author: Shen Shu
+ * @Date: 2022-05-26 13:57:44
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-06-06 19:48:34
+ * @FilePath: /uwcssa_ca/src/components/Page.tsx
+ * @Description:
+ *
+ */
+
 import React, { useEffect, useState } from 'react';
 
 import AOS from 'aos';
+import { ConfirmProvider } from 'material-ui-confirm';
 import CssBaseline from '@mui/material/CssBaseline';
 import Paper from '@mui/material/Paper';
 import { ThemeProvider } from '@mui/material/styles';
@@ -43,7 +54,7 @@ interface Props {
 }
 
 export default function Page({ children }: Props): JSX.Element {
-  React.useEffect(() => {
+  useEffect(() => {
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector('#jss-server-side');
     if (jssStyles) {
@@ -68,7 +79,9 @@ export default function Page({ children }: Props): JSX.Element {
     <ThemeProvider theme={getTheme(themeMode, themeToggler)}>
       {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
       <CssBaseline />
-      <Paper elevation={0}>{children}</Paper>
+      <ConfirmProvider>
+        <Paper elevation={0}>{children}</Paper>
+      </ConfirmProvider>
     </ThemeProvider>
   );
 }
