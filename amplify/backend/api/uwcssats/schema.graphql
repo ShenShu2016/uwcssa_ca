@@ -418,7 +418,7 @@ type FormItem
     ]
   ) {
   id: ID!
-  name: String!
+  question: String!
   order: Int! #在一个form里面需要 顺序。
   isRequired: Boolean! #是否必填
   isString: Boolean! # 是否是字符串

@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-06-02 17:10:21
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-05 13:15:52
+ * @LastEditTime: 2022-06-05 21:39:17
  * @FilePath: /uwcssa_ca/src/redux/form/formSlice.tsx
  * @Description:
  *
@@ -48,7 +48,7 @@ export type Form = {
 
 export type FormItem = {
   id?: string | null;
-  name: string;
+  question: string;
   order: number;
   isRequired: boolean;
   isString: boolean;
@@ -199,7 +199,7 @@ export const updateFormDetail = createAsyncThunk(
 );
 
 export const fetchFormItemList = createAsyncThunk(
-  'form/fetchFormItemList',
+  'form/formItem/fetchFormItemList',
   async ({ isAuth }: { isAuth: boolean }) => {
     try {
       const result: any = await API.graphql({
@@ -217,7 +217,7 @@ export const fetchFormItemList = createAsyncThunk(
 );
 
 export const fetchFormItem = createAsyncThunk(
-  'form/fetchFormItem',
+  'form/formItem/fetchFormItem',
   async ({ formItemId, isAuth }: { formItemId: string; isAuth: boolean }) => {
     try {
       const result: any = await API.graphql({
@@ -236,7 +236,7 @@ export const fetchFormItem = createAsyncThunk(
 );
 
 export const postFormItem = createAsyncThunk(
-  'form/postFormItem',
+  'form/formItem/postFormItem',
   async ({
     createFormItemInput,
   }: {
@@ -254,7 +254,7 @@ export const postFormItem = createAsyncThunk(
 );
 
 export const updateFormItemDetail = createAsyncThunk(
-  'form/updateFormItemDetail',
+  'form/formItem/updateFormItemDetail',
   async ({
     updateFormItemInput,
   }: {

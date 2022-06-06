@@ -1,6 +1,6 @@
     TextFieldShort
     email:情况
-    name: 比如： 学校邮箱 (中英文都可以，可以是一段话)
+    question: 比如： 学校邮箱 (中英文都可以，可以是一段话)
     isRequired: true|false
     isString: true
     isEmail: true
@@ -17,7 +17,7 @@
     formSelectChoices： undefined
 
     数字:情况
-    name： 比如： 你每天上厕所的次数?
+    question： 比如： 你每天上厕所的次数?
     isRequired: true|false
     isString: false
     isEmail: false
@@ -34,7 +34,7 @@
     formSelectChoices： undefined
 
     普通:情况
-    name： 比如： 你的中文姓名?
+    question： 比如： 你的中文姓名?
     isRequired: true|false
     isString: true
     isEmail: false
@@ -52,7 +52,7 @@
 
 
   TextFieldLong
-    name：个人介绍
+    question：个人介绍
     isRequired: true|false
     isString: true
     isEmail: false
@@ -70,7 +70,7 @@
 
 
     Checkbox
-    name：同意以上协议
+    question：同意以上协议
     isRequired: true|false
     isString: false
     isEmail: false
@@ -88,7 +88,7 @@
 
 
     Boolean
-    name：同意以上协议
+    question：同意以上协议
     isRequired: true|false
     isString: false
     isEmail: false
@@ -106,7 +106,7 @@
 
 
     Select （这地方不能放true or false）
-    name：你的性别?
+    question：你的性别?
     isRequired: true|false
     isString: true
     isEmail: false
@@ -123,7 +123,7 @@
     formSelectChoices： ['男', '女','保密', '其他', '不知道', '不愿意说', '不想说']
 
     MultipleSelect
-    name：请您选择以下一个火多个符合的描述?
+    question：请您选择以下一个火多个符合的描述?
     isRequired: true|false
     isString: true
     isEmail: false
@@ -144,7 +144,7 @@
     还没想好
 
     RadioGroupH && RadioGroupV
-    name：请选择你最喜欢的颜色
+    question：请选择你最喜欢的颜色
     isRequired: true|false
     isString: false
     isEmail: false
@@ -161,7 +161,7 @@
     formSelectChoices： ['绿色', '红色','蓝色', '紫色', '黄色', '白色', '黑色']
  
     DatePicker
-    name：你的生日
+    question：你的生日
     isRequired: true|false
     isString: false
     isEmail: false
@@ -178,7 +178,7 @@
     formSelectChoices： undefined
  
     DateTimePicker
-    name：你上次吃popeye的时间
+    question：你上次吃popeye的时间
     isRequired: true|false
     isString: false
     isEmail: false
@@ -195,7 +195,7 @@
     formSelectChoices： undefined
 
     TimePicker
-    name：每天睡觉时间
+    question：每天睡觉时间
     isRequired: true|false
     isString: false
     isEmail: false

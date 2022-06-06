@@ -1180,7 +1180,7 @@ export const getFormItem = /* GraphQL */ `
   query GetFormItem($id: ID!) {
     getFormItem(id: $id) {
       id
-      name
+      question
       order
       isRequired
       isString
@@ -1220,7 +1220,7 @@ export const listFormItems = /* GraphQL */ `
     listFormItems(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        name
+        question
         order
         isRequired
         isString
@@ -1253,7 +1253,7 @@ export const getEventParticipant = /* GraphQL */ `
       content1
       formItem1 {
         id
-        name
+        question
         order
         isRequired
         isString
@@ -1278,7 +1278,7 @@ export const getEventParticipant = /* GraphQL */ `
       content2
       formItem2 {
         id
-        name
+        question
         order
         isRequired
         isString
@@ -1303,7 +1303,7 @@ export const getEventParticipant = /* GraphQL */ `
       content3
       formItem3 {
         id
-        name
+        question
         order
         isRequired
         isString
@@ -1328,7 +1328,7 @@ export const getEventParticipant = /* GraphQL */ `
       content4
       formItem4 {
         id
-        name
+        question
         order
         isRequired
         isString
@@ -1353,7 +1353,7 @@ export const getEventParticipant = /* GraphQL */ `
       content5
       formItem5 {
         id
-        name
+        question
         order
         isRequired
         isString
@@ -1378,7 +1378,7 @@ export const getEventParticipant = /* GraphQL */ `
       content6
       formItem6 {
         id
-        name
+        question
         order
         isRequired
         isString
@@ -1403,7 +1403,7 @@ export const getEventParticipant = /* GraphQL */ `
       content7
       formItem7 {
         id
-        name
+        question
         order
         isRequired
         isString
@@ -1428,7 +1428,7 @@ export const getEventParticipant = /* GraphQL */ `
       content8
       formItem8 {
         id
-        name
+        question
         order
         isRequired
         isString
@@ -1453,7 +1453,7 @@ export const getEventParticipant = /* GraphQL */ `
       content9
       formItem9 {
         id
-        name
+        question
         order
         isRequired
         isString
@@ -1478,7 +1478,7 @@ export const getEventParticipant = /* GraphQL */ `
       content10
       formItem10 {
         id
-        name
+        question
         order
         isRequired
         isString
@@ -1503,7 +1503,7 @@ export const getEventParticipant = /* GraphQL */ `
       content11
       formItem11 {
         id
-        name
+        question
         order
         isRequired
         isString
@@ -1528,7 +1528,7 @@ export const getEventParticipant = /* GraphQL */ `
       content12
       formItem12 {
         id
-        name
+        question
         order
         isRequired
         isString
@@ -1553,7 +1553,7 @@ export const getEventParticipant = /* GraphQL */ `
       content13
       formItem13 {
         id
-        name
+        question
         order
         isRequired
         isString
@@ -1578,7 +1578,7 @@ export const getEventParticipant = /* GraphQL */ `
       content14
       formItem14 {
         id
-        name
+        question
         order
         isRequired
         isString
@@ -1603,7 +1603,7 @@ export const getEventParticipant = /* GraphQL */ `
       content15
       formItem15 {
         id
-        name
+        question
         order
         isRequired
         isString
@@ -1628,7 +1628,7 @@ export const getEventParticipant = /* GraphQL */ `
       content16
       formItem16 {
         id
-        name
+        question
         order
         isRequired
         isString
@@ -1653,7 +1653,7 @@ export const getEventParticipant = /* GraphQL */ `
       content17
       formItem17 {
         id
-        name
+        question
         order
         isRequired
         isString
@@ -1678,7 +1678,7 @@ export const getEventParticipant = /* GraphQL */ `
       content18
       formItem18 {
         id
-        name
+        question
         order
         isRequired
         isString
@@ -1703,7 +1703,7 @@ export const getEventParticipant = /* GraphQL */ `
       content19
       formItem19 {
         id
-        name
+        question
         order
         isRequired
         isString

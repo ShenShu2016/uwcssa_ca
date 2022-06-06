@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-06-02 18:10:36
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-05 13:47:25
+ * @LastEditTime: 2022-06-05 21:12:01
  * @FilePath: /uwcssa_ca/src/admin/Activity/Form/FormTest.tsx
  * @Description:
  *
@@ -50,7 +50,7 @@ function FormTest() {
               component={Paper}
               sx={{ maxWidth: '350px', m: '1rem' }}
             >
-              <Typography variant="body2">name: {item.name}</Typography>
+              <Typography variant="body2">name: {item.question}</Typography>
               <Typography>order: {item.order}</Typography>
               <Typography>isRequired: {item.isRequired.toString()}</Typography>
               <Typography>isString: {item.isString.toString()}</Typography>

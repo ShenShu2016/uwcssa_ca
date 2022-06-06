@@ -477,7 +477,7 @@ export type ModelFormItemConnection = {
 export type FormItem = {
   __typename: "FormItem",
   id: string,
-  name: string,
+  question: string,
   order: number,
   isRequired: boolean,
   isString: boolean,
@@ -1225,7 +1225,7 @@ export type DeleteFormInput = {
 
 export type CreateFormItemInput = {
   id?: string | null,
-  name: string,
+  question: string,
   order: number,
   isRequired: boolean,
   isString: boolean,
@@ -1249,7 +1249,7 @@ export type CreateFormItemInput = {
 };
 
 export type ModelFormItemConditionInput = {
-  name?: ModelStringInput | null,
+  question?: ModelStringInput | null,
   order?: ModelIntInput | null,
   isRequired?: ModelBooleanInput | null,
   isString?: ModelBooleanInput | null,
@@ -1282,7 +1282,7 @@ export type ModelFormTypeInput = {
 
 export type UpdateFormItemInput = {
   id: string,
-  name?: string | null,
+  question?: string | null,
   order?: number | null,
   isRequired?: boolean | null,
   isString?: boolean | null,
@@ -1841,7 +1841,7 @@ export type ModelFormConnection = {
 
 export type ModelFormItemFilterInput = {
   id?: ModelIDInput | null,
-  name?: ModelStringInput | null,
+  question?: ModelStringInput | null,
   order?: ModelIntInput | null,
   isRequired?: ModelBooleanInput | null,
   isString?: ModelBooleanInput | null,
@@ -4083,7 +4083,7 @@ export type CreateFormItemMutation = {
   createFormItem?:  {
     __typename: "FormItem",
     id: string,
-    name: string,
+    question: string,
     order: number,
     isRequired: boolean,
     isString: boolean,
@@ -4124,7 +4124,7 @@ export type UpdateFormItemMutation = {
   updateFormItem?:  {
     __typename: "FormItem",
     id: string,
-    name: string,
+    question: string,
     order: number,
     isRequired: boolean,
     isString: boolean,
@@ -4165,7 +4165,7 @@ export type DeleteFormItemMutation = {
   deleteFormItem?:  {
     __typename: "FormItem",
     id: string,
-    name: string,
+    question: string,
     order: number,
     isRequired: boolean,
     isString: boolean,
@@ -4210,7 +4210,7 @@ export type CreateEventParticipantMutation = {
     formItem1?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -4236,7 +4236,7 @@ export type CreateEventParticipantMutation = {
     formItem2?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -4262,7 +4262,7 @@ export type CreateEventParticipantMutation = {
     formItem3?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -4288,7 +4288,7 @@ export type CreateEventParticipantMutation = {
     formItem4?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -4314,7 +4314,7 @@ export type CreateEventParticipantMutation = {
     formItem5?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -4340,7 +4340,7 @@ export type CreateEventParticipantMutation = {
     formItem6?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -4366,7 +4366,7 @@ export type CreateEventParticipantMutation = {
     formItem7?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -4392,7 +4392,7 @@ export type CreateEventParticipantMutation = {
     formItem8?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -4418,7 +4418,7 @@ export type CreateEventParticipantMutation = {
     formItem9?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -4444,7 +4444,7 @@ export type CreateEventParticipantMutation = {
     formItem10?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -4470,7 +4470,7 @@ export type CreateEventParticipantMutation = {
     formItem11?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -4496,7 +4496,7 @@ export type CreateEventParticipantMutation = {
     formItem12?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -4522,7 +4522,7 @@ export type CreateEventParticipantMutation = {
     formItem13?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -4548,7 +4548,7 @@ export type CreateEventParticipantMutation = {
     formItem14?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -4574,7 +4574,7 @@ export type CreateEventParticipantMutation = {
     formItem15?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -4600,7 +4600,7 @@ export type CreateEventParticipantMutation = {
     formItem16?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -4626,7 +4626,7 @@ export type CreateEventParticipantMutation = {
     formItem17?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -4652,7 +4652,7 @@ export type CreateEventParticipantMutation = {
     formItem18?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -4678,7 +4678,7 @@ export type CreateEventParticipantMutation = {
     formItem19?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -4757,7 +4757,7 @@ export type UpdateEventParticipantMutation = {
     formItem1?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -4783,7 +4783,7 @@ export type UpdateEventParticipantMutation = {
     formItem2?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -4809,7 +4809,7 @@ export type UpdateEventParticipantMutation = {
     formItem3?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -4835,7 +4835,7 @@ export type UpdateEventParticipantMutation = {
     formItem4?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -4861,7 +4861,7 @@ export type UpdateEventParticipantMutation = {
     formItem5?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -4887,7 +4887,7 @@ export type UpdateEventParticipantMutation = {
     formItem6?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -4913,7 +4913,7 @@ export type UpdateEventParticipantMutation = {
     formItem7?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -4939,7 +4939,7 @@ export type UpdateEventParticipantMutation = {
     formItem8?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -4965,7 +4965,7 @@ export type UpdateEventParticipantMutation = {
     formItem9?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -4991,7 +4991,7 @@ export type UpdateEventParticipantMutation = {
     formItem10?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -5017,7 +5017,7 @@ export type UpdateEventParticipantMutation = {
     formItem11?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -5043,7 +5043,7 @@ export type UpdateEventParticipantMutation = {
     formItem12?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -5069,7 +5069,7 @@ export type UpdateEventParticipantMutation = {
     formItem13?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -5095,7 +5095,7 @@ export type UpdateEventParticipantMutation = {
     formItem14?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -5121,7 +5121,7 @@ export type UpdateEventParticipantMutation = {
     formItem15?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -5147,7 +5147,7 @@ export type UpdateEventParticipantMutation = {
     formItem16?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -5173,7 +5173,7 @@ export type UpdateEventParticipantMutation = {
     formItem17?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -5199,7 +5199,7 @@ export type UpdateEventParticipantMutation = {
     formItem18?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -5225,7 +5225,7 @@ export type UpdateEventParticipantMutation = {
     formItem19?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -5304,7 +5304,7 @@ export type DeleteEventParticipantMutation = {
     formItem1?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -5330,7 +5330,7 @@ export type DeleteEventParticipantMutation = {
     formItem2?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -5356,7 +5356,7 @@ export type DeleteEventParticipantMutation = {
     formItem3?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -5382,7 +5382,7 @@ export type DeleteEventParticipantMutation = {
     formItem4?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -5408,7 +5408,7 @@ export type DeleteEventParticipantMutation = {
     formItem5?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -5434,7 +5434,7 @@ export type DeleteEventParticipantMutation = {
     formItem6?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -5460,7 +5460,7 @@ export type DeleteEventParticipantMutation = {
     formItem7?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -5486,7 +5486,7 @@ export type DeleteEventParticipantMutation = {
     formItem8?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -5512,7 +5512,7 @@ export type DeleteEventParticipantMutation = {
     formItem9?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -5538,7 +5538,7 @@ export type DeleteEventParticipantMutation = {
     formItem10?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -5564,7 +5564,7 @@ export type DeleteEventParticipantMutation = {
     formItem11?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -5590,7 +5590,7 @@ export type DeleteEventParticipantMutation = {
     formItem12?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -5616,7 +5616,7 @@ export type DeleteEventParticipantMutation = {
     formItem13?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -5642,7 +5642,7 @@ export type DeleteEventParticipantMutation = {
     formItem14?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -5668,7 +5668,7 @@ export type DeleteEventParticipantMutation = {
     formItem15?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -5694,7 +5694,7 @@ export type DeleteEventParticipantMutation = {
     formItem16?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -5720,7 +5720,7 @@ export type DeleteEventParticipantMutation = {
     formItem17?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -5746,7 +5746,7 @@ export type DeleteEventParticipantMutation = {
     formItem18?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -5772,7 +5772,7 @@ export type DeleteEventParticipantMutation = {
     formItem19?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -7367,7 +7367,7 @@ export type GetFormItemQuery = {
   getFormItem?:  {
     __typename: "FormItem",
     id: string,
-    name: string,
+    question: string,
     order: number,
     isRequired: boolean,
     isString: boolean,
@@ -7411,7 +7411,7 @@ export type ListFormItemsQuery = {
     items:  Array< {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -7449,7 +7449,7 @@ export type GetEventParticipantQuery = {
     formItem1?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -7475,7 +7475,7 @@ export type GetEventParticipantQuery = {
     formItem2?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -7501,7 +7501,7 @@ export type GetEventParticipantQuery = {
     formItem3?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -7527,7 +7527,7 @@ export type GetEventParticipantQuery = {
     formItem4?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -7553,7 +7553,7 @@ export type GetEventParticipantQuery = {
     formItem5?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -7579,7 +7579,7 @@ export type GetEventParticipantQuery = {
     formItem6?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -7605,7 +7605,7 @@ export type GetEventParticipantQuery = {
     formItem7?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -7631,7 +7631,7 @@ export type GetEventParticipantQuery = {
     formItem8?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -7657,7 +7657,7 @@ export type GetEventParticipantQuery = {
     formItem9?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -7683,7 +7683,7 @@ export type GetEventParticipantQuery = {
     formItem10?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -7709,7 +7709,7 @@ export type GetEventParticipantQuery = {
     formItem11?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -7735,7 +7735,7 @@ export type GetEventParticipantQuery = {
     formItem12?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -7761,7 +7761,7 @@ export type GetEventParticipantQuery = {
     formItem13?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -7787,7 +7787,7 @@ export type GetEventParticipantQuery = {
     formItem14?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -7813,7 +7813,7 @@ export type GetEventParticipantQuery = {
     formItem15?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -7839,7 +7839,7 @@ export type GetEventParticipantQuery = {
     formItem16?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -7865,7 +7865,7 @@ export type GetEventParticipantQuery = {
     formItem17?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -7891,7 +7891,7 @@ export type GetEventParticipantQuery = {
     formItem18?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
@@ -7917,7 +7917,7 @@ export type GetEventParticipantQuery = {
     formItem19?:  {
       __typename: "FormItem",
       id: string,
-      name: string,
+      question: string,
       order: number,
       isRequired: boolean,
       isString: boolean,
