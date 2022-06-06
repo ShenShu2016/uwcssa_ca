@@ -1045,7 +1045,6 @@ export const createResearchDevelopmentTeam = /* GraphQL */ `
       title
       subTitle
       content
-      imgURL
       email
       linkedIn
       github
@@ -1083,7 +1082,6 @@ export const updateResearchDevelopmentTeam = /* GraphQL */ `
       title
       subTitle
       content
-      imgURL
       email
       linkedIn
       github
@@ -1121,7 +1119,6 @@ export const deleteResearchDevelopmentTeam = /* GraphQL */ `
       title
       subTitle
       content
-      imgURL
       email
       linkedIn
       github
@@ -1264,25 +1261,6 @@ export const createUwcssaMember = /* GraphQL */ `
       title
       subTitle
       content
-      imgURL {
-        id
-        objectURL
-        key
-        name
-        size
-        type
-        lastModified
-        lastModifiedDate
-        compressedWidth
-        objectCompressedURL
-        thumbnailWidth
-        objectThumbnailURL
-        targetTable
-        active
-        createdAt
-        updatedAt
-        owner
-      }
       email
       department {
         id
@@ -1316,7 +1294,6 @@ export const createUwcssaMember = /* GraphQL */ `
         userProfileAvatarURLId
       }
       uwcssaDepartmentUwcssaMembersId
-      uwcssaMemberImgURLId
     }
   }
 `;
@@ -1331,25 +1308,6 @@ export const updateUwcssaMember = /* GraphQL */ `
       title
       subTitle
       content
-      imgURL {
-        id
-        objectURL
-        key
-        name
-        size
-        type
-        lastModified
-        lastModifiedDate
-        compressedWidth
-        objectCompressedURL
-        thumbnailWidth
-        objectThumbnailURL
-        targetTable
-        active
-        createdAt
-        updatedAt
-        owner
-      }
       email
       department {
         id
@@ -1383,7 +1341,6 @@ export const updateUwcssaMember = /* GraphQL */ `
         userProfileAvatarURLId
       }
       uwcssaDepartmentUwcssaMembersId
-      uwcssaMemberImgURLId
     }
   }
 `;
@@ -1398,25 +1355,6 @@ export const deleteUwcssaMember = /* GraphQL */ `
       title
       subTitle
       content
-      imgURL {
-        id
-        objectURL
-        key
-        name
-        size
-        type
-        lastModified
-        lastModifiedDate
-        compressedWidth
-        objectCompressedURL
-        thumbnailWidth
-        objectThumbnailURL
-        targetTable
-        active
-        createdAt
-        updatedAt
-        owner
-      }
       email
       department {
         id
@@ -1450,7 +1388,6 @@ export const deleteUwcssaMember = /* GraphQL */ `
         userProfileAvatarURLId
       }
       uwcssaDepartmentUwcssaMembersId
-      uwcssaMemberImgURLId
     }
   }
 `;

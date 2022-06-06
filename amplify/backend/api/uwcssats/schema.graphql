@@ -256,7 +256,7 @@ type ResearchDevelopmentTeam
   title: String
   subTitle: String
   content: String
-  imgURL: AWSURL
+  # imgURL: UserImage @hasOne 去掉吧，直接用頭像的
   email: AWSEmail
   linkedIn: AWSURL
   github: AWSURL
@@ -298,10 +298,11 @@ type UwcssaMember
     ]
   ) {
   id: ID!
+  name: String
   title: String
   subTitle: String
   content: String
-  imgURL: UserImage @hasOne
+  # imgURL: UserImage @hasOne 去掉吧，直接用頭像的
   email: AWSEmail
   department: UwcssaDepartment! @belongsTo
   linkedIn: AWSURL

@@ -8737,17 +8737,6 @@
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
-          "name" : "imgURL",
-          "description" : null,
-          "args" : [ ],
-          "type" : {
-            "kind" : "SCALAR",
-            "name" : "AWSURL",
-            "ofType" : null
-          },
-          "isDeprecated" : false,
-          "deprecationReason" : null
-        }, {
           "name" : "email",
           "description" : null,
           "args" : [ ],
@@ -8934,15 +8923,6 @@
           "defaultValue" : null
         }, {
           "name" : "content",
-          "description" : null,
-          "type" : {
-            "kind" : "INPUT_OBJECT",
-            "name" : "ModelStringInput",
-            "ofType" : null
-          },
-          "defaultValue" : null
-        }, {
-          "name" : "imgURL",
           "description" : null,
           "type" : {
             "kind" : "INPUT_OBJECT",
@@ -9315,17 +9295,6 @@
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
-          "name" : "imgURL",
-          "description" : null,
-          "args" : [ ],
-          "type" : {
-            "kind" : "OBJECT",
-            "name" : "UserImage",
-            "ofType" : null
-          },
-          "isDeprecated" : false,
-          "deprecationReason" : null
-        }, {
           "name" : "email",
           "description" : null,
           "args" : [ ],
@@ -9341,9 +9310,13 @@
           "description" : null,
           "args" : [ ],
           "type" : {
-            "kind" : "OBJECT",
-            "name" : "UwcssaDepartment",
-            "ofType" : null
+            "kind" : "NON_NULL",
+            "name" : null,
+            "ofType" : {
+              "kind" : "OBJECT",
+              "name" : "UwcssaDepartment",
+              "ofType" : null
+            }
           },
           "isDeprecated" : false,
           "deprecationReason" : null
@@ -9438,17 +9411,6 @@
           "deprecationReason" : null
         }, {
           "name" : "uwcssaDepartmentUwcssaMembersId",
-          "description" : null,
-          "args" : [ ],
-          "type" : {
-            "kind" : "SCALAR",
-            "name" : "ID",
-            "ofType" : null
-          },
-          "isDeprecated" : false,
-          "deprecationReason" : null
-        }, {
-          "name" : "uwcssaMemberImgURLId",
           "description" : null,
           "args" : [ ],
           "type" : {
@@ -9613,15 +9575,6 @@
           "defaultValue" : null
         }, {
           "name" : "uwcssaDepartmentUwcssaMembersId",
-          "description" : null,
-          "type" : {
-            "kind" : "INPUT_OBJECT",
-            "name" : "ModelIDInput",
-            "ofType" : null
-          },
-          "defaultValue" : null
-        }, {
-          "name" : "uwcssaMemberImgURLId",
           "description" : null,
           "type" : {
             "kind" : "INPUT_OBJECT",
@@ -15447,15 +15400,6 @@
           },
           "defaultValue" : null
         }, {
-          "name" : "imgURL",
-          "description" : null,
-          "type" : {
-            "kind" : "SCALAR",
-            "name" : "AWSURL",
-            "ofType" : null
-          },
-          "defaultValue" : null
-        }, {
           "name" : "email",
           "description" : null,
           "type" : {
@@ -15560,15 +15504,6 @@
           "defaultValue" : null
         }, {
           "name" : "content",
-          "description" : null,
-          "type" : {
-            "kind" : "INPUT_OBJECT",
-            "name" : "ModelStringInput",
-            "ofType" : null
-          },
-          "defaultValue" : null
-        }, {
-          "name" : "imgURL",
           "description" : null,
           "type" : {
             "kind" : "INPUT_OBJECT",
@@ -15729,15 +15664,6 @@
           "type" : {
             "kind" : "SCALAR",
             "name" : "String",
-            "ofType" : null
-          },
-          "defaultValue" : null
-        }, {
-          "name" : "imgURL",
-          "description" : null,
-          "type" : {
-            "kind" : "SCALAR",
-            "name" : "AWSURL",
             "ofType" : null
           },
           "defaultValue" : null
@@ -16228,15 +16154,6 @@
             "ofType" : null
           },
           "defaultValue" : null
-        }, {
-          "name" : "uwcssaMemberImgURLId",
-          "description" : null,
-          "type" : {
-            "kind" : "SCALAR",
-            "name" : "ID",
-            "ofType" : null
-          },
-          "defaultValue" : null
         } ],
         "interfaces" : null,
         "enumValues" : null,
@@ -16389,15 +16306,6 @@
             "ofType" : null
           },
           "defaultValue" : null
-        }, {
-          "name" : "uwcssaMemberImgURLId",
-          "description" : null,
-          "type" : {
-            "kind" : "INPUT_OBJECT",
-            "name" : "ModelIDInput",
-            "ofType" : null
-          },
-          "defaultValue" : null
         } ],
         "interfaces" : null,
         "enumValues" : null,
@@ -16521,15 +16429,6 @@
           "defaultValue" : null
         }, {
           "name" : "uwcssaDepartmentUwcssaMembersId",
-          "description" : null,
-          "type" : {
-            "kind" : "SCALAR",
-            "name" : "ID",
-            "ofType" : null
-          },
-          "defaultValue" : null
-        }, {
-          "name" : "uwcssaMemberImgURLId",
           "description" : null,
           "type" : {
             "kind" : "SCALAR",
@@ -21064,23 +20963,6 @@
         "onFragment" : false,
         "onField" : false
       }, {
-        "name" : "deprecated",
-        "description" : null,
-        "locations" : [ "FIELD_DEFINITION", "ENUM_VALUE" ],
-        "args" : [ {
-          "name" : "reason",
-          "description" : null,
-          "type" : {
-            "kind" : "SCALAR",
-            "name" : "String",
-            "ofType" : null
-          },
-          "defaultValue" : "\"No longer supported\""
-        } ],
-        "onOperation" : false,
-        "onFragment" : false,
-        "onField" : false
-      }, {
         "name" : "aws_cognito_user_pools",
         "description" : "Tells the service this field/object has access authorized by a Cognito User Pools token.",
         "locations" : [ "OBJECT", "FIELD_DEFINITION" ],
@@ -21127,6 +21009,23 @@
         "description" : "Tells the service this field/object has access authorized by a Lambda Authorizer.",
         "locations" : [ "OBJECT", "FIELD_DEFINITION" ],
         "args" : [ ],
+        "onOperation" : false,
+        "onFragment" : false,
+        "onField" : false
+      }, {
+        "name" : "deprecated",
+        "description" : null,
+        "locations" : [ "FIELD_DEFINITION", "ENUM_VALUE" ],
+        "args" : [ {
+          "name" : "reason",
+          "description" : null,
+          "type" : {
+            "kind" : "SCALAR",
+            "name" : "String",
+            "ofType" : null
+          },
+          "defaultValue" : "\"No longer supported\""
+        } ],
         "onOperation" : false,
         "onFragment" : false,
         "onField" : false

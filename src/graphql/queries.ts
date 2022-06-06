@@ -700,7 +700,6 @@ export const getResearchDevelopmentTeam = /* GraphQL */ `
       title
       subTitle
       content
-      imgURL
       email
       linkedIn
       github
@@ -744,7 +743,6 @@ export const listResearchDevelopmentTeams = /* GraphQL */ `
         title
         subTitle
         content
-        imgURL
         email
         linkedIn
         github
@@ -821,25 +819,6 @@ export const getUwcssaMember = /* GraphQL */ `
       title
       subTitle
       content
-      imgURL {
-        id
-        objectURL
-        key
-        name
-        size
-        type
-        lastModified
-        lastModifiedDate
-        compressedWidth
-        objectCompressedURL
-        thumbnailWidth
-        objectThumbnailURL
-        targetTable
-        active
-        createdAt
-        updatedAt
-        owner
-      }
       email
       department {
         id
@@ -873,7 +852,6 @@ export const getUwcssaMember = /* GraphQL */ `
         userProfileAvatarURLId
       }
       uwcssaDepartmentUwcssaMembersId
-      uwcssaMemberImgURLId
     }
   }
 `;
@@ -898,7 +876,6 @@ export const listUwcssaMembers = /* GraphQL */ `
         updatedAt
         owner
         uwcssaDepartmentUwcssaMembersId
-        uwcssaMemberImgURLId
       }
       nextToken
     }
