@@ -2,7 +2,7 @@
  * @Author: Shikai Jin
  * @Date: 2022-05-27 17:53:27
  * @LastEditors: Shikai Jin
- * @LastEditTime: 2022-06-04 21:49:59
+ * @LastEditTime: 2022-06-05 20:44:40
  * @FilePath: /uwcssa_ca/src/views/Logistics/Logistics.tsx
  * @Description:
  *
@@ -15,7 +15,6 @@ import {
   Integrations,
   Jobs,
   News,
-  Reviews,
   Team,
   Video,
 } from './components';
@@ -23,6 +22,7 @@ import { alpha, useTheme } from '@mui/material/styles';
 
 import Box from '@mui/material/Box';
 import Container from 'components/Container';
+import DevelopTeam from 'views/Developers/components/Team/DevelopTeam';
 import { Divider } from '@mui/material';
 import FQA from 'views/FQA';
 import Partner from 'views/Partner';
@@ -91,9 +91,9 @@ const Logistics = (): JSX.Element => {
       <Container>
         <AboutBottom />
       </Container>
-      <Box bgcolor={'primary.main'}>
+      <Box bgcolor={'alternate.main'}>
         <Container>
-          <Reviews />
+          <DevelopTeam />
         </Container>
       </Box>
     </>
