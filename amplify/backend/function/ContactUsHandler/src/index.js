@@ -2,7 +2,7 @@
  * @Author: Shikai Jin
  * @Date: 2022-05-28 22:04:05
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-29 15:54:55
+ * @LastEditTime: 2022-06-06 22:26:45
  * @FilePath: /uwcssa_ca/amplify/backend/function/ContactUsHandler/src/index.js
  * @Description:
  *
@@ -44,7 +44,7 @@ exports.handler = async function (event) {
       BccAddresses: ['shushen2013@gmail.com', 'zoejinmessiah@gmail.com'],
     },
 
-    Source: '"uwcssa.ca" <uwcssa-noreply@uwcssa.ca>',
+    Source: '"UWCSSA" <uwcssa-noreply@uwcssa.ca>',
     Message: {
       Body: {
         Html: {
@@ -57,6 +57,7 @@ exports.handler = async function (event) {
         Data: 'UWCSSA 感谢您的提问，我们会尽快解决问题',
       },
     },
+    ReplyToAddresses: ['uwincssa.it@gmail.com'],
   };
 
   // console.log(params);

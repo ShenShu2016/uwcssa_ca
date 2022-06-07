@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-29 15:21:31
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-29 15:58:28
+ * @LastEditTime: 2022-06-06 22:41:13
  * @FilePath: /uwcssa_ca/amplify/backend/function/ArticlePublishHandler/src/email_template.js
  * @Description:
  *
@@ -153,7 +153,7 @@ function articlePublishTemplate(record) {
                                                   <table class="image_block" width="100%" border="0" cellpadding="30" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
                                                       <tr>
                                                           <td>
-                                                              <div align="center" style="line-height:10px"><img class="big" src=${record.dynamodb.NewImage.coverPageImgURL.S}} style="display: block; height: auto; border: 0; width: 640px; max-width: 100%;" width="640"></div>
+                                                              <div align="center" style="line-height:10px"><img class="big" src=${record.dynamodb.NewImage.coverPageImgURL.S} style="display: block; height: auto; border: 0; width: 640px; max-width: 100%;" width="640"></div>
                                                           </td>
                                                       </tr>
                                                   </table>

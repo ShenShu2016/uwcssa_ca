@@ -2,7 +2,7 @@
  * @Author: Shikai Jin
  * @Date: 2022-05-28 22:04:05
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-29 16:11:26
+ * @LastEditTime: 2022-06-06 22:38:20
  * @FilePath: /uwcssa_ca/amplify/backend/function/ArticlePublishHandler/src/index.js
  * @Description:
  *
@@ -52,9 +52,9 @@ exports.handler = async function (event) {
   const HTML_EMAIL_CONTENT = email_template.articlePublishTemplate(record);
   const params = {
     Destination: {
-      ToAddresses: noDupEmailArray,
+      BccAddresses: noDupEmailArray,
     },
-    Source: '"uwcssa.ca" <uwcssa-noreply@uwcssa.ca>',
+    Source: '"UWCSSA" <uwcssa-noreply@uwcssa.ca>',
     Message: {
       Body: {
         Html: {
@@ -67,6 +67,7 @@ exports.handler = async function (event) {
         Data: `UWCSSA News: ${record.dynamodb.NewImage.title.S}`,
       },
     },
+    ReplyToAddresses: ['uwincssa.it@gmail.com'],
   };
 
   const response = await ses.sendEmail(params).promise();
