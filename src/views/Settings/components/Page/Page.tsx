@@ -2,11 +2,12 @@
  * @Author: Shen Shu
  * @Date: 2022-05-19 18:25:04
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-22 01:23:17
- * @FilePath: /uwcssa_ca/frontend/src/views/Settings/components/Page/Page.tsx
+ * @LastEditTime: 2022-06-06 21:47:58
+ * @FilePath: /uwcssa_ca/src/views/Settings/components/Page/Page.tsx
  * @Description:
  *
  */
+
 import React, { useEffect, useState } from 'react';
 
 import Box from '@mui/material/Box';
@@ -25,21 +26,21 @@ const pages = [
     href: '/settings/general',
     title: 'General',
   },
-  {
-    id: 'security',
-    href: '/settings/security',
-    title: 'Security',
-  },
-  {
-    id: 'notifications',
-    href: '/settings/notifications',
-    title: 'Notifications',
-  },
-  {
-    id: 'billing',
-    href: '/settings/billing',
-    title: 'Billing Information',
-  },
+  // {
+  //   id: 'security',
+  //   href: '/settings/security',
+  //   title: 'Security',
+  // },
+  // {
+  //   id: 'notifications',
+  //   href: '/settings/notifications',
+  //   title: 'Notifications',
+  // },
+  // {
+  //   id: 'billing',
+  //   href: '/settings/billing',
+  //   title: 'Billing Information',
+  // },
 ];
 
 interface Props {
