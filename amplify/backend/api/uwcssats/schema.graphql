@@ -71,6 +71,8 @@ type UserImage  # user 所上传的image 都会留个记录
   @auth(
     rules: [
       { allow: owner, operations: [create, read, update] }
+      { allow: public, operations: [read], provider: iam }
+      { allow: groups, operations: [read], groups: ["uwcssaUser"] }
       { allow: groups, groups: ["uwcssaAdmin"] }
     ]
   ) {
