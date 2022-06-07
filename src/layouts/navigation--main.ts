@@ -1,8 +1,8 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-26 13:57:44
- * @LastEditors: Shikai Jin
- * @LastEditTime: 2022-06-04 18:53:25
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-06-06 21:53:12
  * @FilePath: /uwcssa_ca/src/layouts/navigation--main.ts
  * @Description:
  *
@@ -31,15 +31,7 @@ const pages = {
       href: '/',
     },
     {
-      title: 'Redux Counter',
-      href: '/reduxCounter',
-    },
-    {
-      title: 'Research & Development Team',
-      href: '/research-development-team',
-    },
-    {
-      title: '后台管理',
+      title: '后台管理系统',
       href: '/admin',
     },
     // {
@@ -125,29 +117,29 @@ const pages = {
     //   href: '/signup-simple',
     // },
     {
-      title: 'Sign up: Cover',
-      href: '/auth/signUp',
+      title: '正在构建中...',
+      href: '',
     },
     // {
     //   title: 'Sign in: Simple',
     //   href: '/signin-simple',
     // },
-    {
-      title: 'Sign in: Cover',
-      href: '/auth/signIn',
-    },
+    // {
+    //   title: 'Sign in: Cover',
+    //   href: '/auth/signIn',
+    // },
     // {
     //   title: 'Password: Simple',
     //   href: '/password-reset-simple',
     // },
-    {
-      title: 'Password Reset: Cover',
-      href: '/auth/passwordReset',
-    },
-    {
-      title: 'Forgot PassWord Submit',
-      href: '/auth/forgotPassWordSubmit',
-    },
+    // {
+    //   title: 'Password Reset: Cover',
+    //   href: '/auth/passwordReset',
+    // },
+    // {
+    //   title: 'Forgot PassWord Submit',
+    //   href: '/auth/forgotPassWordSubmit',
+    // },
   ],
   activity: [
     // {
@@ -167,8 +159,8 @@ const pages = {
     //   href: '/not-found',
     // },
     {
-      title: 'Error 404: Cover',
-      href: '/404',
+      title: '正在构件中...',
+      href: '',
     },
     // {
     //   title: 'Career Page Minimal',
@@ -191,6 +183,10 @@ const pages = {
     {
       title: 'Engineering at UWCSSA',
       href: '/developers',
+    },
+    {
+      title: 'Research & Development Team',
+      href: '/research-development-team',
     },
   ],
 

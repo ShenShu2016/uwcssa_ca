@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-06 20:57:04
+ * @LastEditTime: 2022-06-06 21:50:07
  * @FilePath: /uwcssa_ca/src/views/ViewRoutes.tsx
  * @Description:
  *
@@ -27,7 +27,6 @@ import {
   Logistics as LogisticsView,
   NotFoundCover as NotFoundCoverView,
   PasswordResetCover as PasswordResetCoverView,
-  ReduxCounter as ReduxCounterView,
   ResearchDevelopment as ResearchDevelopmentView,
   SigninCover as SigninCoverView,
   SignupCover as SignupCoverView,
@@ -63,12 +62,12 @@ function ViewRoutes(): Array<{
       isAllowed: true,
       redirectPath: undefined,
     },
-    {
-      path: '/reduxCounter',
-      renderer: (params = {}): JSX.Element => <ReduxCounterView {...params} />,
-      isAllowed: true,
-      redirectPath: undefined,
-    },
+    // {
+    //   path: '/reduxCounter',
+    //   renderer: (params = {}): JSX.Element => <ReduxCounterView {...params} />,
+    //   isAllowed: true,
+    //   redirectPath: undefined,
+    // },
     // {
     //   path: '/admin/*',
     //   renderer: (): JSX.Element => <AdministratorPage />,
