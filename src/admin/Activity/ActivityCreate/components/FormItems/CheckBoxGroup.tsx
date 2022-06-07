@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /*
  * @Author: 李佳修
  * @Date: 2022-06-03 17:10:14
- * @LastEditTime: 2022-06-04 10:43:31
+ * @LastEditTime: 2022-06-07 17:13:35
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/admin/Activity/ActivityCreate/components/FormItems/CheckBoxGroup.tsx
  */
@@ -31,7 +32,7 @@ const CheckBoxGroupItem: React.FC<CheckBoxGroupProp> = ({ item }) => {
 
   return (
     <>
-      <FieldLabel name={item.name} isRequired={item.isRequired} description={item.description}/>
+      <FieldLabel name={item.question} isRequired={item.isRequired} description={item.description}/>
       <RadioGroup
         row={item.formType === FormType.Checkbox}
         value={value}

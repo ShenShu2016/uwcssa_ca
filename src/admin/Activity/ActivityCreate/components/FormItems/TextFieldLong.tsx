@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /*
  * @Author: 李佳修
  * @Date: 2022-06-03 17:02:56
- * @LastEditTime: 2022-06-04 09:49:27
+ * @LastEditTime: 2022-06-07 17:12:59
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/admin/Activity/ActivityCreate/components/FormItems/TextFieldLong.tsx
  */
@@ -27,7 +28,7 @@ const TextFieldLong: React.FC<TextFieldLongProp> = ({ item }) => {
 
   return (
     <>
-      <FieldLabel name={item.name} isRequired={item.isRequired} description={item.description}/>
+      <FieldLabel name={item.question} isRequired={item.isRequired} description={item.description}/>
       <TextField
         label={item.label}
         placeholder={item.placeholder}

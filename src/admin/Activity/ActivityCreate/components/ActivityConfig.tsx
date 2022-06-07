@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-01 09:18:34
- * @LastEditTime: 2022-06-06 09:05:43
+ * @LastEditTime: 2022-06-07 18:22:39
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/admin/Activity/ActivityCreate/components/ActivityConfig.tsx
  */
@@ -28,7 +28,8 @@ import { removeQuestion, reorderQuestion } from 'redux/form/formSlice';
 import Tooltip from '@mui/material/Tooltip';
 import { fetchFormItemList } from 'redux/form/formSlice';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
-import {SortableContainer, SortableElement, SortEnd} from 'react-sortable-hoc';
+import {SortableContainer, SortableElement, SortableHandle, SortEnd} from 'react-sortable-hoc';
+import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
 
 const ActivityConfig: React.FC = () => {
   const swiper = useSwiper();
@@ -57,84 +58,108 @@ const ActivityConfig: React.FC = () => {
     }));
   };
 
+  const DragHandle = SortableHandle(() => (
+    <Box
+      sx={{
+        height: '100%',
+        borderTopLeftRadius: '12px',
+        borderBottomLeftRadius: '12px',
+        background: '#f5f5f5',
+        display: 'flex',
+        alignItems: 'center',
+        cursor: 'move',
+        color: '#9e9e9e',
+        '&:hover': {
+          background: '#eeeeee',
+          color: '#424242'
+        },
+        '&:active': {
+          background: '#e0e0e0',
+          color: '#fff'
+        }
+      }}
+    >
+      <DragIndicatorIcon  />
+    </Box>
+  ));
+
   const SortableItem = SortableElement(({ item }) => {
     return (
-      <Tooltip title="拖动元素以排序" placement="top" enterNextDelay={1500}>
-        <Box
-          mt={1}
-          paddingY={2}
-          paddingX={4}
-          display='flex'
-          borderRadius={'12px'}
-          sx={{
-            cursor: 'move',
-            '&:hover': {
-              background: '#e1f5fe',
-              '& .remove_icon': {
-                display: 'flex'
-              }
+      <Box
+        mt={2}
+        display='flex'
+        borderRadius={'12px'}
+        sx={{
+          '&:hover': {
+            boxShadow: 'rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px',
+            '& .remove_icon': {
+              display: 'flex'
             }
-          }}
-        >
-          <Box width={'calc(100% - 50px)'}>
-            {
-              item.formType === FormType.TextFieldShort ?
-                <TextFieldShort item={item}/> : null
-            }
-  
-            {
-              item.formType === FormType.TextFieldLong ?
-                <TextFieldLong item={item}/> : null
-            }
-  
-            {
-              item.formType === FormType.Select || item.formType === FormType.MultipleSelect ?
-                <Select item={item}/> : null
-            }
-  
-            {
-              item.formType === FormType.DatePicker ?
-                <DatePicker item={item}/> : null
-            }
-  
-            {
-              item.formType === FormType.TimePicker ?
-                <TimePicker item={item}/> : null
-            }
-  
-            {
-              item.formType === FormType.DateTimePicker ?
-                <DateTimePicker item={item}/> : null
-            }
-  
-            {
-              item.formType === FormType.RadioGroupH ||
-            item.formType === FormType.RadioGroupV ||
-            item.formType === FormType.Boolean ?
-                <RadioGroup item={item}/> : null
-            }
-  
-            {
-              item.formType === FormType.Checkbox ?
-                <CheckBoxGroup item={item}/> : null
-            }
-          </Box>
-          <Box
-            className='remove_icon'
-            width='50px'
-            display='none'
-            alignItems='center'
-            justifyContent='flex-end'
-          >
-            <Tooltip title={'移除问题'} placement="top" arrow>
-              <RemoveCircleIcon
-                sx={{color: '#e53935', cursor: 'pointer'}}
-                onClick={(e) => handleRemoveQuestion(e, item)}
-              />
-            </Tooltip>
-          </Box>
+          }
+        }}
+      >
+        <Box>
+          <DragHandle/>
         </Box>
-      </Tooltip>
+        <Box width={'calc(100% - 80px)'} pl={2} paddingY={1.5}>
+          {
+            item.formType === FormType.TextFieldShort ?
+              <TextFieldShort item={item}/> : null
+          }
+  
+          {
+            item.formType === FormType.TextFieldLong ?
+              <TextFieldLong item={item}/> : null
+          }
+  
+          {
+            item.formType === FormType.Select || item.formType === FormType.MultipleSelect ?
+              <Select item={item}/> : null
+          }
+  
+          {
+            item.formType === FormType.DatePicker ?
+              <DatePicker item={item}/> : null
+          }
+  
+          {
+            item.formType === FormType.TimePicker ?
+              <TimePicker item={item}/> : null
+          }
+  
+          {
+            item.formType === FormType.DateTimePicker ?
+              <DateTimePicker item={item}/> : null
+          }
+  
+          {
+            item.formType === FormType.RadioGroupH ||
+              item.formType === FormType.RadioGroupV ||
+              item.formType === FormType.Boolean ?
+              <RadioGroup item={item}/> : null
+          }
+  
+          {
+            item.formType === FormType.Checkbox ?
+              <CheckBoxGroup item={item}/> : null
+          }
+        </Box>
+        <Box
+          className='remove_icon'
+          width='50px'
+          display='none'
+          alignItems='center'
+          justifyContent='flex-end'
+          pr={1}
+        >
+          <Tooltip title={'移除问题'} placement="top" arrow>
+            <RemoveCircleIcon
+              sx={{color: '#e53935', cursor: 'pointer'}}
+              onClick={(e) => handleRemoveQuestion(e, item)}
+            />
+          </Tooltip>
+        </Box>
+      </Box>
     );
   });
 
@@ -187,8 +212,8 @@ const ActivityConfig: React.FC = () => {
           <Typography variant="h6" gutterBottom component="div">
               活动报名表单
           </Typography>
-          <Box width={'100%'}  boxSizing='border-box'>
-            <SortableList onSortEnd={handleSortEnd} distance={1}/>
+          <Box width={'100%'}  boxSizing='border-box' pr={2}>
+            <SortableList onSortEnd={handleSortEnd} distance={1} useDragHandle/>
           </Box>
           <Button
             variant="contained"

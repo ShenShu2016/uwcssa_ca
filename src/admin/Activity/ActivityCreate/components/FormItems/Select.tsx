@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /*
  * @Author: 李佳修
  * @Date: 2022-06-03 17:10:14
- * @LastEditTime: 2022-06-05 11:17:29
+ * @LastEditTime: 2022-06-07 17:13:08
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/admin/Activity/ActivityCreate/components/FormItems/Select.tsx
  */
@@ -30,7 +31,7 @@ const Select: React.FC<SelectProp> = ({ item }) => {
 
   return (
     <>
-      <FieldLabel name={item.name} isRequired={item.isRequired} description={item.description}/>
+      <FieldLabel name={item.question} isRequired={item.isRequired} description={item.description}/>
       <TextField
         label={item.label}
         select

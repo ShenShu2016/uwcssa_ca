@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /*
  * @Author: 李佳修
  * @Date: 2022-06-03 17:10:14
- * @LastEditTime: 2022-06-05 14:34:58
+ * @LastEditTime: 2022-06-07 17:13:15
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/admin/Activity/ActivityCreate/components/FormItems/RadioGroup.tsx
  */
@@ -31,7 +32,7 @@ const RadioGroupItem: React.FC<RadioGroupProp> = ({ item }) => {
 
   return (
     <>
-      <FieldLabel name={item.name} isRequired={item.isRequired} description={item.description}/>
+      <FieldLabel name={item.question} isRequired={item.isRequired} description={item.description}/>
       <RadioGroup
         row={item.formType !== FormType.RadioGroupV }
         value={value}

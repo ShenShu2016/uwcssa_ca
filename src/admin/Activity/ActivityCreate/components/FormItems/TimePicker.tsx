@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 /*
  * @Author: 李佳修
  * @Date: 2022-06-03 17:10:14
- * @LastEditTime: 2022-06-04 09:44:00
+ * @LastEditTime: 2022-06-07 17:11:45
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/admin/Activity/ActivityCreate/components/FormItems/TimePicker.tsx
  */
@@ -31,7 +32,7 @@ const TimePickerItem: React.FC<TimePickerProp> = ({ item }) => {
   const [value, setValue] = useState<Date | null>(null);
   return (
     <>
-      <FieldLabel name={item.name} isRequired={item.isRequired} description={item.description}/>
+      <FieldLabel name={item.question} isRequired={item.isRequired} description={item.description}/>
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <TimePicker
           label={item.label}
