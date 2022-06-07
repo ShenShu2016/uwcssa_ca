@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-29 22:41:37
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-30 20:30:04
+ * @LastEditTime: 2022-06-06 20:03:38
  * @FilePath: /uwcssa_ca/src/redux/uwcssaDepartment/uwcssaDepartmentSlice.tsx
  * @Description:
  * import uwcssaDepartmentReducer from './uwcssaDepartment/uwcssaDepartmentSlice';
@@ -17,6 +17,7 @@ import {
 } from '@reduxjs/toolkit';
 import {
   createUwcssaDepartment,
+  deleteUwcssaDepartment,
   updateUwcssaDepartment,
 } from 'graphql/mutations';
 import { getUwcssaDepartment, listUwcssaDepartments } from 'graphql/queries';
@@ -51,6 +52,8 @@ const initialState = uwcssaDepartmentAdapter.getInitialState({
   postUwcssaDepartmentImgError: null,
   updateUwcssaDepartmentDetailStatus: 'idle',
   updateUwcssaDepartmentDetailError: null,
+  removeUwcssaDepartmentStatus: 'idle',
+  removeUwcssaDepartmentError: null,
 });
 
 export const fetchUwcssaDepartmentList = createAsyncThunk(
@@ -150,6 +153,23 @@ export const updateUwcssaDepartmentDetail = createAsyncThunk(
   },
 );
 
+export const removeUwcssaDepartment = createAsyncThunk(
+  'uwcssaDepartment/removeUwcssaDepartment',
+  async ({ id }: { id: string }) => {
+    try {
+      const result: any = await API.graphql(
+        graphqlOperation(deleteUwcssaDepartment, {
+          input: { id },
+        }),
+      );
+      console.log(result);
+      return result.data.deleteUwcssaDepartment.id;
+    } catch (error) {
+      console.log(error);
+    }
+  },
+);
+
 const uwcssaDepartmentSlice = createSlice({
   name: 'uwcssaDepartment',
   initialState,
@@ -208,6 +228,20 @@ const uwcssaDepartmentSlice = createSlice({
       .addCase(updateUwcssaDepartmentDetail.rejected, (state, action) => {
         state.updateUwcssaDepartmentDetailStatus = 'failed';
         state.updateUwcssaDepartmentDetailError = action.error.message;
+      })
+      .addCase(removeUwcssaDepartment.pending, (state) => {
+        state.removeUwcssaDepartmentStatus = 'loading';
+      })
+      .addCase(removeUwcssaDepartment.fulfilled, (state, action) => {
+        state.removeUwcssaDepartmentStatus = 'succeed';
+        console.log(action.payload);
+        //state.uwcssaMembers.unshift(action.payload.data.createUwcssaMember);
+        uwcssaDepartmentAdapter.removeOne(state, action.payload);
+        // state.updateUwcssaMemberStatus = "idle";
+      })
+      .addCase(removeUwcssaDepartment.rejected, (state, action) => {
+        state.removeUwcssaDepartmentStatus = 'failed';
+        state.removeUwcssaDepartmentError = action.error.message;
       });
   },
 });

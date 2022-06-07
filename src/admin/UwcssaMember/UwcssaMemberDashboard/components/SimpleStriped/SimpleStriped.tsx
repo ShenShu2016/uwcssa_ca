@@ -17,6 +17,8 @@ import {
   removeUwcssaMember,
 } from 'redux/uwcssaMember/uwcssaMemberSlice';
 
+import CheckIcon from '@mui/icons-material/Check';
+import CloseIcon from '@mui/icons-material/Close';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import EditUwcssaDepartmentForm from './components/EditUwcssaMember';
@@ -38,7 +40,7 @@ const SimpleStriped = ({
   const handleDeleteUwcssaMember = async ({ item }) => {
     console.log(item);
     await confirm({
-      description: `This will permanently delete ${item.name}.`,
+      description: `This will permanently delete ${item.user.name}(${item.name}).`,
     });
     const response = await dispatch(
       removeUwcssaMember({
@@ -179,7 +181,7 @@ const SimpleStriped = ({
                 </TableCell>
                 <TableCell>
                   <Typography variant={'subtitle2'} fontWeight={700}>
-                    {item.name}
+                    {item.name || <CloseIcon color="error" />}
                   </Typography>
                 </TableCell>
                 <TableCell>
@@ -193,12 +195,12 @@ const SimpleStriped = ({
                 </TableCell>
                 <TableCell>
                   <Typography color={'text.secondary'} variant={'subtitle2'}>
-                    {item.title}
+                    {item.title || <CloseIcon color="error" />}
                   </Typography>
                 </TableCell>
                 <TableCell>
                   <Typography color={'text.secondary'} variant={'subtitle2'}>
-                    {item.subTitle}
+                    {item.subTitle || <CloseIcon color="error" />}
                   </Typography>
                 </TableCell>
                 <TableCell>
@@ -207,7 +209,11 @@ const SimpleStriped = ({
                     fontWeight={700}
                     sx={{ color: theme.palette.success.dark }}
                   >
-                    {item.content}
+                    {item.content ? (
+                      <CheckIcon color={'success'} />
+                    ) : (
+                      <CloseIcon color="error" />
+                    )}
                   </Typography>
                 </TableCell>
                 <TableCell>
@@ -216,7 +222,11 @@ const SimpleStriped = ({
                     fontWeight={700}
                     sx={{ color: theme.palette.success.dark }}
                   >
-                    {item.email}
+                    {item.email ? (
+                      <CheckIcon color={'success'} />
+                    ) : (
+                      <CloseIcon color="error" />
+                    )}
                   </Typography>
                 </TableCell>
                 <TableCell>
@@ -225,7 +235,11 @@ const SimpleStriped = ({
                     fontWeight={700}
                     sx={{ color: theme.palette.success.dark }}
                   >
-                    {item.linkedIn}
+                    {item.linkedIn ? (
+                      <CheckIcon color={'success'} />
+                    ) : (
+                      <CloseIcon color="error" />
+                    )}
                   </Typography>
                 </TableCell>
                 <TableCell>
@@ -234,7 +248,11 @@ const SimpleStriped = ({
                     fontWeight={700}
                     sx={{ color: theme.palette.success.dark }}
                   >
-                    {item.github}
+                    {item.github ? (
+                      <CheckIcon color={'success'} />
+                    ) : (
+                      <CloseIcon color="error" />
+                    )}
                   </Typography>
                 </TableCell>
                 <TableCell>
@@ -243,7 +261,11 @@ const SimpleStriped = ({
                     fontWeight={700}
                     sx={{ color: theme.palette.success.dark }}
                   >
-                    {item.website}
+                    {item.website ? (
+                      <CheckIcon color={'success'} />
+                    ) : (
+                      <CloseIcon color="error" />
+                    )}
                   </Typography>
                 </TableCell>
                 <TableCell>

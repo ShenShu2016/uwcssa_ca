@@ -17,6 +17,8 @@ import {
   removeResearchDevelopmentTeam,
 } from 'redux/researchDevelopmentTeam/researchDevelopmentTeamSlice';
 
+import CheckIcon from '@mui/icons-material/Check';
+import CloseIcon from '@mui/icons-material/Close';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import EditUwcssaDepartmentForm from './components/EditResearchDevelopmentTeam/';
@@ -103,7 +105,6 @@ const SimpleStriped = ({
                   content
                 </Typography>
               </TableCell>
-
               <TableCell>
                 <Typography
                   variant={'caption'}
@@ -146,7 +147,7 @@ const SimpleStriped = ({
                   fontWeight={700}
                   sx={{ textTransform: 'uppercase' }}
                 >
-                  User
+                  编辑
                 </Typography>
               </TableCell>
             </TableRow>
@@ -171,17 +172,17 @@ const SimpleStriped = ({
                 </TableCell>
                 <TableCell>
                   <Typography variant={'subtitle2'} fontWeight={700}>
-                    {item.name}
+                    {item.name || <CloseIcon color="error" />}
                   </Typography>
                 </TableCell>
                 <TableCell>
                   <Typography color={'text.secondary'} variant={'subtitle2'}>
-                    {item.title}
+                    {item.title || <CloseIcon color="error" />}
                   </Typography>
                 </TableCell>
                 <TableCell>
                   <Typography color={'text.secondary'} variant={'subtitle2'}>
-                    {item.subTitle}
+                    {item.subTitle || <CloseIcon color="error" />}
                   </Typography>
                 </TableCell>
                 <TableCell>
@@ -190,7 +191,11 @@ const SimpleStriped = ({
                     fontWeight={700}
                     sx={{ color: theme.palette.success.dark }}
                   >
-                    {item.content}
+                    {item.email ? (
+                      <CheckIcon color={'success'} />
+                    ) : (
+                      <CloseIcon color="error" />
+                    )}
                   </Typography>
                 </TableCell>
                 <TableCell>
@@ -199,7 +204,11 @@ const SimpleStriped = ({
                     fontWeight={700}
                     sx={{ color: theme.palette.success.dark }}
                   >
-                    {item.email}
+                    {item.content ? (
+                      <CheckIcon color={'success'} />
+                    ) : (
+                      <CloseIcon color="error" />
+                    )}
                   </Typography>
                 </TableCell>
                 <TableCell>
@@ -208,7 +217,11 @@ const SimpleStriped = ({
                     fontWeight={700}
                     sx={{ color: theme.palette.success.dark }}
                   >
-                    {item.linkedIn}
+                    {item.linkedIn ? (
+                      <CheckIcon color={'success'} />
+                    ) : (
+                      <CloseIcon color="error" />
+                    )}
                   </Typography>
                 </TableCell>
                 <TableCell>
@@ -217,7 +230,11 @@ const SimpleStriped = ({
                     fontWeight={700}
                     sx={{ color: theme.palette.success.dark }}
                   >
-                    {item.github}
+                    {item.github ? (
+                      <CheckIcon color={'success'} />
+                    ) : (
+                      <CloseIcon color="error" />
+                    )}
                   </Typography>
                 </TableCell>
                 <TableCell>
@@ -226,10 +243,13 @@ const SimpleStriped = ({
                     fontWeight={700}
                     sx={{ color: theme.palette.success.dark }}
                   >
-                    {item.website}
+                    {item.website ? (
+                      <CheckIcon color={'success'} />
+                    ) : (
+                      <CloseIcon color="error" />
+                    )}
                   </Typography>
                 </TableCell>
-
                 <TableCell>
                   <Button
                     variant="text"

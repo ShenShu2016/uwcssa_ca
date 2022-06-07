@@ -8,13 +8,18 @@ import {
   TableHead,
   TableRow,
   Typography,
+  useTheme,
 } from '@mui/material';
 import React, { useState } from 'react';
 
+import CheckIcon from '@mui/icons-material/Check';
+import CloseIcon from '@mui/icons-material/Close';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import EditUwcssaDepartmentForm from './components/EditUwcssaDepartment/EditUwcssaDepartmentForm';
-import { useTheme } from '@mui/material/styles';
+//import { removeUwcssaDepartment } from 'redux/uwcssaDepartment/uwcssaDepartmentSlice';
+//import { useAppDispatch } from 'redux/hooks';
+import { useConfirm } from 'material-ui-confirm';
 
 const SimpleStriped = ({
   uwcssaDepartmentList,
@@ -29,7 +34,9 @@ const SimpleStriped = ({
     owner: string | null;
   }>;
 }): JSX.Element => {
+  const confirm = useConfirm();
   const theme = useTheme();
+  //const dispatch = useAppDispatch();
   const [open, setOpen] = useState(false);
   const [department, setDepartment] = useState<{
     id: string;
@@ -40,6 +47,24 @@ const SimpleStriped = ({
     updatedAt?: string | null;
     owner: string | null;
   } | null>(null);
+
+  const handleDeleteDepartment = async ({ item }) => {
+    console.log(item);
+    await confirm({
+      description: '这个不能删，请联系最高管理员.',
+      //description: `This will permanently delete ${item.id}.`,
+    });
+    // const response = await dispatch(
+    //   removeUwcssaDepartment({
+    //     id: item.id,
+    //   }),
+    // );
+    // if (response.meta.requestStatus === 'fulfilled') {
+    //   return true;
+    // } else {
+    //   return false;
+    // }
+  };
 
   return (
     <>
@@ -119,21 +144,20 @@ const SimpleStriped = ({
                 </TableCell>
                 <TableCell>
                   <Typography color={'text.secondary'} variant={'subtitle2'}>
-                    {item.email}
+                    {item.email ? (
+                      <CheckIcon color={'success'} />
+                    ) : (
+                      <CloseIcon color="error" />
+                    )}
                   </Typography>
                 </TableCell>
                 <TableCell>
                   <Typography color={'text.secondary'} variant={'subtitle2'}>
-                    {item.leader}
-                  </Typography>
-                </TableCell>
-                <TableCell>
-                  <Typography
-                    variant={'caption'}
-                    fontWeight={700}
-                    sx={{ color: theme.palette.success.dark }}
-                  >
-                    {item.introduction}
+                    {item.leader ? (
+                      <CheckIcon color={'success'} />
+                    ) : (
+                      <CloseIcon color="error" />
+                    )}
                   </Typography>
                 </TableCell>
                 <TableCell>
@@ -143,6 +167,19 @@ const SimpleStriped = ({
                     sx={{ color: theme.palette.success.dark }}
                   >
                     99999
+                  </Typography>
+                </TableCell>
+                <TableCell>
+                  <Typography
+                    variant={'caption'}
+                    fontWeight={700}
+                    sx={{ color: theme.palette.success.dark }}
+                  >
+                    {item.introduction ? (
+                      <CheckIcon color={'success'} />
+                    ) : (
+                      <CloseIcon color="error" />
+                    )}
                   </Typography>
                 </TableCell>
                 <TableCell>
@@ -161,6 +198,9 @@ const SimpleStriped = ({
                     sx={{ p: '4px' }}
                     variant="text"
                     startIcon={<DeleteIcon />}
+                    onClick={() => {
+                      handleDeleteDepartment({ item });
+                    }}
                   >
                     Delete
                   </Button>

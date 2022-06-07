@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-30 15:13:57
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-30 20:29:20
+ * @LastEditTime: 2022-06-06 20:00:23
  * @FilePath: /uwcssa_ca/src/admin/Department/DepartmentDashboard/components/SimpleStriped/components/EditUwcssaDepartment/EditUwcssaDepartmentForm/EditUwcssaDepartmentForm.tsx
  * @Description:
  *
@@ -181,6 +181,14 @@ const EditUwcssaDepartmentForm = ({
               <Grid item container xs={12}>
                 <Button size={'large'} variant={'contained'} type={'submit'}>
                   Submit
+                </Button>
+                <Button
+                  size={'large'}
+                  variant={'text'}
+                  sx={{ ml: '2rem' }}
+                  onClick={() => onClose()}
+                >
+                  Cancel
                 </Button>
               </Grid>
             </Grid>

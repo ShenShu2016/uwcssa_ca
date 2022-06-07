@@ -2,8 +2,8 @@
  * @Author: Shen Shu
  * @Date: 2022-05-30 15:13:57
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-30 22:18:25
- * @FilePath: /uwcssa_ca/src/admin/Department/DepartmentDashboard/components/AddUwcssaDepartment/AddUwcssaDepartmentForm/AddUwcssaDepartmentFormm.tsx
+ * @LastEditTime: 2022-06-06 20:00:02
+ * @FilePath: /uwcssa_ca/src/admin/Department/DepartmentDashboard/components/AddUwcssaDepartment/AddUwcssaDepartmentForm/AddUwcssaDepartmentForm.tsx
  * @Description:
  *
  */
@@ -166,6 +166,14 @@ const AddUwcssaDepartmentForm = ({ onClose, open }: Props): JSX.Element => {
               <Grid item container xs={12}>
                 <Button size={'large'} variant={'contained'} type={'submit'}>
                   Submit
+                </Button>
+                <Button
+                  size={'large'}
+                  variant={'text'}
+                  sx={{ ml: '2rem' }}
+                  onClick={() => onClose()}
+                >
+                  Cancel
                 </Button>
               </Grid>
             </Grid>
