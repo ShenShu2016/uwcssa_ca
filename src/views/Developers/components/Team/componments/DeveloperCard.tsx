@@ -2,7 +2,7 @@
  * @Author: Shikai Jin
  * @Date: 2022-06-05 19:59:54
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-06 16:19:26
+ * @LastEditTime: 2022-06-06 20:42:39
  * @FilePath: /uwcssa_ca/src/views/Developers/components/Team/componments/DeveloperCard.tsx
  * @Description:
  *
@@ -25,6 +25,7 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import React from 'react';
 import { ResearchDevelopmentTeam } from 'redux/researchDevelopmentTeam/researchDevelopmentTeamSlice';
+import { stringAvatar } from 'components/Avatar/AvatarFunction';
 
 type Props = {
   developers: ResearchDevelopmentTeam[];
@@ -32,9 +33,11 @@ type Props = {
 
 const DevelopCard: React.FC<Props> = (props): JSX.Element => {
   const theme = useTheme();
+  const { developers } = props;
+
   return (
     <>
-      {props.developers.map((item) => (
+      {developers.slice(0, 8).map((item) => (
         <Grid item xs={12} sm={6} md={3} key={item.id}>
           <Box
             component={Card}
@@ -50,9 +53,11 @@ const DevelopCard: React.FC<Props> = (props): JSX.Element => {
             <CardContent>
               <Box
                 component={Avatar}
-                src={item.user.avatarURL.objectCompressedURL}
-                height={80}
-                width={80}
+                src={item.user.avatarURL?.objectCompressedURL}
+                {...stringAvatar(item.user.name, {
+                  width: 80,
+                  height: 80,
+                })}
               />
               <Box marginTop={4}>
                 <ListItemText
