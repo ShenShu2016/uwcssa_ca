@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-26 13:57:44
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-29 23:56:57
+ * @LastEditTime: 2022-06-06 21:41:54
  * @FilePath: /uwcssa_ca/src/views/Settings/Security/Security.tsx
  * @Description:
  *
@@ -10,17 +10,21 @@
 
 import * as yup from 'yup';
 
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Divider from '@mui/material/Divider';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Grid from '@mui/material/Grid';
-import Link from '@mui/material/Link';
+import {
+  Box,
+  Button,
+  Divider,
+  FormControlLabel,
+  Grid,
+  Link as MUILink,
+  Switch,
+  TextField,
+  Typography,
+} from '@mui/material';
+
+import { Link } from 'react-router-dom';
 import Page from '../components/Page';
 import React from 'react';
-import Switch from '@mui/material/Switch';
-import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
 import { useFormik } from 'formik';
 
 const validationSchema = yup.object({
@@ -65,13 +69,14 @@ const Security = (): JSX.Element => {
             <Typography variant="h6" fontWeight={700}>
               Change your password
             </Typography>
-            <Button
+            {/* <Button
               size={'large'}
               variant={'outlined'}
               sx={{ marginTop: { xs: 2, md: 0 } }}
             >
               Log out
-            </Button>
+            </Button> */}
+            {/* !!之后再干 */}
           </Box>
           <Box paddingY={4}>
             <Divider />
@@ -88,6 +93,7 @@ const Security = (): JSX.Element => {
                 </Typography>
                 <TextField
                   variant="outlined"
+                  disabled
                   name={'currentPassword'}
                   type={'password'}
                   fullWidth
@@ -113,6 +119,7 @@ const Security = (): JSX.Element => {
                 </Typography>
                 <TextField
                   variant="outlined"
+                  disabled
                   name={'newPassword'}
                   type={'password'}
                   fullWidth
@@ -137,6 +144,7 @@ const Security = (): JSX.Element => {
                 </Typography>
                 <TextField
                   variant="outlined"
+                  disabled
                   name={'repeatPassword'}
                   type={'password'}
                   fullWidth
@@ -157,6 +165,7 @@ const Security = (): JSX.Element => {
               </Grid>
               <Grid item xs={12}>
                 <FormControlLabel
+                  disabled={true}
                   control={<Switch color="primary" defaultChecked />}
                   label={
                     <Typography variant="subtitle1" fontWeight={700}>
@@ -168,6 +177,7 @@ const Security = (): JSX.Element => {
               </Grid>
               <Grid item xs={12}>
                 <FormControlLabel
+                  disabled={true}
                   control={<Switch color="primary" />}
                   label={
                     <Typography variant="subtitle1" fontWeight={700}>
@@ -189,16 +199,22 @@ const Security = (): JSX.Element => {
                   <Box marginBottom={{ xs: 1, sm: 0 }}>
                     <Typography variant={'subtitle2'}>
                       You may also consider to update your{' '}
-                      <Link
+                      <MUILink
+                        component={Link}
                         color={'primary'}
-                        href={'/account-notifications'}
+                        to={'/account-notifications'}
                         underline={'none'}
                       >
                         notification settings.
-                      </Link>
+                      </MUILink>
                     </Typography>
                   </Box>
-                  <Button size={'large'} variant={'contained'} type={'submit'}>
+                  <Button
+                    size={'large'}
+                    variant={'contained'}
+                    type={'submit'}
+                    disabled
+                  >
                     Save
                   </Button>
                 </Box>
