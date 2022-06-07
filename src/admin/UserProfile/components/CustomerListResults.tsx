@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-06-01 00:31:43
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-01 22:14:41
+ * @LastEditTime: 2022-06-07 19:49:11
  * @FilePath: /uwcssa_ca/src/admin/UserProfile/components/CustomerListResults.tsx
  * @Description:
  *
@@ -22,6 +22,7 @@ import {
 } from '@mui/material';
 
 import { AvatarURL } from 'redux/userProfile/userProfileSlice';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import React from 'react';
 import moment from 'moment';
 import { stringAvatar } from 'components/Avatar/AvatarFunction';
@@ -47,48 +48,8 @@ function CustomerListResults({
 }: {
   userProfileList: Array<UserProfileType>;
 }) {
-  const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(0);
-
-  const handleSelectAll = (event) => {
-    let newSelectedCustomerIds;
-
-    if (event.target.checked) {
-      newSelectedCustomerIds = userProfileList.map((customer) => customer.id);
-    } else {
-      newSelectedCustomerIds = [];
-    }
-
-    setSelectedCustomerIds(newSelectedCustomerIds);
-  };
-
-  const handleSelectOne = (event, id) => {
-    const selectedIndex = selectedCustomerIds.indexOf(id);
-    let newSelectedCustomerIds = [];
-
-    if (selectedIndex === -1) {
-      newSelectedCustomerIds = newSelectedCustomerIds.concat(
-        selectedCustomerIds,
-        id,
-      );
-    } else if (selectedIndex === 0) {
-      newSelectedCustomerIds = newSelectedCustomerIds.concat(
-        selectedCustomerIds.slice(1),
-      );
-    } else if (selectedIndex === selectedCustomerIds.length - 1) {
-      newSelectedCustomerIds = newSelectedCustomerIds.concat(
-        selectedCustomerIds.slice(0, -1),
-      );
-    } else if (selectedIndex > 0) {
-      newSelectedCustomerIds = newSelectedCustomerIds.concat(
-        selectedCustomerIds.slice(0, selectedIndex),
-        selectedCustomerIds.slice(selectedIndex + 1),
-      );
-    }
-
-    setSelectedCustomerIds(newSelectedCustomerIds);
-  };
 
   const handleLimitChange = (event) => {
     setLimit(event.target.value);
@@ -106,46 +67,53 @@ function CustomerListResults({
             <TableRow>
               <TableCell>Name</TableCell>
               <TableCell>Email</TableCell>
-              <TableCell>Location</TableCell>
-              <TableCell>Phone</TableCell>
               <TableCell>Registration date</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {userProfileList.slice(0, limit).map((customer) => (
-              <TableRow
-                hover
-                key={customer.id}
-                selected={selectedCustomerIds.indexOf(customer.id) !== -1}
-              >
-                <TableCell>
-                  <Box
-                    sx={{
-                      alignItems: 'center',
-                      display: 'flex',
-                    }}
-                  >
-                    <Avatar
-                      src={customer.avatarURL?.objectCompressedURL}
-                      {...stringAvatar(customer.name, { mr: 2 })}
-                    />
+            {userProfileList
+              .slice(page * limit, page * limit + limit)
+              .map((customer) => (
+                <TableRow hover key={customer.id}>
+                  <TableCell>
+                    <Box
+                      sx={{
+                        alignItems: 'center',
+                        display: 'flex',
+                      }}
+                    >
+                      <Avatar
+                        src={customer.avatarURL?.objectCompressedURL}
+                        {...stringAvatar(customer.name, { mr: 2 })}
+                      />
 
-                    <Typography color="textPrimary" variant="body1">
-                      {customer.name}
-                    </Typography>
-                  </Box>
-                </TableCell>
-                <TableCell>{customer.email}</TableCell>
-                <TableCell>
-                  {/* {`${customer.address.city}, ${customer.address.state}, ${customer.address.country}`} */}
-                  不知道随便写点
-                </TableCell>
-                <TableCell>{customer.email}</TableCell>
-                <TableCell>
-                  {moment(customer.createdAt).format('DD/MM/YYYY')}
-                </TableCell>
-              </TableRow>
-            ))}
+                      <Typography color="textPrimary" variant="body1">
+                        {customer.name}
+                        {customer.id.slice(0, 6) === 'google' && (
+                          <Box
+                            component={LazyLoadImage}
+                            effect="blur"
+                            src="/assets/images/icons/google-1.svg"
+                            sx={{ mx: '0.5rem' }}
+                          />
+                        )}
+                        {customer.email.includes('@uwindsor.ca') && (
+                          <Box
+                            component={LazyLoadImage}
+                            effect="blur"
+                            src="/assets/images/icons/uwindsor_shield.svg"
+                            sx={{ mx: '0.5rem', height: '20px' }}
+                          />
+                        )}
+                      </Typography>
+                    </Box>
+                  </TableCell>
+                  <TableCell>{customer.email}</TableCell>
+                  <TableCell>
+                    {moment(customer.createdAt).format('DD/MM/YYYY')}
+                  </TableCell>
+                </TableRow>
+              ))}
           </TableBody>
         </Table>
       </Box>
