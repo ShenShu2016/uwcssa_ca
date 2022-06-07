@@ -2,12 +2,15 @@
  * @Author: Shen Shu
  * @Date: 2022-05-18 15:31:43
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-18 17:56:11
- * @FilePath: \uwcssa_ca\frontend\src\views\ForgotPassWordSubmit\components\Form\Form.tsx
+ * @LastEditTime: 2022-06-06 21:00:28
+ * @FilePath: /uwcssa_ca/src/views/ForgotPassWordSubmit/components/Form/Form.tsx
  * @Description:
  *
  */
+
 import * as yup from 'yup';
+
+import { useNavigate, useParams } from 'react-router-dom';
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -19,7 +22,6 @@ import Typography from '@mui/material/Typography';
 import { forgotPassWordSubmit } from 'redux/auth/authSlice';
 import { useAppDispatch } from 'redux/hooks';
 import { useFormik } from 'formik';
-import { useNavigate } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
 
 const validationSchema = yup.object({
@@ -37,16 +39,19 @@ const validationSchema = yup.object({
     .string()
     .required('Please specify your password')
     .min(8, 'The password should have at minimum length of 8'),
+  passwordConfirmation: yup
+    .string()
+    .oneOf([yup.ref('new_password'), null], 'Passwords must match'),
 });
 
 const Form = (): JSX.Element => {
   const theme = useTheme();
   const navigate = useNavigate();
-  //const { email } = useParams();
+  const { email } = useParams();
   const dispatch = useAppDispatch();
 
   const initialValues = {
-    username: '',
+    username: email,
     code: '',
     new_password: '',
   };
@@ -67,6 +72,7 @@ const Form = (): JSX.Element => {
 
   const formik = useFormik({
     initialValues,
+    enableReinitialize: true,
     validationSchema: validationSchema,
     onSubmit,
   });
@@ -84,6 +90,7 @@ const Form = (): JSX.Element => {
               color="primary"
               size="medium"
               name="username"
+              disabled
               fullWidth
               value={formik.values.username}
               onChange={formik.handleChange}
@@ -110,7 +117,7 @@ const Form = (): JSX.Element => {
           <Box marginBottom={4}>
             <TextField
               sx={{ height: 54 }}
-              label="Password"
+              label="New Password"
               type="password"
               variant="outlined"
               color="primary"
@@ -125,6 +132,28 @@ const Form = (): JSX.Element => {
               }
               helperText={
                 formik.touched.new_password && formik.errors.new_password
+              }
+            />
+          </Box>
+          <Box marginBottom={4}>
+            <TextField
+              sx={{ height: 54 }}
+              label="Confirm Password"
+              type="password"
+              variant="outlined"
+              color="primary"
+              size="medium"
+              name="passwordConfirmation"
+              fullWidth
+              value={formik.values.passwordConfirmation}
+              onChange={formik.handleChange}
+              error={
+                formik.touched.passwordConfirmation &&
+                Boolean(formik.errors.passwordConfirmation)
+              }
+              helperText={
+                formik.touched.passwordConfirmation &&
+                formik.errors.passwordConfirmation
               }
             />
           </Box>

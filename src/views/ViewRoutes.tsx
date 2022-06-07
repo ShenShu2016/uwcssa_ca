@@ -1,8 +1,8 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
- * @LastEditors: Shikai Jin
- * @LastEditTime: 2022-06-04 21:46:51
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-06-06 20:57:04
  * @FilePath: /uwcssa_ca/src/views/ViewRoutes.tsx
  * @Description:
  *
@@ -273,15 +273,15 @@ function ViewRoutes(): Array<{
       renderer: (params = {}): JSX.Element => (
         <PasswordResetCoverView {...params} />
       ),
-      isAllowed: isAuth,
+      isAllowed: true,
       redirectPath: '/',
     },
     {
-      path: '/auth/passWordResetSubmit',
+      path: '/auth/passWordResetSubmit/:email',
       renderer: (params = {}): JSX.Element => (
         <ForgotPassWordSubmitView {...params} />
       ),
-      isAllowed: isAuth,
+      isAllowed: true,
       redirectPath: '/',
     },
     // {

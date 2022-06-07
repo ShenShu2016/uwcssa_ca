@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-19 17:32:26
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-01 22:15:08
+ * @LastEditTime: 2022-06-06 21:03:39
  * @FilePath: /uwcssa_ca/src/layouts/Main/components/Topbar/components/AccountMenu/AccountMenu.tsx
  * @Description:
  *
@@ -22,6 +22,8 @@ import {
 import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import InsertEmoticonIcon from '@mui/icons-material/InsertEmoticon';
 import { Link } from 'react-router-dom';
 import Logout from '@mui/icons-material/Logout';
 import Settings from '@mui/icons-material/Settings';
@@ -119,7 +121,10 @@ export default function AccountMenu() {
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
         <MenuItem component={Link} to="/settings/profile">
-          <Avatar /> Profile
+          <ListItemIcon>
+            <AccountBoxIcon fontSize="small" />
+          </ListItemIcon>
+          Profile
         </MenuItem>
         {/* <MenuItem >
           <Avatar /> My account
@@ -142,6 +147,12 @@ export default function AccountMenu() {
             <Logout fontSize="small" />
           </ListItemIcon>
           Logout
+        </MenuItem>
+        <MenuItem>
+          <ListItemIcon>
+            <InsertEmoticonIcon fontSize="small" />
+          </ListItemIcon>
+          更多功能敬请期待
         </MenuItem>
       </Menu>
     </React.Fragment>
