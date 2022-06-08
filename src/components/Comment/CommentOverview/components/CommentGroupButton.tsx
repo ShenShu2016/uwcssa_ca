@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-27 13:44:58
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-08 18:37:08
+ * @LastEditTime: 2022-06-08 19:24:41
  * @FilePath: /uwcssa_ca/src/components/Comment/CommentOverview/components/CommentGroupButton.tsx
  * @Description:
  *
@@ -23,7 +23,7 @@ import { getOwnerUserName } from 'redux/auth/authSlice';
 function CommentGroupButton({ count, likes }: { count: Count; likes: any }) {
   const dispatch = useAppDispatch();
   const [isFavorite, setIsFavorite] = useState(
-    likes.items?.length > 0 || false,
+    likes?.items?.length > 0 || false,
   );
   const [isThumbDown, setIsThumbDown] = useState(false);
   const [likeCount, setLikeCount] = useState(count?.like);

@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-25 19:05:54
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-08 16:41:03
+ * @LastEditTime: 2022-06-08 19:27:57
  * @FilePath: /uwcssa_ca/src/views/ArticleCover/ArticleCover.tsx
  * @Description:
  *
@@ -86,7 +86,9 @@ const ArticleCover = (): JSX.Element => {
               {!isAuth && <SidebarNewsletter />}
             </Grid>
           </Grid>
-          {comments && <CommentOverview comments={comments} />}
+          {comments && article?.count && (
+            <CommentOverview count={article.count} comments={comments} />
+          )}
         </Container>
         <Box
           component={'svg'}

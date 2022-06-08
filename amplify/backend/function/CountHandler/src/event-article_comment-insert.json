@@ -1,0 +1,52 @@
+{
+  "Records": [
+    {
+      "eventID": "c3858724140250f4f9e76defd4019ce7",
+      "eventName": "INSERT",
+      "eventVersion": "1.1",
+      "eventSource": "aws:dynamodb",
+      "awsRegion": "us-east-2",
+      "dynamodb": {
+        "ApproximateCreationDateTime": 1654728010,
+        "Keys": {
+          "id": {
+            "S": "d7695328-162a-4f64-9111-118d70e36bfc"
+          }
+        },
+        "NewImage": {
+          "owner": {
+            "S": "d1f0729b-b5d6-4d7c-b3dd-36c17b1a1d44"
+          },
+          "createdAt": {
+            "S": "2022-06-08T22:40:09.961Z"
+          },
+          "articleCommentsId": {
+            "S": "75e1c614-c957-4950-818d-26a5ecce662b"
+          },
+          "isDeleted": {
+            "BOOL": false
+          },
+          "__typename": {
+            "S": "Comment"
+          },
+          "commentCountId": {
+            "S": "0091d936-23af-478f-a87c-6f7bd1852620"
+          },
+          "id": {
+            "S": "d7695328-162a-4f64-9111-118d70e36bfc"
+          },
+          "content": {
+            "S": "我爱你我爱你我爱你"
+          },
+          "updatedAt": {
+            "S": "2022-06-08T22:40:09.961Z"
+          }
+        },
+        "SequenceNumber": "93605000000000001222562960",
+        "SizeBytes": 347,
+        "StreamViewType": "NEW_AND_OLD_IMAGES"
+      },
+      "eventSourceARN": "arn:aws:dynamodb:us-east-2:537666141782:table/Comment-4r2t6l2uprdgjhmoocpazejjcq-devts/stream/2022-05-20T03:39:57.513"
+    }
+  ]
+}

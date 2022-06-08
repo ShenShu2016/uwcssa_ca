@@ -4,6 +4,10 @@
     {
       "cloudFormationParameterName": "countTable",
       "environmentVariableName": "Count_Table"
+    },
+    {
+      "cloudFormationParameterName": "articleTable",
+      "environmentVariableName": "Article_Table"
     }
   ]
 }

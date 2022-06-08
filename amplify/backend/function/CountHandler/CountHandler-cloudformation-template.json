@@ -26,6 +26,9 @@
     },
     "countTable": {
       "Type": "String"
+    },
+    "articleTable": {
+      "Type": "String"
     }
   },
   "Conditions": {
@@ -83,6 +86,9 @@
             },
             "Count_Table": {
               "Ref": "countTable"
+            },
+            "Article_Table": {
+              "Ref": "articleTable"
             }
           }
         },

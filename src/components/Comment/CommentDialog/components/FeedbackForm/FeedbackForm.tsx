@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-26 16:50:46
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-26 22:07:05
+ * @LastEditTime: 2022-06-08 19:24:37
  * @FilePath: /uwcssa_ca/src/components/Comment/CommentDialog/components/FeedbackForm/FeedbackForm.tsx
  * @Description:
  *
@@ -30,9 +30,16 @@ interface Props {
   // eslint-disable-next-line @typescript-eslint/ban-types
   onClose: () => void;
   open: boolean;
+  commentCount?: number;
+  setCommentCount?: any;
 }
 
-const FeedbackForm = ({ onClose, open }: Props): JSX.Element => {
+const FeedbackForm = ({
+  onClose,
+  open,
+  commentCount,
+  setCommentCount,
+}: Props): JSX.Element => {
   const { articleId } = useParams();
   const dispatch = useAppDispatch();
   const ownerUsername = useAppSelector(getOwnerUserName);
@@ -55,6 +62,7 @@ const FeedbackForm = ({ onClose, open }: Props): JSX.Element => {
     if (response.meta.requestStatus === 'fulfilled') {
       onClose();
       formik.resetForm();
+      setCommentCount(commentCount + 1);
       return true;
     } else {
       return false;

@@ -50,8 +50,9 @@
         },
         "CountHandler": {
           "deploymentBucketName": "amplify-uwcssa-devts-225941-deployment",
-          "s3Key": "amplify-builds/CountHandler-73397966725562434f46-build.zip",
-          "countTable": "Count-4r2t6l2uprdgjhmoocpazejjcq-devts"
+          "s3Key": "amplify-builds/CountHandler-686f6a693242556e7a33-build.zip",
+          "countTable": "Count-4r2t6l2uprdgjhmoocpazejjcq-devts",
+          "articleTable": "Article-4r2t6l2uprdgjhmoocpazejjcq-devts"
         }
       }
     }

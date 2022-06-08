@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-26 16:50:34
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-08 16:52:03
+ * @LastEditTime: 2022-06-08 19:26:18
  * @FilePath: /uwcssa_ca/src/components/Comment/CommentOverview/CommentOverview.tsx
  * @Description:
  *
@@ -14,16 +14,19 @@ import React, { useState } from 'react';
 import { Comment } from 'redux/comment/commentSlice';
 import CommentGroupButton from './components/CommentGroupButton';
 import Container from 'components/Container';
+import { Count } from 'redux/count/countSlice';
 import { FeedbackForm } from '../CommentDialog/components';
 import moment from 'moment';
 import { stringAvatar } from 'components/Avatar/AvatarFunction';
 
 interface Props {
   comments: Array<Comment>;
+  count: Count;
 }
 
-const CommentOverview = ({ comments }: Props): JSX.Element => {
+const CommentOverview = ({ comments, count }: Props): JSX.Element => {
   const [open, setOpen] = useState(false);
+  const [commentCount, setCommentCount] = useState(count.commentCount);
   //console.log('comments', comments);
   return (
     <Container
@@ -32,7 +35,12 @@ const CommentOverview = ({ comments }: Props): JSX.Element => {
       alignItems={'center'}
       sx={{ p: 0 }}
     >
-      <FeedbackForm open={open} onClose={() => setOpen(false)} />
+      <FeedbackForm
+        open={open}
+        onClose={() => setOpen(false)}
+        commentCount={commentCount}
+        setCommentCount={setCommentCount}
+      />
       <Grid container spacing={4}>
         <Grid item xs={12}>
           <Box
@@ -45,7 +53,7 @@ const CommentOverview = ({ comments }: Props): JSX.Element => {
           >
             <Box>
               <Typography variant={'h4'} fontWeight={700} marginBottom={1}>
-                Comments
+                Comments ({commentCount || 0})
               </Typography>
               <Box display={'flex'} alignItems={'center'}>
                 {/* <Box display={'flex'} alignItems={'center'}>
