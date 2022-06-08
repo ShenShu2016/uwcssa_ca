@@ -3,7 +3,7 @@
  * @Author: Shen Shu
  * @Date: 2022-06-03 16:35:33
  * @LastEditors: 李佳修
- * @LastEditTime: 2022-06-08 13:45:55
+ * @LastEditTime: 2022-06-08 15:58:44
  * @FilePath: /uwcssa_ca/src/admin/Event/Form/components/FormItemForm/FormInputFieldComponent.tsx
  * @Description:
  *
@@ -43,136 +43,141 @@ function FormInputFieldComponent({
   formik: any;
   formItem: FormItem;
 }) {
+  // 参数为什么要套一个对象 直接写order: number 不行吗
   function getInputFieldName({ order }: { order: number }) {
     return 'content' + order;
   }
 
   function getFormikValue({ order }: { order: number }) {
-    if (order === 1) {
-      return formik.values.content1;
-    } else if (order === 2) {
-      return formik.values.content2;
-    } else if (order === 3) {
-      return formik.values.content3;
-    } else if (order === 4) {
-      return formik.values.content4;
-    } else if (order === 5) {
-      return formik.values.content5;
-    } else if (order === 6) {
-      return formik.values.content6;
-    } else if (order === 7) {
-      return formik.values.content7;
-    } else if (order === 8) {
-      return formik.values.content8;
-    } else if (order === 9) {
-      return formik.values.content9;
-    } else if (order === 10) {
-      return formik.values.content10;
-    } else if (order === 11) {
-      return formik.values.content11;
-    } else if (order === 12) {
-      return formik.values.content12;
-    } else if (order === 13) {
-      return formik.values.content13;
-    } else if (order === 14) {
-      return formik.values.content14;
-    } else if (order === 15) {
-      return formik.values.content15;
-    } else if (order === 16) {
-      return formik.values.content16;
-    } else if (order === 17) {
-      return formik.values.content17;
-    } else if (order === 18) {
-      return formik.values.content18;
-    } else if (order === 19) {
-      return formik.values.content19;
-    }
+    return formik.values[getInputFieldName({order})];
+    // if (order === 1) {
+    //   return formik.values.content1;
+    // } else if (order === 2) {
+    //   return formik.values.content2;
+    // } else if (order === 3) {
+    //   return formik.values.content3;
+    // } else if (order === 4) {
+    //   return formik.values.content4;
+    // } else if (order === 5) {
+    //   return formik.values.content5;
+    // } else if (order === 6) {
+    //   return formik.values.content6;
+    // } else if (order === 7) {
+    //   return formik.values.content7;
+    // } else if (order === 8) {
+    //   return formik.values.content8;
+    // } else if (order === 9) {
+    //   return formik.values.content9;
+    // } else if (order === 10) {
+    //   return formik.values.content10;
+    // } else if (order === 11) {
+    //   return formik.values.content11;
+    // } else if (order === 12) {
+    //   return formik.values.content12;
+    // } else if (order === 13) {
+    //   return formik.values.content13;
+    // } else if (order === 14) {
+    //   return formik.values.content14;
+    // } else if (order === 15) {
+    //   return formik.values.content15;
+    // } else if (order === 16) {
+    //   return formik.values.content16;
+    // } else if (order === 17) {
+    //   return formik.values.content17;
+    // } else if (order === 18) {
+    //   return formik.values.content18;
+    // } else if (order === 19) {
+    //   return formik.values.content19;
+    // }
   }
   function getFormikTouched({ order }: { order: number }) {
-    if (order === 1) {
-      return formik.touched.content1;
-    } else if (order === 2) {
-      return formik.touched.content2;
-    } else if (order === 3) {
-      return formik.touched.content3;
-    } else if (order === 4) {
-      return formik.touched.content4;
-    } else if (order === 5) {
-      return formik.touched.content5;
-    } else if (order === 6) {
-      return formik.touched.content6;
-    } else if (order === 7) {
-      return formik.touched.content7;
-    } else if (order === 8) {
-      return formik.touched.content8;
-    } else if (order === 9) {
-      return formik.touched.content9;
-    } else if (order === 10) {
-      return formik.touched.content10;
-    } else if (order === 11) {
-      return formik.touched.content11;
-    } else if (order === 12) {
-      return formik.touched.content12;
-    } else if (order === 13) {
-      return formik.touched.content13;
-    } else if (order === 14) {
-      return formik.touched.content14;
-    } else if (order === 15) {
-      return formik.touched.content15;
-    } else if (order === 16) {
-      return formik.touched.content16;
-    } else if (order === 17) {
-      return formik.touched.content17;
-    } else if (order === 18) {
-      return formik.touched.content18;
-    } else if (order === 19) {
-      return formik.touched.content19;
-    } else {
-      console.error('getFormikTouched error');
-    }
+    return formik.touched[getInputFieldName({order})];
+    // if (order === 1) {
+    //   return formik.touched.content1;
+    // } else if (order === 2) {
+    //   return formik.touched.content2;
+    // } else if (order === 3) {
+    //   return formik.touched.content3;
+    // } else if (order === 4) {
+    //   return formik.touched.content4;
+    // } else if (order === 5) {
+    //   return formik.touched.content5;
+    // } else if (order === 6) {
+    //   return formik.touched.content6;
+    // } else if (order === 7) {
+    //   return formik.touched.content7;
+    // } else if (order === 8) {
+    //   return formik.touched.content8;
+    // } else if (order === 9) {
+    //   return formik.touched.content9;
+    // } else if (order === 10) {
+    //   return formik.touched.content10;
+    // } else if (order === 11) {
+    //   return formik.touched.content11;
+    // } else if (order === 12) {
+    //   return formik.touched.content12;
+    // } else if (order === 13) {
+    //   return formik.touched.content13;
+    // } else if (order === 14) {
+    //   return formik.touched.content14;
+    // } else if (order === 15) {
+    //   return formik.touched.content15;
+    // } else if (order === 16) {
+    //   return formik.touched.content16;
+    // } else if (order === 17) {
+    //   return formik.touched.content17;
+    // } else if (order === 18) {
+    //   return formik.touched.content18;
+    // } else if (order === 19) {
+    //   return formik.touched.content19;
+    // } else {
+    //   console.error('getFormikTouched error');
+    // }
   }
   function getFormikErrors({ order }: { order: number }) {
-    if (order === 1) {
-      return formik.errors.content1;
-    } else if (order === 2) {
-      return formik.errors.content2;
-    } else if (order === 3) {
-      return formik.errors.content3;
-    } else if (order === 4) {
-      return formik.errors.content4;
-    } else if (order === 5) {
-      return formik.errors.content5;
-    } else if (order === 6) {
-      return formik.errors.content6;
-    } else if (order === 7) {
-      return formik.errors.content7;
-    } else if (order === 8) {
-      return formik.errors.content8;
-    } else if (order === 9) {
-      return formik.errors.content9;
-    } else if (order === 10) {
-      return formik.errors.content10;
-    } else if (order === 11) {
-      return formik.errors.content11;
-    } else if (order === 12) {
-      return formik.errors.content12;
-    } else if (order === 13) {
-      return formik.errors.content13;
-    } else if (order === 14) {
-      return formik.errors.content14;
-    } else if (order === 15) {
-      return formik.errors.content15;
-    } else if (order === 16) {
-      return formik.errors.content16;
-    } else if (order === 17) {
-      return formik.errors.content17;
-    } else if (order === 18) {
-      return formik.errors.content18;
-    } else if (order === 19) {
-      return formik.errors.content19;
-    } else {
-      console.error(`Unknown order: ${order}`);
-    }
+    console.log(formik.errors[getInputFieldName({order})]);
+    return formik.errors[getInputFieldName({order})];
+    // if (order === 1) {
+    //   return formik.errors.content1;
+    // } else if (order === 2) {
+    //   return formik.errors.content2;
+    // } else if (order === 3) {
+    //   return formik.errors.content3;
+    // } else if (order === 4) {
+    //   return formik.errors.content4;
+    // } else if (order === 5) {
+    //   return formik.errors.content5;
+    // } else if (order === 6) {
+    //   return formik.errors.content6;
+    // } else if (order === 7) {
+    //   return formik.errors.content7;
+    // } else if (order === 8) {
+    //   return formik.errors.content8;
+    // } else if (order === 9) {
+    //   return formik.errors.content9;
+    // } else if (order === 10) {
+    //   return formik.errors.content10;
+    // } else if (order === 11) {
+    //   return formik.errors.content11;
+    // } else if (order === 12) {
+    //   return formik.errors.content12;
+    // } else if (order === 13) {
+    //   return formik.errors.content13;
+    // } else if (order === 14) {
+    //   return formik.errors.content14;
+    // } else if (order === 15) {
+    //   return formik.errors.content15;
+    // } else if (order === 16) {
+    //   return formik.errors.content16;
+    // } else if (order === 17) {
+    //   return formik.errors.content17;
+    // } else if (order === 18) {
+    //   return formik.errors.content18;
+    // } else if (order === 19) {
+    //   return formik.errors.content19;
+    // } else {
+    //   console.error(`Unknown order: ${order}`);
+    // }
   }
 
   function getInputLabelId({ order }: { order: number }) {

@@ -1,9 +1,9 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-06-02 18:10:36
- * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-05 21:12:01
- * @FilePath: /uwcssa_ca/src/admin/Activity/Form/FormTest.tsx
+ * @LastEditors: 李佳修
+ * @LastEditTime: 2022-06-08 15:57:14
+ * @FilePath: /uwcssa_ca/src/admin/Event/Form/FormTest.tsx
  * @Description:
  *
  */
@@ -28,6 +28,8 @@ function FormTest() {
   const formItemListSortByOrder = formItemList.sort(
     (a, b) => a.order - b.order,
   );
+
+  console.log(formItemList);
 
   useEffect(() => {
     if (isAuth !== null && fetchFormItemListStatus === 'idle') {
@@ -77,7 +79,14 @@ function FormTest() {
         })}
       </Box>
       <Divider />
-      <FormItemForm formItemList={formItemList} />
+      {
+        // 这里必须要等待这个数组请求到内容之后再渲染这个组件 因为formik的initValue改成依赖数组长度动态赋值之后
+        // 这个数组传一个空的进去 会导致initValue里面没有内容 这样的话 之后渲染的每一个问题的value都会变成undefined 
+        // 因为initValue是空对象
+        formItemList.length ?
+          <FormItemForm formItemList={formItemList} /> :
+          null
+      }
     </Box>
   );
 }

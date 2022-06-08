@@ -3,7 +3,7 @@
  * @Author: Shen Shu
  * @Date: 2022-06-02 17:10:21
  * @LastEditors: 李佳修
- * @LastEditTime: 2022-06-08 13:38:02
+ * @LastEditTime: 2022-06-08 16:09:59
  * @FilePath: /uwcssa_ca/src/redux/form/formSlice.tsx
  * @Description:
  *
@@ -205,9 +205,10 @@ export const fetchFormItemList = createAsyncThunk(
     try {
       const result: any = await API.graphql({
         query: listFormItems,
-        variables: {
-          limit: 19,
-        },
+        // 改成动态的之后 不用再限制条目了
+        // variables: {
+        //   limit: 19,
+        // },
         authMode: isAuth ? undefined : 'AWS_IAM',
       });
       return result.data.listFormItems.items;
