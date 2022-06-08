@@ -206,6 +206,29 @@ type ContactUs
   user: UserProfile @hasOne(fields: ["owner"])
 }
 
+# go appsync to generate this
+# mutation MyMutation {
+#   createCount(
+#     input: {
+#       count: 0
+#       id: "UserProfileTable"
+#       targetTable: "UserProfile"
+#       owner: "这个要改成用户的id"
+#     }
+#   ) {
+#     count
+#     countArticleId
+#     countCommentId
+#     createdAt
+#     disLike
+#     id
+#     like
+#     owner
+#     targetTable
+#     updatedAt
+#   }
+# }
+
 type Count
   @model(subscriptions: null)
   @auth(
