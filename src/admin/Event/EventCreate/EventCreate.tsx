@@ -2,9 +2,9 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-31 10:20:04
- * @LastEditTime: 2022-06-04 11:14:45
+ * @LastEditTime: 2022-06-08 13:39:31
  * @LastEditors: 李佳修
- * @FilePath: /uwcssa_ca/src/admin/Activity/ActivityCreate/ActivityCreate.tsx
+ * @FilePath: /uwcssa_ca/src/admin/Event/EventCreate/EventCreate.tsx
  */
 import React, { useState } from 'react';
 import PageTitle from 'admin/components/pageTitle';
@@ -13,19 +13,19 @@ import Card from '@mui/material/Card';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
-import ActivityForm from './components/ActivityForm';
-import ActivityConfig from './components/ActivityConfig';
-import ActivityPoster from './components/ActivityPoster';
-import ActivityPreview from './components/ActivityPreview';
+import EventForm from './components/EventForm';
+import EventConfig from './components/EventConfig';
+import EventPoster from './components/EventPoster';
+import EventPreview from './components/EventPreview';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useAppSelector } from 'redux/hooks';
 import 'swiper/css';
 
 export enum Steps {
-    ActivityForm = 'ActivityForm',
-    ActivityPoster = 'ActivityPoster',
-    ActivityConfig = 'ActivityConfig',
-    ActivityPreview = 'ActivityPreview'
+    EventForm = 'EventForm',
+    EventPoster = 'EventPoster',
+    EventConfig = 'EventConfig',
+    EventPreview = 'EventPreview'
 }
 export interface ActivityFormInfo {
     title: string;
@@ -38,23 +38,22 @@ export interface ActivityFormInfo {
 const stepItems = [
   {
     label: '填写活动信息',
-    key: Steps.ActivityForm,
+    key: Steps.EventForm,
   },{
     label: '添加活动海报',
-    key: Steps.ActivityPoster,
+    key: Steps.EventPoster,
   },{
     label: '配置报名表单',
-    key: Steps.ActivityConfig,
+    key: Steps.EventConfig,
   },{
     label: '完成',
-    key: Steps.ActivityPreview,
+    key: Steps.EventPreview,
   }
 ];
 
-const ActivityCreate: React.FC = () => {
+const EventCreate: React.FC = () => {
   const completed = useAppSelector(state => state.form.createData.completeStatus);
   const [activeStep, setActiveStep] = useState<number>(0);
-  const [posterImage, setPosterImage] = useState<string>('');
   
   return (
     <>
@@ -103,16 +102,16 @@ const ActivityCreate: React.FC = () => {
               onSlideChange={(e) => setActiveStep(e.activeIndex)}
             >
               <SwiperSlide>
-                <ActivityForm />
+                <EventForm />
               </SwiperSlide>
               <SwiperSlide>
-                <ActivityPoster posterImage={posterImage} setPosterImage={setPosterImage}/>
+                <EventPoster />
               </SwiperSlide>
               <SwiperSlide>
-                <ActivityConfig/>
+                <EventConfig/>
               </SwiperSlide>
               <SwiperSlide>
-                <ActivityPreview/>
+                <EventPreview/>
               </SwiperSlide>
             </Swiper>
           </Card>
@@ -121,4 +120,4 @@ const ActivityCreate: React.FC = () => {
     </>
   );
 };
-export default ActivityCreate;
+export default EventCreate;

@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-22 15:10:30
- * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-05 22:19:08
+ * @LastEditors: 李佳修
+ * @LastEditTime: 2022-06-08 11:03:15
  * @FilePath: /uwcssa_ca/src/redux/userImage/userImageSlice.tsx
  * @Description:
  *

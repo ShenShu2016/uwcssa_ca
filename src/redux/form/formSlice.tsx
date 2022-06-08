@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /*
  * @Author: Shen Shu
  * @Date: 2022-06-02 17:10:21
- * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-05 21:39:17
+ * @LastEditors: 李佳修
+ * @LastEditTime: 2022-06-08 13:38:02
  * @FilePath: /uwcssa_ca/src/redux/form/formSlice.tsx
  * @Description:
  *
@@ -116,10 +117,10 @@ const initialState = formAdapter.getInitialState({
   }),
   createData: {
     completeStatus: {
-      ActivityForm: false,
-      ActivityPoster: false,
-      ActivityConfig: false,
-      ActivityPreview: false,
+      EventForm: false,
+      EventPoster: false,
+      EventConfig: false,
+      EventPreview: false,
     },
     basicInfo: {
       title: '',
@@ -128,7 +129,7 @@ const initialState = formAdapter.getInitialState({
       limit: 0,
       content: '',
     },
-    posterImage: {},
+    posterImage: '',
     selectedQuestions: [],
   },
 });
@@ -286,7 +287,12 @@ const formSlice = createSlice({
           !!state.createData.basicInfo[key] ||
           state.createData.basicInfo[key] === 0,
       );
-      state.createData.completeStatus.ActivityForm = complete;
+      state.createData.completeStatus.EventForm = complete;
+    },
+
+    setPosterImage(state, action) {
+      state.createData.posterImage = action.payload;
+      state.createData.completeStatus.EventPoster = !!state.createData.posterImage;
     },
 
     addQuestion(state, action) {
@@ -296,6 +302,8 @@ const formSlice = createSlice({
         order: state.createData.selectedQuestions.length + 1,
       };
       state.createData.selectedQuestions.push(selected);
+      // 如果questions数组中有内容 说明配置了活动报名表单 该项置为已完成
+      state.createData.completeStatus.EventConfig = !!state.createData.selectedQuestions.length;
     },
 
     removeQuestion(state, action) {
@@ -305,6 +313,7 @@ const formSlice = createSlice({
       );
       current.forEach((item, index) => (item.order = index + 1));
       state.createData.selectedQuestions = current;
+      state.createData.completeStatus.EventConfig = !!state.createData.selectedQuestions.length;
     },
 
     reorderQuestion(state, action) {
@@ -444,8 +453,13 @@ const formSlice = createSlice({
   },
 });
 
-export const { setBasicInfo, addQuestion, removeQuestion, reorderQuestion } =
-  formSlice.actions;
+export const { 
+  setBasicInfo,
+  addQuestion,
+  removeQuestion,
+  reorderQuestion,
+  setPosterImage
+} = formSlice.actions;
 
 export const {
   selectAll: selectAllForms,

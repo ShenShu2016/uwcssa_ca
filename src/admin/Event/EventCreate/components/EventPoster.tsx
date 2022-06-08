@@ -1,9 +1,9 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-01 09:18:34
- * @LastEditTime: 2022-06-03 15:42:35
+ * @LastEditTime: 2022-06-08 13:37:06
  * @LastEditors: 李佳修
- * @FilePath: /uwcssa_ca/src/admin/Activity/ActivityCreate/components/ActivityPoster.tsx
+ * @FilePath: /uwcssa_ca/src/admin/Event/EventCreate/components/EventPoster.tsx
  */
 import React, { useState } from 'react';
 import Box from '@mui/material/Box';
@@ -16,26 +16,60 @@ import LinearProgress from '@mui/material/LinearProgress';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
+import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import InsertPhotoIcon from '@mui/icons-material/InsertPhoto';
-
-interface ActivityPosterProp {
-  posterImage: string;
-  setPosterImage: React.Dispatch<React.SetStateAction<string>>
-}
+import { postUserImage } from 'redux/userImage/userImageSlice';
+import { setPosterImage } from 'redux/form/formSlice';
+import useMessage from 'hooks/useMessage';
 
 const Input = styled('input')({
   display: 'none',
 });
 
-const ActivityPoster: React.FC<ActivityPosterProp> = ({ posterImage, setPosterImage }) => {
+const EventPoster: React.FC = () => {
   const swiper = useSwiper();
+  const message = useMessage();
+  const dispatch = useAppDispatch();
   const [uploadImgLoading, setUploadImgLoading] = useState<boolean>(false);
+  // const [imgFile, setImgFile] = useState<string>('');
+  const posterImage = useAppSelector((state) => state.form.createData.posterImage);
+  const authUser = useAppSelector((state) => state.auth.user);
+
+  const handleImgUpload = async (e) => {
+    // input点击取消之后 change事件仍有可能触发
+    // 这个如果value = '' 就是点击取消以后触发的 需要阻止后续动作 不然会弹上传错误的提示
+    if (!e.target.value) return;
+
+    const targetTable = 'Article';
+    const file = e.target.files[0];
+    setUploadImgLoading(true);
+    const response = await dispatch(
+      postUserImage({ targetTable, file, authUser, compressedWidth: 1920 }),
+    );
+    if (response.meta.requestStatus === 'fulfilled') {
+      dispatch(setPosterImage(response.payload.objectURL || response.payload.objectCompressedURL));
+      // setImgFile(
+      //   response.payload.objectURL || response.payload.objectCompressedURL,
+      // );
+      // setOriginImg(response.payload.objectURL);
+      message.open({
+        type: 'success',
+        message: '图片上传成功',
+      });
+    } else {
+      message.open({
+        type: 'error',
+        message: '图片上传失败',
+      });
+    }
+    setUploadImgLoading(false);
+  };
 
   const handleRemovePic = (e) => {
     e.preventDefault();
     e.stopPropagation();
     e.nativeEvent.stopImmediatePropagation();
-    setPosterImage('');
+    dispatch(setPosterImage(''));
   };
 
   return (
@@ -74,7 +108,7 @@ const ActivityPoster: React.FC<ActivityPosterProp> = ({ posterImage, setPosterIm
                 id="contained-button-file"
                 type="file"
                 disabled={uploadImgLoading}
-                // onChange={(e) => handleImgUpload(e)}
+                onChange={(e) => handleImgUpload(e)}
               />
               <Box
                 sx={{
@@ -162,4 +196,4 @@ const ActivityPoster: React.FC<ActivityPosterProp> = ({ posterImage, setPosterIm
   );
 };
 
-export default ActivityPoster;
+export default EventPoster;

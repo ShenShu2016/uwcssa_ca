@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /*
  * @Author: Shen Shu
  * @Date: 2022-06-03 16:39:34
- * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-05 15:26:34
- * @FilePath: /uwcssa_ca/src/admin/Activity/Form/components/FormItemForm/FormItemForm.tsx
+ * @LastEditors: 李佳修
+ * @LastEditTime: 2022-06-08 13:46:02
+ * @FilePath: /uwcssa_ca/src/admin/Event/Form/components/FormItemForm/FormItemForm.tsx
  * @Description:
  *
  */

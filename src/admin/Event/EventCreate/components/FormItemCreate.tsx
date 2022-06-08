@@ -1,8 +1,8 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-03 09:32:30
- * @LastEditTime: 2022-06-05 21:36:29
- * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-06-08 11:28:57
+ * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/admin/Activity/ActivityCreate/components/FormItemCreate.tsx
  */
 
@@ -26,7 +26,7 @@ import {
 } from '@mui/material';
 import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
-
+import FullScreenLoading from 'components/FullScreenLoading';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import FieldLabel from './FieldLabel';
 import { FormType } from 'redux/form/formSlice';
@@ -60,6 +60,10 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({
   const handleClose = () => {
     setOpen(false);
   };
+  const [fullScreenLoading, setFullScreenLoading] = useState({
+    loading: false,
+    message: '',
+  });
 
   const handleAddOption = () => {
     const exist = options.find((item) => item.label === newOption);
@@ -105,7 +109,6 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({
   };
 
   const onSubmit = async (values) => {
-    console.log(values);
     // 如果类型是选择器或者checkbox
     if (
       (formik.values.formType === FormType.Select ||
@@ -120,6 +123,10 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({
       });
       return;
     }
+    setFullScreenLoading({
+      loading: true,
+      message: '正在创建问题',
+    });
 
     // 通过前面的校验后 可以发送请求创建问题
     const res = await dispatch(
@@ -151,10 +158,14 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({
         type: 'success',
         message: '问题创建成功，记得加入表单才能生效哦',
       });
+      setFullScreenLoading({
+        loading: false,
+        message: '',
+      });
       setOpen(false);
       completeCreate();
+      formik.resetForm();
     }
-    console.log(res);
 
     return values;
   };
@@ -171,6 +182,10 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({
 
   return (
     <Dialog maxWidth={false} open={open} onClose={handleClose} scroll={'paper'}>
+      <FullScreenLoading
+        message={fullScreenLoading.message}
+        loading={fullScreenLoading.loading}
+      />
       <form onSubmit={formik.handleSubmit}>
         <DialogTitle>创建问题</DialogTitle>
         <DialogContent dividers>

@@ -1,13 +1,13 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-28 16:58:31
- * @LastEditTime: 2022-06-05 22:11:21
- * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-06-08 13:27:46
+ * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/admin/AdminRoutes.tsx
  */
 
 import {
-  ActivityCreate as ActivityCreateView,
+  EventCreate as EventCreateView,
   AdminDashboard as AdminDashboardView,
   ArticleEdit as ArticleEditView,
   ArticlePublish as ArticlePublishView,
@@ -69,7 +69,7 @@ function AdminRoutes(): Array<{
     },
     {
       path: '/admin/activity-create',
-      renderer: (): JSX.Element => <ActivityCreateView />,
+      renderer: (): JSX.Element => <EventCreateView />,
       isAllowed: isAdmin,
       redirectPath: '/404',
     },

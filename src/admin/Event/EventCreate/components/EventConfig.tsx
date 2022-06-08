@@ -1,9 +1,9 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-01 09:18:34
- * @LastEditTime: 2022-06-07 18:22:39
+ * @LastEditTime: 2022-06-08 13:36:51
  * @LastEditors: 李佳修
- * @FilePath: /uwcssa_ca/src/admin/Activity/ActivityCreate/components/ActivityConfig.tsx
+ * @FilePath: /uwcssa_ca/src/admin/Event/EventCreate/components/EventConfig.tsx
  */
 import React, { useState } from 'react';
 import Box from '@mui/material/Box';
@@ -31,7 +31,7 @@ import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import {SortableContainer, SortableElement, SortableHandle, SortEnd} from 'react-sortable-hoc';
 import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
 
-const ActivityConfig: React.FC = () => {
+const EventConfig: React.FC = () => {
   const swiper = useSwiper();
   const [dialogOpen, setDialogOpen] = useState<boolean>(false);
   const dispatch = useAppDispatch();
@@ -229,4 +229,4 @@ const ActivityConfig: React.FC = () => {
   );
 };
 
-export default ActivityConfig;
+export default EventConfig;

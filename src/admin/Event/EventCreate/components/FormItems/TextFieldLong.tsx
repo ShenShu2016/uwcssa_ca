@@ -2,7 +2,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-03 17:02:56
- * @LastEditTime: 2022-06-07 17:12:59
+ * @LastEditTime: 2022-06-08 11:30:57
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/admin/Activity/ActivityCreate/components/FormItems/TextFieldLong.tsx
  */
@@ -37,7 +37,7 @@ const TextFieldLong: React.FC<TextFieldLongProp> = ({ item }) => {
         multiline
         value={value}
         onChange={(e) => setValue(e.target.value)}
-        maxRows={4}
+        rows={4}
         size='small'
         helperText={item.helperText}
       />

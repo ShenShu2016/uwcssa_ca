@@ -43,7 +43,7 @@ const validationSchema = yup.object({
     .required('请输入活动最多限制人数'),
 });
 
-const ActivityForm: React.FC = () => {
+const EventForm: React.FC = () => {
 
   const [description, setDescription] = useState('');
   const swiper = useSwiper();
@@ -154,7 +154,7 @@ const ActivityForm: React.FC = () => {
             />
           </Grid>
           <Grid item xs={12}>
-            <Divider />
+            <Divider sx={{ mb: 2 }}/>
           </Grid>
         </Grid>
         <Box
@@ -174,4 +174,4 @@ const ActivityForm: React.FC = () => {
   );
 };
 
-export default ActivityForm;
+export default EventForm;
