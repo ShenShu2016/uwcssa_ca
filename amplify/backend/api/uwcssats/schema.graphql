@@ -210,7 +210,7 @@ type Count
   @model(subscriptions: null)
   @auth(
     rules: [
-      { allow: owner }
+      { allow: owner, operations: [create, read] }
       { allow: public, operations: [read], provider: iam }
       { allow: groups, operations: [read], groups: ["uwcssaUser"] }
       { allow: groups, groups: ["uwcssaAdmin"] }
@@ -218,8 +218,11 @@ type Count
   ) {
   id: ID!
   count: Int!
+  like: Int
+  disLike: Int
   article: Article @belongsTo
   comment: Comment @belongsTo
+  targetTable: String!
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
   owner: ID!

@@ -334,6 +334,9 @@ export const createArticle = /* GraphQL */ `
       count {
         id
         count
+        like
+        disLike
+        targetTable
         createdAt
         updatedAt
         owner
@@ -387,6 +390,9 @@ export const updateArticle = /* GraphQL */ `
       count {
         id
         count
+        like
+        disLike
+        targetTable
         createdAt
         updatedAt
         owner
@@ -440,6 +446,9 @@ export const deleteArticle = /* GraphQL */ `
       count {
         id
         count
+        like
+        disLike
+        targetTable
         createdAt
         updatedAt
         owner
@@ -516,6 +525,9 @@ export const createComment = /* GraphQL */ `
       count {
         id
         count
+        like
+        disLike
+        targetTable
         createdAt
         updatedAt
         owner
@@ -594,6 +606,9 @@ export const updateComment = /* GraphQL */ `
       count {
         id
         count
+        like
+        disLike
+        targetTable
         createdAt
         updatedAt
         owner
@@ -672,6 +687,9 @@ export const deleteComment = /* GraphQL */ `
       count {
         id
         count
+        like
+        disLike
+        targetTable
         createdAt
         updatedAt
         owner
@@ -811,6 +829,8 @@ export const createCount = /* GraphQL */ `
     createCount(input: $input, condition: $condition) {
       id
       count
+      like
+      disLike
       article {
         id
         title
@@ -834,6 +854,7 @@ export const createCount = /* GraphQL */ `
         owner
         commentCountId
       }
+      targetTable
       createdAt
       updatedAt
       owner
@@ -850,6 +871,8 @@ export const updateCount = /* GraphQL */ `
     updateCount(input: $input, condition: $condition) {
       id
       count
+      like
+      disLike
       article {
         id
         title
@@ -873,6 +896,7 @@ export const updateCount = /* GraphQL */ `
         owner
         commentCountId
       }
+      targetTable
       createdAt
       updatedAt
       owner
@@ -889,6 +913,8 @@ export const deleteCount = /* GraphQL */ `
     deleteCount(input: $input, condition: $condition) {
       id
       count
+      like
+      disLike
       article {
         id
         title
@@ -912,6 +938,7 @@ export const deleteCount = /* GraphQL */ `
         owner
         commentCountId
       }
+      targetTable
       createdAt
       updatedAt
       owner

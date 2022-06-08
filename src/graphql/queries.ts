@@ -284,6 +284,9 @@ export const getArticle = /* GraphQL */ `
       count {
         id
         count
+        like
+        disLike
+        targetTable
         createdAt
         updatedAt
         owner
@@ -413,6 +416,9 @@ export const getComment = /* GraphQL */ `
       count {
         id
         count
+        like
+        disLike
+        targetTable
         createdAt
         updatedAt
         owner
@@ -587,6 +593,8 @@ export const getCount = /* GraphQL */ `
     getCount(id: $id) {
       id
       count
+      like
+      disLike
       article {
         id
         title
@@ -610,6 +618,7 @@ export const getCount = /* GraphQL */ `
         owner
         commentCountId
       }
+      targetTable
       createdAt
       updatedAt
       owner
@@ -628,6 +637,9 @@ export const listCounts = /* GraphQL */ `
       items {
         id
         count
+        like
+        disLike
+        targetTable
         createdAt
         updatedAt
         owner
