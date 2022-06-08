@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-20 21:02:00
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-01 22:06:50
+ * @LastEditTime: 2022-06-07 23:28:10
  * @FilePath: /uwcssa_ca/src/redux/comment/commentSlice.tsx
  * @Description:
  *
@@ -18,24 +18,33 @@ import {
   createEntityAdapter,
   createSlice,
 } from '@reduxjs/toolkit';
+import { createCount, updateComment } from 'graphql/mutations';
 
 import API from '@aws-amplify/api';
-import { AvatarURL } from 'redux/userProfile/userProfileSlice';
+import { Article } from 'redux/article/articleSlice';
 import { CreateCommentInput } from 'API';
+import { Like } from 'redux/like/likeSlice';
 import { RootState } from 'redux/store';
+import { UserProfile } from 'redux/userProfile/userProfileSlice';
 import { getComment } from 'graphql/queries';
 import { graphqlOperation } from '@aws-amplify/api-graphql';
-import { updateComment } from 'graphql/mutations';
+import { v4 as uuid } from 'uuid';
 
 export type Comment = {
   id: string;
   content: string;
   isDeleted: boolean;
-  articleCommentId: string;
+  articleCommentsId?: string | null;
+  article?: Article | null;
+  eventCommentsId?: string | null;
+  event?: any | null;
+  count?: any | null;
+  likes?: Like | null;
   createdAt: string;
   updatedAt: string;
   owner: string;
-  user?: { avatarURL: AvatarURL; id: string; name: string; createdAt: string };
+  user: UserProfile;
+  commentCountId?: string | null;
 };
 
 export const commentAdapter = createEntityAdapter<Comment>({
@@ -110,8 +119,29 @@ export const postComment = createAsyncThunk(
     createCommentInput: CreateCommentInput;
   }) => {
     try {
+      const countId = uuid();
+      const commentId = uuid();
+      await API.graphql(
+        graphqlOperation(createCount, {
+          input: {
+            id: countId,
+            count: undefined,
+            commentCount: undefined,
+            like: 0,
+            targetTable: 'Comment',
+            countCommentId: commentId,
+            owner: createCommentInput.owner,
+          },
+        }),
+      );
       const result: any = await API.graphql(
-        graphqlOperation(createComment, { input: createCommentInput }),
+        graphqlOperation(createComment, {
+          input: {
+            id: commentId,
+            commentCountId: countId,
+            ...createCommentInput,
+          },
+        }),
       );
       return result.data.createComment;
     } catch (error) {

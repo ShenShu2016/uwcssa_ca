@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-20 21:02:00
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-01 22:07:33
+ * @LastEditTime: 2022-06-07 22:43:49
  * @FilePath: /uwcssa_ca/src/redux/article/articleSlice.tsx
  * @Description:
  *
@@ -21,6 +21,7 @@ import {
 
 import API from '@aws-amplify/api';
 import { AvatarURL } from 'redux/userProfile/userProfileSlice';
+import { CreateArticleInput } from 'API';
 import { RootState } from 'redux/store';
 import { graphqlOperation } from '@aws-amplify/api-graphql';
 import { updateArticle } from 'graphql/mutations';
@@ -45,7 +46,7 @@ export type Article = {
       };
     }>;
   } | null;
-  active: 'T' | 'F';
+  active: ActiveType;
   coverPageImgURL?: string | null;
   coverPageDescription?: string | null;
   createdAt?: string;
@@ -54,6 +55,10 @@ export type Article = {
   user?: { avatarURL: AvatarURL; id: string; name: string };
 };
 
+enum ActiveType {
+  T = 'T',
+  F = 'F',
+}
 const articleAdapter = createEntityAdapter<Article>({
   // selectId: (item) => item.id,
   sortComparer: (a, b) => b.createdAt.localeCompare(a.createdAt),
@@ -113,7 +118,11 @@ export const fetchArticle = createAsyncThunk(
 
 export const postArticle = createAsyncThunk(
   'article/postArticle',
-  async ({ createArticleInput }: { createArticleInput: Article }) => {
+  async ({
+    createArticleInput,
+  }: {
+    createArticleInput: CreateArticleInput;
+  }) => {
     try {
       const result: any = await API.graphql(
         graphqlOperation(createArticle, { input: createArticleInput }),

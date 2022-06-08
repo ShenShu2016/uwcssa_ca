@@ -1,34 +1,34 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-20 09:30:58
- * @LastEditTime: 2022-05-31 13:36:45
- * @LastEditors: 李佳修
+ * @LastEditTime: 2022-06-07 22:45:56
+ * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/admin/Article/ArticlePublish/ArticlePublish.tsx
  */
+
+import {
+  Article,
+  fetchArticle,
+  postArticle,
+  updateArticleDetail,
+} from 'redux/article/articleSlice';
+import { Box, Card, TextField } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { createArticleTag, createNewTag } from 'redux/tag/tagSlice';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 
+import { ActiveType } from 'API';
 import AddCoverPic from './components/AddCoverPic';
-import Card from '@mui/material/Card';
 import AddTags from './components/AddTags';
-import Box from '@mui/material/Box';
 import FullScreenLoading from 'components/FullScreenLoading';
 import LoadingButton from '@mui/lab/LoadingButton';
 import MyImageList from './components/MyImageList';
-import TextField from '@mui/material/TextField';
-import { getOwnerUserName } from 'redux/auth/authSlice';
+import PageTitle from 'admin/components/pageTitle';
 import RichTextEditor from 'components/RichTextEditor';
-import {
-  Article,
-  postArticle,
-  fetchArticle,
-  updateArticleDetail
-} from 'redux/article/articleSlice';
+import { getOwnerUserName } from 'redux/auth/authSlice';
 import useMessage from 'hooks/useMessage';
 import { useNavigate } from 'react-router';
 import { useParams } from 'react-router-dom';
-import PageTitle from 'admin/components/pageTitle';
 import { v4 as uuidv4 } from 'uuid';
 
 export interface Tag {
@@ -37,12 +37,12 @@ export interface Tag {
 
 enum ActionType {
   create = '发布文章',
-  edit = '编辑文章'
+  edit = '编辑文章',
 }
 
 const ArticlePublish: React.FC = () => {
   const dispatch = useAppDispatch();
-  
+
   const message = useMessage();
   const navigate = useNavigate();
   const username = useAppSelector(getOwnerUserName);
@@ -71,10 +71,12 @@ const ArticlePublish: React.FC = () => {
         loading: true,
         message: '正在获取文章信息',
       });
-      const res = await dispatch(fetchArticle({
-        articleId: editArticleId,
-        isAuth: true
-      }));
+      const res = await dispatch(
+        fetchArticle({
+          articleId: editArticleId,
+          isAuth: true,
+        }),
+      );
       if (res.meta.requestStatus === 'fulfilled') {
         const articleInfo = res.payload;
         setTitle(articleInfo.title);
@@ -85,7 +87,7 @@ const ArticlePublish: React.FC = () => {
       } else {
         message.open({
           type: 'error',
-          message: '获取文章失败'
+          message: '获取文章失败',
         });
       }
       setFullScreenLoading({
@@ -133,7 +135,10 @@ const ArticlePublish: React.FC = () => {
     }
     setFullScreenLoading({
       loading: true,
-      message: actionType === ActionType.create ? '正在创建标签和文章' : '正在更新标签和文章信息',
+      message:
+        actionType === ActionType.create
+          ? '正在创建标签和文章'
+          : '正在更新标签和文章信息',
     });
     // 创建tag 和 创建文章异步进行 因为此时tag和文章之间没有依赖关系
     const [tagCreate, articleCommit] = await Promise.all([
@@ -153,7 +158,9 @@ const ArticlePublish: React.FC = () => {
       if (isConnected) {
         message.open({
           type: 'success',
-          message: `文章${actionType === ActionType.create ? '发布' : '更新'}完成`,
+          message: `文章${
+            actionType === ActionType.create ? '发布' : '更新'
+          }完成`,
         });
         setFullScreenLoading({
           loading: true,
@@ -184,19 +191,21 @@ const ArticlePublish: React.FC = () => {
     currentContent,
     currentCoverPageDescription,
   ) => {
-    const articleID = actionType === ActionType.create ? uuidv4() : editArticleId;
+    const articleID =
+      actionType === ActionType.create ? uuidv4() : editArticleId;
     const params: Article = {
       id: articleID,
       title: currentTitle,
       content: currentContent,
-      active: 'T',
+      active: ActiveType.T,
       coverPageImgURL: imgFile || undefined,
       coverPageDescription: currentCoverPageDescription,
       owner: username,
     };
-    const articlePostRes = actionType === ActionType.create ?
-      await dispatch(postArticle({ createArticleInput: params })) :
-      await dispatch(updateArticleDetail({ updateArticleInput: params }));
+    const articlePostRes =
+      actionType === ActionType.create
+        ? await dispatch(postArticle({ createArticleInput: params }))
+        : await dispatch(updateArticleDetail({ updateArticleInput: params }));
     const isPosted = articlePostRes.meta.requestStatus === 'fulfilled';
     if (isPosted) {
       message.open({
@@ -206,7 +215,9 @@ const ArticlePublish: React.FC = () => {
     } else {
       message.open({
         type: 'warning',
-        message: `文章${actionType === ActionType.create ? '创建' : '更新'}错误`,
+        message: `文章${
+          actionType === ActionType.create ? '创建' : '更新'
+        }错误`,
       });
     }
     return {
@@ -272,7 +283,7 @@ const ArticlePublish: React.FC = () => {
     if (find !== -1) {
       message.open({
         type: 'warning',
-        message: `标签【${tag}】已存在`
+        message: `标签【${tag}】已存在`,
       });
       return;
     }
@@ -298,7 +309,7 @@ const ArticlePublish: React.FC = () => {
       />
       <PageTitle title={actionType}>
         <Box display={'flex'} paddingX="5%" pb={4}>
-          <Card sx={{width: '70%', p: 2}} >
+          <Card sx={{ width: '70%', p: 2 }}>
             <TextField
               error={inputStatus.title}
               id="standard-textarea"
@@ -334,7 +345,7 @@ const ArticlePublish: React.FC = () => {
               inputProps={{
                 style: {
                   fontSize: 14,
-                  color: '#616161'
+                  color: '#616161',
                 },
               }}
               InputLabelProps={{
@@ -348,7 +359,11 @@ const ArticlePublish: React.FC = () => {
               onChange={(e) => setCoverPageDescription(e.target.value)}
               onFocus={() => handleFocus('desc')}
             />
-            <RichTextEditor content={content} setContent={setContent} height={'calc(100% - 180px)'}/>
+            <RichTextEditor
+              content={content}
+              setContent={setContent}
+              height={'calc(100% - 180px)'}
+            />
           </Card>
           <Box
             width="30%"
@@ -358,11 +373,7 @@ const ArticlePublish: React.FC = () => {
             flexDirection="column"
             justifyContent="space-between"
           >
-            <AddTags
-              addTag={addTag}
-              tags={tags}
-              removeTag={removeTag}
-            />
+            <AddTags addTag={addTag} tags={tags} removeTag={removeTag} />
             <MyImageList useImgFromRecent={useImgFromRecent} />
             <Box>
               <AddCoverPic setImgFile={setImgFile} imgFile={imgFile} />
@@ -381,7 +392,6 @@ const ArticlePublish: React.FC = () => {
           </Box>
         </Box>
       </PageTitle>
-   
     </>
   );
 };

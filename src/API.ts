@@ -613,12 +613,14 @@ export type Like = {
   article?: Article | null,
   comment?: Comment | null,
   event?: Event | null,
+  count?: Count | null,
   createdAt: string,
   updatedAt: string,
   owner: string,
   articleLikesId?: string | null,
   commentLikesId?: string | null,
   eventLikesId?: string | null,
+  likeCountId?: string | null,
 };
 
 export type Count = {
@@ -845,6 +847,7 @@ export type CreateLikeInput = {
   articleLikesId?: string | null,
   commentLikesId?: string | null,
   eventLikesId?: string | null,
+  likeCountId?: string | null,
 };
 
 export type ModelLikeConditionInput = {
@@ -857,6 +860,7 @@ export type ModelLikeConditionInput = {
   articleLikesId?: ModelIDInput | null,
   commentLikesId?: ModelIDInput | null,
   eventLikesId?: ModelIDInput | null,
+  likeCountId?: ModelIDInput | null,
 };
 
 export type UpdateLikeInput = {
@@ -867,6 +871,7 @@ export type UpdateLikeInput = {
   articleLikesId?: string | null,
   commentLikesId?: string | null,
   eventLikesId?: string | null,
+  likeCountId?: string | null,
 };
 
 export type DeleteLikeInput = {
@@ -1725,6 +1730,7 @@ export type ModelLikeFilterInput = {
   articleLikesId?: ModelIDInput | null,
   commentLikesId?: ModelIDInput | null,
   eventLikesId?: ModelIDInput | null,
+  likeCountId?: ModelIDInput | null,
 };
 
 export type ModelResearchDevelopmentTeamFilterInput = {
@@ -3133,12 +3139,27 @@ export type CreateLikeMutation = {
       eventFormId?: string | null,
       eventCountId?: string | null,
     } | null,
+    count?:  {
+      __typename: "Count",
+      id: string,
+      count?: number | null,
+      commentCount?: number | null,
+      like?: number | null,
+      targetTable: string,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      countArticleId?: string | null,
+      countEventId?: string | null,
+      countCommentId?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
     owner: string,
     articleLikesId?: string | null,
     commentLikesId?: string | null,
     eventLikesId?: string | null,
+    likeCountId?: string | null,
   } | null,
 };
 
@@ -3198,12 +3219,27 @@ export type UpdateLikeMutation = {
       eventFormId?: string | null,
       eventCountId?: string | null,
     } | null,
+    count?:  {
+      __typename: "Count",
+      id: string,
+      count?: number | null,
+      commentCount?: number | null,
+      like?: number | null,
+      targetTable: string,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      countArticleId?: string | null,
+      countEventId?: string | null,
+      countCommentId?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
     owner: string,
     articleLikesId?: string | null,
     commentLikesId?: string | null,
     eventLikesId?: string | null,
+    likeCountId?: string | null,
   } | null,
 };
 
@@ -3263,12 +3299,27 @@ export type DeleteLikeMutation = {
       eventFormId?: string | null,
       eventCountId?: string | null,
     } | null,
+    count?:  {
+      __typename: "Count",
+      id: string,
+      count?: number | null,
+      commentCount?: number | null,
+      like?: number | null,
+      targetTable: string,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      countArticleId?: string | null,
+      countEventId?: string | null,
+      countCommentId?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
     owner: string,
     articleLikesId?: string | null,
     commentLikesId?: string | null,
     eventLikesId?: string | null,
+    likeCountId?: string | null,
   } | null,
 };
 
@@ -7054,12 +7105,27 @@ export type GetLikeQuery = {
       eventFormId?: string | null,
       eventCountId?: string | null,
     } | null,
+    count?:  {
+      __typename: "Count",
+      id: string,
+      count?: number | null,
+      commentCount?: number | null,
+      like?: number | null,
+      targetTable: string,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      countArticleId?: string | null,
+      countEventId?: string | null,
+      countCommentId?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
     owner: string,
     articleLikesId?: string | null,
     commentLikesId?: string | null,
     eventLikesId?: string | null,
+    likeCountId?: string | null,
   } | null,
 };
 
@@ -7081,6 +7147,7 @@ export type ListLikesQuery = {
       articleLikesId?: string | null,
       commentLikesId?: string | null,
       eventLikesId?: string | null,
+      likeCountId?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,

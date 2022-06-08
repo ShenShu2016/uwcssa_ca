@@ -266,6 +266,7 @@ type Like
   article: Article @belongsTo
   comment: Comment @belongsTo
   event: Event @belongsTo
+  count: Count! @hasOne #应该有感叹号
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
   owner: ID!

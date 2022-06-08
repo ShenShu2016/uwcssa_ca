@@ -1073,12 +1073,26 @@ export const createLike = /* GraphQL */ `
         eventFormId
         eventCountId
       }
+      count {
+        id
+        count
+        commentCount
+        like
+        targetTable
+        createdAt
+        updatedAt
+        owner
+        countArticleId
+        countEventId
+        countCommentId
+      }
       createdAt
       updatedAt
       owner
       articleLikesId
       commentLikesId
       eventLikesId
+      likeCountId
     }
   }
 `;
@@ -1133,12 +1147,26 @@ export const updateLike = /* GraphQL */ `
         eventFormId
         eventCountId
       }
+      count {
+        id
+        count
+        commentCount
+        like
+        targetTable
+        createdAt
+        updatedAt
+        owner
+        countArticleId
+        countEventId
+        countCommentId
+      }
       createdAt
       updatedAt
       owner
       articleLikesId
       commentLikesId
       eventLikesId
+      likeCountId
     }
   }
 `;
@@ -1193,12 +1221,26 @@ export const deleteLike = /* GraphQL */ `
         eventFormId
         eventCountId
       }
+      count {
+        id
+        count
+        commentCount
+        like
+        targetTable
+        createdAt
+        updatedAt
+        owner
+        countArticleId
+        countEventId
+        countCommentId
+      }
       createdAt
       updatedAt
       owner
       articleLikesId
       commentLikesId
       eventLikesId
+      likeCountId
     }
   }
 `;

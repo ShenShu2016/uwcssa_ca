@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-26 16:50:34
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-01 22:16:36
+ * @LastEditTime: 2022-06-07 23:27:55
  * @FilePath: /uwcssa_ca/src/components/Comment/CommentOverview/CommentOverview.tsx
  * @Description:
  *
@@ -11,7 +11,7 @@
 import { Avatar, Box, Button, Divider, Grid, Typography } from '@mui/material';
 import React, { useState } from 'react';
 
-import { AvatarURL } from 'redux/userProfile/userProfileSlice';
+import { Comment } from 'redux/comment/commentSlice';
 import CommentGroupButton from './components/CommentGroupButton';
 import Container from 'components/Container';
 import { FeedbackForm } from '../CommentDialog/components';
@@ -19,17 +19,7 @@ import moment from 'moment';
 import { stringAvatar } from 'components/Avatar/AvatarFunction';
 
 interface Props {
-  comments: Array<{
-    id: string;
-    content: string;
-    createdAt: string;
-    user?: {
-      name: string;
-      avatarURL: AvatarURL;
-      id: string;
-      createdAt: string;
-    };
-  }>;
+  comments: Array<Comment>;
 }
 
 const CommentOverview = ({ comments }: Props): JSX.Element => {
@@ -138,7 +128,7 @@ const CommentOverview = ({ comments }: Props): JSX.Element => {
                   {/* <Typography marginY={1}></Typography> */}
                   <Typography>{item.content}</Typography>
                 </Box>
-                <CommentGroupButton />
+                <CommentGroupButton count={item.count} />
               </Box>
             </Box>
           </Grid>

@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-21 00:00:03
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-01 22:04:02
+ * @LastEditTime: 2022-06-07 23:08:41
  * @FilePath: /uwcssa_ca/src/redux/article/custom_q_m_s.tsx
  * @Description:
  *
@@ -81,6 +81,19 @@ export const getArticle = /* GraphQL */ `
             id
             name
             createdAt
+          }
+          count {
+            id
+            count
+            commentCount
+            like
+            targetTable
+            createdAt
+            updatedAt
+            owner
+            countArticleId
+            countEventId
+            countCommentId
           }
         }
       }

@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-26 17:34:52
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-01 22:04:44
+ * @LastEditTime: 2022-06-07 23:12:17
  * @FilePath: /uwcssa_ca/src/redux/comment/custom_q_m_s.tsx
  * @Description:
  *
@@ -58,35 +58,23 @@ export const createComment = /* GraphQL */ `
       content
       isDeleted
       articleCommentsId
-      article {
-        id
-        title
-        content
-        coverPageImgURL
-        coverPageDescription
-        active
-        createdAt
-        updatedAt
-        owner
-      }
       createdAt
       updatedAt
       owner
+      count {
+        id
+        like
+        countCommentId
+      }
       user {
         id
         name
-        fullName
-        contactEmail
-        title
-        about
         avatarURL {
           objectURL
           objectCompressedURL
           objectThumbnailURL
         }
         website
-        createdAt
-        updatedAt
         owner
       }
     }
