@@ -3,7 +3,7 @@
  * @Author: Shen Shu
  * @Date: 2022-06-03 16:35:33
  * @LastEditors: 李佳修
- * @LastEditTime: 2022-06-08 15:58:44
+ * @LastEditTime: 2022-06-08 18:08:56
  * @FilePath: /uwcssa_ca/src/admin/Event/Form/components/FormItemForm/FormInputFieldComponent.tsx
  * @Description:
  *
@@ -23,9 +23,8 @@ import {
   Radio,
   RadioGroup,
   Select,
-  Switch,
+  // Switch,
   TextField,
-  Typography,
 } from '@mui/material';
 
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
@@ -35,6 +34,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 import React from 'react';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
+import FieldLabel from '../../../EventCreate/components/FieldLabel';
 
 function FormInputFieldComponent({
   formik,
@@ -43,170 +43,32 @@ function FormInputFieldComponent({
   formik: any;
   formItem: FormItem;
 }) {
-  // 参数为什么要套一个对象 直接写order: number 不行吗
-  function getInputFieldName({ order }: { order: number }) {
-    return 'content' + order;
+  
+  function getInputLabelId(id: string) {
+    return 'input-label-id' + id;
   }
-
-  function getFormikValue({ order }: { order: number }) {
-    return formik.values[getInputFieldName({order})];
-    // if (order === 1) {
-    //   return formik.values.content1;
-    // } else if (order === 2) {
-    //   return formik.values.content2;
-    // } else if (order === 3) {
-    //   return formik.values.content3;
-    // } else if (order === 4) {
-    //   return formik.values.content4;
-    // } else if (order === 5) {
-    //   return formik.values.content5;
-    // } else if (order === 6) {
-    //   return formik.values.content6;
-    // } else if (order === 7) {
-    //   return formik.values.content7;
-    // } else if (order === 8) {
-    //   return formik.values.content8;
-    // } else if (order === 9) {
-    //   return formik.values.content9;
-    // } else if (order === 10) {
-    //   return formik.values.content10;
-    // } else if (order === 11) {
-    //   return formik.values.content11;
-    // } else if (order === 12) {
-    //   return formik.values.content12;
-    // } else if (order === 13) {
-    //   return formik.values.content13;
-    // } else if (order === 14) {
-    //   return formik.values.content14;
-    // } else if (order === 15) {
-    //   return formik.values.content15;
-    // } else if (order === 16) {
-    //   return formik.values.content16;
-    // } else if (order === 17) {
-    //   return formik.values.content17;
-    // } else if (order === 18) {
-    //   return formik.values.content18;
-    // } else if (order === 19) {
-    //   return formik.values.content19;
-    // }
-  }
-  function getFormikTouched({ order }: { order: number }) {
-    return formik.touched[getInputFieldName({order})];
-    // if (order === 1) {
-    //   return formik.touched.content1;
-    // } else if (order === 2) {
-    //   return formik.touched.content2;
-    // } else if (order === 3) {
-    //   return formik.touched.content3;
-    // } else if (order === 4) {
-    //   return formik.touched.content4;
-    // } else if (order === 5) {
-    //   return formik.touched.content5;
-    // } else if (order === 6) {
-    //   return formik.touched.content6;
-    // } else if (order === 7) {
-    //   return formik.touched.content7;
-    // } else if (order === 8) {
-    //   return formik.touched.content8;
-    // } else if (order === 9) {
-    //   return formik.touched.content9;
-    // } else if (order === 10) {
-    //   return formik.touched.content10;
-    // } else if (order === 11) {
-    //   return formik.touched.content11;
-    // } else if (order === 12) {
-    //   return formik.touched.content12;
-    // } else if (order === 13) {
-    //   return formik.touched.content13;
-    // } else if (order === 14) {
-    //   return formik.touched.content14;
-    // } else if (order === 15) {
-    //   return formik.touched.content15;
-    // } else if (order === 16) {
-    //   return formik.touched.content16;
-    // } else if (order === 17) {
-    //   return formik.touched.content17;
-    // } else if (order === 18) {
-    //   return formik.touched.content18;
-    // } else if (order === 19) {
-    //   return formik.touched.content19;
-    // } else {
-    //   console.error('getFormikTouched error');
-    // }
-  }
-  function getFormikErrors({ order }: { order: number }) {
-    console.log(formik.errors[getInputFieldName({order})]);
-    return formik.errors[getInputFieldName({order})];
-    // if (order === 1) {
-    //   return formik.errors.content1;
-    // } else if (order === 2) {
-    //   return formik.errors.content2;
-    // } else if (order === 3) {
-    //   return formik.errors.content3;
-    // } else if (order === 4) {
-    //   return formik.errors.content4;
-    // } else if (order === 5) {
-    //   return formik.errors.content5;
-    // } else if (order === 6) {
-    //   return formik.errors.content6;
-    // } else if (order === 7) {
-    //   return formik.errors.content7;
-    // } else if (order === 8) {
-    //   return formik.errors.content8;
-    // } else if (order === 9) {
-    //   return formik.errors.content9;
-    // } else if (order === 10) {
-    //   return formik.errors.content10;
-    // } else if (order === 11) {
-    //   return formik.errors.content11;
-    // } else if (order === 12) {
-    //   return formik.errors.content12;
-    // } else if (order === 13) {
-    //   return formik.errors.content13;
-    // } else if (order === 14) {
-    //   return formik.errors.content14;
-    // } else if (order === 15) {
-    //   return formik.errors.content15;
-    // } else if (order === 16) {
-    //   return formik.errors.content16;
-    // } else if (order === 17) {
-    //   return formik.errors.content17;
-    // } else if (order === 18) {
-    //   return formik.errors.content18;
-    // } else if (order === 19) {
-    //   return formik.errors.content19;
-    // } else {
-    //   console.error(`Unknown order: ${order}`);
-    // }
-  }
-
-  function getInputLabelId({ order }: { order: number }) {
-    return 'input-label-id' + order;
-  }
-  function getInputId({ order }: { order: number }) {
-    return 'input-id-' + order;
+  function getInputId(id: string) {
+    return 'input-id-' + id;
   }
 
   if (formItem.formType === 'TextFieldShort') {
     return (
       <>
-        <Typography variant={'subtitle2'} sx={{ marginBottom: 2 }}>
-          {formItem.question}
-        </Typography>
+        <FieldLabel name={formItem.question} isRequired={formItem.isRequired} description={formItem.description}/>
         <TextField
           label={formItem.label}
           variant="outlined"
-          name={getInputFieldName({ order: formItem.order })}
+          name={formItem.id}
           fullWidth
-          value={getFormikValue({ order: formItem.order })}
+          value={formik.values[formItem.id]}
           onChange={formik.handleChange}
           error={
-            getFormikTouched({ order: formItem.order }) &&
-            Boolean(getFormikErrors({ order: formItem.order }))
+            formik.touched[formItem.id] &&
+            Boolean(formik.errors[formItem.id])
           }
           helperText={
-            getFormikTouched({ order: formItem.order }) &&
-            getFormikErrors({ order: formItem.order })
+            formik.touched[formItem.id] &&
+            formik.errors[formItem.id]
           }
         />
       </>
@@ -214,25 +76,23 @@ function FormInputFieldComponent({
   } else if (formItem.formType === 'TextFieldLong') {
     return (
       <>
-        <Typography variant={'subtitle2'} sx={{ marginBottom: 2 }}>
-          {formItem.question}
-        </Typography>
+        <FieldLabel name={formItem.question} isRequired={formItem.isRequired} description={formItem.description}/>
         <TextField
           label={formItem.label}
           variant="outlined"
-          name={getInputFieldName({ order: formItem.order })}
+          name={formItem.id}
           fullWidth
           multiline
           minRows={3}
-          value={getFormikValue({ order: formItem.order })}
+          value={formik.values[formItem.id]}
           onChange={formik.handleChange}
           error={
-            getFormikTouched({ order: formItem.order }) &&
-            Boolean(getFormikErrors({ order: formItem.order }))
+            formik.touched[formItem.id] &&
+            Boolean(formik.errors[formItem.id])
           }
           helperText={
-            getFormikTouched({ order: formItem.order }) &&
-            getFormikErrors({ order: formItem.order })
+            formik.touched[formItem.id] &&
+            formik.errors[formItem.id]
           }
         />
       </>
@@ -240,12 +100,10 @@ function FormInputFieldComponent({
   } else if (formItem.formType === 'Checkbox') {
     return (
       <>
-        <Typography variant={'subtitle2'} sx={{ marginBottom: 2 }}>
-          {formItem.question}
-        </Typography>
+        <FieldLabel name={formItem.question} isRequired={formItem.isRequired} description={formItem.description}/>
         <FormControlLabel
-          name={getInputFieldName({ order: formItem.order })}
-          value={getFormikValue({ order: formItem.order })}
+          name={formItem.id}
+          value={formik.values[formItem.id]}
           onChange={formik.handleChange}
           control={<Checkbox />}
           label={formItem.label}
@@ -255,44 +113,68 @@ function FormInputFieldComponent({
   } else if (formItem.formType === 'Boolean') {
     return (
       <>
-        <Typography variant={'subtitle2'} sx={{ marginBottom: 2 }}>
-          {formItem.question}
-        </Typography>
-        <FormControlLabel
-          name={getInputFieldName({ order: formItem.order })}
-          value={getFormikValue({ order: formItem.order }) || false}
+        <FieldLabel name={formItem.question} isRequired={formItem.isRequired} description={formItem.description}/>
+        {/* switch的初始状态有点问题 赋默认值false 赋不进去 如果这个字段是required 校验不通过 有点问题 */}
+        {/* 而且就算赋默认值是false了 这相当于是强制用户选了false 如果这个字段不是required 是应该允许空值的 */}
+        {/* <FormControlLabel
+          name={formItem.id}
+          value={Boolean(formik.values[formItem.id])}
           onChange={formik.handleChange}
           control={<Switch />}
           label={formItem.label}
-        />
+        /> */}
+        <FormControl
+          error={formik.touched[formItem.id] && Boolean(formik.errors[formItem.id])}
+          variant="standard"
+        >
+          <RadioGroup
+            row
+            name={formItem.id}
+            value={formik.values[formItem.id]}
+            onChange={formik.handleChange}
+          >
+            {/* 可以写 required={formItem.isRequired} */}
+            <FormControlLabel
+              value={true}
+              control={<Radio size='small' sx={{ color: formik.touched[formItem.id] && Boolean(formik.errors[formItem.id]) ? '#d32f2f' : '' }}/>}
+              label={'是'}
+            />
+            <FormControlLabel
+              value={false}
+              control={<Radio size='small' sx={{ color: formik.touched[formItem.id] && Boolean(formik.errors[formItem.id]) ? '#d32f2f' : '' }}/>}
+              label={'否'}
+            />
+          </RadioGroup>
+          <FormHelperText
+            error={formik.touched[formItem.id] && Boolean(formik.errors[formItem.id])}
+          >{formik.touched[formItem.id] && formik.errors[formItem.id]}</FormHelperText>
+        </FormControl>
       </>
     );
   } else if (formItem.formType === 'MultipleSelect') {
     //之后这里放switch
     return (
       <>
-        <Typography variant={'subtitle2'} sx={{ marginBottom: 2 }}>
-          {formItem.question}
-        </Typography>
+        <FieldLabel name={formItem.question} isRequired={formItem.isRequired} description={formItem.description}/>
         <FormControl fullWidth>
-          <InputLabel id={getInputLabelId({ order: formItem.order })}>
+          <InputLabel id={getInputLabelId(formItem.id)}>
             {formItem.label}
           </InputLabel>
           <Select
-            labelId={getInputLabelId({ order: formItem.order })}
+            labelId={getInputLabelId(formItem.id)}
             multiple
-            id={getInputId({ order: formItem.order })}
-            name={getInputFieldName({ order: formItem.order })}
-            value={getFormikValue({ order: formItem.order }) || []} //！！太重要了这个是为了防止没有值的时候报错
+            id={getInputId(formItem.id)}
+            name={formItem.id}
+            value={formik.values[formItem.id] || []} //！！太重要了这个是为了防止没有值的时候报错
             label={formItem.label}
             onChange={formik.handleChange}
             error={
-              getFormikTouched({ order: formItem.order }) &&
-              Boolean(getFormikErrors({ order: formItem.order }))
+              formik.touched[formItem.id] &&
+              Boolean(formik.errors[formItem.id])
             }
             input={
               <OutlinedInput
-                id={getInputId({ order: formItem.order })}
+                id={getInputId(formItem.id)}
                 label="Chip"
               />
             }
@@ -318,23 +200,21 @@ function FormInputFieldComponent({
   } else if (formItem.formType === 'Select') {
     return (
       <>
-        <Typography variant={'subtitle2'} sx={{ marginBottom: 2 }}>
-          {formItem.question}
-        </Typography>
+        <FieldLabel name={formItem.question} isRequired={formItem.isRequired} description={formItem.description}/>
         <FormControl fullWidth>
-          <InputLabel id={getInputLabelId({ order: formItem.order })}>
+          <InputLabel id={getInputLabelId(formItem.id)}>
             {formItem.label}
           </InputLabel>
           <Select
-            labelId={getInputLabelId({ order: formItem.order })}
-            //id={getInputFieldName({ order: formItem.order })}
-            name={getInputFieldName({ order: formItem.order })}
-            value={getFormikValue({ order: formItem.order })}
+            labelId={getInputLabelId(formItem.id)}
+            id={formItem.id}
+            name={formItem.id}
+            value={formik.values[formItem.id]}
             label={formItem.label}
             onChange={formik.handleChange}
             error={
-              getFormikTouched({ order: formItem.order }) &&
-              Boolean(getFormikErrors({ order: formItem.order }))
+              formik.touched[formItem.id] &&
+              Boolean(formik.errors[formItem.id])
             }
           >
             {formItem.formSelectChoices.map((option, index) => {
@@ -346,8 +226,10 @@ function FormInputFieldComponent({
             })}
           </Select>
           <FormHelperText>
-            {getFormikTouched({ order: formItem.order }) &&
-              getFormikErrors({ order: formItem.order })}
+            {
+              formik.touched[formItem.id] &&
+                  formik.errors[formItem.id]
+            }
           </FormHelperText>
         </FormControl>
       </>
@@ -360,19 +242,17 @@ function FormInputFieldComponent({
   ) {
     return (
       <>
-        <Typography variant={'subtitle2'} sx={{ marginBottom: 2 }}>
-          {formItem.question}
-        </Typography>
+        <FieldLabel name={formItem.question} isRequired={formItem.isRequired} description={formItem.description}/>
         <FormControl>
-          <FormLabel id={getInputLabelId({ order: formItem.order })}>
+          <FormLabel id={getInputLabelId(formItem.id)}>
             {formItem.label}
           </FormLabel>
           <RadioGroup
             row={formItem.formType === 'RadioGroupH'}
-            aria-labelledby={getInputLabelId({ order: formItem.order })}
-            name={getInputFieldName({ order: formItem.order })}
+            aria-labelledby={getInputLabelId(formItem.id)}
+            name={formItem.id}
             onChange={formik.handleChange}
-            value={getFormikValue({ order: formItem.order })}
+            value={formik.values[formItem.id]}
           >
             {formItem.formSelectChoices.map((option, index) => {
               return (
@@ -386,8 +266,10 @@ function FormInputFieldComponent({
             })}
           </RadioGroup>
           <FormHelperText>
-            {getFormikTouched({ order: formItem.order }) &&
-              getFormikErrors({ order: formItem.order })}
+            {
+              formik.touched[formItem.id] &&
+                  formik.errors[formItem.id]
+            }
           </FormHelperText>
         </FormControl>
       </>
@@ -395,17 +277,15 @@ function FormInputFieldComponent({
   } else if (formItem.formType === 'DatePicker') {
     return (
       <>
-        <Typography variant={'subtitle2'} sx={{ marginBottom: 2 }}>
-          {formItem.question}
-        </Typography>
+        <FieldLabel name={formItem.question} isRequired={formItem.isRequired} description={formItem.description}/>
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <MobileDatePicker
             label={formItem.label}
             inputFormat="MM/dd/yyyy"
-            value={getFormikValue({ order: formItem.order }) || null}
+            value={formik.values[formItem.id] || null}
             onChange={(value) => {
               formik.setFieldValue(
-                getInputFieldName({ order: formItem.order }),
+                formItem.id,
                 value,
               );
             }}
@@ -414,12 +294,12 @@ function FormInputFieldComponent({
                 {...params}
                 fullWidth
                 error={
-                  getFormikTouched({ order: formItem.order }) &&
-                  Boolean(getFormikErrors({ order: formItem.order }))
+                  formik.touched[formItem.id] &&
+                  Boolean(formik.errors[formItem.id])
                 }
                 helperText={
-                  getFormikTouched({ order: formItem.order }) &&
-                  getFormikErrors({ order: formItem.order })
+                  formik.touched[formItem.id] &&
+                  formik.errors[formItem.id]
                 }
               />
             )}
@@ -430,16 +310,14 @@ function FormInputFieldComponent({
   } else if (formItem.formType === 'DateTimePicker') {
     return (
       <>
-        <Typography variant={'subtitle2'} sx={{ marginBottom: 2 }}>
-          {formItem.question}
-        </Typography>
+        <FieldLabel name={formItem.question} isRequired={formItem.isRequired} description={formItem.description}/>
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <DateTimePicker
             label={formItem.label}
-            value={getFormikValue({ order: formItem.order }) || null}
+            value={formik.values[formItem.id] || null}
             onChange={(value) => {
               formik.setFieldValue(
-                getInputFieldName({ order: formItem.order }),
+                formItem.id,
                 value,
               );
             }}
@@ -448,12 +326,12 @@ function FormInputFieldComponent({
                 {...params}
                 fullWidth
                 error={
-                  getFormikTouched({ order: formItem.order }) &&
-                  Boolean(getFormikErrors({ order: formItem.order }))
+                  formik.touched[formItem.id] &&
+                  Boolean(formik.errors[formItem.id])
                 }
                 helperText={
-                  getFormikTouched({ order: formItem.order }) &&
-                  getFormikErrors({ order: formItem.order })
+                  formik.touched[formItem.id] &&
+                  formik.errors[formItem.id]
                 }
               />
             )}
@@ -464,16 +342,14 @@ function FormInputFieldComponent({
   } else if (formItem.formType === 'TimePicker') {
     return (
       <>
-        <Typography variant={'subtitle2'} sx={{ marginBottom: 2 }}>
-          {formItem.question}
-        </Typography>
+        <FieldLabel name={formItem.question} isRequired={formItem.isRequired} description={formItem.description}/>
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <TimePicker
             label={formItem.label}
-            value={getFormikValue({ order: formItem.order }) || null}
+            value={formik.values[formItem.id] || null}
             onChange={(value) => {
               formik.setFieldValue(
-                getInputFieldName({ order: formItem.order }),
+                formItem.id,
                 value,
               );
             }}
@@ -482,12 +358,12 @@ function FormInputFieldComponent({
                 {...params}
                 fullWidth
                 error={
-                  getFormikTouched({ order: formItem.order }) &&
-                  Boolean(getFormikErrors({ order: formItem.order }))
+                  formik.touched[formItem.id] &&
+                  Boolean(formik.errors[formItem.id])
                 }
                 helperText={
-                  getFormikTouched({ order: formItem.order }) &&
-                  getFormikErrors({ order: formItem.order })
+                  formik.touched[formItem.id] &&
+                  formik.errors[formItem.id]
                 }
               />
             )}

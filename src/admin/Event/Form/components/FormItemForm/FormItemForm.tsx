@@ -3,7 +3,7 @@
  * @Author: Shen Shu
  * @Date: 2022-06-03 16:39:34
  * @LastEditors: 李佳修
- * @LastEditTime: 2022-06-08 15:43:43
+ * @LastEditTime: 2022-06-08 17:36:12
  * @FilePath: /uwcssa_ca/src/admin/Event/Form/components/FormItemForm/FormItemForm.tsx
  * @Description:
  *
@@ -67,15 +67,16 @@ function FormItemForm({ formItemList }: { formItemList: Array<FormItem> }) {
   const initialValues = {};
   const yupObject = {};
 
-  sortedFormItemList.forEach((item, index) => {
-    initialValues[`content${index + 1}`] = '';
-    yupObject[`content${index + 1}`] = item && getYupValidation(item);
+  sortedFormItemList.forEach(item => {
+    initialValues[item.id] = '';
+    yupObject[item.id] = item && getYupValidation(item);
   });
-  console.log(yupObject);
+  
   const validationSchema = yup.object(yupObject);
 
   const onSubmit = async (values) => {
-    console.log(values);
+    console.log(values, 999);
+    return values;
   };
 
   const formik = useFormik({
@@ -84,73 +85,27 @@ function FormItemForm({ formItemList }: { formItemList: Array<FormItem> }) {
     onSubmit,
   });
 
-  // const validationSchema = yup.object({
-  //   content1: sortedFormItemList[0] && getYupValidation(sortedFormItemList[0]),
-  //   content2: sortedFormItemList[1] && getYupValidation(sortedFormItemList[1]),
-  //   content3: sortedFormItemList[2] && getYupValidation(sortedFormItemList[2]),
-  //   content4: sortedFormItemList[3] && getYupValidation(sortedFormItemList[3]),
-  //   content5: sortedFormItemList[4] && getYupValidation(sortedFormItemList[4]),
-  //   content6: sortedFormItemList[5] && getYupValidation(sortedFormItemList[5]),
-  //   content7: sortedFormItemList[6] && getYupValidation(sortedFormItemList[6]),
-  //   content8: sortedFormItemList[7] && getYupValidation(sortedFormItemList[7]),
-  //   content9: sortedFormItemList[8] && getYupValidation(sortedFormItemList[8]),
-  //   content10: sortedFormItemList[9] && getYupValidation(sortedFormItemList[9]),
-  //   content11:
-  //     sortedFormItemList[10] && getYupValidation(sortedFormItemList[10]),
-  //   content12:
-  //     sortedFormItemList[11] && getYupValidation(sortedFormItemList[11]),
-  //   content13:
-  //     sortedFormItemList[12] && getYupValidation(sortedFormItemList[12]),
-  //   content14:
-  //     sortedFormItemList[13] && getYupValidation(sortedFormItemList[13]),
-  //   content15:
-  //     sortedFormItemList[14] && getYupValidation(sortedFormItemList[14]),
-  //   content16:
-  //     sortedFormItemList[15] && getYupValidation(sortedFormItemList[15]),
-  //   content17:
-  //     sortedFormItemList[16] && getYupValidation(sortedFormItemList[16]),
-  //   content18:
-  //     sortedFormItemList[17] && getYupValidation(sortedFormItemList[17]),
-  //   content19:
-  //     sortedFormItemList[18] && getYupValidation(sortedFormItemList[18]),
-  // });
+  const handleSubmitClicked = () => {
+    if (!formik.isValid) {
+      console.error('表单未完成', formik.errors);
+    }
+  };
 
-  // const initialValues = {
-  //   content1: '',
-  //   content2: '',
-  //   content3: '',
-  //   content4: '',
-  //   content5: '',
-  //   content6: '',
-  //   content7: '',
-  //   content8: '',
-  //   content9: '',
-  //   content10: '',
-  //   content11: '',
-  //   content12: '',
-  //   content13: '',
-  //   content14: '',
-  //   content15: '',
-  //   content16: '',
-  //   content17: '',
-  //   content18: '',
-  //   content19: '',
-  // };
   return (
     <Container>
       FormItemForm
       <Divider sx={{ my: '2rem' }} />
       <form onSubmit={formik.handleSubmit}>
-        <Grid container spacing={1}>
+        <Grid container spacing={8}>
           {sortedFormItemList.map((formItem) => {
             return (
-              <Grid item xs={12} sm={12} key={formItem.id}>
+              <Grid item xs={12} sm={12} key={formItem.id} marginX={4}>
                 <FormInputFieldComponent formItem={formItem} formik={formik} />
               </Grid>
             );
           })}
         </Grid>
-        <Button size={'large'} variant={'contained'} type={'submit'}>
+        <Button size={'large'} variant={'contained'} type={'submit'} onClick={handleSubmitClicked}>
           Submit
         </Button>
       </form>
