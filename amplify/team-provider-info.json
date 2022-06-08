@@ -50,7 +50,7 @@
         },
         "CountHandler": {
           "deploymentBucketName": "amplify-uwcssa-devts-225941-deployment",
-          "s3Key": "amplify-builds/CountHandler-5058506e737349653569-build.zip"
+          "s3Key": "amplify-builds/CountHandler-355849714d4f5a324f68-build.zip"
         }
       }
     }

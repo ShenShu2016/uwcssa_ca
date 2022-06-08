@@ -120,6 +120,7 @@ export const onCreateEventTags = /* GraphQL */ `
         owner
         eventEventLocationId
         eventFormId
+        eventCountId
       }
       createdAt
       updatedAt
@@ -157,6 +158,7 @@ export const onUpdateEventTags = /* GraphQL */ `
         owner
         eventEventLocationId
         eventFormId
+        eventCountId
       }
       createdAt
       updatedAt
@@ -194,6 +196,7 @@ export const onDeleteEventTags = /* GraphQL */ `
         owner
         eventEventLocationId
         eventFormId
+        eventCountId
       }
       createdAt
       updatedAt

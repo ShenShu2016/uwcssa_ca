@@ -284,13 +284,14 @@ export const getArticle = /* GraphQL */ `
       count {
         id
         count
+        commentCount
         like
-        disLike
         targetTable
         createdAt
         updatedAt
         owner
         countArticleId
+        countEventId
         countCommentId
       }
       active
@@ -412,17 +413,19 @@ export const getComment = /* GraphQL */ `
         owner
         eventEventLocationId
         eventFormId
+        eventCountId
       }
       count {
         id
         count
+        commentCount
         like
-        disLike
         targetTable
         createdAt
         updatedAt
         owner
         countArticleId
+        countEventId
         countCommentId
       }
       likes {
@@ -593,8 +596,8 @@ export const getCount = /* GraphQL */ `
     getCount(id: $id) {
       id
       count
+      commentCount
       like
-      disLike
       article {
         id
         title
@@ -606,6 +609,27 @@ export const getCount = /* GraphQL */ `
         updatedAt
         owner
         articleCountId
+      }
+      event {
+        id
+        title
+        coverPageImgURL
+        coverPageDescription
+        content
+        imgURLs
+        sponsor
+        online
+        group
+        startDate
+        endDate
+        eventStatus
+        active
+        createdAt
+        updatedAt
+        owner
+        eventEventLocationId
+        eventFormId
+        eventCountId
       }
       comment {
         id
@@ -623,6 +647,7 @@ export const getCount = /* GraphQL */ `
       updatedAt
       owner
       countArticleId
+      countEventId
       countCommentId
     }
   }
@@ -637,13 +662,14 @@ export const listCounts = /* GraphQL */ `
       items {
         id
         count
+        commentCount
         like
-        disLike
         targetTable
         createdAt
         updatedAt
         owner
         countArticleId
+        countEventId
         countCommentId
       }
       nextToken
@@ -677,11 +703,33 @@ export const getLike = /* GraphQL */ `
         owner
         commentCountId
       }
+      event {
+        id
+        title
+        coverPageImgURL
+        coverPageDescription
+        content
+        imgURLs
+        sponsor
+        online
+        group
+        startDate
+        endDate
+        eventStatus
+        active
+        createdAt
+        updatedAt
+        owner
+        eventEventLocationId
+        eventFormId
+        eventCountId
+      }
       createdAt
       updatedAt
       owner
       articleLikesId
       commentLikesId
+      eventLikesId
     }
   }
 `;
@@ -699,6 +747,7 @@ export const listLikes = /* GraphQL */ `
         owner
         articleLikesId
         commentLikesId
+        eventLikesId
       }
       nextToken
     }
@@ -939,6 +988,22 @@ export const getEvent = /* GraphQL */ `
       eventParticipants {
         nextToken
       }
+      likes {
+        nextToken
+      }
+      count {
+        id
+        count
+        commentCount
+        like
+        targetTable
+        createdAt
+        updatedAt
+        owner
+        countArticleId
+        countEventId
+        countCommentId
+      }
       active
       createdAt
       updatedAt
@@ -961,6 +1026,7 @@ export const getEvent = /* GraphQL */ `
       }
       eventEventLocationId
       eventFormId
+      eventCountId
     }
   }
 `;
@@ -990,6 +1056,7 @@ export const listEvents = /* GraphQL */ `
         owner
         eventEventLocationId
         eventFormId
+        eventCountId
       }
       nextToken
     }
@@ -1031,6 +1098,7 @@ export const eventSortByCreatedAt = /* GraphQL */ `
         owner
         eventEventLocationId
         eventFormId
+        eventCountId
       }
       nextToken
     }
@@ -1123,6 +1191,7 @@ export const getForm = /* GraphQL */ `
         owner
         eventEventLocationId
         eventFormId
+        eventCountId
       }
       createdAt
       updatedAt
@@ -1896,6 +1965,7 @@ export const getEventTags = /* GraphQL */ `
         owner
         eventEventLocationId
         eventFormId
+        eventCountId
       }
       createdAt
       updatedAt

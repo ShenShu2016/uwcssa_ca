@@ -240,10 +240,11 @@ type Count
     ]
   ) {
   id: ID!
-  count: Int!
+  count: Int
+  commentCount: Int #只有在article 和event 里面才有用
   like: Int
-  disLike: Int
   article: Article @belongsTo
+  event: Event @belongsTo
   comment: Comment @belongsTo
   targetTable: String!
   createdAt: AWSDateTime!
@@ -264,6 +265,7 @@ type Like
   id: ID!
   article: Article @belongsTo
   comment: Comment @belongsTo
+  event: Event @belongsTo
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
   owner: ID!
@@ -368,6 +370,8 @@ type Event
   form: Form @hasOne
   comments: [Comment] @hasMany
   eventParticipants: [EventParticipant] @hasMany
+  likes: [Like] @hasMany
+  count: Count @hasOne # 每一个article 都要有一个count 记录有几个Comments
   active: ActiveType!
     @index(
       name: "eventSortByCreatedAt" #名字要用小写

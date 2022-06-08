@@ -334,13 +334,14 @@ export const createArticle = /* GraphQL */ `
       count {
         id
         count
+        commentCount
         like
-        disLike
         targetTable
         createdAt
         updatedAt
         owner
         countArticleId
+        countEventId
         countCommentId
       }
       active
@@ -390,13 +391,14 @@ export const updateArticle = /* GraphQL */ `
       count {
         id
         count
+        commentCount
         like
-        disLike
         targetTable
         createdAt
         updatedAt
         owner
         countArticleId
+        countEventId
         countCommentId
       }
       active
@@ -446,13 +448,14 @@ export const deleteArticle = /* GraphQL */ `
       count {
         id
         count
+        commentCount
         like
-        disLike
         targetTable
         createdAt
         updatedAt
         owner
         countArticleId
+        countEventId
         countCommentId
       }
       active
@@ -521,17 +524,19 @@ export const createComment = /* GraphQL */ `
         owner
         eventEventLocationId
         eventFormId
+        eventCountId
       }
       count {
         id
         count
+        commentCount
         like
-        disLike
         targetTable
         createdAt
         updatedAt
         owner
         countArticleId
+        countEventId
         countCommentId
       }
       likes {
@@ -602,17 +607,19 @@ export const updateComment = /* GraphQL */ `
         owner
         eventEventLocationId
         eventFormId
+        eventCountId
       }
       count {
         id
         count
+        commentCount
         like
-        disLike
         targetTable
         createdAt
         updatedAt
         owner
         countArticleId
+        countEventId
         countCommentId
       }
       likes {
@@ -683,17 +690,19 @@ export const deleteComment = /* GraphQL */ `
         owner
         eventEventLocationId
         eventFormId
+        eventCountId
       }
       count {
         id
         count
+        commentCount
         like
-        disLike
         targetTable
         createdAt
         updatedAt
         owner
         countArticleId
+        countEventId
         countCommentId
       }
       likes {
@@ -829,8 +838,8 @@ export const createCount = /* GraphQL */ `
     createCount(input: $input, condition: $condition) {
       id
       count
+      commentCount
       like
-      disLike
       article {
         id
         title
@@ -842,6 +851,27 @@ export const createCount = /* GraphQL */ `
         updatedAt
         owner
         articleCountId
+      }
+      event {
+        id
+        title
+        coverPageImgURL
+        coverPageDescription
+        content
+        imgURLs
+        sponsor
+        online
+        group
+        startDate
+        endDate
+        eventStatus
+        active
+        createdAt
+        updatedAt
+        owner
+        eventEventLocationId
+        eventFormId
+        eventCountId
       }
       comment {
         id
@@ -859,6 +889,7 @@ export const createCount = /* GraphQL */ `
       updatedAt
       owner
       countArticleId
+      countEventId
       countCommentId
     }
   }
@@ -871,8 +902,8 @@ export const updateCount = /* GraphQL */ `
     updateCount(input: $input, condition: $condition) {
       id
       count
+      commentCount
       like
-      disLike
       article {
         id
         title
@@ -884,6 +915,27 @@ export const updateCount = /* GraphQL */ `
         updatedAt
         owner
         articleCountId
+      }
+      event {
+        id
+        title
+        coverPageImgURL
+        coverPageDescription
+        content
+        imgURLs
+        sponsor
+        online
+        group
+        startDate
+        endDate
+        eventStatus
+        active
+        createdAt
+        updatedAt
+        owner
+        eventEventLocationId
+        eventFormId
+        eventCountId
       }
       comment {
         id
@@ -901,6 +953,7 @@ export const updateCount = /* GraphQL */ `
       updatedAt
       owner
       countArticleId
+      countEventId
       countCommentId
     }
   }
@@ -913,8 +966,8 @@ export const deleteCount = /* GraphQL */ `
     deleteCount(input: $input, condition: $condition) {
       id
       count
+      commentCount
       like
-      disLike
       article {
         id
         title
@@ -926,6 +979,27 @@ export const deleteCount = /* GraphQL */ `
         updatedAt
         owner
         articleCountId
+      }
+      event {
+        id
+        title
+        coverPageImgURL
+        coverPageDescription
+        content
+        imgURLs
+        sponsor
+        online
+        group
+        startDate
+        endDate
+        eventStatus
+        active
+        createdAt
+        updatedAt
+        owner
+        eventEventLocationId
+        eventFormId
+        eventCountId
       }
       comment {
         id
@@ -943,6 +1017,7 @@ export const deleteCount = /* GraphQL */ `
       updatedAt
       owner
       countArticleId
+      countEventId
       countCommentId
     }
   }
@@ -977,11 +1052,33 @@ export const createLike = /* GraphQL */ `
         owner
         commentCountId
       }
+      event {
+        id
+        title
+        coverPageImgURL
+        coverPageDescription
+        content
+        imgURLs
+        sponsor
+        online
+        group
+        startDate
+        endDate
+        eventStatus
+        active
+        createdAt
+        updatedAt
+        owner
+        eventEventLocationId
+        eventFormId
+        eventCountId
+      }
       createdAt
       updatedAt
       owner
       articleLikesId
       commentLikesId
+      eventLikesId
     }
   }
 `;
@@ -1015,11 +1112,33 @@ export const updateLike = /* GraphQL */ `
         owner
         commentCountId
       }
+      event {
+        id
+        title
+        coverPageImgURL
+        coverPageDescription
+        content
+        imgURLs
+        sponsor
+        online
+        group
+        startDate
+        endDate
+        eventStatus
+        active
+        createdAt
+        updatedAt
+        owner
+        eventEventLocationId
+        eventFormId
+        eventCountId
+      }
       createdAt
       updatedAt
       owner
       articleLikesId
       commentLikesId
+      eventLikesId
     }
   }
 `;
@@ -1053,11 +1172,33 @@ export const deleteLike = /* GraphQL */ `
         owner
         commentCountId
       }
+      event {
+        id
+        title
+        coverPageImgURL
+        coverPageDescription
+        content
+        imgURLs
+        sponsor
+        online
+        group
+        startDate
+        endDate
+        eventStatus
+        active
+        createdAt
+        updatedAt
+        owner
+        eventEventLocationId
+        eventFormId
+        eventCountId
+      }
       createdAt
       updatedAt
       owner
       articleLikesId
       commentLikesId
+      eventLikesId
     }
   }
 `;
@@ -1467,6 +1608,22 @@ export const createEvent = /* GraphQL */ `
       eventParticipants {
         nextToken
       }
+      likes {
+        nextToken
+      }
+      count {
+        id
+        count
+        commentCount
+        like
+        targetTable
+        createdAt
+        updatedAt
+        owner
+        countArticleId
+        countEventId
+        countCommentId
+      }
       active
       createdAt
       updatedAt
@@ -1489,6 +1646,7 @@ export const createEvent = /* GraphQL */ `
       }
       eventEventLocationId
       eventFormId
+      eventCountId
     }
   }
 `;
@@ -1541,6 +1699,22 @@ export const updateEvent = /* GraphQL */ `
       eventParticipants {
         nextToken
       }
+      likes {
+        nextToken
+      }
+      count {
+        id
+        count
+        commentCount
+        like
+        targetTable
+        createdAt
+        updatedAt
+        owner
+        countArticleId
+        countEventId
+        countCommentId
+      }
       active
       createdAt
       updatedAt
@@ -1563,6 +1737,7 @@ export const updateEvent = /* GraphQL */ `
       }
       eventEventLocationId
       eventFormId
+      eventCountId
     }
   }
 `;
@@ -1615,6 +1790,22 @@ export const deleteEvent = /* GraphQL */ `
       eventParticipants {
         nextToken
       }
+      likes {
+        nextToken
+      }
+      count {
+        id
+        count
+        commentCount
+        like
+        targetTable
+        createdAt
+        updatedAt
+        owner
+        countArticleId
+        countEventId
+        countCommentId
+      }
       active
       createdAt
       updatedAt
@@ -1637,6 +1828,7 @@ export const deleteEvent = /* GraphQL */ `
       }
       eventEventLocationId
       eventFormId
+      eventCountId
     }
   }
 `;
@@ -1783,6 +1975,7 @@ export const createForm = /* GraphQL */ `
         owner
         eventEventLocationId
         eventFormId
+        eventCountId
       }
       createdAt
       updatedAt
@@ -1836,6 +2029,7 @@ export const updateForm = /* GraphQL */ `
         owner
         eventEventLocationId
         eventFormId
+        eventCountId
       }
       createdAt
       updatedAt
@@ -1889,6 +2083,7 @@ export const deleteForm = /* GraphQL */ `
         owner
         eventEventLocationId
         eventFormId
+        eventCountId
       }
       createdAt
       updatedAt
@@ -3732,6 +3927,7 @@ export const createEventTags = /* GraphQL */ `
         owner
         eventEventLocationId
         eventFormId
+        eventCountId
       }
       createdAt
       updatedAt
@@ -3772,6 +3968,7 @@ export const updateEventTags = /* GraphQL */ `
         owner
         eventEventLocationId
         eventFormId
+        eventCountId
       }
       createdAt
       updatedAt
@@ -3812,6 +4009,7 @@ export const deleteEventTags = /* GraphQL */ `
         owner
         eventEventLocationId
         eventFormId
+        eventCountId
       }
       createdAt
       updatedAt
