@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-20 21:02:00
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-08 16:41:30
+ * @LastEditTime: 2022-06-08 17:45:23
  * @FilePath: /uwcssa_ca/src/redux/article/articleSlice.tsx
  * @Description:
  *
@@ -18,13 +18,14 @@ import {
   createEntityAdapter,
   createSlice,
 } from '@reduxjs/toolkit';
+import { createCount, updateArticle } from 'graphql/mutations';
 
 import API from '@aws-amplify/api';
 import { AvatarURL } from 'redux/userProfile/userProfileSlice';
 import { CreateArticleInput } from 'API';
 import { RootState } from 'redux/store';
 import { graphqlOperation } from '@aws-amplify/api-graphql';
-import { updateArticle } from 'graphql/mutations';
+import { v4 as uuid } from 'uuid';
 
 //import { commentAdapter } from 'redux/comment/commentSlice';
 
@@ -46,6 +47,8 @@ export type Article = {
       };
     }>;
   } | null;
+  count?: any;
+  likes?: any;
   active: ActiveType;
   coverPageImgURL?: string | null;
   coverPageDescription?: string | null;
@@ -132,8 +135,24 @@ export const postArticle = createAsyncThunk(
     createArticleInput: CreateArticleInput;
   }) => {
     try {
+      const countId = uuid();
+      await API.graphql(
+        graphqlOperation(createCount, {
+          input: {
+            id: countId,
+            count: undefined,
+            commentCount: 0,
+            like: 0,
+            targetTable: 'Article',
+            countArticleId: createArticleInput.id,
+            owner: createArticleInput.owner,
+          },
+        }),
+      );
       const result: any = await API.graphql(
-        graphqlOperation(createArticle, { input: createArticleInput }),
+        graphqlOperation(createArticle, {
+          input: { articleCountId: countId, ...createArticleInput },
+        }),
       );
       return result.data.createArticle;
     } catch (error) {

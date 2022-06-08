@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-25 19:05:54
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-01 22:18:49
+ * @LastEditTime: 2022-06-08 18:10:29
  * @FilePath: /uwcssa_ca/src/views/ArticleCover/components/Content/Content.tsx
  * @Description:
  *
@@ -11,6 +11,7 @@
 import { Avatar, Box, Divider, IconButton, Typography } from '@mui/material';
 
 import { Article } from 'redux/article/articleSlice';
+import CommentGroupButton from 'components/Comment/CommentOverview/components/CommentGroupButton';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import React from 'react';
@@ -88,6 +89,9 @@ const Content = ({ article }: { article: Article }): JSX.Element => {
               </Typography>
             </Box>
           </Box>
+          {article.likes?.items && article.count && (
+            <CommentGroupButton likes={article.likes} count={article.count} />
+          )}
           <Box display={'flex'} alignItems={'center'}>
             <Typography color={'text.secondary'}>Share:</Typography>
             <Box marginLeft={0.5}>

@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-27 13:44:58
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-08 16:57:32
+ * @LastEditTime: 2022-06-08 18:37:08
  * @FilePath: /uwcssa_ca/src/components/Comment/CommentOverview/components/CommentGroupButton.tsx
  * @Description:
  *
@@ -13,7 +13,6 @@ import React, { useState } from 'react';
 import { postLike, removeLike } from 'redux/like/likeSlice';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 
-import Button from '@mui/material/Button';
 import { Count } from 'redux/count/countSlice';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -23,9 +22,11 @@ import { getOwnerUserName } from 'redux/auth/authSlice';
 
 function CommentGroupButton({ count, likes }: { count: Count; likes: any }) {
   const dispatch = useAppDispatch();
-  const [isFavorite, setIsFavorite] = useState(likes.items.length > 0 || false);
+  const [isFavorite, setIsFavorite] = useState(
+    likes.items?.length > 0 || false,
+  );
   const [isThumbDown, setIsThumbDown] = useState(false);
-  const [likeCount, setLikeCount] = useState(count.like);
+  const [likeCount, setLikeCount] = useState(count?.like);
   const ownerUserName = useAppSelector(getOwnerUserName);
 
   async function handleFavoriteClick() {
@@ -33,7 +34,9 @@ function CommentGroupButton({ count, likes }: { count: Count; likes: any }) {
       setIsFavorite(true);
       const createLikeInput = {
         id: ownerUserName + '_' + count.id,
-        commentLikesId: count.countCommentId,
+        articleLikesId: count.countArticleId || undefined,
+        commentLikesId: count.countCommentId || undefined,
+        eventLikesId: count.countEventId || undefined,
         likeCountId: count.id,
         owner: ownerUserName,
       };
@@ -86,7 +89,7 @@ function CommentGroupButton({ count, likes }: { count: Count; likes: any }) {
           )}
         </IconButton>
       </Tooltip>
-      <Button>回复</Button>
+      {/* <Button>回复</Button> */}
     </Stack>
   );
 }

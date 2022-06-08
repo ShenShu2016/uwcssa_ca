@@ -1,0 +1,46 @@
+{
+  "Records": [
+    {
+      "eventID": "9584b6dc78683e5b2adb821de94b73e6",
+      "eventName": "INSERT",
+      "eventVersion": "1.1",
+      "eventSource": "aws:dynamodb",
+      "awsRegion": "us-east-2",
+      "dynamodb": {
+        "ApproximateCreationDateTime": 1654725608,
+        "Keys": {
+          "id": {
+            "S": "d1f0729b-b5d6-4d7c-b3dd-36c17b1a1d44_cd362ac4-54b0-4463-bcef-51f07ec53056"
+          }
+        },
+        "NewImage": {
+          "owner": {
+            "S": "d1f0729b-b5d6-4d7c-b3dd-36c17b1a1d44"
+          },
+          "createdAt": {
+            "S": "2022-06-08T22:00:08.910Z"
+          },
+          "articleLikesId": {
+            "S": "75e1c614-c957-4950-818d-26a5ecce662b"
+          },
+          "__typename": {
+            "S": "Like"
+          },
+          "likeCountId": {
+            "S": "cd362ac4-54b0-4463-bcef-51f07ec53056"
+          },
+          "id": {
+            "S": "d1f0729b-b5d6-4d7c-b3dd-36c17b1a1d44_cd362ac4-54b0-4463-bcef-51f07ec53056"
+          },
+          "updatedAt": {
+            "S": "2022-06-08T22:00:08.910Z"
+          }
+        },
+        "SequenceNumber": "56027500000000000440667983",
+        "SizeBytes": 368,
+        "StreamViewType": "NEW_AND_OLD_IMAGES"
+      },
+      "eventSourceARN": "arn:aws:dynamodb:us-east-2:537666141782:table/Like-4r2t6l2uprdgjhmoocpazejjcq-devts/stream/2022-05-28T01:01:33.119"
+    }
+  ]
+}

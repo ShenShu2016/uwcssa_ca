@@ -23,6 +23,9 @@
     "apiuwcssatsGraphQLAPIEndpointOutput": {
       "Type": "String",
       "Default": "apiuwcssatsGraphQLAPIEndpointOutput"
+    },
+    "countTable": {
+      "Type": "String"
     }
   },
   "Conditions": {
@@ -77,6 +80,9 @@
             },
             "REGION": {
               "Ref": "AWS::Region"
+            },
+            "Count_Table": {
+              "Ref": "countTable"
             }
           }
         },
