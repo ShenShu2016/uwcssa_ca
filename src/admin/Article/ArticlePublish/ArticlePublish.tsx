@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-20 09:30:58
- * @LastEditTime: 2022-06-07 22:45:56
+ * @LastEditTime: 2022-06-08 17:11:54
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/admin/Article/ArticlePublish/ArticlePublish.tsx
  */
@@ -75,6 +75,7 @@ const ArticlePublish: React.FC = () => {
         fetchArticle({
           articleId: editArticleId,
           isAuth: true,
+          ownerUsername: username,
         }),
       );
       if (res.meta.requestStatus === 'fulfilled') {

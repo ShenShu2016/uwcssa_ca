@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-25 19:05:54
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-29 23:47:57
+ * @LastEditTime: 2022-06-08 16:41:03
  * @FilePath: /uwcssa_ca/src/views/ArticleCover/ArticleCover.tsx
  * @Description:
  *
@@ -18,6 +18,7 @@ import {
 } from './components';
 import React, { useEffect } from 'react';
 import { fetchArticle, selectArticleById } from 'redux/article/articleSlice';
+import { getAuthState, getOwnerUserName } from 'redux/auth/authSlice';
 import {
   insertAllComments,
   removeAllComments,
@@ -29,7 +30,6 @@ import Box from '@mui/material/Box';
 import CommentOverview from 'components/Comment/CommentOverview';
 import Container from 'components/Container';
 import Grid from '@mui/material/Grid';
-import { getAuthState } from 'redux/auth/authSlice';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useParams } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
@@ -41,7 +41,7 @@ const ArticleCover = (): JSX.Element => {
   const isMd = useMediaQuery(theme.breakpoints.up('md'), {
     defaultMatches: true,
   });
-
+  const ownerUsername = useAppSelector(getOwnerUserName);
   const { articleId } = useParams();
   const article = useAppSelector((state) =>
     selectArticleById(state, articleId),
@@ -55,6 +55,7 @@ const ArticleCover = (): JSX.Element => {
           fetchArticle({
             articleId,
             isAuth,
+            ownerUsername,
           }),
         );
         //console.log('response', response);

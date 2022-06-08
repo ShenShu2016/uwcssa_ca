@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-20 21:02:00
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-07 23:28:10
+ * @LastEditTime: 2022-06-08 16:49:04
  * @FilePath: /uwcssa_ca/src/redux/comment/commentSlice.tsx
  * @Description:
  *
@@ -39,7 +39,7 @@ export type Comment = {
   eventCommentsId?: string | null;
   event?: any | null;
   count?: any | null;
-  likes?: Like | null;
+  likes?: any | null;
   createdAt: string;
   updatedAt: string;
   owner: string;

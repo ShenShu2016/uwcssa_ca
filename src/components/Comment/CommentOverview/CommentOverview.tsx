@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-26 16:50:34
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-07 23:27:55
+ * @LastEditTime: 2022-06-08 16:52:03
  * @FilePath: /uwcssa_ca/src/components/Comment/CommentOverview/CommentOverview.tsx
  * @Description:
  *
@@ -128,7 +128,7 @@ const CommentOverview = ({ comments }: Props): JSX.Element => {
                   {/* <Typography marginY={1}></Typography> */}
                   <Typography>{item.content}</Typography>
                 </Box>
-                <CommentGroupButton count={item.count} />
+                <CommentGroupButton likes={item.likes} count={item.count} />
               </Box>
             </Box>
           </Grid>

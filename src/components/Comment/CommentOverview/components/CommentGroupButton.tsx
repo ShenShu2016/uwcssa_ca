@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-27 13:44:58
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-08 00:36:33
+ * @LastEditTime: 2022-06-08 16:57:32
  * @FilePath: /uwcssa_ca/src/components/Comment/CommentOverview/components/CommentGroupButton.tsx
  * @Description:
  *
@@ -10,6 +10,7 @@
 
 import { IconButton, Stack, Tooltip } from '@mui/material';
 import React, { useState } from 'react';
+import { postLike, removeLike } from 'redux/like/likeSlice';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 
 import Button from '@mui/material/Button';
@@ -19,27 +20,37 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
 import { getOwnerUserName } from 'redux/auth/authSlice';
-import { postLike } from 'redux/like/likeSlice';
 
-function CommentGroupButton({ count }: { count: Count }) {
+function CommentGroupButton({ count, likes }: { count: Count; likes: any }) {
   const dispatch = useAppDispatch();
-  const [isFavorite, setIsFavorite] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(likes.items.length > 0 || false);
   const [isThumbDown, setIsThumbDown] = useState(false);
   const [likeCount, setLikeCount] = useState(count.like);
   const ownerUserName = useAppSelector(getOwnerUserName);
 
   async function handleFavoriteClick() {
-    const createLikeInput = {
-      id: ownerUserName + '_' + count.id,
-      commentLikesId: count.countCommentId,
-      likeCountId: count.id,
-      owner: ownerUserName,
-    };
-    const response = await dispatch(postLike({ createLikeInput }));
-    console.log(response);
-    if (response.meta.requestStatus === 'fulfilled') {
+    if (isFavorite === false) {
       setIsFavorite(true);
-      setLikeCount(likeCount + 1);
+      const createLikeInput = {
+        id: ownerUserName + '_' + count.id,
+        commentLikesId: count.countCommentId,
+        likeCountId: count.id,
+        owner: ownerUserName,
+      };
+      const response = await dispatch(postLike({ createLikeInput }));
+      console.log(response);
+      if (response.meta.requestStatus === 'fulfilled') {
+        setLikeCount(likeCount + 1);
+      }
+    } else if (isFavorite === true) {
+      setIsFavorite(false);
+      const response = await dispatch(
+        removeLike({ id: ownerUserName + '_' + count.id }),
+      );
+      console.log(response);
+      if (response.meta.requestStatus === 'fulfilled') {
+        setLikeCount(likeCount - 1);
+      }
     }
   }
 

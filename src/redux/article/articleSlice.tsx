@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-20 21:02:00
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-07 22:43:49
+ * @LastEditTime: 2022-06-08 16:41:30
  * @FilePath: /uwcssa_ca/src/redux/article/articleSlice.tsx
  * @Description:
  *
@@ -99,11 +99,19 @@ export const fetchArticleList = createAsyncThunk(
 
 export const fetchArticle = createAsyncThunk(
   'article/fetchArticle',
-  async ({ articleId, isAuth }: { articleId: string; isAuth: boolean }) => {
+  async ({
+    articleId,
+    isAuth,
+    ownerUsername = undefined,
+  }: {
+    articleId: string;
+    isAuth: boolean;
+    ownerUsername: string;
+  }) => {
     try {
       const result: any = await API.graphql({
         query: getArticle,
-        variables: { id: articleId },
+        variables: { id: articleId, eq: ownerUsername },
         authMode: isAuth ? undefined : 'AWS_IAM',
       });
       if (result.data.getArticle === null) {

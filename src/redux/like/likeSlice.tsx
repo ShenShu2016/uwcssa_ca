@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-06-07 22:23:59
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-07 23:28:23
+ * @LastEditTime: 2022-06-08 16:58:04
  * @FilePath: /uwcssa_ca/src/redux/like/likeSlice.tsx
  * @Description:
  *
@@ -144,7 +144,6 @@ export const removeLike = createAsyncThunk(
           input: { id },
         }),
       );
-      console.log(result);
       return result.data.deleteLike.id;
     } catch (error) {
       console.log(error);
