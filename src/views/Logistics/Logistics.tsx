@@ -2,7 +2,7 @@
  * @Author: Shikai Jin
  * @Date: 2022-05-27 17:53:27
  * @LastEditors: Shikai Jin
- * @LastEditTime: 2022-06-07 22:52:24
+ * @LastEditTime: 2022-06-08 10:56:56
  * @FilePath: /uwcssa_ca/src/views/Logistics/Logistics.tsx
  * @Description:
  *
@@ -16,6 +16,7 @@ import {
   Jobs,
   News,
   Team,
+  TeamCard,
   Video,
 } from './components';
 import { alpha, useTheme } from '@mui/material/styles';
@@ -92,7 +93,7 @@ const Logistics = (): JSX.Element => {
       </Container>
       <Box bgcolor={'alternate.main'}>
         <Container>
-          <Team />
+          <TeamCard />
         </Container>
       </Box>
     </>
