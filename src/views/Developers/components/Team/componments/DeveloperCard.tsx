@@ -2,7 +2,7 @@
  * @Author: Shikai Jin
  * @Date: 2022-06-05 19:59:54
  * @LastEditors: Shikai Jin
- * @LastEditTime: 2022-06-07 20:26:55
+ * @LastEditTime: 2022-06-07 23:05:47
  * @FilePath: /uwcssa_ca/src/views/Developers/components/Team/componments/DeveloperCard.tsx
  * @Description:
  *
@@ -13,6 +13,7 @@ import {
   Box,
   Card,
   CardContent,
+  CardMedia,
   Grid,
   IconButton,
   ListItemText,
@@ -32,85 +33,85 @@ type Props = {
 };
 
 const DevelopCard: React.FC<Props> = (props): JSX.Element => {
-  const theme = useTheme();
   const { developers } = props;
 
   return (
     <>
-      {developers.slice(0, 8).map((item) => (
-        <Grid item xs={12} sm={6} md={3} key={item.id}>
-          <Box
-            component={Card}
-            boxShadow={2}
+      {developers.map((item, i) => (
+        <Grid
+          item
+          xs={12}
+          sm={6}
+          md={3}
+          key={i}
+          data-aos={'fade-up'}
+          data-aos-delay={i * 100}
+          data-aos-offset={100}
+          data-aos-duration={600}
+        >
+          <Card
             sx={{
-              textDecoration: 'none',
-              transition: 'all .2s ease-in-out',
-              '&:hover': {
-                transform: `translateY(-${theme.spacing(1 / 2)})`,
-              },
+              boxShadow: 0,
+              background: 'transparent',
+              backgroundImage: 'none',
             }}
           >
-            <CardContent>
-              <Box
-                component={Avatar}
-                src={item.user.avatarURL?.objectCompressedURL}
-                {...stringAvatar(item.user.name, {
-                  width: 80,
-                  height: 80,
-                })}
-              />
-              <Box marginTop={4}>
-                <ListItemText
-                  sx={{
-                    overflow: 'hidden',
-                    height: '50px',
-                  }}
-                  primary={item.name || 'null'}
-                  secondary={`${item.title}-${item.subTitle}`}
-                />
-                <Typography
-                  variant={'subtitle2'}
-                  color={'text.secondary'}
-                  sx={{
-                    overflow: 'hidden',
-                    height: '40px',
-                  }}
-                >
-                  {/* 最多2行字 */}
-                  {item.content || '还没有填写。。。'}
-                </Typography>
-                <Box marginTop={4} sx={{ height: '25px' }}>
-                  {item.email ? (
-                    <IconButton
-                      size={'small'}
-                      color={'primary'}
-                      onClick={() => window.open(`mailto:${item.email}`)}
-                    >
-                      <EmailIcon />
-                    </IconButton>
-                  ) : null}
-                  {item.github ? (
-                    <IconButton
-                      size={'small'}
-                      color={'primary'}
-                      onClick={() => window.open(`${item.github}`)}
-                    >
-                      <GitHubIcon />
-                    </IconButton>
-                  ) : null}
-                  {item.linkedIn ? (
-                    <IconButton
-                      size={'small'}
-                      color={'primary'}
-                      onClick={() => window.open(`${item.linkedIn}`)}
-                    >
-                      <LinkedInIcon />
-                    </IconButton>
-                  ) : null}
-                </Box>
+            <Box
+              component={CardMedia}
+              borderRadius={2}
+              width={1}
+              height={1}
+              minHeight={300}
+              image={item.user.avatarURL?.objectCompressedURL}
+              {...stringAvatar(item.user.name, {
+                width: 'auto',
+                height: 'auto',
+              })}
+            />
+            <Box component={CardContent} bgcolor={'transparent'} marginTop={-6}>
+              <Box component={Card} borderRadius={2}>
+                <CardContent>
+                  <ListItemText
+                    sx={{
+                      overflow: 'hidden',
+                      height: '40px',
+                    }}
+                    primary={item.name || 'null'}
+                    secondary={`${item.title}-${item.subTitle}`}
+                  />
+                  <Box marginTop={4} sx={{ height: '20px' }}>
+                    {item.email ? (
+                      <IconButton
+                        size={'small'}
+                        color={'primary'}
+                        onClick={() => window.open(`mailto:${item.email}`)}
+                      >
+                        <EmailIcon />
+                      </IconButton>
+                    ) : null}
+                    {item.github ? (
+                      <IconButton
+                        size={'small'}
+                        color={'primary'}
+                        onClick={() => window.open(`${item.github}`)}
+                      >
+                        <GitHubIcon />
+                      </IconButton>
+                    ) : null}
+                    {item.linkedIn ? (
+                      <IconButton
+                        size={'small'}
+                        color={'primary'}
+                        onClick={() => window.open(`${item.linkedIn}`)}
+                      >
+                        <LinkedInIcon />
+                      </IconButton>
+                    ) : null}
+                  </Box>
+                </CardContent>
               </Box>
-            </CardContent>
-          </Box>
+            </Box>
+          </Card>
         </Grid>
       ))}
     </>

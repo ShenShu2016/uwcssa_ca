@@ -2,13 +2,13 @@
  * @Author: Shen Shu
  * @Date: 2022-05-29 22:58:47
  * @LastEditors: Shikai Jin
- * @LastEditTime: 2022-06-07 19:48:23
+ * @LastEditTime: 2022-06-07 23:11:41
  * @FilePath: /uwcssa_ca/src/views/ResearchDevelopment/ResearchDevelopment.tsx
  * @Description:
  *
  */
 
-import { Features, Process, Reviews, Team } from './components';
+import { Process, Reviews } from './components';
 
 import Box from '@mui/material/Box';
 import Container from 'components/Container';
@@ -24,9 +24,7 @@ const ResearchDevelopment = (): JSX.Element => {
           <Partners />
         </Container>
       </Box> */}
-      <Container>
-        <Features />
-      </Container>
+
       <Container>
         <Process />
       </Container>
@@ -38,9 +36,9 @@ const ResearchDevelopment = (): JSX.Element => {
         <Reviews />
       </Container>
       <Divider />
-      <Container>
+      {/* <Container>
         <Team />
-      </Container>
+      </Container> */}
     </>
   );
 };

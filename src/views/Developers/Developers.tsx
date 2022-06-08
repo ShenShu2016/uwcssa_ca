@@ -2,13 +2,21 @@
  * @Author: Shikai Jin
  * @Date: 2022-06-04 18:07:29
  * @LastEditors: Shikai Jin
- * @LastEditTime: 2022-06-07 19:49:27
+ * @LastEditTime: 2022-06-07 23:10:15
  * @FilePath: /uwcssa_ca/src/views/Developers/Developers.tsx
  * @Description:
  *
  */
 
-import { Headline, Hero, Partners, Story, Team, Work } from './components';
+import {
+  Features,
+  Headline,
+  Hero,
+  Partners,
+  Story,
+  Team,
+  Work,
+} from './components';
 
 import Box from '@mui/material/Box';
 import Container from 'components/Container';
@@ -22,9 +30,7 @@ const Developers = (): JSX.Element => {
       {/* <Container>
         <Headline />
       </Container> */}
-      {/* <Container maxWidth={'800px !important'}>
-        <Divider />
-      </Container> */}
+
       <Container>
         <Story />
       </Container>
@@ -33,6 +39,12 @@ const Developers = (): JSX.Element => {
           <Partners />
         </Container>
       </Box>
+      <Container>
+        <Features />
+      </Container>
+      <Container maxWidth={'800px !important'}>
+        <Divider />
+      </Container>
       <Container>
         <Work />
       </Container>

@@ -1,10 +1,11 @@
 /* eslint-disable react/no-unescaped-entities */
-import React from 'react';
-import { useTheme } from '@mui/material/styles';
+
+import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import Avatar from '@mui/material/Avatar';
+import React from 'react';
 import Typography from '@mui/material/Typography';
+import { useTheme } from '@mui/material/styles';
 
 const mock = [
   {
@@ -152,7 +153,7 @@ const Features = (): JSX.Element => {
             fontWeight: 'medium',
           }}
           gutterBottom
-          color={'secondary.main'}
+          color={'text.secondary'}
           align={'center'}
         >
           WHAT WE DO?
