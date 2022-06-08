@@ -1,8 +1,8 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
- * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-06 21:50:07
+ * @LastEditors: Shikai Jin
+ * @LastEditTime: 2022-06-07 19:52:58
  * @FilePath: /uwcssa_ca/src/views/ViewRoutes.tsx
  * @Description:
  *
@@ -144,15 +144,15 @@ function ViewRoutes(): Array<{
     //   path: '/agency',
     //   renderer: (params = {}): JSX.Element => <AgencyView {...params} />,
     // },
-    {
-      path: '/research-development-team',
-      renderer: (params = {}): JSX.Element => (
-        <ResearchDevelopmentView {...params} />
-      ),
-      isAllowed: true,
-      redirectPath: undefined,
-      colorInvert: true,
-    },
+    // {
+    //   path: '/research-development-team',
+    //   renderer: (params = {}): JSX.Element => (
+    //     <ResearchDevelopmentView {...params} />
+    //   ),
+    //   isAllowed: true,
+    //   redirectPath: undefined,
+    //   colorInvert: true,
+    // },
     // {
     //   path: '/design-company',
     //   renderer: (params = {}): JSX.Element => <DesignCompanyView {...params} />,
@@ -219,10 +219,11 @@ function ViewRoutes(): Array<{
       colorInvert: true,
     },
     {
-      path: '/developers',
+      path: '//research-development-team',
       renderer: (params = {}): JSX.Element => <DevelopersView {...params} />,
       isAllowed: true,
       redirectPath: undefined,
+      colorInvert: true,
     },
     {
       path: '/contactUs',

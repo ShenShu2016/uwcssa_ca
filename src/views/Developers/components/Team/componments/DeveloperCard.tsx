@@ -1,8 +1,8 @@
 /*
  * @Author: Shikai Jin
  * @Date: 2022-06-05 19:59:54
- * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-06 20:42:39
+ * @LastEditors: Shikai Jin
+ * @LastEditTime: 2022-06-07 20:26:55
  * @FilePath: /uwcssa_ca/src/views/Developers/components/Team/componments/DeveloperCard.tsx
  * @Description:
  *
@@ -61,34 +61,52 @@ const DevelopCard: React.FC<Props> = (props): JSX.Element => {
               />
               <Box marginTop={4}>
                 <ListItemText
-                  primary={item.name}
+                  sx={{
+                    overflow: 'hidden',
+                    height: '50px',
+                  }}
+                  primary={item.name || 'null'}
                   secondary={`${item.title}-${item.subTitle}`}
                 />
-                <Typography variant={'subtitle2'} color={'text.secondary'}>
-                  {item.content}
+                <Typography
+                  variant={'subtitle2'}
+                  color={'text.secondary'}
+                  sx={{
+                    overflow: 'hidden',
+                    height: '40px',
+                  }}
+                >
+                  {/* 最多2行字 */}
+                  {item.content || '还没有填写。。。'}
                 </Typography>
-                <Box marginTop={4}>
-                  <IconButton
-                    size={'small'}
-                    color={'primary'}
-                    onClick={() => window.open(`mailto:${item.email}`)}
-                  >
-                    <EmailIcon />
-                  </IconButton>
-                  <IconButton
-                    size={'small'}
-                    color={'primary'}
-                    onClick={() => window.open(`${item.github}`)}
-                  >
-                    <GitHubIcon />
-                  </IconButton>
-                  <IconButton
-                    size={'small'}
-                    color={'primary'}
-                    onClick={() => window.open(`${item.linkedIn}`)}
-                  >
-                    <LinkedInIcon />
-                  </IconButton>
+                <Box marginTop={4} sx={{ height: '25px' }}>
+                  {item.email ? (
+                    <IconButton
+                      size={'small'}
+                      color={'primary'}
+                      onClick={() => window.open(`mailto:${item.email}`)}
+                    >
+                      <EmailIcon />
+                    </IconButton>
+                  ) : null}
+                  {item.github ? (
+                    <IconButton
+                      size={'small'}
+                      color={'primary'}
+                      onClick={() => window.open(`${item.github}`)}
+                    >
+                      <GitHubIcon />
+                    </IconButton>
+                  ) : null}
+                  {item.linkedIn ? (
+                    <IconButton
+                      size={'small'}
+                      color={'primary'}
+                      onClick={() => window.open(`${item.linkedIn}`)}
+                    >
+                      <LinkedInIcon />
+                    </IconButton>
+                  ) : null}
                 </Box>
               </Box>
             </CardContent>

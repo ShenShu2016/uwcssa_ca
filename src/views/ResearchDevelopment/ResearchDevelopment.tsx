@@ -1,22 +1,14 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-29 22:58:47
- * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-29 23:56:05
+ * @LastEditors: Shikai Jin
+ * @LastEditTime: 2022-06-07 19:48:23
  * @FilePath: /uwcssa_ca/src/views/ResearchDevelopment/ResearchDevelopment.tsx
  * @Description:
  *
  */
 
-import {
-  Features,
-  Hero,
-  Partners,
-  Process,
-  Reviews,
-  Team,
-  Work,
-} from './components';
+import { Features, Process, Reviews, Team } from './components';
 
 import Box from '@mui/material/Box';
 import Container from 'components/Container';
@@ -26,21 +18,21 @@ import React from 'react';
 const ResearchDevelopment = (): JSX.Element => {
   return (
     <>
-      <Hero />
-      <Box bgcolor={'primary.main'}>
+      {/* <Hero /> */}
+      {/* <Box bgcolor={'primary.main'}>
         <Container paddingX={'0 !important'} maxWidth={1}>
           <Partners />
         </Container>
-      </Box>
+      </Box> */}
       <Container>
         <Features />
       </Container>
       <Container>
         <Process />
       </Container>
-      <Container>
+      {/* <Container>
         <Work />
-      </Container>
+      </Container> */}
       <Divider />
       <Container>
         <Reviews />

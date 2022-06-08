@@ -2,11 +2,12 @@
  * @Author: Shikai Jin
  * @Date: 2022-06-04 18:07:29
  * @LastEditors: Shikai Jin
- * @LastEditTime: 2022-06-04 18:42:35
+ * @LastEditTime: 2022-06-07 20:49:06
  * @FilePath: /uwcssa_ca/src/views/Developers/components/Story/Story.tsx
  * @Description:
  *
  */
+
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import React from 'react';
@@ -19,8 +20,15 @@ const Story = (): JSX.Element => {
     <Box>
       <Grid container spacing={4}>
         <Grid item xs={12} md={6}>
-          <Typography fontWeight={700} variant={'h5'}>
+          <Typography fontWeight={700} variant={'h4'}>
             A Word About Open-source
+          </Typography>
+          <Typography variant={'h6'} marginTop={4} sx={{ fontStyle: 'italic' }}>
+            “It is not our abilities that show what we truly are… it is our
+            choices.”
+          </Typography>
+          <Typography variant={'body1'}>
+            — Albus Dumbledore, Harry Potter & the Chamber of Secrets
           </Typography>
         </Grid>
         <Grid item xs={12} md={6}>
@@ -36,7 +44,7 @@ const Story = (): JSX.Element => {
           </Typography>
         </Grid>
         {/* 这里放使用的技术工具 */}
-        <Grid item xs={12}>
+        {/* <Grid item xs={12}>
           <Box display="flex" flexWrap="wrap" justifyContent={'center'}>
             {[
               'https://www.logo.wine/a/logo/Amazon_Web_Services/Amazon_Web_Services-Logo.wine.svg',
@@ -62,7 +70,7 @@ const Story = (): JSX.Element => {
               </Box>
             ))}
           </Box>
-        </Grid>
+        </Grid> */}
       </Grid>
     </Box>
   );

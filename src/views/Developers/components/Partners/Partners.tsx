@@ -1,19 +1,25 @@
+/*
+ * @Author: Shikai Jin
+ * @Date: 2022-06-01 00:01:32
+ * @LastEditors: Shikai Jin
+ * @LastEditTime: 2022-06-07 19:44:02
+ * @FilePath: /uwcssa_ca/src/views/Developers/components/Partners/Partners.tsx
+ * @Description:
+ *
+ */
+
+import Box from '@mui/material/Box';
 import React from 'react';
 import Slider from 'react-slick';
-import { useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 
 const mock = [
-  'https://assets.maccarianagency.com/svg/logos/airbnb-original.svg',
-  'https://assets.maccarianagency.com/svg/logos/amazon-original.svg',
-  'https://assets.maccarianagency.com/svg/logos/fitbit-original.svg',
-  'https://assets.maccarianagency.com/svg/logos/netflix-original.svg',
-  'https://assets.maccarianagency.com/svg/logos/google-original.svg',
-  'https://assets.maccarianagency.com/svg/logos/paypal-original.svg',
-  'https://assets.maccarianagency.com/svg/logos/hubspot-original.svg',
-  'https://assets.maccarianagency.com/svg/logos/mapbox-original.svg',
-  'https://assets.maccarianagency.com/svg/logos/slack-original.svg',
+  'https://www.logo.wine/a/logo/Amazon_Web_Services/Amazon_Web_Services-Logo.wine.svg',
+  'https://www.logo.wine/a/logo/Node.js/Node.js-Logo.wine.svg',
+  'https://www.logo.wine/a/logo/TypeScript/TypeScript-Logo.wine.svg',
+  'https://www.logo.wine/a/logo/React_(web_framework)/React_(web_framework)-Logo.wine.svg',
+  'https://www.logo.wine/a/logo/GitHub/GitHub-Logo.wine.svg',
 ];
 
 const Partners = (): JSX.Element => {

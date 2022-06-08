@@ -1,8 +1,8 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-26 13:57:44
- * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-06 21:53:12
+ * @LastEditors: Shikai Jin
+ * @LastEditTime: 2022-06-07 19:54:14
  * @FilePath: /uwcssa_ca/src/layouts/navigation--main.ts
  * @Description:
  *
@@ -179,10 +179,6 @@ const pages = {
     {
       title: '合作伙伴',
       href: '/partners',
-    },
-    {
-      title: 'Engineering at UWCSSA',
-      href: '/developers',
     },
     {
       title: 'Research & Development Team',
