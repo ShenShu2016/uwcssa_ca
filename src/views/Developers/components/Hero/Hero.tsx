@@ -1,15 +1,16 @@
 /* eslint-disable react/no-unescaped-entities */
-import React from 'react';
-import { useFormik } from 'formik';
-import * as yup from 'yup';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Card from '@mui/material/Card';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import { useTheme } from '@mui/material/styles';
 
+import * as yup from 'yup';
+
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
 import Container from 'components/Container';
+import React from 'react';
+import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
+import { useFormik } from 'formik';
+import { useTheme } from '@mui/material/styles';
 
 const validationSchema = yup.object({
   name: yup
@@ -95,7 +96,7 @@ const Hero = (): JSX.Element => {
           <Box>
             <Box marginBottom={4}>
               <Typography
-                variant={'h3'}
+                variant={'h2'}
                 align={'center'}
                 gutterBottom
                 sx={{
@@ -103,7 +104,7 @@ const Hero = (): JSX.Element => {
                   fontWeight: 700,
                 }}
               >
-                We craft beautiful websites and digital products
+                Engineering at UWCSSA
               </Typography>
               <Typography
                 variant={'h6'}
@@ -113,11 +114,10 @@ const Hero = (): JSX.Element => {
                   fontWeight: 700,
                 }}
               >
-                We design, develop and launch websites and products for
-                startups, companies and ourselves.
+                We Work Together toward a Common Vision
               </Typography>
             </Box>
-            <Box
+            {/* <Box
               padding={{ xs: 3, sm: 6 }}
               width={1}
               component={Card}
@@ -186,7 +186,7 @@ const Hero = (): JSX.Element => {
                   </Box>
                 </Box>
               </form>
-            </Box>
+            </Box> */}
           </Box>
         </Container>
       </Box>

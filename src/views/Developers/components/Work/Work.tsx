@@ -1,8 +1,8 @@
-import React from 'react';
 import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import Grid from '@mui/material/Grid';
+import React from 'react';
+import Typography from '@mui/material/Typography';
 import { useTheme } from '@mui/material/styles';
 
 const mock = [
@@ -48,7 +48,7 @@ const Work = (): JSX.Element => {
             fontWeight: 'medium',
           }}
           gutterBottom
-          color={'secondary'}
+          color={'text.secondary'}
           align={'center'}
         >
           Our work
@@ -82,6 +82,7 @@ const Work = (): JSX.Element => {
                 <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
               </svg>
             }
+            onClick={() => window.open('mailto:uwincssa.it@gmail.com')}
           >
             Contact us
           </Button>
