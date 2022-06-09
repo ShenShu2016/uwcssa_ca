@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-01 09:18:34
- * @LastEditTime: 2022-06-08 13:45:16
+ * @LastEditTime: 2022-06-09 13:18:07
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/admin/Event/EventCreate/components/EventPreview.tsx
  */
@@ -9,19 +9,19 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-// import { useAppDispatch, useAppSelector } from 'redux/hooks';
-// import { postEvent } from 'redux/event/eventSlice';
+import { useAppDispatch, useAppSelector } from 'redux/hooks';
+import { postEvent } from 'redux/event/eventSlice';
 import { useSwiper } from 'swiper/react';
 
 const EventPreview: React.FC = () => {
   const swiper = useSwiper();
-  // const createData = useAppSelector(state => state.form.createData);
+  const createData = useAppSelector(state => state.form.createData);
 
   const printData = () => {
-    // console.log(createData);
-    // const data = {
+    console.log(createData);
+    //   const data = {
 
-    // }
+  //   }
   };
 
   // __typename: "Event",

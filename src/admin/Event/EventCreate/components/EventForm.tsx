@@ -18,7 +18,8 @@ import * as yup from 'yup';
 
 enum FieldType {
     title = 'title',
-    dateTime = 'dateTime',
+    startDateTime = 'startDateTime',
+    endDateTime = 'endDateTime',
     address = 'address',
     limit = 'limit',
     content = 'content'
@@ -29,7 +30,7 @@ const validationSchema = yup.object({
     .string()
     .trim()
     .required('请输入活动标题'),
-  dateTime: yup
+  startDateTime: yup
     .date()
     .nullable()
     .required('请选择活动时间'),
@@ -62,8 +63,11 @@ const EventForm: React.FC = () => {
 
   const handleFieldValueChange = (e, type: FieldType) => {
     dispatch(setBasicInfo({
-      [type]: type === FieldType.dateTime || type === FieldType.content ? 
-        e : e.target.value
+      [type]:
+        type === FieldType.startDateTime ||
+        type === FieldType.endDateTime ||
+        type === FieldType.content ? 
+          e : e.target.value
     }));
     // 如果是rte传过来的内容 还需要设置一下description 是用于这个组件里显示内容的
     // 设置完之后就可以return了 因为rte和formik没关系
@@ -71,8 +75,9 @@ const EventForm: React.FC = () => {
       setDescription(e);
       return;
     }
-    type === FieldType.dateTime ?
-      formik.setFieldValue('dateTime', e) :
+    type === FieldType.startDateTime ||
+    type === FieldType.endDateTime ?
+      formik.setFieldValue(type, e) :
       formik.handleChange(e);
   };
 
@@ -104,27 +109,45 @@ const EventForm: React.FC = () => {
               helperText={formik.touched.title && formik.errors.title}
             />
           </Grid>
-          <Grid item xs={12} sm={4}>
-            <FieldLabel name='活动时间' isRequired />
+          <Grid item xs={12} sm={3}>
+            <FieldLabel name='活动开始时间' isRequired />
             <LocalizationProvider dateAdapter={AdapterDateFns}>
               <DateTimePicker
                 label="Date & Time"
-                value={formik.values.dateTime}
+                value={formik.values.startDateTime}
                 minDateTime={new Date()}
-                onChange={(e) => handleFieldValueChange(e, FieldType.dateTime)}
+                onChange={(e) => handleFieldValueChange(e, FieldType.startDateTime)}
                 renderInput={(params) => 
                   <TextField
                     {...params} 
                     size='small'
                     fullWidth
-                    name={'dateTime'}
-                    error={formik.touched.dateTime && Boolean(formik.errors.dateTime)}
-                    helperText={formik.touched.dateTime && formik.errors.dateTime}
+                    name={'startDateTime'}
+                    error={formik.touched.startDateTime && Boolean(formik.errors.startDateTime)}
+                    helperText={formik.touched.startDateTime && formik.errors.startDateTime}
                   />}
               />
             </LocalizationProvider>
           </Grid>
-          <Grid item xs={12} sm={4}>
+          <Grid item xs={12} sm={3}>
+            <FieldLabel name='活动结束时间' description='不选择结束时间代表长期有效' />
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+              <DateTimePicker
+                label="Date & Time"
+                value={formik.values.endDateTime}
+                minDateTime={new Date()}
+                onChange={(e) => handleFieldValueChange(e, FieldType.endDateTime)}
+                renderInput={(params) => 
+                  <TextField
+                    {...params} 
+                    size='small'
+                    fullWidth
+                    name={'endDateTime'}
+                  />}
+              />
+            </LocalizationProvider>
+          </Grid>
+          <Grid item xs={12} sm={3}>
             <FieldLabel name='活动地点' isRequired />
             <TextField
               label="Address"
@@ -138,7 +161,7 @@ const EventForm: React.FC = () => {
               helperText={formik.touched.address && formik.errors.address}
             />
           </Grid>
-          <Grid item xs={12} sm={4}>
+          <Grid item xs={12} sm={3}>
             <FieldLabel name='最多参数人数（0表示不限制）' isRequired />
             <TextField
               label="Member limitation"

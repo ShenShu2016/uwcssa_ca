@@ -3,7 +3,7 @@
  * @Author: Shen Shu
  * @Date: 2022-06-02 17:10:21
  * @LastEditors: 李佳修
- * @LastEditTime: 2022-06-08 16:09:59
+ * @LastEditTime: 2022-06-09 13:27:19
  * @FilePath: /uwcssa_ca/src/redux/form/formSlice.tsx
  * @Description:
  *
@@ -124,7 +124,8 @@ const initialState = formAdapter.getInitialState({
     },
     basicInfo: {
       title: '',
-      dateTime: null,
+      startDateTime: null,
+      endDateTime: null,
       address: '',
       limit: 0,
       content: '',
@@ -285,8 +286,9 @@ const formSlice = createSlice({
       // 检查basicInfo中是否所有字段都不为空
       const complete = Object.keys(state.createData.basicInfo).every(
         (key) =>
-          !!state.createData.basicInfo[key] ||
-          state.createData.basicInfo[key] === 0,
+          key === 'endDateTime' ||
+          (!!state.createData.basicInfo[key] ||
+          state.createData.basicInfo[key] === 0),
       );
       state.createData.completeStatus.EventForm = complete;
     },
