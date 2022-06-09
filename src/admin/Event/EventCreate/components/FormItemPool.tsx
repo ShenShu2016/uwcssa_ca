@@ -1,12 +1,12 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-03 16:11:08
- * @LastEditTime: 2022-06-05 15:54:02
+ * @LastEditTime: 2022-06-09 15:59:53
  * @LastEditors: 李佳修
- * @FilePath: /uwcssa_ca/src/admin/Activity/ActivityCreate/components/FormItemPool.tsx
+ * @FilePath: /uwcssa_ca/src/admin/Event/EventCreate/components/FormItemPool.tsx
  */
 import React, { useEffect, useState } from 'react';
-import { fetchFormItemList } from 'redux/form/formSlice';
+import { fetchFormItemList, selectAllFormItems } from 'redux/form/formSlice';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import Card from '@mui/material/Card';
 import Box from '@mui/material/Box';
@@ -23,15 +23,20 @@ import Button from '@mui/material/Button';
 import { addQuestion } from 'redux/form/formSlice';
 import FormItemDetail from './FormItemDetail';
 import { FormItem } from 'redux/form/formSlice';
+import FormItemCreate from './FormItemCreate';
+import { DialogType } from './FormItemCreate';
+
 // interface FormItemPoolProp {
 //     questions: []
 // }
 
 const FormItemPool: React.FC = () => {
-  const formItemList = useAppSelector(state => state.form.formItem);
+  const formItemList = useAppSelector(selectAllFormItems);
   const selectedList = useAppSelector(state => state.form.createData.selectedQuestions);
   const [detailDialogOpen, setDetailDialogOpen] = useState<boolean>(false);
   const [detailedItem, setDetailedItem] = useState<null | FormItem>(null);
+  const [editDialogOpen, setEditDialogOpen] = useState<boolean>(false);
+  const [editItem, setEditItem] = useState(null);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -47,20 +52,29 @@ const FormItemPool: React.FC = () => {
     setDetailDialogOpen(true);
   };
 
+  const handleEditQuestion = (data) => {
+    setEditItem(data);
+    setEditDialogOpen(true);
+    console.log(data);
+  };
+
+  const handleCompleteCreateFormItem = () => {
+    dispatch(fetchFormItemList({ isAuth: true }));
+  };
+
   return (
     <>
       {
-        formItemList?.entities && Object.keys(formItemList.entities).map(key => {
-          const item = formItemList.entities[key];
+        formItemList && formItemList.map(item => {
           return (
-            selectedList.findIndex(ele => ele.id === key) === -1 ?
+            selectedList.findIndex(ele => ele.id === item.id) === -1 ?
               (<Card
                 sx={{
                   p: 1,
                   marginY: 1,
                   cursor: 'pointer'
                 }}
-                key={key}
+                key={item.id}
               >
                 {
                   item.formType === FormType.TextFieldShort ?
@@ -109,13 +123,20 @@ const FormItemPool: React.FC = () => {
                 >
                   <Button variant="text" size='small' onClick={() => handleAddQuestion(item)}>使用问题</Button>
                   <Button variant="text" size='small' onClick={() => handleCheckDetail(item)}>查看详情</Button>
-                  <Button variant="text" size='small'>编辑问题</Button>
+                  <Button variant="text" size='small' onClick={() => handleEditQuestion(item)}>编辑问题</Button>
                 </Box>
               </Card>)
               : null
           );
         })
       }
+      <FormItemCreate
+        editItem={editItem}
+        type={DialogType.edit}
+        open={editDialogOpen}
+        setOpen={setEditDialogOpen}
+        completeCreate={handleCompleteCreateFormItem}
+      />
       <FormItemDetail open={detailDialogOpen} setOpen={setDetailDialogOpen} item={detailedItem}/>
     </>
   );

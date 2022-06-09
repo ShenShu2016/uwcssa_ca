@@ -53,6 +53,7 @@
     "aws-amplify": "^4.3.22",
     "card-validator": "^8.1.1",
     "ckeditor5-custom-build": "file:ckeditor5",
+    "date-and-time": "^2.3.1",
     "date-fns": "^2.28.0",
     "formik": "^2.2.9",
     "htmlparser2": "^8.0.1",

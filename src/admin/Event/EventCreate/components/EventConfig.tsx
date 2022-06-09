@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-01 09:18:34
- * @LastEditTime: 2022-06-08 13:36:51
+ * @LastEditTime: 2022-06-09 14:29:01
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/admin/Event/EventCreate/components/EventConfig.tsx
  */
@@ -30,6 +30,7 @@ import { fetchFormItemList } from 'redux/form/formSlice';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import {SortableContainer, SortableElement, SortableHandle, SortEnd} from 'react-sortable-hoc';
 import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
+import { DialogType } from './FormItemCreate';
 
 const EventConfig: React.FC = () => {
   const swiper = useSwiper();
@@ -38,7 +39,6 @@ const EventConfig: React.FC = () => {
   const selectedQuestions = useAppSelector(state => state.form.createData.selectedQuestions);
   const rederList = [...selectedQuestions];
   rederList.sort((prev, next) => prev.order - next.order);
-  console.log(rederList);
   
   const handleRemoveQuestion = (e, item) => {
     e.preventDefault();
@@ -224,7 +224,12 @@ const EventConfig: React.FC = () => {
           </Button>
         </Box>
       </Box>
-      <FormItemCreate open={dialogOpen} setOpen={setDialogOpen} completeCreate={handleCompleteCreateFormItem}/>
+      <FormItemCreate
+        type={DialogType.create}
+        open={dialogOpen}
+        setOpen={setDialogOpen}
+        completeCreate={handleCompleteCreateFormItem}
+      />
     </Box>
   );
 };

@@ -3,7 +3,7 @@
  * @Author: Shen Shu
  * @Date: 2022-06-03 16:39:34
  * @LastEditors: 李佳修
- * @LastEditTime: 2022-06-09 11:24:58
+ * @LastEditTime: 2022-06-09 15:53:54
  * @FilePath: /uwcssa_ca/src/admin/Event/Form/components/FormItemForm/FormItemForm.tsx
  * @Description:
  *
@@ -71,7 +71,6 @@ function FormItemForm({ formItemList }: { formItemList: Array<FormItem> }) {
   const validationSchema = yup.object(yupObject);
 
   const onSubmit = async (values) => {
-    console.log(values, 999);
     return values;
   };
 

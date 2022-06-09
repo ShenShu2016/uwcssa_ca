@@ -1,9 +1,9 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-05 14:38:23
- * @LastEditTime: 2022-06-05 21:36:55
- * @LastEditors: Shen Shu
- * @FilePath: /uwcssa_ca/src/admin/Activity/ActivityCreate/components/FormItemDetail.tsx
+ * @LastEditTime: 2022-06-09 15:46:48
+ * @LastEditors: 李佳修
+ * @FilePath: /uwcssa_ca/src/admin/Event/EventCreate/components/FormItemDetail.tsx
  */
 
 import {
@@ -20,7 +20,7 @@ import {
   TableRow
 } from '@mui/material';
 import { FormItem, FormType } from 'redux/form/formSlice';
-
+import date from 'date-and-time';
 import React from 'react';
 
 interface FormItemDetailProp {
@@ -182,10 +182,25 @@ const FormItemDetail: React.FC<FormItemDetailProp> = ({
                       </TableCell>
                     </TableRow>
                   ) : null}
+
+                <TableRow>
+                  <TableCell component="th" scope="row">
+                     问题创建时间
+                  </TableCell>
+                  <TableCell align="right">{date.format(new Date(item.createdAt), 'YYYY/MM/DD HH:mm:ss') || '-'}</TableCell>
+                </TableRow>
+
+                <TableRow>
+                  <TableCell component="th" scope="row">
+                     问题最后修改时间
+                  </TableCell>
+                  <TableCell align="right">{date.format(new Date(item.updatedAt), 'YYYY/MM/DD HH:mm:ss') || '-'}</TableCell>
+                </TableRow>
               </TableBody>
             </Table>
           </TableContainer>
         ) : null}
+
       </DialogContent>
       <DialogActions>
         <Button onClick={() => setOpen(false)}>Ok</Button>

@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /*
  * @Author: 李佳修
  * @Date: 2022-06-03 09:32:30
- * @LastEditTime: 2022-06-09 11:35:52
+ * @LastEditTime: 2022-06-09 15:34:31
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/admin/Event/EventCreate/components/FormItemCreate.tsx
  */
@@ -24,7 +25,7 @@ import {
   RadioGroup,
   TextField
 } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import FullScreenLoading from 'components/FullScreenLoading';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
@@ -32,11 +33,18 @@ import FieldLabel from './FieldLabel';
 import { FormType } from 'redux/form/formSlice';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { getOwnerUserName } from 'redux/auth/authSlice';
-import { postFormItem } from 'redux/form/formSlice';
+import { postFormItem, updateFormItemDetail } from 'redux/form/formSlice';
 import { useFormik } from 'formik';
 import useMessage from 'hooks/useMessage';
 
+export enum DialogType {
+  create,
+  edit
+}
+
 interface FormItemCreateProp {
+  type: DialogType;
+  editItem?: any;
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   completeCreate: () => void;
@@ -48,6 +56,8 @@ interface Option {
 }
 
 const FormItemCreate: React.FC<FormItemCreateProp> = ({
+  type,
+  editItem=null,
   open,
   setOpen,
   completeCreate,
@@ -64,6 +74,42 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({
     loading: false,
     message: '',
   });
+
+  const resetForm = () => {
+    formik.resetForm();
+    setOptions([]);
+  };
+
+  useEffect(() => {
+    if (type === DialogType.create) {
+      resetForm();
+    }
+    if (type === DialogType.edit && editItem) {
+      let inputType = '';
+      if (editItem.isString) inputType = 'string';
+      if (editItem.isEmail) inputType = 'email';
+      if (editItem.isNumber) inputType = 'number';
+      formik.setFieldValue('formType', editItem.formType);
+      formik.setFieldValue('title', editItem.question);
+      formik.setFieldValue('placeholder', editItem.placeholder || '');
+      formik.setFieldValue('description', editItem.description || '');
+      formik.setFieldValue('label', editItem.label || '');
+      formik.setFieldValue('helperText', editItem.helperText || '');
+      formik.setFieldValue('minLength', editItem.minLength || 0);
+      formik.setFieldValue('maxLength', editItem.maxLength || 0);
+      formik.setFieldValue('inputType', inputType || '');
+      formik.setFieldValue('isRequired', editItem.isRequired ? 1 : 0);
+      if (editItem.formSelectChoices?.length) {
+        setOptions(() => {
+          const current = editItem.formSelectChoices.map(item => ({
+            label: item,
+            key: item
+          }));
+          return current;
+        });
+      }
+    }
+  }, [type, editItem]);
 
   const handleAddOption = () => {
     const exist = options.find((item) => item.label === newOption);
@@ -124,38 +170,43 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({
     }
     setFullScreenLoading({
       loading: true,
-      message: '正在创建问题',
+      message: type === DialogType.create ? '正在创建问题' : '正在修改问题配置',
     });
-
+    const param = {
+      question: values.title,
+      order: 1,
+      isDate: false,
+      isTrim: true,
+      isBoolean: values.formType === FormType.Boolean,
+      isString: values.inputType === 'string',
+      isEmail: values.inputType === 'email',
+      isNumber: values.inputType === 'number',
+      minLength: values.minLength,
+      maxLength: values.maxLength,
+      isRequired: !!values.isRequired,
+      description: values.description,
+      label: values.label,
+      helperText: values.helperText,
+      formType: values.formType,
+      placeholder: values.placeholder,
+      formSelectChoices: options.map((item) => item.label),
+      owner: ownerUserName,
+    };
     // 通过前面的校验后 可以发送请求创建问题
-    const res = await dispatch(
+    const res = type === DialogType.create ? await dispatch(
       postFormItem({
-        createFormItemInput: {
-          question: values.title,
-          order: 1,
-          isDate: false,
-          isTrim: true,
-          isBoolean: values.formType === FormType.Boolean,
-          isString: values.inputType === 'string',
-          isEmail: values.inputType === 'email',
-          isNumber: values.inputType === 'number',
-          minLength: values.minLength,
-          maxLength: values.maxLength,
-          isRequired: !!values.isRequired,
-          description: values.description,
-          label: values.label,
-          helperText: values.helperText,
-          formType: values.formType,
-          placeholder: values.placeholder,
-          formSelectChoices: options.map((item) => item.label),
-          owner: ownerUserName,
-        },
+        createFormItemInput: param,
       }),
-    );
+    ) : await dispatch(updateFormItemDetail({
+      updateFormItemInput: {
+        id: editItem.id,
+        ...param
+      }
+    }));
     if (res.meta.requestStatus === 'fulfilled') {
       message.open({
         type: 'success',
-        message: '问题创建成功，记得加入表单才能生效哦',
+        message: type === DialogType.create ? '问题创建成功，记得加入表单才能生效哦' : '修改问题配置成功',
       });
       setFullScreenLoading({
         loading: false,
@@ -163,7 +214,7 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({
       });
       setOpen(false);
       completeCreate();
-      formik.resetForm();
+      resetForm();
     }
 
     return values;
@@ -186,7 +237,7 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({
         loading={fullScreenLoading.loading}
       />
       <form onSubmit={formik.handleSubmit}>
-        <DialogTitle>创建问题</DialogTitle>
+        <DialogTitle>{ type === DialogType.create ? '创建问题' : '编辑问题' }</DialogTitle>
         <DialogContent dividers>
           <Box width={'50vw'}>
             <Grid container spacing={2}>
@@ -522,7 +573,7 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>取消</Button>
-          <Button type={'submit'}>创建</Button>
+          <Button type={'submit'}>{type === DialogType.create ? '创建' : '编辑'}</Button>
         </DialogActions>
       </form>
     </Dialog>
