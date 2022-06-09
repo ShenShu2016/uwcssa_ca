@@ -2,9 +2,9 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-03 17:10:14
- * @LastEditTime: 2022-06-07 17:13:35
+ * @LastEditTime: 2022-06-09 11:11:41
  * @LastEditors: 李佳修
- * @FilePath: /uwcssa_ca/src/admin/Activity/ActivityCreate/components/FormItems/CheckBoxGroup.tsx
+ * @FilePath: /uwcssa_ca/src/admin/Event/EventCreate/components/FormItems/CheckBoxGroup.tsx
  */
 import React, { useState } from 'react';
 import FieldLabel from '../FieldLabel';
@@ -38,16 +38,11 @@ const CheckBoxGroupItem: React.FC<CheckBoxGroupProp> = ({ item }) => {
         value={value}
         onChange={(e) => setValue(e.target.value)}
       >
-        {
-          item.formSelectChoices?.map(choice => (
-            <FormControlLabel
-              key={choice}
-              value={choice}
-              control={<Checkbox size='small'/>}
-              label={choice}
-            />
-          ))
-        }
+        <FormControlLabel
+          value={value}
+          control={<Checkbox size='small'/>}
+          label={item.label}
+        />
       </RadioGroup>
     </>
   );

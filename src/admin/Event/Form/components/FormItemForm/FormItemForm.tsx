@@ -3,7 +3,7 @@
  * @Author: Shen Shu
  * @Date: 2022-06-03 16:39:34
  * @LastEditors: 李佳修
- * @LastEditTime: 2022-06-08 17:36:12
+ * @LastEditTime: 2022-06-09 11:24:58
  * @FilePath: /uwcssa_ca/src/admin/Event/Form/components/FormItemForm/FormItemForm.tsx
  * @Description:
  *
@@ -23,39 +23,31 @@ function getYupValidation(formItem: FormItem) {
   if (formItem.formType === 'MultipleSelect') {
     return validation.array().of(yup.string()); //github ai帮忙写的。。牛逼
   }
-  if (formItem.formType === 'Checkbox') {
-    return validation.boolean();
+  if (formItem.formType === 'Boolean' || formItem.formType === 'Checkbox') {
+    validation = validation.boolean();
+  } else {
+    if (formItem.isNumber) {
+      validation = validation.number('Please enter a valid number');
+    } else {
+      validation = validation.string();
+      if (formItem.isEmail) {
+        validation = validation.email('Please enter a valid email address');
+      }
+      if (formItem.minLength) {
+        validation = validation.min(
+          formItem.minLength,
+          'Please enter more than ' + formItem.minLength + ' characters',
+        );
+      }
+      if (formItem.maxLength) {
+        validation = validation.max(
+          formItem.maxLength,
+          'Please enter less than ' + formItem.maxLength + ' characters',
+        );
+      }
+    }
   }
-  if (
-    formItem.formType === 'RadioGroupH' ||
-    formItem.formType === 'RadioGroupV' ||
-    formItem.formType === 'DatePicker' ||
-    formItem.formType === 'DateTimePicker' ||
-    formItem.formType === 'TimePicker'
-  ) {
-    return yup.string();
-  }
-  if (formItem.isString) {
-    validation = validation.string();
-  }
-  if (formItem.isEmail) {
-    validation = validation.email('Please enter a valid email address');
-  }
-  if (formItem.isNumber) {
-    validation = validation.number('Please enter a valid number');
-  }
-  if (formItem.minLength) {
-    validation = validation.min(
-      formItem.minLength,
-      'Please enter more than ' + formItem.minLength + ' characters',
-    );
-  }
-  if (formItem.maxLength) {
-    validation = validation.max(
-      formItem.maxLength,
-      'Please enter less than ' + formItem.maxLength + ' characters',
-    );
-  }
+
   if (formItem.isRequired) {
     validation = validation.required('This field is required'); //required 要放在最后面
   }
@@ -68,7 +60,11 @@ function FormItemForm({ formItemList }: { formItemList: Array<FormItem> }) {
   const yupObject = {};
 
   sortedFormItemList.forEach(item => {
-    initialValues[item.id] = '';
+    if (item.formType === 'Checkbox') {
+      initialValues[item.id] = false;
+    } else {
+      initialValues[item.id] = '';
+    }
     yupObject[item.id] = item && getYupValidation(item);
   });
   

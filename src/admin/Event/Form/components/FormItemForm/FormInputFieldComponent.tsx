@@ -3,7 +3,7 @@
  * @Author: Shen Shu
  * @Date: 2022-06-03 16:35:33
  * @LastEditors: 李佳修
- * @LastEditTime: 2022-06-08 18:08:56
+ * @LastEditTime: 2022-06-09 11:41:18
  * @FilePath: /uwcssa_ca/src/admin/Event/Form/components/FormItemForm/FormInputFieldComponent.tsx
  * @Description:
  *
@@ -16,7 +16,7 @@ import {
   FormControl,
   FormControlLabel,
   FormHelperText,
-  FormLabel,
+  // FormLabel,
   InputLabel,
   MenuItem,
   OutlinedInput,
@@ -103,11 +103,14 @@ function FormInputFieldComponent({
         <FieldLabel name={formItem.question} isRequired={formItem.isRequired} description={formItem.description}/>
         <FormControlLabel
           name={formItem.id}
-          value={formik.values[formItem.id]}
+          value={Boolean(formik.values[formItem.id])}
           onChange={formik.handleChange}
-          control={<Checkbox />}
+          control={<Checkbox size='small' sx={{ color: formik.touched[formItem.id] && Boolean(formik.errors[formItem.id]) ? '#d32f2f' : '' }}/>}
           label={formItem.label}
         />
+        <FormHelperText
+          error={formik.touched[formItem.id] && Boolean(formik.errors[formItem.id])}
+        >{formik.touched[formItem.id] && formik.errors[formItem.id]}</FormHelperText>
       </>
     );
   } else if (formItem.formType === 'Boolean') {
@@ -135,12 +138,12 @@ function FormInputFieldComponent({
           >
             {/* 可以写 required={formItem.isRequired} */}
             <FormControlLabel
-              value={true}
+              value={'T'}
               control={<Radio size='small' sx={{ color: formik.touched[formItem.id] && Boolean(formik.errors[formItem.id]) ? '#d32f2f' : '' }}/>}
               label={'是'}
             />
             <FormControlLabel
-              value={false}
+              value={'F'}
               control={<Radio size='small' sx={{ color: formik.touched[formItem.id] && Boolean(formik.errors[formItem.id]) ? '#d32f2f' : '' }}/>}
               label={'否'}
             />
@@ -243,10 +246,12 @@ function FormInputFieldComponent({
     return (
       <>
         <FieldLabel name={formItem.question} isRequired={formItem.isRequired} description={formItem.description}/>
-        <FormControl>
-          <FormLabel id={getInputLabelId(formItem.id)}>
+        <FormControl
+          error={formik.touched[formItem.id] && Boolean(formik.errors[formItem.id])}
+        >
+          {/* <FormLabel id={getInputLabelId(formItem.id)}>
             {formItem.label}
-          </FormLabel>
+          </FormLabel> */}
           <RadioGroup
             row={formItem.formType === 'RadioGroupH'}
             aria-labelledby={getInputLabelId(formItem.id)}
@@ -259,17 +264,16 @@ function FormInputFieldComponent({
                 <FormControlLabel
                   key={index}
                   value={option}
-                  control={<Radio />}
+                  control={<Radio size='small' sx={{ color: formik.touched[formItem.id] && Boolean(formik.errors[formItem.id]) ? '#d32f2f' : '' }}/>}
                   label={option}
                 />
               );
             })}
           </RadioGroup>
-          <FormHelperText>
-            {
-              formik.touched[formItem.id] &&
-                  formik.errors[formItem.id]
-            }
+          <FormHelperText
+            error={formik.touched[formItem.id] && Boolean(formik.errors[formItem.id])}
+          >
+            { formik.touched[formItem.id] && formik.errors[formItem.id] }
           </FormHelperText>
         </FormControl>
       </>

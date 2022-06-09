@@ -1,9 +1,9 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-03 09:32:30
- * @LastEditTime: 2022-06-08 11:28:57
+ * @LastEditTime: 2022-06-09 11:35:52
  * @LastEditors: 李佳修
- * @FilePath: /uwcssa_ca/src/admin/Activity/ActivityCreate/components/FormItemCreate.tsx
+ * @FilePath: /uwcssa_ca/src/admin/Event/EventCreate/components/FormItemCreate.tsx
  */
 
 import * as yup from 'yup';
@@ -104,7 +104,7 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({
     helperText: '',
     minLength: 0,
     maxLength: 0,
-    inputType: 'string',
+    inputType: '',
     isRequired: 0,
   };
 
@@ -112,7 +112,6 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({
     // 如果类型是选择器或者checkbox
     if (
       (formik.values.formType === FormType.Select ||
-        formik.values.formType === FormType.Checkbox ||
         formik.values.formType === FormType.RadioGroupH ||
         formik.values.formType === FormType.RadioGroupV) &&
       !options.length
@@ -226,7 +225,7 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({
                     多项选择（下拉选择）
                   </MenuItem>
                   <MenuItem value={FormType.Checkbox}>
-                    多项选择（checkbox）
+                    Checkbox勾选
                   </MenuItem>
                   <MenuItem value={FormType.Boolean}>是或否</MenuItem>
                   <MenuItem value={FormType.DatePicker}>日期选择</MenuItem>
@@ -267,7 +266,18 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({
                   helperText={formik.touched.title && formik.errors.title}
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid
+                item
+                xs={12}
+                sm={6}
+                sx={{ 
+                  display: formik.values.formType !== FormType.Boolean &&
+                  formik.values.formType !== FormType.RadioGroupH &&
+                  formik.values.formType !== FormType.RadioGroupV &&
+                  formik.values.formType !== FormType.Checkbox ?
+                    'block' : 'none'
+                }}
+              >
                 <FieldLabel
                   name="提示文字"
                   description="输入框聚焦且未输入的情况下显示提示文字"
@@ -283,10 +293,20 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({
                   onChange={(e) => handleFieldValueChange(e)}
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid
+                item
+                xs={12}
+                sm={6}
+                sx={{ 
+                  display: formik.values.formType !== FormType.Boolean &&
+                  formik.values.formType !== FormType.RadioGroupH &&
+                  formik.values.formType !== FormType.RadioGroupV ?
+                    'block' : 'none'
+                }}
+              >
                 <FieldLabel
                   name="问题标签"
-                  description="输入框未聚焦时显示的文字"
+                  description={formik.values.formType === FormType.Checkbox ? 'checkbox后面显示的文字' : '输入框未聚焦时显示的文字' }
                 />
                 <TextField
                   label="问题标签"
@@ -314,7 +334,7 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({
                   onChange={(e) => handleFieldValueChange(e)}
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              {/* <Grid item xs={12} sm={6}>
                 <FieldLabel name="校验提示" />
                 <TextField
                   label="Helper text"
@@ -326,27 +346,35 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({
                   helperText={'校验提示会出现在输入框的下方'}
                   onChange={(e) => handleFieldValueChange(e)}
                 />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <FieldLabel name="是否必填" />
-                <RadioGroup
-                  row
-                  aria-labelledby="demo-row-radio-buttons-group-label"
-                  name={'isRequired'}
-                  value={formik.values.isRequired}
-                  onChange={(e) => handleFieldValueChange(e)}
-                >
-                  <FormControlLabel
-                    value={1}
-                    control={<Radio />}
-                    label="必填"
-                  />
-                  <FormControlLabel
-                    value={0}
-                    control={<Radio />}
-                    label="非必填"
-                  />
-                </RadioGroup>
+              </Grid> */}
+              <Grid
+                item
+                xs={12}
+                sm={6}
+              >
+                <>
+                  <FieldLabel name="是否必填" description={formik.values.formType === FormType.Checkbox ? 'checkbox类型不支持配置是否必填，不填写时默认为不勾选' : ''}/>
+                  <RadioGroup
+                    row
+                    aria-labelledby="demo-row-radio-buttons-group-label"
+                    name={'isRequired'}
+                    value={formik.values.isRequired}
+                    onChange={(e) => handleFieldValueChange(e)}
+                  >
+                    <FormControlLabel
+                      value={1}
+                      disabled={formik.values.formType === FormType.Checkbox}
+                      control={<Radio />}
+                      label="必填"
+                    />
+                    <FormControlLabel
+                      value={0}
+                      disabled={formik.values.formType === FormType.Checkbox}
+                      control={<Radio />}
+                      label="非必填"
+                    />
+                  </RadioGroup>
+                </>
               </Grid>
             </Grid>
 
@@ -357,7 +385,6 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({
                 display:
                   formik.values.formType === FormType.Select ||
                   formik.values.formType === FormType.MultipleSelect ||
-                  formik.values.formType === FormType.Checkbox ||
                   formik.values.formType === FormType.RadioGroupH ||
                   formik.values.formType === FormType.RadioGroupV
                     ? 'block'
