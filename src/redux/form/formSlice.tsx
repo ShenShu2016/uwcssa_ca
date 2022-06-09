@@ -3,7 +3,7 @@
  * @Author: Shen Shu
  * @Date: 2022-06-02 17:10:21
  * @LastEditors: 李佳修
- * @LastEditTime: 2022-06-09 13:27:19
+ * @LastEditTime: 2022-06-09 13:48:09
  * @FilePath: /uwcssa_ca/src/redux/form/formSlice.tsx
  * @Description:
  *
@@ -84,6 +84,15 @@ export enum FormType {
   TimePicker = 'TimePicker',
 }
 
+export enum EventStatus {
+  ComingSoon = 'ComingSoon',
+  InProgress = 'InProgress',
+  SignUpClosed = 'SignUpClosed',
+  Finished = 'Finished',
+  Canceled = 'Canceled',
+}
+
+
 const formAdapter = createEntityAdapter<Form>({
   sortComparer: (a, b) => b.createdAt.localeCompare(a.createdAt),
 });
@@ -126,6 +135,7 @@ const initialState = formAdapter.getInitialState({
       title: '',
       startDateTime: null,
       endDateTime: null,
+      online: false,
       address: '',
       limit: 0,
       content: '',
@@ -286,6 +296,7 @@ const formSlice = createSlice({
       // 检查basicInfo中是否所有字段都不为空
       const complete = Object.keys(state.createData.basicInfo).every(
         (key) =>
+          key === 'online' ||
           key === 'endDateTime' ||
           (!!state.createData.basicInfo[key] ||
           state.createData.basicInfo[key] === 0),

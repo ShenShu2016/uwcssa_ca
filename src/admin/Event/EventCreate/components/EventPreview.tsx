@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-01 09:18:34
- * @LastEditTime: 2022-06-09 13:18:07
+ * @LastEditTime: 2022-06-09 13:53:57
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/admin/Event/EventCreate/components/EventPreview.tsx
  */
@@ -12,16 +12,29 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { postEvent } from 'redux/event/eventSlice';
 import { useSwiper } from 'swiper/react';
+import { create } from 'domain';
+import { EventStatus } from 'redux/form/formSlice';
 
 const EventPreview: React.FC = () => {
   const swiper = useSwiper();
+  const dispatch = useAppDispatch();
   const createData = useAppSelector(state => state.form.createData);
 
   const printData = () => {
     console.log(createData);
-    //   const data = {
-
-  //   }
+    const data = {
+      title: createData.basicInfo.title,
+      coverPageImgURL: createData.posterImage,
+      content: createData.basicInfo.content,
+      online: createData.basicInfo.online,
+      group: false,
+      startDate: createData.basicInfo.startDateTime,
+      endDate: createData.basicInfo.endDateTime,
+      eventStatus: EventStatus.ComingSoon,
+      eventLocation: createData.basicInfo.address,
+      active: 'T'
+    };
+    console.log(data);
   };
 
   // __typename: "Event",
@@ -50,7 +63,23 @@ const EventPreview: React.FC = () => {
   // eventEventLocationId?: string | null,
   // eventFormId?: string | null,
 
-  const completeActivityCreate = () => {console.log(999);};
+  const completeActivityCreate = async () => {
+    const data = {
+      title: createData.basicInfo.title,
+      coverPageImgURL: createData.posterImage,
+      content: createData.basicInfo.content,
+      online: createData.basicInfo.online,
+      group: false,
+      startDate: createData.basicInfo.startDateTime,
+      endDate: createData.basicInfo.endDateTime,
+      eventStatus: EventStatus.ComingSoon,
+      eventLocation: createData.basicInfo.address,
+      active: 'T'
+    };
+    // const res = await dispatch(postEvent({
+    //   createEventInput: data
+    // }))
+  };
 
   return (
     <Box height='80vh'>
