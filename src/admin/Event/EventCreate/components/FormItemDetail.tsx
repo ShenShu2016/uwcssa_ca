@@ -1,8 +1,9 @@
+/* eslint-disable indent */
 /*
  * @Author: 李佳修
  * @Date: 2022-06-05 14:38:23
- * @LastEditTime: 2022-06-09 15:46:48
- * @LastEditors: 李佳修
+ * @LastEditTime: 2022-06-09 16:26:20
+ * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/admin/Event/EventCreate/components/FormItemDetail.tsx
  */
 
@@ -17,11 +18,12 @@ import {
   TableBody,
   TableCell,
   TableContainer,
-  TableRow
+  TableRow,
 } from '@mui/material';
 import { FormItem, FormType } from 'redux/form/formSlice';
-import date from 'date-and-time';
+
 import React from 'react';
+import moment from 'moment';
 
 interface FormItemDetailProp {
   item: FormItem;
@@ -148,59 +150,64 @@ const FormItemDetail: React.FC<FormItemDetailProp> = ({
 
                 {item.formType === FormType.TextFieldLong ||
                 item.formType === FormType.TextFieldShort ? (
-                    <>
-                      <TableRow>
-                        <TableCell component="th" scope="row">
+                  <>
+                    <TableRow>
+                      <TableCell component="th" scope="row">
                         输入最大长度
-                        </TableCell>
-                        <TableCell align="right">
-                          {!item.maxLength ? '不限制' : item.maxLength}
-                        </TableCell>
-                      </TableRow>
+                      </TableCell>
+                      <TableCell align="right">
+                        {!item.maxLength ? '不限制' : item.maxLength}
+                      </TableCell>
+                    </TableRow>
 
-                      <TableRow>
-                        <TableCell component="th" scope="row">
+                    <TableRow>
+                      <TableCell component="th" scope="row">
                         输入最小长度
-                        </TableCell>
-                        <TableCell align="right">
-                          {!item.minLength ? '不限制' : item.minLength}
-                        </TableCell>
-                      </TableRow>
-                    </>
-                  ) : null}
+                      </TableCell>
+                      <TableCell align="right">
+                        {!item.minLength ? '不限制' : item.minLength}
+                      </TableCell>
+                    </TableRow>
+                  </>
+                ) : null}
                 {item.formType === FormType.Select ||
                 item.formType === FormType.MultipleSelect ||
                 item.formType === FormType.Checkbox ||
                 item.formType === FormType.RadioGroupH ||
                 item.formType === FormType.RadioGroupV ? (
-                    <TableRow>
-                      <TableCell component="th" scope="row">
+                  <TableRow>
+                    <TableCell component="th" scope="row">
                       选项
-                      </TableCell>
-                      <TableCell align="right">
-                        {item.formSelectChoices?.join(', ')}
-                      </TableCell>
-                    </TableRow>
-                  ) : null}
+                    </TableCell>
+                    <TableCell align="right">
+                      {item.formSelectChoices?.join(', ')}
+                    </TableCell>
+                  </TableRow>
+                ) : null}
 
                 <TableRow>
                   <TableCell component="th" scope="row">
-                     问题创建时间
+                    问题创建时间
                   </TableCell>
-                  <TableCell align="right">{date.format(new Date(item.createdAt), 'YYYY/MM/DD HH:mm:ss') || '-'}</TableCell>
+                  <TableCell align="right">
+                    {moment(item.createdAt).format('MMMM Do YYYY, h:mm a') ||
+                      '-'}
+                  </TableCell>
                 </TableRow>
 
                 <TableRow>
                   <TableCell component="th" scope="row">
-                     问题最后修改时间
+                    问题最后修改时间
                   </TableCell>
-                  <TableCell align="right">{date.format(new Date(item.updatedAt), 'YYYY/MM/DD HH:mm:ss') || '-'}</TableCell>
+                  <TableCell align="right">
+                    {moment(item.updatedAt).format('MMMM Do YYYY, h:mm a') ||
+                      '-'}
+                  </TableCell>
                 </TableRow>
               </TableBody>
             </Table>
           </TableContainer>
         ) : null}
-
       </DialogContent>
       <DialogActions>
         <Button onClick={() => setOpen(false)}>Ok</Button>
