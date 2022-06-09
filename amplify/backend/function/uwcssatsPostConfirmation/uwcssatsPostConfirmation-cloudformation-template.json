@@ -49,6 +49,9 @@
     },
     "userProfileTable": {
       "Type": "String"
+    },
+    "countTable": {
+      "Type": "String"
     }
   },
   "Conditions": {
@@ -107,6 +110,9 @@
             },
             "UserProfile_Table": {
               "Ref": "userProfileTable"
+            },
+            "Count_Table": {
+              "Ref": "countTable"
             }
           }
         },
@@ -228,7 +234,7 @@
             },
             {
               "Action": [
-                "dynamodb:PutItem"
+                "dynamodb:*"
               ],
               "Resource": [
                 "arn:aws:dynamodb:*:*:table/*"

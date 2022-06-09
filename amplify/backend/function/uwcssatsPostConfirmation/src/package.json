@@ -8,6 +8,7 @@
     "axios": "latest"
   },
   "devDependencies": {
-    "@types/aws-lambda": "^8.10.92"
+    "@types/aws-lambda": "^8.10.92",
+    "aws-sdk": "^2.1145.0"
   }
 }

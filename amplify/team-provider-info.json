@@ -23,9 +23,10 @@
         "uwcssatsPostConfirmation": {
           "GROUP": "uwcssaUser",
           "deploymentBucketName": "amplify-uwcssa-devts-225941-deployment",
-          "s3Key": "amplify-builds/uwcssatsPostConfirmation-58692b4d77696a745246-build.zip",
+          "s3Key": "amplify-builds/uwcssatsPostConfirmation-7979735179754d794675-build.zip",
           "userTable": "User-4r2t6l2uprdgjhmoocpazejjcq-devts",
-          "userProfileTable": "UserProfile-4r2t6l2uprdgjhmoocpazejjcq-devts"
+          "userProfileTable": "UserProfile-4r2t6l2uprdgjhmoocpazejjcq-devts",
+          "countTable": "Count-4r2t6l2uprdgjhmoocpazejjcq-devts"
         },
         "AdminQueriesdf7beb2c": {
           "deploymentBucketName": "amplify-uwcssa-devts-225941-deployment",

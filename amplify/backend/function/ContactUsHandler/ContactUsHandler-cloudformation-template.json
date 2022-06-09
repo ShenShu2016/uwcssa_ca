@@ -241,7 +241,7 @@
                 "ses:SendEmail"
               ],
               "Resource": [
-                "arn:aws:ses:*:537666141782:identity/*"
+                "arn:aws:ses:*:*:identity/*"
               ],
               "Effect": "Allow"
             }

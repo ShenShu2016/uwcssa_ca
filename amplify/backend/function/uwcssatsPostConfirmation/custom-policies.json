@@ -4,7 +4,7 @@
     "Resource": ["arn:aws:cognito-idp:*:*:userpool/*"]
   },
   {
-    "Action": ["dynamodb:PutItem"],
+    "Action": ["dynamodb:*"],
     "Resource": ["arn:aws:dynamodb:*:*:table/*"]
   }
 ]

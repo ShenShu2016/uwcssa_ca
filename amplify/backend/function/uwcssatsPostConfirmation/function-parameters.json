@@ -24,6 +24,10 @@
     {
       "cloudFormationParameterName": "userProfileTable",
       "environmentVariableName": "UserProfile_Table"
+    },
+    {
+      "cloudFormationParameterName": "countTable",
+      "environmentVariableName": "Count_Table"
     }
   ]
 }
