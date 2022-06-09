@@ -59,6 +59,7 @@ export const createUserProfile = /* GraphQL */ `
       id
       name
       email
+      rank
       fullName
       contactEmail
       title
@@ -101,6 +102,7 @@ export const updateUserProfile = /* GraphQL */ `
       id
       name
       email
+      rank
       fullName
       contactEmail
       title
@@ -143,6 +145,7 @@ export const deleteUserProfile = /* GraphQL */ `
       id
       name
       email
+      rank
       fullName
       contactEmail
       title
@@ -352,6 +355,7 @@ export const createArticle = /* GraphQL */ `
         id
         name
         email
+        rank
         fullName
         contactEmail
         title
@@ -409,6 +413,7 @@ export const updateArticle = /* GraphQL */ `
         id
         name
         email
+        rank
         fullName
         contactEmail
         title
@@ -466,6 +471,7 @@ export const deleteArticle = /* GraphQL */ `
         id
         name
         email
+        rank
         fullName
         contactEmail
         title
@@ -549,6 +555,7 @@ export const createComment = /* GraphQL */ `
         id
         name
         email
+        rank
         fullName
         contactEmail
         title
@@ -632,6 +639,7 @@ export const updateComment = /* GraphQL */ `
         id
         name
         email
+        rank
         fullName
         contactEmail
         title
@@ -715,6 +723,7 @@ export const deleteComment = /* GraphQL */ `
         id
         name
         email
+        rank
         fullName
         contactEmail
         title
@@ -749,6 +758,7 @@ export const createContactUs = /* GraphQL */ `
         id
         name
         email
+        rank
         fullName
         contactEmail
         title
@@ -782,6 +792,7 @@ export const updateContactUs = /* GraphQL */ `
         id
         name
         email
+        rank
         fullName
         contactEmail
         title
@@ -815,6 +826,7 @@ export const deleteContactUs = /* GraphQL */ `
         id
         name
         email
+        rank
         fullName
         contactEmail
         title
@@ -1266,6 +1278,7 @@ export const createResearchDevelopmentTeam = /* GraphQL */ `
         id
         name
         email
+        rank
         fullName
         contactEmail
         title
@@ -1303,6 +1316,7 @@ export const updateResearchDevelopmentTeam = /* GraphQL */ `
         id
         name
         email
+        rank
         fullName
         contactEmail
         title
@@ -1340,6 +1354,7 @@ export const deleteResearchDevelopmentTeam = /* GraphQL */ `
         id
         name
         email
+        rank
         fullName
         contactEmail
         title
@@ -1369,6 +1384,7 @@ export const createUwcssaDepartment = /* GraphQL */ `
         id
         name
         email
+        rank
         fullName
         contactEmail
         title
@@ -1404,6 +1420,7 @@ export const updateUwcssaDepartment = /* GraphQL */ `
         id
         name
         email
+        rank
         fullName
         contactEmail
         title
@@ -1439,6 +1456,7 @@ export const deleteUwcssaDepartment = /* GraphQL */ `
         id
         name
         email
+        rank
         fullName
         contactEmail
         title
@@ -1491,6 +1509,7 @@ export const createUwcssaMember = /* GraphQL */ `
         id
         name
         email
+        rank
         fullName
         contactEmail
         title
@@ -1538,6 +1557,7 @@ export const updateUwcssaMember = /* GraphQL */ `
         id
         name
         email
+        rank
         fullName
         contactEmail
         title
@@ -1585,6 +1605,7 @@ export const deleteUwcssaMember = /* GraphQL */ `
         id
         name
         email
+        rank
         fullName
         contactEmail
         title
@@ -1674,6 +1695,7 @@ export const createEvent = /* GraphQL */ `
         id
         name
         email
+        rank
         fullName
         contactEmail
         title
@@ -1765,6 +1787,7 @@ export const updateEvent = /* GraphQL */ `
         id
         name
         email
+        rank
         fullName
         contactEmail
         title
@@ -1856,6 +1879,7 @@ export const deleteEvent = /* GraphQL */ `
         id
         name
         email
+        rank
         fullName
         contactEmail
         title
@@ -1897,6 +1921,7 @@ export const createAddress = /* GraphQL */ `
         id
         name
         email
+        rank
         fullName
         contactEmail
         title
@@ -1935,6 +1960,7 @@ export const updateAddress = /* GraphQL */ `
         id
         name
         email
+        rank
         fullName
         contactEmail
         title
@@ -1973,6 +1999,7 @@ export const deleteAddress = /* GraphQL */ `
         id
         name
         email
+        rank
         fullName
         contactEmail
         title
@@ -2026,6 +2053,7 @@ export const createForm = /* GraphQL */ `
         id
         name
         email
+        rank
         fullName
         contactEmail
         title
@@ -2080,6 +2108,7 @@ export const updateForm = /* GraphQL */ `
         id
         name
         email
+        rank
         fullName
         contactEmail
         title
@@ -2134,6 +2163,7 @@ export const deleteForm = /* GraphQL */ `
         id
         name
         email
+        rank
         fullName
         contactEmail
         title
@@ -2754,6 +2784,7 @@ export const createEventParticipant = /* GraphQL */ `
         id
         name
         email
+        rank
         fullName
         contactEmail
         title
@@ -3279,6 +3310,7 @@ export const updateEventParticipant = /* GraphQL */ `
         id
         name
         email
+        rank
         fullName
         contactEmail
         title
@@ -3804,6 +3836,7 @@ export const deleteEventParticipant = /* GraphQL */ `
         id
         name
         email
+        rank
         fullName
         contactEmail
         title

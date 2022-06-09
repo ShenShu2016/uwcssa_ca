@@ -48,6 +48,14 @@ type UserProfile
         { allow: groups, groups: ["uwcssaAdmin"] }
       ]
     )
+  rank: Int
+    @auth(
+      rules: [
+        { allow: public, operations: [read], provider: iam }
+        { allow: groups, operations: [read], groups: ["uwcssaUser"] }
+        { allow: groups, groups: ["uwcssaAdmin"] }
+      ]
+    )
   fullName: String
   contactEmail: AWSEmail
   title: String

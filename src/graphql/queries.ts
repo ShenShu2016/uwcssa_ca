@@ -41,6 +41,7 @@ export const getUserProfile = /* GraphQL */ `
       id
       name
       email
+      rank
       fullName
       contactEmail
       title
@@ -85,6 +86,7 @@ export const listUserProfiles = /* GraphQL */ `
         id
         name
         email
+        rank
         fullName
         contactEmail
         title
@@ -122,6 +124,7 @@ export const userProfileSortByCreatedAt = /* GraphQL */ `
         id
         name
         email
+        rank
         fullName
         contactEmail
         title
@@ -302,6 +305,7 @@ export const getArticle = /* GraphQL */ `
         id
         name
         email
+        rank
         fullName
         contactEmail
         title
@@ -438,6 +442,7 @@ export const getComment = /* GraphQL */ `
         id
         name
         email
+        rank
         fullName
         contactEmail
         title
@@ -555,6 +560,7 @@ export const getContactUs = /* GraphQL */ `
         id
         name
         email
+        rank
         fullName
         contactEmail
         title
@@ -787,6 +793,7 @@ export const getResearchDevelopmentTeam = /* GraphQL */ `
         id
         name
         email
+        rank
         fullName
         contactEmail
         title
@@ -842,6 +849,7 @@ export const getUwcssaDepartment = /* GraphQL */ `
         id
         name
         email
+        rank
         fullName
         contactEmail
         title
@@ -915,6 +923,7 @@ export const getUwcssaMember = /* GraphQL */ `
         id
         name
         email
+        rank
         fullName
         contactEmail
         title
@@ -1027,6 +1036,7 @@ export const getEvent = /* GraphQL */ `
         id
         name
         email
+        rank
         fullName
         contactEmail
         title
@@ -1139,6 +1149,7 @@ export const getAddress = /* GraphQL */ `
         id
         name
         email
+        rank
         fullName
         contactEmail
         title
@@ -1215,6 +1226,7 @@ export const getForm = /* GraphQL */ `
         id
         name
         email
+        rank
         fullName
         contactEmail
         title
@@ -1806,6 +1818,7 @@ export const getEventParticipant = /* GraphQL */ `
         id
         name
         email
+        rank
         fullName
         contactEmail
         title
