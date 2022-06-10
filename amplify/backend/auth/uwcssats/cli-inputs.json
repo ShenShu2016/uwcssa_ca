@@ -99,6 +99,8 @@
     "parentStack": {
       "Ref": "AWS::StackId"
     },
-    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:3000/\",\"https://devts.uwcssa.ca/\"],\"LogoutURLs\":[\"http://localhost:3000/\",\"https://devts.uwcssa.ca/\"]}"
+    "hostedUIProviderCreds": "[]",
+    "googleClientId": "1067602080073-4sib1lqinat4u97ovto5o1khl70ofijk.apps.googleusercontent.com",
+    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:3000/\",\"https://devts.uwcssa.ca/\",\"https://production.uwcssa.ca/\",\"https://uwcssa.ca/\"],\"LogoutURLs\":[\"http://localhost:3000/\",\"https://devts.uwcssa.ca/\",\"https://production.uwcssa.ca/\",\"https://uwcssa.ca/\"]}"
   }
 }

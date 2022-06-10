@@ -44,13 +44,13 @@
     "s3Key": {
       "Type": "String"
     },
-    "userTable": {
+    "countTable": {
       "Type": "String"
     },
     "userProfileTable": {
       "Type": "String"
     },
-    "countTable": {
+    "userTable": {
       "Type": "String"
     }
   },
@@ -105,14 +105,14 @@
             "GROUP": {
               "Ref": "GROUP"
             },
-            "User_Table": {
-              "Ref": "userTable"
+            "Count_Table": {
+              "Ref": "countTable"
             },
             "UserProfile_Table": {
               "Ref": "userProfileTable"
             },
-            "Count_Table": {
-              "Ref": "countTable"
+            "User_Table": {
+              "Ref": "userTable"
             }
           }
         },
