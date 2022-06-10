@@ -24,10 +24,10 @@
       "Type": "String",
       "Default": "apiuwcssatsGraphQLAPIEndpointOutput"
     },
-    "countTable": {
+    "articleTable": {
       "Type": "String"
     },
-    "articleTable": {
+    "countTable": {
       "Type": "String"
     }
   },
@@ -84,11 +84,11 @@
             "REGION": {
               "Ref": "AWS::Region"
             },
-            "Count_Table": {
-              "Ref": "countTable"
-            },
             "Article_Table": {
               "Ref": "articleTable"
+            },
+            "Count_Table": {
+              "Ref": "countTable"
             }
           }
         },

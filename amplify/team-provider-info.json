@@ -83,9 +83,9 @@
           "GROUP": "uwcssaUser",
           "deploymentBucketName": "amplify-uwcssa-production-232508-deployment",
           "s3Key": "amplify-builds/uwcssatsPostConfirmation-335a4432517745755568-build.zip",
-          "userTable": "User-4r2t6l2uprdgjhmoocpazejjcq-devts",
-          "userProfileTable": "UserProfile-4r2t6l2uprdgjhmoocpazejjcq-devts",
-          "countTable": "Count-4r2t6l2uprdgjhmoocpazejjcq-devts"
+          "userTable": "User-wajhfftifnfjpis7ez2nxdmg4u-production",
+          "userProfileTable": "UserProfile-wajhfftifnfjpis7ez2nxdmg4u-production",
+          "countTable": "Count-wajhfftifnfjpis7ez2nxdmg4u-production"
         },
         "AdminQueriesdf7beb2c": {
           "deploymentBucketName": "amplify-uwcssa-production-232508-deployment",
@@ -98,7 +98,7 @@
         "ArticlePublishHandler": {
           "deploymentBucketName": "amplify-uwcssa-production-232508-deployment",
           "s3Key": "amplify-builds/ArticlePublishHandler-31486836444571654d5a-build.zip",
-          "userProfileTable": "UserProfile-4r2t6l2uprdgjhmoocpazejjcq-devts"
+          "userProfileTable": "UserProfile-wajhfftifnfjpis7ez2nxdmg4u-production"
         },
         "ContactUsHandler": {
           "deploymentBucketName": "amplify-uwcssa-production-232508-deployment",
@@ -107,8 +107,8 @@
         "CountHandler": {
           "deploymentBucketName": "amplify-uwcssa-production-232508-deployment",
           "s3Key": "amplify-builds/CountHandler-686f6a693242556e7a33-build.zip",
-          "countTable": "Count-4r2t6l2uprdgjhmoocpazejjcq-devts",
-          "articleTable": "Article-4r2t6l2uprdgjhmoocpazejjcq-devts"
+          "articleTable": "Article-wajhfftifnfjpis7ez2nxdmg4u-production",
+          "countTable": "Count-wajhfftifnfjpis7ez2nxdmg4u-production"
         },
         "uwcssaLayerNodeJSSharp": {
           "deploymentBucketName": "amplify-uwcssa-production-232508-deployment",
