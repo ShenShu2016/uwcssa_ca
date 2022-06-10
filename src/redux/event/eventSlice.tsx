@@ -2,8 +2,8 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-20 21:02:00
- * @LastEditors: 李佳修
- * @LastEditTime: 2022-06-08 13:29:03
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-06-09 22:05:35
  * @FilePath: /uwcssa_ca/src/redux/event/eventSlice.tsx
  * @Description:
  *
@@ -14,12 +14,14 @@ import {
   createEntityAdapter,
   createSlice,
 } from '@reduxjs/toolkit';
-import { createEvent, updateEvent } from 'graphql/mutations';
+import { createCount, createEvent, updateEvent } from 'graphql/mutations';
 import { eventSortByCreatedAt, getEvent } from 'graphql/queries';
 
 import API from '@aws-amplify/api';
+import { CreateEventInput } from 'API';
 import { RootState } from 'redux/store';
 import { graphqlOperation } from '@aws-amplify/api-graphql';
+import { v4 as uuid } from 'uuid';
 
 //import { commentAdapter } from 'redux/comment/commentSlice';
 
@@ -104,10 +106,27 @@ export const fetchEvent = createAsyncThunk(
 
 export const postEvent = createAsyncThunk(
   'event/postEvent',
-  async ({ createEventInput }: { createEventInput: Event }) => {
+  async ({ createEventInput }: { createEventInput: CreateEventInput }) => {
     try {
+      const countId = uuid();
+      await API.graphql(
+        graphqlOperation(createCount, {
+          input: {
+            id: countId,
+            count: undefined,
+            commentCount: 0,
+            like: 0,
+            targetTable: 'Event',
+            countEventId: createEventInput.id,
+            owner: createEventInput.owner,
+          },
+        }),
+      );
+
       const result: any = await API.graphql(
-        graphqlOperation(createEvent, { input: createEventInput }),
+        graphqlOperation(createEvent, {
+          input: { eventCountId: countId, ...createEventInput },
+        }),
       );
       return result.data.createEvent;
     } catch (error) {

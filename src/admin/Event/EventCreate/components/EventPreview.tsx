@@ -1,28 +1,35 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-01 09:18:34
- * @LastEditTime: 2022-06-09 13:53:57
- * @LastEditors: 李佳修
+ * @LastEditTime: 2022-06-09 22:00:57
+ * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/admin/Event/EventCreate/components/EventPreview.tsx
  */
-import React from 'react';
+
+import { useAppDispatch, useAppSelector } from 'redux/hooks';
+
+import { ActiveType } from 'API';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { useAppDispatch, useAppSelector } from 'redux/hooks';
+import { EventStatus } from 'redux/form/formSlice';
+import React from 'react';
+import { create } from 'domain';
+import { getOwnerUserName } from 'redux/auth/authSlice';
 import { postEvent } from 'redux/event/eventSlice';
 import { useSwiper } from 'swiper/react';
-import { create } from 'domain';
-import { EventStatus } from 'redux/form/formSlice';
+import { v4 as uuid } from 'uuid';
 
 const EventPreview: React.FC = () => {
   const swiper = useSwiper();
   const dispatch = useAppDispatch();
-  const createData = useAppSelector(state => state.form.createData);
-
+  const createData = useAppSelector((state) => state.form.createData);
+  const ownerUsername = useAppSelector(getOwnerUserName);
+  const preArticleId = uuid();
   const printData = () => {
     console.log(createData);
     const data = {
+      id: preArticleId,
       title: createData.basicInfo.title,
       coverPageImgURL: createData.posterImage,
       content: createData.basicInfo.content,
@@ -31,8 +38,9 @@ const EventPreview: React.FC = () => {
       startDate: createData.basicInfo.startDateTime,
       endDate: createData.basicInfo.endDateTime,
       eventStatus: EventStatus.ComingSoon,
-      eventLocation: createData.basicInfo.address,
-      active: 'T'
+      eventEventLocationId: undefined, //这东西要跟google map api结合 和另一个 Address 表联动。。
+      eventFormId: undefined, //这东西要跟google map api结合 和另一个 Address 表联动。。
+      active: 'T',
     };
     console.log(data);
   };
@@ -64,39 +72,61 @@ const EventPreview: React.FC = () => {
   // eventFormId?: string | null,
 
   const completeActivityCreate = async () => {
-    const data = {
+    const createEventInput = {
+      id: preArticleId,
       title: createData.basicInfo.title,
       coverPageImgURL: createData.posterImage,
       content: createData.basicInfo.content,
       online: createData.basicInfo.online,
-      group: false,
+      group: false, //这个好像还没做
       startDate: createData.basicInfo.startDateTime,
       endDate: createData.basicInfo.endDateTime,
       eventStatus: EventStatus.ComingSoon,
-      eventLocation: createData.basicInfo.address,
-      active: 'T'
+      eventEventLocationId: undefined, //这东西要跟google map api结合 和另一个 Address 表联动。。
+      eventFormId: undefined, // 这里放form 的ID 不是form item 的id。
+      eventCountId: undefined, //这个东西我要在slice里面处理。 就undefined 放着
+      active: ActiveType.T,
+      owner: ownerUsername,
     };
-    // const res = await dispatch(postEvent({
-    //   createEventInput: data
-    // }))
+    const response = await dispatch(
+      postEvent({
+        createEventInput,
+      }),
+    );
+    if (response.meta.requestStatus === 'fulfilled') {
+      alert('活動創建成功');
+    } else {
+      alert('活動創建失敗');
+    }
   };
 
   return (
-    <Box height='80vh'>
+    <Box height="80vh">
       <Box>
         <Button
           variant="contained"
           endIcon={<ArrowBackIcon />}
           onClick={() => swiper.slidePrev()}
         >
-            配置报名表单
+          配置报名表单
         </Button>
       </Box>
-      <Box>这里准备做整个活动创建的preview 可以先空出来 等用户端的ui做好以后 再补到这里 让这里的预览和效果和用户最终看到的保持一致</Box>
       <Box>
-        <Button sx={{m: '24px'}} variant="contained" onClick={printData}>console.log要提交的表单数据</Button>
+        这里准备做整个活动创建的preview 可以先空出来 等用户端的ui做好以后
+        再补到这里 让这里的预览和效果和用户最终看到的保持一致
+      </Box>
+      <Box>
+        <Button sx={{ m: '24px' }} variant="contained" onClick={printData}>
+          console.log要提交的表单数据
+        </Button>
         <br />
-        <Button sx={{m: '24px'}} variant="contained" onClick={completeActivityCreate}>提交表单</Button>
+        <Button
+          sx={{ m: '24px' }}
+          variant="contained"
+          onClick={completeActivityCreate}
+        >
+          提交表单
+        </Button>
       </Box>
     </Box>
   );

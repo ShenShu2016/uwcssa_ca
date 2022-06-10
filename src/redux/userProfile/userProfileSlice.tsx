@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-28 01:04:11
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-01 23:04:37
+ * @LastEditTime: 2022-06-09 17:19:18
  * @FilePath: /uwcssa_ca/src/redux/userProfile/userProfileSlice.tsx
  * @Description:
  *
@@ -28,6 +28,7 @@ export type UserProfile = {
   email?: string | null;
   fullName?: string | null;
   contactEmail?: string | null;
+  rank?: number | null;
   title?: string | null;
   about?: string | null;
   avatarURL?: AvatarURL;
