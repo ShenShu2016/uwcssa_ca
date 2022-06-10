@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-02 19:33:37
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-10 15:00:13
+ * @LastEditTime: 2022-06-10 18:34:11
  * @FilePath: /uwcssa_ca/src/redux/auth/authSlice.tsx
  * @Description:
  *
@@ -174,7 +174,7 @@ export const loadUser = createAsyncThunk('auth/loadUser', async () => {
   //!! need to rename
   const [response, credentials] = await Promise.all([
     Auth.currentAuthenticatedUser(),
-    Auth.currentSession(),
+    Auth.currentUserCredentials(),
   ]);
   return { ...response, ...credentials };
 });
