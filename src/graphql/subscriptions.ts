@@ -20,7 +20,7 @@ export const onCreateArticleTags = /* GraphQL */ `
         content
         coverPageImgURL
         coverPageDescription
-        publish
+        isPublish
         active
         createdAt
         updatedAt
@@ -50,7 +50,7 @@ export const onUpdateArticleTags = /* GraphQL */ `
         content
         coverPageImgURL
         coverPageDescription
-        publish
+        isPublish
         active
         createdAt
         updatedAt
@@ -80,7 +80,7 @@ export const onDeleteArticleTags = /* GraphQL */ `
         content
         coverPageImgURL
         coverPageDescription
-        publish
+        isPublish
         active
         createdAt
         updatedAt
@@ -117,7 +117,7 @@ export const onCreateEventTags = /* GraphQL */ `
         startDate
         endDate
         eventStatus
-        publish
+        isPublish
         active
         createdAt
         updatedAt
@@ -156,7 +156,7 @@ export const onUpdateEventTags = /* GraphQL */ `
         startDate
         endDate
         eventStatus
-        publish
+        isPublish
         active
         createdAt
         updatedAt
@@ -195,7 +195,7 @@ export const onDeleteEventTags = /* GraphQL */ `
         startDate
         endDate
         eventStatus
-        publish
+        isPublish
         active
         createdAt
         updatedAt

@@ -2,7 +2,7 @@
  * @Author: Shikai Jin
  * @Date: 2022-05-28 22:04:05
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-06 22:38:20
+ * @LastEditTime: 2022-06-10 16:26:55
  * @FilePath: /uwcssa_ca/amplify/backend/function/ArticlePublishHandler/src/index.js
  * @Description:
  *
@@ -20,8 +20,13 @@ var docClient = new AWS.DynamoDB.DocumentClient({ region: process.env.REGION });
 exports.handler = async function (event) {
   console.log(`EVENT: ${JSON.stringify(event)}`);
   const record = event['Records'][0];
-  if (record.eventName !== 'INSERT') {
-    return Promise.resolve('not an insert event');
+  if (record.eventName !== 'INSERT' && record.eventName !== 'MODIFY') {
+    console.log('Event is not INSERT or MODIFY, ignore');
+    return Promise.resolve('not an insert event or modify event');
+  }
+  if (record.dynamodb.NewImage.isPublish.BOOL === false) {
+    console.log('Article is not published, ignore');
+    return Promise.resolve('did not publish');
   }
   console.log(record.eventID);
   console.log(record.eventName);

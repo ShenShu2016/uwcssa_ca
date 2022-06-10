@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-20 09:30:58
- * @LastEditTime: 2022-06-08 17:11:54
+ * @LastEditTime: 2022-06-10 16:51:38
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/admin/Article/ArticlePublish/ArticlePublish.tsx
  */
@@ -12,7 +12,13 @@ import {
   postArticle,
   updateArticleDetail,
 } from 'redux/article/articleSlice';
-import { Box, Card, TextField } from '@mui/material';
+import {
+  Box,
+  Card,
+  Checkbox,
+  FormControlLabel,
+  TextField,
+} from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { createArticleTag, createNewTag } from 'redux/tag/tagSlice';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
@@ -26,10 +32,11 @@ import MyImageList from './components/MyImageList';
 import PageTitle from 'admin/components/pageTitle';
 import RichTextEditor from 'components/RichTextEditor';
 import { getOwnerUserName } from 'redux/auth/authSlice';
+import { useConfirm } from 'material-ui-confirm';
 import useMessage from 'hooks/useMessage';
 import { useNavigate } from 'react-router';
 import { useParams } from 'react-router-dom';
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuid } from 'uuid';
 
 export interface Tag {
   tagID: string;
@@ -42,14 +49,14 @@ enum ActionType {
 
 const ArticlePublish: React.FC = () => {
   const dispatch = useAppDispatch();
-
+  const confirm = useConfirm();
   const message = useMessage();
   const navigate = useNavigate();
   const username = useAppSelector(getOwnerUserName);
   // 获取url中的文章id参数 如果有说明是编辑文章 没有说明是新建
   const { id: editArticleId } = useParams();
   const actionType = editArticleId ? ActionType.edit : ActionType.create;
-
+  const [isPublish, setIsPublish] = useState(false); //必须一直是false
   const [content, setContent] = useState<string>('');
   const [title, setTitle] = useState<string>('');
   const [coverPageDescription, setCoverPageDescription] = useState<string>('');
@@ -116,6 +123,11 @@ const ArticlePublish: React.FC = () => {
   };
 
   const handleSubmitArticle = async () => {
+    if (isPublish) {
+      await confirm({
+        description: '此行为会将文章发布到订阅者邮箱，是否继续？',
+      });
+    }
     setSubmitLoading(true);
     const currentTitle = title;
     const currentContent = content;
@@ -192,13 +204,13 @@ const ArticlePublish: React.FC = () => {
     currentContent,
     currentCoverPageDescription,
   ) => {
-    const articleID =
-      actionType === ActionType.create ? uuidv4() : editArticleId;
+    const articleID = actionType === ActionType.create ? uuid() : editArticleId;
     const params: Article = {
       id: articleID,
       title: currentTitle,
       content: currentContent,
       active: ActiveType.T,
+      isPublish: isPublish,
       coverPageImgURL: imgFile || undefined,
       coverPageDescription: currentCoverPageDescription,
       owner: username,
@@ -378,6 +390,13 @@ const ArticlePublish: React.FC = () => {
             <MyImageList useImgFromRecent={useImgFromRecent} />
             <Box>
               <AddCoverPic setImgFile={setImgFile} imgFile={imgFile} />
+              <FormControlLabel
+                name={'isPublish'}
+                value={isPublish}
+                onChange={(e: any) => setIsPublish(e.target.checked)}
+                control={<Checkbox size="medium" />}
+                label={'要发布吗？'}
+              />
               <LoadingButton
                 loading={submitLoading}
                 fullWidth

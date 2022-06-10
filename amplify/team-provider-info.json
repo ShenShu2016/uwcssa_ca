@@ -46,7 +46,7 @@
         },
         "ArticlePublishHandler": {
           "deploymentBucketName": "amplify-uwcssa-devts-225941-deployment",
-          "s3Key": "amplify-builds/ArticlePublishHandler-31486836444571654d5a-build.zip",
+          "s3Key": "amplify-builds/ArticlePublishHandler-694d493455743154465a-build.zip",
           "userProfileTable": "UserProfile-4r2t6l2uprdgjhmoocpazejjcq-devts"
         },
         "CountHandler": {
@@ -89,7 +89,7 @@
         },
         "AdminQueriesdf7beb2c": {
           "deploymentBucketName": "amplify-uwcssa-production-232508-deployment",
-          "s3Key": "amplify-builds/AdminQueriesdf7beb2c-6d345939576834733638-build.zip"
+          "s3Key": "amplify-builds/AdminQueriesdf7beb2c-306b6a47703234557839-build.zip"
         },
         "UserImageCompressHandler": {
           "deploymentBucketName": "amplify-uwcssa-production-232508-deployment",
@@ -97,7 +97,7 @@
         },
         "ArticlePublishHandler": {
           "deploymentBucketName": "amplify-uwcssa-production-232508-deployment",
-          "s3Key": "amplify-builds/ArticlePublishHandler-31486836444571654d5a-build.zip",
+          "s3Key": "amplify-builds/ArticlePublishHandler-694d493455743154465a-build.zip",
           "userProfileTable": "UserProfile-wajhfftifnfjpis7ez2nxdmg4u-production"
         },
         "ContactUsHandler": {

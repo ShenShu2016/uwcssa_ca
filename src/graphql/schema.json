@@ -4056,7 +4056,7 @@
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
-          "name" : "publish",
+          "name" : "isPublish",
           "description" : null,
           "args" : [ ],
           "type" : {
@@ -4884,7 +4884,7 @@
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
-          "name" : "publish",
+          "name" : "isPublish",
           "description" : null,
           "args" : [ ],
           "type" : {
@@ -8405,7 +8405,7 @@
           },
           "defaultValue" : null
         }, {
-          "name" : "publish",
+          "name" : "isPublish",
           "description" : null,
           "type" : {
             "kind" : "INPUT_OBJECT",
@@ -10166,7 +10166,7 @@
           },
           "defaultValue" : null
         }, {
-          "name" : "publish",
+          "name" : "isPublish",
           "description" : null,
           "type" : {
             "kind" : "INPUT_OBJECT",
@@ -14219,7 +14219,7 @@
           },
           "defaultValue" : null
         }, {
-          "name" : "publish",
+          "name" : "isPublish",
           "description" : null,
           "type" : {
             "kind" : "SCALAR",
@@ -14326,7 +14326,7 @@
           },
           "defaultValue" : null
         }, {
-          "name" : "publish",
+          "name" : "isPublish",
           "description" : null,
           "type" : {
             "kind" : "INPUT_OBJECT",
@@ -14473,7 +14473,7 @@
           },
           "defaultValue" : null
         }, {
-          "name" : "publish",
+          "name" : "isPublish",
           "description" : null,
           "type" : {
             "kind" : "SCALAR",
@@ -17123,7 +17123,7 @@
           },
           "defaultValue" : null
         }, {
-          "name" : "publish",
+          "name" : "isPublish",
           "description" : null,
           "type" : {
             "kind" : "SCALAR",
@@ -17311,7 +17311,7 @@
           },
           "defaultValue" : null
         }, {
-          "name" : "publish",
+          "name" : "isPublish",
           "description" : null,
           "type" : {
             "kind" : "INPUT_OBJECT",
@@ -17547,7 +17547,7 @@
           },
           "defaultValue" : null
         }, {
-          "name" : "publish",
+          "name" : "isPublish",
           "description" : null,
           "type" : {
             "kind" : "SCALAR",

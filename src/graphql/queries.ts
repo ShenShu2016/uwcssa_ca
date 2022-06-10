@@ -297,7 +297,7 @@ export const getArticle = /* GraphQL */ `
         countEventId
         countCommentId
       }
-      publish
+      isPublish
       active
       createdAt
       updatedAt
@@ -336,7 +336,7 @@ export const listArticles = /* GraphQL */ `
         content
         coverPageImgURL
         coverPageDescription
-        publish
+        isPublish
         active
         createdAt
         updatedAt
@@ -370,7 +370,7 @@ export const articleSortByCreatedAt = /* GraphQL */ `
         content
         coverPageImgURL
         coverPageDescription
-        publish
+        isPublish
         active
         createdAt
         updatedAt
@@ -394,7 +394,7 @@ export const getComment = /* GraphQL */ `
         content
         coverPageImgURL
         coverPageDescription
-        publish
+        isPublish
         active
         createdAt
         updatedAt
@@ -415,7 +415,7 @@ export const getComment = /* GraphQL */ `
         startDate
         endDate
         eventStatus
-        publish
+        isPublish
         active
         createdAt
         updatedAt
@@ -615,7 +615,7 @@ export const getCount = /* GraphQL */ `
         content
         coverPageImgURL
         coverPageDescription
-        publish
+        isPublish
         active
         createdAt
         updatedAt
@@ -635,7 +635,7 @@ export const getCount = /* GraphQL */ `
         startDate
         endDate
         eventStatus
-        publish
+        isPublish
         active
         createdAt
         updatedAt
@@ -699,7 +699,7 @@ export const getLike = /* GraphQL */ `
         content
         coverPageImgURL
         coverPageDescription
-        publish
+        isPublish
         active
         createdAt
         updatedAt
@@ -730,7 +730,7 @@ export const getLike = /* GraphQL */ `
         startDate
         endDate
         eventStatus
-        publish
+        isPublish
         active
         createdAt
         updatedAt
@@ -1037,7 +1037,7 @@ export const getEvent = /* GraphQL */ `
         countEventId
         countCommentId
       }
-      publish
+      isPublish
       active
       createdAt
       updatedAt
@@ -1085,7 +1085,7 @@ export const listEvents = /* GraphQL */ `
         startDate
         endDate
         eventStatus
-        publish
+        isPublish
         active
         createdAt
         updatedAt
@@ -1128,7 +1128,7 @@ export const eventSortByCreatedAt = /* GraphQL */ `
         startDate
         endDate
         eventStatus
-        publish
+        isPublish
         active
         createdAt
         updatedAt
@@ -1223,7 +1223,7 @@ export const getForm = /* GraphQL */ `
         startDate
         endDate
         eventStatus
-        publish
+        isPublish
         active
         createdAt
         updatedAt
@@ -1946,7 +1946,7 @@ export const getArticleTags = /* GraphQL */ `
         content
         coverPageImgURL
         coverPageDescription
-        publish
+        isPublish
         active
         createdAt
         updatedAt
@@ -2001,7 +2001,7 @@ export const getEventTags = /* GraphQL */ `
         startDate
         endDate
         eventStatus
-        publish
+        isPublish
         active
         createdAt
         updatedAt

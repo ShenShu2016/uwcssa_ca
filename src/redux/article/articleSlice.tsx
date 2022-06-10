@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-20 21:02:00
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-10 14:32:26
+ * @LastEditTime: 2022-06-10 16:02:09
  * @FilePath: /uwcssa_ca/src/redux/article/articleSlice.tsx
  * @Description:
  *
@@ -49,7 +49,7 @@ export type Article = {
   } | null;
   count?: any;
   likes?: any;
-  publish?: boolean | null;
+  isPublish?: boolean | null;
   active: ActiveType;
   coverPageImgURL?: string | null;
   coverPageDescription?: string | null;
