@@ -2,19 +2,18 @@
  * @Author: 李佳修
  * @Date: 2022-05-19 17:21:06
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-01 22:17:06
+ * @LastEditTime: 2022-06-10 14:33:19
  * @FilePath: /uwcssa_ca/src/components/UserCardGrid/UserCardGrid.tsx
  * @Description:
  *
  */
 
-import { Avatar, Box, Stack, Typography } from '@mui/material';
+import { Avatar, Box, Stack, Typography, useTheme } from '@mui/material';
 
 import Button from '@mui/material/Button';
 import React from 'react';
 import { stringAvatar } from 'components/Avatar/AvatarFunction';
 import { useAppSelector } from 'redux/hooks';
-import { useTheme } from '@mui/material/styles';
 
 //import { loadUser } from 'redux/auth/authSlice';
 
@@ -94,7 +93,7 @@ const UserCardGrid = (): JSX.Element => {
           </Typography>
           <Box flexGrow={1} />
           <Stack spacing={2} marginTop={2} width={1} alignItems={'center'}>
-            <Box
+            {/* <Box
               display={'flex'}
               justifyContent={'center'}
               alignItems={'center'}
@@ -120,7 +119,7 @@ const UserCardGrid = (): JSX.Element => {
               <Typography color={'text.secondary'} variant={'subtitle2'}>
                 {'300 info.followers'}
               </Typography>
-            </Box>
+            </Box> */}
             <Button
               component={'a'}
               variant={'outlined'}

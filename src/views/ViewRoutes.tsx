@@ -1,8 +1,8 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
- * @LastEditors: Shikai Jin
- * @LastEditTime: 2022-06-07 19:52:58
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-06-10 14:50:11
  * @FilePath: /uwcssa_ca/src/views/ViewRoutes.tsx
  * @Description:
  *
@@ -277,7 +277,7 @@ function ViewRoutes(): Array<{
       redirectPath: '/',
     },
     {
-      path: '/auth/passWordResetSubmit/:email',
+      path: '/auth/passWordResetSubmit/:username',
       renderer: (params = {}): JSX.Element => (
         <ForgotPassWordSubmitView {...params} />
       ),
@@ -298,7 +298,7 @@ function ViewRoutes(): Array<{
       path: '/auth/signIn',
       renderer: (params = {}): JSX.Element => <SigninCoverView {...params} />,
       isAllowed: !isAuth,
-      redirectPath: '/settings/general',
+      redirectPath: '/dashboard',
     },
     // {
     //   path: '/signup-simple',
@@ -311,7 +311,15 @@ function ViewRoutes(): Array<{
       redirectPath: '/settings/general',
     },
     {
-      path: '/auth/emailConfirmation',
+      path: '/auth/emailConfirmation', //!! 这里也不知道怎么处理，如果username 不存在，会报错
+      renderer: (params = {}): JSX.Element => (
+        <EmailConfirmationCoverView {...params} />
+      ),
+      isAllowed: !isAuth,
+      redirectPath: '/settings/general',
+    },
+    {
+      path: '/auth/emailConfirmation/:username', // username is the email
       renderer: (params = {}): JSX.Element => (
         <EmailConfirmationCoverView {...params} />
       ),

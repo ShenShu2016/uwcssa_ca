@@ -2,8 +2,8 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 21:41:42
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-21 02:11:20
- * @FilePath: /uwcssa_ca/frontend/src/views/SigninCover/components/Form/Form.tsx
+ * @LastEditTime: 2022-06-10 14:40:33
+ * @FilePath: /uwcssa_ca/src/views/SigninCover/components/Form/Form.tsx
  * @Description:
  *
  */
@@ -11,21 +11,23 @@
 
 import * as yup from 'yup';
 
+import {
+  Alert,
+  Box,
+  Button,
+  Divider,
+  Grid,
+  Link as MUILink,
+  TextField,
+  Typography,
+} from '@mui/material';
+import React, { useState } from 'react';
 import { googleSignIn, signIn } from 'redux/auth/authSlice';
 
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import { Divider } from '@mui/material';
-import Grid from '@mui/material/Grid';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Link } from 'react-router-dom';
-import { Link as MUILink } from '@mui/material';
-import React from 'react';
-import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
 import { useAppDispatch } from 'redux/hooks';
 import { useFormik } from 'formik';
-import { useNavigate } from 'react-router-dom';
 
 const validationSchema = yup.object({
   username: yup
@@ -36,25 +38,25 @@ const validationSchema = yup.object({
   password: yup
     .string()
     .required('Please specify your password')
-    .min(8, 'The password should have at minimum length of 8'),
+    .min(8, 'Password must be at least 8 characters long.'),
 });
 
 const Form = (): JSX.Element => {
-  const navigate = useNavigate();
-  //const { email } = useParams();
   const dispatch = useAppDispatch();
+  const [signInError, setSignInError] = useState('');
+  // const { signInError } = useAppSelector((state) => state.auth);
   const initialValues = {
     username: '',
     password: '',
   };
 
   const onSubmit = async (values) => {
-    console.log(JSON.stringify(values));
-    const { username, password } = values;
-    const response = await dispatch(signIn({ username, password }));
+    const response: any = await dispatch(signIn(values)); //!! 这里有毛病，后期需要改一改
     if (response.meta.requestStatus === 'fulfilled') {
-      navigate('/');
+      //!! viewroutes 中redirect 当auth 成功后，会直接给你转到/dashboard 所以这里写啥都不会改变任何东西
+      //navigate('/dashboard');
     } else {
+      setSignInError(response.error.message);
       return false;
     }
 
@@ -150,6 +152,9 @@ const Form = (): JSX.Element => {
               helperText={formik.touched.password && formik.errors.password}
             />
           </Grid>
+          <Grid item xs={12}>
+            {signInError && <Alert severity="error">{signInError}</Alert>}
+          </Grid>
           <Grid item container xs={12}>
             <Box
               display="flex"
@@ -173,7 +178,18 @@ const Form = (): JSX.Element => {
                   </MUILink>
                 </Typography>
               </Box>
-              <Button size={'large'} variant={'contained'} type={'submit'}>
+              <Button
+                startIcon={
+                  <LazyLoadImage
+                    src={'/assets/images/uwcssa_logo.svg'}
+                    width="20px"
+                    style={{ marginRight: '0.5rem' }}
+                  />
+                }
+                size={'large'}
+                variant={'contained'}
+                type={'submit'}
+              >
                 Login
               </Button>
             </Box>
@@ -183,8 +199,8 @@ const Form = (): JSX.Element => {
               on
             </Divider>
           </Grid>
-          <Grid item container xs={12}>
-            <Box
+          <Grid item container xs={12} sx={{ justifyContent: 'center' }}>
+            {/* <Box
               display="flex"
               flexDirection={{ xs: 'column', sm: 'row' }}
               alignItems={{ xs: 'stretched', sm: 'center' }}
@@ -192,24 +208,23 @@ const Form = (): JSX.Element => {
               width={1}
               maxWidth={600}
               margin={'0 auto'}
+            > */}
+            <Button
+              variant={'contained'}
+              color={'primary'}
+              onClick={() => handleGoogleSignIn()}
+              sx={{ lineHeight: 1 }}
             >
-              <Button
-                variant={'contained'}
-                color={'primary'}
-                onClick={() => handleGoogleSignIn()}
-                fullWidth
-                sx={{ lineHeight: 1 }}
-              >
-                <Box
-                  component={LazyLoadImage}
-                  effect="blur"
-                  src="/assets/images/icons/google-1.svg"
-                />
-                <Box sx={{ fontSize: '12px', marginLeft: '1rem' }}>
-                  Continue with Google
-                </Box>
-              </Button>
-            </Box>
+              <Box
+                component={LazyLoadImage}
+                effect="blur"
+                src="/assets/images/icons/google-1.svg"
+              />
+              <Box sx={{ fontSize: '12px', marginLeft: '1rem' }}>
+                Continue with Google
+              </Box>
+            </Button>
+            {/* </Box> */}
           </Grid>
         </Grid>
       </form>

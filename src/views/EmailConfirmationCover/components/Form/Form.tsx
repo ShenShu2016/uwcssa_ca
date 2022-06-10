@@ -1,22 +1,33 @@
-/* eslint-disable react/no-unescaped-entities */
+/*
+ * @Author: Shen Shu
+ * @Date: 2022-05-26 13:57:44
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-06-10 14:57:10
+ * @FilePath: /uwcssa_ca/src/views/EmailConfirmationCover/components/Form/Form.tsx
+ * @Description:
+ *
+ */
 
 import * as yup from 'yup';
 
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Grid from '@mui/material/Grid';
-import { Link } from 'react-router-dom';
-import { Link as MUILink } from '@mui/material';
-import React from 'react';
-import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
+import {
+  Alert,
+  Box,
+  Button,
+  Grid,
+  Link as MUILink,
+  TextField,
+  Typography,
+} from '@mui/material';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import React, { useState } from 'react';
+
 import { emailConfirm } from 'redux/auth/authSlice';
 import { useAppDispatch } from 'redux/hooks';
 import { useFormik } from 'formik';
-import { useNavigate } from 'react-router-dom';
 
 const validationSchema = yup.object({
-  email: yup
+  username: yup
     .string()
     .trim()
     .email('Please enter a valid email address')
@@ -30,23 +41,20 @@ const validationSchema = yup.object({
 
 const Form = (): JSX.Element => {
   const navigate = useNavigate();
-  //const { email } = useParams();
+  const { username } = useParams();
   const dispatch = useAppDispatch();
-
+  const [signInError, setSignInError] = useState('');
   const initialValues = {
-    email: '',
+    username: username,
     authenticationCode: '',
   };
 
   const onSubmit = async (values) => {
-    console.log(JSON.stringify(values));
-    const { email, authenticationCode } = values;
-    const response = await dispatch(
-      emailConfirm({ email, authenticationCode }),
-    );
+    const response: any = await dispatch(emailConfirm(values));
     if (response.meta.requestStatus === 'fulfilled') {
       navigate('/auth/signIn');
     } else {
+      setSignInError(response.error.message);
       return false;
     }
 
@@ -91,12 +99,12 @@ const Form = (): JSX.Element => {
             <TextField
               label="Email *"
               variant="outlined"
-              name={'email'}
+              name={'username'}
               fullWidth
-              value={formik.values.email}
+              value={formik.values.username}
               onChange={formik.handleChange}
-              error={formik.touched.email && Boolean(formik.errors.email)}
-              helperText={formik.touched.email && formik.errors.email}
+              error={formik.touched.username && Boolean(formik.errors.username)}
+              helperText={formik.touched.username && formik.errors.username}
             />
           </Grid>
           <Grid item xs={12}>
@@ -142,6 +150,9 @@ const Form = (): JSX.Element => {
               }
             />
           </Grid>
+          <Grid item xs={12}>
+            {signInError && <Alert severity="error">{signInError}</Alert>}
+          </Grid>
           <Grid item container xs={12}>
             <Box
               display="flex"
@@ -154,6 +165,7 @@ const Form = (): JSX.Element => {
             >
               <Box marginBottom={{ xs: 1, sm: 0 }}>
                 <Typography variant={'subtitle2'}>
+                  {/* eslint-disable-next-line react/no-unescaped-entities */}
                   Don't have an account yet?{' '}
                   <MUILink
                     component={Link}

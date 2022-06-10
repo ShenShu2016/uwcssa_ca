@@ -2,8 +2,8 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 15:50:53
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-21 02:09:51
- * @FilePath: /uwcssa_ca/frontend/src/views/SignupCover/components/Form/Form.tsx
+ * @LastEditTime: 2022-06-10 14:59:07
+ * @FilePath: /uwcssa_ca/src/views/SignupCover/components/Form/Form.tsx
  * @Description:
  *
  */
@@ -11,18 +11,21 @@
 
 import * as yup from 'yup';
 
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Grid from '@mui/material/Grid';
-import { Link } from 'react-router-dom';
-import { Link as MUILink } from '@mui/material';
-import React from 'react';
-import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
+import {
+  Alert,
+  Box,
+  Button,
+  Grid,
+  Link as MUILink,
+  TextField,
+  Typography,
+} from '@mui/material';
+import { Link, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+
 import { signUp } from 'redux/auth/authSlice';
 import { useAppDispatch } from 'redux/hooks';
 import { useFormik } from 'formik';
-import { useNavigate } from 'react-router-dom';
 
 const validationSchema = yup.object({
   name: yup
@@ -39,12 +42,17 @@ const validationSchema = yup.object({
   password: yup
     .string()
     .required('Please specify your password')
-    .min(8, 'The password should have at minimum length of 8'),
+    .matches(
+      // eslint-disable-next-line no-useless-escape
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
+      'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character',
+    ),
 });
 
 const Form = (): JSX.Element => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const [signInError, setSignInError] = useState('');
   const initialValues = {
     name: '',
     username: '',
@@ -52,13 +60,12 @@ const Form = (): JSX.Element => {
   };
 
   const onSubmit = async (values) => {
-    console.log(values);
-    const { password, username, name } = values;
-    const response = await dispatch(signUp({ password, username, name }));
-    console.log(response);
+    const response: any = await dispatch(signUp(values));
+
     if (response.meta.requestStatus === 'fulfilled') {
-      navigate('/auth/emailConfirmation');
+      navigate(`/auth/emailConfirmation/${values.username}`);
     } else {
+      setSignInError(response.error.message);
       return false;
     }
     return values;
@@ -142,6 +149,9 @@ const Form = (): JSX.Element => {
               error={formik.touched.password && Boolean(formik.errors.password)}
               helperText={formik.touched.password && formik.errors.password}
             />
+          </Grid>
+          <Grid item xs={12}>
+            {signInError && <Alert severity="error">{signInError}</Alert>}
           </Grid>
           <Grid item container xs={12}>
             <Box

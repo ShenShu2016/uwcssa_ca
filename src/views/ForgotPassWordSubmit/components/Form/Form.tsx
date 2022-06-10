@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-18 15:31:43
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-06 21:00:28
+ * @LastEditTime: 2022-06-10 14:58:35
  * @FilePath: /uwcssa_ca/src/views/ForgotPassWordSubmit/components/Form/Form.tsx
  * @Description:
  *
@@ -10,19 +10,23 @@
 
 import * as yup from 'yup';
 
+import {
+  Alert,
+  Box,
+  Button,
+  Card,
+  Divider,
+  Grid,
+  TextField,
+  Typography,
+  useTheme,
+} from '@mui/material';
+import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
-import Divider from '@mui/material/Divider';
-import React from 'react';
-import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
 import { forgotPassWordSubmit } from 'redux/auth/authSlice';
 import { useAppDispatch } from 'redux/hooks';
 import { useFormik } from 'formik';
-import { useTheme } from '@mui/material/styles';
 
 const validationSchema = yup.object({
   username: yup
@@ -38,7 +42,11 @@ const validationSchema = yup.object({
   new_password: yup
     .string()
     .required('Please specify your password')
-    .min(8, 'The password should have at minimum length of 8'),
+    .matches(
+      // eslint-disable-next-line no-useless-escape
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
+      'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character',
+    ),
   passwordConfirmation: yup
     .string()
     .oneOf([yup.ref('new_password'), null], 'Passwords must match'),
@@ -47,25 +55,23 @@ const validationSchema = yup.object({
 const Form = (): JSX.Element => {
   const theme = useTheme();
   const navigate = useNavigate();
-  const { email } = useParams();
+  const { username } = useParams();
+  console.log(username);
   const dispatch = useAppDispatch();
-
+  const [signInError, setSignInError] = useState('');
   const initialValues = {
-    username: email,
+    username: username,
     code: '',
     new_password: '',
   };
 
   const onSubmit = async (values) => {
-    console.log(JSON.stringify(values));
-    const { username, code, new_password } = values;
-    const response = await dispatch(
-      forgotPassWordSubmit({ username, code, new_password }),
-    );
+    const response: any = await dispatch(forgotPassWordSubmit(values));
     console.log(response);
     if (response.meta.requestStatus === 'fulfilled') {
       navigate('/auth/signIn');
     } else {
+      setSignInError(response.error.message);
       return false;
     }
   };
@@ -114,7 +120,7 @@ const Form = (): JSX.Element => {
             />
           </Box>
 
-          <Box marginBottom={4}>
+          <Box marginBottom={6}>
             <TextField
               sx={{ height: 54 }}
               label="New Password"
@@ -135,7 +141,7 @@ const Form = (): JSX.Element => {
               }
             />
           </Box>
-          <Box marginBottom={4}>
+          <Box marginBottom={6}>
             <TextField
               sx={{ height: 54 }}
               label="Confirm Password"
@@ -157,6 +163,9 @@ const Form = (): JSX.Element => {
               }
             />
           </Box>
+          <Grid item xs={12}>
+            {signInError && <Alert severity="error">{signInError}</Alert>}
+          </Grid>
           <Box>
             <Button
               sx={{ height: 54 }}

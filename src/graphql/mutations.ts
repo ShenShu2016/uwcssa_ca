@@ -347,6 +347,7 @@ export const createArticle = /* GraphQL */ `
         countEventId
         countCommentId
       }
+      publish
       active
       createdAt
       updatedAt
@@ -405,6 +406,7 @@ export const updateArticle = /* GraphQL */ `
         countEventId
         countCommentId
       }
+      publish
       active
       createdAt
       updatedAt
@@ -463,6 +465,7 @@ export const deleteArticle = /* GraphQL */ `
         countEventId
         countCommentId
       }
+      publish
       active
       createdAt
       updatedAt
@@ -504,6 +507,7 @@ export const createComment = /* GraphQL */ `
         content
         coverPageImgURL
         coverPageDescription
+        publish
         active
         createdAt
         updatedAt
@@ -524,6 +528,7 @@ export const createComment = /* GraphQL */ `
         startDate
         endDate
         eventStatus
+        publish
         active
         createdAt
         updatedAt
@@ -588,6 +593,7 @@ export const updateComment = /* GraphQL */ `
         content
         coverPageImgURL
         coverPageDescription
+        publish
         active
         createdAt
         updatedAt
@@ -608,6 +614,7 @@ export const updateComment = /* GraphQL */ `
         startDate
         endDate
         eventStatus
+        publish
         active
         createdAt
         updatedAt
@@ -672,6 +679,7 @@ export const deleteComment = /* GraphQL */ `
         content
         coverPageImgURL
         coverPageDescription
+        publish
         active
         createdAt
         updatedAt
@@ -692,6 +700,7 @@ export const deleteComment = /* GraphQL */ `
         startDate
         endDate
         eventStatus
+        publish
         active
         createdAt
         updatedAt
@@ -858,6 +867,7 @@ export const createCount = /* GraphQL */ `
         content
         coverPageImgURL
         coverPageDescription
+        publish
         active
         createdAt
         updatedAt
@@ -877,6 +887,7 @@ export const createCount = /* GraphQL */ `
         startDate
         endDate
         eventStatus
+        publish
         active
         createdAt
         updatedAt
@@ -922,6 +933,7 @@ export const updateCount = /* GraphQL */ `
         content
         coverPageImgURL
         coverPageDescription
+        publish
         active
         createdAt
         updatedAt
@@ -941,6 +953,7 @@ export const updateCount = /* GraphQL */ `
         startDate
         endDate
         eventStatus
+        publish
         active
         createdAt
         updatedAt
@@ -986,6 +999,7 @@ export const deleteCount = /* GraphQL */ `
         content
         coverPageImgURL
         coverPageDescription
+        publish
         active
         createdAt
         updatedAt
@@ -1005,6 +1019,7 @@ export const deleteCount = /* GraphQL */ `
         startDate
         endDate
         eventStatus
+        publish
         active
         createdAt
         updatedAt
@@ -1047,6 +1062,7 @@ export const createLike = /* GraphQL */ `
         content
         coverPageImgURL
         coverPageDescription
+        publish
         active
         createdAt
         updatedAt
@@ -1077,6 +1093,7 @@ export const createLike = /* GraphQL */ `
         startDate
         endDate
         eventStatus
+        publish
         active
         createdAt
         updatedAt
@@ -1121,6 +1138,7 @@ export const updateLike = /* GraphQL */ `
         content
         coverPageImgURL
         coverPageDescription
+        publish
         active
         createdAt
         updatedAt
@@ -1151,6 +1169,7 @@ export const updateLike = /* GraphQL */ `
         startDate
         endDate
         eventStatus
+        publish
         active
         createdAt
         updatedAt
@@ -1195,6 +1214,7 @@ export const deleteLike = /* GraphQL */ `
         content
         coverPageImgURL
         coverPageDescription
+        publish
         active
         createdAt
         updatedAt
@@ -1225,6 +1245,7 @@ export const deleteLike = /* GraphQL */ `
         startDate
         endDate
         eventStatus
+        publish
         active
         createdAt
         updatedAt
@@ -1687,6 +1708,7 @@ export const createEvent = /* GraphQL */ `
         countEventId
         countCommentId
       }
+      publish
       active
       createdAt
       updatedAt
@@ -1779,6 +1801,7 @@ export const updateEvent = /* GraphQL */ `
         countEventId
         countCommentId
       }
+      publish
       active
       createdAt
       updatedAt
@@ -1871,6 +1894,7 @@ export const deleteEvent = /* GraphQL */ `
         countEventId
         countCommentId
       }
+      publish
       active
       createdAt
       updatedAt
@@ -2038,6 +2062,7 @@ export const createForm = /* GraphQL */ `
         startDate
         endDate
         eventStatus
+        publish
         active
         createdAt
         updatedAt
@@ -2093,6 +2118,7 @@ export const updateForm = /* GraphQL */ `
         startDate
         endDate
         eventStatus
+        publish
         active
         createdAt
         updatedAt
@@ -2148,6 +2174,7 @@ export const deleteForm = /* GraphQL */ `
         startDate
         endDate
         eventStatus
+        publish
         active
         createdAt
         updatedAt
@@ -3893,6 +3920,7 @@ export const createArticleTags = /* GraphQL */ `
         content
         coverPageImgURL
         coverPageDescription
+        publish
         active
         createdAt
         updatedAt
@@ -3925,6 +3953,7 @@ export const updateArticleTags = /* GraphQL */ `
         content
         coverPageImgURL
         coverPageDescription
+        publish
         active
         createdAt
         updatedAt
@@ -3957,6 +3986,7 @@ export const deleteArticleTags = /* GraphQL */ `
         content
         coverPageImgURL
         coverPageDescription
+        publish
         active
         createdAt
         updatedAt
@@ -3996,6 +4026,7 @@ export const createEventTags = /* GraphQL */ `
         startDate
         endDate
         eventStatus
+        publish
         active
         createdAt
         updatedAt
@@ -4037,6 +4068,7 @@ export const updateEventTags = /* GraphQL */ `
         startDate
         endDate
         eventStatus
+        publish
         active
         createdAt
         updatedAt
@@ -4078,6 +4110,7 @@ export const deleteEventTags = /* GraphQL */ `
         startDate
         endDate
         eventStatus
+        publish
         active
         createdAt
         updatedAt

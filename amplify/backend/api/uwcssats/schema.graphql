@@ -145,6 +145,7 @@ type Article
   comments: [Comment] @hasMany
   likes: [Like] @hasMany
   count: Count @hasOne # 每一个article 都要有一个count 记录有几个Comments
+  publish: Boolean
   active: ActiveType!
     @index(
       name: "articleSortByCreatedAt" #名字要用小写
@@ -381,6 +382,7 @@ type Event
   eventParticipants: [EventParticipant] @hasMany
   likes: [Like] @hasMany
   count: Count @hasOne # 每一个article 都要有一个count 记录有几个Comments
+  publish: Boolean
   active: ActiveType!
     @index(
       name: "eventSortByCreatedAt" #名字要用小写
