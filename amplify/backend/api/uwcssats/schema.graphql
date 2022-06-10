@@ -14,7 +14,7 @@ type User
   @auth(rules: [{ allow: groups, groups: ["uwcssaAdmin"] }]) {
   id: ID!
   email: AWSEmail!
-  userName: String! # 和这个东西一样：event.request.userAttributes.sub, Google 登录的话就是google_ 开头
+  userName: String! # 和这个东西一样：event.request.userAttributes.sub, Google 登录的话就是google_ 开头 google 的sub 和username 不一样，username 是google_开头
   name: String! # 额外的name，但是他们的username 还是uuid。和Google连用不错
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!

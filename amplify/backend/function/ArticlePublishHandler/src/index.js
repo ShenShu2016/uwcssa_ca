@@ -2,7 +2,7 @@
  * @Author: Shikai Jin
  * @Date: 2022-05-28 22:04:05
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-10 16:26:55
+ * @LastEditTime: 2022-06-10 18:23:48
  * @FilePath: /uwcssa_ca/amplify/backend/function/ArticlePublishHandler/src/index.js
  * @Description:
  *
@@ -32,7 +32,13 @@ exports.handler = async function (event) {
   console.log(record.eventName);
   console.log('DynamoDB Record: %j', record.dynamodb);
   const tableName = process.env.UserProfile_Table;
-  let dbParams = { TableName: tableName };
+  let dbParams = {
+    TableName: tableName,
+    FilterExpression: 'emailSubscription = :emailSubscription',
+    ExpressionAttributeValues: {
+      ':emailSubscription': true,
+    },
+  };
   let scanResults = [];
   let items;
   //没有处理多于50个人的情况

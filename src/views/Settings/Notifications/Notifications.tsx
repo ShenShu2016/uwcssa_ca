@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-26 13:57:44
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-10 17:35:54
+ * @LastEditTime: 2022-06-10 18:13:49
  * @FilePath: /uwcssa_ca/src/views/Settings/Notifications/Notifications.tsx
  * @Description:
  *
@@ -10,6 +10,7 @@
 
 import * as yup from 'yup';
 
+import { getOwnerUserName, getUserInfo } from 'redux/auth/authSlice';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 
 import Box from '@mui/material/Box';
@@ -22,7 +23,6 @@ import Link from '@mui/material/Link';
 import Page from '../components/Page';
 import React from 'react';
 import Typography from '@mui/material/Typography';
-import { getUserInfo } from 'redux/auth/authSlice';
 import { updateUserProfileData } from 'redux/userProfile/userProfileSlice';
 import { useFormik } from 'formik';
 
@@ -32,6 +32,7 @@ const validationSchema = yup.object({
 const Notifications = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const userInfo = useAppSelector(getUserInfo);
+  const ownerUserName = useAppSelector(getOwnerUserName);
 
   const myUserProfile = useAppSelector(
     (state) => state.userProfile.myUserProfile,
@@ -43,7 +44,7 @@ const Notifications = (): JSX.Element => {
   console.log(initialValues);
   const onSubmit = async (values) => {
     const updateUserProfileInput = {
-      id: userInfo.sub,
+      id: ownerUserName,
       ...values,
     };
     const response = await dispatch(
