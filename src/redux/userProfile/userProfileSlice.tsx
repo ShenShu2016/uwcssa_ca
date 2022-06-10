@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-28 01:04:11
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-09 17:19:18
+ * @LastEditTime: 2022-06-10 17:03:57
  * @FilePath: /uwcssa_ca/src/redux/userProfile/userProfileSlice.tsx
  * @Description:
  *
@@ -32,6 +32,7 @@ export type UserProfile = {
   title?: string | null;
   about?: string | null;
   avatarURL?: AvatarURL;
+  emailSubscription?: boolean | null;
   userProfileAvatarURLId?: string | null;
   website?: string | null;
   createdAt: string;
@@ -71,6 +72,7 @@ const initialState = userProfileAdapter.getInitialState({
     contactEmail: '',
     title: '',
     about: '',
+    emailSubscription: true,
     avatarURL: {
       id: '',
       objectURL: '',

@@ -1,3 +1,17 @@
+/*
+ * @Author: Shen Shu
+ * @Date: 2022-05-26 13:57:44
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-06-10 17:35:54
+ * @FilePath: /uwcssa_ca/src/views/Settings/Notifications/Notifications.tsx
+ * @Description:
+ *
+ */
+
+import * as yup from 'yup';
+
+import { useAppDispatch, useAppSelector } from 'redux/hooks';
+
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
@@ -8,8 +22,42 @@ import Link from '@mui/material/Link';
 import Page from '../components/Page';
 import React from 'react';
 import Typography from '@mui/material/Typography';
+import { getUserInfo } from 'redux/auth/authSlice';
+import { updateUserProfileData } from 'redux/userProfile/userProfileSlice';
+import { useFormik } from 'formik';
 
+const validationSchema = yup.object({
+  emailSubscription: yup.boolean(),
+});
 const Notifications = (): JSX.Element => {
+  const dispatch = useAppDispatch();
+  const userInfo = useAppSelector(getUserInfo);
+
+  const myUserProfile = useAppSelector(
+    (state) => state.userProfile.myUserProfile,
+  );
+  console.log(myUserProfile);
+  const initialValues = {
+    emailSubscription: myUserProfile.emailSubscription,
+  };
+  console.log(initialValues);
+  const onSubmit = async (values) => {
+    const updateUserProfileInput = {
+      id: userInfo.sub,
+      ...values,
+    };
+    const response = await dispatch(
+      updateUserProfileData(updateUserProfileInput),
+    );
+    console.log('response', response);
+    return values;
+  };
+  const formik = useFormik({
+    initialValues,
+    enableReinitialize: true,
+    validationSchema: validationSchema,
+    onSubmit,
+  });
   return (
     <>
       <Page>
@@ -23,34 +71,41 @@ const Notifications = (): JSX.Element => {
             <Typography variant="h6" fontWeight={700}>
               Update website notifications
             </Typography>
-            <Button
+            {/* <Button
               size={'large'}
               variant={'outlined'}
               sx={{ marginTop: { xs: 2, md: 0 } }}
             >
               Reset all
-            </Button>
+            </Button> */}
           </Box>
           <Box paddingY={4}>
             <Divider />
           </Box>
-          <form>
+          <form onSubmit={formik.handleSubmit}>
             <Grid container spacing={4}>
               <Grid item xs={12} md={6}>
                 <Typography variant="h6">System settings</Typography>
                 <Typography variant="caption">
-                  You will recieve emails in your business email address
+                  You will receive emails in {userInfo.email} when new article
+                  and event are published.
                 </Typography>
                 <Box>
                   <Box>
                     <FormControlLabel
+                      name={'emailSubscription'}
+                      value={formik.values.emailSubscription}
+                      onChange={formik.handleChange}
                       control={
-                        <Checkbox defaultChecked={true} color="primary" />
+                        <Checkbox
+                          color="primary"
+                          checked={formik.values.emailSubscription}
+                        />
                       }
-                      label="E-mail alerts"
+                      label="E-mail subscription"
                     />
                   </Box>
-                  <Box>
+                  {/* <Box>
                     <FormControlLabel
                       control={
                         <Checkbox defaultChecked={true} color="primary" />
@@ -73,10 +128,10 @@ const Notifications = (): JSX.Element => {
                       }
                       label="Phone calles"
                     />
-                  </Box>
+                  </Box> */}
                 </Box>
               </Grid>
-              <Grid item xs={12} md={6}>
+              {/* <Grid item xs={12} md={6}>
                 <Typography variant="h6">Chat settings</Typography>
                 <Typography variant="caption">
                   You will recieve emails in your business email address
@@ -99,7 +154,7 @@ const Notifications = (): JSX.Element => {
                     />
                   </Box>
                 </Box>
-              </Grid>
+              </Grid> */}
               <Grid item container xs={12}>
                 <Box
                   display="flex"
