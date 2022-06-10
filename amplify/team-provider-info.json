@@ -57,5 +57,64 @@
         }
       }
     }
+  },
+  "production": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-uwcssa-production-232508-authRole",
+      "UnauthRoleArn": "arn:aws:iam::537666141782:role/amplify-uwcssa-production-232508-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::537666141782:role/amplify-uwcssa-production-232508-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-uwcssa-production-232508-deployment",
+      "UnauthRoleName": "amplify-uwcssa-production-232508-unauthRole",
+      "StackName": "amplify-uwcssa-production-232508",
+      "StackId": "arn:aws:cloudformation:us-east-2:537666141782:stack/amplify-uwcssa-production-232508/ee63e980-e86c-11ec-99aa-028adfc81194",
+      "AmplifyAppId": "d23ollqt4907qw",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-uwcssa-production-232508-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
+    },
+    "categories": {
+      "auth": {
+        "userPoolGroups": {},
+        "uwcssats": {
+          "googleClientId": "1067602080073-4sib1lqinat4u97ovto5o1khl70ofijk.apps.googleusercontent.com"
+        }
+      },
+      "function": {
+        "uwcssatsPostConfirmation": {
+          "GROUP": "uwcssaUser",
+          "deploymentBucketName": "amplify-uwcssa-production-232508-deployment",
+          "s3Key": "amplify-builds/uwcssatsPostConfirmation-335a4432517745755568-build.zip",
+          "userTable": "User-4r2t6l2uprdgjhmoocpazejjcq-devts",
+          "userProfileTable": "UserProfile-4r2t6l2uprdgjhmoocpazejjcq-devts",
+          "countTable": "Count-4r2t6l2uprdgjhmoocpazejjcq-devts"
+        },
+        "AdminQueriesdf7beb2c": {
+          "deploymentBucketName": "amplify-uwcssa-production-232508-deployment",
+          "s3Key": "amplify-builds/AdminQueriesdf7beb2c-6d345939576834733638-build.zip"
+        },
+        "UserImageCompressHandler": {
+          "deploymentBucketName": "amplify-uwcssa-production-232508-deployment",
+          "s3Key": "amplify-builds/UserImageCompressHandler-7a44524d4c4170385258-build.zip"
+        },
+        "ArticlePublishHandler": {
+          "deploymentBucketName": "amplify-uwcssa-production-232508-deployment",
+          "s3Key": "amplify-builds/ArticlePublishHandler-31486836444571654d5a-build.zip",
+          "userProfileTable": "UserProfile-4r2t6l2uprdgjhmoocpazejjcq-devts"
+        },
+        "ContactUsHandler": {
+          "deploymentBucketName": "amplify-uwcssa-production-232508-deployment",
+          "s3Key": "amplify-builds/ContactUsHandler-7666725173764d725567-build.zip"
+        },
+        "CountHandler": {
+          "deploymentBucketName": "amplify-uwcssa-production-232508-deployment",
+          "s3Key": "amplify-builds/CountHandler-686f6a693242556e7a33-build.zip",
+          "countTable": "Count-4r2t6l2uprdgjhmoocpazejjcq-devts",
+          "articleTable": "Article-4r2t6l2uprdgjhmoocpazejjcq-devts"
+        },
+        "uwcssaLayerNodeJSSharp": {
+          "deploymentBucketName": "amplify-uwcssa-production-232508-deployment",
+          "s3Key": "amplify-builds/uwcssaLayerNodeJSSharp-LambdaLayerVersion48893822-build.zip"
+        }
+      }
+    }
   }
 }
