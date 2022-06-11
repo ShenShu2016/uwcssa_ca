@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-06-07 22:23:59
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-08 16:58:04
+ * @LastEditTime: 2022-06-11 01:26:37
  * @FilePath: /uwcssa_ca/src/redux/like/likeSlice.tsx
  * @Description:
  *
@@ -56,8 +56,9 @@ const initialState = likeAdapter.getInitialState({
 
 export const fetchLikeList = createAsyncThunk(
   'like/fetchLikeList',
-  async ({ isAuth }: { isAuth: boolean }) => {
+  async ({ isAuth }: { isAuth: boolean }, { rejectWithValue }) => {
     try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const result: any = await API.graphql({
         query: listLikes,
         // variables: {
@@ -70,14 +71,19 @@ export const fetchLikeList = createAsyncThunk(
       return result.data.listLikes.items;
     } catch (error) {
       console.log(error);
+      return rejectWithValue(error.errors);
     }
   },
 );
 
 export const fetchLike = createAsyncThunk(
   'like/fetchLike',
-  async ({ likeId, isAuth }: { likeId: string; isAuth: boolean }) => {
+  async (
+    { likeId, isAuth }: { likeId: string; isAuth: boolean },
+    { rejectWithValue },
+  ) => {
     try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const result: any = await API.graphql({
         query: getLike,
         variables: { id: likeId },
@@ -89,19 +95,24 @@ export const fetchLike = createAsyncThunk(
       return result.data.getLike;
     } catch (error) {
       console.log(error);
+      return rejectWithValue(error.errors);
     }
   },
 );
 
 export const postLike = createAsyncThunk(
   'like/postLike',
-  async ({ createLikeInput }: { createLikeInput: CreateLikeInput }) => {
+  async (
+    { createLikeInput }: { createLikeInput: CreateLikeInput },
+    { rejectWithValue },
+  ) => {
     Object.keys(createLikeInput).forEach((key) =>
       createLikeInput[key] === null || createLikeInput[key] === ''
         ? delete createLikeInput[key]
         : {},
     );
     try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const result: any = await API.graphql(
         graphqlOperation(createLike, {
           input: createLikeInput,
@@ -110,19 +121,24 @@ export const postLike = createAsyncThunk(
       return result.data.createLike;
     } catch (error) {
       console.log(error);
+      return rejectWithValue(error.errors);
     }
   },
 );
 
 export const updateLikeDetail = createAsyncThunk(
   'like/updateLikeDetail',
-  async ({ updateLikeInput }: { updateLikeInput: UpdateLikeInput }) => {
+  async (
+    { updateLikeInput }: { updateLikeInput: UpdateLikeInput },
+    { rejectWithValue },
+  ) => {
     Object.keys(updateLikeInput).forEach((key) =>
       updateLikeInput[key] === null || updateLikeInput[key] === ''
         ? delete updateLikeInput[key]
         : {},
     );
     try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const result: any = await API.graphql(
         graphqlOperation(updateLike, {
           input: updateLikeInput,
@@ -131,14 +147,16 @@ export const updateLikeDetail = createAsyncThunk(
       return result.data.updateLike;
     } catch (error) {
       console.log(error);
+      return rejectWithValue(error.errors);
     }
   },
 );
 
 export const removeLike = createAsyncThunk(
   'like/removeLike',
-  async ({ id }: { id: string }) => {
+  async ({ id }: { id: string }, { rejectWithValue }) => {
     try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const result: any = await API.graphql(
         graphqlOperation(deleteLike, {
           input: { id },
@@ -147,6 +165,7 @@ export const removeLike = createAsyncThunk(
       return result.data.deleteLike.id;
     } catch (error) {
       console.log(error);
+      return rejectWithValue(error.errors);
     }
   },
 );
@@ -168,7 +187,7 @@ const likeSlice = createSlice({
       })
       .addCase(fetchLikeList.rejected, (state, action) => {
         state.fetchLikeListStatus = 'failed';
-        state.fetchLikeError = action.error.message;
+        state.fetchLikeListError = action.payload;
       })
       // Cases for status of selectedLike (pending, fulfilled, and rejected)
       .addCase(fetchLike.pending, (state) => {
@@ -182,7 +201,7 @@ const likeSlice = createSlice({
       })
       .addCase(fetchLike.rejected, (state, action) => {
         state.fetchLikeStatus = 'failed';
-        state.fetchLikeError = action.error.message;
+        state.fetchLikeError = action.payload;
       })
       // Cases for status of postLike (pending, fulfilled, and rejected)
       .addCase(postLike.pending, (state) => {
@@ -196,7 +215,7 @@ const likeSlice = createSlice({
       })
       .addCase(postLike.rejected, (state, action) => {
         state.postLikeStatus = 'failed';
-        state.postLikeError = action.error.message;
+        state.postLikeError = action.payload;
       })
       // Cases for status of updateLike (pending, fulfilled, and rejected)
       .addCase(updateLikeDetail.pending, (state) => {
@@ -208,7 +227,7 @@ const likeSlice = createSlice({
       })
       .addCase(updateLikeDetail.rejected, (state, action) => {
         state.updateLikeDetailStatus = 'failed';
-        state.updateLikeDetailError = action.error.message;
+        state.updateLikeDetailError = action.payload;
       })
       .addCase(removeLike.pending, (state) => {
         state.removeLikeStatus = 'loading';
@@ -222,7 +241,7 @@ const likeSlice = createSlice({
       })
       .addCase(removeLike.rejected, (state, action) => {
         state.removeLikeStatus = 'failed';
-        state.removeLikeError = action.error.message;
+        state.removeLikeError = action.payload;
       });
   },
 });

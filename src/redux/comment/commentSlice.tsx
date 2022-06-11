@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-20 21:02:00
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-10 21:04:18
+ * @LastEditTime: 2022-06-11 01:20:14
  * @FilePath: /uwcssa_ca/src/redux/comment/commentSlice.tsx
  * @Description:
  *
@@ -208,7 +208,7 @@ const commentSlice = createSlice({
       })
       .addCase(fetchCommentList.rejected, (state, action) => {
         state.fetchCommentListStatus = 'failed';
-        state.fetchCommentError = action.payload;
+        state.fetchCommentListError = action.payload;
       })
       .addCase(fetchComment.pending, (state) => {
         state.fetchCommentStatus = 'loading';

@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-28 01:04:11
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-10 18:10:40
+ * @LastEditTime: 2022-06-11 01:35:53
  * @FilePath: /uwcssa_ca/src/redux/userProfile/userProfileSlice.tsx
  * @Description:
  *
@@ -108,8 +108,9 @@ const initialState = userProfileAdapter.getInitialState({
 
 export const fetchUserProfileList = createAsyncThunk(
   'userProfile/fetchUserProfileList',
-  async ({ isAuth }: { isAuth: boolean }) => {
+  async ({ isAuth }: { isAuth: boolean }, { rejectWithValue }) => {
     try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const result: any = await API.graphql({
         query: userProfileSortByCreatedAt,
         variables: {
@@ -123,24 +124,34 @@ export const fetchUserProfileList = createAsyncThunk(
       return result.data.userProfileSortByCreatedAt.items;
     } catch (error) {
       console.log(error);
+      return rejectWithValue(error.errors);
     }
   },
 );
 
 export const fetchUserProfile = createAsyncThunk(
   'userProfile/fetchUserProfile',
-  async (username: string) => {
-    const response: any = await API.graphql({
-      query: getUserProfile,
-      variables: { id: username },
-    });
-    return response.data.getUserProfile;
+  async (username: string, { rejectWithValue }) => {
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const response: any = await API.graphql({
+        query: getUserProfile,
+        variables: { id: username },
+      });
+      return response.data.getUserProfile;
+    } catch (error) {
+      console.log(error);
+      return rejectWithValue(error.errors);
+    }
   },
 );
 
 export const updateUserProfileData = createAsyncThunk(
   'userProfile/updateUserProfile',
-  async (updateUserProfileInput: UpdateUserProfileInput) => {
+  async (
+    updateUserProfileInput: UpdateUserProfileInput,
+    { rejectWithValue },
+  ) => {
     Object.keys(updateUserProfileInput).forEach((key) =>
       updateUserProfileInput[key] === null || updateUserProfileInput[key] === ''
         ? delete updateUserProfileInput[key]
@@ -148,6 +159,7 @@ export const updateUserProfileData = createAsyncThunk(
     );
 
     try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const response: any = await API.graphql(
         graphqlOperation(updateUserProfile, {
           input: updateUserProfileInput,
@@ -157,6 +169,7 @@ export const updateUserProfileData = createAsyncThunk(
       return response.data.updateUserProfile;
     } catch (error) {
       console.log(error);
+      return rejectWithValue(error.errors);
     }
   },
 );
@@ -183,7 +196,7 @@ const userProfileSlice = createSlice({
       })
       .addCase(fetchUserProfileList.rejected, (state, action) => {
         state.fetchUserProfileListStatus = 'failed';
-        state.fetchUserProfileListError = action.error.message;
+        state.fetchUserProfileListError = action.payload;
       })
       // Cases for status of getProfile (pending, fulfilled, and rejected)
       .addCase(fetchUserProfile.pending, (state) => {
@@ -196,7 +209,7 @@ const userProfileSlice = createSlice({
       })
       .addCase(fetchUserProfile.rejected, (state, action) => {
         state.fetchUserProfileStatus = 'failed';
-        state.fetchUserProfileError = action.error.message;
+        state.fetchUserProfileError = action.payload;
       })
       // Cases for status of putUserProfile (pending, fulfilled, and rejected)
       .addCase(updateUserProfileData.pending, (state) => {
@@ -214,7 +227,7 @@ const userProfileSlice = createSlice({
       })
       .addCase(updateUserProfileData.rejected, (state, action) => {
         state.updateUserProfileDetailStatus = 'failed';
-        state.updateUserProfileDetailError = action.error.message;
+        state.updateUserProfileDetailError = action.payload;
       });
   },
 });

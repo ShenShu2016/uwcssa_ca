@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-20 21:02:00
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-11 01:14:32
+ * @LastEditTime: 2022-06-11 01:18:43
  * @FilePath: /uwcssa_ca/src/redux/article/articleSlice.tsx
  * @Description:
  *
@@ -213,7 +213,7 @@ const articleSlice = createSlice({
       })
       .addCase(fetchArticleList.rejected, (state, action) => {
         state.fetchArticleListStatus = 'failed';
-        state.fetchArticleError = action.payload;
+        state.fetchArticleListError = action.payload;
       })
       // Cases for status of selectedArticle (pending, fulfilled, and rejected)
       .addCase(fetchArticle.pending, (state) => {

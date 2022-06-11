@@ -2,8 +2,8 @@
  * @Author: Shen Shu
  * @Date: 2022-05-21 00:37:27
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-21 01:54:49
- * @FilePath: /uwcssa_ca/frontend/src/redux/contactUs/ContactUsSlice.tsx
+ * @LastEditTime: 2022-06-11 01:21:04
+ * @FilePath: /uwcssa_ca/src/redux/contactUs/ContactUsSlice.tsx
  * @Description:
  *
  */
@@ -34,18 +34,26 @@ type ContactUs = {
 
 export const postContactUs = createAsyncThunk(
   'contactUs/postContactUs',
-  async ({ createContactUsInput }: { createContactUsInput: ContactUs }) => {
-    await API.graphql(
-      {
-        query: createContactUs,
-        variables: {
-          input: createContactUsInput,
+  async (
+    { createContactUsInput }: { createContactUsInput: ContactUs },
+    { rejectWithValue },
+  ) => {
+    try {
+      await API.graphql(
+        {
+          query: createContactUs,
+          variables: {
+            input: createContactUsInput,
+          },
+          authMode: createContactUsInput.owner ? undefined : 'AWS_IAM',
         },
-        authMode: createContactUsInput.owner ? undefined : 'AWS_IAM',
-      },
 
-      //graphqlOperation(createContactUs, { input: createContactUsInput }),
-    );
+        //graphqlOperation(createContactUs, { input: createContactUsInput }),
+      );
+    } catch (error) {
+      console.log(error);
+      return rejectWithValue(error.errors);
+    }
   },
 );
 
@@ -65,7 +73,7 @@ const contactUsSlice = createSlice({
       })
       .addCase(postContactUs.rejected, (state, action) => {
         state.postContactUsStatus = 'failed';
-        state.postContactUsError = action.error.message;
+        state.postContactUsError = action.payload;
       });
   },
 });
