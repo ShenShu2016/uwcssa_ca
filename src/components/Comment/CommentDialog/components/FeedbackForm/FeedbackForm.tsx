@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-26 16:50:46
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-10 21:14:40
+ * @LastEditTime: 2022-06-11 18:24:24
  * @FilePath: /uwcssa_ca/src/components/Comment/CommentDialog/components/FeedbackForm/FeedbackForm.tsx
  * @Description:
  *
@@ -23,8 +23,8 @@ import React from 'react';
 import { getOwnerUserName } from 'redux/auth/authSlice';
 import { postComment } from 'redux/comment/commentSlice';
 import { useFormik } from 'formik';
-import useMessage from 'hooks/useMessage';
 import { useParams } from 'react-router-dom';
+import { useSnackbar } from 'notistack';
 
 const validationSchema = yup.object({
   content: yup.string().trim().required('content is required.'),
@@ -46,7 +46,7 @@ const FeedbackForm = ({
   const { articleId } = useParams();
   const dispatch = useAppDispatch();
   const ownerUsername = useAppSelector(getOwnerUserName);
-  const message = useMessage();
+  const { enqueueSnackbar } = useSnackbar();
 
   const initialValues = {
     content: '',
@@ -67,10 +67,10 @@ const FeedbackForm = ({
       onClose();
       formik.resetForm();
       setCommentCount(commentCount + 1);
-      message.success('评论成功');
+      enqueueSnackbar('评论成功', { variant: 'success' });
       return true;
     } else {
-      message.error('评论失败');
+      enqueueSnackbar('评论失败', { variant: 'error' });
       return false;
     }
   };

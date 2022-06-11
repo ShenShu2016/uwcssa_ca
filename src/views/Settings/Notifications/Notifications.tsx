@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-26 13:57:44
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-10 18:58:34
+ * @LastEditTime: 2022-06-11 18:23:03
  * @FilePath: /uwcssa_ca/src/views/Settings/Notifications/Notifications.tsx
  * @Description:
  *
@@ -28,14 +28,14 @@ import Page from '../components/Page';
 import React from 'react';
 import { updateUserProfileData } from 'redux/userProfile/userProfileSlice';
 import { useFormik } from 'formik';
-import useMessage from 'hooks/useMessage';
+import { useSnackbar } from 'notistack';
 
 const validationSchema = yup.object({
   emailSubscription: yup.boolean(),
 });
 const Notifications = (): JSX.Element => {
   const dispatch = useAppDispatch();
-  const message = useMessage();
+  const { enqueueSnackbar } = useSnackbar();
   const userInfo = useAppSelector(getUserInfo);
   const ownerUserName = useAppSelector(getOwnerUserName);
 
@@ -56,9 +56,9 @@ const Notifications = (): JSX.Element => {
       updateUserProfileData(updateUserProfileInput),
     );
     if (response.meta.requestStatus === 'fulfilled') {
-      message.success('Profile updated successfully');
+      enqueueSnackbar('Profile updated successfully', { variant: 'success' });
     } else {
-      message.error('Profile update failed');
+      enqueueSnackbar('Profile update failed', { variant: 'error' });
     }
   };
   const formik = useFormik({

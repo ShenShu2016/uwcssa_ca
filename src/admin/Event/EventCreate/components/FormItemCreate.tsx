@@ -3,7 +3,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-03 09:32:30
- * @LastEditTime: 2022-06-10 20:16:09
+ * @LastEditTime: 2022-06-11 18:24:35
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/admin/Event/EventCreate/components/FormItemCreate.tsx
  */
@@ -37,7 +37,7 @@ import FullScreenLoading from 'components/FullScreenLoading';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { getOwnerUserName } from 'redux/auth/authSlice';
 import { useFormik } from 'formik';
-import useMessage from 'hooks/useMessage';
+import { useSnackbar } from 'notistack';
 
 export enum DialogType {
   create,
@@ -68,7 +68,7 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({
   const [newOption, setNewOption] = useState<string>('');
   const ownerUserName = useAppSelector(getOwnerUserName);
   const dispatch = useAppDispatch();
-  const message = useMessage();
+  const { enqueueSnackbar } = useSnackbar();
   const handleClose = () => {
     setOpen(false);
   };
@@ -116,7 +116,7 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({
   const handleAddOption = () => {
     const exist = options.find((item) => item.label === newOption);
     if (exist) {
-      message.warning(`选项${newOption}已存在`);
+      enqueueSnackbar(`选项${newOption}已存在`, { variant: 'warning' });
       return;
     }
     setOptions((prev: Option[]) => {
@@ -161,7 +161,7 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({
         formik.values.formType === FormType.RadioGroupV) &&
       !options.length
     ) {
-      message.warning('请完成选项配置');
+      enqueueSnackbar('请完成选项配置', { variant: 'warning' });
       return;
     }
     setFullScreenLoading({
@@ -205,10 +205,11 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({
             }),
           );
     if (res.meta.requestStatus === 'fulfilled') {
-      message.success(
+      enqueueSnackbar(
         type === DialogType.create
           ? '问题创建成功，记得加入表单才能生效哦'
           : '修改问题配置成功',
+        { variant: 'error' },
       );
       setFullScreenLoading({
         loading: false,

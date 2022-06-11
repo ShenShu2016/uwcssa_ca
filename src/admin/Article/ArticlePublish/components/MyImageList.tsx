@@ -3,7 +3,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-23 13:50:22
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-10 20:19:43
+ * @LastEditTime: 2022-06-11 18:26:13
  * @FilePath: /uwcssa_ca/src/admin/Article/ArticlePublish/components/MyImageList.tsx
  * @Description:
  *
@@ -31,13 +31,13 @@ import { useAppDispatch, useAppSelector } from 'redux/hooks';
 
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import moment from 'moment';
-import useMessage from 'hooks/useMessage';
+import { useSnackbar } from 'notistack';
 
 // import ListSubheader from '@mui/material/ListSubheader';
 
 function MyImageList({ useImgFromRecent }) {
   const dispatch = useAppDispatch();
-  const message = useMessage();
+  const { enqueueSnackbar } = useSnackbar();
   const userImages = useAppSelector(selectAllUserImages);
   const nextToken = useAppSelector(getNextToken);
   const { fetchUserImageListStatus } = useAppSelector(
@@ -108,10 +108,10 @@ function MyImageList({ useImgFromRecent }) {
                           navigator.clipboard.writeText(
                             item.objectCompressedURL || item.objectURL,
                           );
-                          message.success('链接已复制');
+                          enqueueSnackbar('链接已复制', { variant: 'success' });
                         } catch (err) {
                           console.error(err);
-                          message.warning('复制有误');
+                          enqueueSnackbar('复制有误', { variant: 'error' });
                         }
                       }}
                     >

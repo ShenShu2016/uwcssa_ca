@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-30 15:13:57
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-10 20:02:58
+ * @LastEditTime: 2022-06-11 18:46:30
  * @FilePath: /uwcssa_ca/src/admin/Department/DepartmentDashboard/components/AddUwcssaDepartment/AddUwcssaDepartmentForm/AddUwcssaDepartmentForm.tsx
  * @Description:
  *
@@ -24,7 +24,7 @@ import React from 'react';
 import { getOwnerUserName } from 'redux/auth/authSlice';
 import { postUwcssaDepartment } from 'redux/uwcssaDepartment/uwcssaDepartmentSlice';
 import { useFormik } from 'formik';
-import useMessage from 'hooks/useMessage';
+import { useSnackbar } from 'notistack';
 
 const validationSchema = yup.object({
   id: yup.string().required(),
@@ -41,7 +41,7 @@ interface Props {
 const AddUwcssaDepartmentForm = ({ onClose, open }: Props): JSX.Element => {
   const dispatch = useAppDispatch();
   const ownerUsername = useAppSelector(getOwnerUserName);
-  const message = useMessage();
+  const { enqueueSnackbar } = useSnackbar();
   const initialValues = {
     id: '',
     introduction: '',
@@ -60,11 +60,11 @@ const AddUwcssaDepartmentForm = ({ onClose, open }: Props): JSX.Element => {
     );
     if (response.meta.requestStatus === 'fulfilled') {
       onClose();
-      message.success('添加成功！');
+      enqueueSnackbar('添加成功！', { variant: 'success' });
       formik.resetForm();
       return true;
     } else {
-      message.error(response.payload[0].errorType);
+      enqueueSnackbar({ variant: 'error' }, response.payload[0].errorType);
       return false;
     }
   };

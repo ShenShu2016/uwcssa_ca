@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-01 09:18:34
- * @LastEditTime: 2022-06-10 20:20:45
+ * @LastEditTime: 2022-06-11 18:25:33
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/admin/Event/EventCreate/components/EventPoster.tsx
  */
@@ -17,7 +17,7 @@ import InsertPhotoIcon from '@mui/icons-material/InsertPhoto';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import { postUserImage } from 'redux/userImage/userImageSlice';
 import { setPosterImage } from 'redux/form/formSlice';
-import useMessage from 'hooks/useMessage';
+import { useSnackbar } from 'notistack';
 import { useSwiper } from 'swiper/react';
 
 const Input = styled('input')({
@@ -26,7 +26,7 @@ const Input = styled('input')({
 
 const EventPoster: React.FC = () => {
   const swiper = useSwiper();
-  const message = useMessage();
+  const { enqueueSnackbar } = useSnackbar();
   const dispatch = useAppDispatch();
   const [uploadImgLoading, setUploadImgLoading] = useState<boolean>(false);
   // const [imgFile, setImgFile] = useState<string>('');
@@ -56,9 +56,9 @@ const EventPoster: React.FC = () => {
       //   response.payload.objectURL || response.payload.objectCompressedURL,
       // );
       // setOriginImg(response.payload.objectURL);
-      message.success('图片上传成功');
+      enqueueSnackbar('图片上传成功', { variant: 'success' });
     } else {
-      message.error('图片上传失败');
+      enqueueSnackbar('图片上传失败', { variant: 'error' });
     }
     setUploadImgLoading(false);
   };

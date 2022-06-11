@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-19 21:16:43
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-10 21:15:12
+ * @LastEditTime: 2022-06-11 18:23:26
  * @FilePath: /uwcssa_ca/src/views/ContactPage/components/Form/Form.tsx
  * @Description:
  *
@@ -25,7 +25,7 @@ import React from 'react';
 import { getOwnerUserName } from 'redux/auth/authSlice';
 import { postContactUs } from 'redux/contactUs/ContactUsSlice';
 import { useFormik } from 'formik';
-import useMessage from 'hooks/useMessage';
+import { useSnackbar } from 'notistack';
 
 /* eslint-disable react/no-unescaped-entities */
 
@@ -54,7 +54,7 @@ const Form = (): JSX.Element => {
   const theme = useTheme();
   const dispatch = useAppDispatch();
   const ownerUserName = useAppSelector(getOwnerUserName);
-  const message = useMessage();
+  const { enqueueSnackbar } = useSnackbar();
   const isMd = useMediaQuery(theme.breakpoints.up('md'), {
     defaultMatches: true,
   });
@@ -75,9 +75,9 @@ const Form = (): JSX.Element => {
     const response = await dispatch(postContactUs({ createContactUsInput }));
     if (response.meta.requestStatus === 'fulfilled') {
       formik.resetForm();
-      message.success('Message sent successfully');
+      enqueueSnackbar('Message sent successfully', { variant: 'success' });
     } else {
-      message.error('Message failed to send');
+      enqueueSnackbar('Message failed to send', { variant: 'error' });
       return false;
     }
     return values;
