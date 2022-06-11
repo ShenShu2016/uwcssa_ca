@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-20 21:02:00
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-10 16:02:09
+ * @LastEditTime: 2022-06-11 01:14:32
  * @FilePath: /uwcssa_ca/src/redux/article/articleSlice.tsx
  * @Description:
  *
@@ -64,7 +64,6 @@ enum ActiveType {
   F = 'F',
 }
 const articleAdapter = createEntityAdapter<Article>({
-  // selectId: (item) => item.id,
   sortComparer: (a, b) => b.createdAt.localeCompare(a.createdAt),
 });
 
@@ -83,8 +82,9 @@ const initialState = articleAdapter.getInitialState({
 
 export const fetchArticleList = createAsyncThunk(
   'article/fetchArticleList',
-  async ({ isAuth }: { isAuth: boolean }) => {
+  async ({ isAuth }: { isAuth: boolean }, { rejectWithValue }) => {
     try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const result: any = await API.graphql({
         query: articleSortByCreatedAt,
         variables: {
@@ -97,22 +97,27 @@ export const fetchArticleList = createAsyncThunk(
       return result.data.articleSortByCreatedAt.items;
     } catch (error) {
       console.log(error);
+      return rejectWithValue(error.errors);
     }
   },
 );
 
 export const fetchArticle = createAsyncThunk(
   'article/fetchArticle',
-  async ({
-    articleId,
-    isAuth,
-    ownerUsername = undefined,
-  }: {
-    articleId: string;
-    isAuth: boolean;
-    ownerUsername: string;
-  }) => {
+  async (
+    {
+      articleId,
+      isAuth,
+      ownerUsername = undefined,
+    }: {
+      articleId: string;
+      isAuth: boolean;
+      ownerUsername: string;
+    },
+    { rejectWithValue },
+  ) => {
     try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const result: any = await API.graphql({
         query: getArticle,
         variables: { id: articleId, eq: ownerUsername },
@@ -124,17 +129,21 @@ export const fetchArticle = createAsyncThunk(
       return result.data.getArticle;
     } catch (error) {
       console.log(error);
+      return rejectWithValue(error.errors);
     }
   },
 );
 
 export const postArticle = createAsyncThunk(
   'article/postArticle',
-  async ({
-    createArticleInput,
-  }: {
-    createArticleInput: CreateArticleInput;
-  }) => {
+  async (
+    {
+      createArticleInput,
+    }: {
+      createArticleInput: CreateArticleInput;
+    },
+    { rejectWithValue },
+  ) => {
     try {
       const countId = uuid();
       await API.graphql(
@@ -149,7 +158,7 @@ export const postArticle = createAsyncThunk(
             owner: createArticleInput.owner,
           },
         }),
-      );
+      ); // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const result: any = await API.graphql(
         graphqlOperation(createArticle, {
           input: { articleCountId: countId, ...createArticleInput },
@@ -158,20 +167,26 @@ export const postArticle = createAsyncThunk(
       return result.data.createArticle;
     } catch (error) {
       console.log(error);
+      return rejectWithValue(error.errors);
     }
   },
 );
 
 export const updateArticleDetail = createAsyncThunk(
   'article/updateArticleDetail',
-  async ({ updateArticleInput }: { updateArticleInput: Article }) => {
+  async (
+    { updateArticleInput }: { updateArticleInput: Article },
+    { rejectWithValue },
+  ) => {
     try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const result: any = await API.graphql(
         graphqlOperation(updateArticle, { input: updateArticleInput }),
       );
       return result.data.updateArticle;
     } catch (error) {
       console.log(error);
+      return rejectWithValue(error.errors);
     }
   },
 );
@@ -198,7 +213,7 @@ const articleSlice = createSlice({
       })
       .addCase(fetchArticleList.rejected, (state, action) => {
         state.fetchArticleListStatus = 'failed';
-        state.fetchArticleError = action.error.message;
+        state.fetchArticleError = action.payload;
       })
       // Cases for status of selectedArticle (pending, fulfilled, and rejected)
       .addCase(fetchArticle.pending, (state) => {
@@ -216,7 +231,7 @@ const articleSlice = createSlice({
       })
       .addCase(fetchArticle.rejected, (state, action) => {
         state.fetchArticleStatus = 'failed';
-        state.fetchArticleError = action.error.message;
+        state.fetchArticleError = action.payload;
       })
       // Cases for status of postArticle (pending, fulfilled, and rejected)
       .addCase(postArticle.pending, (state) => {
@@ -230,21 +245,21 @@ const articleSlice = createSlice({
       })
       .addCase(postArticle.rejected, (state, action) => {
         state.postArticleStatus = 'failed';
-        state.postArticleError = action.error.message;
+        state.postArticleError = action.payload;
       })
       // Cases for status of updateArticle (pending, fulfilled, and rejected)
       .addCase(updateArticleDetail.pending, (state) => {
         state.updateArticleDetailStatus = 'loading';
       })
-      .addCase(updateArticleDetail.fulfilled, (state) => {
+      .addCase(updateArticleDetail.fulfilled, (state, action) => {
         state.updateArticleDetailStatus = 'succeed';
         //state.articles.unshift(action.payload.data.createArticle);
-        //articleAdapter.upsertOne(state, action.payload);
+        articleAdapter.upsertOne(state, action.payload);
         // state.updateArticleStatus = "idle";
       })
       .addCase(updateArticleDetail.rejected, (state, action) => {
         state.updateArticleDetailStatus = 'failed';
-        state.updateArticleDetailError = action.error.message;
+        state.updateArticleDetailError = action.payload;
       });
   },
 });
