@@ -1,14 +1,13 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-18 09:12:03
- * @LastEditTime: 2022-05-30 08:59:52
- * @LastEditors: 李佳修
- * @FilePath: /uwcssa_ca/src/views/Home/components/Section.tsx
+ * @LastEditTime: 2022-06-11 16:33:38
+ * @LastEditors: Shen Shu
+ * @FilePath: /uwcssa_ca/src/views/Dashboard/components/Section.tsx
  */
 
-import Card from '@mui/material/Card';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
+import { Box, Card, Typography } from '@mui/material';
+
 import React from 'react';
 
 interface Props {
@@ -16,7 +15,7 @@ interface Props {
   title: string;
   showTitle?: boolean;
   hasPadding?: boolean;
-  component?: any
+  component?: any;
   // All other props
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [x: string]: any;
@@ -25,15 +24,12 @@ interface Props {
 const Container = ({
   children,
   title,
-  hasPadding=true,
-  showTitle=true,
-  component=Card,
+  hasPadding = true,
+  showTitle = true,
+  component = Card,
   ...rest
 }: Props): JSX.Element => (
-  <Box
-    {...rest}
-    margin={'8px'}
-  >
+  <Box {...rest} margin={'8px'}>
     <Typography
       display={showTitle ? 'block' : 'none'}
       color="text.secondary"
@@ -47,7 +43,7 @@ const Container = ({
         p: hasPadding ? '8px' : '0px',
         width: '100%',
         height: '100%',
-        boxSizing: 'border-box'
+        boxSizing: 'border-box',
       }}
     >
       {children}
