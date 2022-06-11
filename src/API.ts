@@ -985,6 +985,7 @@ export type UwcssaDepartment = {
   leader?: string | null,
   currentLeader?: UserProfile | null,
   uwcssaMembers?: ModelUwcssaMemberConnection | null,
+  uwcssaCareers?: ModelUwcssaCareerConnection | null,
   createdAt: string,
   updatedAt: string,
   owner: string,
@@ -1014,6 +1015,73 @@ export type UwcssaMember = {
   user?: UserProfile | null,
   uwcssaDepartmentUwcssaMembersId?: string | null,
 };
+
+export type ModelUwcssaCareerConnection = {
+  __typename: "ModelUwcssaCareerConnection",
+  items:  Array<UwcssaCareer | null >,
+  nextToken?: string | null,
+};
+
+export type UwcssaCareer = {
+  __typename: "UwcssaCareer",
+  id: string,
+  title?: string | null,
+  whoWeAre?: string | null,
+  whatWeAreLookingFor?: Array< string | null > | null,
+  requirements?: Array< string | null > | null,
+  whyToApply?: string | null,
+  location?: string | null,
+  employmentType?: EmploymentType | null,
+  uwcssaDepartment?: UwcssaDepartment | null,
+  resume?: ModelResumeConnection | null,
+  startDate?: string | null,
+  createdAt: string,
+  updatedAt: string,
+  owner: string,
+  user?: UserProfile | null,
+  uwcssaDepartmentUwcssaCareersId?: string | null,
+};
+
+export enum EmploymentType {
+  FullTime = "FullTime",
+  PartTime = "PartTime",
+  Internship = "Internship",
+  Volunteer = "Volunteer",
+  Other = "Other",
+}
+
+
+export type ModelResumeConnection = {
+  __typename: "ModelResumeConnection",
+  items:  Array<Resume | null >,
+  nextToken?: string | null,
+};
+
+export type Resume = {
+  __typename: "Resume",
+  id: string,
+  fullName?: string | null,
+  email?: string | null,
+  phone?: string | null,
+  resumeURL?: string | null,
+  coverLetterURL?: string | null,
+  createdAt: string,
+  updatedAt: string,
+  message?: string | null,
+  progress: ResumeProgress,
+  uwcssaCareer?: UwcssaCareer | null,
+  owner?: string | null,
+  user?: UserProfile | null,
+  uwcssaCareerResumeId?: string | null,
+};
+
+export enum ResumeProgress {
+  pending = "pending",
+  inProgress = "inProgress",
+  accepted = "accepted",
+  rejected = "rejected",
+}
+
 
 export type UpdateUwcssaDepartmentInput = {
   id: string,
@@ -1497,6 +1565,121 @@ export type DeleteEventParticipantInput = {
   id: string,
 };
 
+export type CreateUwcssaCareerInput = {
+  id?: string | null,
+  title?: string | null,
+  whoWeAre?: string | null,
+  whatWeAreLookingFor?: Array< string | null > | null,
+  requirements?: Array< string | null > | null,
+  whyToApply?: string | null,
+  location?: string | null,
+  employmentType?: EmploymentType | null,
+  startDate?: string | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  owner: string,
+  uwcssaDepartmentUwcssaCareersId?: string | null,
+};
+
+export type ModelUwcssaCareerConditionInput = {
+  title?: ModelStringInput | null,
+  whoWeAre?: ModelStringInput | null,
+  whatWeAreLookingFor?: ModelStringInput | null,
+  requirements?: ModelStringInput | null,
+  whyToApply?: ModelStringInput | null,
+  location?: ModelStringInput | null,
+  employmentType?: ModelEmploymentTypeInput | null,
+  startDate?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  owner?: ModelIDInput | null,
+  and?: Array< ModelUwcssaCareerConditionInput | null > | null,
+  or?: Array< ModelUwcssaCareerConditionInput | null > | null,
+  not?: ModelUwcssaCareerConditionInput | null,
+  uwcssaDepartmentUwcssaCareersId?: ModelIDInput | null,
+};
+
+export type ModelEmploymentTypeInput = {
+  eq?: EmploymentType | null,
+  ne?: EmploymentType | null,
+};
+
+export type UpdateUwcssaCareerInput = {
+  id: string,
+  title?: string | null,
+  whoWeAre?: string | null,
+  whatWeAreLookingFor?: Array< string | null > | null,
+  requirements?: Array< string | null > | null,
+  whyToApply?: string | null,
+  location?: string | null,
+  employmentType?: EmploymentType | null,
+  startDate?: string | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  owner?: string | null,
+  uwcssaDepartmentUwcssaCareersId?: string | null,
+};
+
+export type DeleteUwcssaCareerInput = {
+  id: string,
+};
+
+export type CreateResumeInput = {
+  id?: string | null,
+  fullName?: string | null,
+  email?: string | null,
+  phone?: string | null,
+  resumeURL?: string | null,
+  coverLetterURL?: string | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  message?: string | null,
+  progress: ResumeProgress,
+  owner?: string | null,
+  uwcssaCareerResumeId?: string | null,
+};
+
+export type ModelResumeConditionInput = {
+  fullName?: ModelStringInput | null,
+  email?: ModelStringInput | null,
+  phone?: ModelStringInput | null,
+  resumeURL?: ModelStringInput | null,
+  coverLetterURL?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  message?: ModelStringInput | null,
+  progress?: ModelResumeProgressInput | null,
+  owner?: ModelIDInput | null,
+  and?: Array< ModelResumeConditionInput | null > | null,
+  or?: Array< ModelResumeConditionInput | null > | null,
+  not?: ModelResumeConditionInput | null,
+  uwcssaCareerResumeId?: ModelIDInput | null,
+};
+
+export type ModelResumeProgressInput = {
+  eq?: ResumeProgress | null,
+  ne?: ResumeProgress | null,
+};
+
+export type UpdateResumeInput = {
+  id: string,
+  fullName?: string | null,
+  email?: string | null,
+  phone?: string | null,
+  resumeURL?: string | null,
+  coverLetterURL?: string | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  message?: string | null,
+  progress?: ResumeProgress | null,
+  owner?: string | null,
+  uwcssaCareerResumeId?: string | null,
+};
+
+export type DeleteResumeInput = {
+  id: string,
+};
+
 export type CreateArticleTagsInput = {
   id?: string | null,
   tagID: string,
@@ -1959,6 +2142,43 @@ export type ModelEventParticipantFilterInput = {
   eventParticipantFormItem17Id?: ModelIDInput | null,
   eventParticipantFormItem18Id?: ModelIDInput | null,
   eventParticipantFormItem19Id?: ModelIDInput | null,
+};
+
+export type ModelUwcssaCareerFilterInput = {
+  id?: ModelIDInput | null,
+  title?: ModelStringInput | null,
+  whoWeAre?: ModelStringInput | null,
+  whatWeAreLookingFor?: ModelStringInput | null,
+  requirements?: ModelStringInput | null,
+  whyToApply?: ModelStringInput | null,
+  location?: ModelStringInput | null,
+  employmentType?: ModelEmploymentTypeInput | null,
+  startDate?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  owner?: ModelIDInput | null,
+  and?: Array< ModelUwcssaCareerFilterInput | null > | null,
+  or?: Array< ModelUwcssaCareerFilterInput | null > | null,
+  not?: ModelUwcssaCareerFilterInput | null,
+  uwcssaDepartmentUwcssaCareersId?: ModelIDInput | null,
+};
+
+export type ModelResumeFilterInput = {
+  id?: ModelIDInput | null,
+  fullName?: ModelStringInput | null,
+  email?: ModelStringInput | null,
+  phone?: ModelStringInput | null,
+  resumeURL?: ModelStringInput | null,
+  coverLetterURL?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  message?: ModelStringInput | null,
+  progress?: ModelResumeProgressInput | null,
+  owner?: ModelIDInput | null,
+  and?: Array< ModelResumeFilterInput | null > | null,
+  or?: Array< ModelResumeFilterInput | null > | null,
+  not?: ModelResumeFilterInput | null,
+  uwcssaCareerResumeId?: ModelIDInput | null,
 };
 
 export type ModelArticleTagsFilterInput = {
@@ -3528,6 +3748,10 @@ export type CreateUwcssaDepartmentMutation = {
       __typename: "ModelUwcssaMemberConnection",
       nextToken?: string | null,
     } | null,
+    uwcssaCareers?:  {
+      __typename: "ModelUwcssaCareerConnection",
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
     owner: string,
@@ -3568,6 +3792,10 @@ export type UpdateUwcssaDepartmentMutation = {
       __typename: "ModelUwcssaMemberConnection",
       nextToken?: string | null,
     } | null,
+    uwcssaCareers?:  {
+      __typename: "ModelUwcssaCareerConnection",
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
     owner: string,
@@ -3606,6 +3834,10 @@ export type DeleteUwcssaDepartmentMutation = {
     } | null,
     uwcssaMembers?:  {
       __typename: "ModelUwcssaMemberConnection",
+      nextToken?: string | null,
+    } | null,
+    uwcssaCareers?:  {
+      __typename: "ModelUwcssaCareerConnection",
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -6155,6 +6387,345 @@ export type DeleteEventParticipantMutation = {
   } | null,
 };
 
+export type CreateUwcssaCareerMutationVariables = {
+  input: CreateUwcssaCareerInput,
+  condition?: ModelUwcssaCareerConditionInput | null,
+};
+
+export type CreateUwcssaCareerMutation = {
+  createUwcssaCareer?:  {
+    __typename: "UwcssaCareer",
+    id: string,
+    title?: string | null,
+    whoWeAre?: string | null,
+    whatWeAreLookingFor?: Array< string | null > | null,
+    requirements?: Array< string | null > | null,
+    whyToApply?: string | null,
+    location?: string | null,
+    employmentType?: EmploymentType | null,
+    uwcssaDepartment?:  {
+      __typename: "UwcssaDepartment",
+      id: string,
+      introduction?: string | null,
+      email?: string | null,
+      leader?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    } | null,
+    resume?:  {
+      __typename: "ModelResumeConnection",
+      nextToken?: string | null,
+    } | null,
+    startDate?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    user?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      rank?: number | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      website?: string | null,
+      emailSubscription: boolean,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      userProfileAvatarURLId?: string | null,
+    } | null,
+    uwcssaDepartmentUwcssaCareersId?: string | null,
+  } | null,
+};
+
+export type UpdateUwcssaCareerMutationVariables = {
+  input: UpdateUwcssaCareerInput,
+  condition?: ModelUwcssaCareerConditionInput | null,
+};
+
+export type UpdateUwcssaCareerMutation = {
+  updateUwcssaCareer?:  {
+    __typename: "UwcssaCareer",
+    id: string,
+    title?: string | null,
+    whoWeAre?: string | null,
+    whatWeAreLookingFor?: Array< string | null > | null,
+    requirements?: Array< string | null > | null,
+    whyToApply?: string | null,
+    location?: string | null,
+    employmentType?: EmploymentType | null,
+    uwcssaDepartment?:  {
+      __typename: "UwcssaDepartment",
+      id: string,
+      introduction?: string | null,
+      email?: string | null,
+      leader?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    } | null,
+    resume?:  {
+      __typename: "ModelResumeConnection",
+      nextToken?: string | null,
+    } | null,
+    startDate?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    user?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      rank?: number | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      website?: string | null,
+      emailSubscription: boolean,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      userProfileAvatarURLId?: string | null,
+    } | null,
+    uwcssaDepartmentUwcssaCareersId?: string | null,
+  } | null,
+};
+
+export type DeleteUwcssaCareerMutationVariables = {
+  input: DeleteUwcssaCareerInput,
+  condition?: ModelUwcssaCareerConditionInput | null,
+};
+
+export type DeleteUwcssaCareerMutation = {
+  deleteUwcssaCareer?:  {
+    __typename: "UwcssaCareer",
+    id: string,
+    title?: string | null,
+    whoWeAre?: string | null,
+    whatWeAreLookingFor?: Array< string | null > | null,
+    requirements?: Array< string | null > | null,
+    whyToApply?: string | null,
+    location?: string | null,
+    employmentType?: EmploymentType | null,
+    uwcssaDepartment?:  {
+      __typename: "UwcssaDepartment",
+      id: string,
+      introduction?: string | null,
+      email?: string | null,
+      leader?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    } | null,
+    resume?:  {
+      __typename: "ModelResumeConnection",
+      nextToken?: string | null,
+    } | null,
+    startDate?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    user?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      rank?: number | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      website?: string | null,
+      emailSubscription: boolean,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      userProfileAvatarURLId?: string | null,
+    } | null,
+    uwcssaDepartmentUwcssaCareersId?: string | null,
+  } | null,
+};
+
+export type CreateResumeMutationVariables = {
+  input: CreateResumeInput,
+  condition?: ModelResumeConditionInput | null,
+};
+
+export type CreateResumeMutation = {
+  createResume?:  {
+    __typename: "Resume",
+    id: string,
+    fullName?: string | null,
+    email?: string | null,
+    phone?: string | null,
+    resumeURL?: string | null,
+    coverLetterURL?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    message?: string | null,
+    progress: ResumeProgress,
+    uwcssaCareer?:  {
+      __typename: "UwcssaCareer",
+      id: string,
+      title?: string | null,
+      whoWeAre?: string | null,
+      whatWeAreLookingFor?: Array< string | null > | null,
+      requirements?: Array< string | null > | null,
+      whyToApply?: string | null,
+      location?: string | null,
+      employmentType?: EmploymentType | null,
+      startDate?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      uwcssaDepartmentUwcssaCareersId?: string | null,
+    } | null,
+    owner?: string | null,
+    user?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      rank?: number | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      website?: string | null,
+      emailSubscription: boolean,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      userProfileAvatarURLId?: string | null,
+    } | null,
+    uwcssaCareerResumeId?: string | null,
+  } | null,
+};
+
+export type UpdateResumeMutationVariables = {
+  input: UpdateResumeInput,
+  condition?: ModelResumeConditionInput | null,
+};
+
+export type UpdateResumeMutation = {
+  updateResume?:  {
+    __typename: "Resume",
+    id: string,
+    fullName?: string | null,
+    email?: string | null,
+    phone?: string | null,
+    resumeURL?: string | null,
+    coverLetterURL?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    message?: string | null,
+    progress: ResumeProgress,
+    uwcssaCareer?:  {
+      __typename: "UwcssaCareer",
+      id: string,
+      title?: string | null,
+      whoWeAre?: string | null,
+      whatWeAreLookingFor?: Array< string | null > | null,
+      requirements?: Array< string | null > | null,
+      whyToApply?: string | null,
+      location?: string | null,
+      employmentType?: EmploymentType | null,
+      startDate?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      uwcssaDepartmentUwcssaCareersId?: string | null,
+    } | null,
+    owner?: string | null,
+    user?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      rank?: number | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      website?: string | null,
+      emailSubscription: boolean,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      userProfileAvatarURLId?: string | null,
+    } | null,
+    uwcssaCareerResumeId?: string | null,
+  } | null,
+};
+
+export type DeleteResumeMutationVariables = {
+  input: DeleteResumeInput,
+  condition?: ModelResumeConditionInput | null,
+};
+
+export type DeleteResumeMutation = {
+  deleteResume?:  {
+    __typename: "Resume",
+    id: string,
+    fullName?: string | null,
+    email?: string | null,
+    phone?: string | null,
+    resumeURL?: string | null,
+    coverLetterURL?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    message?: string | null,
+    progress: ResumeProgress,
+    uwcssaCareer?:  {
+      __typename: "UwcssaCareer",
+      id: string,
+      title?: string | null,
+      whoWeAre?: string | null,
+      whatWeAreLookingFor?: Array< string | null > | null,
+      requirements?: Array< string | null > | null,
+      whyToApply?: string | null,
+      location?: string | null,
+      employmentType?: EmploymentType | null,
+      startDate?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      uwcssaDepartmentUwcssaCareersId?: string | null,
+    } | null,
+    owner?: string | null,
+    user?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      rank?: number | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      website?: string | null,
+      emailSubscription: boolean,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      userProfileAvatarURLId?: string | null,
+    } | null,
+    uwcssaCareerResumeId?: string | null,
+  } | null,
+};
+
 export type CreateArticleTagsMutationVariables = {
   input: CreateArticleTagsInput,
   condition?: ModelArticleTagsConditionInput | null,
@@ -7350,6 +7921,10 @@ export type GetUwcssaDepartmentQuery = {
       __typename: "ModelUwcssaMemberConnection",
       nextToken?: string | null,
     } | null,
+    uwcssaCareers?:  {
+      __typename: "ModelUwcssaCareerConnection",
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
     owner: string,
@@ -8467,6 +9042,174 @@ export type ListEventParticipantsQuery = {
       eventParticipantFormItem17Id?: string | null,
       eventParticipantFormItem18Id?: string | null,
       eventParticipantFormItem19Id?: string | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetUwcssaCareerQueryVariables = {
+  id: string,
+};
+
+export type GetUwcssaCareerQuery = {
+  getUwcssaCareer?:  {
+    __typename: "UwcssaCareer",
+    id: string,
+    title?: string | null,
+    whoWeAre?: string | null,
+    whatWeAreLookingFor?: Array< string | null > | null,
+    requirements?: Array< string | null > | null,
+    whyToApply?: string | null,
+    location?: string | null,
+    employmentType?: EmploymentType | null,
+    uwcssaDepartment?:  {
+      __typename: "UwcssaDepartment",
+      id: string,
+      introduction?: string | null,
+      email?: string | null,
+      leader?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    } | null,
+    resume?:  {
+      __typename: "ModelResumeConnection",
+      nextToken?: string | null,
+    } | null,
+    startDate?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    user?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      rank?: number | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      website?: string | null,
+      emailSubscription: boolean,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      userProfileAvatarURLId?: string | null,
+    } | null,
+    uwcssaDepartmentUwcssaCareersId?: string | null,
+  } | null,
+};
+
+export type ListUwcssaCareersQueryVariables = {
+  filter?: ModelUwcssaCareerFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListUwcssaCareersQuery = {
+  listUwcssaCareers?:  {
+    __typename: "ModelUwcssaCareerConnection",
+    items:  Array< {
+      __typename: "UwcssaCareer",
+      id: string,
+      title?: string | null,
+      whoWeAre?: string | null,
+      whatWeAreLookingFor?: Array< string | null > | null,
+      requirements?: Array< string | null > | null,
+      whyToApply?: string | null,
+      location?: string | null,
+      employmentType?: EmploymentType | null,
+      startDate?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      uwcssaDepartmentUwcssaCareersId?: string | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetResumeQueryVariables = {
+  id: string,
+};
+
+export type GetResumeQuery = {
+  getResume?:  {
+    __typename: "Resume",
+    id: string,
+    fullName?: string | null,
+    email?: string | null,
+    phone?: string | null,
+    resumeURL?: string | null,
+    coverLetterURL?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    message?: string | null,
+    progress: ResumeProgress,
+    uwcssaCareer?:  {
+      __typename: "UwcssaCareer",
+      id: string,
+      title?: string | null,
+      whoWeAre?: string | null,
+      whatWeAreLookingFor?: Array< string | null > | null,
+      requirements?: Array< string | null > | null,
+      whyToApply?: string | null,
+      location?: string | null,
+      employmentType?: EmploymentType | null,
+      startDate?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      uwcssaDepartmentUwcssaCareersId?: string | null,
+    } | null,
+    owner?: string | null,
+    user?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      rank?: number | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      website?: string | null,
+      emailSubscription: boolean,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      userProfileAvatarURLId?: string | null,
+    } | null,
+    uwcssaCareerResumeId?: string | null,
+  } | null,
+};
+
+export type ListResumesQueryVariables = {
+  filter?: ModelResumeFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListResumesQuery = {
+  listResumes?:  {
+    __typename: "ModelResumeConnection",
+    items:  Array< {
+      __typename: "Resume",
+      id: string,
+      fullName?: string | null,
+      email?: string | null,
+      phone?: string | null,
+      resumeURL?: string | null,
+      coverLetterURL?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      message?: string | null,
+      progress: ResumeProgress,
+      owner?: string | null,
+      uwcssaCareerResumeId?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,

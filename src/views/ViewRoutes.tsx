@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-10 14:50:11
+ * @LastEditTime: 2022-06-10 23:43:05
  * @FilePath: /uwcssa_ca/src/views/ViewRoutes.tsx
  * @Description:
  *
@@ -103,7 +103,7 @@ function ViewRoutes(): Array<{
     //   ),
     // },
     {
-      path: '/careerOpening',
+      path: '/career/:id',
       renderer: (params = {}): JSX.Element => <CareerOpeningView {...params} />,
       isAllowed: true,
       redirectPath: undefined,

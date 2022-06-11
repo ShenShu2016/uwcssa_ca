@@ -46,7 +46,7 @@
         },
         "ArticlePublishHandler": {
           "deploymentBucketName": "amplify-uwcssa-devts-225941-deployment",
-          "s3Key": "amplify-builds/ArticlePublishHandler-694d493455743154465a-build.zip",
+          "s3Key": "amplify-builds/ArticlePublishHandler-454d69694d35546c3562-build.zip",
           "userProfileTable": "UserProfile-4r2t6l2uprdgjhmoocpazejjcq-devts"
         },
         "CountHandler": {

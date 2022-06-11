@@ -874,6 +874,9 @@ export const getUwcssaDepartment = /* GraphQL */ `
       uwcssaMembers {
         nextToken
       }
+      uwcssaCareers {
+        nextToken
+      }
       createdAt
       updatedAt
       owner
@@ -1923,6 +1926,155 @@ export const listEventParticipants = /* GraphQL */ `
         eventParticipantFormItem17Id
         eventParticipantFormItem18Id
         eventParticipantFormItem19Id
+      }
+      nextToken
+    }
+  }
+`;
+export const getUwcssaCareer = /* GraphQL */ `
+  query GetUwcssaCareer($id: ID!) {
+    getUwcssaCareer(id: $id) {
+      id
+      title
+      whoWeAre
+      whatWeAreLookingFor
+      requirements
+      whyToApply
+      location
+      employmentType
+      uwcssaDepartment {
+        id
+        introduction
+        email
+        leader
+        createdAt
+        updatedAt
+        owner
+      }
+      resume {
+        nextToken
+      }
+      startDate
+      createdAt
+      updatedAt
+      owner
+      user {
+        id
+        name
+        email
+        rank
+        fullName
+        contactEmail
+        title
+        about
+        website
+        emailSubscription
+        active
+        createdAt
+        updatedAt
+        owner
+        userProfileAvatarURLId
+      }
+      uwcssaDepartmentUwcssaCareersId
+    }
+  }
+`;
+export const listUwcssaCareers = /* GraphQL */ `
+  query ListUwcssaCareers(
+    $filter: ModelUwcssaCareerFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listUwcssaCareers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        title
+        whoWeAre
+        whatWeAreLookingFor
+        requirements
+        whyToApply
+        location
+        employmentType
+        startDate
+        createdAt
+        updatedAt
+        owner
+        uwcssaDepartmentUwcssaCareersId
+      }
+      nextToken
+    }
+  }
+`;
+export const getResume = /* GraphQL */ `
+  query GetResume($id: ID!) {
+    getResume(id: $id) {
+      id
+      fullName
+      email
+      phone
+      resumeURL
+      coverLetterURL
+      createdAt
+      updatedAt
+      message
+      progress
+      uwcssaCareer {
+        id
+        title
+        whoWeAre
+        whatWeAreLookingFor
+        requirements
+        whyToApply
+        location
+        employmentType
+        startDate
+        createdAt
+        updatedAt
+        owner
+        uwcssaDepartmentUwcssaCareersId
+      }
+      owner
+      user {
+        id
+        name
+        email
+        rank
+        fullName
+        contactEmail
+        title
+        about
+        website
+        emailSubscription
+        active
+        createdAt
+        updatedAt
+        owner
+        userProfileAvatarURLId
+      }
+      uwcssaCareerResumeId
+    }
+  }
+`;
+export const listResumes = /* GraphQL */ `
+  query ListResumes(
+    $filter: ModelResumeFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listResumes(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        fullName
+        email
+        phone
+        resumeURL
+        coverLetterURL
+        createdAt
+        updatedAt
+        message
+        progress
+        owner
+        uwcssaCareerResumeId
       }
       nextToken
     }

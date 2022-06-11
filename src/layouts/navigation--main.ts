@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-26 13:57:44
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-10 13:47:30
+ * @LastEditTime: 2022-06-10 23:42:24
  * @FilePath: /uwcssa_ca/src/layouts/navigation--main.ts
  * @Description:
  *
@@ -173,10 +173,12 @@ const pages = {
   ],
   jobs: [
     {
-      title: '正在构建中...',
-      href: '',
-      // title: 'careerOpening',
-      // href: '/careerOpening',
+      title: 'Careers',
+      href: '/career',
+    },
+    {
+      title: '某一个职位',
+      href: '/career/6566',
     },
   ],
   about: [

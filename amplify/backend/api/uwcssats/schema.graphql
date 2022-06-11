@@ -322,6 +322,7 @@ type UwcssaDepartment
   leader: ID
   currentLeader: UserProfile @hasOne(fields: ["leader"])
   uwcssaMembers: [UwcssaMember] @hasMany
+  uwcssaCareers: [UwcssaCareer] @hasMany
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
   owner: ID!
@@ -557,4 +558,63 @@ enum EventParticipantStatus {
   ArriveOnTime
   CanNotArrive
   Undecided
+}
+
+type UwcssaCareer
+  @model(subscriptions: null)
+  @auth(
+    rules: [
+      { allow: public, operations: [read], provider: iam }
+      { allow: groups, operations: [read], groups: ["uwcssaUser"] }
+      { allow: groups, groups: ["uwcssaAdmin"] }
+    ]
+  ) {
+  id: ID!
+  title: String
+  whoWeAre: String
+  whatWeAreLookingFor: [String]
+  requirements: [String]
+  whyToApply: String
+  location: String
+  employmentType: EmploymentType
+  uwcssaDepartment: UwcssaDepartment @belongsTo
+  resume: [Resume] @hasMany
+  startDate: AWSDateTime
+  createdAt: AWSDateTime! # 创建时间
+  updatedAt: AWSDateTime! # 更新时间
+  owner: ID! # 创建者
+  user: UserProfile @hasOne(fields: ["owner"])
+}
+
+enum EmploymentType {
+  FullTime
+  PartTime
+  Internship
+  Volunteer
+  Other
+}
+
+type Resume
+  @model(subscriptions: null)
+  @auth(rules: [{ allow: owner }, { allow: groups, groups: ["uwcssaAdmin"] }]) {
+  id: ID!
+  fullName: String
+  email: AWSEmail
+  phone: String
+  resumeURL: AWSURL #上传 s3
+  coverLetterURL: AWSURL #上传 s3
+  createdAt: AWSDateTime! # 创建时间
+  updatedAt: AWSDateTime! # 更新时间
+  message: String
+  progress: ResumeProgress!
+  uwcssaCareer: UwcssaCareer @belongsTo
+  owner: ID # 创建者
+  user: UserProfile @hasOne(fields: ["owner"])
+}
+
+enum ResumeProgress {
+  pending
+  inProgress
+  accepted
+  rejected
 }

@@ -1421,6 +1421,9 @@ export const createUwcssaDepartment = /* GraphQL */ `
       uwcssaMembers {
         nextToken
       }
+      uwcssaCareers {
+        nextToken
+      }
       createdAt
       updatedAt
       owner
@@ -1457,6 +1460,9 @@ export const updateUwcssaDepartment = /* GraphQL */ `
       uwcssaMembers {
         nextToken
       }
+      uwcssaCareers {
+        nextToken
+      }
       createdAt
       updatedAt
       owner
@@ -1491,6 +1497,9 @@ export const deleteUwcssaDepartment = /* GraphQL */ `
         userProfileAvatarURLId
       }
       uwcssaMembers {
+        nextToken
+      }
+      uwcssaCareers {
         nextToken
       }
       createdAt
@@ -3896,6 +3905,318 @@ export const deleteEventParticipant = /* GraphQL */ `
       eventParticipantFormItem17Id
       eventParticipantFormItem18Id
       eventParticipantFormItem19Id
+    }
+  }
+`;
+export const createUwcssaCareer = /* GraphQL */ `
+  mutation CreateUwcssaCareer(
+    $input: CreateUwcssaCareerInput!
+    $condition: ModelUwcssaCareerConditionInput
+  ) {
+    createUwcssaCareer(input: $input, condition: $condition) {
+      id
+      title
+      whoWeAre
+      whatWeAreLookingFor
+      requirements
+      whyToApply
+      location
+      employmentType
+      uwcssaDepartment {
+        id
+        introduction
+        email
+        leader
+        createdAt
+        updatedAt
+        owner
+      }
+      resume {
+        nextToken
+      }
+      startDate
+      createdAt
+      updatedAt
+      owner
+      user {
+        id
+        name
+        email
+        rank
+        fullName
+        contactEmail
+        title
+        about
+        website
+        emailSubscription
+        active
+        createdAt
+        updatedAt
+        owner
+        userProfileAvatarURLId
+      }
+      uwcssaDepartmentUwcssaCareersId
+    }
+  }
+`;
+export const updateUwcssaCareer = /* GraphQL */ `
+  mutation UpdateUwcssaCareer(
+    $input: UpdateUwcssaCareerInput!
+    $condition: ModelUwcssaCareerConditionInput
+  ) {
+    updateUwcssaCareer(input: $input, condition: $condition) {
+      id
+      title
+      whoWeAre
+      whatWeAreLookingFor
+      requirements
+      whyToApply
+      location
+      employmentType
+      uwcssaDepartment {
+        id
+        introduction
+        email
+        leader
+        createdAt
+        updatedAt
+        owner
+      }
+      resume {
+        nextToken
+      }
+      startDate
+      createdAt
+      updatedAt
+      owner
+      user {
+        id
+        name
+        email
+        rank
+        fullName
+        contactEmail
+        title
+        about
+        website
+        emailSubscription
+        active
+        createdAt
+        updatedAt
+        owner
+        userProfileAvatarURLId
+      }
+      uwcssaDepartmentUwcssaCareersId
+    }
+  }
+`;
+export const deleteUwcssaCareer = /* GraphQL */ `
+  mutation DeleteUwcssaCareer(
+    $input: DeleteUwcssaCareerInput!
+    $condition: ModelUwcssaCareerConditionInput
+  ) {
+    deleteUwcssaCareer(input: $input, condition: $condition) {
+      id
+      title
+      whoWeAre
+      whatWeAreLookingFor
+      requirements
+      whyToApply
+      location
+      employmentType
+      uwcssaDepartment {
+        id
+        introduction
+        email
+        leader
+        createdAt
+        updatedAt
+        owner
+      }
+      resume {
+        nextToken
+      }
+      startDate
+      createdAt
+      updatedAt
+      owner
+      user {
+        id
+        name
+        email
+        rank
+        fullName
+        contactEmail
+        title
+        about
+        website
+        emailSubscription
+        active
+        createdAt
+        updatedAt
+        owner
+        userProfileAvatarURLId
+      }
+      uwcssaDepartmentUwcssaCareersId
+    }
+  }
+`;
+export const createResume = /* GraphQL */ `
+  mutation CreateResume(
+    $input: CreateResumeInput!
+    $condition: ModelResumeConditionInput
+  ) {
+    createResume(input: $input, condition: $condition) {
+      id
+      fullName
+      email
+      phone
+      resumeURL
+      coverLetterURL
+      createdAt
+      updatedAt
+      message
+      progress
+      uwcssaCareer {
+        id
+        title
+        whoWeAre
+        whatWeAreLookingFor
+        requirements
+        whyToApply
+        location
+        employmentType
+        startDate
+        createdAt
+        updatedAt
+        owner
+        uwcssaDepartmentUwcssaCareersId
+      }
+      owner
+      user {
+        id
+        name
+        email
+        rank
+        fullName
+        contactEmail
+        title
+        about
+        website
+        emailSubscription
+        active
+        createdAt
+        updatedAt
+        owner
+        userProfileAvatarURLId
+      }
+      uwcssaCareerResumeId
+    }
+  }
+`;
+export const updateResume = /* GraphQL */ `
+  mutation UpdateResume(
+    $input: UpdateResumeInput!
+    $condition: ModelResumeConditionInput
+  ) {
+    updateResume(input: $input, condition: $condition) {
+      id
+      fullName
+      email
+      phone
+      resumeURL
+      coverLetterURL
+      createdAt
+      updatedAt
+      message
+      progress
+      uwcssaCareer {
+        id
+        title
+        whoWeAre
+        whatWeAreLookingFor
+        requirements
+        whyToApply
+        location
+        employmentType
+        startDate
+        createdAt
+        updatedAt
+        owner
+        uwcssaDepartmentUwcssaCareersId
+      }
+      owner
+      user {
+        id
+        name
+        email
+        rank
+        fullName
+        contactEmail
+        title
+        about
+        website
+        emailSubscription
+        active
+        createdAt
+        updatedAt
+        owner
+        userProfileAvatarURLId
+      }
+      uwcssaCareerResumeId
+    }
+  }
+`;
+export const deleteResume = /* GraphQL */ `
+  mutation DeleteResume(
+    $input: DeleteResumeInput!
+    $condition: ModelResumeConditionInput
+  ) {
+    deleteResume(input: $input, condition: $condition) {
+      id
+      fullName
+      email
+      phone
+      resumeURL
+      coverLetterURL
+      createdAt
+      updatedAt
+      message
+      progress
+      uwcssaCareer {
+        id
+        title
+        whoWeAre
+        whatWeAreLookingFor
+        requirements
+        whyToApply
+        location
+        employmentType
+        startDate
+        createdAt
+        updatedAt
+        owner
+        uwcssaDepartmentUwcssaCareersId
+      }
+      owner
+      user {
+        id
+        name
+        email
+        rank
+        fullName
+        contactEmail
+        title
+        about
+        website
+        emailSubscription
+        active
+        createdAt
+        updatedAt
+        owner
+        userProfileAvatarURLId
+      }
+      uwcssaCareerResumeId
     }
   }
 `;
