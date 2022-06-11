@@ -1,24 +1,28 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-20 21:02:00
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-09 22:05:35
+ * @LastEditTime: 2022-06-10 20:54:19
  * @FilePath: /uwcssa_ca/src/redux/event/eventSlice.tsx
  * @Description:
  *
  */
 
+import { CreateEventInput, UpdateEventInput } from 'API';
 import {
   createAsyncThunk,
   createEntityAdapter,
   createSlice,
 } from '@reduxjs/toolkit';
-import { createCount, createEvent, updateEvent } from 'graphql/mutations';
+import {
+  createCount,
+  createEvent,
+  deleteEvent,
+  updateEvent,
+} from 'graphql/mutations';
 import { eventSortByCreatedAt, getEvent } from 'graphql/queries';
 
 import API from '@aws-amplify/api';
-import { CreateEventInput } from 'API';
 import { RootState } from 'redux/store';
 import { graphqlOperation } from '@aws-amplify/api-graphql';
 import { v4 as uuid } from 'uuid';
@@ -48,7 +52,6 @@ import { v4 as uuid } from 'uuid';
 // };
 
 const eventAdapter = createEntityAdapter<any>({
-  // selectId: (item) => item.id,
   sortComparer: (a, b) => b.createdAt.localeCompare(a.createdAt),
 });
 
@@ -63,12 +66,15 @@ const initialState = eventAdapter.getInitialState({
   postEventImgError: null,
   updateEventDetailStatus: 'idle',
   updateEventDetailError: null,
+  removeEventStatus: 'idle',
+  removeEventError: null,
 });
 
 export const fetchEventList = createAsyncThunk(
   'event/fetchEventList',
-  async ({ isAuth }: { isAuth: boolean }) => {
+  async ({ isAuth }: { isAuth: boolean }, { rejectWithValue }) => {
     try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const result: any = await API.graphql({
         query: eventSortByCreatedAt,
         variables: {
@@ -81,14 +87,19 @@ export const fetchEventList = createAsyncThunk(
       return result.data.eventSortByCreatedAt.items;
     } catch (error) {
       console.log(error);
+      return rejectWithValue(error.errors);
     }
   },
 );
 
 export const fetchEvent = createAsyncThunk(
   'event/fetchEvent',
-  async ({ eventId, isAuth }: { eventId: string; isAuth: boolean }) => {
+  async (
+    { eventId, isAuth }: { eventId: string; isAuth: boolean },
+    { rejectWithValue },
+  ) => {
     try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const result: any = await API.graphql({
         query: getEvent,
         variables: { id: eventId },
@@ -100,51 +111,82 @@ export const fetchEvent = createAsyncThunk(
       return result.data.getEvent;
     } catch (error) {
       console.log(error);
+      return rejectWithValue(error.errors);
     }
   },
 );
 
 export const postEvent = createAsyncThunk(
   'event/postEvent',
-  async ({ createEventInput }: { createEventInput: CreateEventInput }) => {
+  async (
+    { createEventInput }: { createEventInput: CreateEventInput },
+    { rejectWithValue },
+  ) => {
+    const countId = uuid();
     try {
-      const countId = uuid();
-      await API.graphql(
-        graphqlOperation(createCount, {
-          input: {
-            id: countId,
-            count: undefined,
-            commentCount: 0,
-            like: 0,
-            targetTable: 'Event',
-            countEventId: createEventInput.id,
-            owner: createEventInput.owner,
-          },
-        }),
-      );
-
-      const result: any = await API.graphql(
-        graphqlOperation(createEvent, {
-          input: { eventCountId: countId, ...createEventInput },
-        }),
-      );
-      return result.data.createEvent;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const [eventResponse, countResponse]: [any, any] = await Promise.all([
+        API.graphql(
+          graphqlOperation(createEvent, {
+            input: { eventCountId: countId, ...createEventInput },
+          }),
+        ),
+        API.graphql(
+          graphqlOperation(createCount, {
+            input: {
+              id: countId,
+              count: undefined,
+              commentCount: 0,
+              like: 0,
+              targetTable: 'Event',
+              countEventId: createEventInput.id,
+              owner: createEventInput.owner,
+            },
+          }),
+        ),
+      ]);
+      return eventResponse.data.createEvent;
     } catch (error) {
       console.log(error);
+      return rejectWithValue(error.errors);
     }
   },
 );
 
 export const updateEventDetail = createAsyncThunk(
   'event/updateEventDetail',
-  async ({ updateEventInput }: { updateEventInput: Event }) => {
+  async (
+    { updateEventInput }: { updateEventInput: UpdateEventInput },
+    { rejectWithValue },
+  ) => {
     try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const result: any = await API.graphql(
         graphqlOperation(updateEvent, { input: updateEventInput }),
       );
       return result.data.updateEvent;
     } catch (error) {
       console.log(error);
+      return rejectWithValue(error.errors);
+    }
+  },
+);
+
+export const removeEvent = createAsyncThunk(
+  'event/removeEvent',
+  async ({ id }: { id: string }, { rejectWithValue }) => {
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const result: any = await API.graphql(
+        graphqlOperation(deleteEvent, {
+          input: { id },
+        }),
+      );
+      console.log(result);
+      return result.data.deleteEvent.id;
+    } catch (error) {
+      console.log(error);
+      return rejectWithValue(error.errors);
     }
   },
 );
@@ -152,72 +194,62 @@ export const updateEventDetail = createAsyncThunk(
 const eventSlice = createSlice({
   name: 'event',
   initialState,
-  // initialState: eventAdapter.getInitialState({
-  //   ...initialState,
-  //   comments: commentAdapter.getInitialState(),
-  // }),
-
   reducers: {},
   extraReducers(builder) {
     builder
-      // Cases for status of fetchEventList (pending, fulfilled, and rejected)
       .addCase(fetchEventList.pending, (state) => {
         state.fetchEventListStatus = 'loading';
       })
       .addCase(fetchEventList.fulfilled, (state, action) => {
         state.fetchEventListStatus = 'succeed';
-        //eventAdapter.removeAll(state);
         eventAdapter.upsertMany(state, action.payload);
       })
       .addCase(fetchEventList.rejected, (state, action) => {
         state.fetchEventListStatus = 'failed';
-        state.fetchEventError = action.error.message;
+        state.fetchEventListError = action.payload;
       })
-      // Cases for status of selectedEvent (pending, fulfilled, and rejected)
       .addCase(fetchEvent.pending, (state) => {
         state.fetchEventStatus = 'loading';
       })
       .addCase(fetchEvent.fulfilled, (state, action) => {
         state.fetchEventStatus = 'succeed';
         eventAdapter.upsertOne(state, action.payload);
-        // commentAdapter.upsertMany(
-        //   state.comments,
-        //   action.payload.comments.items,
-        // );
-        //console.log(action.payload.comments.items);
-        // store.dispatch(insertAllComments(action.payload.comments.items));
       })
       .addCase(fetchEvent.rejected, (state, action) => {
         state.fetchEventStatus = 'failed';
-        state.fetchEventError = action.error.message;
+        state.fetchEventError = action.payload;
       })
-      // Cases for status of postEvent (pending, fulfilled, and rejected)
       .addCase(postEvent.pending, (state) => {
         state.postEventStatus = 'loading';
       })
       .addCase(postEvent.fulfilled, (state, action) => {
         state.postEventStatus = 'succeed';
-        // state.events.unshift(action.payload.data.createEvent);
         eventAdapter.addOne(state, action.payload);
-        // state.postEventStatus = "idle";
       })
       .addCase(postEvent.rejected, (state, action) => {
         state.postEventStatus = 'failed';
-        state.postEventError = action.error.message;
+        state.postEventError = action.payload;
       })
-      // Cases for status of updateEvent (pending, fulfilled, and rejected)
+
       .addCase(updateEventDetail.pending, (state) => {
         state.updateEventDetailStatus = 'loading';
       })
       .addCase(updateEventDetail.fulfilled, (state) => {
         state.updateEventDetailStatus = 'succeed';
-        //state.events.unshift(action.payload.data.createEvent);
-        //eventAdapter.upsertOne(state, action.payload);
-        // state.updateEventStatus = "idle";
       })
       .addCase(updateEventDetail.rejected, (state, action) => {
         state.updateEventDetailStatus = 'failed';
-        state.updateEventDetailError = action.error.message;
+        state.updateEventDetailError = action.payload;
+      })
+      .addCase(removeEvent.pending, (state) => {
+        state.removeEventStatus = 'loading';
+      })
+      .addCase(removeEvent.fulfilled, (state) => {
+        state.removeEventStatus = 'succeed';
+      })
+      .addCase(removeEvent.rejected, (state, action) => {
+        state.removeEventStatus = 'failed';
+        state.removeEventError = action.payload;
       });
   },
 });
