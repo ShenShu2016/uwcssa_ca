@@ -1,64 +1,48 @@
 /*
  * @Author: Shikai Jin
  * @Date: 2022-05-17 22:50:55
- * @LastEditors: Shikai Jin
- * @LastEditTime: 2022-05-27 19:41:25
- * @FilePath: /uwcssa_ca/src/views/Logistics/components/Reviews/Reviews.tsx
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-06-11 17:02:00
+ * @FilePath: /uwcssa_ca/src/views/Home/components/Reviews/Reviews.tsx
  * @Description:
  *
  */
 
-import { Stack, Tooltip } from '@mui/material';
+import {
+  Avatar,
+  Box,
+  Card,
+  CardContent,
+  Grid,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
+  Typography,
+} from '@mui/material';
+import React, { useEffect } from 'react';
+import {
+  fetchResearchDevelopmentTeamList,
+  selectAllResearchDevelopmentTeams,
+} from 'redux/researchDevelopmentTeam/researchDevelopmentTeamSlice';
+import { useAppDispatch, useAppSelector } from 'redux/hooks';
 
-import Avatar from '@mui/material/Avatar';
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import FacebookIcon from '@mui/icons-material/Facebook';
-import GitHubIcon from '@mui/icons-material/GitHub';
-import Grid from '@mui/material/Grid';
-import IconButton from '@mui/material/IconButton';
-import ListItem from '@mui/material/ListItem';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import ListItemText from '@mui/material/ListItemText';
-import React from 'react';
-import TwitterIcon from '@mui/icons-material/Twitter';
-import Typography from '@mui/material/Typography';
-import { useTheme } from '@mui/material/styles';
-
-const mock = [
-  {
-    name: 'Chary Smith',
-    title: 'SEO at Comoti',
-    avatar: 'https://assets.maccarianagency.com/avatars/img3.jpg',
-    about:
-      'I am an ambitious workaholic, but apart from that, pretty simple person.',
-  },
-  {
-    name: 'Clara Bertoletti',
-    title: 'Junior Designer',
-    avatar: 'https://assets.maccarianagency.com/avatars/img4.jpg',
-    about:
-      'I am an ambitious workaholic, but apart from that, pretty simple person.',
-  },
-  {
-    name: 'Jhon Anderson',
-    title: 'Senior Frontend Developer',
-    avatar: 'https://assets.maccarianagency.com/avatars/img5.jpg',
-    about:
-      'I am an ambitious workaholic, but apart from that, pretty simple person.',
-  },
-  {
-    name: 'Chary Smith',
-    title: 'SEO at Comoti',
-    avatar: 'https://assets.maccarianagency.com/avatars/img6.jpg',
-    about:
-      'I am an ambitious workaholic, but apart from that, pretty simple person.',
-  },
-];
+import { getAuthState } from 'redux/auth/authSlice';
+import { stringAvatar } from 'components/Avatar/AvatarFunction';
 
 const Reviews = (): JSX.Element => {
-  const theme = useTheme();
+  const dispatch = useAppDispatch();
+  const isAuth = useAppSelector(getAuthState);
+
+  const developers = useAppSelector(selectAllResearchDevelopmentTeams);
+  const { fetchResearchDevelopmentTeamListStatus } = useAppSelector(
+    (state) => state.researchDevelopmentTeam,
+  );
+  useEffect(() => {
+    if (isAuth !== null && fetchResearchDevelopmentTeamListStatus === 'idle') {
+      dispatch(fetchResearchDevelopmentTeamList({ isAuth }));
+    }
+  }, [isAuth, fetchResearchDevelopmentTeamListStatus]);
+
   return (
     <Box>
       <Box marginBottom={4}>
@@ -72,7 +56,7 @@ const Reviews = (): JSX.Element => {
             color: 'common.white',
           }}
         >
-          Our Awesome Team
+          Trusted by the world’s most innovative businesses – big and small
         </Typography>
         <Typography
           variant="h6"
@@ -80,47 +64,56 @@ const Reviews = (): JSX.Element => {
           data-aos={'fade-up'}
           sx={{ color: 'common.white' }}
         >
-          Trust the professionals.
+          Companies from across the globe have had fantastic experiences using
+          theFront.
+          <br />
+          Here’s what they have to say.
         </Typography>
       </Box>
       <Grid container spacing={2}>
-        {mock.map((item, i) => (
-          <Grid item xs={12} sm={6} md={3} key={i}>
+        {developers.map((item, i) => (
+          <Grid item xs={12} md={4} key={i}>
             <Box
+              width={1}
+              height={1}
+              data-aos={'fade-up'}
+              data-aos-delay={i * 100}
+              data-aos-offset={100}
+              data-aos-duration={600}
               component={Card}
-              boxShadow={2}
-              sx={{
-                textDecoration: 'none',
-                transition: 'all .2s ease-in-out',
-                '&:hover': {
-                  transform: `translateY(-${theme.spacing(1 / 2)})`,
-                },
-              }}
+              display={'flex'}
+              flexDirection={'column'}
+              alignItems={'center'}
+              boxShadow={0}
+              variant={'outlined'}
             >
-              <CardContent>
-                <Box
-                  component={Avatar}
-                  src={item.avatar}
-                  height={80}
-                  width={80}
-                />
-                <Box marginTop={4}>
-                  <ListItemText primary={item.name} secondary={item.title} />
-                  <Typography variant={'subtitle2'} color={'text.secondary'}>
-                    {item.about}
-                  </Typography>
-                  <Box marginTop={4}>
-                    <IconButton size={'small'} color={'primary'}>
-                      <FacebookIcon />
-                    </IconButton>
-                    <IconButton size={'small'} color={'primary'}>
-                      <GitHubIcon />
-                    </IconButton>
-                    <IconButton size={'small'} color={'primary'}>
-                      <TwitterIcon />
-                    </IconButton>
-                  </Box>
+              <CardContent
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                }}
+              >
+                <Box sx={{ paddingBottom: 2 }}>
+                  <ListItem component="div" disableGutters sx={{ padding: 0 }}>
+                    <ListItemAvatar sx={{ marginRight: 3 }}>
+                      <Avatar
+                        src={item.user.avatarURL?.objectCompressedURL}
+                        variant={'rounded'}
+                        {...stringAvatar(item.user.name, {
+                          width: 100,
+                          height: 100,
+                          borderRadius: 2,
+                        })}
+                      />
+                    </ListItemAvatar>
+                    <ListItemText
+                      sx={{ margin: 0 }}
+                      primary={item.name}
+                      secondary={item.title}
+                    />
+                  </ListItem>
                 </Box>
+                <Typography color="text.secondary">{item.content}</Typography>
               </CardContent>
             </Box>
           </Grid>

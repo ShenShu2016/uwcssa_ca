@@ -2,7 +2,7 @@
  * @Author: Shikai Jin
  * @Date: 2022-05-27 17:53:27
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-11 16:44:31
+ * @LastEditTime: 2022-06-11 17:02:20
  * @FilePath: /uwcssa_ca/src/views/Home/Home.tsx
  * @Description:
  *
@@ -15,8 +15,8 @@ import {
   Integrations,
   Jobs,
   News,
+  Reviews,
   Team,
-  TeamCard,
   Video,
 } from './components';
 import { alpha, useTheme } from '@mui/material/styles';
@@ -87,9 +87,9 @@ const Home = (): JSX.Element => {
       <Container>
         <AboutBottom />
       </Container>
-      <Box bgcolor={'alternate.main'}>
+      <Box bgcolor={'primary.main'}>
         <Container>
-          <TeamCard />
+          <Reviews />
         </Container>
       </Box>
     </>

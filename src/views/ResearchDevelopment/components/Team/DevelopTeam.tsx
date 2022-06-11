@@ -1,13 +1,14 @@
 /*
  * @Author: Shikai Jin
  * @Date: 2022-06-04 21:45:47
- * @LastEditors: Shikai Jin
- * @LastEditTime: 2022-06-05 20:47:52
- * @FilePath: /uwcssa_ca/src/views/Developers/components/Team/DevelopTeam.tsx
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-06-11 17:40:16
+ * @FilePath: /uwcssa_ca/src/views/ResearchDevelopment/components/Team/DevelopTeam.tsx
  * @Description:
  *
  */
 
+import { Box, Grid, Typography } from '@mui/material';
 import React, { useEffect } from 'react';
 import {
   fetchResearchDevelopmentTeamList,
@@ -15,10 +16,7 @@ import {
 } from 'redux/researchDevelopmentTeam/researchDevelopmentTeamSlice';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 
-import { Box } from '@mui/system';
-import DevelopCard from './componments/DeveloperCard';
-import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
+import DevelopCard from './components/DeveloperCard';
 import { getAuthState } from 'redux/auth/authSlice';
 
 const DevelopTeam = (): JSX.Element => {
@@ -30,16 +28,10 @@ const DevelopTeam = (): JSX.Element => {
     (state) => state.researchDevelopmentTeam,
   );
   useEffect(() => {
-    const getUwcssaDepartments = async () => {
-      if (
-        isAuth !== null &&
-        fetchResearchDevelopmentTeamListStatus === 'idle'
-      ) {
-        await dispatch(fetchResearchDevelopmentTeamList({ isAuth }));
-      }
-    };
-    getUwcssaDepartments();
-  }, [fetchResearchDevelopmentTeamListStatus]);
+    if (isAuth !== null && fetchResearchDevelopmentTeamListStatus === 'idle') {
+      dispatch(fetchResearchDevelopmentTeamList({ isAuth }));
+    }
+  }, [isAuth, fetchResearchDevelopmentTeamListStatus]);
 
   return (
     <Box>

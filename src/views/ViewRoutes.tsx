@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-11 16:44:00
+ * @LastEditTime: 2022-06-11 17:13:17
  * @FilePath: /uwcssa_ca/src/views/ViewRoutes.tsx
  * @Description:
  *
@@ -21,7 +21,6 @@ import {
   CompanyTerms as CompanyTermsView,
   ContactPage as ContactPageView,
   Dashboard as DashboardView,
-  Developers as DevelopersView,
   EmailConfirmationCover as EmailConfirmationCoverView,
   ForgotPassWordSubmit as ForgotPassWordSubmitView,
   Home as HomeView,
@@ -33,7 +32,6 @@ import {
 } from 'views';
 import { getAuthState, getIsAdmin } from 'redux/auth/authSlice';
 
-import ArticleAPI from './Demo/ArticleAPI';
 import React from 'react';
 import { useAppSelector } from 'redux/hooks';
 
@@ -89,7 +87,9 @@ function ViewRoutes(): Array<{
     },
     {
       path: '/research-development-team',
-      renderer: (params = {}): JSX.Element => <DevelopersView {...params} />,
+      renderer: (params = {}): JSX.Element => (
+        <ResearchDevelopmentView {...params} />
+      ),
       isAllowed: true,
       redirectPath: undefined,
       colorInvert: true,
@@ -206,13 +206,6 @@ function ViewRoutes(): Array<{
     {
       path: '/404',
       renderer: (params = {}): JSX.Element => <NotFoundCoverView {...params} />,
-      isAllowed: true,
-      redirectPath: undefined,
-    },
-
-    {
-      path: '/demo/articleAPI',
-      renderer: (params = {}): JSX.Element => <ArticleAPI {...params} />,
       isAllowed: true,
       redirectPath: undefined,
     },

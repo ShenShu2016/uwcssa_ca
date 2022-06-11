@@ -1,15 +1,14 @@
 /*
  * @Author: Shikai Jin
  * @Date: 2022-06-05 19:59:54
- * @LastEditors: Shikai Jin
- * @LastEditTime: 2022-06-07 23:05:47
- * @FilePath: /uwcssa_ca/src/views/Developers/components/Team/componments/DeveloperCard.tsx
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-06-11 17:40:38
+ * @FilePath: /uwcssa_ca/src/views/ResearchDevelopment/components/Team/components/DeveloperCard.tsx
  * @Description:
  *
  */
 
 import {
-  Avatar,
   Box,
   Card,
   CardContent,
@@ -17,8 +16,6 @@ import {
   Grid,
   IconButton,
   ListItemText,
-  Typography,
-  useTheme,
 } from '@mui/material';
 
 import EmailIcon from '@mui/icons-material/Email';

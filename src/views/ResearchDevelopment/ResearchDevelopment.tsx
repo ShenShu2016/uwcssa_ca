@@ -1,14 +1,14 @@
 /*
- * @Author: Shen Shu
- * @Date: 2022-05-29 22:58:47
- * @LastEditors: Shikai Jin
- * @LastEditTime: 2022-06-07 23:11:41
+ * @Author: Shikai Jin
+ * @Date: 2022-06-04 18:07:29
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-06-11 17:39:39
  * @FilePath: /uwcssa_ca/src/views/ResearchDevelopment/ResearchDevelopment.tsx
  * @Description:
  *
  */
 
-import { Process, Reviews } from './components';
+import { Features, Hero, Partners, Story, Team, Work } from './components';
 
 import Box from '@mui/material/Box';
 import Container from 'components/Container';
@@ -17,29 +17,36 @@ import React from 'react';
 
 const ResearchDevelopment = (): JSX.Element => {
   return (
-    <>
-      {/* <Hero /> */}
-      {/* <Box bgcolor={'primary.main'}>
+    <Box>
+      <Hero />
+      {/* <Container>
+        <Headline />
+      </Container> */}
+
+      <Container>
+        <Story />
+      </Container>
+      <Box bgcolor={'primary.main'}>
         <Container paddingX={'0 !important'} maxWidth={1}>
           <Partners />
         </Container>
-      </Box> */}
-
+      </Box>
       <Container>
-        <Process />
+        <Features />
       </Container>
-      {/* <Container>
+      <Container maxWidth={'800px !important'}>
+        <Divider />
+      </Container>
+      <Container>
         <Work />
-      </Container> */}
-      <Divider />
-      <Container>
-        <Reviews />
       </Container>
-      <Divider />
-      {/* <Container>
+      <Container maxWidth={'800px !important'}>
+        <Divider />
+      </Container>
+      <Container>
         <Team />
-      </Container> */}
-    </>
+      </Container>
+    </Box>
   );
 };
 

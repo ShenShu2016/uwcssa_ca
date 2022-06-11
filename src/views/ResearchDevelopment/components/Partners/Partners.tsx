@@ -1,25 +1,30 @@
 /*
  * @Author: Shikai Jin
  * @Date: 2022-06-01 00:01:32
- * @LastEditors: Shikai Jin
- * @LastEditTime: 2022-06-07 19:44:02
- * @FilePath: /uwcssa_ca/src/views/Developers/components/Partners/Partners.tsx
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-06-11 17:39:57
+ * @FilePath: /uwcssa_ca/src/views/ResearchDevelopment/components/Partners/Partners.tsx
  * @Description:
  *
  */
 
-import Box from '@mui/material/Box';
+import { Box, useMediaQuery, useTheme } from '@mui/material';
+
 import React from 'react';
 import Slider from 'react-slick';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import { useTheme } from '@mui/material/styles';
 
 const mock = [
   'https://www.logo.wine/a/logo/Amazon_Web_Services/Amazon_Web_Services-Logo.wine.svg',
-  'https://www.logo.wine/a/logo/Node.js/Node.js-Logo.wine.svg',
+  //'https://www.logo.wine/a/logo/Node.js/Node.js-Logo.wine.svg',
+  'https://www.svgrepo.com/show/303360/nodejs-logo.svg',
   'https://www.logo.wine/a/logo/TypeScript/TypeScript-Logo.wine.svg',
-  'https://www.logo.wine/a/logo/React_(web_framework)/React_(web_framework)-Logo.wine.svg',
+
+  //'https://www.logo.wine/a/logo/React_(web_framework)/React_(web_framework)-Logo.wine.svg',
   'https://www.logo.wine/a/logo/GitHub/GitHub-Logo.wine.svg',
+
+  'https://seeklogo.com/images/A/aws-amplify-logo-D68DDB5AB1-seeklogo.com.png',
+  'https://i.pinimg.com/originals/66/ec/d4/66ecd45c7b6a7a76cd3c2c1e16b14ea0.png',
+  'https://www.freelogovectors.net/wp-content/uploads/2018/12/react-logo.png',
 ];
 
 const Partners = (): JSX.Element => {
@@ -60,17 +65,17 @@ const Partners = (): JSX.Element => {
     arrows: false,
     autoplay: true,
     autoplaySpeed: 2000,
+    with: '100%',
   };
 
   return (
     <Box>
       <Slider {...sliderOpts}>
         {mock.map((item, i) => (
-          <Box maxWidth={120} key={i} marginX={3}>
+          <Box key={i} sx={{ height: '90px', width: '100%' }}>
             <Box
               component="img"
               height={1}
-              width={1}
               src={item}
               alt="..."
               sx={{
