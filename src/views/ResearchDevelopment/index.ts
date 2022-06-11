@@ -1,10 +1,10 @@
 /*
- * @Author: Shen Shu
- * @Date: 2022-05-29 22:58:47
- * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-29 23:01:29
- * @FilePath: /uwcssa_ca/src/views/ResearchDevelopment/index.ts
+ * @Author: Shikai Jin
+ * @Date: 2022-06-04 18:07:29
+ * @LastEditors: Shikai Jin
+ * @LastEditTime: 2022-06-04 18:11:49
+ * @FilePath: /uwcssa_ca/src/views/Developers/index.ts
  * @Description:
  *
  */
-export { default } from './ResearchDevelopment';
+export { default } from './Developers';
