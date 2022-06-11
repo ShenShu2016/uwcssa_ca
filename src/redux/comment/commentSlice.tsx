@@ -2,12 +2,11 @@
  * @Author: Shen Shu
  * @Date: 2022-05-20 21:02:00
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-08 16:49:04
+ * @LastEditTime: 2022-06-10 21:04:18
  * @FilePath: /uwcssa_ca/src/redux/comment/commentSlice.tsx
  * @Description:
  *
  */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import {
   commentSortByArticleCommentsIdCreatedAt,
@@ -23,7 +22,6 @@ import { createCount, updateComment } from 'graphql/mutations';
 import API from '@aws-amplify/api';
 import { Article } from 'redux/article/articleSlice';
 import { CreateCommentInput } from 'API';
-import { Like } from 'redux/like/likeSlice';
 import { RootState } from 'redux/store';
 import { UserProfile } from 'redux/userProfile/userProfileSlice';
 import { getComment } from 'graphql/queries';
@@ -48,7 +46,6 @@ export type Comment = {
 };
 
 export const commentAdapter = createEntityAdapter<Comment>({
-  // selectId: (item) => item.id,
   sortComparer: (a, b) => b.createdAt.localeCompare(a.createdAt),
 });
 
@@ -67,14 +64,18 @@ const initialState = commentAdapter.getInitialState({
 
 export const fetchCommentList = createAsyncThunk(
   'comment/fetchCommentList',
-  async ({
-    isAuth,
-    articleCommentsId,
-  }: {
-    isAuth: boolean;
-    articleCommentsId: string;
-  }) => {
+  async (
+    {
+      isAuth,
+      articleCommentsId,
+    }: {
+      isAuth: boolean;
+      articleCommentsId: string;
+    },
+    { rejectWithValue },
+  ) => {
     try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const result: any = await API.graphql({
         query: commentSortByArticleCommentsIdCreatedAt,
         variables: {
@@ -88,14 +89,19 @@ export const fetchCommentList = createAsyncThunk(
       return result.data.commentSortByArticleCommentsIdCreatedAt.items;
     } catch (error) {
       console.log(error);
+      return rejectWithValue(error.errors);
     }
   },
 );
 
 export const fetchComment = createAsyncThunk(
   'comment/fetchComment',
-  async ({ commentId, isAuth }: { commentId: string; isAuth: boolean }) => {
+  async (
+    { commentId, isAuth }: { commentId: string; isAuth: boolean },
+    { rejectWithValue },
+  ) => {
     try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const result: any = await API.graphql({
         query: getComment,
         variables: { id: commentId },
@@ -107,59 +113,74 @@ export const fetchComment = createAsyncThunk(
       return result.data.getComment;
     } catch (error) {
       console.log(error);
+      return rejectWithValue(error.errors);
     }
   },
 );
 
 export const postComment = createAsyncThunk(
   'comment/postComment',
-  async ({
-    createCommentInput,
-  }: {
-    createCommentInput: CreateCommentInput;
-  }) => {
+  async (
+    {
+      createCommentInput,
+    }: {
+      createCommentInput: CreateCommentInput;
+    },
+    { rejectWithValue },
+  ) => {
     try {
       const countId = uuid();
       const commentId = uuid();
-      await API.graphql(
-        graphqlOperation(createCount, {
-          input: {
-            id: countId,
-            count: undefined,
-            commentCount: undefined,
-            like: 0,
-            targetTable: 'Comment',
-            countCommentId: commentId,
-            owner: createCommentInput.owner,
-          },
-        }),
-      );
-      const result: any = await API.graphql(
-        graphqlOperation(createComment, {
-          input: {
-            id: commentId,
-            commentCountId: countId,
-            ...createCommentInput,
-          },
-        }),
-      );
-      return result.data.createComment;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const [createCommentResult, createCountResult]: [any, any] =
+        await Promise.all([
+          API.graphql(
+            graphqlOperation(createComment, {
+              input: {
+                id: commentId,
+                commentCountId: countId,
+                ...createCommentInput,
+              },
+            }),
+          ),
+          API.graphql(
+            graphqlOperation(createCount, {
+              input: {
+                id: countId,
+                count: undefined,
+                commentCount: undefined,
+                like: 0,
+                targetTable: 'Comment',
+                countCommentId: commentId,
+                owner: createCommentInput.owner,
+              },
+            }),
+          ),
+        ]);
+
+      return createCommentResult.data.createComment;
     } catch (error) {
       console.log(error);
+      return rejectWithValue(error.errors);
     }
   },
 );
 
 export const updateCommentDetail = createAsyncThunk(
   'comment/updateCommentDetail',
-  async ({ updateCommentInput }: { updateCommentInput: Comment }) => {
+  async (
+    { updateCommentInput }: { updateCommentInput: Comment },
+    { rejectWithValue },
+  ) => {
     try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const result: any = await API.graphql(
         graphqlOperation(updateComment, { input: updateCommentInput }),
       );
       return result.data.updateComment;
     } catch (error) {
       console.log(error);
+      return rejectWithValue(error.errors);
     }
   },
 );
@@ -178,20 +199,17 @@ const commentSlice = createSlice({
   },
   extraReducers(builder) {
     builder
-      // Cases for status of fetchCommentList (pending, fulfilled, and rejected)
       .addCase(fetchCommentList.pending, (state) => {
         state.fetchCommentListStatus = 'loading';
       })
       .addCase(fetchCommentList.fulfilled, (state, action) => {
         state.fetchCommentListStatus = 'succeed';
-        //commentAdapter.removeAll(state);
         commentAdapter.upsertMany(state, action.payload);
       })
       .addCase(fetchCommentList.rejected, (state, action) => {
         state.fetchCommentListStatus = 'failed';
-        state.fetchCommentError = action.error.message;
+        state.fetchCommentError = action.payload;
       })
-      // Cases for status of selectedComment (pending, fulfilled, and rejected)
       .addCase(fetchComment.pending, (state) => {
         state.fetchCommentStatus = 'loading';
       })
@@ -201,35 +219,29 @@ const commentSlice = createSlice({
       })
       .addCase(fetchComment.rejected, (state, action) => {
         state.fetchCommentStatus = 'failed';
-        state.fetchCommentError = action.error.message;
+        state.fetchCommentError = action.payload;
       })
-      // Cases for status of postComment (pending, fulfilled, and rejected)
       .addCase(postComment.pending, (state) => {
         state.postCommentStatus = 'loading';
       })
       .addCase(postComment.fulfilled, (state, action) => {
         state.postCommentStatus = 'succeed';
-        // state.comments.unshift(action.payload.data.createComment);
         commentAdapter.addOne(state, action.payload);
-        // state.postCommentStatus = "idle";
       })
       .addCase(postComment.rejected, (state, action) => {
         state.postCommentStatus = 'failed';
-        state.postCommentError = action.error.message;
+        state.postCommentError = action.payload;
       })
-      // Cases for status of updateComment (pending, fulfilled, and rejected)
       .addCase(updateCommentDetail.pending, (state) => {
         state.updateCommentDetailStatus = 'loading';
       })
-      .addCase(updateCommentDetail.fulfilled, (state) => {
+      .addCase(updateCommentDetail.fulfilled, (state, action) => {
         state.updateCommentDetailStatus = 'succeed';
-        //state.comments.unshift(action.payload.data.createComment);
-        //commentAdapter.upsertOne(state, action.payload);
-        // state.updateCommentStatus = "idle";
+        commentAdapter.updateOne(state, action.payload);
       })
       .addCase(updateCommentDetail.rejected, (state, action) => {
         state.updateCommentDetailStatus = 'failed';
-        state.updateCommentDetailError = action.error.message;
+        state.updateCommentDetailError = action.payload;
       });
   },
 });

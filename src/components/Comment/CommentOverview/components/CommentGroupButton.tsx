@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-27 13:44:58
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-08 19:24:41
+ * @LastEditTime: 2022-06-10 21:06:28
  * @FilePath: /uwcssa_ca/src/components/Comment/CommentOverview/components/CommentGroupButton.tsx
  * @Description:
  *
@@ -19,9 +19,11 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
 import { getOwnerUserName } from 'redux/auth/authSlice';
+import useMessage from 'hooks/useMessage';
 
 function CommentGroupButton({ count, likes }: { count: Count; likes: any }) {
   const dispatch = useAppDispatch();
+  const message = useMessage();
   const [isFavorite, setIsFavorite] = useState(
     likes?.items?.length > 0 || false,
   );
@@ -44,6 +46,9 @@ function CommentGroupButton({ count, likes }: { count: Count; likes: any }) {
       console.log(response);
       if (response.meta.requestStatus === 'fulfilled') {
         setLikeCount(likeCount + 1);
+        message.success('点赞成功');
+      } else {
+        message.error('点赞失败');
       }
     } else if (isFavorite === true) {
       setIsFavorite(false);
@@ -53,6 +58,9 @@ function CommentGroupButton({ count, likes }: { count: Count; likes: any }) {
       console.log(response);
       if (response.meta.requestStatus === 'fulfilled') {
         setLikeCount(likeCount - 1);
+        message.success('取消点赞成功');
+      } else {
+        message.error('取消点赞失败');
       }
     }
   }

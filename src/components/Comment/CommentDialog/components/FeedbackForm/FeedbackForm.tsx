@@ -2,25 +2,28 @@
  * @Author: Shen Shu
  * @Date: 2022-05-26 16:50:46
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-08 19:24:37
+ * @LastEditTime: 2022-06-10 21:14:40
  * @FilePath: /uwcssa_ca/src/components/Comment/CommentDialog/components/FeedbackForm/FeedbackForm.tsx
  * @Description:
  *
  */
 import * as yup from 'yup';
 
+import {
+  Box,
+  Button,
+  Dialog,
+  Grid,
+  TextField,
+  Typography,
+} from '@mui/material';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import Grid from '@mui/material/Grid';
 import React from 'react';
-import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
 import { getOwnerUserName } from 'redux/auth/authSlice';
 import { postComment } from 'redux/comment/commentSlice';
 import { useFormik } from 'formik';
+import useMessage from 'hooks/useMessage';
 import { useParams } from 'react-router-dom';
 
 const validationSchema = yup.object({
@@ -43,6 +46,7 @@ const FeedbackForm = ({
   const { articleId } = useParams();
   const dispatch = useAppDispatch();
   const ownerUsername = useAppSelector(getOwnerUserName);
+  const message = useMessage();
 
   const initialValues = {
     content: '',
@@ -63,8 +67,10 @@ const FeedbackForm = ({
       onClose();
       formik.resetForm();
       setCommentCount(commentCount + 1);
+      message.success('评论成功');
       return true;
     } else {
+      message.error('评论失败');
       return false;
     }
   };

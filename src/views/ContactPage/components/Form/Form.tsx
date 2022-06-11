@@ -2,27 +2,32 @@
  * @Author: Shen Shu
  * @Date: 2022-05-19 21:16:43
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-23 12:08:42
- * @FilePath: /uwcssa_ca/frontend/src/views/ContactPage/components/Form/Form.tsx
+ * @LastEditTime: 2022-06-10 21:15:12
+ * @FilePath: /uwcssa_ca/src/views/ContactPage/components/Form/Form.tsx
  * @Description:
  *
  */
+
 import * as yup from 'yup';
 
+import {
+  Box,
+  Button,
+  Grid,
+  TextField,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Grid from '@mui/material/Grid';
-/* eslint-disable react/no-unescaped-entities */
 import React from 'react';
-import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
 import { getOwnerUserName } from 'redux/auth/authSlice';
 import { postContactUs } from 'redux/contactUs/ContactUsSlice';
 import { useFormik } from 'formik';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import { useTheme } from '@mui/material/styles';
+import useMessage from 'hooks/useMessage';
+
+/* eslint-disable react/no-unescaped-entities */
 
 const validationSchema = yup.object({
   fullName: yup
@@ -49,6 +54,7 @@ const Form = (): JSX.Element => {
   const theme = useTheme();
   const dispatch = useAppDispatch();
   const ownerUserName = useAppSelector(getOwnerUserName);
+  const message = useMessage();
   const isMd = useMediaQuery(theme.breakpoints.up('md'), {
     defaultMatches: true,
   });
@@ -61,20 +67,17 @@ const Form = (): JSX.Element => {
   };
 
   const onSubmit = async (values) => {
-    const { fullName, message, email, phone } = values;
     const createContactUsInput = {
       id: undefined,
-      fullName,
-      message,
-      email,
-      phone,
+      ...values,
       owner: ownerUserName && ownerUserName,
     };
     const response = await dispatch(postContactUs({ createContactUsInput }));
     if (response.meta.requestStatus === 'fulfilled') {
-      alert('提交成功');
+      formik.resetForm();
+      message.success('Message sent successfully');
     } else {
-      alert('提交失败');
+      message.error('Message failed to send');
       return false;
     }
     return values;
