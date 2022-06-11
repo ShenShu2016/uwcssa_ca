@@ -1,8 +1,10 @@
 /*
- * @Author: 李佳修
- * @Date: 2022-05-18 13:56:14
- * @LastEditTime: 2022-05-18 13:57:17
- * @LastEditors: 李佳修
- * @FilePath: /uwcssa_ca/frontend/src/views/Home/index.ts
+ * @Author: Shen Shu
+ * @Date: 2022-05-17 15:10:01
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-05-17 15:10:34
+ * @FilePath: \uwcssa_ca\frontend\src\views\Logistics\index.ts
+ * @Description:
+ *
  */
-export { default } from './Home';
+export { default } from './Logistics';
