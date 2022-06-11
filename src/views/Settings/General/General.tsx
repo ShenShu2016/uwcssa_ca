@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-26 13:57:44
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-01 22:20:18
+ * @LastEditTime: 2022-06-10 19:04:29
  * @FilePath: /uwcssa_ca/src/views/Settings/General/General.tsx
  * @Description:
  *
@@ -26,6 +26,7 @@ import React from 'react';
 import { getOwnerUserName } from 'redux/auth/authSlice';
 import { updateUserProfileData } from 'redux/userProfile/userProfileSlice';
 import { useFormik } from 'formik';
+import useMessage from 'hooks/useMessage';
 
 const validationSchema = yup.object({
   fullName: yup
@@ -60,6 +61,7 @@ const validationSchema = yup.object({
 
 const General = (): JSX.Element => {
   const dispatch = useAppDispatch();
+  const message = useMessage();
   const ownerUsername = useAppSelector(getOwnerUserName);
   const myUserProfile = useAppSelector(
     (state) => state.userProfile.myUserProfile,
@@ -80,8 +82,11 @@ const General = (): JSX.Element => {
     const response = await dispatch(
       updateUserProfileData(updateUserProfileInput),
     );
-    console.log('response', response);
-    return values;
+    if (response.meta.requestStatus === 'fulfilled') {
+      message.success('Profile updated successfully');
+    } else {
+      message.error('Profile update failed');
+    }
   };
 
   const formik = useFormik({

@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-26 13:57:44
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-10 18:13:49
+ * @LastEditTime: 2022-06-10 18:58:34
  * @FilePath: /uwcssa_ca/src/views/Settings/Notifications/Notifications.tsx
  * @Description:
  *
@@ -10,27 +10,32 @@
 
 import * as yup from 'yup';
 
+import {
+  Box,
+  Button,
+  Checkbox,
+  Divider,
+  FormControlLabel,
+  Grid,
+  Link as MUILink,
+  Typography,
+} from '@mui/material';
 import { getOwnerUserName, getUserInfo } from 'redux/auth/authSlice';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Checkbox from '@mui/material/Checkbox';
-import Divider from '@mui/material/Divider';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Grid from '@mui/material/Grid';
-import Link from '@mui/material/Link';
+import { Link } from 'react-router-dom';
 import Page from '../components/Page';
 import React from 'react';
-import Typography from '@mui/material/Typography';
 import { updateUserProfileData } from 'redux/userProfile/userProfileSlice';
 import { useFormik } from 'formik';
+import useMessage from 'hooks/useMessage';
 
 const validationSchema = yup.object({
   emailSubscription: yup.boolean(),
 });
 const Notifications = (): JSX.Element => {
   const dispatch = useAppDispatch();
+  const message = useMessage();
   const userInfo = useAppSelector(getUserInfo);
   const ownerUserName = useAppSelector(getOwnerUserName);
 
@@ -50,8 +55,11 @@ const Notifications = (): JSX.Element => {
     const response = await dispatch(
       updateUserProfileData(updateUserProfileInput),
     );
-    console.log('response', response);
-    return values;
+    if (response.meta.requestStatus === 'fulfilled') {
+      message.success('Profile updated successfully');
+    } else {
+      message.error('Profile update failed');
+    }
   };
   const formik = useFormik({
     initialValues,
@@ -168,13 +176,14 @@ const Notifications = (): JSX.Element => {
                   <Box marginBottom={{ xs: 1, sm: 0 }}>
                     <Typography variant={'subtitle2'}>
                       You may also consider to update your{' '}
-                      <Link
+                      <MUILink
+                        component={Link}
                         color={'primary'}
-                        href={'/account-security'}
+                        to={'/account-security'}
                         underline={'none'}
                       >
                         security settings.
-                      </Link>
+                      </MUILink>
                     </Typography>
                   </Box>
                   <Button size={'large'} variant={'contained'} type={'submit'}>

@@ -1,36 +1,49 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-21 14:21:38
- * @LastEditTime: 2022-05-21 15:22:11
- * @LastEditors: 李佳修
- * @FilePath: /uwcssa_ca/frontend/src/hooks/useMessage.ts
+ * @LastEditTime: 2022-06-10 20:13:39
+ * @LastEditors: Shen Shu
+ * @FilePath: /uwcssa_ca/src/hooks/useMessage.ts
  */
-import { useAppDispatch } from 'redux/hooks';
+
 import { setAlert } from 'redux/alert/alertSlice';
+import { useAppDispatch } from 'redux/hooks';
 
 export interface AlertConfig {
-    type: 'success' | 'info' | 'warning' | 'error';
-    message: string;
+  type: 'success' | 'info' | 'warning' | 'error';
+  message: string;
 }
 
 const useMessage = () => {
   const dispatch = useAppDispatch();
 
   const handleOpenMessageAlert = (config: AlertConfig) => {
-    dispatch(setAlert({
-      isOpen: true,
-      ...config
-    }));
+    dispatch(
+      setAlert({
+        isOpen: true,
+        ...config,
+      }),
+    );
   };
 
   const handleCloseMessageAlert = () => {
-    dispatch(setAlert({
-      isOpen: false
-    }));
+    dispatch(
+      setAlert({
+        isOpen: false,
+      }),
+    );
   };
 
   const message = {
-    open: (config: AlertConfig) => handleOpenMessageAlert(config),
+    // open: (config: AlertConfig) => handleOpenMessageAlert(config),
+    success: (message: string) =>
+      handleOpenMessageAlert({ type: 'success', message }),
+    info: (message: string) =>
+      handleOpenMessageAlert({ type: 'info', message }),
+    warning: (message: string) =>
+      handleOpenMessageAlert({ type: 'warning', message }),
+    error: (message: string) =>
+      handleOpenMessageAlert({ type: 'error', message }),
     close: handleCloseMessageAlert,
   };
 

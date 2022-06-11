@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 21:41:42
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-10 14:40:33
+ * @LastEditTime: 2022-06-10 20:21:55
  * @FilePath: /uwcssa_ca/src/views/SigninCover/components/Form/Form.tsx
  * @Description:
  *
@@ -28,6 +28,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Link } from 'react-router-dom';
 import { useAppDispatch } from 'redux/hooks';
 import { useFormik } from 'formik';
+import useMessage from 'hooks/useMessage';
 
 const validationSchema = yup.object({
   username: yup
@@ -44,6 +45,7 @@ const validationSchema = yup.object({
 const Form = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const [signInError, setSignInError] = useState('');
+  const message = useMessage();
   // const { signInError } = useAppSelector((state) => state.auth);
   const initialValues = {
     username: '',
@@ -52,7 +54,11 @@ const Form = (): JSX.Element => {
 
   const onSubmit = async (values) => {
     const response: any = await dispatch(signIn(values)); //!! 这里有毛病，后期需要改一改
+    console.log(response);
     if (response.meta.requestStatus === 'fulfilled') {
+      message.success(
+        `登录成功！ 欢迎回来 ${response.payload.attributes.name}`,
+      );
       //!! viewroutes 中redirect 当auth 成功后，会直接给你转到/dashboard 所以这里写啥都不会改变任何东西
       //navigate('/dashboard');
     } else {

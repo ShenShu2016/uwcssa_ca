@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-20 09:30:58
- * @LastEditTime: 2022-06-10 16:51:38
+ * @LastEditTime: 2022-06-10 20:23:13
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/admin/Article/ArticlePublish/ArticlePublish.tsx
  */
@@ -22,6 +22,7 @@ import {
 import React, { useEffect, useState } from 'react';
 import { createArticleTag, createNewTag } from 'redux/tag/tagSlice';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { ActiveType } from 'API';
 import AddCoverPic from './components/AddCoverPic';
@@ -34,8 +35,6 @@ import RichTextEditor from 'components/RichTextEditor';
 import { getOwnerUserName } from 'redux/auth/authSlice';
 import { useConfirm } from 'material-ui-confirm';
 import useMessage from 'hooks/useMessage';
-import { useNavigate } from 'react-router';
-import { useParams } from 'react-router-dom';
 import { v4 as uuid } from 'uuid';
 
 export interface Tag {
@@ -93,10 +92,7 @@ const ArticlePublish: React.FC = () => {
         setTags(() => articleInfo.tags.items);
         setImgFile(articleInfo.coverPageImgURL);
       } else {
-        message.open({
-          type: 'error',
-          message: '获取文章失败',
-        });
+        message.error('获取文章失败');
       }
       setFullScreenLoading({
         loading: false,
@@ -140,10 +136,7 @@ const ArticlePublish: React.FC = () => {
         desc: !coverPageDescription,
       }));
       setSubmitLoading(false);
-      message.open({
-        type: 'error',
-        message: !content ? '请填写文章内容' : '文章信息不全，无法发布',
-      });
+      message.error(!content ? '请填写文章内容' : '文章信息不全，无法发布');
       return;
     }
     setFullScreenLoading({
@@ -169,12 +162,9 @@ const ArticlePublish: React.FC = () => {
         tagCreate.tags,
       );
       if (isConnected) {
-        message.open({
-          type: 'success',
-          message: `文章${
-            actionType === ActionType.create ? '发布' : '更新'
-          }完成`,
-        });
+        message.success(
+          `文章${actionType === ActionType.create ? '发布' : '更新'}完成`,
+        );
         setFullScreenLoading({
           loading: true,
           message: '操作成功，即将跳转',
@@ -188,10 +178,7 @@ const ArticlePublish: React.FC = () => {
           navigate('/dashboard', { replace: true });
         }, 1000);
       } else {
-        message.open({
-          type: 'warning',
-          message: '文章操作有误',
-        });
+        message.warning('文章操作有误');
       }
     } else {
       console.error('文章上传或标签上传出现错误');
@@ -221,17 +208,13 @@ const ArticlePublish: React.FC = () => {
         : await dispatch(updateArticleDetail({ updateArticleInput: params }));
     const isPosted = articlePostRes.meta.requestStatus === 'fulfilled';
     if (isPosted) {
-      message.open({
-        type: 'success',
-        message: `文章已${actionType === ActionType.create ? '创建' : '更新'}`,
-      });
+      message.success(
+        `文章已${actionType === ActionType.create ? '创建' : '更新'}`,
+      );
     } else {
-      message.open({
-        type: 'warning',
-        message: `文章${
-          actionType === ActionType.create ? '创建' : '更新'
-        }错误`,
-      });
+      message.warning(
+        `文章${actionType === ActionType.create ? '创建' : '更新'}错误`,
+      );
     }
     return {
       articleID,
@@ -255,15 +238,9 @@ const ArticlePublish: React.FC = () => {
       (res) => res.meta.requestStatus === 'fulfilled',
     );
     if (isAllTagCreated) {
-      message.open({
-        type: 'success',
-        message: '标签已创建',
-      });
+      message.success('标签已创建');
     } else {
-      message.open({
-        type: 'warning',
-        message: '标签创建错误',
-      });
+      message.warning('标签创建错误');
     }
     return {
       tags: tagUploadRes.map((tag) => tag.meta.arg.createTagInput.id),
@@ -294,10 +271,7 @@ const ArticlePublish: React.FC = () => {
     // 判断当前的tag列表里是否有这个tag
     const find = tags.findIndex((item) => item.tagID === tag);
     if (find !== -1) {
-      message.open({
-        type: 'warning',
-        message: `标签【${tag}】已存在`,
-      });
+      message.warning(`标签【${tag}】已存在`);
       return;
     }
     // 如果没有

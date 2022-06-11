@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-26 13:57:44
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-01 23:03:03
+ * @LastEditTime: 2022-06-10 20:21:41
  * @FilePath: /uwcssa_ca/src/views/Settings/Profile/Profile.tsx
  * @Description:
  *
@@ -17,13 +17,13 @@ import {
   Typography,
   useTheme,
 } from '@mui/material';
+import { Link, useNavigate } from 'react-router-dom';
 
 import Container from 'components/Container';
 import CropperDialog from 'components/Cropper/CropperDialog';
 import React from 'react';
 import { stringAvatar } from 'components/Avatar/AvatarFunction';
 import { useAppSelector } from 'redux/hooks';
-import { useNavigate } from 'react-router-dom';
 
 // import CropperDialog from 'components/Cropper/CropperDialog';
 
@@ -277,10 +277,10 @@ const Profile = (): JSX.Element => {
                     </Typography>
                   </Box>
                   <Button
-                    component={'a'}
+                    component={Link}
                     variant={'contained'}
                     color={'primary'}
-                    href={myUserProfile.website}
+                    to={'/settings/general'}
                   >
                     View profile
                   </Button>

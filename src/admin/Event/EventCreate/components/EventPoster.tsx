@@ -1,26 +1,24 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-01 09:18:34
- * @LastEditTime: 2022-06-08 13:37:06
- * @LastEditors: 李佳修
+ * @LastEditTime: 2022-06-10 20:20:45
+ * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/admin/Event/EventCreate/components/EventPoster.tsx
  */
+
+import { Box, Button, LinearProgress, Typography, styled } from '@mui/material';
 import React, { useState } from 'react';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { useSwiper } from 'swiper/react';
-import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
-import LinearProgress from '@mui/material/LinearProgress';
-import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
-import Typography from '@mui/material/Typography';
-import { styled } from '@mui/material/styles';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
+
+import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import InsertPhotoIcon from '@mui/icons-material/InsertPhoto';
+import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import { postUserImage } from 'redux/userImage/userImageSlice';
 import { setPosterImage } from 'redux/form/formSlice';
 import useMessage from 'hooks/useMessage';
+import { useSwiper } from 'swiper/react';
 
 const Input = styled('input')({
   display: 'none',
@@ -32,7 +30,9 @@ const EventPoster: React.FC = () => {
   const dispatch = useAppDispatch();
   const [uploadImgLoading, setUploadImgLoading] = useState<boolean>(false);
   // const [imgFile, setImgFile] = useState<string>('');
-  const posterImage = useAppSelector((state) => state.form.createData.posterImage);
+  const posterImage = useAppSelector(
+    (state) => state.form.createData.posterImage,
+  );
   const authUser = useAppSelector((state) => state.auth.user);
 
   const handleImgUpload = async (e) => {
@@ -47,20 +47,18 @@ const EventPoster: React.FC = () => {
       postUserImage({ targetTable, file, authUser, compressedWidth: 1920 }),
     );
     if (response.meta.requestStatus === 'fulfilled') {
-      dispatch(setPosterImage(response.payload.objectURL || response.payload.objectCompressedURL));
+      dispatch(
+        setPosterImage(
+          response.payload.objectURL || response.payload.objectCompressedURL,
+        ),
+      );
       // setImgFile(
       //   response.payload.objectURL || response.payload.objectCompressedURL,
       // );
       // setOriginImg(response.payload.objectURL);
-      message.open({
-        type: 'success',
-        message: '图片上传成功',
-      });
+      message.success('图片上传成功');
     } else {
-      message.open({
-        type: 'error',
-        message: '图片上传失败',
-      });
+      message.error('图片上传失败');
     }
     setUploadImgLoading(false);
   };
@@ -74,28 +72,24 @@ const EventPoster: React.FC = () => {
 
   return (
     <Box p={'2px'}>
-      <Box display='flex' justifyContent='space-between'>
+      <Box display="flex" justifyContent="space-between">
         <Button
           variant="contained"
           endIcon={<ArrowBackIcon />}
           onClick={() => swiper.slidePrev()}
         >
-            填写活动信息
+          填写活动信息
         </Button>
         <Button
           variant="contained"
           endIcon={<ArrowForwardIcon />}
           onClick={() => swiper.slideNext()}
-
         >
-            配置报名表单
+          配置报名表单
         </Button>
       </Box>
-      <Box
-        height={'110vh'}
-        padding='2% 5%'
-      >
-        <Box width={'100%'} height='100px'>
+      <Box height={'110vh'} padding="2% 5%">
+        <Box width={'100%'} height="100px">
           <Box
             sx={{
               width: '100%',
@@ -127,7 +121,7 @@ const EventPoster: React.FC = () => {
             </label>
           </Box>
         </Box>
-        <Box 
+        <Box
           sx={{
             border: '1px dotted #bdbdbd',
             borderRadius: '12px',
@@ -136,7 +130,7 @@ const EventPoster: React.FC = () => {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            justifyContent: 'center'
+            justifyContent: 'center',
           }}
         >
           {uploadImgLoading ? (
@@ -148,7 +142,7 @@ const EventPoster: React.FC = () => {
                 component="div"
                 color="#9e9e9e"
               >
-                  uploading...
+                uploading...
               </Typography>
             </Box>
           ) : posterImage ? (
@@ -186,7 +180,7 @@ const EventPoster: React.FC = () => {
                 component="div"
                 color="#9e9e9e"
               >
-              还没有上传海报
+                还没有上传海报
               </Typography>
             </>
           )}

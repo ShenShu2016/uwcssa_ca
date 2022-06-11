@@ -2,15 +2,22 @@
  * @Author: 李佳修
  * @Date: 2022-05-19 17:21:06
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-10 14:33:19
+ * @LastEditTime: 2022-06-10 20:21:18
  * @FilePath: /uwcssa_ca/src/components/UserCardGrid/UserCardGrid.tsx
  * @Description:
  *
  */
 
-import { Avatar, Box, Stack, Typography, useTheme } from '@mui/material';
+import {
+  Avatar,
+  Box,
+  Button,
+  Stack,
+  Typography,
+  useTheme,
+} from '@mui/material';
 
-import Button from '@mui/material/Button';
+import { Link } from 'react-router-dom';
 import React from 'react';
 import { stringAvatar } from 'components/Avatar/AvatarFunction';
 import { useAppSelector } from 'redux/hooks';
@@ -121,10 +128,10 @@ const UserCardGrid = (): JSX.Element => {
               </Typography>
             </Box> */}
             <Button
-              component={'a'}
+              component={Link}
               variant={'outlined'}
               color={'primary'}
-              href={''}
+              to={'/settings/general'}
             >
               View profile
             </Button>

@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-30 15:13:57
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-06 20:00:23
+ * @LastEditTime: 2022-06-10 20:12:52
  * @FilePath: /uwcssa_ca/src/admin/Department/DepartmentDashboard/components/SimpleStriped/components/EditUwcssaDepartment/EditUwcssaDepartmentForm/EditUwcssaDepartmentForm.tsx
  * @Description:
  *
@@ -24,6 +24,7 @@ import React from 'react';
 import { getOwnerUserName } from 'redux/auth/authSlice';
 import { updateUwcssaDepartmentDetail } from 'redux/uwcssaDepartment/uwcssaDepartmentSlice';
 import { useFormik } from 'formik';
+import useMessage from 'hooks/useMessage';
 
 const validationSchema = yup.object({
   id: yup.string().required(),
@@ -53,7 +54,7 @@ const EditUwcssaDepartmentForm = ({
 }: Props): JSX.Element => {
   const dispatch = useAppDispatch();
   const ownerUsername = useAppSelector(getOwnerUserName);
-
+  const message = useMessage();
   const initialValues = {
     id: item?.id || '',
     introduction: item?.introduction || '',
@@ -73,10 +74,11 @@ const EditUwcssaDepartmentForm = ({
     );
     if (response.meta.requestStatus === 'fulfilled') {
       onClose();
+      message.success('修改成功！');
       formik.resetForm();
       return true;
     } else {
-      return false;
+      message.error('修改失败！');
     }
   };
 
