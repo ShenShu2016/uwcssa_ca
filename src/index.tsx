@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-10 00:20:25
+ * @LastEditTime: 2022-06-11 18:50:29
  * @FilePath: /uwcssa_ca/src/index.tsx
  * @Description:
  *
@@ -10,13 +10,15 @@
 
 import Amplify from 'aws-amplify';
 import App from './App';
-import Message from 'components/Message';
 import { Provider } from 'react-redux';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { SnackbarProvider } from 'notistack';
 import config from './aws-exports';
 import reportWebVitals from './reportWebVitals';
 import { store } from './redux/store';
+
+// import Message from 'components/Message';
 
 function getUri() {
   if (window.location.hostname === 'localhost') {
@@ -43,9 +45,16 @@ Amplify.configure(updatedAwsConfig);
 
 ReactDOM.render(
   <Provider store={store}>
-    <Message>
+    {/* https://iamhosseindhv.com/notistack/demos#maximum-snackbars */}
+    <SnackbarProvider
+      maxSnack={3}
+      anchorOrigin={{
+        vertical: 'top',
+        horizontal: 'center',
+      }}
+    >
       <App />
-    </Message>
+    </SnackbarProvider>
   </Provider>,
   document.getElementById('root'),
 );

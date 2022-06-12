@@ -2,26 +2,29 @@
  * @Author: Shen Shu
  * @Date: 2022-05-26 16:50:46
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-08 19:24:37
+ * @LastEditTime: 2022-06-11 18:24:24
  * @FilePath: /uwcssa_ca/src/components/Comment/CommentDialog/components/FeedbackForm/FeedbackForm.tsx
  * @Description:
  *
  */
 import * as yup from 'yup';
 
+import {
+  Box,
+  Button,
+  Dialog,
+  Grid,
+  TextField,
+  Typography,
+} from '@mui/material';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import Grid from '@mui/material/Grid';
 import React from 'react';
-import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
 import { getOwnerUserName } from 'redux/auth/authSlice';
 import { postComment } from 'redux/comment/commentSlice';
 import { useFormik } from 'formik';
 import { useParams } from 'react-router-dom';
+import { useSnackbar } from 'notistack';
 
 const validationSchema = yup.object({
   content: yup.string().trim().required('content is required.'),
@@ -43,6 +46,7 @@ const FeedbackForm = ({
   const { articleId } = useParams();
   const dispatch = useAppDispatch();
   const ownerUsername = useAppSelector(getOwnerUserName);
+  const { enqueueSnackbar } = useSnackbar();
 
   const initialValues = {
     content: '',
@@ -63,8 +67,10 @@ const FeedbackForm = ({
       onClose();
       formik.resetForm();
       setCommentCount(commentCount + 1);
+      enqueueSnackbar('评论成功', { variant: 'success' });
       return true;
     } else {
+      enqueueSnackbar('评论失败', { variant: 'error' });
       return false;
     }
   };

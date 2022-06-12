@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-29 22:42:19
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-06 19:36:08
+ * @LastEditTime: 2022-06-11 01:28:05
  * @FilePath: /uwcssa_ca/src/redux/researchDevelopmentTeam/researchDevelopmentTeamSlice.tsx
  * @Description:
  * import researchDevelopmentTeamReducer from './researchDevelopmentTeam/researchDevelopmentTeamSlice';
@@ -73,8 +73,9 @@ const initialState = researchDevelopmentTeamAdapter.getInitialState({
 
 export const fetchResearchDevelopmentTeamList = createAsyncThunk(
   'researchDevelopmentTeam/fetchResearchDevelopmentTeamList',
-  async ({ isAuth }: { isAuth: boolean }) => {
+  async ({ isAuth }: { isAuth: boolean }, { rejectWithValue }) => {
     try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const result: any = await API.graphql({
         query: listResearchDevelopmentTeams,
         // variables: {
@@ -86,20 +87,25 @@ export const fetchResearchDevelopmentTeamList = createAsyncThunk(
       return result.data.listResearchDevelopmentTeams.items;
     } catch (error) {
       console.log(error);
+      return rejectWithValue(error.errors);
     }
   },
 );
 
 export const fetchResearchDevelopmentTeam = createAsyncThunk(
   'researchDevelopmentTeam/fetchResearchDevelopmentTeam',
-  async ({
-    researchDevelopmentTeamId,
-    isAuth,
-  }: {
-    researchDevelopmentTeamId: string;
-    isAuth: boolean;
-  }) => {
+  async (
+    {
+      researchDevelopmentTeamId,
+      isAuth,
+    }: {
+      researchDevelopmentTeamId: string;
+      isAuth: boolean;
+    },
+    { rejectWithValue },
+  ) => {
     try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const result: any = await API.graphql({
         query: getResearchDevelopmentTeam,
         variables: { id: researchDevelopmentTeamId },
@@ -111,24 +117,28 @@ export const fetchResearchDevelopmentTeam = createAsyncThunk(
       return result.data.getResearchDevelopmentTeam;
     } catch (error) {
       console.log(error);
+      return rejectWithValue(error.errors);
     }
   },
 );
 
 export const postResearchDevelopmentTeam = createAsyncThunk(
   'researchDevelopmentTeam/postResearchDevelopmentTeam',
-  async ({
-    createResearchDevelopmentTeamInput,
-  }: {
-    createResearchDevelopmentTeamInput: CreateResearchDevelopmentTeamInput;
-  }) => {
+  async (
+    {
+      createResearchDevelopmentTeamInput,
+    }: {
+      createResearchDevelopmentTeamInput: CreateResearchDevelopmentTeamInput;
+    },
+    { rejectWithValue },
+  ) => {
     try {
       Object.keys(createResearchDevelopmentTeamInput).forEach((key) =>
         createResearchDevelopmentTeamInput[key] === null ||
         createResearchDevelopmentTeamInput[key] === ''
           ? delete createResearchDevelopmentTeamInput[key]
           : {},
-      );
+      ); // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const result: any = await API.graphql(
         graphqlOperation(createResearchDevelopmentTeam, {
           input: createResearchDevelopmentTeamInput,
@@ -137,17 +147,21 @@ export const postResearchDevelopmentTeam = createAsyncThunk(
       return result.data.createResearchDevelopmentTeam;
     } catch (error) {
       console.log(error);
+      return rejectWithValue(error.errors);
     }
   },
 );
 
 export const updateResearchDevelopmentTeamDetail = createAsyncThunk(
   'researchDevelopmentTeam/updateResearchDevelopmentTeamDetail',
-  async ({
-    updateResearchDevelopmentTeamInput,
-  }: {
-    updateResearchDevelopmentTeamInput: UpdateResearchDevelopmentTeamInput;
-  }) => {
+  async (
+    {
+      updateResearchDevelopmentTeamInput,
+    }: {
+      updateResearchDevelopmentTeamInput: UpdateResearchDevelopmentTeamInput;
+    },
+    { rejectWithValue },
+  ) => {
     Object.keys(updateResearchDevelopmentTeamInput).forEach((key) =>
       updateResearchDevelopmentTeamInput[key] === null ||
       updateResearchDevelopmentTeamInput[key] === ''
@@ -155,6 +169,7 @@ export const updateResearchDevelopmentTeamDetail = createAsyncThunk(
         : {},
     );
     try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const result: any = await API.graphql(
         graphqlOperation(updateResearchDevelopmentTeam, {
           input: updateResearchDevelopmentTeamInput,
@@ -163,14 +178,16 @@ export const updateResearchDevelopmentTeamDetail = createAsyncThunk(
       return result.data.updateResearchDevelopmentTeam;
     } catch (error) {
       console.log(error);
+      return rejectWithValue(error.errors);
     }
   },
 );
 
 export const removeResearchDevelopmentTeam = createAsyncThunk(
   'researchDevelopmentTeam/removeResearchDevelopmentTeam',
-  async ({ id }: { id: string }) => {
+  async ({ id }: { id: string }, { rejectWithValue }) => {
     try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const result: any = await API.graphql(
         graphqlOperation(deleteResearchDevelopmentTeam, {
           input: { id },
@@ -180,6 +197,7 @@ export const removeResearchDevelopmentTeam = createAsyncThunk(
       return result.data.deleteResearchDevelopmentTeam.id;
     } catch (error) {
       console.log(error);
+      return rejectWithValue(error.errors);
     }
   },
 );
@@ -201,7 +219,7 @@ const researchDevelopmentTeamSlice = createSlice({
       })
       .addCase(fetchResearchDevelopmentTeamList.rejected, (state, action) => {
         state.fetchResearchDevelopmentTeamListStatus = 'failed';
-        state.fetchResearchDevelopmentTeamError = action.error.message;
+        state.fetchResearchDevelopmentTeamListError = action.payload;
       })
       // Cases for status of selectedResearchDevelopmentTeam (pending, fulfilled, and rejected)
       .addCase(fetchResearchDevelopmentTeam.pending, (state) => {
@@ -215,7 +233,7 @@ const researchDevelopmentTeamSlice = createSlice({
       })
       .addCase(fetchResearchDevelopmentTeam.rejected, (state, action) => {
         state.fetchResearchDevelopmentTeamStatus = 'failed';
-        state.fetchResearchDevelopmentTeamError = action.error.message;
+        state.fetchResearchDevelopmentTeamError = action.payload;
       })
       // Cases for status of postResearchDevelopmentTeam (pending, fulfilled, and rejected)
       .addCase(postResearchDevelopmentTeam.pending, (state) => {
@@ -229,7 +247,7 @@ const researchDevelopmentTeamSlice = createSlice({
       })
       .addCase(postResearchDevelopmentTeam.rejected, (state, action) => {
         state.postResearchDevelopmentTeamStatus = 'failed';
-        state.postResearchDevelopmentTeamError = action.error.message;
+        state.postResearchDevelopmentTeamError = action.payload;
       })
       // Cases for status of updateResearchDevelopmentTeam (pending, fulfilled, and rejected)
       .addCase(updateResearchDevelopmentTeamDetail.pending, (state) => {
@@ -246,7 +264,7 @@ const researchDevelopmentTeamSlice = createSlice({
         updateResearchDevelopmentTeamDetail.rejected,
         (state, action) => {
           state.updateResearchDevelopmentTeamDetailStatus = 'failed';
-          state.updateResearchDevelopmentTeamDetailError = action.error.message;
+          state.updateResearchDevelopmentTeamDetailError = action.payload;
         },
       )
       .addCase(removeResearchDevelopmentTeam.pending, (state) => {
@@ -261,7 +279,7 @@ const researchDevelopmentTeamSlice = createSlice({
       })
       .addCase(removeResearchDevelopmentTeam.rejected, (state, action) => {
         state.removeResearchDevelopmentTeamStatus = 'failed';
-        state.removeResearchDevelopmentTeamError = action.error.message;
+        state.removeResearchDevelopmentTeamError = action.payload;
       });
   },
 });

@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-06-07 22:23:59
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-07 23:23:39
+ * @LastEditTime: 2022-06-11 01:38:54
  * @FilePath: /uwcssa_ca/src/redux/count/countSlice.tsx
  * @Description:
  *
@@ -60,8 +60,9 @@ const initialState = countAdapter.getInitialState({
 
 export const fetchCountList = createAsyncThunk(
   'count/fetchCountList',
-  async ({ isAuth }: { isAuth: boolean }) => {
+  async ({ isAuth }: { isAuth: boolean }, { rejectWithValue }) => {
     try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const result: any = await API.graphql({
         query: listCounts,
         // variables: {
@@ -74,14 +75,19 @@ export const fetchCountList = createAsyncThunk(
       return result.data.listCounts.items;
     } catch (error) {
       console.log(error);
+      return rejectWithValue(error.errors);
     }
   },
 );
 
 export const fetchCount = createAsyncThunk(
   'count/fetchCount',
-  async ({ countId, isAuth }: { countId: string; isAuth: boolean }) => {
+  async (
+    { countId, isAuth }: { countId: string; isAuth: boolean },
+    { rejectWithValue },
+  ) => {
     try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const result: any = await API.graphql({
         query: getCount,
         variables: { id: countId },
@@ -93,19 +99,24 @@ export const fetchCount = createAsyncThunk(
       return result.data.getCount;
     } catch (error) {
       console.log(error);
+      return rejectWithValue(error.errors);
     }
   },
 );
 
 export const postCount = createAsyncThunk(
   'count/postCount',
-  async ({ createCountInput }: { createCountInput: CreateCountInput }) => {
+  async (
+    { createCountInput }: { createCountInput: CreateCountInput },
+    { rejectWithValue },
+  ) => {
     Object.keys(createCountInput).forEach((key) =>
       createCountInput[key] === null || createCountInput[key] === ''
         ? delete createCountInput[key]
         : {},
     );
     try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const result: any = await API.graphql(
         graphqlOperation(createCount, {
           input: createCountInput,
@@ -114,19 +125,24 @@ export const postCount = createAsyncThunk(
       return result.data.createCount;
     } catch (error) {
       console.log(error);
+      return rejectWithValue(error.errors);
     }
   },
 );
 
 export const updateCountDetail = createAsyncThunk(
   'count/updateCountDetail',
-  async ({ updateCountInput }: { updateCountInput: UpdateCountInput }) => {
+  async (
+    { updateCountInput }: { updateCountInput: UpdateCountInput },
+    { rejectWithValue },
+  ) => {
     Object.keys(updateCountInput).forEach((key) =>
       updateCountInput[key] === null || updateCountInput[key] === ''
         ? delete updateCountInput[key]
         : {},
     );
     try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const result: any = await API.graphql(
         graphqlOperation(updateCount, {
           input: updateCountInput,
@@ -135,14 +151,16 @@ export const updateCountDetail = createAsyncThunk(
       return result.data.updateCount;
     } catch (error) {
       console.log(error);
+      return rejectWithValue(error.errors);
     }
   },
 );
 
 export const removeCount = createAsyncThunk(
   'count/removeCount',
-  async ({ id }: { id: string }) => {
+  async ({ id }: { id: string }, { rejectWithValue }) => {
     try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const result: any = await API.graphql(
         graphqlOperation(deleteCount, {
           input: { id },
@@ -152,6 +170,7 @@ export const removeCount = createAsyncThunk(
       return result.data.deleteCount.id;
     } catch (error) {
       console.log(error);
+      return rejectWithValue(error.errors);
     }
   },
 );
@@ -173,7 +192,7 @@ const countSlice = createSlice({
       })
       .addCase(fetchCountList.rejected, (state, action) => {
         state.fetchCountListStatus = 'failed';
-        state.fetchCountError = action.error.message;
+        state.fetchCountListError = action.payload;
       })
       // Cases for status of selectedCount (pending, fulfilled, and rejected)
       .addCase(fetchCount.pending, (state) => {
@@ -187,7 +206,7 @@ const countSlice = createSlice({
       })
       .addCase(fetchCount.rejected, (state, action) => {
         state.fetchCountStatus = 'failed';
-        state.fetchCountError = action.error.message;
+        state.fetchCountError = action.payload;
       })
       // Cases for status of postCount (pending, fulfilled, and rejected)
       .addCase(postCount.pending, (state) => {
@@ -201,7 +220,7 @@ const countSlice = createSlice({
       })
       .addCase(postCount.rejected, (state, action) => {
         state.postCountStatus = 'failed';
-        state.postCountError = action.error.message;
+        state.postCountError = action.payload;
       })
       // Cases for status of updateCount (pending, fulfilled, and rejected)
       .addCase(updateCountDetail.pending, (state) => {
@@ -213,7 +232,7 @@ const countSlice = createSlice({
       })
       .addCase(updateCountDetail.rejected, (state, action) => {
         state.updateCountDetailStatus = 'failed';
-        state.updateCountDetailError = action.error.message;
+        state.updateCountDetailError = action.payload;
       })
       .addCase(removeCount.pending, (state) => {
         state.removeCountStatus = 'loading';
@@ -227,7 +246,7 @@ const countSlice = createSlice({
       })
       .addCase(removeCount.rejected, (state, action) => {
         state.removeCountStatus = 'failed';
-        state.removeCountError = action.error.message;
+        state.removeCountError = action.payload;
       });
   },
 });

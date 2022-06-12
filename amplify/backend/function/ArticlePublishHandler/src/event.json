@@ -29,6 +29,9 @@
           "active": {
             "S": "T"
           },
+          "isPublish": {
+            "BOOL": true
+          },
           "coverPageImgURL": {
             "S": "https://uwcssats225941-devts.s3.us-east-2.amazonaws.com/protected/us-east-2:7845a883-556b-4fd6-b477-333b873abb68/Article/9bec28a1-fed9-4fde-a184-a6fa58232294-compressed.webp"
           },

@@ -347,6 +347,7 @@ export const createArticle = /* GraphQL */ `
         countEventId
         countCommentId
       }
+      isPublish
       active
       createdAt
       updatedAt
@@ -405,6 +406,7 @@ export const updateArticle = /* GraphQL */ `
         countEventId
         countCommentId
       }
+      isPublish
       active
       createdAt
       updatedAt
@@ -463,6 +465,7 @@ export const deleteArticle = /* GraphQL */ `
         countEventId
         countCommentId
       }
+      isPublish
       active
       createdAt
       updatedAt
@@ -504,6 +507,7 @@ export const createComment = /* GraphQL */ `
         content
         coverPageImgURL
         coverPageDescription
+        isPublish
         active
         createdAt
         updatedAt
@@ -524,6 +528,7 @@ export const createComment = /* GraphQL */ `
         startDate
         endDate
         eventStatus
+        isPublish
         active
         createdAt
         updatedAt
@@ -588,6 +593,7 @@ export const updateComment = /* GraphQL */ `
         content
         coverPageImgURL
         coverPageDescription
+        isPublish
         active
         createdAt
         updatedAt
@@ -608,6 +614,7 @@ export const updateComment = /* GraphQL */ `
         startDate
         endDate
         eventStatus
+        isPublish
         active
         createdAt
         updatedAt
@@ -672,6 +679,7 @@ export const deleteComment = /* GraphQL */ `
         content
         coverPageImgURL
         coverPageDescription
+        isPublish
         active
         createdAt
         updatedAt
@@ -692,6 +700,7 @@ export const deleteComment = /* GraphQL */ `
         startDate
         endDate
         eventStatus
+        isPublish
         active
         createdAt
         updatedAt
@@ -858,6 +867,7 @@ export const createCount = /* GraphQL */ `
         content
         coverPageImgURL
         coverPageDescription
+        isPublish
         active
         createdAt
         updatedAt
@@ -877,6 +887,7 @@ export const createCount = /* GraphQL */ `
         startDate
         endDate
         eventStatus
+        isPublish
         active
         createdAt
         updatedAt
@@ -922,6 +933,7 @@ export const updateCount = /* GraphQL */ `
         content
         coverPageImgURL
         coverPageDescription
+        isPublish
         active
         createdAt
         updatedAt
@@ -941,6 +953,7 @@ export const updateCount = /* GraphQL */ `
         startDate
         endDate
         eventStatus
+        isPublish
         active
         createdAt
         updatedAt
@@ -986,6 +999,7 @@ export const deleteCount = /* GraphQL */ `
         content
         coverPageImgURL
         coverPageDescription
+        isPublish
         active
         createdAt
         updatedAt
@@ -1005,6 +1019,7 @@ export const deleteCount = /* GraphQL */ `
         startDate
         endDate
         eventStatus
+        isPublish
         active
         createdAt
         updatedAt
@@ -1047,6 +1062,7 @@ export const createLike = /* GraphQL */ `
         content
         coverPageImgURL
         coverPageDescription
+        isPublish
         active
         createdAt
         updatedAt
@@ -1077,6 +1093,7 @@ export const createLike = /* GraphQL */ `
         startDate
         endDate
         eventStatus
+        isPublish
         active
         createdAt
         updatedAt
@@ -1121,6 +1138,7 @@ export const updateLike = /* GraphQL */ `
         content
         coverPageImgURL
         coverPageDescription
+        isPublish
         active
         createdAt
         updatedAt
@@ -1151,6 +1169,7 @@ export const updateLike = /* GraphQL */ `
         startDate
         endDate
         eventStatus
+        isPublish
         active
         createdAt
         updatedAt
@@ -1195,6 +1214,7 @@ export const deleteLike = /* GraphQL */ `
         content
         coverPageImgURL
         coverPageDescription
+        isPublish
         active
         createdAt
         updatedAt
@@ -1225,6 +1245,7 @@ export const deleteLike = /* GraphQL */ `
         startDate
         endDate
         eventStatus
+        isPublish
         active
         createdAt
         updatedAt
@@ -1400,6 +1421,9 @@ export const createUwcssaDepartment = /* GraphQL */ `
       uwcssaMembers {
         nextToken
       }
+      uwcssaCareers {
+        nextToken
+      }
       createdAt
       updatedAt
       owner
@@ -1436,6 +1460,9 @@ export const updateUwcssaDepartment = /* GraphQL */ `
       uwcssaMembers {
         nextToken
       }
+      uwcssaCareers {
+        nextToken
+      }
       createdAt
       updatedAt
       owner
@@ -1470,6 +1497,9 @@ export const deleteUwcssaDepartment = /* GraphQL */ `
         userProfileAvatarURLId
       }
       uwcssaMembers {
+        nextToken
+      }
+      uwcssaCareers {
         nextToken
       }
       createdAt
@@ -1687,6 +1717,7 @@ export const createEvent = /* GraphQL */ `
         countEventId
         countCommentId
       }
+      isPublish
       active
       createdAt
       updatedAt
@@ -1779,6 +1810,7 @@ export const updateEvent = /* GraphQL */ `
         countEventId
         countCommentId
       }
+      isPublish
       active
       createdAt
       updatedAt
@@ -1871,6 +1903,7 @@ export const deleteEvent = /* GraphQL */ `
         countEventId
         countCommentId
       }
+      isPublish
       active
       createdAt
       updatedAt
@@ -2038,6 +2071,7 @@ export const createForm = /* GraphQL */ `
         startDate
         endDate
         eventStatus
+        isPublish
         active
         createdAt
         updatedAt
@@ -2093,6 +2127,7 @@ export const updateForm = /* GraphQL */ `
         startDate
         endDate
         eventStatus
+        isPublish
         active
         createdAt
         updatedAt
@@ -2148,6 +2183,7 @@ export const deleteForm = /* GraphQL */ `
         startDate
         endDate
         eventStatus
+        isPublish
         active
         createdAt
         updatedAt
@@ -3872,6 +3908,318 @@ export const deleteEventParticipant = /* GraphQL */ `
     }
   }
 `;
+export const createUwcssaCareer = /* GraphQL */ `
+  mutation CreateUwcssaCareer(
+    $input: CreateUwcssaCareerInput!
+    $condition: ModelUwcssaCareerConditionInput
+  ) {
+    createUwcssaCareer(input: $input, condition: $condition) {
+      id
+      title
+      whoWeAre
+      whatWeAreLookingFor
+      requirements
+      whyToApply
+      location
+      employmentType
+      uwcssaDepartment {
+        id
+        introduction
+        email
+        leader
+        createdAt
+        updatedAt
+        owner
+      }
+      resume {
+        nextToken
+      }
+      startDate
+      createdAt
+      updatedAt
+      owner
+      user {
+        id
+        name
+        email
+        rank
+        fullName
+        contactEmail
+        title
+        about
+        website
+        emailSubscription
+        active
+        createdAt
+        updatedAt
+        owner
+        userProfileAvatarURLId
+      }
+      uwcssaDepartmentUwcssaCareersId
+    }
+  }
+`;
+export const updateUwcssaCareer = /* GraphQL */ `
+  mutation UpdateUwcssaCareer(
+    $input: UpdateUwcssaCareerInput!
+    $condition: ModelUwcssaCareerConditionInput
+  ) {
+    updateUwcssaCareer(input: $input, condition: $condition) {
+      id
+      title
+      whoWeAre
+      whatWeAreLookingFor
+      requirements
+      whyToApply
+      location
+      employmentType
+      uwcssaDepartment {
+        id
+        introduction
+        email
+        leader
+        createdAt
+        updatedAt
+        owner
+      }
+      resume {
+        nextToken
+      }
+      startDate
+      createdAt
+      updatedAt
+      owner
+      user {
+        id
+        name
+        email
+        rank
+        fullName
+        contactEmail
+        title
+        about
+        website
+        emailSubscription
+        active
+        createdAt
+        updatedAt
+        owner
+        userProfileAvatarURLId
+      }
+      uwcssaDepartmentUwcssaCareersId
+    }
+  }
+`;
+export const deleteUwcssaCareer = /* GraphQL */ `
+  mutation DeleteUwcssaCareer(
+    $input: DeleteUwcssaCareerInput!
+    $condition: ModelUwcssaCareerConditionInput
+  ) {
+    deleteUwcssaCareer(input: $input, condition: $condition) {
+      id
+      title
+      whoWeAre
+      whatWeAreLookingFor
+      requirements
+      whyToApply
+      location
+      employmentType
+      uwcssaDepartment {
+        id
+        introduction
+        email
+        leader
+        createdAt
+        updatedAt
+        owner
+      }
+      resume {
+        nextToken
+      }
+      startDate
+      createdAt
+      updatedAt
+      owner
+      user {
+        id
+        name
+        email
+        rank
+        fullName
+        contactEmail
+        title
+        about
+        website
+        emailSubscription
+        active
+        createdAt
+        updatedAt
+        owner
+        userProfileAvatarURLId
+      }
+      uwcssaDepartmentUwcssaCareersId
+    }
+  }
+`;
+export const createResume = /* GraphQL */ `
+  mutation CreateResume(
+    $input: CreateResumeInput!
+    $condition: ModelResumeConditionInput
+  ) {
+    createResume(input: $input, condition: $condition) {
+      id
+      fullName
+      email
+      phone
+      resumeURL
+      coverLetterURL
+      createdAt
+      updatedAt
+      message
+      progress
+      uwcssaCareer {
+        id
+        title
+        whoWeAre
+        whatWeAreLookingFor
+        requirements
+        whyToApply
+        location
+        employmentType
+        startDate
+        createdAt
+        updatedAt
+        owner
+        uwcssaDepartmentUwcssaCareersId
+      }
+      owner
+      user {
+        id
+        name
+        email
+        rank
+        fullName
+        contactEmail
+        title
+        about
+        website
+        emailSubscription
+        active
+        createdAt
+        updatedAt
+        owner
+        userProfileAvatarURLId
+      }
+      uwcssaCareerResumeId
+    }
+  }
+`;
+export const updateResume = /* GraphQL */ `
+  mutation UpdateResume(
+    $input: UpdateResumeInput!
+    $condition: ModelResumeConditionInput
+  ) {
+    updateResume(input: $input, condition: $condition) {
+      id
+      fullName
+      email
+      phone
+      resumeURL
+      coverLetterURL
+      createdAt
+      updatedAt
+      message
+      progress
+      uwcssaCareer {
+        id
+        title
+        whoWeAre
+        whatWeAreLookingFor
+        requirements
+        whyToApply
+        location
+        employmentType
+        startDate
+        createdAt
+        updatedAt
+        owner
+        uwcssaDepartmentUwcssaCareersId
+      }
+      owner
+      user {
+        id
+        name
+        email
+        rank
+        fullName
+        contactEmail
+        title
+        about
+        website
+        emailSubscription
+        active
+        createdAt
+        updatedAt
+        owner
+        userProfileAvatarURLId
+      }
+      uwcssaCareerResumeId
+    }
+  }
+`;
+export const deleteResume = /* GraphQL */ `
+  mutation DeleteResume(
+    $input: DeleteResumeInput!
+    $condition: ModelResumeConditionInput
+  ) {
+    deleteResume(input: $input, condition: $condition) {
+      id
+      fullName
+      email
+      phone
+      resumeURL
+      coverLetterURL
+      createdAt
+      updatedAt
+      message
+      progress
+      uwcssaCareer {
+        id
+        title
+        whoWeAre
+        whatWeAreLookingFor
+        requirements
+        whyToApply
+        location
+        employmentType
+        startDate
+        createdAt
+        updatedAt
+        owner
+        uwcssaDepartmentUwcssaCareersId
+      }
+      owner
+      user {
+        id
+        name
+        email
+        rank
+        fullName
+        contactEmail
+        title
+        about
+        website
+        emailSubscription
+        active
+        createdAt
+        updatedAt
+        owner
+        userProfileAvatarURLId
+      }
+      uwcssaCareerResumeId
+    }
+  }
+`;
 export const createArticleTags = /* GraphQL */ `
   mutation CreateArticleTags(
     $input: CreateArticleTagsInput!
@@ -3893,6 +4241,7 @@ export const createArticleTags = /* GraphQL */ `
         content
         coverPageImgURL
         coverPageDescription
+        isPublish
         active
         createdAt
         updatedAt
@@ -3925,6 +4274,7 @@ export const updateArticleTags = /* GraphQL */ `
         content
         coverPageImgURL
         coverPageDescription
+        isPublish
         active
         createdAt
         updatedAt
@@ -3957,6 +4307,7 @@ export const deleteArticleTags = /* GraphQL */ `
         content
         coverPageImgURL
         coverPageDescription
+        isPublish
         active
         createdAt
         updatedAt
@@ -3996,6 +4347,7 @@ export const createEventTags = /* GraphQL */ `
         startDate
         endDate
         eventStatus
+        isPublish
         active
         createdAt
         updatedAt
@@ -4037,6 +4389,7 @@ export const updateEventTags = /* GraphQL */ `
         startDate
         endDate
         eventStatus
+        isPublish
         active
         createdAt
         updatedAt
@@ -4078,6 +4431,7 @@ export const deleteEventTags = /* GraphQL */ `
         startDate
         endDate
         eventStatus
+        isPublish
         active
         createdAt
         updatedAt

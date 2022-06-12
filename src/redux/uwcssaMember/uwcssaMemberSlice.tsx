@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-29 22:42:19
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-06 19:35:07
+ * @LastEditTime: 2022-06-11 01:37:26
  * @FilePath: /uwcssa_ca/src/redux/uwcssaMember/uwcssaMemberSlice.tsx
  * @Description:
  * import uwcssaMemberReducer from './uwcssaMember/uwcssaMemberSlice';
@@ -72,8 +72,9 @@ const initialState = uwcssaMemberAdapter.getInitialState({
 
 export const fetchUwcssaMemberList = createAsyncThunk(
   'uwcssaMember/fetchUwcssaMemberList',
-  async ({ isAuth }: { isAuth: boolean }) => {
+  async ({ isAuth }: { isAuth: boolean }, { rejectWithValue }) => {
     try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const result: any = await API.graphql({
         query: listUwcssaMembers,
         // variables: {
@@ -85,20 +86,25 @@ export const fetchUwcssaMemberList = createAsyncThunk(
       return result.data.listUwcssaMembers.items;
     } catch (error) {
       console.log(error);
+      return rejectWithValue(error.errors);
     }
   },
 );
 
 export const fetchUwcssaMember = createAsyncThunk(
   'uwcssaMember/fetchUwcssaMember',
-  async ({
-    uwcssaMemberId,
-    isAuth,
-  }: {
-    uwcssaMemberId: string;
-    isAuth: boolean;
-  }) => {
+  async (
+    {
+      uwcssaMemberId,
+      isAuth,
+    }: {
+      uwcssaMemberId: string;
+      isAuth: boolean;
+    },
+    { rejectWithValue },
+  ) => {
     try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const result: any = await API.graphql({
         query: getUwcssaMember,
         variables: { id: uwcssaMemberId },
@@ -110,17 +116,21 @@ export const fetchUwcssaMember = createAsyncThunk(
       return result.data.getUwcssaMember;
     } catch (error) {
       console.log(error);
+      return rejectWithValue(error.errors);
     }
   },
 );
 
 export const postUwcssaMember = createAsyncThunk(
   'uwcssaMember/postUwcssaMember',
-  async ({
-    createUwcssaMemberInput,
-  }: {
-    createUwcssaMemberInput: CreateUwcssaMemberInput;
-  }) => {
+  async (
+    {
+      createUwcssaMemberInput,
+    }: {
+      createUwcssaMemberInput: CreateUwcssaMemberInput;
+    },
+    { rejectWithValue },
+  ) => {
     Object.keys(createUwcssaMemberInput).forEach((key) =>
       createUwcssaMemberInput[key] === null ||
       createUwcssaMemberInput[key] === ''
@@ -128,6 +138,7 @@ export const postUwcssaMember = createAsyncThunk(
         : {},
     );
     try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const result: any = await API.graphql(
         graphqlOperation(createUwcssaMember, {
           input: createUwcssaMemberInput,
@@ -136,17 +147,21 @@ export const postUwcssaMember = createAsyncThunk(
       return result.data.createUwcssaMember;
     } catch (error) {
       console.log(error);
+      return rejectWithValue(error.errors);
     }
   },
 );
 
 export const updateUwcssaMemberDetail = createAsyncThunk(
   'uwcssaMember/updateUwcssaMemberDetail',
-  async ({
-    updateUwcssaMemberInput,
-  }: {
-    updateUwcssaMemberInput: UpdateUwcssaMemberInput;
-  }) => {
+  async (
+    {
+      updateUwcssaMemberInput,
+    }: {
+      updateUwcssaMemberInput: UpdateUwcssaMemberInput;
+    },
+    { rejectWithValue },
+  ) => {
     Object.keys(updateUwcssaMemberInput).forEach((key) =>
       updateUwcssaMemberInput[key] === null ||
       updateUwcssaMemberInput[key] === ''
@@ -154,6 +169,7 @@ export const updateUwcssaMemberDetail = createAsyncThunk(
         : {},
     );
     try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const result: any = await API.graphql(
         graphqlOperation(updateUwcssaMember, {
           input: updateUwcssaMemberInput,
@@ -162,14 +178,16 @@ export const updateUwcssaMemberDetail = createAsyncThunk(
       return result.data.updateUwcssaMember;
     } catch (error) {
       console.log(error);
+      return rejectWithValue(error.errors);
     }
   },
 );
 
 export const removeUwcssaMember = createAsyncThunk(
   'uwcssaMember/removeUwcssaMember',
-  async ({ id }: { id: string }) => {
+  async ({ id }: { id: string }, { rejectWithValue }) => {
     try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const result: any = await API.graphql(
         graphqlOperation(deleteUwcssaMember, {
           input: { id },
@@ -179,6 +197,7 @@ export const removeUwcssaMember = createAsyncThunk(
       return result.data.deleteUwcssaMember.id;
     } catch (error) {
       console.log(error);
+      return rejectWithValue(error.errors);
     }
   },
 );
@@ -200,7 +219,7 @@ const uwcssaMemberSlice = createSlice({
       })
       .addCase(fetchUwcssaMemberList.rejected, (state, action) => {
         state.fetchUwcssaMemberListStatus = 'failed';
-        state.fetchUwcssaMemberError = action.error.message;
+        state.fetchUwcssaMemberListError = action.payload;
       })
       // Cases for status of selectedUwcssaMember (pending, fulfilled, and rejected)
       .addCase(fetchUwcssaMember.pending, (state) => {
@@ -214,7 +233,7 @@ const uwcssaMemberSlice = createSlice({
       })
       .addCase(fetchUwcssaMember.rejected, (state, action) => {
         state.fetchUwcssaMemberStatus = 'failed';
-        state.fetchUwcssaMemberError = action.error.message;
+        state.fetchUwcssaMemberError = action.payload;
       })
       // Cases for status of postUwcssaMember (pending, fulfilled, and rejected)
       .addCase(postUwcssaMember.pending, (state) => {
@@ -228,7 +247,7 @@ const uwcssaMemberSlice = createSlice({
       })
       .addCase(postUwcssaMember.rejected, (state, action) => {
         state.postUwcssaMemberStatus = 'failed';
-        state.postUwcssaMemberError = action.error.message;
+        state.postUwcssaMemberError = action.payload;
       })
       // Cases for status of updateUwcssaMember (pending, fulfilled, and rejected)
       .addCase(updateUwcssaMemberDetail.pending, (state) => {
@@ -242,7 +261,7 @@ const uwcssaMemberSlice = createSlice({
       })
       .addCase(updateUwcssaMemberDetail.rejected, (state, action) => {
         state.updateUwcssaMemberDetailStatus = 'failed';
-        state.updateUwcssaMemberDetailError = action.error.message;
+        state.updateUwcssaMemberDetailError = action.payload;
       })
       // Cases for status of updateUwcssaMember (pending, fulfilled, and rejected)
       .addCase(removeUwcssaMember.pending, (state) => {
@@ -257,7 +276,7 @@ const uwcssaMemberSlice = createSlice({
       })
       .addCase(removeUwcssaMember.rejected, (state, action) => {
         state.removeUwcssaMemberStatus = 'failed';
-        state.removeUwcssaMemberError = action.error.message;
+        state.removeUwcssaMemberError = action.payload;
       });
   },
 });

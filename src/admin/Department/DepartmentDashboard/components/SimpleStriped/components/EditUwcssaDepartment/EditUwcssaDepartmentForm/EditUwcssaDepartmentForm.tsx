@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-30 15:13:57
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-06 20:00:23
+ * @LastEditTime: 2022-06-11 18:25:43
  * @FilePath: /uwcssa_ca/src/admin/Department/DepartmentDashboard/components/SimpleStriped/components/EditUwcssaDepartment/EditUwcssaDepartmentForm/EditUwcssaDepartmentForm.tsx
  * @Description:
  *
@@ -24,6 +24,7 @@ import React from 'react';
 import { getOwnerUserName } from 'redux/auth/authSlice';
 import { updateUwcssaDepartmentDetail } from 'redux/uwcssaDepartment/uwcssaDepartmentSlice';
 import { useFormik } from 'formik';
+import { useSnackbar } from 'notistack';
 
 const validationSchema = yup.object({
   id: yup.string().required(),
@@ -53,7 +54,7 @@ const EditUwcssaDepartmentForm = ({
 }: Props): JSX.Element => {
   const dispatch = useAppDispatch();
   const ownerUsername = useAppSelector(getOwnerUserName);
-
+  const { enqueueSnackbar } = useSnackbar();
   const initialValues = {
     id: item?.id || '',
     introduction: item?.introduction || '',
@@ -73,10 +74,11 @@ const EditUwcssaDepartmentForm = ({
     );
     if (response.meta.requestStatus === 'fulfilled') {
       onClose();
+      enqueueSnackbar('修改成功！', { variant: 'success' });
       formik.resetForm();
       return true;
     } else {
-      return false;
+      enqueueSnackbar('修改失败！', { variant: 'error' });
     }
   };
 

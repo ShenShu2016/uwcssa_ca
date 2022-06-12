@@ -1,13 +1,14 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-18 09:12:03
- * @LastEditTime: 2022-05-28 18:00:44
- * @LastEditors: 李佳修
+ * @LastEditTime: 2022-06-10 20:22:35
+ * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/layouts/Main/components/Sidebar/components/SidebarNav/components/NavItem/NavItem.tsx
  */
 
 import React, { useEffect, useState } from 'react';
 import { alpha, useTheme } from '@mui/material/styles';
+import { matchPath, useLocation, useNavigate } from 'react-router-dom';
 
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -18,8 +19,6 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Grid from '@mui/material/Grid';
 import { Link } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
-import { useNavigate, matchPath } from 'react-router';
-import { useLocation } from 'react-router-dom';
 
 interface Props {
   title: string;
@@ -38,9 +37,7 @@ const NavItem = ({ title, items }: Props): JSX.Element => {
 
   const hasActiveLink = () => {
     if (items instanceof Array) {
-      return items.find(
-        (i) => matchPath(i.href, activeLink)
-      );
+      return items.find((i) => matchPath(i.href, activeLink));
     } else {
       return matchPath(items.href, activeLink);
     }

@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-06-01 00:31:43
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-07 19:49:11
+ * @LastEditTime: 2022-06-10 13:53:59
  * @FilePath: /uwcssa_ca/src/admin/UserProfile/components/CustomerListResults.tsx
  * @Description:
  *
@@ -110,7 +110,16 @@ function CustomerListResults({
                   </TableCell>
                   <TableCell>{customer.email}</TableCell>
                   <TableCell>
-                    {moment(customer.createdAt).format('DD/MM/YYYY')}
+                    <Box sx={{ display: 'flex' }}>
+                      {moment(customer.createdAt).format('YYYY/MM/DD')}
+                      <Typography
+                        fontSize={10}
+                        variant="subtitle2"
+                        sx={{ ml: '4px' }}
+                      >
+                        ({moment(customer.createdAt).fromNow()})
+                      </Typography>
+                    </Box>
                   </TableCell>
                 </TableRow>
               ))}

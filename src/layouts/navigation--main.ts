@@ -1,8 +1,8 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-26 13:57:44
- * @LastEditors: Shikai Jin
- * @LastEditTime: 2022-06-07 19:54:14
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-06-10 23:42:24
  * @FilePath: /uwcssa_ca/src/layouts/navigation--main.ts
  * @Description:
  *
@@ -91,10 +91,14 @@ const pages = {
     title: 'dashboard',
     href: '/dashboard',
   },
-  freshman: {
-    title: 'terms',
-    href: '/terms',
-  },
+  freshman: [
+    {
+      title: '正在构建中...',
+      href: '',
+      // title: 'terms',
+      // href: '/terms',
+    },
+  ],
   house: [
     // {
     //   title: 'General Settings',
@@ -167,10 +171,16 @@ const pages = {
     //   href: '/career-listing-minimal',
     // },
   ],
-  jobs: {
-    title: 'careerOpening',
-    href: '/careerOpening',
-  },
+  jobs: [
+    {
+      title: 'Careers',
+      href: '/career',
+    },
+    {
+      title: '某一个职位',
+      href: '/career/6566',
+    },
+  ],
   about: [
     {
       title: '关于我们',

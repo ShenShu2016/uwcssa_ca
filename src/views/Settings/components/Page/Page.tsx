@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-19 18:25:04
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-06 21:47:58
+ * @LastEditTime: 2022-06-10 23:43:53
  * @FilePath: /uwcssa_ca/src/views/Settings/components/Page/Page.tsx
  * @Description:
  *
@@ -31,11 +31,11 @@ const pages = [
   //   href: '/settings/security',
   //   title: 'Security',
   // },
-  // {
-  //   id: 'notifications',
-  //   href: '/settings/notifications',
-  //   title: 'Notifications',
-  // },
+  {
+    id: 'notifications',
+    href: '/settings/notifications',
+    title: 'Notifications',
+  },
   // {
   //   id: 'billing',
   //   href: '/settings/billing',

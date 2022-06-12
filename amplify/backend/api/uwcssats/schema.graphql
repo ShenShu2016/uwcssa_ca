@@ -14,7 +14,7 @@ type User
   @auth(rules: [{ allow: groups, groups: ["uwcssaAdmin"] }]) {
   id: ID!
   email: AWSEmail!
-  userName: String! # 和这个东西一样：event.request.userAttributes.sub, Google 登录的话就是google_ 开头
+  userName: String! # 和这个东西一样：event.request.userAttributes.sub, Google 登录的话就是google_ 开头 google 的sub 和username 不一样，username 是google_开头
   name: String! # 额外的name，但是他们的username 还是uuid。和Google连用不错
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
@@ -145,6 +145,7 @@ type Article
   comments: [Comment] @hasMany
   likes: [Like] @hasMany
   count: Count @hasOne # 每一个article 都要有一个count 记录有几个Comments
+  isPublish: Boolean
   active: ActiveType!
     @index(
       name: "articleSortByCreatedAt" #名字要用小写
@@ -321,6 +322,7 @@ type UwcssaDepartment
   leader: ID
   currentLeader: UserProfile @hasOne(fields: ["leader"])
   uwcssaMembers: [UwcssaMember] @hasMany
+  uwcssaCareers: [UwcssaCareer] @hasMany
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
   owner: ID!
@@ -381,6 +383,7 @@ type Event
   eventParticipants: [EventParticipant] @hasMany
   likes: [Like] @hasMany
   count: Count @hasOne # 每一个article 都要有一个count 记录有几个Comments
+  isPublish: Boolean
   active: ActiveType!
     @index(
       name: "eventSortByCreatedAt" #名字要用小写
@@ -555,4 +558,63 @@ enum EventParticipantStatus {
   ArriveOnTime
   CanNotArrive
   Undecided
+}
+
+type UwcssaCareer
+  @model(subscriptions: null)
+  @auth(
+    rules: [
+      { allow: public, operations: [read], provider: iam }
+      { allow: groups, operations: [read], groups: ["uwcssaUser"] }
+      { allow: groups, groups: ["uwcssaAdmin"] }
+    ]
+  ) {
+  id: ID!
+  title: String
+  whoWeAre: String
+  whatWeAreLookingFor: [String]
+  requirements: [String]
+  whyToApply: String
+  location: String
+  employmentType: EmploymentType
+  uwcssaDepartment: UwcssaDepartment @belongsTo
+  resume: [Resume] @hasMany
+  startDate: AWSDateTime
+  createdAt: AWSDateTime! # 创建时间
+  updatedAt: AWSDateTime! # 更新时间
+  owner: ID! # 创建者
+  user: UserProfile @hasOne(fields: ["owner"])
+}
+
+enum EmploymentType {
+  FullTime
+  PartTime
+  Internship
+  Volunteer
+  Other
+}
+
+type Resume
+  @model(subscriptions: null)
+  @auth(rules: [{ allow: owner }, { allow: groups, groups: ["uwcssaAdmin"] }]) {
+  id: ID!
+  fullName: String
+  email: AWSEmail
+  phone: String
+  resumeURL: AWSURL #上传 s3
+  coverLetterURL: AWSURL #上传 s3
+  createdAt: AWSDateTime! # 创建时间
+  updatedAt: AWSDateTime! # 更新时间
+  message: String
+  progress: ResumeProgress!
+  uwcssaCareer: UwcssaCareer @belongsTo
+  owner: ID # 创建者
+  user: UserProfile @hasOne(fields: ["owner"])
+}
+
+enum ResumeProgress {
+  pending
+  inProgress
+  accepted
+  rejected
 }

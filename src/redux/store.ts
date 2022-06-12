@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 18:10:27
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-07 22:32:45
+ * @LastEditTime: 2022-06-11 00:55:31
  * @FilePath: /uwcssa_ca/src/redux/store.ts
  * @Description:
  *
@@ -20,8 +20,10 @@ import eventReducer from './event/eventSlice';
 import formReducer from './form/formSlice';
 import likeReducer from './like/likeSlice';
 import researchDevelopmentTeamReducer from './researchDevelopmentTeam/researchDevelopmentTeamSlice';
+import resumeReducer from './resume/resumeSlice';
 import userImageReducer from './userImage/userImageSlice';
 import userProfileReducer from './userProfile/userProfileSlice';
+import uwcssaCareerReducer from './uwcssaCareer/uwcssaCareerSlice';
 import uwcssaDepartmentReducer from './uwcssaDepartment/uwcssaDepartmentSlice';
 import uwcssaMemberReducer from './uwcssaMember/uwcssaMemberSlice';
 
@@ -35,6 +37,8 @@ export const store = configureStore({
     contactUs: contactUsReducer,
     alert: alertReducer,
     userImage: userImageReducer,
+    uwcssaCareer: uwcssaCareerReducer,
+    resume: resumeReducer,
     uwcssaDepartment: uwcssaDepartmentReducer,
     uwcssaMember: uwcssaMemberReducer,
     researchDevelopmentTeam: researchDevelopmentTeamReducer,

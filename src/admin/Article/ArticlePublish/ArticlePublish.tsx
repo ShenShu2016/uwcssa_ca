@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-20 09:30:58
- * @LastEditTime: 2022-06-08 17:11:54
+ * @LastEditTime: 2022-06-11 18:27:13
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/admin/Article/ArticlePublish/ArticlePublish.tsx
  */
@@ -12,10 +12,17 @@ import {
   postArticle,
   updateArticleDetail,
 } from 'redux/article/articleSlice';
-import { Box, Card, TextField } from '@mui/material';
+import {
+  Box,
+  Card,
+  Checkbox,
+  FormControlLabel,
+  TextField,
+} from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { createArticleTag, createNewTag } from 'redux/tag/tagSlice';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { ActiveType } from 'API';
 import AddCoverPic from './components/AddCoverPic';
@@ -26,10 +33,9 @@ import MyImageList from './components/MyImageList';
 import PageTitle from 'admin/components/pageTitle';
 import RichTextEditor from 'components/RichTextEditor';
 import { getOwnerUserName } from 'redux/auth/authSlice';
-import useMessage from 'hooks/useMessage';
-import { useNavigate } from 'react-router';
-import { useParams } from 'react-router-dom';
-import { v4 as uuidv4 } from 'uuid';
+import { useConfirm } from 'material-ui-confirm';
+import { useSnackbar } from 'notistack';
+import { v4 as uuid } from 'uuid';
 
 export interface Tag {
   tagID: string;
@@ -42,14 +48,14 @@ enum ActionType {
 
 const ArticlePublish: React.FC = () => {
   const dispatch = useAppDispatch();
-
-  const message = useMessage();
+  const confirm = useConfirm();
+  const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
   const username = useAppSelector(getOwnerUserName);
   // 获取url中的文章id参数 如果有说明是编辑文章 没有说明是新建
   const { id: editArticleId } = useParams();
   const actionType = editArticleId ? ActionType.edit : ActionType.create;
-
+  const [isPublish, setIsPublish] = useState(false); //必须一直是false
   const [content, setContent] = useState<string>('');
   const [title, setTitle] = useState<string>('');
   const [coverPageDescription, setCoverPageDescription] = useState<string>('');
@@ -86,10 +92,7 @@ const ArticlePublish: React.FC = () => {
         setTags(() => articleInfo.tags.items);
         setImgFile(articleInfo.coverPageImgURL);
       } else {
-        message.open({
-          type: 'error',
-          message: '获取文章失败',
-        });
+        enqueueSnackbar('获取文章失败', { variant: 'error' });
       }
       setFullScreenLoading({
         loading: false,
@@ -116,6 +119,11 @@ const ArticlePublish: React.FC = () => {
   };
 
   const handleSubmitArticle = async () => {
+    if (isPublish) {
+      await confirm({
+        description: '此行为会将文章发布到订阅者邮箱，是否继续？',
+      });
+    }
     setSubmitLoading(true);
     const currentTitle = title;
     const currentContent = content;
@@ -128,9 +136,8 @@ const ArticlePublish: React.FC = () => {
         desc: !coverPageDescription,
       }));
       setSubmitLoading(false);
-      message.open({
-        type: 'error',
-        message: !content ? '请填写文章内容' : '文章信息不全，无法发布',
+      enqueueSnackbar(!content ? '请填写文章内容' : '文章信息不全，无法发布', {
+        variant: 'error',
       });
       return;
     }
@@ -157,12 +164,10 @@ const ArticlePublish: React.FC = () => {
         tagCreate.tags,
       );
       if (isConnected) {
-        message.open({
-          type: 'success',
-          message: `文章${
-            actionType === ActionType.create ? '发布' : '更新'
-          }完成`,
-        });
+        enqueueSnackbar(
+          `文章${actionType === ActionType.create ? '发布' : '更新'}完成`,
+          { variant: 'error' },
+        );
         setFullScreenLoading({
           loading: true,
           message: '操作成功，即将跳转',
@@ -176,10 +181,7 @@ const ArticlePublish: React.FC = () => {
           navigate('/dashboard', { replace: true });
         }, 1000);
       } else {
-        message.open({
-          type: 'warning',
-          message: '文章操作有误',
-        });
+        enqueueSnackbar('文章操作有误', { variant: 'warning' });
       }
     } else {
       console.error('文章上传或标签上传出现错误');
@@ -192,13 +194,13 @@ const ArticlePublish: React.FC = () => {
     currentContent,
     currentCoverPageDescription,
   ) => {
-    const articleID =
-      actionType === ActionType.create ? uuidv4() : editArticleId;
+    const articleID = actionType === ActionType.create ? uuid() : editArticleId;
     const params: Article = {
       id: articleID,
       title: currentTitle,
       content: currentContent,
       active: ActiveType.T,
+      isPublish: isPublish,
       coverPageImgURL: imgFile || undefined,
       coverPageDescription: currentCoverPageDescription,
       owner: username,
@@ -209,17 +211,15 @@ const ArticlePublish: React.FC = () => {
         : await dispatch(updateArticleDetail({ updateArticleInput: params }));
     const isPosted = articlePostRes.meta.requestStatus === 'fulfilled';
     if (isPosted) {
-      message.open({
-        type: 'success',
-        message: `文章已${actionType === ActionType.create ? '创建' : '更新'}`,
-      });
+      enqueueSnackbar(
+        `文章已${actionType === ActionType.create ? '创建' : '更新'}`,
+        { variant: 'error' },
+      );
     } else {
-      message.open({
-        type: 'warning',
-        message: `文章${
-          actionType === ActionType.create ? '创建' : '更新'
-        }错误`,
-      });
+      enqueueSnackbar(
+        `文章${actionType === ActionType.create ? '创建' : '更新'}错误`,
+        { variant: 'warning' },
+      );
     }
     return {
       articleID,
@@ -243,15 +243,9 @@ const ArticlePublish: React.FC = () => {
       (res) => res.meta.requestStatus === 'fulfilled',
     );
     if (isAllTagCreated) {
-      message.open({
-        type: 'success',
-        message: '标签已创建',
-      });
+      enqueueSnackbar('标签已创建', { variant: 'success' });
     } else {
-      message.open({
-        type: 'warning',
-        message: '标签创建错误',
-      });
+      enqueueSnackbar('标签创建错误', { variant: 'warning' });
     }
     return {
       tags: tagUploadRes.map((tag) => tag.meta.arg.createTagInput.id),
@@ -282,10 +276,7 @@ const ArticlePublish: React.FC = () => {
     // 判断当前的tag列表里是否有这个tag
     const find = tags.findIndex((item) => item.tagID === tag);
     if (find !== -1) {
-      message.open({
-        type: 'warning',
-        message: `标签【${tag}】已存在`,
-      });
+      enqueueSnackbar(`标签【${tag}】已存在`, { variant: 'warning' });
       return;
     }
     // 如果没有
@@ -378,6 +369,13 @@ const ArticlePublish: React.FC = () => {
             <MyImageList useImgFromRecent={useImgFromRecent} />
             <Box>
               <AddCoverPic setImgFile={setImgFile} imgFile={imgFile} />
+              <FormControlLabel
+                name={'isPublish'}
+                value={isPublish}
+                onChange={(e: any) => setIsPublish(e.target.checked)}
+                control={<Checkbox size="medium" />}
+                label={'要发布吗？'}
+              />
               <LoadingButton
                 loading={submitLoading}
                 fullWidth

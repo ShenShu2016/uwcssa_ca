@@ -297,6 +297,7 @@ export const getArticle = /* GraphQL */ `
         countEventId
         countCommentId
       }
+      isPublish
       active
       createdAt
       updatedAt
@@ -335,6 +336,7 @@ export const listArticles = /* GraphQL */ `
         content
         coverPageImgURL
         coverPageDescription
+        isPublish
         active
         createdAt
         updatedAt
@@ -368,6 +370,7 @@ export const articleSortByCreatedAt = /* GraphQL */ `
         content
         coverPageImgURL
         coverPageDescription
+        isPublish
         active
         createdAt
         updatedAt
@@ -391,6 +394,7 @@ export const getComment = /* GraphQL */ `
         content
         coverPageImgURL
         coverPageDescription
+        isPublish
         active
         createdAt
         updatedAt
@@ -411,6 +415,7 @@ export const getComment = /* GraphQL */ `
         startDate
         endDate
         eventStatus
+        isPublish
         active
         createdAt
         updatedAt
@@ -610,6 +615,7 @@ export const getCount = /* GraphQL */ `
         content
         coverPageImgURL
         coverPageDescription
+        isPublish
         active
         createdAt
         updatedAt
@@ -629,6 +635,7 @@ export const getCount = /* GraphQL */ `
         startDate
         endDate
         eventStatus
+        isPublish
         active
         createdAt
         updatedAt
@@ -692,6 +699,7 @@ export const getLike = /* GraphQL */ `
         content
         coverPageImgURL
         coverPageDescription
+        isPublish
         active
         createdAt
         updatedAt
@@ -722,6 +730,7 @@ export const getLike = /* GraphQL */ `
         startDate
         endDate
         eventStatus
+        isPublish
         active
         createdAt
         updatedAt
@@ -863,6 +872,9 @@ export const getUwcssaDepartment = /* GraphQL */ `
         userProfileAvatarURLId
       }
       uwcssaMembers {
+        nextToken
+      }
+      uwcssaCareers {
         nextToken
       }
       createdAt
@@ -1028,6 +1040,7 @@ export const getEvent = /* GraphQL */ `
         countEventId
         countCommentId
       }
+      isPublish
       active
       createdAt
       updatedAt
@@ -1075,6 +1088,7 @@ export const listEvents = /* GraphQL */ `
         startDate
         endDate
         eventStatus
+        isPublish
         active
         createdAt
         updatedAt
@@ -1117,6 +1131,7 @@ export const eventSortByCreatedAt = /* GraphQL */ `
         startDate
         endDate
         eventStatus
+        isPublish
         active
         createdAt
         updatedAt
@@ -1211,6 +1226,7 @@ export const getForm = /* GraphQL */ `
         startDate
         endDate
         eventStatus
+        isPublish
         active
         createdAt
         updatedAt
@@ -1915,6 +1931,155 @@ export const listEventParticipants = /* GraphQL */ `
     }
   }
 `;
+export const getUwcssaCareer = /* GraphQL */ `
+  query GetUwcssaCareer($id: ID!) {
+    getUwcssaCareer(id: $id) {
+      id
+      title
+      whoWeAre
+      whatWeAreLookingFor
+      requirements
+      whyToApply
+      location
+      employmentType
+      uwcssaDepartment {
+        id
+        introduction
+        email
+        leader
+        createdAt
+        updatedAt
+        owner
+      }
+      resume {
+        nextToken
+      }
+      startDate
+      createdAt
+      updatedAt
+      owner
+      user {
+        id
+        name
+        email
+        rank
+        fullName
+        contactEmail
+        title
+        about
+        website
+        emailSubscription
+        active
+        createdAt
+        updatedAt
+        owner
+        userProfileAvatarURLId
+      }
+      uwcssaDepartmentUwcssaCareersId
+    }
+  }
+`;
+export const listUwcssaCareers = /* GraphQL */ `
+  query ListUwcssaCareers(
+    $filter: ModelUwcssaCareerFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listUwcssaCareers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        title
+        whoWeAre
+        whatWeAreLookingFor
+        requirements
+        whyToApply
+        location
+        employmentType
+        startDate
+        createdAt
+        updatedAt
+        owner
+        uwcssaDepartmentUwcssaCareersId
+      }
+      nextToken
+    }
+  }
+`;
+export const getResume = /* GraphQL */ `
+  query GetResume($id: ID!) {
+    getResume(id: $id) {
+      id
+      fullName
+      email
+      phone
+      resumeURL
+      coverLetterURL
+      createdAt
+      updatedAt
+      message
+      progress
+      uwcssaCareer {
+        id
+        title
+        whoWeAre
+        whatWeAreLookingFor
+        requirements
+        whyToApply
+        location
+        employmentType
+        startDate
+        createdAt
+        updatedAt
+        owner
+        uwcssaDepartmentUwcssaCareersId
+      }
+      owner
+      user {
+        id
+        name
+        email
+        rank
+        fullName
+        contactEmail
+        title
+        about
+        website
+        emailSubscription
+        active
+        createdAt
+        updatedAt
+        owner
+        userProfileAvatarURLId
+      }
+      uwcssaCareerResumeId
+    }
+  }
+`;
+export const listResumes = /* GraphQL */ `
+  query ListResumes(
+    $filter: ModelResumeFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listResumes(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        fullName
+        email
+        phone
+        resumeURL
+        coverLetterURL
+        createdAt
+        updatedAt
+        message
+        progress
+        owner
+        uwcssaCareerResumeId
+      }
+      nextToken
+    }
+  }
+`;
 export const getArticleTags = /* GraphQL */ `
   query GetArticleTags($id: ID!) {
     getArticleTags(id: $id) {
@@ -1933,6 +2098,7 @@ export const getArticleTags = /* GraphQL */ `
         content
         coverPageImgURL
         coverPageDescription
+        isPublish
         active
         createdAt
         updatedAt
@@ -1987,6 +2153,7 @@ export const getEventTags = /* GraphQL */ `
         startDate
         endDate
         eventStatus
+        isPublish
         active
         createdAt
         updatedAt

@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-29 15:21:31
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-06 22:41:13
+ * @LastEditTime: 2022-06-10 16:50:28
  * @FilePath: /uwcssa_ca/amplify/backend/function/ArticlePublishHandler/src/email_template.js
  * @Description:
  *
@@ -161,7 +161,7 @@ function articlePublishTemplate(record) {
                                                       <tr>
                                                           <td style="padding-bottom:30px;padding-left:35px;padding-right:35px;padding-top:30px;">
                                                               <div style="color:#393d47;direction:ltr;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;font-size:16px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:left;">
-                                                                  <p style="margin: 0; margin-bottom: 16px;">${record.dynamodb.NewImage.content.S}</p>
+                                                                  <p style="margin: 0; margin-bottom: 16px;">${record.dynamodb.NewImage.coverPageDescription.S}</p>
                                                                   <p style="margin: 0; margin-bottom: 16px;">&nbsp;</p>
                                                                   <p style="margin: 0;">&nbsp;</p>
                                                               </div>
@@ -172,7 +172,7 @@ function articlePublishTemplate(record) {
                                                       <tr>
                                                           <td>
                                                               <div align="center">
-                                                                  <!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="https://uwcssa.ca/article" style="height:44px;width:78px;v-text-anchor:middle;" arcsize="10%" strokeweight="0.75pt" strokecolor="#445daa" fillcolor="#445daa"><w:anchorlock/><v:textbox inset="0px,0px,0px,0px"><center style="color:#ffffff; font-family:Tahoma, sans-serif; font-size:16px"><![endif]--><a href="https://uwcssa.ca/article" target="_blank" style="text-decoration:none;display:inline-block;color:#ffffff;background-color:#445daa;border-radius:4px;width:auto;border-top:1px solid #445daa;font-weight:400;border-right:1px solid #445daa;border-bottom:1px solid #445daa;border-left:1px solid #445daa;padding-top:5px;padding-bottom:5px;font-family:Montserrat, Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif;text-align:center;mso-border-alt:none;word-break:keep-all;"><span style="padding-left:5px;padding-right:5px;font-size:16px;display:inline-block;letter-spacing:normal;"><span style="font-size: 16px; line-height: 2; word-break: break-word; mso-line-height-alt: 32px;">更多资讯</span></span></a>
+                                                                  <!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="https://uwcssa.ca/article/${record.dynamodb.NewImage.id.S}" style="height:44px;width:78px;v-text-anchor:middle;" arcsize="10%" strokeweight="0.75pt" strokecolor="#445daa" fillcolor="#445daa"><w:anchorlock/><v:textbox inset="0px,0px,0px,0px"><center style="color:#ffffff; font-family:Tahoma, sans-serif; font-size:16px"><![endif]--><a href="https://uwcssa.ca/article" target="_blank" style="text-decoration:none;display:inline-block;color:#ffffff;background-color:#445daa;border-radius:4px;width:auto;border-top:1px solid #445daa;font-weight:400;border-right:1px solid #445daa;border-bottom:1px solid #445daa;border-left:1px solid #445daa;padding-top:5px;padding-bottom:5px;font-family:Montserrat, Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif;text-align:center;mso-border-alt:none;word-break:keep-all;"><span style="padding-left:5px;padding-right:5px;font-size:16px;display:inline-block;letter-spacing:normal;"><span style="font-size: 16px; line-height: 2; word-break: break-word; mso-line-height-alt: 32px;">更多资讯</span></span></a>
                                                                   <!--[if mso]></center></v:textbox></v:roundrect><![endif]-->
                                                               </div>
                                                           </td>

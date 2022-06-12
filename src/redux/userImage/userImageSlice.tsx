@@ -1,9 +1,8 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-22 15:10:30
- * @LastEditors: 李佳修
- * @LastEditTime: 2022-06-08 11:03:15
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-06-11 01:34:32
  * @FilePath: /uwcssa_ca/src/redux/userImage/userImageSlice.tsx
  * @Description:
  *
@@ -17,7 +16,7 @@ import {
 
 import API from '@aws-amplify/api';
 import { RootState } from 'redux/store';
-import Storage from '@aws-amplify/storage';
+import { Storage } from '@aws-amplify/storage';
 import awsmobile from '../../aws-exports';
 import { createUserImage } from 'graphql/mutations';
 import { graphqlOperation } from '@aws-amplify/api-graphql';
@@ -47,7 +46,6 @@ export type UserImage = {
 };
 
 const userImageAdapter = createEntityAdapter<UserImage>({
-  // selectId: (item) => item.id,
   sortComparer: (a, b) => b.createdAt.localeCompare(a.createdAt),
 });
 
@@ -61,8 +59,9 @@ const initialState = userImageAdapter.getInitialState({
 
 export const fetchUserImageList = createAsyncThunk(
   'userImage/fetchUserImageList',
-  async () => {
+  async (undifend, { rejectWithValue }) => {
     try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const result: any = await API.graphql({
         query: userImageSortByCreatedAt,
         variables: {
@@ -74,14 +73,16 @@ export const fetchUserImageList = createAsyncThunk(
       return result.data.userImageSortByCreatedAt;
     } catch (error) {
       console.log(error);
+      return rejectWithValue(error.errors);
     }
   },
 );
 
 export const moreUserImageList = createAsyncThunk(
   'userImage/moreUserImageList',
-  async (nextToken: string) => {
+  async (nextToken: string, { rejectWithValue }) => {
     try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const result: any = await API.graphql({
         query: userImageSortByCreatedAt,
         variables: {
@@ -95,6 +96,7 @@ export const moreUserImageList = createAsyncThunk(
       return result.data.userImageSortByCreatedAt;
     } catch (error) {
       console.log(error);
+      return rejectWithValue(error.errors);
     }
   },
 );
@@ -105,19 +107,22 @@ interface MyFile extends File {
 
 export const postUserImage = createAsyncThunk(
   'userImage/postUserImage',
-  async ({
-    targetTable,
-    file,
-    authUser,
-    compressedWidth = 700,
-    thumbnailWidth = 200,
-  }: {
-    targetTable: string;
-    file: MyFile; //自己编的一个type
-    authUser: { identityId: string; username: string }; //这个type编的也不太好
-    compressedWidth?: number;
-    thumbnailWidth?: number;
-  }) => {
+  async (
+    {
+      targetTable,
+      file,
+      authUser,
+      compressedWidth = 700,
+      thumbnailWidth = 200,
+    }: {
+      targetTable: string;
+      file: MyFile; //自己编的一个type
+      authUser: { identityId: string; username: string }; //这个type编的也不太好
+      compressedWidth?: number;
+      thumbnailWidth?: number;
+    },
+    { rejectWithValue },
+  ) => {
     const id = uuid();
     const fileEXT = file.name.split('.').pop();
     const { identityId, username } = authUser;
@@ -148,13 +153,14 @@ export const postUserImage = createAsyncThunk(
         level: 'protected',
         contentType: 'image/*',
       });
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const result: any = await API.graphql(
         graphqlOperation(createUserImage, { input: createUserImageInput }), //当这里发上去之后lambda function 会开始做两个东西，一个是压缩，一个是做thumbnail
       );
       return result.data.createUserImage;
     } catch (error) {
       console.log(error);
-      return error;
+      return rejectWithValue(error.errors);
     }
   },
 );
@@ -174,7 +180,7 @@ const userImageSlice = createSlice({
       })
       .addCase(fetchUserImageList.rejected, (state, action) => {
         state.fetchUserImageListStatus = 'failed';
-        state.fetchUserImageListError = action.error.message;
+        state.fetchUserImageListError = action.payload;
       })
       .addCase(moreUserImageList.fulfilled, (state, action) => {
         userImageAdapter.upsertMany(state, action.payload.items);
@@ -190,7 +196,7 @@ const userImageSlice = createSlice({
       })
       .addCase(postUserImage.rejected, (state, action) => {
         state.postUserImageStatus = 'failed';
-        state.postUserImageError = action.error.message;
+        state.postUserImageError = action.payload;
       });
   },
 });
@@ -201,7 +207,7 @@ export const {
   selectIds: selectUserImageIds,
 } = userImageAdapter.getSelectors((state: RootState) => state.userImage);
 
-export const getNextToken = (state: { userImage: { nextToken: any } }) =>
+export const getNextToken = (state: { userImage: { nextToken: string } }) =>
   state.userImage?.nextToken;
 
 export default userImageSlice.reducer;

@@ -2,23 +2,19 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-21 15:30:41
- * @LastEditTime: 2022-05-26 16:04:26
+ * @LastEditTime: 2022-06-11 18:26:33
  * @LastEditors: Shen Shu
- * @FilePath: /uwcssa_ca/src/views/ArticlePublish/components/AddCoverPic.tsx
+ * @FilePath: /uwcssa_ca/src/admin/Article/ArticlePublish/components/AddCoverPic.tsx
  */
 
+import { Box, Card, LinearProgress, Typography, styled } from '@mui/material';
 import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import LinearProgress from '@mui/material/LinearProgress';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
-import Typography from '@mui/material/Typography';
 import { postUserImage } from 'redux/userImage/userImageSlice';
-import { styled } from '@mui/material/styles';
-import useMessage from 'hooks/useMessage';
+import { useSnackbar } from 'notistack';
 
 // import Button from '@mui/material/Button';
 
@@ -34,7 +30,7 @@ const AddCoverPic = ({
   imgFile: string;
 }) => {
   const dispatch = useAppDispatch();
-  const message = useMessage();
+  const { enqueueSnackbar } = useSnackbar();
   const authUser = useAppSelector((state) => state.auth.user);
   // const [originImg, setOriginImg] = useState<string>();
   const [uploadImgLoading, setUploadIngLoading] = useState<boolean>(false);
@@ -54,15 +50,9 @@ const AddCoverPic = ({
         response.payload.objectURL || response.payload.objectCompressedURL,
       );
       // setOriginImg(response.payload.objectURL);
-      message.open({
-        type: 'success',
-        message: '图片上传成功',
-      });
+      enqueueSnackbar('图片上传成功', { variant: 'success' });
     } else {
-      message.open({
-        type: 'error',
-        message: '图片上传失败',
-      });
+      enqueueSnackbar('图片上传失败', { variant: 'error' });
     }
     setUploadIngLoading(false);
   };
