@@ -2,7 +2,7 @@
  * @Author: 李佳修
  * @Date: 2022-05-19 17:21:06
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-30 13:50:04
+ * @LastEditTime: 2022-06-12 19:49:25
  * @FilePath: /uwcssa_ca/src/components/BlogWithLargeImage/BlogWithLargeImage.tsx
  * @Description:
  *
@@ -21,16 +21,12 @@ import {
   Grid,
   Typography,
 } from '@mui/material';
-import React, { useEffect } from 'react';
-import {
-  fetchArticleList,
-  selectAllArticles,
-} from 'redux/article/articleSlice';
-import { useAppDispatch, useAppSelector } from 'redux/hooks';
 
 import { Link } from 'react-router-dom';
-import { getAuthState } from 'redux/auth/authSlice';
+import React from 'react';
 import moment from 'moment';
+import { selectAllArticles } from 'redux/article/articleSlice';
+import { useAppSelector } from 'redux/hooks';
 
 // import Divider from '@mui/material/Divider';
 
@@ -40,23 +36,23 @@ import moment from 'moment';
 
 const BlogWithLargeImage = (): JSX.Element => {
   // const theme = useTheme();
-  const dispatch = useAppDispatch();
-  const isAuth = useAppSelector(getAuthState); //看一下Auth的选项他有可能会返回null 或者false 现在前面没有load 好user 就不让你进了，所以有可能不需要 ！==null的判断了
+  //const dispatch = useAppDispatch();
+  //const isAuth = useAppSelector(getAuthState); //看一下Auth的选项他有可能会返回null 或者false 现在前面没有load 好user 就不让你进了，所以有可能不需要 ！==null的判断了
   const articles = useAppSelector(selectAllArticles); // redux 有这种用法
-  const { fetchArticleListStatus } = useAppSelector((state) => state.article);
+  //const { fetchArticleListStatus } = useAppSelector((state) => state.article);
 
-  useEffect(() => {
-    const getArticles = async () => {
-      if (isAuth !== null && fetchArticleListStatus === 'idle') {
-        await dispatch(
-          fetchArticleList({
-            isAuth,
-          }),
-        );
-      }
-    };
-    getArticles();
-  }, [isAuth, fetchArticleListStatus]);
+  // useEffect(() => {
+  //   const getArticles = async () => {
+  //     if (isAuth !== null && fetchArticleListStatus === 'idle') {
+  //       await dispatch(
+  //         fetchArticleList({
+  //           isAuth,
+  //         }),
+  //       );
+  //     }
+  //   };
+  //   getArticles();
+  // }, [isAuth, fetchArticleListStatus]);
 
   return (
     <Box>

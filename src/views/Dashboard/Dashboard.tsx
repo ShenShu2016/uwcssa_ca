@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-18 13:56:36
- * @LastEditTime: 2022-06-11 16:32:38
+ * @LastEditTime: 2022-06-12 19:48:05
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/views/Dashboard/Dashboard.tsx
  */
@@ -16,14 +16,18 @@ import {
   Typography,
   styled,
 } from '@mui/material';
+import React, { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from 'redux/hooks';
 
 import ArticleContainer from 'components/ArticleContainer';
 import Entries from './components/Entries';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import React from 'react';
-import Section from './components/Section';
 import EventContainer from 'components/EventContainer';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import Section from './components/Section';
 import UserCardGrid from 'components/UserCardGrid';
+import { fetchArticleList } from 'redux/article/articleSlice';
+import { fetchEventList } from 'redux/event/eventSlice';
+import { getAuthState } from 'redux/auth/authSlice';
 
 const StickyAccordion = styled(AccordionSummary)(() => ({
   position: 'sticky',
@@ -33,6 +37,27 @@ const StickyAccordion = styled(AccordionSummary)(() => ({
 }));
 
 const Dashboard = (): React.ReactElement => {
+  const dispatch = useAppDispatch();
+  const isAuth = useAppSelector(getAuthState); //看一下Auth的选项他有可能会返回null 或者false 现在前面没有load 好user 就不让你进了，所以有可能不需要 ！==null的判断了
+  const { fetchArticleListStatus } = useAppSelector((state) => state.article);
+  const { fetchEventListStatus } = useAppSelector((state) => state.event);
+
+  useEffect(() => {
+    if (fetchArticleListStatus === 'idle') {
+      dispatch(
+        fetchArticleList({
+          isAuth,
+        }),
+      );
+    }
+  }, [fetchArticleListStatus]);
+
+  useEffect(() => {
+    if (fetchEventListStatus === 'idle') {
+      dispatch(fetchEventList({ isAuth }));
+    }
+  }, [fetchEventListStatus]);
+
   return (
     <>
       {/* PC端显示界面 */}
@@ -60,7 +85,7 @@ const Dashboard = (): React.ReactElement => {
           title="活动"
           sx={{
             flex: 2,
-            height: 'auto'
+            height: 'auto',
           }}
         >
           <EventContainer />
