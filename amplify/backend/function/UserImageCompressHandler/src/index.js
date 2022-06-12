@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-24 23:30:45
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-11 19:55:12
+ * @LastEditTime: 2022-06-12 18:41:52
  * @FilePath: /uwcssa_ca/amplify/backend/function/UserImageCompressHandler/src/index.js
  * @Description:
  *
@@ -74,8 +74,12 @@ exports.handler = async (event, context, callback) => {
     const thumbnailWidth = record.dynamodb.NewImage.thumbnailWidth.N;
 
     let [compressedBuffer, thumbnailBuffer] = await Promise.all([
-      sharp(originImg.Body).resize(parseInt(compressedWidth)).toBuffer(),
-      sharp(originImg.Body).resize(parseInt(thumbnailWidth)).toBuffer(),
+      sharp(originImg.Body)
+        .resize(parseInt(compressedWidth), null, { withoutEnlargement: true })
+        .toBuffer(),
+      sharp(originImg.Body)
+        .resize(parseInt(thumbnailWidth), null, { withoutEnlargement: true })
+        .toBuffer(),
     ]);
 
     const compressedDstParams = {
