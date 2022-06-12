@@ -1,8 +1,8 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-01 09:18:34
- * @LastEditTime: 2022-06-09 22:00:57
- * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-06-10 17:29:27
+ * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/admin/Event/EventCreate/components/EventPreview.tsx
  */
 
@@ -14,7 +14,6 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { EventStatus } from 'redux/form/formSlice';
 import React from 'react';
-import { create } from 'domain';
 import { getOwnerUserName } from 'redux/auth/authSlice';
 import { postEvent } from 'redux/event/eventSlice';
 import { useSwiper } from 'swiper/react';
