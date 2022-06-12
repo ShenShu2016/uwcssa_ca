@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-19 17:21:06
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-09 17:06:55
+ * @LastEditTime: 2022-06-12 19:23:50
  * @FilePath: /uwcssa_ca/amplify/backend/function/uwcssatsPostConfirmation/src/custom.js
  * @Description:
  *
@@ -49,6 +49,18 @@ exports.handler = async (event, context) => {
         email: { S: event.request.userAttributes.email },
         active: { S: 'T' },
         rank: { N: newRankCount.toString() },
+        uWindsorEmail: {
+          S: event.request.userAttributes.email
+            .toLowerCase()
+            .includes('@uwindsor.ca')
+            ? event.request.userAttributes.email.toLowerCase()
+            : undefined,
+        },
+        windsorStudent: {
+          BOOL: event.request.userAttributes.email
+            .toLowerCase()
+            .includes('@uwindsor.ca'),
+        },
         emailSubscription: { BOOL: true },
         createdAt: { S: date.toISOString() },
         updatedAt: { S: date.toISOString() },

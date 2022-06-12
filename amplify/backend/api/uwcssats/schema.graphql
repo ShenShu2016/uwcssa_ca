@@ -56,6 +56,15 @@ type UserProfile
         { allow: groups, groups: ["uwcssaAdmin"] }
       ]
     )
+  uWindsorEmail: AWSEmail # !! 照道理来说这个东西一旦设置了，就不能改了
+  windsorStudent: Boolean  # 用来验证是否是Windsor的学生
+    @auth(
+      rules: [
+        { allow: public, operations: [read], provider: iam }
+        { allow: groups, operations: [read], groups: ["uwcssaUser"] }
+        { allow: groups, groups: ["uwcssaAdmin"] }
+      ]
+    )
   fullName: String
   contactEmail: AWSEmail
   title: String
