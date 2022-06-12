@@ -22,6 +22,7 @@ import Entries from './components/Entries';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import React from 'react';
 import Section from './components/Section';
+import EventContainer from 'components/EventContainer';
 import UserCardGrid from 'components/UserCardGrid';
 
 const StickyAccordion = styled(AccordionSummary)(() => ({
@@ -50,7 +51,6 @@ const Dashboard = (): React.ReactElement => {
           component={Box}
           sx={{
             flex: 1,
-            minHeight: '100vh',
           }}
         >
           <ArticleContainer />
@@ -60,10 +60,10 @@ const Dashboard = (): React.ReactElement => {
           title="活动"
           sx={{
             flex: 2,
-            minHeight: '100vh',
+            height: 'auto'
           }}
         >
-          {''}
+          <EventContainer />
         </Section>
 
         <Box

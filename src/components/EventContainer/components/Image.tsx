@@ -9,6 +9,10 @@ import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 
+interface ImageProp {
+  url: string;
+}
+
 const mock = [
   {
     title: '',
@@ -24,7 +28,7 @@ const mock = [
   },
 ];
 
-const Image = (): JSX.Element => {
+const Image: React.FC<ImageProp> = ({ url }) => {
   const [current, setCurrent] = useState(mock[0]);
   return (
     <Box>
@@ -41,7 +45,7 @@ const Image = (): JSX.Element => {
             },
           }}
         >
-          <img src={current.src} alt={current.title} />
+          <img src={url} alt={current.title} />
         </Box>
       )}
       {/* <Stack

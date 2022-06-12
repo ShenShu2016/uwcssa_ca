@@ -1,28 +1,33 @@
-import React, { useState } from 'react';
-import { alpha, useTheme } from '@mui/material/styles';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React from 'react';
 import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
+import ReactHtmlParser from 'react-html-parser';
+import Chip from '@mui/material/Chip';
 
-const Details = (): JSX.Element => {
-  const theme = useTheme();
-  const [size, setSize] = useState('M');
-  const [color, setColor] = useState('white');
-  const [quantity, setQuantity] = useState(1);
-  const quantityLimit = 4;
+interface DetailProp {
+  info: any;
+}
+
+const Details: React.FC<DetailProp> = ({ info }): JSX.Element => {
 
   return (
     <Box>
-      <Typography variant={'h5'} fontWeight={700} gutterBottom>
-        Classy sweatshirt
-      </Typography>
-      <Typography variant={'subtitle2'} color={'text.secondary'}>
-        The finishes of this product are very realistic with a double stitching
-        on the neck, sleeves and bottom, and with a banded neck cleaning that
-        allows optimal support in all situations.
-      </Typography>
       <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between'
+        }}
+      >
+        <Typography variant={'h5'} fontWeight={700} gutterBottom>
+          {info.title}
+        </Typography>
+        <Chip label={info.eventStatus} color="primary" />
+      </Box>
+      <Typography variant={'subtitle2'} color={'text.secondary'}>
+        {<Box className="ck-content">{ReactHtmlParser(info.content)}</Box>}
+      </Typography>
+      {/* <Box
         marginTop={2}
         display={'flex'}
         alignItems={'center'}
@@ -228,7 +233,7 @@ const Details = (): JSX.Element => {
             />
           </svg>
         </Button>
-      </Stack>
+      </Stack> */}
     </Box>
   );
 };

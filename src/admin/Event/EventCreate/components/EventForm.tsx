@@ -101,7 +101,7 @@ const EventForm: React.FC = () => {
             endIcon={<ArrowForwardIcon />}
             onClick={() => swiper.slideNext()}
           >
-           配置报名表单
+           添加活动海报
           </Button>
         </Box>
         <Grid container spacing={2}>
