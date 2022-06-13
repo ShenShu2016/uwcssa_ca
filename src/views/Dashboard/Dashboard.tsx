@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-18 13:56:36
- * @LastEditTime: 2022-06-13 17:51:48
+ * @LastEditTime: 2022-06-13 18:05:46
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/views/Dashboard/Dashboard.tsx
  */
@@ -82,7 +82,7 @@ const Dashboard = (): React.ReactElement => {
             },
           }}
         >
-          <Section
+          {/* <Section
             title="新闻"
             hasPadding={false}
             component={Box}
@@ -91,7 +91,7 @@ const Dashboard = (): React.ReactElement => {
             }}
           >
             <ArticleContainer />
-          </Section>
+          </Section> */}
           <Section
             title="新闻"
             hasPadding={false}

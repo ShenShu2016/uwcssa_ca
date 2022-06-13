@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-13 09:15:49
- * @LastEditTime: 2022-06-13 17:05:17
+ * @LastEditTime: 2022-06-13 17:57:54
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/components/EventContainer/components/Detail.tsx
  */
@@ -32,7 +32,7 @@ const Details: React.FC<DetailProp> = ({ info }): JSX.Element => {
           justifyContent: 'space-between'
         }}
       >
-        <Typography variant={'h5'} fontWeight={700} gutterBottom>
+        <Typography variant={'h6'} fontWeight={700}>
           {info.title}
         </Typography>
         <Box>
@@ -57,6 +57,7 @@ const Details: React.FC<DetailProp> = ({ info }): JSX.Element => {
       <Box
         sx={{
           mt: 1,
+          fontSize: '14px',
           display: 'flex',
           alignItems: 'center'
         }}
@@ -67,6 +68,7 @@ const Details: React.FC<DetailProp> = ({ info }): JSX.Element => {
       <Box
         sx={{
           mt: 1,
+          fontSize: '14px',
           display: 'flex',
           alignItems: 'center'
         }}
@@ -77,7 +79,7 @@ const Details: React.FC<DetailProp> = ({ info }): JSX.Element => {
       <Typography
         color="#616161"
         component={'i'}
-        sx={{ mt: 1 }}
+        sx={{ mt: 1, fontSize: '14px' }}
         className="detail-text"
       >
         {`description放这里description放这里description放这里description放这里，

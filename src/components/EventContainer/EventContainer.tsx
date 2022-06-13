@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-10 17:37:29
- * @LastEditTime: 2022-06-13 17:50:40
+ * @LastEditTime: 2022-06-13 18:01:43
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/components/EventContainer/EventContainer.tsx
  */
@@ -26,7 +26,7 @@ const EventContainer: React.FC = () => {
     <Box p={1}>
       <Swiper
         pagination={true}
-        speed={1000}
+        speed={1500}
         autoplay={{
           delay: 5000,
           disableOnInteraction: false,
@@ -45,7 +45,7 @@ const EventContainer: React.FC = () => {
                     url={eventList.entities[id].coverPageImgURL}
                   />
                 </Box>
-                <Box flex={2} ml={4}>
+                <Box flex={2}>
                   <Details info={eventList.entities[id]} />
                 </Box>
               </Box>

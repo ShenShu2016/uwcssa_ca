@@ -1,40 +1,24 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-10 17:48:47
- * @LastEditTime: 2022-06-13 17:06:41
+ * @LastEditTime: 2022-06-13 17:59:05
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/components/EventContainer/components/Image.tsx
  */
-import React, { useState } from 'react';
+import React from 'react';
 import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
 
 interface ImageProp {
   url: string;
 }
-
-const mock = [
-  {
-    title: '',
-    src: 'https://assets.maccarianagency.com/backgrounds/img54.jpg',
-  },
-  {
-    title: '',
-    src: 'https://assets.maccarianagency.com/backgrounds/img53.jpg',
-  },
-  {
-    title: '',
-    src: 'https://assets.maccarianagency.com/backgrounds/img55.jpg',
-  },
-];
 
 const Image: React.FC<ImageProp> = ({ url }) => {
   return (
     <Box>
       <Box
         sx={{
-          width: 1,
-          height: '230px',
+          width: '90%',
+          height: '200px',
           '& img': {
             width: 1,
             height: 1,
