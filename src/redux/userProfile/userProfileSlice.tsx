@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-28 01:04:11
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-12 19:26:49
+ * @LastEditTime: 2022-06-12 21:57:34
  * @FilePath: /uwcssa_ca/src/redux/userProfile/userProfileSlice.tsx
  * @Description:
  *
@@ -74,6 +74,8 @@ const initialState = userProfileAdapter.getInitialState({
     contactEmail: '',
     title: '',
     about: '',
+    uWindsorEmail: '',
+    windsorStudent: '',
     emailSubscription: true,
     avatarURL: {
       id: '',
