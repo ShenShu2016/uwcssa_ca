@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-01 09:18:34
- * @LastEditTime: 2022-06-10 17:29:27
+ * @LastEditTime: 2022-06-13 16:50:21
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/admin/Event/EventCreate/components/EventPreview.tsx
  */
@@ -34,6 +34,7 @@ const EventPreview: React.FC = () => {
       content: createData.basicInfo.content,
       online: createData.basicInfo.online,
       group: false,
+      description: createData.basicInfo.description,
       startDate: createData.basicInfo.startDateTime,
       endDate: createData.basicInfo.endDateTime,
       eventStatus: EventStatus.ComingSoon,

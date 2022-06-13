@@ -1,8 +1,8 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-18 13:56:36
- * @LastEditTime: 2022-06-12 19:48:05
- * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-06-13 17:51:48
+ * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/views/Dashboard/Dashboard.tsx
  */
 
@@ -63,51 +63,64 @@ const Dashboard = (): React.ReactElement => {
       {/* PC端显示界面 */}
       <Box
         sx={{
-          display: {
-            md: 'flex',
-            xs: 'none',
-          },
-          padding: '24px 5%',
+          padding: '24px 10%',
         }}
       >
         <Section
-          title="新闻"
-          hasPadding={false}
-          component={Box}
-          sx={{
-            flex: 1,
-          }}
-        >
-          <ArticleContainer />
-        </Section>
-
-        <Section
           title="活动"
           sx={{
-            flex: 2,
             height: 'auto',
           }}
         >
           <EventContainer />
         </Section>
-
         <Box
-          sx={{ flex: 1 }}
-          position="sticky"
-          top="80px"
-          alignSelf="flex-start"
+          sx={{
+            display: {
+              md: 'flex',
+              xs: 'none',
+            },
+          }}
         >
-          <Section title="个人信息" hasPadding={false}>
-            <UserCardGrid />
+          <Section
+            title="新闻"
+            hasPadding={false}
+            component={Box}
+            sx={{
+              flex: 1,
+            }}
+          >
+            <ArticleContainer />
+          </Section>
+          <Section
+            title="新闻"
+            hasPadding={false}
+            component={Box}
+            sx={{
+              flex: 2,
+            }}
+          >
+            <ArticleContainer />
           </Section>
 
-          <Card sx={{ margin: '12px 8px' }}>
-            <Button fullWidth>新生必读</Button>
-          </Card>
+          <Box
+            sx={{ flex: 1 }}
+            position="sticky"
+            top="80px"
+            alignSelf="flex-start"
+          >
+            <Section title="个人信息" hasPadding={false}>
+              <UserCardGrid />
+            </Section>
 
-          <Section title="功能入口" hasPadding={false} component={Box}>
-            <Entries />
-          </Section>
+            <Card sx={{ margin: '12px 8px' }}>
+              <Button fullWidth>新生必读</Button>
+            </Card>
+
+            <Section title="功能入口" hasPadding={false} component={Box}>
+              <Entries />
+            </Section>
+          </Box>
         </Box>
       </Box>
       {/* 移动端显示界面 */}

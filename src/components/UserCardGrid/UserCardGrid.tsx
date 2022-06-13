@@ -1,8 +1,8 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-19 17:21:06
- * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-10 20:21:18
+ * @LastEditors: 李佳修
+ * @LastEditTime: 2022-06-13 17:53:20
  * @FilePath: /uwcssa_ca/src/components/UserCardGrid/UserCardGrid.tsx
  * @Description:
  *
@@ -62,9 +62,9 @@ const UserCardGrid = (): JSX.Element => {
             variant={'circular'}
             alt={myUserProfile.name}
             {...stringAvatar(myUserProfile.name, {
-              width: 80,
-              height: 80,
-              fontSize: { xs: '38px', sm: '64px' },
+              width: 50,
+              height: 50,
+              fontSize: { xs: '24px', sm: '32px' },
             })}
           />
           <Box

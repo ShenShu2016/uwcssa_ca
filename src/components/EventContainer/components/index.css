@@ -1,0 +1,16 @@
+.detail-text {
+    height: auto;
+    font-size: 14px;
+    overflow: hidden; 
+    text-overflow: ellipsis;
+    display: -webkit-box; 
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    word-break: break-all;
+    /* max-height: 90px; */
+}
+
+.swiper-pagination {
+    bottom: 0 !important;
+}

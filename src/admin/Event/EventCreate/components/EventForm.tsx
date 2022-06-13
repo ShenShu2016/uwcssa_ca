@@ -25,6 +25,7 @@ enum FieldType {
     endDateTime = 'endDateTime',
     address = 'address',
     limit = 'limit',
+    description = 'description',
     content = 'content'
 }
 
@@ -45,6 +46,10 @@ const validationSchema = yup.object({
     .number()
     .min(0, '输入人数无效')
     .required('请输入活动最多限制人数'),
+  description: yup
+    .string()
+    .trim()
+    .required('请输入活动描述'),
 });
 
 const EventForm: React.FC = () => {
@@ -197,15 +202,31 @@ const EventForm: React.FC = () => {
             />
           </Grid>
           <Grid item xs={12}>
+            <FieldLabel name='活动描述' isRequired />
+            <TextField
+              label="Description"
+              variant="outlined"
+              rows={3}
+              name={'description'}
+              fullWidth
+              multiline
+              size='small'
+              value={formik.values.description}
+              onChange={(e) => handleFieldValueChange(e, FieldType.description)}
+              error={formik.touched.description && Boolean(formik.errors.description)}
+              helperText={formik.touched.description && formik.errors.description}
+            />
+          </Grid>
+          <Grid item xs={12}>
             <Divider sx={{ mb: 2 }}/>
           </Grid>
         </Grid>
         <Box
           width='100%'
-          height='80vh'
+          height='67vh'
           mb={2}
         >
-          <FieldLabel name='活动描述' isRequired />
+          <FieldLabel name='活动详情' isRequired />
           <RichTextEditor
             content={description}
             setContent={(e) => handleFieldValueChange(e, FieldType.content)}

@@ -1,8 +1,8 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-06-02 17:10:21
- * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-11 01:39:10
+ * @LastEditors: 李佳修
+ * @LastEditTime: 2022-06-13 16:42:30
  * @FilePath: /uwcssa_ca/src/redux/form/formSlice.tsx
  * @Description:
  *
@@ -136,6 +136,7 @@ const initialState = formAdapter.getInitialState({
       online: false,
       address: '',
       limit: 0,
+      description: '',
       content: '',
     },
     posterImage: '',

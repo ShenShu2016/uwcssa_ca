@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-10 17:48:47
- * @LastEditTime: 2022-06-10 17:56:19
+ * @LastEditTime: 2022-06-13 17:06:41
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/components/EventContainer/components/Image.tsx
  */
@@ -29,25 +29,22 @@ const mock = [
 ];
 
 const Image: React.FC<ImageProp> = ({ url }) => {
-  const [current, setCurrent] = useState(mock[0]);
   return (
     <Box>
-      {current && (
-        <Box
-          sx={{
+      <Box
+        sx={{
+          width: 1,
+          height: '230px',
+          '& img': {
             width: 1,
-            height: 'auto',
-            '& img': {
-              width: 1,
-              height: 1,
-              objectFit: 'cover',
-              borderRadius: 2,
-            },
-          }}
-        >
-          <img src={url} alt={current.title} />
-        </Box>
-      )}
+            height: 1,
+            objectFit: 'cover',
+            borderRadius: 2,
+          },
+        }}
+      >
+        <img src={url} alt={'current.title'} />
+      </Box>
       {/* <Stack
         direction={'row'}
         spacing={2}
