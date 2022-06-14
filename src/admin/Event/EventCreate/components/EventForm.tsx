@@ -16,6 +16,7 @@ import { useSwiper } from 'swiper/react';
 import FieldLabel from './FieldLabel';
 import { setBasicInfo } from 'redux/form/formSlice';
 import { useAppSelector, useAppDispatch } from 'redux/hooks';
+import GoogleMapDialog from './GoogleMapDialog';
 import * as yup from 'yup';
 
 enum FieldType {
@@ -54,7 +55,8 @@ const validationSchema = yup.object({
 
 const EventForm: React.FC = () => {
 
-  const [description, setDescription] = useState('');
+  const [description, setDescription] = useState<string>('');
+  const [googleMapDialog, setGoogleMapDialog] = useState<boolean>(false);
   const swiper = useSwiper();
   const activityForm = useAppSelector(state => state.form.createData.basicInfo);
   const dispatch = useAppDispatch();
@@ -96,8 +98,15 @@ const EventForm: React.FC = () => {
       formik.handleChange(e);
   };
 
+  const onLocationSelect = (location) => {
+    if (location) {
+      formik.setFieldValue('address', location.formatted_address);
+    }
+  };
+
   return (
     <Box p={'2px'}>
+      <GoogleMapDialog open={googleMapDialog} setOpen={setGoogleMapDialog} onLocationSelect={onLocationSelect}/>
       <form onSubmit={formik.handleSubmit}>
         <Box sx={{ float: 'right' }}>
           <Button
@@ -181,7 +190,8 @@ const EventForm: React.FC = () => {
               fullWidth
               size='small'
               value={formik.values.address}
-              onChange={(e) => handleFieldValueChange(e, FieldType.address)}
+              onClick={() => setGoogleMapDialog(true)}
+              // onChange={(e) => handleFieldValueChange(e, FieldType.address)}
               error={formik.touched.address && Boolean(formik.errors.address)}
               helperText={formik.touched.address && formik.errors.address}
             />

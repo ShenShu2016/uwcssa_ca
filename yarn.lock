@@ -3574,6 +3574,22 @@
     minimatch "^3.1.2"
     strip-json-comments "^3.1.1"
 
+"@googlemaps/js-api-loader@1.14.1":
+  version "1.14.1"
+  resolved "http://rnpm.chehejia.com/@googlemaps/js-api-loader/download/@googlemaps/js-api-loader-1.14.1.tgz#63db9c6baa84bcf12abb170760aeda0bfec87821"
+  integrity sha1-Y9uca6qEvPEquxcHYK7aC/7IeCE=
+  dependencies:
+    fast-deep-equal "^3.1.3"
+
+"@googlemaps/markerclusterer@2.0.4":
+  version "2.0.4"
+  resolved "http://rnpm.chehejia.com/@googlemaps/markerclusterer/download/@googlemaps/markerclusterer-2.0.4.tgz#dc99b44d986cc4cb380d71b28d4388efc907f2e9"
+  integrity sha1-3Jm0TZhsxMs4DXGyjUOI78kH8uk=
+  dependencies:
+    fast-deep-equal "^3.1.3"
+    fast-equals "^3.0.0"
+    supercluster "^7.1.3"
+
 "@humanwhocodes/config-array@^0.5.0":
   version "0.5.0"
   resolved "https://registry.npmjs.org/@humanwhocodes/config-array/-/config-array-0.5.0.tgz"
@@ -4098,6 +4114,28 @@
   resolved "https://registry.npmjs.org/@popperjs/core/-/core-2.11.5.tgz"
   integrity sha512-9X2obfABZuDVLCgPK9aX0a/x4jaOEweTTWE2+9sr0Qqqevj2Uv5XorvusThmc9XGYpS9yI+fhh8RTafBtGposw==
 
+"@react-google-maps/api@^2.10.2":
+  version "2.10.2"
+  resolved "http://rnpm.chehejia.com/@react-google-maps/api/download/@react-google-maps/api-2.10.2.tgz#f1bbe4eea199ad7b7613ae17a8abce25813e868e"
+  integrity sha1-8bvk7qGZrXt2E64XqKvOJYE+ho4=
+  dependencies:
+    "@googlemaps/js-api-loader" "1.14.1"
+    "@googlemaps/markerclusterer" "2.0.4"
+    "@react-google-maps/infobox" "2.10.0"
+    "@react-google-maps/marker-clusterer" "2.10.0"
+    "@types/google.maps" "3.48.6"
+    invariant "2.2.4"
+
+"@react-google-maps/infobox@2.10.0":
+  version "2.10.0"
+  resolved "http://rnpm.chehejia.com/@react-google-maps/infobox/download/@react-google-maps/infobox-2.10.0.tgz#d3399c74d35cd4ab78e5488628d90bc22f957a17"
+  integrity sha1-0zmcdNNc1Kt45UiGKNkLwi+Vehc=
+
+"@react-google-maps/marker-clusterer@2.10.0":
+  version "2.10.0"
+  resolved "http://rnpm.chehejia.com/@react-google-maps/marker-clusterer/download/@react-google-maps/marker-clusterer-2.10.0.tgz#ba005202124deaaae9fb9bcf31b23e81722ee87f"
+  integrity sha1-ugBSAhJN6qrp+5vPMbI+gXIu6H8=
+
 "@reduxjs/toolkit@^1.8.1":
   version "1.8.1"
   resolved "https://registry.npmjs.org/@reduxjs/toolkit/-/toolkit-1.8.1.tgz"
@@ -4441,6 +4479,11 @@
     "@types/express-serve-static-core" "^4.17.18"
     "@types/qs" "*"
     "@types/serve-static" "*"
+
+"@types/google.maps@3.48.6":
+  version "3.47.3"
+  resolved "http://rnpm.chehejia.com/@types/google.maps/download/@types/google.maps-3.47.3.tgz#36ec9cfb421ef8db11ba7337e006143dbd374522"
+  integrity sha1-Nuyc+0Ie+NsRunM34AYUPb03RSI=
 
 "@types/graceful-fs@^4.1.2":
   version "4.1.5"
@@ -7493,6 +7536,11 @@ fast-diff@^1.1.2:
   resolved "https://registry.npmjs.org/fast-diff/-/fast-diff-1.2.0.tgz"
   integrity sha512-xJuoT5+L99XlZ8twedaRf6Ax2TgQVxvgZOYoPKqZufmJib0tL2tegPBOZb1pVNgIhlqDlA0eO0c3wBvQcmzx4w==
 
+fast-equals@^3.0.0:
+  version "3.0.3"
+  resolved "http://rnpm.chehejia.com/fast-equals/download/fast-equals-3.0.3.tgz#8e6cb4e51ca1018d87dd41982ef92758b3e4197f"
+  integrity sha1-jmy05RyhAY2H3UGYLvknWLPkGX8=
+
 fast-glob@^3.2.11, fast-glob@^3.2.9:
   version "3.2.11"
   resolved "https://registry.npmjs.org/fast-glob/-/fast-glob-3.2.11.tgz"
@@ -8356,7 +8404,7 @@ internal-slot@^1.0.3:
     has "^1.0.3"
     side-channel "^1.0.4"
 
-invariant@^2.2.4:
+invariant@2.2.4, invariant@^2.2.4:
   version "2.2.4"
   resolved "https://registry.npmjs.org/invariant/-/invariant-2.2.4.tgz"
   integrity sha512-phJfQVBuaJM5raOpJjSfkiD6BpbCE4Ns//LaXl6wGYtUBY83nWS6Rf9tXm2e8VaK60JEjYldbPif/A2B1C2gNA==
@@ -9334,6 +9382,11 @@ jss@10.9.0, jss@^10.8.2:
   dependencies:
     array-includes "^3.1.4"
     object.assign "^4.1.2"
+
+kdbush@^3.0.0:
+  version "3.0.0"
+  resolved "http://rnpm.chehejia.com/kdbush/download/kdbush-3.0.0.tgz#f8484794d47004cc2d85ed3a79353dbe0abc2bf0"
+  integrity sha1-+EhHlNRwBMwthe06eTU9vgq8K/A=
 
 kind-of@^6.0.2:
   version "6.0.3"
@@ -12262,6 +12315,13 @@ stylis@4.0.13:
   version "4.0.13"
   resolved "https://registry.npmjs.org/stylis/-/stylis-4.0.13.tgz"
   integrity sha512-xGPXiFVl4YED9Jh7Euv2V220mriG9u4B2TA6Ybjc1catrstKD2PpIdU3U0RKpkVBC2EhmL/F0sPCr9vrFTNRag==
+
+supercluster@^7.1.3:
+  version "7.1.5"
+  resolved "http://rnpm.chehejia.com/supercluster/download/supercluster-7.1.5.tgz#65a6ce4a037a972767740614c19051b64b8be5a3"
+  integrity sha1-ZabOSgN6lydndAYUwZBRtkuL5aM=
+  dependencies:
+    kdbush "^3.0.0"
 
 supports-color@^2.0.0:
   version "2.0.0"
