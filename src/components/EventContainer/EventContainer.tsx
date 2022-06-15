@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-10 17:37:29
- * @LastEditTime: 2022-06-13 18:01:43
+ * @LastEditTime: 2022-06-15 17:33:49
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/components/EventContainer/EventContainer.tsx
  */
@@ -10,20 +10,30 @@ import { Box } from '@mui/material';
 
 import Details from './components/Detail';
 import Image from './components/Image';
-import React from 'react';
+import React, { useState } from 'react';
 import { useAppSelector } from 'redux/hooks';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper';
+import EventJoinForm from './components/EventJoinForm';
+import { Event } from 'redux/event/eventSlice';
 import 'swiper/css';
 import 'swiper/css/pagination';
 
 const EventContainer: React.FC = () => {
   const eventList = useAppSelector((state) => state.event);
+  const [joinDialogOpen, setJoinDialogOpen] = useState<boolean>(false);
+  const [event, setEvent] = useState<Event | null>(null);
+
+  const handleJoinEvent = (event: Event) => {
+    setEvent(event);
+    setJoinDialogOpen(true);
+  };
 
   console.log(eventList);
 
   return (
     <Box p={1}>
+      <EventJoinForm open={joinDialogOpen} setOpen={setJoinDialogOpen} event={event}/>
       <Swiper
         pagination={true}
         speed={1500}
@@ -46,7 +56,7 @@ const EventContainer: React.FC = () => {
                   />
                 </Box>
                 <Box flex={2}>
-                  <Details info={eventList.entities[id]} />
+                  <Details info={eventList.entities[id]} onJoin={() => handleJoinEvent(eventList.entities[id])}/>
                 </Box>
               </Box>
             </SwiperSlide>

@@ -2,7 +2,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-14 15:03:43
- * @LastEditTime: 2022-06-14 16:56:47
+ * @LastEditTime: 2022-06-15 16:10:35
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/admin/Event/EventCreate/components/GoogleMapDialog.tsx
  */
@@ -14,6 +14,7 @@ import {
   DialogContent,
   DialogTitle,
 } from '@mui/material';
+import Box from '@mui/material/Box';
 import GoogleMaps from 'components/GoogleMap/GoogleMaps';
 
 interface GoogleMapDialogProp {
@@ -39,7 +40,9 @@ const GoogleMapDialog: React.FC<GoogleMapDialogProp> = ({ open,  setOpen, onLoca
     >
       <DialogTitle>选取地点</DialogTitle>
       <DialogContent dividers>
-        <GoogleMaps setLocation={setLocation}/>
+        <Box minHeight='456px' minWidth='600px'>
+          <GoogleMaps setLocation={setLocation}/>
+        </Box>
       </DialogContent>
       <DialogActions>
         <Button onClick={handleLocationSelect}>Ok</Button>

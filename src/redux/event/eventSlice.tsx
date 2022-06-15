@@ -1,8 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-20 21:02:00
- * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-10 20:54:19
+ * @LastEditors: 李佳修
+ * @LastEditTime: 2022-06-15 17:37:10
  * @FilePath: /uwcssa_ca/src/redux/event/eventSlice.tsx
  * @Description:
  *
@@ -29,27 +31,27 @@ import { v4 as uuid } from 'uuid';
 
 //import { commentAdapter } from 'redux/comment/commentSlice';
 
-// export type Event = {
-//   id: string;
-//   title: string;
-//   tags?: { items: Array<{ tagID: string }> } | null;
-//   content: string;
-//   comments?: {
-//     items: Array<{
-//       id: string;
-//       content: string;
-//       createdAt: string;
-//       user: { avatarURL: string; id: string; name: string; createdAt: string };
-//     }>;
-//   } | null;
-//   active: 'T' | 'F';
-//   coverPageImgURL?: string | null;
-//   coverPageDescription?: string | null;
-//   createdAt?: string;
-//   updatedAt?: string;
-//   owner: string;
-//   user?: { avatarURL: string; id: string; name: string };
-// };
+export type Event = {
+  id: string;
+  title: string;
+  tags?: { items: Array<{ tagID: string }> } | null;
+  content: string;
+  comments?: {
+    items: Array<{
+      id: string;
+      content: string;
+      createdAt: string;
+      user: { avatarURL: string; id: string; name: string; createdAt: string };
+    }>;
+  } | null;
+  active: 'T' | 'F';
+  coverPageImgURL?: string | null;
+  coverPageDescription?: string | null;
+  createdAt?: string;
+  updatedAt?: string;
+  owner: string;
+  user?: { avatarURL: string; id: string; name: string };
+};
 
 const eventAdapter = createEntityAdapter<any>({
   sortComparer: (a, b) => b.createdAt.localeCompare(a.createdAt),

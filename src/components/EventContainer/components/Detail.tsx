@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-13 09:15:49
- * @LastEditTime: 2022-06-13 17:57:54
+ * @LastEditTime: 2022-06-15 17:31:36
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/components/EventContainer/components/Detail.tsx
  */
@@ -18,9 +18,10 @@ import Button from '@mui/material/Button';
 import './index.css';
 interface DetailProp {
   info: any;
+  onJoin: () => void;
 }
 
-const Details: React.FC<DetailProp> = ({ info }): JSX.Element => {
+const Details: React.FC<DetailProp> = ({ info, onJoin }): JSX.Element => {
 
   console.log(info);
 
@@ -89,7 +90,7 @@ const Details: React.FC<DetailProp> = ({ info }): JSX.Element => {
       </Typography>
       <Box mt={1} display='flex' justifyContent='space-between'>
         <Button variant="outlined" sx={{width: '100px'}}>查看详情</Button>
-        <Button variant="contained" sx={{width: '100px'}}>报名</Button>
+        <Button variant="contained" sx={{width: '100px'}} onClick={onJoin}>报名</Button>
       </Box>
     </Box>
   );
