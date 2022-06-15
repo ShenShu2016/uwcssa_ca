@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-26 13:57:44
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-11 18:23:17
+ * @LastEditTime: 2022-06-12 21:52:43
  * @FilePath: /uwcssa_ca/src/views/Settings/General/General.tsx
  * @Description:
  *
@@ -21,8 +21,10 @@ import {
 } from '@mui/material';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 
+import { Link } from 'react-router-dom';
 import Page from '../components/Page';
 import React from 'react';
+import UWindsorEmailVerify from './components/UWindsorEmailVerify';
 import { getOwnerUserName } from 'redux/auth/authSlice';
 import { updateUserProfileData } from 'redux/userProfile/userProfileSlice';
 import { useFormik } from 'formik';
@@ -106,14 +108,16 @@ const General = (): JSX.Element => {
           <Typography variant={'subtitle2'} color={'text.secondary'}>
             Please read our
             <MUILink
+              component={Link}
               color={'primary'}
-              href={'/company-terms'}
+              to={'/terms'}
               underline={'none'}
             >
               terms of use
             </MUILink>
             to be informed how we manage your private data.
           </Typography>
+          <UWindsorEmailVerify />
           <Box paddingY={4}>
             <Divider />
           </Box>
