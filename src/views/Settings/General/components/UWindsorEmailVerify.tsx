@@ -10,17 +10,7 @@
 
 import * as yup from 'yup';
 
-import {
-  Box,
-  Button,
-  FormControl,
-  FormHelperText,
-  Grid,
-  InputAdornment,
-  OutlinedInput,
-  TextField,
-  Typography,
-} from '@mui/material';
+import { Box, Button, TextField, Typography } from '@mui/material';
 
 import React from 'react';
 import { useAppSelector } from 'redux/hooks';
@@ -77,6 +67,7 @@ function UWindsorEmailVerify() {
           账号验证，是否是温莎大学的学生
         </Typography>
         <TextField
+          size="small"
           label="温莎大学邮箱"
           variant="outlined"
           name={'uWindsorEmail'}
@@ -91,10 +82,10 @@ function UWindsorEmailVerify() {
         />
         <Button
           variant="contained"
-          size="medium"
+          size="small"
           type="submit"
           color="warning"
-          sx={{ lineHeight: 2.5, ml: '1rem' }}
+          sx={{ lineHeight: 1.5, ml: '1rem' }}
         >
           Submit
         </Button>

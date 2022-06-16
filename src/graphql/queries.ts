@@ -1322,6 +1322,7 @@ export const getFormItem = /* GraphQL */ `
       placeholder
       label
       formSelectChoices
+      isExample
       createdAt
       updatedAt
       form {
@@ -1362,6 +1363,7 @@ export const listFormItems = /* GraphQL */ `
         placeholder
         label
         formSelectChoices
+        isExample
         createdAt
         updatedAt
         owner
@@ -1395,6 +1397,7 @@ export const getEventParticipant = /* GraphQL */ `
         placeholder
         label
         formSelectChoices
+        isExample
         createdAt
         updatedAt
         owner
@@ -1420,6 +1423,7 @@ export const getEventParticipant = /* GraphQL */ `
         placeholder
         label
         formSelectChoices
+        isExample
         createdAt
         updatedAt
         owner
@@ -1445,6 +1449,7 @@ export const getEventParticipant = /* GraphQL */ `
         placeholder
         label
         formSelectChoices
+        isExample
         createdAt
         updatedAt
         owner
@@ -1470,6 +1475,7 @@ export const getEventParticipant = /* GraphQL */ `
         placeholder
         label
         formSelectChoices
+        isExample
         createdAt
         updatedAt
         owner
@@ -1495,6 +1501,7 @@ export const getEventParticipant = /* GraphQL */ `
         placeholder
         label
         formSelectChoices
+        isExample
         createdAt
         updatedAt
         owner
@@ -1520,6 +1527,7 @@ export const getEventParticipant = /* GraphQL */ `
         placeholder
         label
         formSelectChoices
+        isExample
         createdAt
         updatedAt
         owner
@@ -1545,6 +1553,7 @@ export const getEventParticipant = /* GraphQL */ `
         placeholder
         label
         formSelectChoices
+        isExample
         createdAt
         updatedAt
         owner
@@ -1570,6 +1579,7 @@ export const getEventParticipant = /* GraphQL */ `
         placeholder
         label
         formSelectChoices
+        isExample
         createdAt
         updatedAt
         owner
@@ -1595,6 +1605,7 @@ export const getEventParticipant = /* GraphQL */ `
         placeholder
         label
         formSelectChoices
+        isExample
         createdAt
         updatedAt
         owner
@@ -1620,6 +1631,7 @@ export const getEventParticipant = /* GraphQL */ `
         placeholder
         label
         formSelectChoices
+        isExample
         createdAt
         updatedAt
         owner
@@ -1645,6 +1657,7 @@ export const getEventParticipant = /* GraphQL */ `
         placeholder
         label
         formSelectChoices
+        isExample
         createdAt
         updatedAt
         owner
@@ -1670,6 +1683,7 @@ export const getEventParticipant = /* GraphQL */ `
         placeholder
         label
         formSelectChoices
+        isExample
         createdAt
         updatedAt
         owner
@@ -1695,6 +1709,7 @@ export const getEventParticipant = /* GraphQL */ `
         placeholder
         label
         formSelectChoices
+        isExample
         createdAt
         updatedAt
         owner
@@ -1720,6 +1735,7 @@ export const getEventParticipant = /* GraphQL */ `
         placeholder
         label
         formSelectChoices
+        isExample
         createdAt
         updatedAt
         owner
@@ -1745,6 +1761,7 @@ export const getEventParticipant = /* GraphQL */ `
         placeholder
         label
         formSelectChoices
+        isExample
         createdAt
         updatedAt
         owner
@@ -1770,6 +1787,7 @@ export const getEventParticipant = /* GraphQL */ `
         placeholder
         label
         formSelectChoices
+        isExample
         createdAt
         updatedAt
         owner
@@ -1795,6 +1813,7 @@ export const getEventParticipant = /* GraphQL */ `
         placeholder
         label
         formSelectChoices
+        isExample
         createdAt
         updatedAt
         owner
@@ -1820,6 +1839,7 @@ export const getEventParticipant = /* GraphQL */ `
         placeholder
         label
         formSelectChoices
+        isExample
         createdAt
         updatedAt
         owner
@@ -1845,6 +1865,7 @@ export const getEventParticipant = /* GraphQL */ `
         placeholder
         label
         formSelectChoices
+        isExample
         createdAt
         updatedAt
         owner

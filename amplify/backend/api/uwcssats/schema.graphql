@@ -488,6 +488,7 @@ type FormItem
   placeholder: String # 占位符
   label: String # 标签
   formSelectChoices: [String] # 选项
+  isExample: Boolean # 是否是样例
   createdAt: AWSDateTime! # 创建时间
   updatedAt: AWSDateTime! # 更新时间
   form: Form @belongsTo
