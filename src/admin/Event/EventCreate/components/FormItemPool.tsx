@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-03 16:11:08
- * @LastEditTime: 2022-06-09 15:59:53
+ * @LastEditTime: 2022-06-16 14:56:39
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/admin/Event/EventCreate/components/FormItemPool.tsx
  */
@@ -38,6 +38,8 @@ const FormItemPool: React.FC = () => {
   const [editDialogOpen, setEditDialogOpen] = useState<boolean>(false);
   const [editItem, setEditItem] = useState(null);
   const dispatch = useAppDispatch();
+
+  console.log(formItemList);
 
   useEffect(() => {
     dispatch(fetchFormItemList({ isAuth: true }));

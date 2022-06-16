@@ -2,7 +2,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-14 15:03:43
- * @LastEditTime: 2022-06-15 16:10:35
+ * @LastEditTime: 2022-06-16 15:29:38
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/admin/Event/EventCreate/components/GoogleMapDialog.tsx
  */
@@ -29,6 +29,7 @@ const GoogleMapDialog: React.FC<GoogleMapDialogProp> = ({ open,  setOpen, onLoca
 
   const handleLocationSelect = () => {
     onLocationSelect(location);
+    console.log(location);
     setOpen(false);
   };
   return (

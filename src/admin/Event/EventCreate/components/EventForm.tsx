@@ -79,7 +79,8 @@ const EventForm: React.FC = () => {
         (
           type === FieldType.startDateTime ||
           type === FieldType.endDateTime ||
-          type === FieldType.content ? 
+          type === FieldType.content ||
+          type === FieldType.address ? 
             e : e.target.value
         )
     }));
@@ -101,6 +102,7 @@ const EventForm: React.FC = () => {
   const onLocationSelect = (location) => {
     if (location) {
       formik.setFieldValue('address', location.formatted_address);
+      handleFieldValueChange(location.place_id, FieldType.address);
     }
   };
 
