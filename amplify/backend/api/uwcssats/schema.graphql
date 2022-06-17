@@ -383,8 +383,8 @@ type Event
   online: Boolean!
   group: Boolean!
   tags: [Tag] @manyToMany(relationName: "EventTags")
-  startDate: AWSDateTime!
-  endDate: AWSDateTime!
+  startDate: AWSDateTime
+  endDate: AWSDateTime
   eventStatus: EventStatus!
   eventLocation: Address @hasOne
   form: Form @hasOne
