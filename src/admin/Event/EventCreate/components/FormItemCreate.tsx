@@ -3,8 +3,8 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-03 09:32:30
- * @LastEditTime: 2022-06-11 18:24:35
- * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-06-16 14:38:10
+ * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/admin/Event/EventCreate/components/FormItemCreate.tsx
  */
 
@@ -187,6 +187,8 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({
       placeholder: values.placeholder,
       formSelectChoices: options.map((item) => item.label),
       owner: ownerUserName,
+      formFormItemsId: undefined,
+      isExample: true
     };
     // 通过前面的校验后 可以发送请求创建问题
     const res =
@@ -209,7 +211,7 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({
         type === DialogType.create
           ? '问题创建成功，记得加入表单才能生效哦'
           : '修改问题配置成功',
-        { variant: 'error' },
+        { variant: 'success' },
       );
       setFullScreenLoading({
         loading: false,

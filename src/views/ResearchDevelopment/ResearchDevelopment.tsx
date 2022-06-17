@@ -2,18 +2,18 @@
  * @Author: Shikai Jin
  * @Date: 2022-06-04 18:07:29
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-11 17:39:39
+ * @LastEditTime: 2022-06-12 14:21:00
  * @FilePath: /uwcssa_ca/src/views/ResearchDevelopment/ResearchDevelopment.tsx
  * @Description:
  *
  */
 
-import { Features, Hero, Partners, Story, Team, Work } from './components';
+import { Box, Divider } from '@mui/material';
+import { Features, Hero, Partners, Story, Team } from './components';
 
-import Box from '@mui/material/Box';
 import Container from 'components/Container';
-import Divider from '@mui/material/Divider';
 import React from 'react';
+import { Work } from '@mui/icons-material';
 
 const ResearchDevelopment = (): JSX.Element => {
   return (

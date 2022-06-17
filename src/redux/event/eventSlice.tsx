@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-20 21:02:00
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-10 20:54:19
+ * @LastEditTime: 2022-06-16 21:50:04
  * @FilePath: /uwcssa_ca/src/redux/event/eventSlice.tsx
  * @Description:
  *
@@ -20,38 +20,118 @@ import {
   deleteEvent,
   updateEvent,
 } from 'graphql/mutations';
-import { eventSortByCreatedAt, getEvent } from 'graphql/queries';
 
 import API from '@aws-amplify/api';
 import { RootState } from 'redux/store';
+import { eventSortByCreatedAt } from './custom_q_m_s';
+import { getEvent } from 'graphql/queries';
 import { graphqlOperation } from '@aws-amplify/api-graphql';
 import { v4 as uuid } from 'uuid';
 
 //import { commentAdapter } from 'redux/comment/commentSlice';
 
-// export type Event = {
+export type Event = {
+  id: string;
+  title: string;
+  tags?: { items: Array<{ tagID: string }> } | null;
+  content: string;
+  comments?: {
+    items: Array<{
+      id: string;
+      content: string;
+      createdAt: string;
+      user: { avatarURL: string; id: string; name: string; createdAt: string };
+    }>;
+  } | null;
+  eventFormId?: string;
+  active: 'T' | 'F';
+  coverPageImgURL?: string | null;
+  coverPageDescription?: string | null;
+  form?: Form | null;
+  createdAt?: string;
+  updatedAt?: string;
+  owner: string;
+  user?: { avatarURL: string; id: string; name: string };
+};
+
+// export interface Event {
 //   id: string;
 //   title: string;
-//   tags?: { items: Array<{ tagID: string }> } | null;
+//   coverPageImgURL: string;
+//   coverPageDescription: null;
 //   content: string;
-//   comments?: {
-//     items: Array<{
-//       id: string;
-//       content: string;
-//       createdAt: string;
-//       user: { avatarURL: string; id: string; name: string; createdAt: string };
-//     }>;
-//   } | null;
-//   active: 'T' | 'F';
-//   coverPageImgURL?: string | null;
-//   coverPageDescription?: string | null;
-//   createdAt?: string;
-//   updatedAt?: string;
+//   imgURLs: null;
+//   sponsor: null;
+//   online: boolean;
+//   group: boolean;
+//   startDate: string;
+//   endDate: string;
+//   eventStatus: string;
+//   isPublish: null;
+//   tags: Tags;
+//   eventLocation: null;
+//   form: Form;
+//   active: string;
+//   createdAt: string;
+//   updatedAt: string;
 //   owner: string;
-//   user?: { avatarURL: string; id: string; name: string };
-// };
+//   user: User;
+//   eventEventLocationId: string;
+//   eventFormId: string;
+//   eventCountId: null;
+// }
 
-const eventAdapter = createEntityAdapter<any>({
+export interface Form {
+  createdAt: string;
+  formEventId: null;
+  id: string;
+  owner: string;
+  updatedAt: string;
+  formItems: FormItems;
+}
+
+export interface FormItems {
+  nextToken: null;
+  items: Item[];
+}
+
+export interface Item {
+  createdAt: string;
+  description: string;
+  formFormItemsId: string;
+  formSelectChoices: string[];
+  formType: string;
+  helperText: string;
+  id: string;
+  isBoolean: boolean;
+  isDate: boolean;
+  isEmail: boolean;
+  isExample: boolean;
+  isNumber: boolean;
+  isRequired: boolean;
+  isString: boolean;
+  isTrim: boolean;
+  label: string;
+  maxLength: number;
+  minLength: number;
+  order: number;
+  owner: string;
+  placeholder: string;
+  question: string;
+  updatedAt: string;
+}
+
+// export interface Tags {
+//   items: any[];
+// }
+
+// export interface User {
+//   id: string;
+//   name: string;
+//   avatarURL: null;
+// }
+
+const eventAdapter = createEntityAdapter<Event>({
   sortComparer: (a, b) => b.createdAt.localeCompare(a.createdAt),
 });
 

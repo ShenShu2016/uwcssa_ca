@@ -47,6 +47,7 @@
     "@mui/styles": "^5.8.0",
     "@mui/x-data-grid": "^5.11.1",
     "@mui/x-date-pickers": "^5.0.0-alpha.4",
+    "@react-google-maps/api": "^2.10.2",
     "@reduxjs/toolkit": "^1.8.1",
     "@types/jest": "^27.5.1",
     "aos": "^2.3.4",

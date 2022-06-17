@@ -1,8 +1,8 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-06-02 17:10:21
- * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-11 01:39:10
+ * @LastEditors: 李佳修
+ * @LastEditTime: 2022-06-16 15:19:03
  * @FilePath: /uwcssa_ca/src/redux/form/formSlice.tsx
  * @Description:
  *
@@ -25,17 +25,13 @@ import {
   updateForm,
   updateFormItem,
 } from 'graphql/mutations';
-import {
-  getForm,
-  getFormItem,
-  listFormItems,
-  listForms,
-} from 'graphql/queries';
+import { getForm, getFormItem, listForms } from 'graphql/queries';
 
 import API from '@aws-amplify/api';
 import { RootState } from 'redux/store';
 import { UserProfile } from 'redux/userProfile/userProfileSlice';
 import { graphqlOperation } from '@aws-amplify/api-graphql';
+import { listFormItems } from './custom_q_m_s';
 
 export type Form = {
   id: string;
@@ -62,6 +58,7 @@ export type FormItem = {
   placeholder?: string | null;
   label?: string | null;
   formSelectChoices?: Array<string | null> | null;
+  isExample?: boolean | null;
   createdAt?: string | null;
   updatedAt?: string | null;
   owner: string;
@@ -136,6 +133,7 @@ const initialState = formAdapter.getInitialState({
       online: false,
       address: '',
       limit: 0,
+      description: '',
       content: '',
     },
     posterImage: '',
@@ -233,9 +231,9 @@ export const fetchFormItemList = createAsyncThunk(
       const result: any = await API.graphql({
         query: listFormItems,
         // 改成动态的之后 不用再限制条目了
-        // variables: {
-        //   limit: 19,
-        // },
+        variables: {
+          filter: { isExample: { eq: true } },
+        },
         authMode: isAuth ? undefined : 'AWS_IAM',
       });
       return result.data.listFormItems.items;
@@ -280,6 +278,7 @@ export const postFormItem = createAsyncThunk(
     },
     { rejectWithValue },
   ) => {
+    console.log(createFormItemInput);
     try {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const result: any = await API.graphql(
@@ -333,6 +332,7 @@ const formSlice = createSlice({
           !!state.createData.basicInfo[key] ||
           state.createData.basicInfo[key] === 0,
       );
+      console.log(state.createData.basicInfo);
       state.createData.completeStatus.EventForm = complete;
     },
 

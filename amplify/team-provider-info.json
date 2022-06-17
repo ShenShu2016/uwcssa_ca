@@ -23,7 +23,7 @@
         "uwcssatsPostConfirmation": {
           "GROUP": "uwcssaUser",
           "deploymentBucketName": "amplify-uwcssa-devts-225941-deployment",
-          "s3Key": "amplify-builds/uwcssatsPostConfirmation-335a4432517745755568-build.zip",
+          "s3Key": "amplify-builds/uwcssatsPostConfirmation-50635169676e31414d45-build.zip",
           "userTable": "User-4r2t6l2uprdgjhmoocpazejjcq-devts",
           "userProfileTable": "UserProfile-4r2t6l2uprdgjhmoocpazejjcq-devts",
           "countTable": "Count-4r2t6l2uprdgjhmoocpazejjcq-devts"
@@ -34,11 +34,11 @@
         },
         "UserImageCompressHandler": {
           "deploymentBucketName": "amplify-uwcssa-devts-225941-deployment",
-          "s3Key": "amplify-builds/UserImageCompressHandler-4b674d72762b4137516f-build.zip"
+          "s3Key": "amplify-builds/UserImageCompressHandler-445567554868756f2b30-build.zip"
         },
         "uwcssaLayerNodeJSSharp": {
           "deploymentBucketName": "amplify-uwcssa-devts-225941-deployment",
-          "s3Key": "amplify-builds/uwcssaLayerNodeJSSharp-LambdaLayerVersionf172a294-build.zip"
+          "s3Key": "amplify-builds/uwcssaLayerNodeJSSharp-LambdaLayerVersionce77511d-build.zip"
         },
         "ContactUsHandler": {
           "deploymentBucketName": "amplify-uwcssa-devts-225941-deployment",
@@ -46,12 +46,12 @@
         },
         "ArticlePublishHandler": {
           "deploymentBucketName": "amplify-uwcssa-devts-225941-deployment",
-          "s3Key": "amplify-builds/ArticlePublishHandler-7a6c614459344f507537-build.zip",
+          "s3Key": "amplify-builds/ArticlePublishHandler-784c612f3775346d7877-build.zip",
           "userProfileTable": "UserProfile-4r2t6l2uprdgjhmoocpazejjcq-devts"
         },
         "CountHandler": {
           "deploymentBucketName": "amplify-uwcssa-devts-225941-deployment",
-          "s3Key": "amplify-builds/CountHandler-4f73336867616d6d6839-build.zip",
+          "s3Key": "amplify-builds/CountHandler-7a764f36614d616a6632-build.zip",
           "articleTable": "Article-4r2t6l2uprdgjhmoocpazejjcq-devts",
           "countTable": "Count-4r2t6l2uprdgjhmoocpazejjcq-devts"
         }

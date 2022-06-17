@@ -42,6 +42,8 @@ export const getUserProfile = /* GraphQL */ `
       name
       email
       rank
+      uWindsorEmail
+      windsorStudent
       fullName
       contactEmail
       title
@@ -87,6 +89,8 @@ export const listUserProfiles = /* GraphQL */ `
         name
         email
         rank
+        uWindsorEmail
+        windsorStudent
         fullName
         contactEmail
         title
@@ -125,6 +129,8 @@ export const userProfileSortByCreatedAt = /* GraphQL */ `
         name
         email
         rank
+        uWindsorEmail
+        windsorStudent
         fullName
         contactEmail
         title
@@ -307,6 +313,8 @@ export const getArticle = /* GraphQL */ `
         name
         email
         rank
+        uWindsorEmail
+        windsorStudent
         fullName
         contactEmail
         title
@@ -448,6 +456,8 @@ export const getComment = /* GraphQL */ `
         name
         email
         rank
+        uWindsorEmail
+        windsorStudent
         fullName
         contactEmail
         title
@@ -566,6 +576,8 @@ export const getContactUs = /* GraphQL */ `
         name
         email
         rank
+        uWindsorEmail
+        windsorStudent
         fullName
         contactEmail
         title
@@ -803,6 +815,8 @@ export const getResearchDevelopmentTeam = /* GraphQL */ `
         name
         email
         rank
+        uWindsorEmail
+        windsorStudent
         fullName
         contactEmail
         title
@@ -859,6 +873,8 @@ export const getUwcssaDepartment = /* GraphQL */ `
         name
         email
         rank
+        uWindsorEmail
+        windsorStudent
         fullName
         contactEmail
         title
@@ -936,6 +952,8 @@ export const getUwcssaMember = /* GraphQL */ `
         name
         email
         rank
+        uWindsorEmail
+        windsorStudent
         fullName
         contactEmail
         title
@@ -1050,6 +1068,8 @@ export const getEvent = /* GraphQL */ `
         name
         email
         rank
+        uWindsorEmail
+        windsorStudent
         fullName
         contactEmail
         title
@@ -1165,6 +1185,8 @@ export const getAddress = /* GraphQL */ `
         name
         email
         rank
+        uWindsorEmail
+        windsorStudent
         fullName
         contactEmail
         title
@@ -1243,6 +1265,8 @@ export const getForm = /* GraphQL */ `
         name
         email
         rank
+        uWindsorEmail
+        windsorStudent
         fullName
         contactEmail
         title
@@ -1298,6 +1322,7 @@ export const getFormItem = /* GraphQL */ `
       placeholder
       label
       formSelectChoices
+      isExample
       createdAt
       updatedAt
       form {
@@ -1338,6 +1363,7 @@ export const listFormItems = /* GraphQL */ `
         placeholder
         label
         formSelectChoices
+        isExample
         createdAt
         updatedAt
         owner
@@ -1371,6 +1397,7 @@ export const getEventParticipant = /* GraphQL */ `
         placeholder
         label
         formSelectChoices
+        isExample
         createdAt
         updatedAt
         owner
@@ -1396,6 +1423,7 @@ export const getEventParticipant = /* GraphQL */ `
         placeholder
         label
         formSelectChoices
+        isExample
         createdAt
         updatedAt
         owner
@@ -1421,6 +1449,7 @@ export const getEventParticipant = /* GraphQL */ `
         placeholder
         label
         formSelectChoices
+        isExample
         createdAt
         updatedAt
         owner
@@ -1446,6 +1475,7 @@ export const getEventParticipant = /* GraphQL */ `
         placeholder
         label
         formSelectChoices
+        isExample
         createdAt
         updatedAt
         owner
@@ -1471,6 +1501,7 @@ export const getEventParticipant = /* GraphQL */ `
         placeholder
         label
         formSelectChoices
+        isExample
         createdAt
         updatedAt
         owner
@@ -1496,6 +1527,7 @@ export const getEventParticipant = /* GraphQL */ `
         placeholder
         label
         formSelectChoices
+        isExample
         createdAt
         updatedAt
         owner
@@ -1521,6 +1553,7 @@ export const getEventParticipant = /* GraphQL */ `
         placeholder
         label
         formSelectChoices
+        isExample
         createdAt
         updatedAt
         owner
@@ -1546,6 +1579,7 @@ export const getEventParticipant = /* GraphQL */ `
         placeholder
         label
         formSelectChoices
+        isExample
         createdAt
         updatedAt
         owner
@@ -1571,6 +1605,7 @@ export const getEventParticipant = /* GraphQL */ `
         placeholder
         label
         formSelectChoices
+        isExample
         createdAt
         updatedAt
         owner
@@ -1596,6 +1631,7 @@ export const getEventParticipant = /* GraphQL */ `
         placeholder
         label
         formSelectChoices
+        isExample
         createdAt
         updatedAt
         owner
@@ -1621,6 +1657,7 @@ export const getEventParticipant = /* GraphQL */ `
         placeholder
         label
         formSelectChoices
+        isExample
         createdAt
         updatedAt
         owner
@@ -1646,6 +1683,7 @@ export const getEventParticipant = /* GraphQL */ `
         placeholder
         label
         formSelectChoices
+        isExample
         createdAt
         updatedAt
         owner
@@ -1671,6 +1709,7 @@ export const getEventParticipant = /* GraphQL */ `
         placeholder
         label
         formSelectChoices
+        isExample
         createdAt
         updatedAt
         owner
@@ -1696,6 +1735,7 @@ export const getEventParticipant = /* GraphQL */ `
         placeholder
         label
         formSelectChoices
+        isExample
         createdAt
         updatedAt
         owner
@@ -1721,6 +1761,7 @@ export const getEventParticipant = /* GraphQL */ `
         placeholder
         label
         formSelectChoices
+        isExample
         createdAt
         updatedAt
         owner
@@ -1746,6 +1787,7 @@ export const getEventParticipant = /* GraphQL */ `
         placeholder
         label
         formSelectChoices
+        isExample
         createdAt
         updatedAt
         owner
@@ -1771,6 +1813,7 @@ export const getEventParticipant = /* GraphQL */ `
         placeholder
         label
         formSelectChoices
+        isExample
         createdAt
         updatedAt
         owner
@@ -1796,6 +1839,7 @@ export const getEventParticipant = /* GraphQL */ `
         placeholder
         label
         formSelectChoices
+        isExample
         createdAt
         updatedAt
         owner
@@ -1821,6 +1865,7 @@ export const getEventParticipant = /* GraphQL */ `
         placeholder
         label
         formSelectChoices
+        isExample
         createdAt
         updatedAt
         owner
@@ -1835,6 +1880,8 @@ export const getEventParticipant = /* GraphQL */ `
         name
         email
         rank
+        uWindsorEmail
+        windsorStudent
         fullName
         contactEmail
         title
@@ -1963,6 +2010,8 @@ export const getUwcssaCareer = /* GraphQL */ `
         name
         email
         rank
+        uWindsorEmail
+        windsorStudent
         fullName
         contactEmail
         title
@@ -2039,6 +2088,8 @@ export const getResume = /* GraphQL */ `
         name
         email
         rank
+        uWindsorEmail
+        windsorStudent
         fullName
         contactEmail
         title

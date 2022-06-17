@@ -1,8 +1,8 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-18 13:56:36
- * @LastEditTime: 2022-06-11 16:32:38
- * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-06-13 18:05:46
+ * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/views/Dashboard/Dashboard.tsx
  */
 
@@ -16,13 +16,18 @@ import {
   Typography,
   styled,
 } from '@mui/material';
+import React, { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from 'redux/hooks';
 
 import ArticleContainer from 'components/ArticleContainer';
 import Entries from './components/Entries';
+import EventContainer from 'components/EventContainer';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import React from 'react';
 import Section from './components/Section';
 import UserCardGrid from 'components/UserCardGrid';
+import { fetchArticleList } from 'redux/article/articleSlice';
+import { fetchEventList } from 'redux/event/eventSlice';
+import { getAuthState } from 'redux/auth/authSlice';
 
 const StickyAccordion = styled(AccordionSummary)(() => ({
   position: 'sticky',
@@ -32,57 +37,90 @@ const StickyAccordion = styled(AccordionSummary)(() => ({
 }));
 
 const Dashboard = (): React.ReactElement => {
+  const dispatch = useAppDispatch();
+  const isAuth = useAppSelector(getAuthState); //看一下Auth的选项他有可能会返回null 或者false 现在前面没有load 好user 就不让你进了，所以有可能不需要 ！==null的判断了
+  const { fetchArticleListStatus } = useAppSelector((state) => state.article);
+  const { fetchEventListStatus } = useAppSelector((state) => state.event);
+
+  useEffect(() => {
+    if (fetchArticleListStatus === 'idle') {
+      dispatch(
+        fetchArticleList({
+          isAuth,
+        }),
+      );
+    }
+  }, [fetchArticleListStatus]);
+
+  useEffect(() => {
+    if (fetchEventListStatus === 'idle') {
+      dispatch(fetchEventList({ isAuth }));
+    }
+  }, [fetchEventListStatus]);
+
   return (
     <>
       {/* PC端显示界面 */}
       <Box
         sx={{
-          display: {
-            md: 'flex',
-            xs: 'none',
-          },
-          padding: '24px 5%',
+          padding: '24px 10%',
         }}
       >
         <Section
-          title="新闻"
-          hasPadding={false}
-          component={Box}
-          sx={{
-            flex: 1,
-            minHeight: '100vh',
-          }}
-        >
-          <ArticleContainer />
-        </Section>
-
-        <Section
           title="活动"
           sx={{
-            flex: 2,
-            minHeight: '100vh',
+            height: 'auto',
           }}
         >
-          {''}
+          <EventContainer />
         </Section>
-
         <Box
-          sx={{ flex: 1 }}
-          position="sticky"
-          top="80px"
-          alignSelf="flex-start"
+          sx={{
+            display: {
+              md: 'flex',
+              xs: 'none',
+            },
+          }}
         >
-          <Section title="个人信息" hasPadding={false}>
-            <UserCardGrid />
+          {/* <Section
+            title="新闻"
+            hasPadding={false}
+            component={Box}
+            sx={{
+              flex: 1,
+            }}
+          >
+            <ArticleContainer />
+          </Section> */}
+          <Section
+            title="新闻"
+            hasPadding={false}
+            component={Box}
+            sx={{
+              flex: 2,
+            }}
+          >
+            <ArticleContainer />
           </Section>
 
-          <Card sx={{ margin: '12px 8px' }}>
-            <Button fullWidth>新生必读</Button>
-          </Card>
+          <Box
+            sx={{ flex: 1 }}
+            position="sticky"
+            top="80px"
+            alignSelf="flex-start"
+          >
+            <Section title="个人信息" hasPadding={false}>
+              <UserCardGrid />
+            </Section>
 
-          <Section title="功能入口" hasPadding={false} component={Box}>
-            <Entries />
-          </Section>
+            <Card sx={{ margin: '12px 8px' }}>
+              <Button fullWidth>新生必读</Button>
+            </Card>
+
+            <Section title="功能入口" hasPadding={false} component={Box}>
+              <Entries />
+            </Section>
+          </Box>
         </Box>
       </Box>
       {/* 移动端显示界面 */}

@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-29 17:08:05
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-29 17:56:40
+ * @LastEditTime: 2022-06-12 17:28:03
  * @FilePath: /uwcssa_ca/src/components/CkeditorS3UploadAdapter.tsx
  * @Description:
  *
@@ -40,10 +40,13 @@ export default class CkeditorS3UploadAdapter {
             authUser: this.authUser,
           }),
         );
-        console.log(response.payload.objectURL);
-        resolve({
-          default: response.payload.objectURL,
-        });
+        console.log(response.payload.objectCompressedURL);
+        console.log('waiting for another 5 second');
+        setTimeout(() => {
+          resolve({
+            default: response.payload.objectCompressedURL,
+          });
+        }, 5000);
       })
       .catch(reject);
   }

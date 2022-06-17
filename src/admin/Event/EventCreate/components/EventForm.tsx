@@ -16,6 +16,7 @@ import { useSwiper } from 'swiper/react';
 import FieldLabel from './FieldLabel';
 import { setBasicInfo } from 'redux/form/formSlice';
 import { useAppSelector, useAppDispatch } from 'redux/hooks';
+import GoogleMapDialog from './GoogleMapDialog';
 import * as yup from 'yup';
 
 enum FieldType {
@@ -25,6 +26,7 @@ enum FieldType {
     endDateTime = 'endDateTime',
     address = 'address',
     limit = 'limit',
+    description = 'description',
     content = 'content'
 }
 
@@ -45,11 +47,16 @@ const validationSchema = yup.object({
     .number()
     .min(0, '输入人数无效')
     .required('请输入活动最多限制人数'),
+  description: yup
+    .string()
+    .trim()
+    .required('请输入活动描述'),
 });
 
 const EventForm: React.FC = () => {
 
-  const [description, setDescription] = useState('');
+  const [description, setDescription] = useState<string>('');
+  const [googleMapDialog, setGoogleMapDialog] = useState<boolean>(false);
   const swiper = useSwiper();
   const activityForm = useAppSelector(state => state.form.createData.basicInfo);
   const dispatch = useAppDispatch();
@@ -72,7 +79,8 @@ const EventForm: React.FC = () => {
         (
           type === FieldType.startDateTime ||
           type === FieldType.endDateTime ||
-          type === FieldType.content ? 
+          type === FieldType.content ||
+          type === FieldType.address ? 
             e : e.target.value
         )
     }));
@@ -91,8 +99,16 @@ const EventForm: React.FC = () => {
       formik.handleChange(e);
   };
 
+  const onLocationSelect = (location) => {
+    if (location) {
+      formik.setFieldValue('address', location.formatted_address);
+      handleFieldValueChange(location.place_id, FieldType.address);
+    }
+  };
+
   return (
     <Box p={'2px'}>
+      <GoogleMapDialog open={googleMapDialog} setOpen={setGoogleMapDialog} onLocationSelect={onLocationSelect}/>
       <form onSubmit={formik.handleSubmit}>
         <Box sx={{ float: 'right' }}>
           <Button
@@ -101,7 +117,7 @@ const EventForm: React.FC = () => {
             endIcon={<ArrowForwardIcon />}
             onClick={() => swiper.slideNext()}
           >
-           配置报名表单
+           添加活动海报
           </Button>
         </Box>
         <Grid container spacing={2}>
@@ -176,7 +192,8 @@ const EventForm: React.FC = () => {
               fullWidth
               size='small'
               value={formik.values.address}
-              onChange={(e) => handleFieldValueChange(e, FieldType.address)}
+              onClick={() => setGoogleMapDialog(true)}
+              // onChange={(e) => handleFieldValueChange(e, FieldType.address)}
               error={formik.touched.address && Boolean(formik.errors.address)}
               helperText={formik.touched.address && formik.errors.address}
             />
@@ -197,15 +214,31 @@ const EventForm: React.FC = () => {
             />
           </Grid>
           <Grid item xs={12}>
+            <FieldLabel name='活动描述' isRequired />
+            <TextField
+              label="Description"
+              variant="outlined"
+              rows={3}
+              name={'description'}
+              fullWidth
+              multiline
+              size='small'
+              value={formik.values.description}
+              onChange={(e) => handleFieldValueChange(e, FieldType.description)}
+              error={formik.touched.description && Boolean(formik.errors.description)}
+              helperText={formik.touched.description && formik.errors.description}
+            />
+          </Grid>
+          <Grid item xs={12}>
             <Divider sx={{ mb: 2 }}/>
           </Grid>
         </Grid>
         <Box
           width='100%'
-          height='80vh'
+          height='67vh'
           mb={2}
         >
-          <FieldLabel name='活动描述' isRequired />
+          <FieldLabel name='活动详情' isRequired />
           <RichTextEditor
             content={description}
             setContent={(e) => handleFieldValueChange(e, FieldType.content)}
