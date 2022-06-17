@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-06-16 21:53:41
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-16 22:08:15
+ * @LastEditTime: 2022-06-16 22:35:09
  * @FilePath: /uwcssa_ca/src/components/DynamicForm/components/FormItemForm/FormItemForm.tsx
  * @Description:
  *
@@ -54,12 +54,15 @@ function getYupValidation(formItem: FormItem) {
   return validation;
 }
 
-function FormItemForm({ formItemList }: { formItemList: Array<FormItem> }) {
-  const sortedFormItemList = formItemList.sort((a, b) => a.order - b.order);
+function FormItemForm({
+  formItemListSortByOrder,
+}: {
+  formItemListSortByOrder: Array<FormItem>;
+}) {
   const initialValues = {};
   const yupObject = {};
 
-  sortedFormItemList.forEach((item) => {
+  formItemListSortByOrder.forEach((item) => {
     if (item.formType === 'Checkbox') {
       initialValues[item.id] = false;
     } else {
@@ -71,7 +74,7 @@ function FormItemForm({ formItemList }: { formItemList: Array<FormItem> }) {
   const validationSchema = yup.object(yupObject);
 
   const onSubmit = async (values) => {
-    return values;
+    console.log('表单提交', values);
   };
 
   const formik = useFormik({
@@ -80,9 +83,11 @@ function FormItemForm({ formItemList }: { formItemList: Array<FormItem> }) {
     onSubmit,
   });
 
-  const handleSubmitClicked = () => {
+  const handleSubmitClicked = (values) => {
     if (!formik.isValid) {
       console.error('表单未完成', formik.errors);
+    } else {
+      console.log('表单完成', values);
     }
   };
 
@@ -92,7 +97,7 @@ function FormItemForm({ formItemList }: { formItemList: Array<FormItem> }) {
       <Divider sx={{ my: '2rem' }} />
       <form onSubmit={formik.handleSubmit}>
         <Grid container spacing={8}>
-          {sortedFormItemList.map((formItem) => {
+          {formItemListSortByOrder.map((formItem) => {
             return (
               <Grid item xs={12} sm={12} key={formItem.id} marginX={4}>
                 <FormInputFieldComponent formItem={formItem} formik={formik} />
@@ -101,10 +106,10 @@ function FormItemForm({ formItemList }: { formItemList: Array<FormItem> }) {
           })}
         </Grid>
         <Button
+          onClick={handleSubmitClicked}
           size={'large'}
           variant={'contained'}
           type={'submit'}
-          onClick={handleSubmitClicked}
         >
           Submit
         </Button>

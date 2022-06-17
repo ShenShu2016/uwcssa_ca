@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-06-02 18:10:36
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-16 22:04:39
+ * @LastEditTime: 2022-06-16 22:29:59
  * @FilePath: /uwcssa_ca/src/components/DynamicForm/DynamicForm.tsx
  * @Description:
  *
@@ -27,9 +27,8 @@ function DynamicForm({ formItemList }: any) {
   //   (state) => state.form.formItem,
   // );
   // const formItemList = useAppSelector(selectAllFormItems);
-  const formItemListSortByOrder = formItemList.sort(
-    (a, b) => a.order - b.order,
-  );
+  const formItemListSortByOrder = [...formItemList];
+  formItemListSortByOrder.sort((a, b) => a.order - b.order);
 
   // useEffect(() => {
   //   if (isAuth !== null && fetchFormItemListStatus === 'idle') {
@@ -48,7 +47,7 @@ function DynamicForm({ formItemList }: any) {
         // 这个数组传一个空的进去 会导致initValue里面没有内容 这样的话 之后渲染的每一个问题的value都会变成undefined
         // 因为initValue是空对象
         formItemList.length ? (
-          <FormItemForm formItemList={formItemList} />
+          <FormItemForm formItemListSortByOrder={formItemListSortByOrder} />
         ) : null
       }
     </Box>
