@@ -1,10 +1,8 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-20 21:02:00
- * @LastEditors: 李佳修
- * @LastEditTime: 2022-06-16 16:15:47
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-06-16 21:50:04
  * @FilePath: /uwcssa_ca/src/redux/event/eventSlice.tsx
  * @Description:
  *
@@ -22,10 +20,11 @@ import {
   deleteEvent,
   updateEvent,
 } from 'graphql/mutations';
-import { eventSortByCreatedAt, getEvent } from 'graphql/queries';
 
 import API from '@aws-amplify/api';
 import { RootState } from 'redux/store';
+import { eventSortByCreatedAt } from './custom_q_m_s';
+import { getEvent } from 'graphql/queries';
 import { graphqlOperation } from '@aws-amplify/api-graphql';
 import { v4 as uuid } from 'uuid';
 
@@ -48,13 +47,91 @@ export type Event = {
   active: 'T' | 'F';
   coverPageImgURL?: string | null;
   coverPageDescription?: string | null;
+  form?: Form | null;
   createdAt?: string;
   updatedAt?: string;
   owner: string;
   user?: { avatarURL: string; id: string; name: string };
 };
 
-const eventAdapter = createEntityAdapter<any>({
+// export interface Event {
+//   id: string;
+//   title: string;
+//   coverPageImgURL: string;
+//   coverPageDescription: null;
+//   content: string;
+//   imgURLs: null;
+//   sponsor: null;
+//   online: boolean;
+//   group: boolean;
+//   startDate: string;
+//   endDate: string;
+//   eventStatus: string;
+//   isPublish: null;
+//   tags: Tags;
+//   eventLocation: null;
+//   form: Form;
+//   active: string;
+//   createdAt: string;
+//   updatedAt: string;
+//   owner: string;
+//   user: User;
+//   eventEventLocationId: string;
+//   eventFormId: string;
+//   eventCountId: null;
+// }
+
+export interface Form {
+  createdAt: string;
+  formEventId: null;
+  id: string;
+  owner: string;
+  updatedAt: string;
+  formItems: FormItems;
+}
+
+export interface FormItems {
+  nextToken: null;
+  items: Item[];
+}
+
+export interface Item {
+  createdAt: string;
+  description: string;
+  formFormItemsId: string;
+  formSelectChoices: string[];
+  formType: string;
+  helperText: string;
+  id: string;
+  isBoolean: boolean;
+  isDate: boolean;
+  isEmail: boolean;
+  isExample: boolean;
+  isNumber: boolean;
+  isRequired: boolean;
+  isString: boolean;
+  isTrim: boolean;
+  label: string;
+  maxLength: number;
+  minLength: number;
+  order: number;
+  owner: string;
+  placeholder: string;
+  question: string;
+  updatedAt: string;
+}
+
+// export interface Tags {
+//   items: any[];
+// }
+
+// export interface User {
+//   id: string;
+//   name: string;
+//   avatarURL: null;
+// }
+
+const eventAdapter = createEntityAdapter<Event>({
   sortComparer: (a, b) => b.createdAt.localeCompare(a.createdAt),
 });
 

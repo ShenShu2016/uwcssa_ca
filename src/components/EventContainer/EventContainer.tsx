@@ -1,23 +1,24 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-10 17:37:29
- * @LastEditTime: 2022-06-15 17:33:49
- * @LastEditors: 李佳修
+ * @LastEditTime: 2022-06-16 21:42:47
+ * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/components/EventContainer/EventContainer.tsx
  */
 
-import { Box } from '@mui/material';
-
-import Details from './components/Detail';
-import Image from './components/Image';
-import React, { useState } from 'react';
-import { useAppSelector } from 'redux/hooks';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Pagination } from 'swiper';
-import EventJoinForm from './components/EventJoinForm';
-import { Event } from 'redux/event/eventSlice';
 import 'swiper/css';
 import 'swiper/css/pagination';
+
+import { Autoplay, Pagination } from 'swiper';
+import React, { useState } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+import { Box } from '@mui/material';
+import Details from './components/Detail';
+import { Event } from 'redux/event/eventSlice';
+import EventJoinForm from './components/EventJoinForm';
+import Image from './components/Image';
+import { useAppSelector } from 'redux/hooks';
 
 const EventContainer: React.FC = () => {
   const eventList = useAppSelector((state) => state.event);
@@ -29,39 +30,43 @@ const EventContainer: React.FC = () => {
     setJoinDialogOpen(true);
   };
 
-  console.log(eventList);
+  //console.log(eventList);
 
   return (
     <Box p={1}>
-      <EventJoinForm open={joinDialogOpen} setOpen={setJoinDialogOpen} event={event}/>
+      <EventJoinForm
+        open={joinDialogOpen}
+        setOpen={setJoinDialogOpen}
+        event={event}
+      />
       <Swiper
         pagination={true}
         speed={1500}
         autoplay={{
           delay: 5000,
           disableOnInteraction: false,
-          pauseOnMouseEnter: true
+          pauseOnMouseEnter: true,
         }}
         loop={true}
         spaceBetween={100}
         modules={[Autoplay, Pagination]}
       >
-        {eventList && eventList.ids?.map((id) =>
-          ( 
+        {eventList &&
+          eventList.ids?.map((id) => (
             <SwiperSlide key={id}>
-              <Box display='flex' mb={4}>
+              <Box display="flex" mb={4}>
                 <Box flex={1}>
-                  <Image
-                    url={eventList.entities[id].coverPageImgURL}
-                  />
+                  <Image url={eventList.entities[id].coverPageImgURL} />
                 </Box>
                 <Box flex={2}>
-                  <Details info={eventList.entities[id]} onJoin={() => handleJoinEvent(eventList.entities[id])}/>
+                  <Details
+                    info={eventList.entities[id]}
+                    onJoin={() => handleJoinEvent(eventList.entities[id])}
+                  />
                 </Box>
               </Box>
             </SwiperSlide>
-          )
-        )}
+          ))}
       </Swiper>
     </Box>
   );

@@ -278,6 +278,7 @@ export const postFormItem = createAsyncThunk(
     },
     { rejectWithValue },
   ) => {
+    console.log(createFormItemInput);
     try {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const result: any = await API.graphql(
