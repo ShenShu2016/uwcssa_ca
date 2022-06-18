@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-18 17:28:22
+ * @LastEditTime: 2022-06-18 17:59:51
  * @FilePath: /uwcssa_ca/src/views/ViewRoutes.tsx
  * @Description:
  *
@@ -113,6 +113,7 @@ function ViewRoutes(): Array<{
       renderer: (params = {}): JSX.Element => <EventDetailView {...params} />,
       isAllowed: true,
       redirectPath: '/',
+      colorInvert: true,
     },
     {
       path: '/auth/passwordReset',

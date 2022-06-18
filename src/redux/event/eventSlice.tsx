@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-20 21:02:00
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-18 17:44:18
+ * @LastEditTime: 2022-06-18 17:57:57
  * @FilePath: /uwcssa_ca/src/redux/event/eventSlice.tsx
  * @Description:
  *
@@ -43,6 +43,8 @@ export type Event = {
     }>;
   } | null;
   eventFormId?: string;
+  count?: any;
+  likes?: any;
   active: 'T' | 'F';
   coverPageImgURL?: string | null;
   coverPageDescription?: string | null;
@@ -52,7 +54,7 @@ export type Event = {
   createdAt?: string;
   updatedAt?: string;
   owner: string;
-  user?: { avatarURL: string; id: string; name: string };
+  user?: any;
   online?: boolean;
 };
 
