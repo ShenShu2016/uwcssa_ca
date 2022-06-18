@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-20 21:02:00
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-18 17:22:18
+ * @LastEditTime: 2022-06-18 17:44:18
  * @FilePath: /uwcssa_ca/src/redux/event/eventSlice.tsx
  * @Description:
  *
@@ -20,11 +20,10 @@ import {
   deleteEvent,
   updateEvent,
 } from 'graphql/mutations';
+import { eventSortByCreatedAt, getEvent } from './custom_q_m_s';
 
 import API from '@aws-amplify/api';
 import { RootState } from 'redux/store';
-import { eventSortByCreatedAt } from './custom_q_m_s';
-import { getEvent } from 'graphql/queries';
 import { graphqlOperation } from '@aws-amplify/api-graphql';
 import { v4 as uuid } from 'uuid';
 
@@ -178,14 +177,18 @@ export const fetchEventList = createAsyncThunk(
 export const fetchEvent = createAsyncThunk(
   'event/fetchEvent',
   async (
-    { eventId, isAuth }: { eventId: string; isAuth: boolean },
+    {
+      eventId,
+      isAuth,
+      ownerUsername = null,
+    }: { eventId: string; isAuth: boolean; ownerUsername: string },
     { rejectWithValue },
   ) => {
     try {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const result: any = await API.graphql({
         query: getEvent,
-        variables: { id: eventId },
+        variables: { id: eventId, eq: ownerUsername || null },
         authMode: isAuth ? undefined : 'AWS_IAM',
       });
       if (result.data.getEvent === null) {

@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-20 21:02:00
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-11 01:18:43
+ * @LastEditTime: 2022-06-18 17:41:46
  * @FilePath: /uwcssa_ca/src/redux/article/articleSlice.tsx
  * @Description:
  *
@@ -108,7 +108,7 @@ export const fetchArticle = createAsyncThunk(
     {
       articleId,
       isAuth,
-      ownerUsername = undefined,
+      ownerUsername = null,
     }: {
       articleId: string;
       isAuth: boolean;
@@ -120,7 +120,7 @@ export const fetchArticle = createAsyncThunk(
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const result: any = await API.graphql({
         query: getArticle,
-        variables: { id: articleId, eq: ownerUsername },
+        variables: { id: articleId, eq: ownerUsername || null },
         authMode: isAuth ? undefined : 'AWS_IAM',
       });
       if (result.data.getArticle === null) {

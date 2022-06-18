@@ -1,21 +1,20 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-13 09:15:49
- * @LastEditTime: 2022-06-18 17:23:01
+ * @LastEditTime: 2022-06-18 17:48:35
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/components/EventContainer/components/Detail.tsx
  */
 
 import './index.css';
 
+import { Box, Button, Chip, Typography } from '@mui/material';
+
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Chip from '@mui/material/Chip';
 import { Event } from 'redux/event/eventSlice';
+import { Link } from 'react-router-dom';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import React from 'react';
-import Typography from '@mui/material/Typography';
 import moment from 'moment';
 
 // import ReactHtmlParser from 'react-html-parser';
@@ -85,7 +84,12 @@ const Details: React.FC<DetailProp> = ({ info, onJoin }): JSX.Element => {
         {info.coverPageDescription}
       </Typography>
       <Box mt={1} display="flex" justifyContent="space-between">
-        <Button variant="outlined" sx={{ width: '100px' }}>
+        <Button
+          variant="outlined"
+          sx={{ width: '100px' }}
+          component={Link}
+          to={`/event/${info.id}`}
+        >
           查看详情
         </Button>
         <Button variant="contained" sx={{ width: '100px' }} onClick={onJoin}>
