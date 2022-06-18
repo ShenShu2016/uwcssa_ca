@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-20 21:02:00
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-16 21:50:04
+ * @LastEditTime: 2022-06-18 17:22:18
  * @FilePath: /uwcssa_ca/src/redux/event/eventSlice.tsx
  * @Description:
  *
@@ -48,10 +48,13 @@ export type Event = {
   coverPageImgURL?: string | null;
   coverPageDescription?: string | null;
   form?: Form | null;
+  startDate?: string | null;
+  endDate?: string | null;
   createdAt?: string;
   updatedAt?: string;
   owner: string;
   user?: { avatarURL: string; id: string; name: string };
+  online?: boolean;
 };
 
 // export interface Event {

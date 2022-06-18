@@ -1,11 +1,10 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-13 09:15:49
- * @LastEditTime: 2022-06-16 21:42:16
+ * @LastEditTime: 2022-06-18 17:23:01
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/components/EventContainer/components/Detail.tsx
  */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import './index.css';
 
@@ -13,6 +12,7 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Chip from '@mui/material/Chip';
+import { Event } from 'redux/event/eventSlice';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import React from 'react';
 import Typography from '@mui/material/Typography';
@@ -21,7 +21,7 @@ import moment from 'moment';
 // import ReactHtmlParser from 'react-html-parser';
 
 interface DetailProp {
-  info: any;
+  info: Event;
   onJoin: () => void;
 }
 
@@ -82,17 +82,14 @@ const Details: React.FC<DetailProp> = ({ info, onJoin }): JSX.Element => {
         sx={{ mt: 1, fontSize: '14px' }}
         className="detail-text"
       >
-        {`description放这里description放这里description放这里description放这里，
-         description放这里description放这里description放这里,description放这里description放这里description放这里description放这里，
-          description放这里description放这里description放这里,description放这里description放这里description放这里description放这里，
-          description放这里description放这里description放这里`}
+        {info.coverPageDescription}
       </Typography>
       <Box mt={1} display="flex" justifyContent="space-between">
         <Button variant="outlined" sx={{ width: '100px' }}>
           查看详情
         </Button>
         <Button variant="contained" sx={{ width: '100px' }} onClick={onJoin}>
-          报名
+          快速报名
         </Button>
       </Box>
     </Box>
