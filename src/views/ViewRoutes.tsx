@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-11 17:13:17
+ * @LastEditTime: 2022-06-18 17:59:51
  * @FilePath: /uwcssa_ca/src/views/ViewRoutes.tsx
  * @Description:
  *
@@ -22,6 +22,7 @@ import {
   ContactPage as ContactPageView,
   Dashboard as DashboardView,
   EmailConfirmationCover as EmailConfirmationCoverView,
+  EventDetail as EventDetailView,
   ForgotPassWordSubmit as ForgotPassWordSubmitView,
   Home as HomeView,
   NotFoundCover as NotFoundCoverView,
@@ -107,7 +108,13 @@ function ViewRoutes(): Array<{
       redirectPath: '/',
       colorInvert: true,
     },
-
+    {
+      path: '/event/:eventId',
+      renderer: (params = {}): JSX.Element => <EventDetailView {...params} />,
+      isAllowed: true,
+      redirectPath: '/',
+      colorInvert: true,
+    },
     {
       path: '/auth/passwordReset',
       renderer: (params = {}): JSX.Element => (

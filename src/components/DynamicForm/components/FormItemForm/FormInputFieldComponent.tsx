@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-06-16 21:53:41
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-16 22:08:05
+ * @LastEditTime: 2022-06-18 16:54:13
  * @FilePath: /uwcssa_ca/src/components/DynamicForm/components/FormItemForm/FormInputFieldComponent.tsx
  * @Description:
  *
@@ -159,7 +159,7 @@ function FormInputFieldComponent({
           >
             {/* 可以写 required={formItem.isRequired} */}
             <FormControlLabel
-              value={'T'}
+              value={true}
               control={
                 <Radio
                   size="small"
@@ -175,7 +175,7 @@ function FormInputFieldComponent({
               label={'是'}
             />
             <FormControlLabel
-              value={'F'}
+              value={false}
               control={
                 <Radio
                   size="small"

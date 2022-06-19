@@ -2,55 +2,112 @@
  * @Author: Shen Shu
  * @Date: 2022-06-02 18:10:36
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-16 22:29:59
+ * @LastEditTime: 2022-06-18 17:19:22
  * @FilePath: /uwcssa_ca/src/components/DynamicForm/DynamicForm.tsx
  * @Description:
  *
  */
 
-import { Box, Divider, Paper, Typography } from '@mui/material';
-import React, { useEffect } from 'react';
-import { fetchFormItemList, selectAllFormItems } from 'redux/form/formSlice';
-import { useAppDispatch, useAppSelector } from 'redux/hooks';
+import * as yup from 'yup';
 
-import Container from 'components/Container';
-import { Form } from 'redux/event/eventSlice';
-import FormItemForm from './components/FormItemForm/FormItemForm';
-import { getAuthState } from 'redux/auth/authSlice';
+import { Button, DialogActions, DialogContent, Grid } from '@mui/material';
 
-function DynamicForm({ formItemList }: any) {
-  console.log(formItemList);
-  // const dispatch = useAppDispatch();
-  // const isAuth = useAppSelector(getAuthState);
+import FormInputFieldComponent from './components/FormItemForm/FormInputFieldComponent';
+import { FormItem } from 'redux/form/formSlice';
+import React from 'react';
+import { useFormik } from 'formik';
 
-  // const { fetchFormItemListStatus } = useAppSelector(
-  //   (state) => state.form.formItem,
-  // );
-  // const formItemList = useAppSelector(selectAllFormItems);
+function getYupValidation(formItem: FormItem) {
+  let validation: any = yup;
+  if (formItem.formType === 'MultipleSelect') {
+    return validation.array().of(yup.string()); //github ai帮忙写的。。牛逼
+  }
+  if (formItem.formType === 'Boolean' || formItem.formType === 'Checkbox') {
+    validation = validation.boolean();
+  } else {
+    if (formItem.isNumber) {
+      validation = validation.number('Please enter a valid number');
+    } else {
+      validation = validation.string();
+      if (formItem.isEmail) {
+        validation = validation.email('Please enter a valid email address');
+      }
+      if (formItem.minLength) {
+        validation = validation.min(
+          formItem.minLength,
+          'Please enter more than ' + formItem.minLength + ' characters',
+        );
+      }
+      if (formItem.maxLength) {
+        validation = validation.max(
+          formItem.maxLength,
+          'Please enter less than ' + formItem.maxLength + ' characters',
+        );
+      }
+    }
+  }
+
+  if (formItem.isRequired) {
+    validation = validation.required('This field is required'); //required 要放在最后面
+  }
+  return validation;
+}
+
+function DynamicForm({ formItemList, setOpen }: any) {
   const formItemListSortByOrder = [...formItemList];
   formItemListSortByOrder.sort((a, b) => a.order - b.order);
 
-  // useEffect(() => {
-  //   if (isAuth !== null && fetchFormItemListStatus === 'idle') {
-  //     dispatch(
-  //       fetchFormItemList({
-  //         isAuth,
-  //       }),
-  //     );
-  //   }
-  // }, [isAuth, fetchFormItemListStatus]);
+  const initialValues = {};
+  const yupObject = {};
 
+  formItemListSortByOrder.forEach((item) => {
+    if (item.formType === 'Checkbox') {
+      initialValues[item.id] = false;
+    } else {
+      initialValues[item.id] = '';
+    }
+    yupObject[item.id] = item && getYupValidation(item);
+  });
+
+  const validationSchema = yup.object(yupObject);
+
+  const onSubmit = async (values) => {
+    console.log('表单提交', values);
+    setOpen(false);
+  };
+
+  const formik = useFormik({
+    initialValues,
+    validationSchema: validationSchema,
+    onSubmit,
+  });
+
+  const handleSubmitClicked = (values) => {
+    if (!formik.isValid) {
+      //console.error('表单未完成' + formik.errors);
+    } else {
+      //console.log('表单完成', values);
+    }
+  };
   return (
-    <Box sx={{ p: '1rem' }}>
-      {
-        // 这里必须要等待这个数组请求到内容之后再渲染这个组件 因为formik的initValue改成依赖数组长度动态赋值之后
-        // 这个数组传一个空的进去 会导致initValue里面没有内容 这样的话 之后渲染的每一个问题的value都会变成undefined
-        // 因为initValue是空对象
-        formItemList.length ? (
-          <FormItemForm formItemListSortByOrder={formItemListSortByOrder} />
-        ) : null
-      }
-    </Box>
+    <form onSubmit={formik.handleSubmit}>
+      <DialogContent dividers>
+        <Grid container spacing={4}>
+          {formItemListSortByOrder.map((formItem) => {
+            return (
+              <Grid item xs={12} sm={12} key={formItem.id} marginX={4}>
+                <FormInputFieldComponent formItem={formItem} formik={formik} />
+              </Grid>
+            );
+          })}
+        </Grid>
+      </DialogContent>
+      <DialogActions>
+        <Button type={'submit'} onClick={handleSubmitClicked}>
+          提交
+        </Button>
+      </DialogActions>
+    </form>
   );
 }
 

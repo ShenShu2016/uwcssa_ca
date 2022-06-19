@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-27 13:44:58
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-11 18:22:22
+ * @LastEditTime: 2022-06-18 22:43:36
  * @FilePath: /uwcssa_ca/src/components/Comment/CommentOverview/components/CommentGroupButton.tsx
  * @Description:
  *
@@ -42,6 +42,7 @@ function CommentGroupButton({ count, likes }: { count: Count; likes: any }) {
         likeCountId: count.id,
         owner: ownerUserName,
       };
+      console.log(createLikeInput);
       const response = await dispatch(postLike({ createLikeInput }));
       console.log(response);
       if (response.meta.requestStatus === 'fulfilled') {

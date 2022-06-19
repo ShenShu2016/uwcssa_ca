@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-06-16 21:24:48
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-16 21:45:50
+ * @LastEditTime: 2022-06-18 17:45:01
  * @FilePath: /uwcssa_ca/src/redux/event/custom_q_m_s.tsx
  * @Description:
  *
@@ -111,6 +111,152 @@ export const eventSortByCreatedAt = /* GraphQL */ `
         eventCountId
       }
       nextToken
+    }
+  }
+`;
+
+export const getEvent = /* GraphQL */ `
+  query GetEvent($id: ID!, $eq: ID) {
+    getEvent(id: $id) {
+      id
+      title
+      coverPageImgURL
+      coverPageDescription
+      content
+      imgURLs
+      sponsor
+      online
+      group
+      tags {
+        items {
+          tagID
+        }
+      }
+      count {
+        id
+        count
+        commentCount
+        like
+        targetTable
+        createdAt
+        updatedAt
+        owner
+        countArticleId
+        countEventId
+        countCommentId
+      }
+      likes(filter: { owner: { eq: $eq } }, limit: 1) {
+        items {
+          owner
+          id
+        }
+      }
+      comments(sortDirection: DESC, filter: { isDeleted: { eq: false } }) {
+        items {
+          id
+          content
+          createdAt
+          likes(filter: { owner: { eq: $eq } }, limit: 1) {
+            items {
+              owner
+              id
+            }
+          }
+          user {
+            avatarURL {
+              objectURL
+              objectCompressedURL
+              objectThumbnailURL
+            }
+            id
+            name
+            createdAt
+          }
+          count {
+            id
+            count
+            commentCount
+            like
+            targetTable
+            createdAt
+            updatedAt
+            owner
+            countArticleId
+            countEventId
+            countCommentId
+          }
+        }
+      }
+      startDate
+      endDate
+      eventStatus
+      eventLocation {
+        id
+        description
+        place_id
+        reference
+        terms
+        types
+        apartmentNumbers
+        geocodingResult
+        lat
+        lng
+        createdAt
+        updatedAt
+        owner
+      }
+      form {
+        id
+        createdAt
+        updatedAt
+        owner
+        formEventId
+        formItems(sortDirection: DESC, limit: 19) {
+          nextToken
+          items {
+            createdAt
+            description
+            formFormItemsId
+            formSelectChoices
+            formType
+            helperText
+            id
+            isBoolean
+            isDate
+            isEmail
+            isExample
+            isNumber
+            isRequired
+            isString
+            isTrim
+            label
+            maxLength
+            minLength
+            order
+            owner
+            placeholder
+            question
+            updatedAt
+          }
+        }
+      }
+      isPublish
+      active
+      createdAt
+      updatedAt
+      owner
+      user {
+        id
+        name
+        avatarURL {
+          objectURL
+          objectCompressedURL
+          objectThumbnailURL
+        }
+      }
+      eventEventLocationId
+      eventFormId
+      eventCountId
     }
   }
 `;
