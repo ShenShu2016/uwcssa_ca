@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-06-18 22:05:34
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-18 22:15:21
+ * @LastEditTime: 2022-06-18 23:20:59
  * @FilePath: /uwcssa_ca/src/views/Event/EventDetail/components/SimilarStories/SimilarStories.tsx
  * @Description:
  *
@@ -37,7 +37,6 @@ const SimilarStories = (): JSX.Element => {
     .slice(0, 3)
     .map((index) => events[index]);
 
-  console.log(randomEvents);
   return (
     <Box>
       <Box

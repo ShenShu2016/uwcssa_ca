@@ -2,11 +2,12 @@
  * @Author: Shen Shu
  * @Date: 2022-05-26 16:50:46
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-11 18:24:24
+ * @LastEditTime: 2022-06-18 22:52:32
  * @FilePath: /uwcssa_ca/src/components/Comment/CommentDialog/components/FeedbackForm/FeedbackForm.tsx
  * @Description:
  *
  */
+
 import * as yup from 'yup';
 
 import {
@@ -43,7 +44,7 @@ const FeedbackForm = ({
   commentCount,
   setCommentCount,
 }: Props): JSX.Element => {
-  const { articleId } = useParams();
+  const { articleId, eventId } = useParams();
   const dispatch = useAppDispatch();
   const ownerUsername = useAppSelector(getOwnerUserName);
   const { enqueueSnackbar } = useSnackbar();
@@ -59,6 +60,7 @@ const FeedbackForm = ({
       content: content,
       isDeleted: false,
       articleCommentsId: articleId,
+      eventCommentsId: eventId,
       owner: ownerUsername,
     };
     console.log(createCommentInput);

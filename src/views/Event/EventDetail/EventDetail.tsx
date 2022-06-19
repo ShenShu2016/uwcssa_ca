@@ -2,22 +2,28 @@
  * @Author: Shen Shu
  * @Date: 2022-06-18 17:26:14
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-18 22:23:16
+ * @LastEditTime: 2022-06-19 00:29:44
  * @FilePath: /uwcssa_ca/src/views/Event/EventDetail/EventDetail.tsx
  * @Description:
  *
  */
 
-import { Box, Container, Grid, useMediaQuery } from '@mui/material';
+import {
+  Box,
+  Button,
+  Container,
+  Grid,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
 import {
   Content,
-  FooterNewsletter,
   Hero,
   SidebarEvents,
   SidebarNewsletter,
   SimilarStories,
 } from './components';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { fetchEvent, selectEventById } from 'redux/event/eventSlice';
 import { getAuthState, getOwnerUserName } from 'redux/auth/authSlice';
 import {
@@ -28,12 +34,13 @@ import {
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 
 import CommentOverview from 'components/Comment/CommentOverview';
+import EventJoinForm from 'components/EventContainer/components/EventJoinForm';
 import { useParams } from 'react-router-dom';
-import { useTheme } from '@mui/material/styles';
 
 function EventDetail() {
   const theme = useTheme();
   const dispatch = useAppDispatch();
+  const [joinDialogOpen, setJoinDialogOpen] = useState<boolean>(false);
   const isAuth = useAppSelector(getAuthState);
   const isMd = useMediaQuery(theme.breakpoints.up('md'), {
     defaultMatches: true,
@@ -64,10 +71,25 @@ function EventDetail() {
 
   return (
     <>
+      <EventJoinForm
+        open={joinDialogOpen}
+        setOpen={setJoinDialogOpen}
+        event={event}
+      />
       <Box>
         {event && <Hero event={event} />}
         <Container style={{ padding: '12px 16px' }}>
           <Grid container spacing={8}>
+            <Grid item xs={12} md={8}>
+              <Button
+                size="large"
+                variant="contained"
+                fullWidth
+                onClick={() => setJoinDialogOpen(true)}
+              >
+                点击此处报名
+              </Button>
+            </Grid>
             <Grid item xs={12} md={8}>
               {event && <Content event={event} />}
             </Grid>
@@ -104,9 +126,6 @@ function EventDetail() {
         <Box bgcolor={'alternate.main'}>
           <Container>
             <SimilarStories />
-          </Container>
-          <Container>
-            <FooterNewsletter />
           </Container>
           <Box
             component={'svg'}
