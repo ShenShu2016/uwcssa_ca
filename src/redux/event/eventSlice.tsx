@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-20 21:02:00
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-18 17:57:57
+ * @LastEditTime: 2022-06-18 21:52:42
  * @FilePath: /uwcssa_ca/src/redux/event/eventSlice.tsx
  * @Description:
  *
@@ -210,30 +210,31 @@ export const postEvent = createAsyncThunk(
     { createEventInput }: { createEventInput: CreateEventInput },
     { rejectWithValue },
   ) => {
-    const countId = uuid();
     try {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const [eventResponse, countResponse]: [any, any] = await Promise.all([
-        API.graphql(
-          graphqlOperation(createEvent, {
-            input: { eventCountId: countId, ...createEventInput },
-          }),
-        ),
-        API.graphql(
-          graphqlOperation(createCount, {
-            input: {
-              id: countId,
-              count: undefined,
-              commentCount: 0,
-              like: 0,
-              targetTable: 'Event',
-              countEventId: createEventInput.id,
-              owner: createEventInput.owner,
-            },
-          }),
-        ),
-      ]);
-      return eventResponse.data.createEvent;
+      const [createEventResponse, createCountResponse]: [any, any] =
+        await Promise.all([
+          API.graphql(
+            graphqlOperation(createEvent, {
+              input: createEventInput,
+            }),
+          ),
+          API.graphql(
+            graphqlOperation(createCount, {
+              input: {
+                id: createEventInput.eventCountId,
+                count: undefined,
+                commentCount: 0,
+                like: 0,
+                targetTable: 'Event',
+                countEventId: createEventInput.id,
+                owner: createEventInput.owner,
+              },
+            }),
+          ),
+        ]);
+      console.log(createEventResponse, createCountResponse);
+      return createEventResponse.data.createEvent;
     } catch (error) {
       console.log(error);
       return rejectWithValue(error.errors);

@@ -1,24 +1,24 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-01 09:18:34
- * @LastEditTime: 2022-06-16 15:42:01
- * @LastEditors: 李佳修
+ * @LastEditTime: 2022-06-18 21:52:16
+ * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/admin/Event/EventCreate/components/EventPreview.tsx
  */
 
+import { EventStatus, postForm, postFormItem } from 'redux/form/formSlice';
+import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 
 import { ActiveType } from 'API';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import { EventStatus, postForm, postFormItem } from 'redux/form/formSlice';
-import React, { useState } from 'react';
+import FullScreenLoading from 'components/FullScreenLoading';
 import { getOwnerUserName } from 'redux/auth/authSlice';
 import { postEvent } from 'redux/event/eventSlice';
-import { useSwiper } from 'swiper/react';
-import FullScreenLoading from 'components/FullScreenLoading';
 import useMessage from 'hooks/useMessage';
+import { useSwiper } from 'swiper/react';
 import { v4 as uuid } from 'uuid';
 
 const EventPreview: React.FC = () => {
@@ -31,7 +31,7 @@ const EventPreview: React.FC = () => {
 
   const [loading, setLoading] = useState({
     status: false,
-    message: ''
+    message: '',
   });
   const printData = () => {
     console.log(createData);
@@ -82,7 +82,7 @@ const EventPreview: React.FC = () => {
   const completeActivityCreate = async () => {
     setLoading({
       status: true,
-      message: '正在创建报名表单'
+      message: '正在创建报名表单',
     });
     const formId = await createForm();
     if (!formId) {
@@ -91,7 +91,7 @@ const EventPreview: React.FC = () => {
     }
     setLoading({
       status: true,
-      message: '正在发布活动'
+      message: '正在发布活动',
     });
     const createEventInput = {
       id: preArticleId,
@@ -106,7 +106,7 @@ const EventPreview: React.FC = () => {
       eventStatus: EventStatus.ComingSoon,
       // eventEventLocationId: undefined, //这东西要跟google map api结合 和另一个 Address 表联动。。
       eventEventLocationId: createData.basicInfo.address,
-      eventCountId: undefined, //这个东西我要在slice里面处理。 就undefined 放着
+      eventCountId: uuid(), //这个东西我要在slice里面处理。 就undefined 放着
       active: ActiveType.T,
       owner: ownerUsername,
     };
@@ -123,17 +123,19 @@ const EventPreview: React.FC = () => {
     }
     setLoading({
       status: false,
-      message: ''
+      message: '',
     });
   };
 
   const createForm = async () => {
     // 首先先创建一个form
-    const formRes = await dispatch(postForm({
-      createFormInput: {
-        owner: ownerUsername
-      }
-    }));
+    const formRes = await dispatch(
+      postForm({
+        createFormInput: {
+          owner: ownerUsername,
+        },
+      }),
+    );
     if (formRes.meta.requestStatus === 'fulfilled') {
       console.log(formRes);
       const formId = formRes.payload.id;
@@ -143,12 +145,20 @@ const EventPreview: React.FC = () => {
         createdAt: undefined,
         updatedAt: undefined,
         formFormItemsId: formId,
-        isExample: false
+        isExample: false,
       }));
-      const resList = await Promise.all(reqList.map(req => dispatch(postFormItem({
-        createFormItemInput: req
-      }))));
-      const complete = resList.every(item => item.meta.requestStatus === 'fulfilled');
+      const resList = await Promise.all(
+        reqList.map((req) =>
+          dispatch(
+            postFormItem({
+              createFormItemInput: req,
+            }),
+          ),
+        ),
+      );
+      const complete = resList.every(
+        (item) => item.meta.requestStatus === 'fulfilled',
+      );
       if (!complete) {
         return;
       }
@@ -161,7 +171,7 @@ const EventPreview: React.FC = () => {
 
   return (
     <Box height="80vh">
-      <FullScreenLoading loading={loading.status} message={loading.message}/>
+      <FullScreenLoading loading={loading.status} message={loading.message} />
       <Box>
         <Button
           variant="contained"

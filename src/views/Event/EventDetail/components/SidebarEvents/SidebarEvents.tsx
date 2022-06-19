@@ -2,53 +2,52 @@
  * @Author: Shen Shu
  * @Date: 2022-06-18 17:53:42
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-18 18:02:27
- * @FilePath: /uwcssa_ca/src/views/Event/EventDetail/components/SidebarArticles/SidebarArticles.tsx
+ * @LastEditTime: 2022-06-18 22:17:35
+ * @FilePath: /uwcssa_ca/src/views/Event/EventDetail/components/SidebarEvents/SidebarEvents.tsx
  * @Description:
  *
  */
 
-import React, { useEffect } from 'react';
 import {
-  fetchArticleList,
-  selectAllArticles,
-} from 'redux/article/articleSlice';
+  Box,
+  Button,
+  Card,
+  CardContent,
+  Grid,
+  Typography,
+  useTheme,
+} from '@mui/material';
+import React, { useEffect } from 'react';
+import { fetchEventList, selectAllEvents } from 'redux/event/eventSlice';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Grid from '@mui/material/Grid';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Link } from 'react-router-dom';
-import Typography from '@mui/material/Typography';
 import { getAuthState } from 'redux/auth/authSlice';
 import moment from 'moment';
 import { useParams } from 'react-router-dom';
-import { useTheme } from '@mui/material/styles';
 
-const SidebarArticles = (): JSX.Element => {
+const SidebarEvents = (): JSX.Element => {
   const theme = useTheme();
   const dispatch = useAppDispatch();
   const isAuth = useAppSelector(getAuthState);
-  const { articleId } = useParams();
-  const { fetchArticleListStatus } = useAppSelector((state) => state.article);
+  const { eventId } = useParams();
+  const { fetchEventListStatus } = useAppSelector((state) => state.event);
   useEffect(() => {
-    const getArticles = async () => {
-      if (isAuth !== null && fetchArticleListStatus === 'idle') {
+    const getEvents = async () => {
+      if (fetchEventListStatus === 'idle') {
         await dispatch(
-          fetchArticleList({
+          fetchEventList({
             isAuth,
           }),
         );
       }
     };
-    getArticles();
-  }, [isAuth, fetchArticleListStatus]);
-  const articles = useAppSelector(selectAllArticles);
-  const articlesWhereIdNotEqualToArticleId = articles
-    .filter((article) => article.id !== articleId)
+    getEvents();
+  }, [fetchEventListStatus]);
+  const events = useAppSelector(selectAllEvents);
+  const articlesWhereIdNotEqualToArticleId = events
+    .filter((event) => event.id !== eventId)
     .slice(0, 5);
   return (
     <Box component={Card} padding={2}>
@@ -152,4 +151,4 @@ const SidebarArticles = (): JSX.Element => {
   );
 };
 
-export default SidebarArticles;
+export default SidebarEvents;
