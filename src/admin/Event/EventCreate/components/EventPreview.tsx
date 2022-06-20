@@ -1,32 +1,33 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-01 09:18:34
- * @LastEditTime: 2022-06-18 21:52:16
+ * @LastEditTime: 2022-06-19 23:23:01
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/admin/Event/EventCreate/components/EventPreview.tsx
  */
 
+import { Box, Button, DialogTitle, Paper } from '@mui/material';
 import { EventStatus, postForm, postFormItem } from 'redux/form/formSlice';
 import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 
 import { ActiveType } from 'API';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
+import DynamicForm from 'components/DynamicForm';
 import FullScreenLoading from 'components/FullScreenLoading';
 import { getOwnerUserName } from 'redux/auth/authSlice';
 import { postEvent } from 'redux/event/eventSlice';
-import useMessage from 'hooks/useMessage';
+import { useSnackbar } from 'notistack';
 import { useSwiper } from 'swiper/react';
 import { v4 as uuid } from 'uuid';
 
 const EventPreview: React.FC = () => {
   const swiper = useSwiper();
   const dispatch = useAppDispatch();
+  const { enqueueSnackbar } = useSnackbar();
   const createData = useAppSelector((state) => state.form.createData);
   const ownerUsername = useAppSelector(getOwnerUserName);
-  const message = useMessage();
+
   const preArticleId = uuid();
 
   const [loading, setLoading] = useState({
@@ -86,7 +87,7 @@ const EventPreview: React.FC = () => {
     });
     const formId = await createForm();
     if (!formId) {
-      message.error('表单创建错误， 请重试');
+      enqueueSnackbar('表单创建错误，请重试', { variant: 'error' });
       return;
     }
     setLoading({
@@ -117,9 +118,9 @@ const EventPreview: React.FC = () => {
     );
     console.log(response);
     if (response.meta.requestStatus === 'fulfilled') {
-      message.success('活动创建成功');
+      enqueueSnackbar('活动创建成功', { variant: 'success' });
     } else {
-      message.error('活动创建失败');
+      enqueueSnackbar('活动创建失败', { variant: 'error' });
     }
     setLoading({
       status: false,
@@ -181,10 +182,14 @@ const EventPreview: React.FC = () => {
           配置报名表单
         </Button>
       </Box>
-      <Box>
-        这里准备做整个活动创建的preview 可以先空出来 等用户端的ui做好以后
-        再补到这里 让这里的预览和效果和用户最终看到的保持一致
+      <Box component={Paper} sx={{ m: '2rem' }} elevation={20}>
+        <DialogTitle>
+          这里准备做整个活动创建的preview 可以先空出来 等用户端的ui做好以后
+          再补到这里 让这里的预览和效果和用户最终看到的保持一致
+        </DialogTitle>
+        <DynamicForm formItemList={createData.selectedQuestions} />
       </Box>
+
       <Box>
         <Button sx={{ m: '24px' }} variant="contained" onClick={printData}>
           console.log要提交的表单数据

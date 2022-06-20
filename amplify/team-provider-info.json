@@ -38,7 +38,7 @@
         },
         "uwcssaLayerNodeJSSharp": {
           "deploymentBucketName": "amplify-uwcssa-devts-225941-deployment",
-          "s3Key": "amplify-builds/uwcssaLayerNodeJSSharp-LambdaLayerVersion5120e39e-build.zip"
+          "s3Key": "amplify-builds/uwcssaLayerNodeJSSharp-LambdaLayerVersion767f62dd-build.zip"
         },
         "ContactUsHandler": {
           "deploymentBucketName": "amplify-uwcssa-devts-225941-deployment",
