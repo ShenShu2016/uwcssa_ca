@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-06-18 17:53:42
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-18 22:17:35
+ * @LastEditTime: 2022-06-20 01:14:45
  * @FilePath: /uwcssa_ca/src/views/Event/EventDetail/components/SidebarEvents/SidebarEvents.tsx
  * @Description:
  *
@@ -19,11 +19,11 @@ import {
 } from '@mui/material';
 import React, { useEffect } from 'react';
 import { fetchEventList, selectAllEvents } from 'redux/event/eventSlice';
+import { getAuthState, getOwnerUserName } from 'redux/auth/authSlice';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Link } from 'react-router-dom';
-import { getAuthState } from 'redux/auth/authSlice';
 import moment from 'moment';
 import { useParams } from 'react-router-dom';
 
@@ -31,6 +31,7 @@ const SidebarEvents = (): JSX.Element => {
   const theme = useTheme();
   const dispatch = useAppDispatch();
   const isAuth = useAppSelector(getAuthState);
+  const ownerUsername = useAppSelector(getOwnerUserName);
   const { eventId } = useParams();
   const { fetchEventListStatus } = useAppSelector((state) => state.event);
   useEffect(() => {
@@ -39,6 +40,7 @@ const SidebarEvents = (): JSX.Element => {
         await dispatch(
           fetchEventList({
             isAuth,
+            ownerUsername,
           }),
         );
       }
@@ -46,7 +48,7 @@ const SidebarEvents = (): JSX.Element => {
     getEvents();
   }, [fetchEventListStatus]);
   const events = useAppSelector(selectAllEvents);
-  const articlesWhereIdNotEqualToArticleId = events
+  const eventsWhereIdNotEqualToArticleId = events
     .filter((event) => event.id !== eventId)
     .slice(0, 5);
   return (
@@ -62,7 +64,7 @@ const SidebarEvents = (): JSX.Element => {
         Upcoming updates
       </Typography>
       <Grid container spacing={2}>
-        {articlesWhereIdNotEqualToArticleId.map((item, index) => (
+        {eventsWhereIdNotEqualToArticleId.map((item, index) => (
           <Grid
             key={item.id}
             data-aos="fade-up"
@@ -133,7 +135,7 @@ const SidebarEvents = (): JSX.Element => {
                 </Box>
                 <Button
                   component={Link}
-                  to={`/article/${item.id}`}
+                  to={`/event/${item.id}`}
                   size={'small'}
                   sx={{
                     width: 'fit-content',

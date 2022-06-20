@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-15 14:38:54
- * @LastEditTime: 2022-06-18 17:23:59
+ * @LastEditTime: 2022-06-20 01:22:42
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/components/EventContainer/components/EventJoinForm.tsx
  */
@@ -36,6 +36,7 @@ const EventJoinForm: React.FC<EventJoinFormProp> = ({
       <DynamicForm
         formItemList={event?.form?.formItems?.items}
         setOpen={setOpen}
+        eventId={event?.id}
       />
     </Dialog>
   );

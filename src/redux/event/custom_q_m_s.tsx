@@ -2,13 +2,14 @@
  * @Author: Shen Shu
  * @Date: 2022-06-16 21:24:48
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-19 23:21:42
+ * @LastEditTime: 2022-06-20 01:13:00
  * @FilePath: /uwcssa_ca/src/redux/event/custom_q_m_s.tsx
  * @Description:
  *
  */
 export const eventSortByCreatedAt = /* GraphQL */ `
   query EventSortByCreatedAt(
+    $eq: ID
     $active: ActiveType!
     $createdAt: ModelStringKeyConditionInput
     $sortDirection: ModelSortDirection
@@ -38,6 +39,14 @@ export const eventSortByCreatedAt = /* GraphQL */ `
         endDate
         eventStatus
         isPublish
+        eventParticipants(limit: 1, filter: { owner: { eq: $eq } }) {
+          items {
+            createdAt
+            id
+            owner
+            updatedAt
+          }
+        }
         tags {
           items {
             tagID

@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-06-18 17:26:14
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-19 00:29:44
+ * @LastEditTime: 2022-06-20 00:31:16
  * @FilePath: /uwcssa_ca/src/views/Event/EventDetail/EventDetail.tsx
  * @Description:
  *
@@ -13,6 +13,7 @@ import {
   Button,
   Container,
   Grid,
+  Typography,
   useMediaQuery,
   useTheme,
 } from '@mui/material';
@@ -81,14 +82,18 @@ function EventDetail() {
         <Container style={{ padding: '12px 16px' }}>
           <Grid container spacing={8}>
             <Grid item xs={12} md={8}>
-              <Button
-                size="large"
-                variant="contained"
-                fullWidth
-                onClick={() => setJoinDialogOpen(true)}
-              >
-                点击此处报名
-              </Button>
+              {event?.eventParticipants?.items[0]?.owner === ownerUsername ? (
+                <Typography variant="h3">你已经报名</Typography>
+              ) : (
+                <Button
+                  size="large"
+                  variant="contained"
+                  fullWidth
+                  onClick={() => setJoinDialogOpen(true)}
+                >
+                  点击此处报名
+                </Button>
+              )}
             </Grid>
             <Grid item xs={12} md={8}>
               {event && <Content event={event} />}

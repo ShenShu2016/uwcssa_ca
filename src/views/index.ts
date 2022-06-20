@@ -2,13 +2,14 @@
  * @Author: Shen Shu
  * @Date: 2022-05-16 22:03:25
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-18 17:28:16
+ * @LastEditTime: 2022-06-20 00:39:34
  * @FilePath: /uwcssa_ca/src/views/index.ts
  * @Description:
  */
 
 export { default as CareerListing } from './CareerListing';
 export { default as EventDetail } from './Event/EventDetail';
+export { default as EventSignUpSuccessfully } from './Event/EventSignUpSuccessfully';
 export { default as CareerOpening } from './CareerOpening';
 
 export { default as Home } from './Home';

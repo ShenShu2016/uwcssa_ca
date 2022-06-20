@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-20 21:02:00
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-18 21:52:42
+ * @LastEditTime: 2022-06-20 01:32:37
  * @FilePath: /uwcssa_ca/src/redux/event/eventSlice.tsx
  * @Description:
  *
@@ -25,7 +25,6 @@ import { eventSortByCreatedAt, getEvent } from './custom_q_m_s';
 import API from '@aws-amplify/api';
 import { RootState } from 'redux/store';
 import { graphqlOperation } from '@aws-amplify/api-graphql';
-import { v4 as uuid } from 'uuid';
 
 //import { commentAdapter } from 'redux/comment/commentSlice';
 
@@ -48,6 +47,9 @@ export type Event = {
   active: 'T' | 'F';
   coverPageImgURL?: string | null;
   coverPageDescription?: string | null;
+  eventParticipants?: {
+    items: Array<{ id: string; owner: string; createdAt: string }>;
+  } | null;
   form?: Form | null;
   startDate?: string | null;
   endDate?: string | null;
@@ -156,7 +158,13 @@ const initialState = eventAdapter.getInitialState({
 
 export const fetchEventList = createAsyncThunk(
   'event/fetchEventList',
-  async ({ isAuth }: { isAuth: boolean }, { rejectWithValue }) => {
+  async (
+    {
+      isAuth,
+      ownerUsername = null,
+    }: { isAuth: boolean; ownerUsername: string },
+    { rejectWithValue },
+  ) => {
     try {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const result: any = await API.graphql({
@@ -165,6 +173,7 @@ export const fetchEventList = createAsyncThunk(
           active: 'T',
           sortDirection: 'DESC',
           limit: 10,
+          eq: ownerUsername || null,
         },
         authMode: isAuth ? undefined : 'AWS_IAM',
       });

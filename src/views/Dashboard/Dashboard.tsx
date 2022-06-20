@@ -1,8 +1,8 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-18 13:56:36
- * @LastEditTime: 2022-06-13 18:05:46
- * @LastEditors: 李佳修
+ * @LastEditTime: 2022-06-20 01:15:17
+ * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/views/Dashboard/Dashboard.tsx
  */
 
@@ -17,6 +17,7 @@ import {
   styled,
 } from '@mui/material';
 import React, { useEffect } from 'react';
+import { getAuthState, getOwnerUserName } from 'redux/auth/authSlice';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 
 import ArticleContainer from 'components/ArticleContainer';
@@ -27,7 +28,6 @@ import Section from './components/Section';
 import UserCardGrid from 'components/UserCardGrid';
 import { fetchArticleList } from 'redux/article/articleSlice';
 import { fetchEventList } from 'redux/event/eventSlice';
-import { getAuthState } from 'redux/auth/authSlice';
 
 const StickyAccordion = styled(AccordionSummary)(() => ({
   position: 'sticky',
@@ -39,6 +39,7 @@ const StickyAccordion = styled(AccordionSummary)(() => ({
 const Dashboard = (): React.ReactElement => {
   const dispatch = useAppDispatch();
   const isAuth = useAppSelector(getAuthState); //看一下Auth的选项他有可能会返回null 或者false 现在前面没有load 好user 就不让你进了，所以有可能不需要 ！==null的判断了
+  const ownerUsername = useAppSelector(getOwnerUserName);
   const { fetchArticleListStatus } = useAppSelector((state) => state.article);
   const { fetchEventListStatus } = useAppSelector((state) => state.event);
 
@@ -54,7 +55,7 @@ const Dashboard = (): React.ReactElement => {
 
   useEffect(() => {
     if (fetchEventListStatus === 'idle') {
-      dispatch(fetchEventList({ isAuth }));
+      dispatch(fetchEventList({ isAuth, ownerUsername }));
     }
   }, [fetchEventListStatus]);
 

@@ -2,18 +2,17 @@
  * @Author: Shen Shu
  * @Date: 2022-06-18 17:53:32
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-18 18:02:38
+ * @LastEditTime: 2022-06-20 01:33:18
  * @FilePath: /uwcssa_ca/src/views/Event/EventDetail/components/Hero/Hero.tsx
  * @Description:
  *
  */
 
-import { Avatar, Box, ListItemText, Typography } from '@mui/material';
+import { Avatar, Box, ListItemText, Typography, alpha } from '@mui/material';
 import React, { useEffect } from 'react';
 
 import Container from 'components/Container';
 import { Event } from 'redux/event/eventSlice';
-import { alpha } from '@mui/material/styles';
 import moment from 'moment';
 import { stringAvatar } from 'components/Avatar/AvatarFunction';
 
@@ -31,7 +30,7 @@ const Hero = ({ event }: { event: Event }): JSX.Element => {
 
     jarallaxInit();
   });
-  // console.log('article', article);
+
   return (
     <Box
       className={'jarallax'}

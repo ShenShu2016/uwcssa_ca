@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-11 18:50:29
+ * @LastEditTime: 2022-06-20 01:19:20
  * @FilePath: /uwcssa_ca/src/index.tsx
  * @Description:
  *
@@ -46,13 +46,7 @@ Amplify.configure(updatedAwsConfig);
 ReactDOM.render(
   <Provider store={store}>
     {/* https://iamhosseindhv.com/notistack/demos#maximum-snackbars */}
-    <SnackbarProvider
-      maxSnack={3}
-      anchorOrigin={{
-        vertical: 'top',
-        horizontal: 'center',
-      }}
-    >
+    <SnackbarProvider maxSnack={3}>
       <App />
     </SnackbarProvider>
   </Provider>,

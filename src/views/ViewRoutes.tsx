@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-18 17:59:51
+ * @LastEditTime: 2022-06-20 00:41:32
  * @FilePath: /uwcssa_ca/src/views/ViewRoutes.tsx
  * @Description:
  *
@@ -23,6 +23,7 @@ import {
   Dashboard as DashboardView,
   EmailConfirmationCover as EmailConfirmationCoverView,
   EventDetail as EventDetailView,
+  EventSignUpSuccessfully as EventSignUpSuccessfullyView,
   ForgotPassWordSubmit as ForgotPassWordSubmitView,
   Home as HomeView,
   NotFoundCover as NotFoundCoverView,
@@ -115,6 +116,15 @@ function ViewRoutes(): Array<{
       redirectPath: '/',
       colorInvert: true,
     },
+    {
+      path: '/event/eventSignUpSuccessfully/:eventId',
+      renderer: (params = {}): JSX.Element => (
+        <EventSignUpSuccessfullyView {...params} />
+      ),
+      isAllowed: true,
+      redirectPath: '/',
+    }, //!! 这里会碰到问题 比如每个人都会进去
+
     {
       path: '/auth/passwordReset',
       renderer: (params = {}): JSX.Element => (

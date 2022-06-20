@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-01 09:18:34
- * @LastEditTime: 2022-06-19 23:23:01
+ * @LastEditTime: 2022-06-20 01:28:50
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/admin/Event/EventCreate/components/EventPreview.tsx
  */
@@ -187,7 +187,11 @@ const EventPreview: React.FC = () => {
           这里准备做整个活动创建的preview 可以先空出来 等用户端的ui做好以后
           再补到这里 让这里的预览和效果和用户最终看到的保持一致
         </DialogTitle>
-        <DynamicForm formItemList={createData.selectedQuestions} />
+        <DynamicForm
+          formItemList={createData.selectedQuestions}
+          setOpen={undefined}
+          eventId={undefined}
+        />
       </Box>
 
       <Box>
