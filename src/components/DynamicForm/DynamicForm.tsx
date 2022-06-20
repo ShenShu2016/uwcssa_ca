@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-06-02 18:10:36
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-18 17:19:22
+ * @LastEditTime: 2022-06-19 23:30:15
  * @FilePath: /uwcssa_ca/src/components/DynamicForm/DynamicForm.tsx
  * @Description:
  *
@@ -62,11 +62,11 @@ function DynamicForm({ formItemList, setOpen }: any) {
 
   formItemListSortByOrder.forEach((item) => {
     if (item.formType === 'Checkbox') {
-      initialValues[item.id] = false;
+      initialValues[`content${item.order}`] = false;
     } else {
-      initialValues[item.id] = '';
+      initialValues[`content${item.order}`] = '';
     }
-    yupObject[item.id] = item && getYupValidation(item);
+    yupObject[`content${item.order}`] = item && getYupValidation(item);
   });
 
   const validationSchema = yup.object(yupObject);

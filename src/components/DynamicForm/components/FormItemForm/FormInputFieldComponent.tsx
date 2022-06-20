@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-06-16 21:53:41
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-18 16:54:13
+ * @LastEditTime: 2022-06-19 23:28:52
  * @FilePath: /uwcssa_ca/src/components/DynamicForm/components/FormItemForm/FormInputFieldComponent.tsx
  * @Description:
  *
@@ -58,14 +58,18 @@ function FormInputFieldComponent({
         <TextField
           label={formItem.label}
           variant="outlined"
-          name={formItem.id}
+          name={`content${formItem.order}`}
           fullWidth
-          value={formik.values[formItem.id]}
+          value={formik.values[`content${formItem.order}`]}
           onChange={formik.handleChange}
           error={
-            formik.touched[formItem.id] && Boolean(formik.errors[formItem.id])
+            formik.touched[`content${formItem.order}`] &&
+            Boolean(formik.errors[`content${formItem.order}`])
           }
-          helperText={formik.touched[formItem.id] && formik.errors[formItem.id]}
+          helperText={
+            formik.touched[`content${formItem.order}`] &&
+            formik.errors[`content${formItem.order}`]
+          }
         />
       </>
     );
@@ -80,16 +84,20 @@ function FormInputFieldComponent({
         <TextField
           label={formItem.label}
           variant="outlined"
-          name={formItem.id}
+          name={`content${formItem.order}`}
           fullWidth
           multiline
           minRows={3}
-          value={formik.values[formItem.id]}
+          value={formik.values[`content${formItem.order}`]}
           onChange={formik.handleChange}
           error={
-            formik.touched[formItem.id] && Boolean(formik.errors[formItem.id])
+            formik.touched[`content${formItem.order}`] &&
+            Boolean(formik.errors[`content${formItem.order}`])
           }
-          helperText={formik.touched[formItem.id] && formik.errors[formItem.id]}
+          helperText={
+            formik.touched[`content${formItem.order}`] &&
+            formik.errors[`content${formItem.order}`]
+          }
         />
       </>
     );
@@ -102,16 +110,16 @@ function FormInputFieldComponent({
           description={formItem.description}
         />
         <FormControlLabel
-          name={formItem.id}
-          value={Boolean(formik.values[formItem.id])}
+          name={`content${formItem.order}`}
+          value={Boolean(formik.values[`content${formItem.order}`])}
           onChange={formik.handleChange}
           control={
             <Checkbox
               size="small"
               sx={{
                 color:
-                  formik.touched[formItem.id] &&
-                  Boolean(formik.errors[formItem.id])
+                  formik.touched[`content${formItem.order}`] &&
+                  Boolean(formik.errors[`content${formItem.order}`])
                     ? '#d32f2f'
                     : '',
               }}
@@ -121,10 +129,12 @@ function FormInputFieldComponent({
         />
         <FormHelperText
           error={
-            formik.touched[formItem.id] && Boolean(formik.errors[formItem.id])
+            formik.touched[`content${formItem.order}`] &&
+            Boolean(formik.errors[`content${formItem.order}`])
           }
         >
-          {formik.touched[formItem.id] && formik.errors[formItem.id]}
+          {formik.touched[`content${formItem.order}`] &&
+            formik.errors[`content${formItem.order}`]}
         </FormHelperText>
       </>
     );
@@ -139,22 +149,23 @@ function FormInputFieldComponent({
         {/* switch的初始状态有点问题 赋默认值false 赋不进去 如果这个字段是required 校验不通过 有点问题 */}
         {/* 而且就算赋默认值是false了 这相当于是强制用户选了false 如果这个字段不是required 是应该允许空值的 */}
         {/* <FormControlLabel
-          name={formItem.id}
-          value={Boolean(formik.values[formItem.id])}
+          name={`content${formItem.order}`}
+          value={Boolean(formik.values[`content${formItem.order}`])}
           onChange={formik.handleChange}
           control={<Switch />}
           label={formItem.label}
         /> */}
         <FormControl
           error={
-            formik.touched[formItem.id] && Boolean(formik.errors[formItem.id])
+            formik.touched[`content${formItem.order}`] &&
+            Boolean(formik.errors[`content${formItem.order}`])
           }
           variant="standard"
         >
           <RadioGroup
             row
-            name={formItem.id}
-            value={formik.values[formItem.id]}
+            name={`content${formItem.order}`}
+            value={formik.values[`content${formItem.order}`]}
             onChange={formik.handleChange}
           >
             {/* 可以写 required={formItem.isRequired} */}
@@ -165,8 +176,8 @@ function FormInputFieldComponent({
                   size="small"
                   sx={{
                     color:
-                      formik.touched[formItem.id] &&
-                      Boolean(formik.errors[formItem.id])
+                      formik.touched[`content${formItem.order}`] &&
+                      Boolean(formik.errors[`content${formItem.order}`])
                         ? '#d32f2f'
                         : '',
                   }}
@@ -181,8 +192,8 @@ function FormInputFieldComponent({
                   size="small"
                   sx={{
                     color:
-                      formik.touched[formItem.id] &&
-                      Boolean(formik.errors[formItem.id])
+                      formik.touched[`content${formItem.order}`] &&
+                      Boolean(formik.errors[`content${formItem.order}`])
                         ? '#d32f2f'
                         : '',
                   }}
@@ -193,10 +204,12 @@ function FormInputFieldComponent({
           </RadioGroup>
           <FormHelperText
             error={
-              formik.touched[formItem.id] && Boolean(formik.errors[formItem.id])
+              formik.touched[`content${formItem.order}`] &&
+              Boolean(formik.errors[`content${formItem.order}`])
             }
           >
-            {formik.touched[formItem.id] && formik.errors[formItem.id]}
+            {formik.touched[`content${formItem.order}`] &&
+              formik.errors[`content${formItem.order}`]}
           </FormHelperText>
         </FormControl>
       </>
@@ -211,21 +224,27 @@ function FormInputFieldComponent({
           description={formItem.description}
         />
         <FormControl fullWidth>
-          <InputLabel id={getInputLabelId(formItem.id)}>
+          <InputLabel id={getInputLabelId(`content${formItem.order}`)}>
             {formItem.label}
           </InputLabel>
           <Select
-            labelId={getInputLabelId(formItem.id)}
+            labelId={getInputLabelId(`content${formItem.order}`)}
             multiple
-            id={getInputId(formItem.id)}
-            name={formItem.id}
-            value={formik.values[formItem.id] || []} //！！太重要了这个是为了防止没有值的时候报错
+            id={getInputId(`content${formItem.order}`)}
+            name={`content${formItem.order}`}
+            value={formik.values[`content${formItem.order}`] || []} //！！太重要了这个是为了防止没有值的时候报错
             label={formItem.label}
             onChange={formik.handleChange}
             error={
-              formik.touched[formItem.id] && Boolean(formik.errors[formItem.id])
+              formik.touched[`content${formItem.order}`] &&
+              Boolean(formik.errors[`content${formItem.order}`])
             }
-            input={<OutlinedInput id={getInputId(formItem.id)} label="Chip" />}
+            input={
+              <OutlinedInput
+                id={getInputId(`content${formItem.order}`)}
+                label="Chip"
+              />
+            }
             renderValue={(selected) => (
               <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
                 {selected.map((value) => (
@@ -254,18 +273,19 @@ function FormInputFieldComponent({
           description={formItem.description}
         />
         <FormControl fullWidth>
-          <InputLabel id={getInputLabelId(formItem.id)}>
+          <InputLabel id={getInputLabelId(`content${formItem.order}`)}>
             {formItem.label}
           </InputLabel>
           <Select
-            labelId={getInputLabelId(formItem.id)}
-            id={formItem.id}
-            name={formItem.id}
-            value={formik.values[formItem.id]}
+            labelId={getInputLabelId(`content${formItem.order}`)}
+            id={`content${formItem.order}`}
+            name={`content${formItem.order}`}
+            value={formik.values[`content${formItem.order}`]}
             label={formItem.label}
             onChange={formik.handleChange}
             error={
-              formik.touched[formItem.id] && Boolean(formik.errors[formItem.id])
+              formik.touched[`content${formItem.order}`] &&
+              Boolean(formik.errors[`content${formItem.order}`])
             }
           >
             {formItem.formSelectChoices.map((option, index) => {
@@ -277,7 +297,8 @@ function FormInputFieldComponent({
             })}
           </Select>
           <FormHelperText>
-            {formik.touched[formItem.id] && formik.errors[formItem.id]}
+            {formik.touched[`content${formItem.order}`] &&
+              formik.errors[`content${formItem.order}`]}
           </FormHelperText>
         </FormControl>
       </>
@@ -297,18 +318,19 @@ function FormInputFieldComponent({
         />
         <FormControl
           error={
-            formik.touched[formItem.id] && Boolean(formik.errors[formItem.id])
+            formik.touched[`content${formItem.order}`] &&
+            Boolean(formik.errors[`content${formItem.order}`])
           }
         >
-          {/* <FormLabel id={getInputLabelId(formItem.id)}>
+          {/* <FormLabel id={getInputLabelId(`content${formItem.order}`)}>
             {formItem.label}
           </FormLabel> */}
           <RadioGroup
             row={formItem.formType === 'RadioGroupH'}
-            aria-labelledby={getInputLabelId(formItem.id)}
-            name={formItem.id}
+            aria-labelledby={getInputLabelId(`content${formItem.order}`)}
+            name={`content${formItem.order}`}
             onChange={formik.handleChange}
-            value={formik.values[formItem.id]}
+            value={formik.values[`content${formItem.order}`]}
           >
             {formItem.formSelectChoices.map((option, index) => {
               return (
@@ -320,8 +342,8 @@ function FormInputFieldComponent({
                       size="small"
                       sx={{
                         color:
-                          formik.touched[formItem.id] &&
-                          Boolean(formik.errors[formItem.id])
+                          formik.touched[`content${formItem.order}`] &&
+                          Boolean(formik.errors[`content${formItem.order}`])
                             ? '#d32f2f'
                             : '',
                       }}
@@ -334,10 +356,12 @@ function FormInputFieldComponent({
           </RadioGroup>
           <FormHelperText
             error={
-              formik.touched[formItem.id] && Boolean(formik.errors[formItem.id])
+              formik.touched[`content${formItem.order}`] &&
+              Boolean(formik.errors[`content${formItem.order}`])
             }
           >
-            {formik.touched[formItem.id] && formik.errors[formItem.id]}
+            {formik.touched[`content${formItem.order}`] &&
+              formik.errors[`content${formItem.order}`]}
           </FormHelperText>
         </FormControl>
       </>
@@ -354,20 +378,21 @@ function FormInputFieldComponent({
           <MobileDatePicker
             label={formItem.label}
             inputFormat="MM/dd/yyyy"
-            value={formik.values[formItem.id] || null}
+            value={formik.values[`content${formItem.order}`] || null}
             onChange={(value) => {
-              formik.setFieldValue(formItem.id, value);
+              formik.setFieldValue(`content${formItem.order}`, value);
             }}
             renderInput={(params) => (
               <TextField
                 {...params}
                 fullWidth
                 error={
-                  formik.touched[formItem.id] &&
-                  Boolean(formik.errors[formItem.id])
+                  formik.touched[`content${formItem.order}`] &&
+                  Boolean(formik.errors[`content${formItem.order}`])
                 }
                 helperText={
-                  formik.touched[formItem.id] && formik.errors[formItem.id]
+                  formik.touched[`content${formItem.order}`] &&
+                  formik.errors[`content${formItem.order}`]
                 }
               />
             )}
@@ -386,20 +411,21 @@ function FormInputFieldComponent({
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <DateTimePicker
             label={formItem.label}
-            value={formik.values[formItem.id] || null}
+            value={formik.values[`content${formItem.order}`] || null}
             onChange={(value) => {
-              formik.setFieldValue(formItem.id, value);
+              formik.setFieldValue(`content${formItem.order}`, value);
             }}
             renderInput={(params) => (
               <TextField
                 {...params}
                 fullWidth
                 error={
-                  formik.touched[formItem.id] &&
-                  Boolean(formik.errors[formItem.id])
+                  formik.touched[`content${formItem.order}`] &&
+                  Boolean(formik.errors[`content${formItem.order}`])
                 }
                 helperText={
-                  formik.touched[formItem.id] && formik.errors[formItem.id]
+                  formik.touched[`content${formItem.order}`] &&
+                  formik.errors[`content${formItem.order}`]
                 }
               />
             )}
@@ -418,20 +444,21 @@ function FormInputFieldComponent({
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <TimePicker
             label={formItem.label}
-            value={formik.values[formItem.id] || null}
+            value={formik.values[`content${formItem.order}`] || null}
             onChange={(value) => {
-              formik.setFieldValue(formItem.id, value);
+              formik.setFieldValue(`content${formItem.order}`, value);
             }}
             renderInput={(params) => (
               <TextField
                 {...params}
                 fullWidth
                 error={
-                  formik.touched[formItem.id] &&
-                  Boolean(formik.errors[formItem.id])
+                  formik.touched[`content${formItem.order}`] &&
+                  Boolean(formik.errors[`content${formItem.order}`])
                 }
                 helperText={
-                  formik.touched[formItem.id] && formik.errors[formItem.id]
+                  formik.touched[`content${formItem.order}`] &&
+                  formik.errors[`content${formItem.order}`]
                 }
               />
             )}
