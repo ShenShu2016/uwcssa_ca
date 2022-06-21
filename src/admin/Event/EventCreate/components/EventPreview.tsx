@@ -6,7 +6,7 @@
  * @FilePath: /uwcssa_ca/src/admin/Event/EventCreate/components/EventPreview.tsx
  */
 
-import { Box, Button, DialogTitle, Paper } from '@mui/material';
+import { Box, Button, Dialog, Card, DialogTitle } from '@mui/material';
 import { EventStatus, postForm, postFormItem } from 'redux/form/formSlice';
 import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
@@ -19,7 +19,10 @@ import { getOwnerUserName } from 'redux/auth/authSlice';
 import { postEvent } from 'redux/event/eventSlice';
 import { useSnackbar } from 'notistack';
 import { useSwiper } from 'swiper/react';
+import EventSwiperItem from 'components/EventContainer/components/EventSwiperItem';
+import { EventDetail } from 'views';
 import { v4 as uuid } from 'uuid';
+import NotInterestedIcon from '@mui/icons-material/NotInterested';
 
 const EventPreview: React.FC = () => {
   const swiper = useSwiper();
@@ -27,6 +30,22 @@ const EventPreview: React.FC = () => {
   const { enqueueSnackbar } = useSnackbar();
   const createData = useAppSelector((state) => state.form.createData);
   const ownerUsername = useAppSelector(getOwnerUserName);
+  const [open, setOpen] = useState<boolean>(false); 
+  const previewData = {
+    title: createData.basicInfo.title,
+    coverPageImgURL: createData.posterImage,
+    content: createData.basicInfo.content,
+    online: createData.basicInfo.online,
+    group: false,
+    description: createData.basicInfo.description,
+    startDate: createData.basicInfo.startDateTime,
+    endDate: createData.basicInfo.endDateTime,
+    eventStatus: EventStatus.ComingSoon,
+    eventEventLocationId: undefined, //这东西要跟google map api结合 和另一个 Address 表联动。。
+    eventFormId: undefined, //这东西要跟google map api结合 和另一个 Address 表联动。。
+    active: 'T',
+  };
+  console.log(createData.completeStatus);
 
   const preArticleId = uuid();
 
@@ -34,51 +53,25 @@ const EventPreview: React.FC = () => {
     status: false,
     message: '',
   });
-  const printData = () => {
-    console.log(createData);
-    const data = {
-      id: preArticleId,
-      title: createData.basicInfo.title,
-      coverPageImgURL: createData.posterImage,
-      content: createData.basicInfo.content,
-      online: createData.basicInfo.online,
-      group: false,
-      description: createData.basicInfo.description,
-      startDate: createData.basicInfo.startDateTime,
-      endDate: createData.basicInfo.endDateTime,
-      eventStatus: EventStatus.ComingSoon,
-      eventEventLocationId: undefined, //这东西要跟google map api结合 和另一个 Address 表联动。。
-      eventFormId: undefined, //这东西要跟google map api结合 和另一个 Address 表联动。。
-      active: 'T',
-    };
-    console.log(data);
-  };
-
-  // __typename: "Event",
-  // id: string,
-  // title?: string | null,
-  // coverPageImgURL?: string | null,
-  // coverPageDescription?: string | null,
-  // content?: string | null,
-  // imgURLs?: Array< string | null > | null,
-  // sponsor?: Array< string | null > | null,
-  // online: boolean,
-  // group: boolean,
-  // tags?: ModelEventTagsConnection | null,
-  // startDate: string,
-  // endDate: string,
-  // eventStatus: EventStatus,
-  // eventLocation?: Address | null,
-  // form?: Form | null,
-  // comments?: ModelCommentConnection | null,
-  // eventParticipants?: ModelEventParticipantConnection | null,
-  // active: ActiveType,
-  // createdAt: string,
-  // updatedAt: string,
-  // owner: string,
-  // user?: UserProfile | null,
-  // eventEventLocationId?: string | null,
-  // eventFormId?: string | null,
+  // const printData = () => {
+  //   console.log(createData);
+  //   const data = {
+  //     id: preArticleId,
+  //     title: createData.basicInfo.title,
+  //     coverPageImgURL: createData.posterImage,
+  //     content: createData.basicInfo.content,
+  //     online: createData.basicInfo.online,
+  //     group: false,
+  //     description: createData.basicInfo.description,
+  //     startDate: createData.basicInfo.startDateTime,
+  //     endDate: createData.basicInfo.endDateTime,
+  //     eventStatus: EventStatus.ComingSoon,
+  //     eventEventLocationId: undefined, //这东西要跟google map api结合 和另一个 Address 表联动。。
+  //     eventFormId: undefined, //这东西要跟google map api结合 和另一个 Address 表联动。。
+  //     active: 'T',
+  //   };
+  //   console.log(data);
+  // };
 
   const completeActivityCreate = async () => {
     setLoading({
@@ -173,6 +166,22 @@ const EventPreview: React.FC = () => {
   return (
     <Box height="80vh">
       <FullScreenLoading loading={loading.status} message={loading.message} />
+      {/* <EventJoinForm /> */}
+      <Dialog
+        open={open}
+        maxWidth="xs"
+        fullWidth
+        onClose={() => setOpen(false)}
+        scroll={'paper'}
+      >
+        <DialogTitle>{previewData ? previewData.title : '活动报名'}</DialogTitle>
+
+        <DynamicForm
+          formItemList={createData.selectedQuestions}
+          setOpen={undefined}
+          eventId={undefined}
+        />
+      </Dialog>
       <Box>
         <Button
           variant="contained"
@@ -182,27 +191,51 @@ const EventPreview: React.FC = () => {
           配置报名表单
         </Button>
       </Box>
-      <Box component={Paper} sx={{ m: '2rem' }} elevation={20}>
-        <DialogTitle>
-          这里准备做整个活动创建的preview 可以先空出来 等用户端的ui做好以后
-          再补到这里 让这里的预览和效果和用户最终看到的保持一致
-        </DialogTitle>
-        <DynamicForm
-          formItemList={createData.selectedQuestions}
-          setOpen={undefined}
-          eventId={undefined}
-        />
-      </Box>
+      {
+        createData.completeStatus.EventForm && createData.completeStatus.EventPoster ?
+          <Box sx={{ m: '2rem' }}>
+            <Card sx={{ p: 2 }}>
+              <EventSwiperItem event={previewData} handleJoinEvent={() => setOpen(true)} fromPreview={true}/>
+            </Card>
+            <Box
+              mt={2}
+              p={2}
+              component={Card}
+              height='60vh'
+              overflow='auto'
+            >
+              <EventDetail fromPreview={true}  previewEvent={previewData} prevenJoinClick={() => setOpen(true)}/>
+            </Box>
+          </Box>
+          :
 
-      <Box>
-        <Button sx={{ m: '24px' }} variant="contained" onClick={printData}>
+          <Card
+            sx={{
+              mt: 2,
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              flexDirection: 'column',
+              minHeight: '30vh'
+            }}
+          >
+            <NotInterestedIcon sx={{ fontSize: '60px', color: '#9e9e9e' }}/>
+            <Box mt={2}>请完成所有必填信息后再进行预览和确认提交</Box>
+          </Card>
+      }
+    
+
+      <Box display='flex' justifyContent='center'>
+        {/* <Button sx={{ m: '24px' }} variant="contained" onClick={printData}>
           console.log要提交的表单数据
         </Button>
-        <br />
+        <br /> */}
         <Button
-          sx={{ m: '24px' }}
+          size='large'
+          sx={{ m: '24px', width: '50%' }}
           variant="contained"
           onClick={completeActivityCreate}
+          disabled={!createData.completeStatus.EventForm || !createData.completeStatus.EventPoster}
         >
           提交表单
         </Button>

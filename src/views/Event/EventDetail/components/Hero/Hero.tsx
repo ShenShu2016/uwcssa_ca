@@ -17,6 +17,7 @@ import moment from 'moment';
 import { stringAvatar } from 'components/Avatar/AvatarFunction';
 
 const Hero = ({ event }: { event: Event }): JSX.Element => {
+  console.log(event.user);
   useEffect(() => {
     const jarallaxInit = async () => {
       const jarallaxElems = document.querySelectorAll('.jarallax');
@@ -87,30 +88,34 @@ const Hero = ({ event }: { event: Event }): JSX.Element => {
           >
             {event.title}
           </Typography>
-          <Box display={'flex'} alignItems={'center'}>
-            <Avatar
-              src={event.user.avatarURL?.objectThumbnailURL}
-              {...stringAvatar(event.user.name, {
-                width: 60,
-                height: 60,
-                marginRight: '1rem',
-              })}
-            />
-            <ListItemText
-              sx={{ margin: 0 }}
-              primary={event.user.name}
-              secondary={moment(event.createdAt).format(
-                'dddd, MMMM Do YYYY, h:mm:ss a',
-              )} //https://momentjs.com/docs/#/displaying/format/
-              primaryTypographyProps={{
-                variant: 'h6',
-                sx: { color: 'common.white' },
-              }}
-              secondaryTypographyProps={{
-                sx: { color: alpha('#ffffff', 0.8) },
-              }}
-            />
-          </Box>
+          {
+            event && event.user ? 
+              <Box display={'flex'} alignItems={'center'}>
+                <Avatar
+                  src={event.user.avatarURL?.objectThumbnailURL}
+                  {...stringAvatar(event.user.name, {
+                    width: 60,
+                    height: 60,
+                    marginRight: '1rem',
+                  })}
+                />
+                <ListItemText
+                  sx={{ margin: 0 }}
+                  primary={event.user.name}
+                  secondary={moment(event.createdAt).format(
+                    'dddd, MMMM Do YYYY, h:mm:ss a',
+                  )} //https://momentjs.com/docs/#/displaying/format/
+                  primaryTypographyProps={{
+                    variant: 'h6',
+                    sx: { color: 'common.white' },
+                  }}
+                  secondaryTypographyProps={{
+                    sx: { color: alpha('#ffffff', 0.8) },
+                  }}
+                />
+              </Box>
+              : null
+          }
         </Box>
       </Container>
     </Box>

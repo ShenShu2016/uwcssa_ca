@@ -27,7 +27,11 @@ import { Link } from 'react-router-dom';
 import moment from 'moment';
 import { useParams } from 'react-router-dom';
 
-const SidebarEvents = (): JSX.Element => {
+interface SidebarEventsProp {
+  fromPreview?: boolean;
+}
+
+const SidebarEvents: React.FC<SidebarEventsProp> = ({ fromPreview=false }): JSX.Element => {
   const theme = useTheme();
   const dispatch = useAppDispatch();
   const isAuth = useAppSelector(getAuthState);
@@ -63,92 +67,96 @@ const SidebarEvents = (): JSX.Element => {
       >
         Upcoming updates
       </Typography>
-      <Grid container spacing={2}>
-        {eventsWhereIdNotEqualToArticleId.map((item, index) => (
-          <Grid
-            key={item.id}
-            data-aos="fade-up"
-            data-aos-delay={index * 200}
-            data-aos-offset={100}
-            data-aos-duration={600}
-            item
-            xs={12}
-          >
-            <Box
-              component={Card}
-              width={1}
-              height={1}
-              boxShadow={0}
-              display={'flex'}
-              flexDirection={{ xs: 'column', md: 'row' }}
-              sx={{ backgroundImage: 'none', bgcolor: 'transparent' }}
-            >
-              <Box
-                sx={{
-                  // width: { xs: 1, md: '50%' },
-                  '& .lazy-load-image-loaded': {
-                    height: 1,
-                    display: 'flex !important',
-                  },
-                }}
+      {
+        fromPreview ?
+          <Box minHeight='200px'></Box> :
+          <Grid container spacing={2}>
+            {eventsWhereIdNotEqualToArticleId.map((item, index) => (
+              <Grid
+                key={item.id}
+                data-aos="fade-up"
+                data-aos-delay={index * 200}
+                data-aos-offset={100}
+                data-aos-duration={600}
+                item
+                xs={12}
               >
                 <Box
-                  component={LazyLoadImage}
-                  height={'100px'}
-                  width={'150px'}
-                  src={item.coverPageImgURL}
-                  alt="..."
-                  effect="blur"
-                  sx={{
-                    objectFit: 'cover',
-                    // maxHeight: 120,
-                    borderRadius: 2,
-                    filter:
+                  component={Card}
+                  width={1}
+                  height={1}
+                  boxShadow={0}
+                  display={'flex'}
+                  flexDirection={{ xs: 'column', md: 'row' }}
+                  sx={{ backgroundImage: 'none', bgcolor: 'transparent' }}
+                >
+                  <Box
+                    sx={{
+                      // width: { xs: 1, md: '50%' },
+                      '& .lazy-load-image-loaded': {
+                        height: 1,
+                        display: 'flex !important',
+                      },
+                    }}
+                  >
+                    <Box
+                      component={LazyLoadImage}
+                      height={'100px'}
+                      width={'150px'}
+                      src={item.coverPageImgURL}
+                      alt="..."
+                      effect="blur"
+                      sx={{
+                        objectFit: 'cover',
+                        // maxHeight: 120,
+                        borderRadius: 2,
+                        filter:
                       theme.palette.mode === 'dark'
                         ? 'brightness(0.7)'
                         : 'none',
-                  }}
-                />
-              </Box>
-              <CardContent
-                sx={{
-                  flex: 1,
-                  padding: '0px 8px',
-                  '&:last-child': { paddingBottom: 0 },
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'space-between',
-                }}
-              >
-                <Box>
-                  <Typography fontSize={14} fontWeight={700}>
-                    {item.title}
-                  </Typography>
-                  <Typography
-                    variant={'caption'}
-                    color={'text.secondary'}
-                    component={'i'}
+                      }}
+                    />
+                  </Box>
+                  <CardContent
+                    sx={{
+                      flex: 1,
+                      padding: '0px 8px',
+                      '&:last-child': { paddingBottom: 0 },
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'space-between',
+                    }}
                   >
-                    {item.user.name} -{' '}
-                    {moment(item.createdAt).format('MMMM Do YYYY, h:mm a')}
-                  </Typography>
-                </Box>
-                <Button
-                  component={Link}
-                  to={`/event/${item.id}`}
-                  size={'small'}
-                  sx={{
-                    width: 'fit-content',
-                    padding: 0,
-                  }}
-                >
+                    <Box>
+                      <Typography fontSize={14} fontWeight={700}>
+                        {item.title}
+                      </Typography>
+                      <Typography
+                        variant={'caption'}
+                        color={'text.secondary'}
+                        component={'i'}
+                      >
+                        {item.user.name} -{' '}
+                        {moment(item.createdAt).format('MMMM Do YYYY, h:mm a')}
+                      </Typography>
+                    </Box>
+                    <Button
+                      component={Link}
+                      to={`/event/${item.id}`}
+                      size={'small'}
+                      sx={{
+                        width: 'fit-content',
+                        padding: 0,
+                      }}
+                    >
                   Read More
-                </Button>
-              </CardContent>
-            </Box>
+                    </Button>
+                  </CardContent>
+                </Box>
+              </Grid>
+            ))}
           </Grid>
-        ))}
-      </Grid>
+      }
     </Box>
   );
 };

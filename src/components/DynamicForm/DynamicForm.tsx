@@ -150,7 +150,7 @@ function DynamicForm({
         </Grid>
       </DialogContent>
       <DialogActions>
-        <Button type={'submit'} onClick={handleSubmitClicked}>
+        <Button type={'submit'} onClick={handleSubmitClicked} disabled={!eventId}>
           提交
         </Button>
       </DialogActions>

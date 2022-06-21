@@ -23,10 +23,11 @@ import { useAppSelector } from 'redux/hooks';
 
 interface DetailProp {
   info: Event;
+  fromPreview?: boolean;
   onJoin: () => void;
 }
 
-const Details: React.FC<DetailProp> = ({ info, onJoin }): JSX.Element => {
+const Details: React.FC<DetailProp> = ({ info, fromPreview=false, onJoin }): JSX.Element => {
   //console.log(info);
   const ownerUsername = useAppSelector(getOwnerUserName);
   return (
@@ -91,6 +92,7 @@ const Details: React.FC<DetailProp> = ({ info, onJoin }): JSX.Element => {
           sx={{ width: '100px' }}
           component={Link}
           to={`/event/${info.id}`}
+          disabled={fromPreview}
         >
           查看详情
         </Button>
