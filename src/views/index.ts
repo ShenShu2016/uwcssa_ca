@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-16 22:03:25
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-20 00:39:34
+ * @LastEditTime: 2022-06-20 21:03:56
  * @FilePath: /uwcssa_ca/src/views/index.ts
  * @Description:
  */
@@ -25,6 +25,7 @@ export { default as SignupCover } from './Authorization/SignupCover';
 export { default as EmailConfirmationCover } from './Authorization/EmailConfirmationCover';
 export { default as AccountBilling } from './Settings/Billing';
 export { default as AccountGeneral } from './Settings/General';
+export { default as UWindsorEmailVerify } from './Settings/UWindsorEmailVerify';
 export { default as AccountNotifications } from './Settings/Notifications';
 export { default as AccountSecurity } from './Settings/Security';
 export { default as AccountProfile } from './Settings/Profile';

@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-20 00:41:32
+ * @LastEditTime: 2022-06-20 21:04:16
  * @FilePath: /uwcssa_ca/src/views/ViewRoutes.tsx
  * @Description:
  *
@@ -31,6 +31,7 @@ import {
   ResearchDevelopment as ResearchDevelopmentView,
   SigninCover as SigninCoverView,
   SignupCover as SignupCoverView,
+  UWindsorEmailVerify as UWindsorEmailVerifyView,
 } from 'views';
 import { getAuthState, getIsAdmin } from 'redux/auth/authSlice';
 
@@ -195,7 +196,14 @@ function ViewRoutes(): Array<{
       isAllowed: isAuth,
       redirectPath: '/',
     },
-
+    {
+      path: '/settings/uwindsorVerify',
+      renderer: (params = {}): JSX.Element => (
+        <UWindsorEmailVerifyView {...params} />
+      ),
+      isAllowed: isAuth,
+      redirectPath: '/',
+    },
     {
       path: '/settings/notifications',
       renderer: (params = {}): JSX.Element => (

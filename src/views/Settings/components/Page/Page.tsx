@@ -2,23 +2,25 @@
  * @Author: Shen Shu
  * @Date: 2022-05-19 18:25:04
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-10 23:43:53
+ * @LastEditTime: 2022-06-20 21:09:20
  * @FilePath: /uwcssa_ca/src/views/Settings/components/Page/Page.tsx
  * @Description:
  *
  */
 
+import {
+  Box,
+  Card,
+  Grid,
+  List,
+  ListItem,
+  Typography,
+  useTheme,
+} from '@mui/material';
 import React, { useEffect, useState } from 'react';
 
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
 import Container from 'components/Container';
-import Grid from '@mui/material/Grid';
 import { Link } from 'react-router-dom';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import Typography from '@mui/material/Typography';
-import { useTheme } from '@mui/material/styles';
 
 const pages = [
   {
@@ -35,6 +37,11 @@ const pages = [
     id: 'notifications',
     href: '/settings/notifications',
     title: 'Notifications',
+  },
+  {
+    id: '温莎大学邮箱验证',
+    href: '/settings/uwindsorVerify',
+    title: '温莎大学邮箱验证',
   },
   // {
   //   id: 'billing',
