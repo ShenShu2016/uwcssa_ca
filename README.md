@@ -167,6 +167,7 @@ See the [open issues](https://github.com/github_username/repo_name/issues) for a
 The following people have contributed to the project:
 
 * [Shen Shu](https://shushengacademy.com/zh-hans/) [![wakatime](https://wakatime.com/badge/github/ShenShu2016/uwcssa_ca.svg)](https://wakatime.com/badge/github/ShenShu2016/uwcssa_ca)
+* [![jiaxiu li](https://wakatime.com/badge/github/jiaxiuli/uwcssa_ca.svg)](https://wakatime.com/badge/github/jiaxiuli/uwcssa_ca)
 * [Shikai(Zoe) Jin](https://github.com/shikaijin) [![wakatime](https://wakatime.com/badge/github/shikaijin/uwcssa_ca.svg)](https://wakatime.com/badge/github/shikaijin/uwcssa_ca)
 * [Xinyu Ji](https://github.com/Quennel-coder) [![wakatime](https://wakatime.com/badge/github/Quennel-coder/uwcssa_ca.svg)](https://wakatime.com/badge/github/Quennel-coder/uwcssa_ca)
 * [Mike Yu](https://github.com/mikezerone) [![wakatime](https://wakatime.com/badge/user/87ae1253-731f-4a92-894d-f7db74f0e775/project/8a56b42a-0d68-4f1a-a923-3be9cd79208c.svg)](https://wakatime.com/badge/user/87ae1253-731f-4a92-894d-f7db74f0e775/project/8a56b42a-0d68-4f1a-a923-3be9cd79208c)
