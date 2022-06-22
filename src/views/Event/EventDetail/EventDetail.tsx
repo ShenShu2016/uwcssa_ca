@@ -1,9 +1,10 @@
+/* eslint-disable indent */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /*
  * @Author: Shen Shu
  * @Date: 2022-06-18 17:26:14
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-20 00:31:16
+ * @LastEditTime: 2022-06-22 01:28:29
  * @FilePath: /uwcssa_ca/src/views/Event/EventDetail/EventDetail.tsx
  * @Description:
  *
@@ -42,10 +43,14 @@ import { useParams } from 'react-router-dom';
 interface EventDetailProp {
   fromPreview?: boolean;
   previewEvent?: any;
-  prevenJoinClick?: () => void
+  prevenJoinClick?: () => void;
 }
 
-const EventDetail: React.FC<EventDetailProp> = ({ fromPreview=false, previewEvent, prevenJoinClick  }) => {
+const EventDetail: React.FC<EventDetailProp> = ({
+  fromPreview = false,
+  previewEvent,
+  prevenJoinClick,
+}) => {
   const theme = useTheme();
   const dispatch = useAppDispatch();
   const [joinDialogOpen, setJoinDialogOpen] = useState<boolean>(false);
@@ -54,7 +59,9 @@ const EventDetail: React.FC<EventDetailProp> = ({ fromPreview=false, previewEven
     defaultMatches: true,
   });
   const { eventId } = fromPreview ? { eventId: null } : useParams();
-  const event = fromPreview ? previewEvent : useAppSelector((state) => selectEventById(state, eventId));
+  const event = fromPreview
+    ? previewEvent
+    : useAppSelector((state) => selectEventById(state, eventId));
   const ownerUsername = useAppSelector(getOwnerUserName);
   const comments = useAppSelector(selectAllComments);
 
@@ -89,7 +96,8 @@ const EventDetail: React.FC<EventDetailProp> = ({ fromPreview=false, previewEven
         <Container style={{ padding: '12px 16px' }}>
           <Grid container spacing={8}>
             <Grid item xs={12} md={8}>
-              {event?.eventParticipants?.items[0]?.owner === ownerUsername ? (
+              {ownerUsername &&
+              event?.eventParticipants?.items[0]?.owner === ownerUsername ? (
                 <Typography variant="h3">你已经报名</Typography>
               ) : (
                 <Button
@@ -114,7 +122,7 @@ const EventDetail: React.FC<EventDetailProp> = ({ fromPreview=false, previewEven
             <Grid item xs={12} md={4}>
               {isMd ? (
                 <Box marginBottom={2}>
-                  <SidebarEvents fromPreview={fromPreview}/>
+                  <SidebarEvents fromPreview={fromPreview} />
                 </Box>
               ) : null}
               {!isAuth && <SidebarNewsletter />}
@@ -141,7 +149,10 @@ const EventDetail: React.FC<EventDetailProp> = ({ fromPreview=false, previewEven
             d="M0,0c0,0,934.4,93.4,1920,0v100.1H0L0,0z"
           ></path>
         </Box>
-        <Box bgcolor={'alternate.main'} display={fromPreview ? 'none' : 'block'}>
+        <Box
+          bgcolor={'alternate.main'}
+          display={fromPreview ? 'none' : 'block'}
+        >
           <Container>
             <SimilarStories />
           </Container>

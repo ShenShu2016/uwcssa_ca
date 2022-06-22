@@ -1,7 +1,8 @@
+/* eslint-disable indent */
 /*
  * @Author: 李佳修
  * @Date: 2022-06-13 09:15:49
- * @LastEditTime: 2022-06-20 01:12:32
+ * @LastEditTime: 2022-06-22 01:27:21
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/components/EventContainer/components/Detail.tsx
  */
@@ -27,9 +28,14 @@ interface DetailProp {
   onJoin: () => void;
 }
 
-const Details: React.FC<DetailProp> = ({ info, fromPreview=false, onJoin }): JSX.Element => {
-  //console.log(info);
+const Details: React.FC<DetailProp> = ({
+  info,
+  fromPreview = false,
+  onJoin,
+}): JSX.Element => {
+  console.log(info);
   const ownerUsername = useAppSelector(getOwnerUserName);
+  console.log(ownerUsername);
   return (
     <Box>
       <Box
@@ -97,7 +103,8 @@ const Details: React.FC<DetailProp> = ({ info, fromPreview=false, onJoin }): JSX
           查看详情
         </Button>
 
-        {info?.eventParticipants?.items[0]?.owner === ownerUsername ? (
+        {ownerUsername &&
+        info?.eventParticipants?.items[0]?.owner === ownerUsername ? (
           <Button variant="contained" disabled>
             你已经报名
           </Button>

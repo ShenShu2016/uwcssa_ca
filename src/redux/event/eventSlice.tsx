@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-20 21:02:00
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-20 01:32:37
+ * @LastEditTime: 2022-06-22 01:23:17
  * @FilePath: /uwcssa_ca/src/redux/event/eventSlice.tsx
  * @Description:
  *
@@ -180,7 +180,7 @@ export const fetchEventList = createAsyncThunk(
       return result.data.eventSortByCreatedAt.items;
     } catch (error) {
       console.log(error);
-      return rejectWithValue(error.errors);
+      return rejectWithValue(error);
     }
   },
 );
@@ -302,9 +302,13 @@ const eventSlice = createSlice({
         state.fetchEventListStatus = 'succeed';
         eventAdapter.upsertMany(state, action.payload);
       })
-      .addCase(fetchEventList.rejected, (state, action) => {
+      .addCase(fetchEventList.rejected, (state, action: any) => {
+        eventAdapter.upsertMany(
+          state,
+          action.payload.data.eventSortByCreatedAt.items,
+        ); //!!这里会有一些问题需要处理
         state.fetchEventListStatus = 'failed';
-        state.fetchEventListError = action.payload;
+        state.fetchEventListError = action.payload.errors;
       })
       .addCase(fetchEvent.pending, (state) => {
         state.fetchEventStatus = 'loading';
