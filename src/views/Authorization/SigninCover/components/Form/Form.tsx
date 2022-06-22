@@ -1,8 +1,13 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-17 21:41:42
+<<<<<<< HEAD
  * @LastEditors: Shen Shu
  * @LastEditTime: 2022-06-21 23:42:49
+=======
+ * @LastEditors: Shikai Jin
+ * @LastEditTime: 2022-06-21 22:43:11
+>>>>>>> f295006b183685c48ccfcfab6feb5d40ec975c27
  * @FilePath: /uwcssa_ca/src/views/Authorization/SigninCover/components/Form/Form.tsx
  * @Description:
  *
@@ -100,7 +105,7 @@ const Form = (): JSX.Element => {
           gutterBottom
           color={'text.secondary'}
         >
-          Login
+          登录
         </Typography>
         <Typography
           variant="h4"
@@ -108,20 +113,20 @@ const Form = (): JSX.Element => {
             fontWeight: 700,
           }}
         >
-          Welcome back
+          欢迎回来
         </Typography>
-        <Typography color="text.secondary">
+        {/* <Typography color="text.secondary">
           Login to manage your account.
-        </Typography>
+        </Typography> */}
       </Box>
       <form onSubmit={formik.handleSubmit}>
         <Grid container spacing={4}>
           <Grid item xs={12}>
-            <Typography variant={'subtitle2'} sx={{ marginBottom: 2 }}>
+            {/* <Typography variant={'subtitle2'} sx={{ marginBottom: 2 }}>
               Enter your email
-            </Typography>
+            </Typography> */}
             <TextField
-              label="Email *"
+              label="请输入邮箱 *"
               variant="outlined"
               name={'username'}
               type="email"
@@ -142,9 +147,9 @@ const Form = (): JSX.Element => {
               marginBottom={2}
             >
               <Box marginBottom={{ xs: 1, sm: 0 }}>
-                <Typography variant={'subtitle2'}>
+                {/* <Typography variant={'subtitle2'}>
                   Enter your password
-                </Typography>
+                </Typography> */}
               </Box>
               <Typography variant={'subtitle2'}>
                 <MUILink
@@ -153,12 +158,12 @@ const Form = (): JSX.Element => {
                   to={'/auth/passwordReset'}
                   underline={'none'}
                 >
-                  Forgot your password?
+                  忘记密码?
                 </MUILink>
               </Typography>
             </Box>
             <TextField
-              label="Password *"
+              label="请输入密码 *"
               variant="outlined"
               name={'password'}
               type={'password'}
@@ -184,14 +189,14 @@ const Form = (): JSX.Element => {
             >
               <Box marginBottom={{ xs: 1, sm: 0 }}>
                 <Typography variant={'subtitle2'}>
-                  Don't have an account yet?{' '}
+                  首次使用？{' '}
                   <MUILink
                     component={Link}
                     color={'primary'}
                     to={'/auth/signUp'}
                     underline={'none'}
                   >
-                    Sign up here.
+                    点我注册
                   </MUILink>
                 </Typography>
               </Box>
@@ -207,13 +212,13 @@ const Form = (): JSX.Element => {
                 variant={'contained'}
                 type={'submit'}
               >
-                Login
+                登录
               </Button>
             </Box>
           </Grid>
           <Grid item container xs={12}>
             <Divider sx={{ px: '1rem', width: '100%', lineHeight: '0' }}>
-              on
+              其他方式登录
             </Divider>
           </Grid>
           <Grid item container xs={12} sx={{ justifyContent: 'center' }}>
@@ -238,7 +243,7 @@ const Form = (): JSX.Element => {
                 src="/assets/images/icons/google-1.svg"
               />
               <Box sx={{ fontSize: '12px', marginLeft: '1rem' }}>
-                Continue with Google
+                Google登录
               </Box>
             </Button>
             {/* </Box> */}
