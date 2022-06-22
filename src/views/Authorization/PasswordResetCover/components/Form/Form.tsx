@@ -2,8 +2,8 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 16:10:37
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-06 21:05:50
- * @FilePath: /uwcssa_ca/src/views/PasswordResetCover/components/Form/Form.tsx
+ * @LastEditTime: 2022-06-21 23:19:11
+ * @FilePath: /uwcssa_ca/src/views/Authorization/PasswordResetCover/components/Form/Form.tsx
  * @Description:
  *
  */
@@ -11,17 +11,17 @@
 
 import * as yup from 'yup';
 
-import { Box, Button, Grid, TextField, Typography } from '@mui/material';
+import { Alert, Box, Button, Grid, TextField, Typography } from '@mui/material';
+import React, { useState } from 'react';
 
 import { Link } from 'react-router-dom';
-import React from 'react';
 import { forgotPassword } from 'redux/auth/authSlice';
 import { useAppDispatch } from 'redux/hooks';
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
 
 const validationSchema = yup.object({
-  email: yup
+  username: yup
     .string()
     .trim()
     .email('Please enter a valid email address')
@@ -31,19 +31,20 @@ const validationSchema = yup.object({
 const Form = (): JSX.Element => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-
+  const [signInError, setSignInError] = useState('');
   const initialValues = {
-    email: '',
+    username: '',
   };
 
-  const onSubmit = async (values: { email: string }) => {
+  const onSubmit = async (values: { username: string }) => {
     console.log(values);
-    const { email } = values;
-    const response = await dispatch(forgotPassword(email));
+    const { username } = values;
+    const response: any = await dispatch(forgotPassword(username));
     console.log(response);
     if (response.meta.requestStatus === 'fulfilled') {
-      navigate(`/auth/passWordResetSubmit/${email}`);
+      navigate(`/auth/passWordResetSubmit/${username}`);
     } else {
+      setSignInError(response.error.message);
       return false;
     }
     return values;
@@ -89,13 +90,21 @@ const Form = (): JSX.Element => {
             <TextField
               label="Email *"
               variant="outlined"
-              name={'email'}
+              name={'username'}
               fullWidth
-              value={formik.values.email}
+              value={formik.values.username}
               onChange={formik.handleChange}
-              error={formik.touched.email && Boolean(formik.errors.email)}
-              helperText={formik.touched.email && formik.errors.email}
+              error={formik.touched.username && Boolean(formik.errors.username)}
+              helperText={formik.touched.username && formik.errors.username}
             />
+          </Grid>
+          <Grid item xs={12}>
+            {signInError && (
+              <Alert severity="error">
+                {signInError} 请查看邮箱是否有临时密码，请用临时密码登录.
+                如还有问题请联系uwincssa.it@gmail.com.
+              </Alert>
+            )}
           </Grid>
           <Grid item container xs={12}>
             <Box

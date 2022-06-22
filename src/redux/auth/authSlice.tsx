@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-02 19:33:37
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-10 18:34:11
+ * @LastEditTime: 2022-06-21 23:51:03
  * @FilePath: /uwcssa_ca/src/redux/auth/authSlice.tsx
  * @Description:
  *
@@ -24,6 +24,9 @@ export interface AuthState {
   loadUserError: null | string;
   signInStatus: string;
   signInError: null | string;
+  NEW_PASSWORD_REQUIRED_user: string;
+  completeNewPasswordStatus: string;
+  completeNewPasswordError: null | string;
   googleSignInStatus: string;
   googleSignInError: null | string;
   signUpStatus: string;
@@ -152,6 +155,9 @@ const initialState: AuthState = {
   loadUserError: null,
   signInStatus: 'idle',
   signInError: null,
+  NEW_PASSWORD_REQUIRED_user: null,
+  completeNewPasswordStatus: 'idle',
+  completeNewPasswordError: null,
   googleSignInStatus: 'idle',
   googleSignInError: null,
   signUpStatus: 'idle',
@@ -187,6 +193,9 @@ export const signIn = createAsyncThunk(
       Auth.currentUserCredentials(),
     ]);
     console.log(response);
+    if (response.challengeName === 'NEW_PASSWORD_REQUIRED') {
+      return response;
+    }
     return { ...response, ...credentials };
   },
 );
@@ -260,6 +269,17 @@ export const forgotPassWordSubmit = createAsyncThunk(
   },
 );
 
+export const completeNewPassword = createAsyncThunk(
+  'auth/completeNewPassword',
+  async ({ user, new_password }: any) => {
+    console.log(user);
+    console.log(new_password);
+    const response = await Auth.completeNewPassword(user, new_password);
+    console.log(response);
+    return response;
+  },
+);
+
 export const changePassword = createAsyncThunk(
   'auth/changePassword',
   async ({
@@ -326,13 +346,20 @@ const authSlice = createSlice({
         state.signInStatus = 'loading';
       })
       .addCase(signIn.fulfilled, (state, action) => {
-        state.signInStatus = 'succeed';
-        state.isAuth = true;
-        state.user = action.payload;
-        state.cognitoGroup =
-          action.payload.signInUserSession.accessToken.payload[
-            'cognito:groups'
-          ];
+        console.log(action);
+        if (action.payload.accessKeyId) {
+          state.signInStatus = 'succeed';
+          state.isAuth = true;
+          state.user = action.payload;
+          state.cognitoGroup =
+            action.payload.signInUserSession.accessToken.payload[
+              'cognito:groups'
+            ];
+        } else if (action.payload.challengeName === 'NEW_PASSWORD_REQUIRED') {
+          state.signInStatus = 'need to change password';
+          state.isAuth = false;
+          state.NEW_PASSWORD_REQUIRED_user = action.payload;
+        }
       })
       .addCase(signIn.rejected, (state, action) => {
         state.signInStatus = 'failed';
@@ -428,6 +455,18 @@ const authSlice = createSlice({
       .addCase(changePassword.rejected, (state, action) => {
         state.changePasswordStatus = 'failed';
         state.changePasswordError = action.error.message;
+      })
+      // Cases for status of changePassword (pending, fulfilled, and rejected)
+      .addCase(completeNewPassword.pending, (state) => {
+        state.completeNewPasswordStatus = 'loading';
+      })
+      .addCase(completeNewPassword.fulfilled, (state) => {
+        state.completeNewPasswordStatus = 'succeed';
+        //! need to do later
+      })
+      .addCase(completeNewPassword.rejected, (state, action) => {
+        state.completeNewPasswordStatus = 'failed';
+        state.completeNewPasswordError = action.error.message;
       })
       // Cases for status of signOut (pending, fulfilled, and rejected)
       .addCase(signOut.pending, (state) => {

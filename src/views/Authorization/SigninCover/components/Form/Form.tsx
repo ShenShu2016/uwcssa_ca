@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 21:41:42
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-11 18:23:49
+ * @LastEditTime: 2022-06-21 23:42:49
  * @FilePath: /uwcssa_ca/src/views/Authorization/SigninCover/components/Form/Form.tsx
  * @Description:
  *
@@ -21,11 +21,11 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
+import { Link, useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
 import { googleSignIn, signIn } from 'redux/auth/authSlice';
 
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import { Link } from 'react-router-dom';
 import { useAppDispatch } from 'redux/hooks';
 import { useFormik } from 'formik';
 import { useSnackbar } from 'notistack';
@@ -44,6 +44,7 @@ const validationSchema = yup.object({
 
 const Form = (): JSX.Element => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const [signInError, setSignInError] = useState('');
   const { enqueueSnackbar } = useSnackbar();
   // const { signInError } = useAppSelector((state) => state.auth);
@@ -55,7 +56,15 @@ const Form = (): JSX.Element => {
   const onSubmit = async (values) => {
     const response: any = await dispatch(signIn(values)); //!! 这里有毛病，后期需要改一改
     console.log(response);
-    if (response.meta.requestStatus === 'fulfilled') {
+    if (response.payload?.challengeName === 'NEW_PASSWORD_REQUIRED') {
+      navigate('/auth/PreSignUpResetPassWord');
+      enqueueSnackbar(
+        `欢迎回来: ${response.payload.challengeParam.userAttributes.name},由于网站更新请重置您的密码`,
+        {
+          variant: 'info',
+        },
+      );
+    } else if (response.meta?.requestStatus === 'fulfilled') {
       enqueueSnackbar(
         `登录成功！ 欢迎回来 ${response.payload.attributes.name}`,
         { variant: 'success' },
@@ -64,6 +73,7 @@ const Form = (): JSX.Element => {
       //navigate('/dashboard');
     } else {
       setSignInError(response.error.message);
+      enqueueSnackbar(response.error.message, { variant: 'error' });
       return false;
     }
 

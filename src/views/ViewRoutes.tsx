@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-20 21:04:16
+ * @LastEditTime: 2022-06-21 23:42:03
  * @FilePath: /uwcssa_ca/src/views/ViewRoutes.tsx
  * @Description:
  *
@@ -28,6 +28,7 @@ import {
   Home as HomeView,
   NotFoundCover as NotFoundCoverView,
   PasswordResetCover as PasswordResetCoverView,
+  PreSignUpResetPassWord as PreSignUpResetPassWordView,
   ResearchDevelopment as ResearchDevelopmentView,
   SigninCover as SigninCoverView,
   SignupCover as SignupCoverView,
@@ -138,6 +139,14 @@ function ViewRoutes(): Array<{
       path: '/auth/passWordResetSubmit/:username',
       renderer: (params = {}): JSX.Element => (
         <ForgotPassWordSubmitView {...params} />
+      ),
+      isAllowed: true,
+      redirectPath: '/',
+    },
+    {
+      path: '/auth/PreSignUpResetPassWord',
+      renderer: (params = {}): JSX.Element => (
+        <PreSignUpResetPassWordView {...params} />
       ),
       isAllowed: true,
       redirectPath: '/',
