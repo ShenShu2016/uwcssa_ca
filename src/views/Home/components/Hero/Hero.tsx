@@ -1,9 +1,9 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-19 17:21:07
- * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-21 02:03:30
- * @FilePath: /uwcssa_ca/frontend/src/views/Logistics/components/Hero/Hero.tsx
+ * @LastEditors: Shikai Jin
+ * @LastEditTime: 2022-06-21 22:50:17
+ * @FilePath: /uwcssa_ca/src/views/Home/components/Hero/Hero.tsx
  * @Description:
  *
  */
@@ -55,7 +55,7 @@ const Hero = (): JSX.Element => {
       </Box>
       <Box marginBottom={3}>
         <Typography variant="h6" component="p" color="text.secondary">
-          We provide a variety of information to enhance your experience.
+          加拿大学生社群
         </Typography>
       </Box>
 
@@ -69,7 +69,7 @@ const Hero = (): JSX.Element => {
             component={Link}
             to="/auth/signIn"
           >
-            Sign in
+            登录
           </Button>
           <Button
             size="large"
@@ -77,7 +77,7 @@ const Hero = (): JSX.Element => {
             component={Link}
             to="/auth/signUp"
           >
-            Sign up
+            注册
           </Button>
           <Button
             size="large"
@@ -85,7 +85,7 @@ const Hero = (): JSX.Element => {
             endIcon={<ArrowForwardIcon />}
             onClick={() => navigate('dashboard')}
           >
-            Get start as a guest
+            游客登录
           </Button>
         </Box>
       )}
