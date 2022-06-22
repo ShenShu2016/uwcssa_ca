@@ -1,9 +1,9 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-17 15:50:53
- * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-10 14:59:07
- * @FilePath: /uwcssa_ca/src/views/SignupCover/components/Form/Form.tsx
+ * @LastEditors: Shikai Jin
+ * @LastEditTime: 2022-06-21 22:36:54
+ * @FilePath: /uwcssa_ca/src/views/Authorization/SignupCover/components/Form/Form.tsx
  * @Description:
  *
  */
@@ -88,7 +88,7 @@ const Form = (): JSX.Element => {
           gutterBottom
           color={'text.secondary'}
         >
-          SignUp
+          注册
         </Typography>
         <Typography
           variant="h4"
@@ -96,20 +96,20 @@ const Form = (): JSX.Element => {
             fontWeight: 700,
           }}
         >
-          Create an account
+          创建账号
         </Typography>
-        <Typography color="text.secondary">
+        {/* <Typography color="text.secondary">
           Fill out the form to get started.
-        </Typography>
+        </Typography> */}
       </Box>
       <form onSubmit={formik.handleSubmit}>
         <Grid container spacing={4}>
           <Grid item xs={12} sm={6}>
-            <Typography variant={'subtitle2'} sx={{ marginBottom: 2 }}>
-              Enter your user name
-            </Typography>
+            {/* <Typography variant={'subtitle2'} sx={{ marginBottom: 2 }}>
+              用户名
+            </Typography> */}
             <TextField
-              label="User name *"
+              label="请输入用户名 *"
               variant="outlined"
               name={'name'}
               fullWidth
@@ -120,11 +120,11 @@ const Form = (): JSX.Element => {
             />
           </Grid>
           <Grid item xs={12}>
-            <Typography variant={'subtitle2'} sx={{ marginBottom: 2 }}>
-              Enter your email
-            </Typography>
+            {/* <Typography variant={'subtitle2'} sx={{ marginBottom: 2 }}>
+              邮箱
+            </Typography> */}
             <TextField
-              label="Email *"
+              label="请输入邮箱 *"
               variant="outlined"
               name={'username'}
               fullWidth
@@ -135,11 +135,11 @@ const Form = (): JSX.Element => {
             />
           </Grid>
           <Grid item xs={12}>
-            <Typography variant={'subtitle2'} sx={{ marginBottom: 2 }}>
-              Enter your password
-            </Typography>
+            {/* <Typography variant={'subtitle2'} sx={{ marginBottom: 2 }}>
+              密码
+            </Typography> */}
             <TextField
-              label="Password *"
+              label="请输入密码 *"
               variant="outlined"
               name={'password'}
               type={'password'}
@@ -165,19 +165,19 @@ const Form = (): JSX.Element => {
             >
               <Box marginBottom={{ xs: 1, sm: 0 }}>
                 <Typography variant={'subtitle2'}>
-                  Already have an account?{' '}
+                  已有账号？{' '}
                   <MUILink
                     component={Link}
                     color={'primary'}
                     to={'/auth/signIn'}
                     underline={'none'}
                   >
-                    Login.
+                    登录
                   </MUILink>
                 </Typography>
               </Box>
               <Button size={'large'} variant={'contained'} type={'submit'}>
-                Sign up
+                注册
               </Button>
             </Box>
           </Grid>

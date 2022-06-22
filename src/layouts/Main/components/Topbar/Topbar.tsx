@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
  * @LastEditors: Shikai Jin
- * @LastEditTime: 2022-06-02 20:12:42
+ * @LastEditTime: 2022-06-21 22:44:21
  * @FilePath: /uwcssa_ca/src/layouts/Main/components/Topbar/Topbar.tsx
  * @Description:
  *
@@ -165,7 +165,7 @@ const Topbar = ({
               to="/auth/signIn"
               size="large"
             >
-              Sign in
+              登录
             </Button>
           )}
         </Box>
