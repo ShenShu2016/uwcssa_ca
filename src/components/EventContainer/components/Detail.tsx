@@ -41,10 +41,20 @@ const Details: React.FC<DetailProp> = ({
       <Box
         sx={{
           display: 'flex',
+          flexDirection: {
+            md: 'row',
+            xs: 'column'
+          },
           justifyContent: 'space-between',
         }}
       >
-        <Typography variant={'h6'} fontWeight={700}>
+        <Typography
+          variant={'h6'}
+          fontWeight={700}
+          p={{ 
+            md: 0,
+            xs: 1
+          }}>
           {info.title}
         </Typography>
         <Box>

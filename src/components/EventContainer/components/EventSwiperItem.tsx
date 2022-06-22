@@ -3,18 +3,24 @@ import React from 'react';
 import { Box } from '@mui/material';
 import Details from './Detail';
 import Image from './Image';
-import { Event } from 'redux/event/eventSlice';
+// import { Event } from 'redux/event/eventSlice';
 
 interface EventSwiperItemProp {
     event: any;
     fromPreview?: boolean;
-    handleJoinEvent: (event: Event) => void
+    handleJoinEvent: (event: any) => void
 }
 
 const EventSwiperItem: React.FC<EventSwiperItemProp> = ({ event, fromPreview=false, handleJoinEvent }) => {
-  console.log(event);
   return (
-    <Box display="flex" mb={4}>
+    <Box
+      display="flex"
+      flexDirection={{
+        md: 'row',
+        xs: 'column',
+      }}
+      mb={4}
+    >
       <Box flex={1}>
         <Image url={event.coverPageImgURL} />
       </Box>

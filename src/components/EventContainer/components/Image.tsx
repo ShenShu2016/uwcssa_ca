@@ -17,8 +17,11 @@ const Image: React.FC<ImageProp> = ({ url }) => {
     <Box>
       <Box
         sx={{
-          width: '90%',
-          height: '200px',
+          width: {
+            md: '90%',
+            xs: '100%'
+          },
+          height: '230px',
           '& img': {
             width: 1,
             height: 1,

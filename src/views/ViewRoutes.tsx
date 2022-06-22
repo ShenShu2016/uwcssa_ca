@@ -21,6 +21,7 @@ import {
   CompanyTerms as CompanyTermsView,
   ContactPage as ContactPageView,
   Dashboard as DashboardView,
+  EventList as EventListView,
   EmailConfirmationCover as EmailConfirmationCoverView,
   EventDetail as EventDetailView,
   EventSignUpSuccessfully as EventSignUpSuccessfullyView,
@@ -61,6 +62,12 @@ function ViewRoutes(): Array<{
     {
       path: '/dashboard',
       renderer: (): JSX.Element => <DashboardView />,
+      isAllowed: true,
+      redirectPath: undefined,
+    },
+    {
+      path: '/history-events',
+      renderer: (): JSX.Element => <EventListView />,
       isAllowed: true,
       redirectPath: undefined,
     },

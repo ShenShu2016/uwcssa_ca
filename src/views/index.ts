@@ -37,3 +37,4 @@ export { default as FQA } from './FQA';
 export { default as Partner } from './Partner';
 export { default as Sponsor } from './Sponsor';
 export { default as Dashboard } from './Dashboard';
+export { default as EventList } from './Event/EventList';

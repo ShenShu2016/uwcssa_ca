@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /*
  * @Author: 李佳修
  * @Date: 2022-06-15 14:38:54
@@ -9,12 +10,12 @@
 import { Dialog, DialogTitle } from '@mui/material';
 
 import DynamicForm from 'components/DynamicForm';
-import { Event } from 'redux/event/eventSlice';
+// import { Event } from 'redux/event/eventSlice';
 import React from 'react';
 
 interface EventJoinFormProp {
   open: boolean;
-  event: Event;
+  event: any;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -26,7 +27,7 @@ const EventJoinForm: React.FC<EventJoinFormProp> = ({
   return (
     <Dialog
       open={open}
-      maxWidth="xs"
+      // maxWidth="xs"
       fullWidth
       onClose={() => setOpen(false)}
       scroll={'paper'}
