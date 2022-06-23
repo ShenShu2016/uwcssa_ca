@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-18 09:12:03
- * @LastEditTime: 2022-05-28 16:39:47
+ * @LastEditTime: 2022-06-23 12:26:37
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/layouts/Main/Main.tsx
  */
@@ -63,7 +63,7 @@ const Main = ({
   return (
     <Box>
       <Box bgcolor={bgcolor} position={'relative'} zIndex={theme.zIndex.appBar}>
-        <Container paddingTop={'8px !important'} paddingBottom={'0 !important'}>
+        <Container paddingTop={'0px !important'} paddingBottom={'0 !important'}>
           <TopNav colorInvert={colorInvert} />
         </Container>
       </Box>
