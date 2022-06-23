@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-18 13:56:36
- * @LastEditTime: 2022-06-20 01:15:17
+ * @LastEditTime: 2022-06-22 23:26:30
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/views/Dashboard/Dashboard.tsx
  */
@@ -13,6 +13,7 @@ import {
   Box,
   Button,
   Card,
+  LinearProgress,
   Typography,
   styled,
 } from '@mui/material';
@@ -28,7 +29,6 @@ import Section from './components/Section';
 import UserCardGrid from 'components/UserCardGrid';
 import { fetchArticleList } from 'redux/article/articleSlice';
 import { fetchEventList } from 'redux/event/eventSlice';
-import LinearProgress from '@mui/material/LinearProgress';
 
 const StickyAccordion = styled(AccordionSummary)(() => ({
   position: 'sticky',
@@ -53,7 +53,10 @@ const Dashboard = (): React.ReactElement => {
         }),
       );
     }
-    if (fetchArticleListStatus === 'succeed' && fetchEventListStatus === 'succeed') {
+    if (
+      fetchArticleListStatus === 'succeed' &&
+      ['succeed', 'failed'].includes(fetchEventListStatus)
+    ) {
       setLoading(false);
     }
   }, [fetchArticleListStatus]);
@@ -62,7 +65,10 @@ const Dashboard = (): React.ReactElement => {
     if (fetchEventListStatus === 'idle') {
       dispatch(fetchEventList({ isAuth, ownerUsername }));
     }
-    if (fetchArticleListStatus === 'succeed' && fetchEventListStatus === 'succeed') {
+    if (
+      fetchArticleListStatus === 'succeed' &&
+      ['succeed', 'failed'].includes(fetchEventListStatus)
+    ) {
       setLoading(false);
     }
   }, [fetchEventListStatus]);
@@ -79,70 +85,70 @@ const Dashboard = (): React.ReactElement => {
           },
         }}
       >
-        {
-          loading ?
-            <Box
-              minHeight='60vh'
-              display='flex'
-              alignItems='center'
-              justifyContent='center'
-            >
-              <Box width='40%'>
-                <LinearProgress />
-                <Typography
-                  sx={{
-                    fontSize: '20px',
-                    color: '#bdbdbd',
-                    padding: 2,
-                    textAlign: 'center'
-                  }}
-                >
-                  LOADING...
-                </Typography>
-              </Box>
-            </Box> :
-            <>
-              <Section
-                title="活动"
+        {loading ? (
+          <Box
+            minHeight="60vh"
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <Box width="40%">
+              <LinearProgress />
+              <Typography
                 sx={{
-                  height: 'auto',
+                  fontSize: '20px',
+                  color: '#bdbdbd',
+                  padding: 2,
+                  textAlign: 'center',
                 }}
               >
-                <EventContainer />
+                LOADING...
+              </Typography>
+            </Box>
+          </Box>
+        ) : (
+          <>
+            <Section
+              title="活动"
+              sx={{
+                height: 'auto',
+              }}
+            >
+              <EventContainer />
+            </Section>
+            <Box display="flex">
+              <Section
+                title="新闻"
+                hasPadding={false}
+                component={Box}
+                sx={{
+                  flex: 2,
+                }}
+              >
+                <ArticleContainer />
               </Section>
-              <Box display='flex'>
-                <Section
-                  title="新闻"
-                  hasPadding={false}
-                  component={Box}
-                  sx={{
-                    flex: 2,
-                  }}
-                >
-                  <ArticleContainer />
+
+              <Box
+                sx={{ flex: 1 }}
+                position="sticky"
+                top="80px"
+                alignSelf="flex-start"
+              >
+                <Section title="个人信息" hasPadding={false}>
+                  <UserCardGrid />
                 </Section>
 
-                <Box
-                  sx={{ flex: 1 }}
-                  position="sticky"
-                  top="80px"
-                  alignSelf="flex-start"
-                >
-                  <Section title="个人信息" hasPadding={false}>
-                    <UserCardGrid />
-                  </Section>
+                <Card sx={{ margin: '12px 8px' }}>
+                  <Button fullWidth>新生必读</Button>
+                </Card>
 
-                  <Card sx={{ margin: '12px 8px' }}>
-                    <Button fullWidth>新生必读</Button>
-                  </Card>
-
-                  <Section title="功能入口" hasPadding={false} component={Box}>
-                    <Entries />
-                  </Section>
-                </Box>
+                <Section title="功能入口" hasPadding={false} component={Box}>
+                  <Entries />
+                </Section>
               </Box>
-            </>
-        }
+            </Box>
+          </>
+        )}
       </Box>
       {/* 移动端显示界面 */}
       <Box
@@ -154,64 +160,64 @@ const Dashboard = (): React.ReactElement => {
           padding: '8px',
         }}
       >
-        {
-          loading ?
-            <Box
-              minHeight='60vh'
-              display='flex'
-              alignItems='center'
-              justifyContent='center'
-            >
-              <Box width='50%'>
-                <LinearProgress />
-                <Typography
-                  sx={{
-                    fontSize: '20px',
-                    color: '#bdbdbd',
-                    padding: 2,
-                    textAlign: 'center'
-                  }}
-                >
-                  LOADING...
-                </Typography>
-              </Box>
-            </Box> :
-            <>
-              <Section
-                title="活动"
+        {loading ? (
+          <Box
+            minHeight="60vh"
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <Box width="50%">
+              <LinearProgress />
+              <Typography
                 sx={{
-                  height: 'auto',
+                  fontSize: '20px',
+                  color: '#bdbdbd',
+                  padding: 2,
+                  textAlign: 'center',
                 }}
               >
-                <EventContainer />
-              </Section>
-              <Accordion defaultExpanded>
-                <StickyAccordion
-                  expandIcon={<ExpandMoreIcon />}
-                  aria-controls="panel1a-content"
-                  id="panel1a-header"
+                LOADING...
+              </Typography>
+            </Box>
+          </Box>
+        ) : (
+          <>
+            <Section
+              title="活动"
+              sx={{
+                height: 'auto',
+              }}
+            >
+              <EventContainer />
+            </Section>
+            <Accordion defaultExpanded>
+              <StickyAccordion
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+              >
+                <Typography>新闻</Typography>
+              </StickyAccordion>
+              <AccordionDetails sx={{ padding: 0 }}>
+                <Section
+                  title="新闻"
+                  showTitle={false}
+                  hasPadding={false}
+                  component={Box}
+                  sx={{
+                    flex: 1,
+                    minHeight: {
+                      xs: 'unset',
+                      md: '100vh',
+                    },
+                  }}
                 >
-                  <Typography>新闻</Typography>
-                </StickyAccordion>
-                <AccordionDetails sx={{ padding: 0 }}>
-                  <Section
-                    title="新闻"
-                    showTitle={false}
-                    hasPadding={false}
-                    component={Box}
-                    sx={{
-                      flex: 1,
-                      minHeight: {
-                        xs: 'unset',
-                        md: '100vh',
-                      },
-                    }}
-                  >
-                    <ArticleContainer />
-                  </Section>
-                </AccordionDetails>
-              </Accordion>
-              {/* <Accordion>
+                  <ArticleContainer />
+                </Section>
+              </AccordionDetails>
+            </Accordion>
+            {/* <Accordion>
                 <StickyAccordion
                   expandIcon={<ExpandMoreIcon />}
                   aria-controls="panel2a-content"
@@ -236,35 +242,35 @@ const Dashboard = (): React.ReactElement => {
                 </AccordionDetails>
               </Accordion> */}
 
-              <Accordion>
-                <StickyAccordion
-                  expandIcon={<ExpandMoreIcon />}
-                  aria-controls="panel2a-content"
-                  id="panel2a-header"
+            <Accordion>
+              <StickyAccordion
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel2a-content"
+                id="panel2a-header"
+              >
+                <Typography>个人信息 & 活动入口</Typography>
+              </StickyAccordion>
+              <AccordionDetails sx={{ padding: 0 }}>
+                <Section title="个人信息" showTitle={false} hasPadding={false}>
+                  <UserCardGrid />
+                </Section>
+
+                <Card sx={{ margin: '12px 8px' }}>
+                  <Button fullWidth>新生必读</Button>
+                </Card>
+
+                <Section
+                  title="功能入口"
+                  hasPadding={false}
+                  showTitle={false}
+                  component={Box}
                 >
-                  <Typography>个人信息 & 活动入口</Typography>
-                </StickyAccordion>
-                <AccordionDetails sx={{ padding: 0 }}>
-                  <Section title="个人信息" showTitle={false} hasPadding={false}>
-                    <UserCardGrid />
-                  </Section>
-
-                  <Card sx={{ margin: '12px 8px' }}>
-                    <Button fullWidth>新生必读</Button>
-                  </Card>
-
-                  <Section
-                    title="功能入口"
-                    hasPadding={false}
-                    showTitle={false}
-                    component={Box}
-                  >
-                    <Entries />
-                  </Section>
-                </AccordionDetails>
-              </Accordion>
-            </>
-        }
+                  <Entries />
+                </Section>
+              </AccordionDetails>
+            </Accordion>
+          </>
+        )}
       </Box>
     </>
   );
