@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-19 17:44:58
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-01 15:44:37
+ * @LastEditTime: 2022-06-23 12:04:34
  * @FilePath: /uwcssa_ca/src/components/Avatar/AvatarFunction.tsx
  * @Description:
  *
@@ -11,7 +11,7 @@ function stringToColorAvatar(string: string) {
   let hash = 0;
   let i: number;
 
-  for (i = 0; i < string.length; i += 1) {
+  for (i = 0; i < string?.length; i += 1) {
     hash = string.charCodeAt(i) + ((hash << 5) - hash);
   }
   let color = '#';

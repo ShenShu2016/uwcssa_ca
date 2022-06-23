@@ -1,3 +1,12 @@
+/*
+ * @Author: Shen Shu
+ * @Date: 2022-06-04 22:41:09
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-06-23 12:06:07
+ * @FilePath: /uwcssa_ca/src/admin/UwcssaMember/UwcssaMemberDashboard/components/SimpleStriped/SimpleStriped.tsx
+ * @Description:
+ *
+ */
 import {
   Avatar,
   Button,
@@ -40,7 +49,7 @@ const SimpleStriped = ({
   const handleDeleteUwcssaMember = async ({ item }) => {
     console.log(item);
     await confirm({
-      description: `This will permanently delete ${item.user.name}(${item.name}).`,
+      description: `This will permanently delete ${item.user?.name}(${item?.name}).`,
     });
     const response = await dispatch(
       removeUwcssaMember({
@@ -173,7 +182,7 @@ const SimpleStriped = ({
                 <TableCell component="th" scope="row">
                   <Avatar
                     src={item.user?.avatarURL?.objectThumbnailURL}
-                    {...stringAvatar(item.user.name, {
+                    {...stringAvatar(item.user?.name, {
                       width: 40,
                       height: 40,
                     })}
