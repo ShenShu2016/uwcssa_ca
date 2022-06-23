@@ -91,86 +91,64 @@ const pages = {
     title: 'dashboard',
     href: '/dashboard',
   },
-  freshman: [
-    {
-      title: '正在构建中...',
-      href: '',
-      // title: 'terms',
-      // href: '/terms',
-    },
-  ],
-  house: [
-    // {
-    //   title: 'General Settings',
-    //   href: '/account-general',
-    // },
-    // {
-    //   title: 'Security Settings',
-    //   href: '/account-security',
-    // },
-    // {
-    //   title: 'Notifications Options',
-    //   href: '/account-notifications',
-    // },
-    // {
-    //   title: 'Billing Options',
-    //   href: '/account-billing',
-    // },
-    // {
-    //   title: 'Sign up: Simple',
-    //   href: '/signup-simple',
-    // },
-    {
-      title: '正在构建中...',
-      href: '',
-    },
-    // {
-    //   title: 'Sign in: Simple',
-    //   href: '/signin-simple',
-    // },
-    // {
-    //   title: 'Sign in: Cover',
-    //   href: '/auth/signIn',
-    // },
-    // {
-    //   title: 'Password: Simple',
-    //   href: '/password-reset-simple',
-    // },
-    // {
-    //   title: 'Password Reset: Cover',
-    //   href: '/auth/passwordReset',
-    // },
-    // {
-    //   title: 'Forgot PassWord Submit',
-    //   href: '/auth/forgotPassWordSubmit',
-    // },
-  ],
-  activity: [
-    // {
-    //   title: 'Help Center: Overview',
-    //   href: '/help-center',
-    // },
-    // {
-    //   title: 'Help Center: Article',
-    //   href: '/help-center-article',
-    // },
-    // {
-    //   title: 'FAQ',
-    //   href: '/faq',
-    // },
-    // {
-    //   title: 'Error 404: Simple',
-    //   href: '/not-found',
-    // },
-    {
-      title: '正在构件中...',
-      href: '',
-    },
-    // {
-    //   title: 'Career Page Minimal',
-    //   href: '/career-listing-minimal',
-    // },
-  ],
+  freshman:  {
+    title: '新生手册',
+    href: '/career',
+  },
+  news: {
+    title: '新闻',
+    href: '/news',
+  },
+  // house: [
+  //   // {
+  //   //   title: 'General Settings',
+  //   //   href: '/account-general',
+  //   // },
+  //   // {
+  //   //   title: 'Security Settings',
+  //   //   href: '/account-security',
+  //   // },
+  //   // {
+  //   //   title: 'Notifications Options',
+  //   //   href: '/account-notifications',
+  //   // },
+  //   // {
+  //   //   title: 'Billing Options',
+  //   //   href: '/account-billing',
+  //   // },
+  //   // {
+  //   //   title: 'Sign up: Simple',
+  //   //   href: '/signup-simple',
+  //   // },
+  //   {
+  //     title: '正在构建中...',
+  //     href: '',
+  //   },
+  //   // {
+  //   //   title: 'Sign in: Simple',
+  //   //   href: '/signin-simple',
+  //   // },
+  //   // {
+  //   //   title: 'Sign in: Cover',
+  //   //   href: '/auth/signIn',
+  //   // },
+  //   // {
+  //   //   title: 'Password: Simple',
+  //   //   href: '/password-reset-simple',
+  //   // },
+  //   // {
+  //   //   title: 'Password Reset: Cover',
+  //   //   href: '/auth/passwordReset',
+  //   // },
+  //   // {
+  //   //   title: 'Forgot PassWord Submit',
+  //   //   href: '/auth/forgotPassWordSubmit',
+  //   // },
+  // ],
+  activity: {
+    title: '活动列表',
+    href: '/history-events',
+  },
   jobs: [
     {
       title: 'Careers',

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Container from 'components/Container';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
@@ -6,14 +6,25 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
-import { useAppSelector } from 'redux/hooks';
+import { useAppSelector, useAppDispatch } from 'redux/hooks';
 import EventSwiperItem from 'components/EventContainer/components/EventSwiperItem';
 import EventJoinForm from 'components/EventContainer/components/EventJoinForm';
+import { fetchEventList } from 'redux/event/eventSlice';
 import moment from 'moment';
-import { getOwnerUserName } from 'redux/auth/authSlice';
+import { getOwnerUserName, getAuthState } from 'redux/auth/authSlice';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
+  const { fetchEventListStatus } = useAppSelector((state) => state.event);
+  const isAuth = useAppSelector(getAuthState); //看一下Auth的选项他有可能会返回null 或者false 现在前面没有load 好user 就不让你进了，所以有可能不需要 ！==null的判断了
+  const ownerUsername = useAppSelector(getOwnerUserName);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (fetchEventListStatus === 'idle') {
+      dispatch(fetchEventList({ isAuth, ownerUsername }));
+    }
+  }, [fetchEventListStatus]);
   
   return (
     <div
@@ -51,7 +62,6 @@ const EventList: React.FC = () => {
   const [joinDialogOpen, setJoinDialogOpen] = useState<boolean>(false);
   const [event, setEvent] = useState<Event | null>(null);
   const ownerUsername = useAppSelector(getOwnerUserName);
-  console.log(eventList, 999);
 
   const joinedEvent = eventList?.ids ?
     eventList.ids.filter((id) => eventList.entities[id].eventParticipants?.items[0]?.owner === ownerUsername)

@@ -96,25 +96,25 @@ const EventDetail: React.FC<EventDetailProp> = ({
         <Container style={{ padding: '12px 16px' }}>
           <Grid container spacing={8}>
             <Grid item xs={12} md={8}>
-              {ownerUsername &&
-              event?.eventParticipants?.items[0]?.owner === ownerUsername ? (
-                <Typography variant="h3">你已经报名</Typography>
-              ) : (
-                <Button
-                  size="large"
-                  variant="contained"
-                  fullWidth
-                  onClick={() => {
-                    if (fromPreview) {
-                      prevenJoinClick();
-                    } else {
-                      setJoinDialogOpen(true);
-                    }
-                  }}
-                >
-                  点击此处报名
-                </Button>
-              )}
+              <Button
+                size="large"
+                variant="contained"
+                fullWidth
+                disabled={ownerUsername &&event?.eventParticipants?.items[0]?.owner === ownerUsername}
+                onClick={() => {
+                  if (fromPreview) {
+                    prevenJoinClick();
+                  } else {
+                    setJoinDialogOpen(true);
+                  }
+                }}
+              >
+                {
+                  ownerUsername &&event?.eventParticipants?.items[0]?.owner === ownerUsername ?
+                  '你已经报名' :
+                  '点击此处报名'
+                }
+              </Button>
             </Grid>
             <Grid item xs={12} md={8}>
               {event && <Content event={event} />}

@@ -38,3 +38,4 @@ export { default as Partner } from './Partner';
 export { default as Sponsor } from './Sponsor';
 export { default as Dashboard } from './Dashboard';
 export { default as EventList } from './Event/EventList';
+export { default as NewsList } from './News/NewsList';

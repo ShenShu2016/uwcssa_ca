@@ -22,6 +22,7 @@ import {
   ContactPage as ContactPageView,
   Dashboard as DashboardView,
   EventList as EventListView,
+  NewsList as NewsListView,
   EmailConfirmationCover as EmailConfirmationCoverView,
   EventDetail as EventDetailView,
   EventSignUpSuccessfully as EventSignUpSuccessfullyView,
@@ -62,6 +63,12 @@ function ViewRoutes(): Array<{
     {
       path: '/dashboard',
       renderer: (): JSX.Element => <DashboardView />,
+      isAllowed: true,
+      redirectPath: undefined,
+    },
+    {
+      path: '/news',
+      renderer: (): JSX.Element => <NewsListView />,
       isAllowed: true,
       redirectPath: undefined,
     },

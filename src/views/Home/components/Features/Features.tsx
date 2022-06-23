@@ -5,10 +5,11 @@ import CardContent from '@mui/material/CardContent';
 import Grid from '@mui/material/Grid';
 import React from 'react';
 import Typography from '@mui/material/Typography';
+import { useNavigate } from 'react-router-dom';
 
 const mock = [
   {
-    title: ' 租房',
+    title: '新闻',
     subtitle: '随时随地找周边房源， 覆盖多伦多、温莎等热门城市',
     icon: (
       <svg
@@ -27,6 +28,7 @@ const mock = [
         />
       </svg>
     ),
+    link: '/news'
   },
   {
     title: '活动',
@@ -50,9 +52,10 @@ const mock = [
         />
       </svg>
     ),
+    link: '/history-events'
   },
   {
-    title: '二手交易',
+    title: '新生必读',
     subtitle:
       '在二手交易平台上即时与当地的买家和卖家联系! 购买和销售广泛的产品，包括汽车，电子产品，家具，以及更多',
     icon: (
@@ -74,7 +77,7 @@ const mock = [
     ),
   },
   {
-    title: '工作机会',
+    title: '加入我们',
     subtitle: '海量的工作机会，随时随地找工作',
     icon: (
       <svg
@@ -97,6 +100,7 @@ const mock = [
 ];
 
 const Features = (): JSX.Element => {
+  const navigate = useNavigate();
   return (
     <Box>
       <Box marginBottom={4}>
@@ -153,6 +157,14 @@ const Features = (): JSX.Element => {
                 data-aos-offset={100}
                 data-aos-duration={600}
                 height={1}
+                sx={{
+                  cursor: 'pointer'
+                }}
+                onClick={() => {
+                  if (item.link) {
+                    navigate(item.link);
+                  }
+                }}
               >
                 <Box
                   component={Card}

@@ -22,13 +22,14 @@ import { getAuthState, getOwnerUserName } from 'redux/auth/authSlice';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 
 import ArticleContainer from 'components/ArticleContainer';
-import Entries from './components/Entries';
+// import Entries from './components/Entries';
 import EventContainer from 'components/EventContainer';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Section from './components/Section';
 import UserCardGrid from 'components/UserCardGrid';
 import { fetchArticleList } from 'redux/article/articleSlice';
 import { fetchEventList } from 'redux/event/eventSlice';
+import JoinedEvent from './components/JoinedEvent';
 
 const StickyAccordion = styled(AccordionSummary)(() => ({
   position: 'sticky',
@@ -142,8 +143,12 @@ const Dashboard = (): React.ReactElement => {
                   <Button fullWidth>新生必读</Button>
                 </Card>
 
-                <Section title="功能入口" hasPadding={false} component={Box}>
+                {/* <Section title="功能入口" hasPadding={false} component={Box}>
                   <Entries />
+                </Section> */}
+
+                <Section title="已加入的活动" hasPadding={false} component={Box}>
+                  <JoinedEvent />
                 </Section>
               </Box>
             </Box>
@@ -248,7 +253,7 @@ const Dashboard = (): React.ReactElement => {
                 aria-controls="panel2a-content"
                 id="panel2a-header"
               >
-                <Typography>个人信息 & 活动入口</Typography>
+                <Typography>个人信息 & 新生必读</Typography>
               </StickyAccordion>
               <AccordionDetails sx={{ padding: 0 }}>
                 <Section title="个人信息" showTitle={false} hasPadding={false}>
@@ -259,13 +264,28 @@ const Dashboard = (): React.ReactElement => {
                   <Button fullWidth>新生必读</Button>
                 </Card>
 
-                <Section
+                {/* <Section
                   title="功能入口"
                   hasPadding={false}
                   showTitle={false}
                   component={Box}
                 >
                   <Entries />
+                </Section> */}
+              </AccordionDetails>
+            </Accordion>
+
+            <Accordion>
+              <StickyAccordion
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel2a-content"
+                id="panel2a-header"
+              >
+                <Typography>已加入的活动</Typography>
+              </StickyAccordion>
+              <AccordionDetails sx={{ padding: 0 }}>
+                <Section title="已加入的活动" hasPadding={false} showTitle={false}>
+                  <JoinedEvent />
                 </Section>
               </AccordionDetails>
             </Accordion>
