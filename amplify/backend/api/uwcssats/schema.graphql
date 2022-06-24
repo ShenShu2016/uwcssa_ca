@@ -425,13 +425,15 @@ type Address
     ]
   ) {
   id: ID!
-  description: String
+  # description: String
+  name: String
+  formatted_address: String
   place_id: String
   reference: String
-  terms: [String]
+  # terms: [String]
   types: [String]
   apartmentNumbers: String
-  geocodingResult: String
+  getPlaceResult: String
   lat: Float
   lng: Float
   createdAt: AWSDateTime!

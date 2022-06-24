@@ -1717,13 +1717,13 @@ export const createEvent = /* GraphQL */ `
       eventStatus
       eventLocation {
         id
-        description
+        name
+        formatted_address
         place_id
         reference
-        terms
         types
         apartmentNumbers
-        geocodingResult
+        getPlaceResult
         lat
         lng
         createdAt
@@ -1812,13 +1812,13 @@ export const updateEvent = /* GraphQL */ `
       eventStatus
       eventLocation {
         id
-        description
+        name
+        formatted_address
         place_id
         reference
-        terms
         types
         apartmentNumbers
-        geocodingResult
+        getPlaceResult
         lat
         lng
         createdAt
@@ -1907,13 +1907,13 @@ export const deleteEvent = /* GraphQL */ `
       eventStatus
       eventLocation {
         id
-        description
+        name
+        formatted_address
         place_id
         reference
-        terms
         types
         apartmentNumbers
-        geocodingResult
+        getPlaceResult
         lat
         lng
         createdAt
@@ -1986,13 +1986,13 @@ export const createAddress = /* GraphQL */ `
   ) {
     createAddress(input: $input, condition: $condition) {
       id
-      description
+      name
+      formatted_address
       place_id
       reference
-      terms
       types
       apartmentNumbers
-      geocodingResult
+      getPlaceResult
       lat
       lng
       createdAt
@@ -2027,13 +2027,13 @@ export const updateAddress = /* GraphQL */ `
   ) {
     updateAddress(input: $input, condition: $condition) {
       id
-      description
+      name
+      formatted_address
       place_id
       reference
-      terms
       types
       apartmentNumbers
-      geocodingResult
+      getPlaceResult
       lat
       lng
       createdAt
@@ -2068,13 +2068,13 @@ export const deleteAddress = /* GraphQL */ `
   ) {
     deleteAddress(input: $input, condition: $condition) {
       id
-      description
+      name
+      formatted_address
       place_id
       reference
-      terms
       types
       apartmentNumbers
-      geocodingResult
+      getPlaceResult
       lat
       lng
       createdAt

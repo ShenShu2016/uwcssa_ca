@@ -1016,13 +1016,13 @@ export const getEvent = /* GraphQL */ `
       eventStatus
       eventLocation {
         id
-        description
+        name
+        formatted_address
         place_id
         reference
-        terms
         types
         apartmentNumbers
-        geocodingResult
+        getPlaceResult
         lat
         lng
         createdAt
@@ -1168,13 +1168,13 @@ export const getAddress = /* GraphQL */ `
   query GetAddress($id: ID!) {
     getAddress(id: $id) {
       id
-      description
+      name
+      formatted_address
       place_id
       reference
-      terms
       types
       apartmentNumbers
-      geocodingResult
+      getPlaceResult
       lat
       lng
       createdAt
@@ -1211,13 +1211,13 @@ export const listAddresses = /* GraphQL */ `
     listAddresses(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        description
+        name
+        formatted_address
         place_id
         reference
-        terms
         types
         apartmentNumbers
-        geocodingResult
+        getPlaceResult
         lat
         lng
         createdAt

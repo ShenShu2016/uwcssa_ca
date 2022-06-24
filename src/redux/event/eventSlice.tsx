@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-20 21:02:00
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-22 01:23:17
+ * @LastEditTime: 2022-06-24 00:34:48
  * @FilePath: /uwcssa_ca/src/redux/event/eventSlice.tsx
  * @Description:
  *
@@ -23,6 +23,7 @@ import {
 import { eventSortByCreatedAt, getEvent } from './custom_q_m_s';
 
 import API from '@aws-amplify/api';
+import { Address } from 'redux/address/addressSlice';
 import { RootState } from 'redux/store';
 import { graphqlOperation } from '@aws-amplify/api-graphql';
 
@@ -47,6 +48,7 @@ export type Event = {
   active: 'T' | 'F';
   coverPageImgURL?: string | null;
   coverPageDescription?: string | null;
+  eventLocation?: Address;
   eventParticipants?: {
     items: Array<{ id: string; owner: string; createdAt: string }>;
   } | null;
