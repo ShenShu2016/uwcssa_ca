@@ -1,46 +1,34 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-14 15:09:24
- * @LastEditTime: 2022-06-23 20:47:51
- * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-06-15 17:06:37
+ * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/components/GoogleMap/GoogleMaps.tsx
  */
-
-import {
-  Autocomplete,
-  GoogleMap,
-  LoadScript,
-  Marker,
-} from '@react-google-maps/api';
 import React, { useEffect, useState } from 'react';
-
+import { GoogleMap, Marker, Autocomplete, LoadScript } from '@react-google-maps/api';
 import TextField from '@mui/material/TextField';
 
 const containerStyle = {
   width: '600px',
-  height: '400px',
+  height: '400px'
 };
 
-type Libraries = (
-  | 'drawing'
-  | 'geometry'
-  | 'localContext'
-  | 'places'
-  | 'visualization'
-)[];
+type Libraries = ('drawing' | 'geometry' | 'localContext' | 'places' | 'visualization')[]
 const libraries: Libraries = ['places'];
 
 interface GoogleMapsProp {
-  setLocation: React.Dispatch<React.SetStateAction<object>>;
+  setLocation: React.Dispatch<React.SetStateAction<object>>
 }
 
 const GoogleMaps: React.FC<GoogleMapsProp> = ({ setLocation }) => {
+
   const [autoComplete, setAutoComplete] = useState(null);
   const [input, setInput] = useState('');
   // 温莎大学图书馆 默认地址
   const [center, setCenter] = useState({
     lat: 42.307,
-    lng: -83.068,
+    lng: -83.068
   });
   const onSearchLoad = (autocomplete) => {
     setAutoComplete(autocomplete);
@@ -51,7 +39,7 @@ const GoogleMaps: React.FC<GoogleMapsProp> = ({ setLocation }) => {
     navigator.geolocation.getCurrentPosition((pos) => {
       setCenter({
         lat: pos.coords.latitude,
-        lng: pos.coords.longitude,
+        lng: pos.coords.longitude
       });
     });
   };
@@ -61,10 +49,9 @@ const GoogleMaps: React.FC<GoogleMapsProp> = ({ setLocation }) => {
       const location = autoComplete.getPlace();
       const geometry = location.geometry.location;
       setLocation(location);
-      console.log(location);
       setCenter({
         lat: geometry.lat(),
-        lng: geometry.lng(),
+        lng: geometry.lng()
       });
       setInput(location.formatted_address);
     } else {
@@ -73,10 +60,9 @@ const GoogleMaps: React.FC<GoogleMapsProp> = ({ setLocation }) => {
   };
 
   useEffect(() => {
-    const options: NodeListOf<HTMLElement> =
-      document.querySelectorAll('.pac-container');
+    const options: NodeListOf<HTMLElement> = document.querySelectorAll('.pac-container');
     if (options) {
-      for (let i = 0; i < options.length; i++) {
+      for (let i = 0 ; i < options.length ; i++) {
         options[i].style.zIndex = '9999';
       }
     }
@@ -87,26 +73,26 @@ const GoogleMaps: React.FC<GoogleMapsProp> = ({ setLocation }) => {
   };
 
   return (
-    <LoadScript
-      googleMapsApiKey="AIzaSyCKR_7S6WE5ETziYlastsHnmKuvELeFTW4"
-      libraries={libraries}
-    >
+    <LoadScript googleMapsApiKey='AIzaSyCKR_7S6WE5ETziYlastsHnmKuvELeFTW4' libraries={libraries}>
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={center}
         zoom={16}
         onLoad={onMapLoad}
       >
-        <Marker position={center} />
+        <Marker position={center}/>
       </GoogleMap>
-      <Autocomplete onLoad={onSearchLoad} onPlaceChanged={onPlaceChanged}>
+      <Autocomplete
+        onLoad={onSearchLoad}
+        onPlaceChanged={onPlaceChanged}
+      >
         <TextField
-          sx={{ mt: 2 }}
+          sx={{mt: 2}}
           label="Title"
           variant="outlined"
           name={'title'}
           fullWidth
-          size="small"
+          size='small'
           value={input}
           onChange={(e) => handleInputChange(e)}
         />
