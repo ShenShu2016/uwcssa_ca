@@ -55,6 +55,10 @@ const BlogWithLargeImage: React.FC = (): JSX.Element => {
                     // borderRadius={0}
                     // boxShadow={0}
                     display={'flex'}
+                    flexDirection={{
+                      md: 'row',
+                      xs: 'column-reverse',
+                    }}
                     padding={'8px'}
                     sx={{
                       backgroundImage: 'none',
@@ -65,7 +69,10 @@ const BlogWithLargeImage: React.FC = (): JSX.Element => {
                       sx={{
                         padding: 0,
                         paddingRight: 3,
-                        width: '65%',
+                        width: {
+                          md: '65%',
+                          xs: '100%',
+                        },
                         display: 'flex',
                         flexDirection: 'column',
                       }}

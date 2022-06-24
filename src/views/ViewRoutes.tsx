@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-18 17:59:51
+ * @LastEditTime: 2022-06-21 23:42:03
  * @FilePath: /uwcssa_ca/src/views/ViewRoutes.tsx
  * @Description:
  *
@@ -21,15 +21,20 @@ import {
   CompanyTerms as CompanyTermsView,
   ContactPage as ContactPageView,
   Dashboard as DashboardView,
+  EventList as EventListView,
+  NewsList as NewsListView,
   EmailConfirmationCover as EmailConfirmationCoverView,
   EventDetail as EventDetailView,
+  EventSignUpSuccessfully as EventSignUpSuccessfullyView,
   ForgotPassWordSubmit as ForgotPassWordSubmitView,
   Home as HomeView,
   NotFoundCover as NotFoundCoverView,
   PasswordResetCover as PasswordResetCoverView,
+  PreSignUpResetPassWord as PreSignUpResetPassWordView,
   ResearchDevelopment as ResearchDevelopmentView,
   SigninCover as SigninCoverView,
   SignupCover as SignupCoverView,
+  UWindsorEmailVerify as UWindsorEmailVerifyView,
 } from 'views';
 import { getAuthState, getIsAdmin } from 'redux/auth/authSlice';
 
@@ -58,6 +63,18 @@ function ViewRoutes(): Array<{
     {
       path: '/dashboard',
       renderer: (): JSX.Element => <DashboardView />,
+      isAllowed: true,
+      redirectPath: undefined,
+    },
+    {
+      path: '/news',
+      renderer: (): JSX.Element => <NewsListView />,
+      isAllowed: true,
+      redirectPath: undefined,
+    },
+    {
+      path: '/history-events',
+      renderer: (): JSX.Element => <EventListView />,
       isAllowed: true,
       redirectPath: undefined,
     },
@@ -116,6 +133,15 @@ function ViewRoutes(): Array<{
       colorInvert: true,
     },
     {
+      path: '/event/eventSignUpSuccessfully/:eventId',
+      renderer: (params = {}): JSX.Element => (
+        <EventSignUpSuccessfullyView {...params} />
+      ),
+      isAllowed: true,
+      redirectPath: '/',
+    }, //!! 这里会碰到问题 比如每个人都会进去
+
+    {
       path: '/auth/passwordReset',
       renderer: (params = {}): JSX.Element => (
         <PasswordResetCoverView {...params} />
@@ -127,6 +153,14 @@ function ViewRoutes(): Array<{
       path: '/auth/passWordResetSubmit/:username',
       renderer: (params = {}): JSX.Element => (
         <ForgotPassWordSubmitView {...params} />
+      ),
+      isAllowed: true,
+      redirectPath: '/',
+    },
+    {
+      path: '/auth/PreSignUpResetPassWord',
+      renderer: (params = {}): JSX.Element => (
+        <PreSignUpResetPassWordView {...params} />
       ),
       isAllowed: true,
       redirectPath: '/',
@@ -185,7 +219,14 @@ function ViewRoutes(): Array<{
       isAllowed: isAuth,
       redirectPath: '/',
     },
-
+    {
+      path: '/settings/uwindsorVerify',
+      renderer: (params = {}): JSX.Element => (
+        <UWindsorEmailVerifyView {...params} />
+      ),
+      isAllowed: isAuth,
+      redirectPath: '/',
+    },
     {
       path: '/settings/notifications',
       renderer: (params = {}): JSX.Element => (

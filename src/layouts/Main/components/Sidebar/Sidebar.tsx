@@ -20,8 +20,9 @@ interface Props {
     dashboard: Array<PageItem> | PageItem;
     UWCSSA: Array<PageItem> | PageItem;
     freshman: Array<PageItem> | PageItem;
-    house: Array<PageItem> | PageItem;
-    jobs: Array<PageItem> | PageItem;
+    news: Array<PageItem> | PageItem;
+    // house: Array<PageItem> | PageItem;
+    // jobs: Array<PageItem> | PageItem;
     about: Array<PageItem> | PageItem;
     activity: Array<PageItem> | PageItem;
     contact: Array<PageItem> | PageItem;

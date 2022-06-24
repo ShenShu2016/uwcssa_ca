@@ -425,13 +425,15 @@ type Address
     ]
   ) {
   id: ID!
-  description: String
+  # description: String
+  name: String
+  formatted_address: String
   place_id: String
   reference: String
-  terms: [String]
+  # terms: [String]
   types: [String]
   apartmentNumbers: String
-  geocodingResult: String
+  getPlaceResult: String
   lat: Float
   lng: Float
   createdAt: AWSDateTime!
@@ -452,7 +454,7 @@ type Form
     ]
   ) {
   id: ID!
-  formItems: [FormItem] @hasMany # 可以有很多 FormItem form questions 不可以重复利用
+  formItems: [FormItem] @hasMany(indexName: "byForm", fields: ["id"]) # 可以有很多 FormItem form questions 不可以重复利用
   event: Event @belongsTo
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
@@ -491,7 +493,8 @@ type FormItem
   isExample: Boolean # 是否是样例
   createdAt: AWSDateTime! # 创建时间
   updatedAt: AWSDateTime! # 更新时间
-  form: Form @belongsTo
+  formFormItemsId: ID @index(name: "byForm", sortKeyFields: ["order"])
+  form: Form @belongsTo(fields: ["formFormItemsId"])
   owner: ID! # 创建者
 }
 

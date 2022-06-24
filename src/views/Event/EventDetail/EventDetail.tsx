@@ -1,8 +1,10 @@
+/* eslint-disable indent */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /*
  * @Author: Shen Shu
  * @Date: 2022-06-18 17:26:14
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-19 00:29:44
+ * @LastEditTime: 2022-06-22 01:28:29
  * @FilePath: /uwcssa_ca/src/views/Event/EventDetail/EventDetail.tsx
  * @Description:
  *
@@ -13,6 +15,7 @@ import {
   Button,
   Container,
   Grid,
+  Typography,
   useMediaQuery,
   useTheme,
 } from '@mui/material';
@@ -37,7 +40,17 @@ import CommentOverview from 'components/Comment/CommentOverview';
 import EventJoinForm from 'components/EventContainer/components/EventJoinForm';
 import { useParams } from 'react-router-dom';
 
-function EventDetail() {
+interface EventDetailProp {
+  fromPreview?: boolean;
+  previewEvent?: any;
+  prevenJoinClick?: () => void;
+}
+
+const EventDetail: React.FC<EventDetailProp> = ({
+  fromPreview = false,
+  previewEvent,
+  prevenJoinClick,
+}) => {
   const theme = useTheme();
   const dispatch = useAppDispatch();
   const [joinDialogOpen, setJoinDialogOpen] = useState<boolean>(false);
@@ -45,8 +58,10 @@ function EventDetail() {
   const isMd = useMediaQuery(theme.breakpoints.up('md'), {
     defaultMatches: true,
   });
-  const { eventId } = useParams();
-  const event = useAppSelector((state) => selectEventById(state, eventId));
+  const { eventId } = fromPreview ? { eventId: null } : useParams();
+  const event = fromPreview
+    ? previewEvent
+    : useAppSelector((state) => selectEventById(state, eventId));
   const ownerUsername = useAppSelector(getOwnerUserName);
   const comments = useAppSelector(selectAllComments);
 
@@ -85,9 +100,20 @@ function EventDetail() {
                 size="large"
                 variant="contained"
                 fullWidth
-                onClick={() => setJoinDialogOpen(true)}
+                disabled={ownerUsername &&event?.eventParticipants?.items[0]?.owner === ownerUsername}
+                onClick={() => {
+                  if (fromPreview) {
+                    prevenJoinClick();
+                  } else {
+                    setJoinDialogOpen(true);
+                  }
+                }}
               >
-                点击此处报名
+                {
+                  ownerUsername &&event?.eventParticipants?.items[0]?.owner === ownerUsername ?
+                  '你已经报名' :
+                  '点击此处报名'
+                }
               </Button>
             </Grid>
             <Grid item xs={12} md={8}>
@@ -96,7 +122,7 @@ function EventDetail() {
             <Grid item xs={12} md={4}>
               {isMd ? (
                 <Box marginBottom={2}>
-                  <SidebarEvents />
+                  <SidebarEvents fromPreview={fromPreview} />
                 </Box>
               ) : null}
               {!isAuth && <SidebarNewsletter />}
@@ -123,7 +149,10 @@ function EventDetail() {
             d="M0,0c0,0,934.4,93.4,1920,0v100.1H0L0,0z"
           ></path>
         </Box>
-        <Box bgcolor={'alternate.main'}>
+        <Box
+          bgcolor={'alternate.main'}
+          display={fromPreview ? 'none' : 'block'}
+        >
           <Container>
             <SimilarStories />
           </Container>
@@ -148,6 +177,6 @@ function EventDetail() {
       </Box>
     </>
   );
-}
+};
 
 export default EventDetail;

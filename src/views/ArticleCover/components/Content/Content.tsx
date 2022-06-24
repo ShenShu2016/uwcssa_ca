@@ -74,21 +74,26 @@ const Content = ({ article }: { article: Article }): JSX.Element => {
           justifyContent={'space-between'}
           flexWrap={'wrap'}
         >
-          <Box display={'flex'} alignItems={'center'}>
-            <Avatar
-              style={{ width: 50, height: 50, marginRight: '1rem' }}
-              src={article.user.avatarURL?.objectThumbnailURL}
-              {...stringAvatar(article.user.name)}
-            />
-            <Box>
-              <Typography fontWeight={600}>{article.user.name}</Typography>
-              <Typography color={'text.secondary'}>
-                {moment(article.createdAt).format(
-                  'dddd, MMMM Do YYYY, h:mm:ss a',
-                )}
-              </Typography>
-            </Box>
-          </Box>
+          {
+            article && article.user ?
+              <Box display={'flex'} alignItems={'center'}>
+                <Avatar
+                  style={{ width: 50, height: 50, marginRight: '1rem' }}
+                  src={article.user.avatarURL?.objectThumbnailURL}
+                  {...stringAvatar(article.user.name)}
+                />
+                <Box>
+                  <Typography fontWeight={600}>{article.user.name}</Typography>
+                  <Typography color={'text.secondary'}>
+                    {moment(article.createdAt).format(
+                      'dddd, MMMM Do YYYY, h:mm:ss a',
+                    )}
+                  </Typography>
+                </Box>
+              </Box>
+              : null
+          }
+          
           {article.likes?.items && article.count && (
             <CommentGroupButton likes={article.likes} count={article.count} />
           )}

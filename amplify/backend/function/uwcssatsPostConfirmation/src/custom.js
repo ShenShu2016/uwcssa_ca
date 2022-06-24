@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-19 17:21:06
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-12 19:23:50
+ * @LastEditTime: 2022-06-22 00:53:32
  * @FilePath: /uwcssa_ca/amplify/backend/function/uwcssatsPostConfirmation/src/custom.js
  * @Description:
  *
@@ -33,6 +33,7 @@ exports.handler = async (event, context) => {
       },
       TableName: process.env.User_Table,
     };
+    console.log('User', User);
     let userProfileCountParams = {
       Key: { id: { S: 'UserProfileTable' } },
       TableName: process.env.Count_Table,
@@ -49,13 +50,12 @@ exports.handler = async (event, context) => {
         email: { S: event.request.userAttributes.email },
         active: { S: 'T' },
         rank: { N: newRankCount.toString() },
-        uWindsorEmail: {
-          S: event.request.userAttributes.email
-            .toLowerCase()
-            .includes('@uwindsor.ca')
-            ? event.request.userAttributes.email.toLowerCase()
-            : undefined,
-        },
+        uWindsorEmail: event.request.userAttributes.email
+          .toLowerCase()
+          .includes('@uwindsor.ca')
+          ? { S: event.request.userAttributes.email.toLowerCase() }
+          : undefined,
+
         windsorStudent: {
           BOOL: event.request.userAttributes.email
             .toLowerCase()
@@ -68,6 +68,7 @@ exports.handler = async (event, context) => {
       },
       TableName: process.env.UserProfile_Table,
     };
+    console.log('UserProfile', UserProfile);
 
     let params2 = {
       TableName: process.env.Count_Table, //dynamodb table name
@@ -85,7 +86,7 @@ exports.handler = async (event, context) => {
       },
       ReturnValues: 'UPDATED_NEW',
     };
-
+    console.log('params2', params2);
     try {
       await Promise.all([
         dynamodb.updateItem(params2).promise(),

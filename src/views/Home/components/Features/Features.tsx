@@ -5,12 +5,12 @@ import CardContent from '@mui/material/CardContent';
 import Grid from '@mui/material/Grid';
 import React from 'react';
 import Typography from '@mui/material/Typography';
+import { useNavigate } from 'react-router-dom';
 
 const mock = [
   {
-    title: ' 租房',
-    subtitle:
-      'Fill out our standardized application on our platform. Most applicants finish in under an hour.',
+    title: '新闻',
+    subtitle: '随时随地找周边房源， 覆盖多伦多、温莎等热门城市',
     icon: (
       <svg
         height={24}
@@ -28,12 +28,13 @@ const mock = [
         />
       </svg>
     ),
+    link: '/news'
   },
   {
     title: '活动',
     subtitle:
       // eslint-disable-next-line quotes
-      "We'll immediately match you with any relevant openings and you get to pick which ones you're interested in.",
+      'UWCSSA活动将您与其他学生联系起来',
     icon: (
       <svg
         height={24}
@@ -51,11 +52,12 @@ const mock = [
         />
       </svg>
     ),
+    link: '/history-events'
   },
   {
-    title: '二手交易',
+    title: '新生必读',
     subtitle:
-      'After 3 days all of your offers will arrive and you will have another 7 days to select your new company.',
+      '在二手交易平台上即时与当地的买家和卖家联系! 购买和销售广泛的产品，包括汽车，电子产品，家具，以及更多',
     icon: (
       <svg
         height={24}
@@ -75,9 +77,8 @@ const mock = [
     ),
   },
   {
-    title: '工作机会',
-    subtitle:
-      'After 3 days all of your offers will arrive and you will have another 7 days to select your new company.',
+    title: '加入我们',
+    subtitle: '海量的工作机会，随时随地找工作',
     icon: (
       <svg
         height={24}
@@ -99,6 +100,7 @@ const mock = [
 ];
 
 const Features = (): JSX.Element => {
+  const navigate = useNavigate();
   return (
     <Box>
       <Box marginBottom={4}>
@@ -108,16 +110,16 @@ const Features = (): JSX.Element => {
           align={'center'}
           sx={{ fontWeight: 700 }}
         >
-          Check out what&apos;s new
+          了解最新动态？
         </Typography>
-        <Typography
+        {/* <Typography
           variant={'h6'}
           component={'p'}
           color={'text.secondary'}
           align={'center'}
         >
           Fill out our standardized application on our platform.
-        </Typography>
+        </Typography> */}
         <Box marginTop={3} display={'flex'} justifyContent={'center'}>
           <Button
             variant="contained"
@@ -155,6 +157,14 @@ const Features = (): JSX.Element => {
                 data-aos-offset={100}
                 data-aos-duration={600}
                 height={1}
+                sx={{
+                  cursor: 'pointer'
+                }}
+                onClick={() => {
+                  if (item.link) {
+                    navigate(item.link);
+                  }
+                }}
               >
                 <Box
                   component={Card}

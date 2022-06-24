@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-19 17:32:26
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-06 21:03:39
+ * @LastEditTime: 2022-06-20 21:43:57
  * @FilePath: /uwcssa_ca/src/layouts/Main/components/Topbar/components/AccountMenu/AccountMenu.tsx
  * @Description:
  *
@@ -11,7 +11,6 @@
 import {
   Avatar,
   Box,
-  Divider,
   IconButton,
   ListItemIcon,
   Menu,
@@ -19,19 +18,18 @@ import {
   Tooltip,
   useTheme,
 } from '@mui/material';
+import { Link, useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import InsertEmoticonIcon from '@mui/icons-material/InsertEmoticon';
-import { Link } from 'react-router-dom';
 import Logout from '@mui/icons-material/Logout';
 import Settings from '@mui/icons-material/Settings';
 import { blue } from '@mui/material/colors';
 import { removeMyUserProfile } from 'redux/userProfile/userProfileSlice';
 import { signOut } from 'redux/auth/authSlice';
 import { stringAvatar } from 'components/Avatar/AvatarFunction';
-import { useNavigate } from 'react-router-dom';
 
 export default function AccountMenu() {
   const theme = useTheme();
@@ -120,16 +118,10 @@ export default function AccountMenu() {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        <MenuItem component={Link} to="/settings/profile">
-          <ListItemIcon>
-            <AccountBoxIcon fontSize="small" />
-          </ListItemIcon>
-          Profile
-        </MenuItem>
         {/* <MenuItem >
           <Avatar /> My account
         </MenuItem> */}
-        <Divider />
+        {/* <Divider /> */}
         {/* <MenuItem>
           <ListItemIcon>
             <PersonAdd fontSize="small" />
@@ -142,17 +134,23 @@ export default function AccountMenu() {
           </ListItemIcon>
           Settings
         </MenuItem>
-        <MenuItem onClick={handleLogout}>
+        <MenuItem component={Link} to="/settings/profile">
           <ListItemIcon>
-            <Logout fontSize="small" />
+            <AccountBoxIcon fontSize="small" />
           </ListItemIcon>
-          Logout
+          Profile
         </MenuItem>
         <MenuItem>
           <ListItemIcon>
             <InsertEmoticonIcon fontSize="small" />
           </ListItemIcon>
           更多功能敬请期待
+        </MenuItem>
+        <MenuItem onClick={handleLogout}>
+          <ListItemIcon>
+            <Logout fontSize="small" />
+          </ListItemIcon>
+          Logout
         </MenuItem>
       </Menu>
     </React.Fragment>

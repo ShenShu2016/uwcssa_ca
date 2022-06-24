@@ -1,7 +1,8 @@
+/* eslint-disable indent */
 /*
  * @Author: 李佳修
  * @Date: 2022-06-13 09:15:49
- * @LastEditTime: 2022-06-18 17:48:35
+ * @LastEditTime: 2022-06-24 00:41:51
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/components/EventContainer/components/Detail.tsx
  */
@@ -15,27 +16,46 @@ import { Event } from 'redux/event/eventSlice';
 import { Link } from 'react-router-dom';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import React from 'react';
+import { getOwnerUserName } from 'redux/auth/authSlice';
 import moment from 'moment';
+import { useAppSelector } from 'redux/hooks';
 
 // import ReactHtmlParser from 'react-html-parser';
 
 interface DetailProp {
   info: Event;
+  fromPreview?: boolean;
   onJoin: () => void;
 }
 
-const Details: React.FC<DetailProp> = ({ info, onJoin }): JSX.Element => {
+const Details: React.FC<DetailProp> = ({
+  info,
+  fromPreview = false,
+  onJoin,
+}): JSX.Element => {
   //console.log(info);
-
+  const ownerUsername = useAppSelector(getOwnerUserName);
+  //console.log(ownerUsername);
   return (
     <Box>
       <Box
         sx={{
           display: 'flex',
+          flexDirection: {
+            md: 'row',
+            xs: 'column',
+          },
           justifyContent: 'space-between',
         }}
       >
-        <Typography variant={'h6'} fontWeight={700}>
+        <Typography
+          variant={'h6'}
+          fontWeight={700}
+          p={{
+            md: 0,
+            xs: 1,
+          }}
+        >
           {info.title}
         </Typography>
         <Box>
@@ -73,7 +93,7 @@ const Details: React.FC<DetailProp> = ({ info, onJoin }): JSX.Element => {
         }}
       >
         <LocationOnIcon sx={{ mr: 2 }} />
-        {'没有存地点？'}
+        {info.eventLocation?.name ?? '未知地点'}
       </Box>
       <Typography
         color="#616161"
@@ -88,13 +108,23 @@ const Details: React.FC<DetailProp> = ({ info, onJoin }): JSX.Element => {
           variant="outlined"
           sx={{ width: '100px' }}
           component={Link}
-          to={`/event/${info.id}`}
+          to={`/event/${info?.id}`}
+          disabled={fromPreview}
         >
           查看详情
         </Button>
-        <Button variant="contained" sx={{ width: '100px' }} onClick={onJoin}>
-          快速报名
-        </Button>
+
+        {ownerUsername &&
+        info?.eventParticipants?.items &&
+        info?.eventParticipants?.items[0]?.owner === ownerUsername ? (
+          <Button variant="contained" disabled>
+            你已经报名
+          </Button>
+        ) : (
+          <Button variant="contained" sx={{ width: '100px' }} onClick={onJoin}>
+            快速报名
+          </Button>
+        )}
       </Box>
     </Box>
   );

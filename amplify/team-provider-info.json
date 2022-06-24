@@ -23,7 +23,7 @@
         "uwcssatsPostConfirmation": {
           "GROUP": "uwcssaUser",
           "deploymentBucketName": "amplify-uwcssa-devts-225941-deployment",
-          "s3Key": "amplify-builds/uwcssatsPostConfirmation-50635169676e31414d45-build.zip",
+          "s3Key": "amplify-builds/uwcssatsPostConfirmation-36564d567872686d767a-build.zip",
           "userTable": "User-4r2t6l2uprdgjhmoocpazejjcq-devts",
           "userProfileTable": "UserProfile-4r2t6l2uprdgjhmoocpazejjcq-devts",
           "countTable": "Count-4r2t6l2uprdgjhmoocpazejjcq-devts"
@@ -38,7 +38,7 @@
         },
         "uwcssaLayerNodeJSSharp": {
           "deploymentBucketName": "amplify-uwcssa-devts-225941-deployment",
-          "s3Key": "amplify-builds/uwcssaLayerNodeJSSharp-LambdaLayerVersion5120e39e-build.zip"
+          "s3Key": "amplify-builds/uwcssaLayerNodeJSSharp-LambdaLayerVersion767f62dd-build.zip"
         },
         "ContactUsHandler": {
           "deploymentBucketName": "amplify-uwcssa-devts-225941-deployment",

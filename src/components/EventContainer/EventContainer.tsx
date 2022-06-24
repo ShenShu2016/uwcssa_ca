@@ -13,12 +13,14 @@ import { Autoplay, Pagination } from 'swiper';
 import React, { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-import { Box } from '@mui/material';
-import Details from './components/Detail';
+import { Box, Button } from '@mui/material';
+// import Details from './components/Detail';/
 import { Event } from 'redux/event/eventSlice';
 import EventJoinForm from './components/EventJoinForm';
-import Image from './components/Image';
+import { Link } from 'react-router-dom';
+// import Image from './components/Image';
 import { useAppSelector } from 'redux/hooks';
+import EventSwiperItem from './components/EventSwiperItem';
 
 const EventContainer: React.FC = () => {
   const eventList = useAppSelector((state) => state.event);
@@ -54,20 +56,19 @@ const EventContainer: React.FC = () => {
         {eventList &&
           eventList.ids?.map((id) => (
             <SwiperSlide key={id}>
-              <Box display="flex" mb={4}>
-                <Box flex={1}>
-                  <Image url={eventList.entities[id].coverPageImgURL} />
-                </Box>
-                <Box flex={2}>
-                  <Details
-                    info={eventList.entities[id]}
-                    onJoin={() => handleJoinEvent(eventList.entities[id])}
-                  />
-                </Box>
-              </Box>
+              <EventSwiperItem event={eventList.entities[id]} handleJoinEvent={handleJoinEvent}/>
             </SwiperSlide>
           ))}
       </Swiper>
+      <Button
+        variant="outlined"
+        component={Link}
+        size='small'
+        sx={{ float: 'right', height: '30px', marginTop: '-25px', zIndex: 999 }}
+        to={'/history-events'}
+      >
+          查看所有活动
+      </Button>
     </Box>
   );
 };

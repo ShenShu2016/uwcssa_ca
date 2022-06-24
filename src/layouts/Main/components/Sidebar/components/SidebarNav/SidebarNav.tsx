@@ -11,8 +11,9 @@ interface Props {
     dashboard: Array<PageItem> | PageItem;
     UWCSSA: Array<PageItem> | PageItem;
     freshman: Array<PageItem> | PageItem;
-    house: Array<PageItem> | PageItem;
-    jobs: Array<PageItem> | PageItem;
+    news: Array<PageItem> | PageItem;
+    // house: Array<PageItem> | PageItem;
+    // jobs: Array<PageItem> | PageItem;
     about: Array<PageItem> | PageItem;
     activity: Array<PageItem> | PageItem;
     contact: Array<PageItem> | PageItem;
@@ -27,9 +28,10 @@ const SidebarNav = ({ pages }: Props): JSX.Element => {
     UWCSSA: UWCSSAPages,
     dashboard: dashboardPages,
     freshman: freshmanPages,
-    house: housePages,
+    news: newsPages,
+    // house: housePages,
     activity: activityPages,
-    jobs: jobsPages,
+    // jobs: jobsPages,
     about: aboutPages,
     contact: contactPages,
   } = pages;
@@ -73,15 +75,18 @@ const SidebarNav = ({ pages }: Props): JSX.Element => {
         <Box>
           <NavItem title={'新生手册'} items={freshmanPages} />
         </Box>
-        <Box>
+        {/* <Box>
           <NavItem title={'租房'} items={housePages} />
+        </Box> */}
+        <Box>
+          <NavItem title={'新闻'} items={newsPages} />
         </Box>
         <Box>
           <NavItem title={'活动'} items={activityPages} />
         </Box>
-        <Box>
+        {/* <Box>
           <NavItem title={'工作机会'} items={jobsPages} />
-        </Box>
+        </Box> */}
         <Box>
           <NavItem title={'关于我们'} items={aboutPages} />
         </Box>

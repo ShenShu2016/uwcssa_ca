@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-06-02 18:10:36
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-18 17:19:22
+ * @LastEditTime: 2022-06-20 01:32:03
  * @FilePath: /uwcssa_ca/src/components/DynamicForm/DynamicForm.tsx
  * @Description:
  *
@@ -11,11 +11,17 @@
 import * as yup from 'yup';
 
 import { Button, DialogActions, DialogContent, Grid } from '@mui/material';
+import { useAppDispatch, useAppSelector } from 'redux/hooks';
 
+import { EventParticipantStatus } from 'API';
 import FormInputFieldComponent from './components/FormItemForm/FormInputFieldComponent';
 import { FormItem } from 'redux/form/formSlice';
 import React from 'react';
+import { getOwnerUserName } from 'redux/auth/authSlice';
+import { postEventParticipant } from 'redux/eventParticipant/eventParticipantSlice';
 import { useFormik } from 'formik';
+import { useNavigate } from 'react-router-dom';
+import { useSnackbar } from 'notistack';
 
 function getYupValidation(formItem: FormItem) {
   let validation: any = yup;
@@ -53,7 +59,20 @@ function getYupValidation(formItem: FormItem) {
   return validation;
 }
 
-function DynamicForm({ formItemList, setOpen }: any) {
+function DynamicForm({
+  formItemList,
+  setOpen,
+  eventId = undefined,
+}: {
+  formItemList: any;
+  setOpen: any;
+  eventId: string | undefined;
+}) {
+  //const { eventId } = useParams();
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
+  const ownerUsername = useAppSelector(getOwnerUserName);
   const formItemListSortByOrder = [...formItemList];
   formItemListSortByOrder.sort((a, b) => a.order - b.order);
 
@@ -62,18 +81,46 @@ function DynamicForm({ formItemList, setOpen }: any) {
 
   formItemListSortByOrder.forEach((item) => {
     if (item.formType === 'Checkbox') {
-      initialValues[item.id] = false;
+      initialValues[`content${item.order}`] = false;
     } else {
-      initialValues[item.id] = '';
+      initialValues[`content${item.order}`] = '';
     }
-    yupObject[item.id] = item && getYupValidation(item);
+    yupObject[`content${item.order}`] = item && getYupValidation(item);
   });
 
   const validationSchema = yup.object(yupObject);
 
   const onSubmit = async (values) => {
-    console.log('表单提交', values);
-    setOpen(false);
+    console.log('表单提交', JSON.stringify(values));
+    const eventParticipantFormItemIds = {};
+    formItemListSortByOrder.forEach((item) => {
+      eventParticipantFormItemIds[`eventParticipantFormItem${item.order}Id`] =
+        item.id;
+    });
+    const createEventParticipantInput = {
+      id: `${eventId}-${ownerUsername}`,
+      eventEventParticipantsId: eventId,
+      ...values,
+      eventParticipantStatus: EventParticipantStatus.ArriveOnTime,
+      ...eventParticipantFormItemIds,
+      owner: ownerUsername,
+    };
+    console.log('createEventParticipantInput', createEventParticipantInput);
+
+    const response = await dispatch(
+      postEventParticipant({ createEventParticipantInput }),
+    );
+
+    if (response.meta.requestStatus === 'fulfilled') {
+      setOpen(false);
+      formik.resetForm();
+      enqueueSnackbar('报名成功', { variant: 'success' });
+      navigate(`/event/eventSignUpSuccessfully/${eventId}`, { replace: true });
+      return true;
+    } else {
+      enqueueSnackbar('报名失败', { variant: 'error' });
+      return false;
+    }
   };
 
   const formik = useFormik({
@@ -103,7 +150,7 @@ function DynamicForm({ formItemList, setOpen }: any) {
         </Grid>
       </DialogContent>
       <DialogActions>
-        <Button type={'submit'} onClick={handleSubmitClicked}>
+        <Button type={'submit'} onClick={handleSubmitClicked} disabled={!eventId}>
           提交
         </Button>
       </DialogActions>

@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 18:10:27
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-11 00:55:31
+ * @LastEditTime: 2022-06-23 22:17:53
  * @FilePath: /uwcssa_ca/src/redux/store.ts
  * @Description:
  *
@@ -10,12 +10,14 @@
 
 import { Action, ThunkAction, configureStore } from '@reduxjs/toolkit';
 
+import addressReducer from './address/addressSlice';
 import alertReducer from './alert/alertSlice';
 import articleReducer from './article/articleSlice';
 import authReducer from './auth/authSlice';
 import commentReducer from './comment/commentSlice';
 import contactUsReducer from './contactUs/ContactUsSlice';
 import countReducer from './count/countSlice';
+import eventParticipantReducer from './eventParticipant/eventParticipantSlice';
 import eventReducer from './event/eventSlice';
 import formReducer from './form/formSlice';
 import likeReducer from './like/likeSlice';
@@ -33,6 +35,7 @@ export const store = configureStore({
     userProfile: userProfileReducer,
     article: articleReducer,
     event: eventReducer,
+    eventParticipant: eventParticipantReducer,
     comment: commentReducer,
     contactUs: contactUsReducer,
     alert: alertReducer,
@@ -45,6 +48,7 @@ export const store = configureStore({
     form: formReducer,
     count: countReducer,
     like: likeReducer,
+    address: addressReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }), //https://stackoverflow.com/questions/61704805/getting-an-error-a-non-serializable-value-was-detected-in-the-state-when-using,

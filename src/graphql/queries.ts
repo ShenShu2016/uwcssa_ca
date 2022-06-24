@@ -1016,13 +1016,13 @@ export const getEvent = /* GraphQL */ `
       eventStatus
       eventLocation {
         id
-        description
+        name
+        formatted_address
         place_id
         reference
-        terms
         types
         apartmentNumbers
-        geocodingResult
+        getPlaceResult
         lat
         lng
         createdAt
@@ -1168,13 +1168,13 @@ export const getAddress = /* GraphQL */ `
   query GetAddress($id: ID!) {
     getAddress(id: $id) {
       id
-      description
+      name
+      formatted_address
       place_id
       reference
-      terms
       types
       apartmentNumbers
-      geocodingResult
+      getPlaceResult
       lat
       lng
       createdAt
@@ -1211,13 +1211,13 @@ export const listAddresses = /* GraphQL */ `
     listAddresses(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        description
+        name
+        formatted_address
         place_id
         reference
-        terms
         types
         apartmentNumbers
-        geocodingResult
+        getPlaceResult
         lat
         lng
         createdAt
@@ -1325,6 +1325,7 @@ export const getFormItem = /* GraphQL */ `
       isExample
       createdAt
       updatedAt
+      formFormItemsId
       form {
         id
         createdAt
@@ -1333,7 +1334,6 @@ export const getFormItem = /* GraphQL */ `
         formEventId
       }
       owner
-      formFormItemsId
     }
   }
 `;
@@ -1366,8 +1366,8 @@ export const listFormItems = /* GraphQL */ `
         isExample
         createdAt
         updatedAt
-        owner
         formFormItemsId
+        owner
       }
       nextToken
     }
@@ -1400,8 +1400,8 @@ export const getEventParticipant = /* GraphQL */ `
         isExample
         createdAt
         updatedAt
-        owner
         formFormItemsId
+        owner
       }
       content2
       formItem2 {
@@ -1426,8 +1426,8 @@ export const getEventParticipant = /* GraphQL */ `
         isExample
         createdAt
         updatedAt
-        owner
         formFormItemsId
+        owner
       }
       content3
       formItem3 {
@@ -1452,8 +1452,8 @@ export const getEventParticipant = /* GraphQL */ `
         isExample
         createdAt
         updatedAt
-        owner
         formFormItemsId
+        owner
       }
       content4
       formItem4 {
@@ -1478,8 +1478,8 @@ export const getEventParticipant = /* GraphQL */ `
         isExample
         createdAt
         updatedAt
-        owner
         formFormItemsId
+        owner
       }
       content5
       formItem5 {
@@ -1504,8 +1504,8 @@ export const getEventParticipant = /* GraphQL */ `
         isExample
         createdAt
         updatedAt
-        owner
         formFormItemsId
+        owner
       }
       content6
       formItem6 {
@@ -1530,8 +1530,8 @@ export const getEventParticipant = /* GraphQL */ `
         isExample
         createdAt
         updatedAt
-        owner
         formFormItemsId
+        owner
       }
       content7
       formItem7 {
@@ -1556,8 +1556,8 @@ export const getEventParticipant = /* GraphQL */ `
         isExample
         createdAt
         updatedAt
-        owner
         formFormItemsId
+        owner
       }
       content8
       formItem8 {
@@ -1582,8 +1582,8 @@ export const getEventParticipant = /* GraphQL */ `
         isExample
         createdAt
         updatedAt
-        owner
         formFormItemsId
+        owner
       }
       content9
       formItem9 {
@@ -1608,8 +1608,8 @@ export const getEventParticipant = /* GraphQL */ `
         isExample
         createdAt
         updatedAt
-        owner
         formFormItemsId
+        owner
       }
       content10
       formItem10 {
@@ -1634,8 +1634,8 @@ export const getEventParticipant = /* GraphQL */ `
         isExample
         createdAt
         updatedAt
-        owner
         formFormItemsId
+        owner
       }
       content11
       formItem11 {
@@ -1660,8 +1660,8 @@ export const getEventParticipant = /* GraphQL */ `
         isExample
         createdAt
         updatedAt
-        owner
         formFormItemsId
+        owner
       }
       content12
       formItem12 {
@@ -1686,8 +1686,8 @@ export const getEventParticipant = /* GraphQL */ `
         isExample
         createdAt
         updatedAt
-        owner
         formFormItemsId
+        owner
       }
       content13
       formItem13 {
@@ -1712,8 +1712,8 @@ export const getEventParticipant = /* GraphQL */ `
         isExample
         createdAt
         updatedAt
-        owner
         formFormItemsId
+        owner
       }
       content14
       formItem14 {
@@ -1738,8 +1738,8 @@ export const getEventParticipant = /* GraphQL */ `
         isExample
         createdAt
         updatedAt
-        owner
         formFormItemsId
+        owner
       }
       content15
       formItem15 {
@@ -1764,8 +1764,8 @@ export const getEventParticipant = /* GraphQL */ `
         isExample
         createdAt
         updatedAt
-        owner
         formFormItemsId
+        owner
       }
       content16
       formItem16 {
@@ -1790,8 +1790,8 @@ export const getEventParticipant = /* GraphQL */ `
         isExample
         createdAt
         updatedAt
-        owner
         formFormItemsId
+        owner
       }
       content17
       formItem17 {
@@ -1816,8 +1816,8 @@ export const getEventParticipant = /* GraphQL */ `
         isExample
         createdAt
         updatedAt
-        owner
         formFormItemsId
+        owner
       }
       content18
       formItem18 {
@@ -1842,8 +1842,8 @@ export const getEventParticipant = /* GraphQL */ `
         isExample
         createdAt
         updatedAt
-        owner
         formFormItemsId
+        owner
       }
       content19
       formItem19 {
@@ -1868,8 +1868,8 @@ export const getEventParticipant = /* GraphQL */ `
         isExample
         createdAt
         updatedAt
-        owner
         formFormItemsId
+        owner
       }
       eventParticipantStatus
       createdAt

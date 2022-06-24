@@ -37,21 +37,25 @@ const Content = ({ event }: { event: Event }): JSX.Element => {
           justifyContent={'space-between'}
           flexWrap={'wrap'}
         >
-          <Box display={'flex'} alignItems={'center'}>
-            <Avatar
-              style={{ width: 50, height: 50, marginRight: '1rem' }}
-              src={event.user.avatarURL?.objectThumbnailURL}
-              {...stringAvatar(event.user.name)}
-            />
-            <Box>
-              <Typography fontWeight={600}>{event.user.name}</Typography>
-              <Typography color={'text.secondary'}>
-                {moment(event.createdAt).format(
-                  'dddd, MMMM Do YYYY, h:mm:ss a',
-                )}
-              </Typography>
-            </Box>
-          </Box>
+          {
+            event && event.user ? 
+              <Box display={'flex'} alignItems={'center'}>
+                <Avatar
+                  style={{ width: 50, height: 50, marginRight: '1rem' }}
+                  src={event.user.avatarURL?.objectThumbnailURL}
+                  {...stringAvatar(event.user.name)}
+                />
+                <Box>
+                  <Typography fontWeight={600}>{event.user.name}</Typography>
+                  <Typography color={'text.secondary'}>
+                    {moment(event.createdAt).format(
+                      'dddd, MMMM Do YYYY, h:mm:ss a',
+                    )}
+                  </Typography>
+                </Box>
+              </Box>
+              : null
+          }
           {event.likes?.items && event.count && (
             <CommentGroupButton likes={event.likes} count={event.count} />
           )}
