@@ -1,8 +1,8 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-06-02 17:10:21
- * @LastEditors: 李佳修
- * @LastEditTime: 2022-06-16 15:19:03
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-06-23 20:48:29
  * @FilePath: /uwcssa_ca/src/redux/form/formSlice.tsx
  * @Description:
  *
@@ -332,7 +332,7 @@ const formSlice = createSlice({
           !!state.createData.basicInfo[key] ||
           state.createData.basicInfo[key] === 0,
       );
-      console.log(state.createData.basicInfo);
+      //console.log(state.createData.basicInfo);
       state.createData.completeStatus.EventForm = complete;
     },
 

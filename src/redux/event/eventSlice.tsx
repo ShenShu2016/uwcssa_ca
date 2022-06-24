@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-20 21:02:00
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-22 01:23:17
+ * @LastEditTime: 2022-06-23 21:18:09
  * @FilePath: /uwcssa_ca/src/redux/event/eventSlice.tsx
  * @Description:
  *
@@ -216,9 +216,14 @@ export const fetchEvent = createAsyncThunk(
 export const postEvent = createAsyncThunk(
   'event/postEvent',
   async (
-    { createEventInput }: { createEventInput: CreateEventInput },
+    {
+      createEventInput,
+      google_place_id,
+    }: { createEventInput: CreateEventInput; google_place_id: string | null },
     { rejectWithValue },
   ) => {
+    console.log(google_place_id);
+
     try {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const [createEventResponse, createCountResponse]: [any, any] =
