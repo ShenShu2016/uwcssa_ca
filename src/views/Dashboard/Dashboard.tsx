@@ -20,7 +20,6 @@ import {
 import React, { useEffect, useState } from 'react';
 import { getAuthState, getOwnerUserName } from 'redux/auth/authSlice';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
-
 import ArticleContainer from 'components/ArticleContainer';
 // import Entries from './components/Entries';
 import EventContainer from 'components/EventContainer';

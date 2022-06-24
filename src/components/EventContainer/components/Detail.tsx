@@ -33,7 +33,7 @@ const Details: React.FC<DetailProp> = ({
   fromPreview = false,
   onJoin,
 }): JSX.Element => {
-  //console.log(info);
+  console.log(info);
   const ownerUsername = useAppSelector(getOwnerUserName);
   //console.log(ownerUsername);
   return (
@@ -95,14 +95,18 @@ const Details: React.FC<DetailProp> = ({
         <LocationOnIcon sx={{ mr: 2 }} />
         {info.eventLocation?.name ?? '未知地点'}
       </Box>
-      <Typography
-        color="#616161"
-        component={'i'}
-        sx={{ mt: 1, fontSize: '14px' }}
-        className="detail-text"
+      <Box
+        sx={{paddingY: 1, mt: 1}}
       >
-        {info.coverPageDescription}
-      </Typography>
+        <Typography
+          color="#616161"
+          component={'i'}
+          sx={{ fontSize: '14px' }}
+          className="detail-text"
+        >
+          {info.coverPageDescription}
+        </Typography>
+      </Box>
       <Box mt={1} display="flex" justifyContent="space-between">
         <Button
           variant="outlined"
