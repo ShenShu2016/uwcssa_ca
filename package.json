@@ -52,7 +52,6 @@
     "@types/jest": "^27.5.1",
     "aos": "^2.3.4",
     "aws-amplify": "^4.3.22",
-    "axios": "^0.27.2",
     "card-validator": "^8.1.1",
     "ckeditor5-custom-build": "file:ckeditor5",
     "date-fns": "^2.28.0",
