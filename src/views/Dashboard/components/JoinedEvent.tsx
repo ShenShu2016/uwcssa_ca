@@ -76,7 +76,7 @@ const JoinedEvent: React.FC = () => {
               }}
             >
               <LocationOnIcon sx={{ mr: 1 }} />
-              {'没有sss存地点？'}
+              {eventList.entities[id].eventLocation.name}
             </Box>
           </Box>
           <Box

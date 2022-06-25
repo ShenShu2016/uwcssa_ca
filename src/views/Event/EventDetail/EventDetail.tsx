@@ -35,16 +35,36 @@ import {
   selectAllComments,
 } from 'redux/comment/commentSlice';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
-
+import {
+  Autocomplete,
+  GoogleMap,
+  LoadScript,
+  Marker,
+} from '@react-google-maps/api';
 import CommentOverview from 'components/Comment/CommentOverview';
 import EventJoinForm from 'components/EventContainer/components/EventJoinForm';
 import { useParams } from 'react-router-dom';
+import GoogleMaps from 'components/GoogleMap/GoogleMaps';
 
 interface EventDetailProp {
   fromPreview?: boolean;
   previewEvent?: any;
   prevenJoinClick?: () => void;
 }
+
+type Libraries = (
+  | 'drawing'
+  | 'geometry'
+  | 'localContext'
+  | 'places'
+  | 'visualization'
+)[];
+const libraries: Libraries = ['places'];
+
+const containerStyle = {
+  width: '100%',
+  height: '500px',
+};
 
 const EventDetail: React.FC<EventDetailProp> = ({
   fromPreview = false,
@@ -116,9 +136,36 @@ const EventDetail: React.FC<EventDetailProp> = ({
                 }
               </Button>
             </Grid>
-            <Grid item xs={12} md={8}>
-              {event && <Content event={event} />}
-            </Grid>
+            {
+              event.eventLocation ?
+                <Grid item xs={12} md={8}>
+                    <LoadScript
+                      googleMapsApiKey="AIzaSyCKR_7S6WE5ETziYlastsHnmKuvELeFTW4"
+                      libraries={libraries}
+                    >
+                      <GoogleMap
+                        mapContainerStyle={containerStyle}
+                        center={{
+                          lat: event.eventLocation.lat,
+                          lng: event.eventLocation.lng,
+                        }}
+                        zoom={16}
+                      >
+                        <Marker position={{
+                          lat: event.eventLocation.lat,
+                          lng: event.eventLocation.lng,
+                        }}/>
+                      </GoogleMap>
+                    </LoadScript>
+                    <Typography
+                      color="#616161"
+                      sx={{ fontSize: '18px', fontWeight: 600, paddingY: 2 }}
+                    >
+                      {`地址：${event.eventLocation.formatted_address}`}
+                    </Typography>
+                </Grid>
+                : null
+            }
             <Grid item xs={12} md={4}>
               {isMd ? (
                 <Box marginBottom={2}>
@@ -126,6 +173,9 @@ const EventDetail: React.FC<EventDetailProp> = ({
                 </Box>
               ) : null}
               {!isAuth && <SidebarNewsletter />}
+            </Grid>
+            <Grid item xs={12} md={8}>
+              {event && <Content event={event} />}
             </Grid>
           </Grid>
           {comments && event?.count && (

@@ -137,7 +137,38 @@ const UserCardGrid = (): JSX.Element => {
             </Button>
           </Stack>
         </>
-      ) : null}
+      ) : 
+        (
+          <Box display='flex' width='100%' justifyContent='space-around' mt={4}>
+            <Button
+              variant="contained"
+              color="primary"
+              component={Link}
+              //target="blank"
+              to="/auth/signIn"
+              size="large"
+              sx={{
+                width: '35%'
+              }}
+            >
+              登录
+            </Button>
+            <Button
+              variant="outlined"
+              color="primary"
+              component={Link}
+              //target="blank"
+              to="/auth/signUp"
+              size="large"
+              sx={{
+                width: '35%'
+              }}
+            >
+              注册
+            </Button>
+          </Box>
+          
+        )}
     </Box>
   );
 };
