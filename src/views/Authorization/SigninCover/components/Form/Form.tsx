@@ -1,13 +1,8 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-17 21:41:42
-<<<<<<< HEAD
- * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-21 23:42:49
-=======
  * @LastEditors: Shikai Jin
  * @LastEditTime: 2022-06-21 22:43:11
->>>>>>> f295006b183685c48ccfcfab6feb5d40ec975c27
  * @FilePath: /uwcssa_ca/src/views/Authorization/SigninCover/components/Form/Form.tsx
  * @Description:
  *
@@ -61,7 +56,7 @@ const Form = (): JSX.Element => {
   const onSubmit = async (values) => {
     const response: any = await dispatch(signIn(values)); //!! 这里有毛病，后期需要改一改
     console.log(response);
-    if (response.payload?.challengeName === 'NEW_PASSWORD_REQUIRED') {
+    if (response.challengeName === 'NEW_PASSWORD_REQUIRED') {
       navigate('/auth/PreSignUpResetPassWord');
       enqueueSnackbar(
         `欢迎回来: ${response.payload.challengeParam.userAttributes.name},由于网站更新请重置您的密码`,
