@@ -1,4 +1,12 @@
-/* eslint-disable indent */
+/*
+ * @Author: 李佳修
+ * @Date: 2022-06-23 12:00:05
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-06-25 15:02:54
+ * @FilePath: /uwcssa_ca/src/views/Dashboard/components/JoinedEvent.tsx
+ * @Description:
+ *
+ */
 
 import { Box, Card, Typography } from '@mui/material';
 
@@ -7,24 +15,22 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import React from 'react';
 import { getOwnerUserName } from 'redux/auth/authSlice';
 import moment from 'moment';
+import { selectAllEvents } from 'redux/event/eventSlice';
 import { useAppSelector } from 'redux/hooks';
 import { useNavigate } from 'react-router-dom';
 
 const JoinedEvent: React.FC = () => {
-  const eventList = useAppSelector((state) => state.event);
+  const eventList = useAppSelector(selectAllEvents);
   const ownerUsername = useAppSelector(getOwnerUserName);
   const navigate = useNavigate();
 
-  const filteredEvent =
-    eventList && eventList.ids
-      ? eventList.ids.filter(
-          (id) =>
-            eventList.entities[id].eventParticipants?.items?.findIndex(
-              (item) => item.owner === ownerUsername,
-            ) !== -1,
-        )
-      : [];
-
+  const filteredEvent = eventList.filter((item) => {
+    item.eventParticipants &&
+      item.eventParticipants?.items?.findIndex((item) => {
+        item.owner === ownerUsername;
+      }) !== -1;
+  });
+  //console.log(filteredEvent);
   return (
     <Box
       sx={{
@@ -32,7 +38,7 @@ const JoinedEvent: React.FC = () => {
         overflow: 'auto',
       }}
     >
-      {filteredEvent.map((id) => (
+      {filteredEvent.map((item) => (
         <Card
           sx={{
             p: 1,
@@ -45,12 +51,12 @@ const JoinedEvent: React.FC = () => {
             },
           }}
           //   to={`/event/${info.id}`}
-          onClick={() => navigate(`/event/${id}`)}
-          key={id}
+          onClick={() => navigate(`/event/${item.id}`)}
+          key={item.id}
         >
           <Box>
             <Typography fontSize={18} fontWeight={600}>
-              {eventList.entities[id].title}
+              {item.title}
             </Typography>
             <Box
               sx={{
@@ -61,11 +67,9 @@ const JoinedEvent: React.FC = () => {
               }}
             >
               <AccessTimeIcon sx={{ mr: 1 }} />
-              {`${moment(eventList.entities[id].startDate).format(
-                'dddd, MMMM Do',
-              )} - ${moment(eventList.entities[id].endDate).format(
-                'dddd, MMMM Do',
-              )}`}
+              {`${moment(item.startDate).format('dddd, MMMM Do')} - ${moment(
+                item.endDate,
+              ).format('dddd, MMMM Do')}`}
             </Box>
             <Box
               sx={{
@@ -76,7 +80,7 @@ const JoinedEvent: React.FC = () => {
               }}
             >
               <LocationOnIcon sx={{ mr: 1 }} />
-              {eventList.entities[id].eventLocation.name}
+              {item.eventLocation?.name}
             </Box>
           </Box>
           <Box
@@ -90,10 +94,7 @@ const JoinedEvent: React.FC = () => {
               },
             }}
           >
-            <img
-              src={eventList.entities[id].coverPageImgURL}
-              alt={'event poster'}
-            />
+            <img src={item.coverPageImgURL} alt={'event poster'} />
           </Box>
         </Card>
       ))}

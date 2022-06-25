@@ -2,7 +2,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-13 09:15:49
- * @LastEditTime: 2022-06-24 00:41:51
+ * @LastEditTime: 2022-06-25 14:56:16
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/components/EventContainer/components/Detail.tsx
  */
@@ -33,7 +33,7 @@ const Details: React.FC<DetailProp> = ({
   fromPreview = false,
   onJoin,
 }): JSX.Element => {
-  console.log(info);
+  //console.log(info);
   const ownerUsername = useAppSelector(getOwnerUserName);
   //console.log(ownerUsername);
   return (
@@ -95,9 +95,7 @@ const Details: React.FC<DetailProp> = ({
         <LocationOnIcon sx={{ mr: 2 }} />
         {info.eventLocation?.name ?? '未知地点'}
       </Box>
-      <Box
-        sx={{paddingY: 1, mt: 1}}
-      >
+      <Box sx={{ paddingY: 1, mt: 1 }}>
         <Typography
           color="#616161"
           component={'i'}
