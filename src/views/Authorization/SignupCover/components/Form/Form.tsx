@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 15:50:53
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-24 23:51:08
+ * @LastEditTime: 2022-06-25 17:28:42
  * @FilePath: /uwcssa_ca/src/views/Authorization/SignupCover/components/Form/Form.tsx
  * @Description:
  *
@@ -47,8 +47,11 @@ const validationSchema = yup.object({
       /^(?=.*[a-z])(?=.*[A-Z])/,
       'Must Contain One Uppercase, One Lowercase',
     )
-    // eslint-disable-next-line no-useless-escape
-    .matches(/^(?=.*[!@#\$%\^&\*])/, 'Must Contain One Special Case Character')
+    .matches(
+      // eslint-disable-next-line no-useless-escape
+      /^[0-9A-Za-z]*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?][0-9a-zA-Z]*$/,
+      'Need one special character',
+    )
     .matches(/^(?=.{8,}$)\D*\d/, 'Must Contain One Number'),
 });
 

@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-06-21 22:26:42
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-24 23:52:55
+ * @LastEditTime: 2022-06-25 17:28:35
  * @FilePath: /uwcssa_ca/src/views/Authorization/PreSignUpResetPassWord/components/Form/Form.tsx
  * @Description:
  *
@@ -35,9 +35,13 @@ const validationSchema = yup.object({
       /^(?=.*[a-z])(?=.*[A-Z])/,
       'Must Contain One Uppercase, One Lowercase',
     )
-    // eslint-disable-next-line no-useless-escape
-    .matches(/^(?=.*[!@#\$%\^&\*])/, 'Must Contain One Special Case Character')
+    .matches(
+      // eslint-disable-next-line no-useless-escape
+      /^[0-9A-Za-z]*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?][0-9a-zA-Z]*$/,
+      'Need one special character',
+    )
     .matches(/^(?=.{8,}$)\D*\d/, 'Must Contain One Number'),
+
   passwordConfirmation: yup
     .string()
     .oneOf([yup.ref('new_password'), null], 'Passwords must match'),
