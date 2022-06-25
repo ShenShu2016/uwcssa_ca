@@ -4,7 +4,7 @@
  * @Author: Shen Shu
  * @Date: 2022-06-18 17:26:14
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-22 01:28:29
+ * @LastEditTime: 2022-06-25 14:30:30
  * @FilePath: /uwcssa_ca/src/views/Event/EventDetail/EventDetail.tsx
  * @Description:
  *
@@ -26,6 +26,7 @@ import {
   SidebarNewsletter,
   SimilarStories,
 } from './components';
+import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import React, { useEffect, useState } from 'react';
 import { fetchEvent, selectEventById } from 'redux/event/eventSlice';
 import { getAuthState, getOwnerUserName } from 'redux/auth/authSlice';
@@ -35,11 +36,7 @@ import {
   selectAllComments,
 } from 'redux/comment/commentSlice';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
-import {
-  GoogleMap,
-  LoadScript,
-  Marker,
-} from '@react-google-maps/api';
+
 import CommentOverview from 'components/Comment/CommentOverview';
 import EventJoinForm from 'components/EventContainer/components/EventJoinForm';
 import { useParams } from 'react-router-dom';
@@ -93,7 +90,7 @@ const EventDetail: React.FC<EventDetailProp> = ({
             ownerUsername,
           }),
         );
-        dispatch(insertAllComments(response.payload.comments.items)); //这种方法不太好
+        dispatch(insertAllComments(response?.payload?.comments?.items)); //这种方法不太好
       }
     };
     getEvent();
@@ -118,7 +115,10 @@ const EventDetail: React.FC<EventDetailProp> = ({
                 size="large"
                 variant="contained"
                 fullWidth
-                disabled={ownerUsername &&event?.eventParticipants?.items[0]?.owner === ownerUsername}
+                disabled={
+                  ownerUsername &&
+                  event?.eventParticipants?.items[0]?.owner === ownerUsername
+                }
                 onClick={() => {
                   if (fromPreview) {
                     prevenJoinClick();
@@ -127,43 +127,42 @@ const EventDetail: React.FC<EventDetailProp> = ({
                   }
                 }}
               >
-                {
-                  ownerUsername &&event?.eventParticipants?.items[0]?.owner === ownerUsername ?
-                  '你已经报名' :
-                  '点击此处报名'
-                }
+                {ownerUsername &&
+                event?.eventParticipants?.items[0]?.owner === ownerUsername
+                  ? '你已经报名'
+                  : '点击此处报名'}
               </Button>
             </Grid>
-            {
-              event.eventLocation ?
-                <Grid item xs={12} md={8}>
-                    <LoadScript
-                      googleMapsApiKey="AIzaSyCKR_7S6WE5ETziYlastsHnmKuvELeFTW4"
-                      libraries={libraries}
-                    >
-                      <GoogleMap
-                        mapContainerStyle={containerStyle}
-                        center={{
-                          lat: event.eventLocation.lat,
-                          lng: event.eventLocation.lng,
-                        }}
-                        zoom={16}
-                      >
-                        <Marker position={{
-                          lat: event.eventLocation.lat,
-                          lng: event.eventLocation.lng,
-                        }}/>
-                      </GoogleMap>
-                    </LoadScript>
-                    <Typography
-                      color="#616161"
-                      sx={{ fontSize: '18px', fontWeight: 600, paddingY: 2 }}
-                    >
-                      {`地址：${event.eventLocation.formatted_address}`}
-                    </Typography>
-                </Grid>
-                : null
-            }
+            {event?.eventLocation ? (
+              <Grid item xs={12} md={8}>
+                <LoadScript
+                  googleMapsApiKey="AIzaSyCKR_7S6WE5ETziYlastsHnmKuvELeFTW4"
+                  libraries={libraries}
+                >
+                  <GoogleMap
+                    mapContainerStyle={containerStyle}
+                    center={{
+                      lat: event.eventLocation.lat,
+                      lng: event.eventLocation.lng,
+                    }}
+                    zoom={16}
+                  >
+                    <Marker
+                      position={{
+                        lat: event.eventLocation.lat,
+                        lng: event.eventLocation.lng,
+                      }}
+                    />
+                  </GoogleMap>
+                </LoadScript>
+                <Typography
+                  color="#616161"
+                  sx={{ fontSize: '18px', fontWeight: 600, paddingY: 2 }}
+                >
+                  {`地址：${event.eventLocation.formatted_address}`}
+                </Typography>
+              </Grid>
+            ) : null}
             <Grid item xs={12} md={4}>
               {isMd ? (
                 <Box marginBottom={2}>

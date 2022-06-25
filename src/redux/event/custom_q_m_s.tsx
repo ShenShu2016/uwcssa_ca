@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-06-16 21:24:48
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-24 00:13:07
+ * @LastEditTime: 2022-06-25 14:33:04
  * @FilePath: /uwcssa_ca/src/redux/event/custom_q_m_s.tsx
  * @Description:
  *
@@ -209,13 +209,13 @@ export const getEvent = /* GraphQL */ `
       }
       eventLocation {
         id
-        description
+        name
+        formatted_address
         place_id
         reference
-        terms
         types
         apartmentNumbers
-        geocodingResult
+        # getPlaceResult
         lat
         lng
         createdAt
