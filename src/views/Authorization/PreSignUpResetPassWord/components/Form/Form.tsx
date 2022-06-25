@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-06-21 22:26:42
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-22 01:10:35
+ * @LastEditTime: 2022-06-24 23:52:55
  * @FilePath: /uwcssa_ca/src/views/Authorization/PreSignUpResetPassWord/components/Form/Form.tsx
  * @Description:
  *
@@ -30,11 +30,14 @@ const validationSchema = yup.object({
   new_password: yup
     .string()
     .required('Please specify your password')
+    .min(8, 'Password must be at least 8 characters long.')
     .matches(
-      // eslint-disable-next-line no-useless-escape
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
-      'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character',
-    ),
+      /^(?=.*[a-z])(?=.*[A-Z])/,
+      'Must Contain One Uppercase, One Lowercase',
+    )
+    // eslint-disable-next-line no-useless-escape
+    .matches(/^(?=.*[!@#\$%\^&\*])/, 'Must Contain One Special Case Character')
+    .matches(/^(?=.{8,}$)\D*\d/, 'Must Contain One Number'),
   passwordConfirmation: yup
     .string()
     .oneOf([yup.ref('new_password'), null], 'Passwords must match'),
@@ -94,7 +97,7 @@ const Form = (): JSX.Element => {
             fontWeight: 700,
           }}
         >
-          Please check your email
+          请输入新密码
         </Typography>
         <Typography color="text.secondary">May be in the spam box.</Typography>
       </Box>
