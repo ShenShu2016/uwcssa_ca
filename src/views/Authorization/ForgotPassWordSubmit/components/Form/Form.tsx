@@ -2,8 +2,8 @@
  * @Author: Shen Shu
  * @Date: 2022-05-18 15:31:43
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-10 14:58:35
- * @FilePath: /uwcssa_ca/src/views/ForgotPassWordSubmit/components/Form/Form.tsx
+ * @LastEditTime: 2022-06-24 23:50:58
+ * @FilePath: /uwcssa_ca/src/views/Authorization/ForgotPassWordSubmit/components/Form/Form.tsx
  * @Description:
  *
  */
@@ -42,11 +42,14 @@ const validationSchema = yup.object({
   new_password: yup
     .string()
     .required('Please specify your password')
+    .min(8, 'Password must be at least 8 characters long.')
     .matches(
-      // eslint-disable-next-line no-useless-escape
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
-      'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character',
-    ),
+      /^(?=.*[a-z])(?=.*[A-Z])/,
+      'Must Contain One Uppercase, One Lowercase',
+    )
+    // eslint-disable-next-line no-useless-escape
+    .matches(/^(?=.*[!@#\$%\^&\*])/, 'Must Contain One Special Case Character')
+    .matches(/^(?=.{8,}$)\D*\d/, 'Must Contain One Number'),
   passwordConfirmation: yup
     .string()
     .oneOf([yup.ref('new_password'), null], 'Passwords must match'),

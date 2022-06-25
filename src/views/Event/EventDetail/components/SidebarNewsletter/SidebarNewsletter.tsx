@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-06-18 17:53:44
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-18 18:03:12
+ * @LastEditTime: 2022-06-24 23:53:30
  * @FilePath: /uwcssa_ca/src/views/Event/EventDetail/components/SidebarNewsletter/SidebarNewsletter.tsx
  * @Description:
  *
@@ -37,7 +37,14 @@ const validationSchema = yup.object({
   password: yup
     .string()
     .required('Please specify your password')
-    .min(8, 'The password should have at minimum length of 8'),
+    .min(8, 'Password must be at least 8 characters long.')
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])/,
+      'Must Contain One Uppercase, One Lowercase',
+    )
+    // eslint-disable-next-line no-useless-escape
+    .matches(/^(?=.*[!@#\$%\^&\*])/, 'Must Contain One Special Case Character')
+    .matches(/^(?=.{8,}$)\D*\d/, 'Must Contain One Number'),
 });
 
 const SidebarNewsletter = (): JSX.Element => {
