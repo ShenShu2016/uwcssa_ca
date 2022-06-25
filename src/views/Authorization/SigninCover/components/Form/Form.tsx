@@ -56,7 +56,7 @@ const Form = (): JSX.Element => {
   const onSubmit = async (values) => {
     const response: any = await dispatch(signIn(values)); //!! 这里有毛病，后期需要改一改
     console.log(response);
-    if (response.challengeName === 'NEW_PASSWORD_REQUIRED') {
+    if (response.payload?.challengeName === 'NEW_PASSWORD_REQUIRED') {
       navigate('/auth/PreSignUpResetPassWord');
       enqueueSnackbar(
         `欢迎回来: ${response.payload.challengeParam.userAttributes.name},由于网站更新请重置您的密码`,
