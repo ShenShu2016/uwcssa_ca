@@ -19,6 +19,7 @@ import EventPoster from './components/EventPoster';
 import EventPreview from './components/EventPreview';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useAppSelector } from 'redux/hooks';
+import FullScreenLoading from 'components/FullScreenLoading';
 import 'swiper/css';
 
 export enum Steps {
@@ -54,6 +55,10 @@ const stepItems = [
 const EventCreate: React.FC = () => {
   const completed = useAppSelector(state => state.form.createData.completeStatus);
   const [activeStep, setActiveStep] = useState<number>(0);
+  const [loading, setLoading] = useState({
+    status: false,
+    message: '',
+  });
   
   return (
     <>
@@ -90,6 +95,7 @@ const EventCreate: React.FC = () => {
         }
       >
         <Box paddingX={'2%'} pb={4}>
+          <FullScreenLoading loading={loading.status} message={loading.message} />
           <Card
             sx={{
               paddingX: 4,
@@ -111,7 +117,7 @@ const EventCreate: React.FC = () => {
                 <EventConfig/>
               </SwiperSlide>
               <SwiperSlide>
-                <EventPreview/>
+                <EventPreview setLoading={setLoading} />
               </SwiperSlide>
             </Swiper>
           </Card>

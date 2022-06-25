@@ -36,7 +36,7 @@ function TabPanel(props) {
     >
       {value === index && (
         <Box sx={{ p: { md: 3, xs: 0 } }}>
-          <Typography>{children}</Typography>
+          {children}
         </Box>
       )}
     </div>
@@ -64,7 +64,12 @@ const EventList: React.FC = () => {
   const ownerUsername = useAppSelector(getOwnerUserName);
 
   const joinedEvent = eventList?.ids ?
-    eventList.ids.filter((id) => eventList.entities[id].eventParticipants?.items[0]?.owner === ownerUsername)
+    eventList.ids.filter(
+      (id) =>
+        eventList.entities[id].eventParticipants?.items?.findIndex(
+          (item) => item.owner === ownerUsername,
+        ) !== -1,
+    )
     : [];
 
   const processingEvent = eventList?.ids ?

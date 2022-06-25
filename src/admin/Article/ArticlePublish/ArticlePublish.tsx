@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-20 09:30:58
- * @LastEditTime: 2022-06-11 18:27:13
+ * @LastEditTime: 2022-06-25 00:29:17
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/admin/Article/ArticlePublish/ArticlePublish.tsx
  */
@@ -158,6 +158,7 @@ const ArticlePublish: React.FC = () => {
       message: '正在关联文章和标签',
     });
     // 都完成后进行tag与文章的关联
+    console.log(tagCreate, articleCommit);
     if (tagCreate.status && articleCommit.status) {
       const isConnected = await connectTagsAndArticle(
         articleCommit.articleID,
@@ -239,9 +240,11 @@ const ArticlePublish: React.FC = () => {
       ),
     );
     const tagUploadRes = await Promise.all(tagsPromises);
+    console.log(tagUploadRes, 999);
     const isAllTagCreated = tagUploadRes.every(
       (res) => res.meta.requestStatus === 'fulfilled',
     );
+    console.log(isAllTagCreated); //这里要改改
     if (isAllTagCreated) {
       enqueueSnackbar('标签已创建', { variant: 'success' });
     } else {
@@ -374,7 +377,7 @@ const ArticlePublish: React.FC = () => {
                 value={isPublish}
                 onChange={(e: any) => setIsPublish(e.target.checked)}
                 control={<Checkbox size="medium" />}
-                label={'要发布吗？'}
+                label={'将文章发送至订阅者邮箱？'}
               />
               <LoadingButton
                 loading={submitLoading}

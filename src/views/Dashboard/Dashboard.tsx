@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-18 13:56:36
- * @LastEditTime: 2022-06-22 23:26:30
+ * @LastEditTime: 2022-06-25 15:06:09
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/views/Dashboard/Dashboard.tsx
  */
@@ -20,15 +20,17 @@ import {
 import React, { useEffect, useState } from 'react';
 import { getAuthState, getOwnerUserName } from 'redux/auth/authSlice';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
+
 import ArticleContainer from 'components/ArticleContainer';
-// import Entries from './components/Entries';
 import EventContainer from 'components/EventContainer';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import JoinedEvent from './components/JoinedEvent';
 import Section from './components/Section';
 import UserCardGrid from 'components/UserCardGrid';
 import { fetchArticleList } from 'redux/article/articleSlice';
 import { fetchEventList } from 'redux/event/eventSlice';
-import JoinedEvent from './components/JoinedEvent';
+
+// import Entries from './components/Entries';
 
 const StickyAccordion = styled(AccordionSummary)(() => ({
   position: 'sticky',
@@ -54,7 +56,7 @@ const Dashboard = (): React.ReactElement => {
       );
     }
     if (
-      fetchArticleListStatus === 'succeed' &&
+      ['succeed', 'failed'].includes(fetchArticleListStatus) &&
       ['succeed', 'failed'].includes(fetchEventListStatus)
     ) {
       setLoading(false);
@@ -66,7 +68,7 @@ const Dashboard = (): React.ReactElement => {
       dispatch(fetchEventList({ isAuth, ownerUsername }));
     }
     if (
-      fetchArticleListStatus === 'succeed' &&
+      ['succeed', 'failed'].includes(fetchArticleListStatus) &&
       ['succeed', 'failed'].includes(fetchEventListStatus)
     ) {
       setLoading(false);
@@ -146,7 +148,11 @@ const Dashboard = (): React.ReactElement => {
                   <Entries />
                 </Section> */}
 
-                <Section title="已加入的活动" hasPadding={false} component={Box}>
+                <Section
+                  title="已加入的活动"
+                  hasPadding={false}
+                  component={Box}
+                >
                   <JoinedEvent />
                 </Section>
               </Box>
@@ -283,7 +289,11 @@ const Dashboard = (): React.ReactElement => {
                 <Typography>已加入的活动</Typography>
               </StickyAccordion>
               <AccordionDetails sx={{ padding: 0 }}>
-                <Section title="已加入的活动" hasPadding={false} showTitle={false}>
+                <Section
+                  title="已加入的活动"
+                  hasPadding={false}
+                  showTitle={false}
+                >
                   <JoinedEvent />
                 </Section>
               </AccordionDetails>

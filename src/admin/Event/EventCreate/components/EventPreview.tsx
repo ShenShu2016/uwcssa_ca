@@ -17,7 +17,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import DynamicForm from 'components/DynamicForm';
 import { EventDetail } from 'views';
 import EventSwiperItem from 'components/EventContainer/components/EventSwiperItem';
-import FullScreenLoading from 'components/FullScreenLoading';
+// import FullScreenLoading from 'components/FullScreenLoading';
 import NotInterestedIcon from '@mui/icons-material/NotInterested';
 import { getOwnerUserName } from 'redux/auth/authSlice';
 import { postAddress } from 'redux/address/addressSlice';
@@ -26,7 +26,14 @@ import { useSnackbar } from 'notistack';
 import { useSwiper } from 'swiper/react';
 import { v4 as uuid } from 'uuid';
 
-const EventPreview: React.FC = () => {
+interface EventPreviewProp {
+  setLoading:  React.Dispatch<React.SetStateAction<{
+    status: boolean;
+    message: string;
+  }>>
+}
+
+const EventPreview: React.FC<EventPreviewProp> = ({ setLoading }) => {
   const swiper = useSwiper();
   const dispatch = useAppDispatch();
   const { enqueueSnackbar } = useSnackbar();
@@ -56,10 +63,10 @@ const EventPreview: React.FC = () => {
   const preArticleId = uuid();
   const preAddressId = uuid();
 
-  const [loading, setLoading] = useState({
-    status: false,
-    message: '',
-  });
+  // const [loading, setLoading] = useState({
+  //   status: false,
+  //   message: '',
+  // });
   // const printData = () => {
   //   console.log(createData);
   //   const data = {
@@ -131,6 +138,7 @@ const EventPreview: React.FC = () => {
       active: ActiveType.T,
       owner: ownerUsername,
     };
+    console.log(98989 ,createEventInput);
     setLoading({
       status: true,
       message: '正在创建活动',
@@ -196,8 +204,6 @@ const EventPreview: React.FC = () => {
 
   return (
     <Box height="80vh">
-      <FullScreenLoading loading={loading.status} message={loading.message} />
-      {/* <EventJoinForm /> */}
       <Dialog
         open={open}
         maxWidth="xs"
