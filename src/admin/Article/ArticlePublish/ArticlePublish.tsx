@@ -240,6 +240,7 @@ const ArticlePublish: React.FC = () => {
       ),
     );
     const tagUploadRes = await Promise.all(tagsPromises);
+    console.log(tagUploadRes, 999);
     const isAllTagCreated = tagUploadRes.every(
       (res) => res.meta.requestStatus === 'fulfilled',
     );
@@ -376,7 +377,7 @@ const ArticlePublish: React.FC = () => {
                 value={isPublish}
                 onChange={(e: any) => setIsPublish(e.target.checked)}
                 control={<Checkbox size="medium" />}
-                label={'要发布吗？'}
+                label={'将文章发送至订阅者邮箱？'}
               />
               <LoadingButton
                 loading={submitLoading}

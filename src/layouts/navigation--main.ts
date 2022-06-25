@@ -32,7 +32,7 @@ const pages = {
     },
     {
       title: '后台管理系统',
-      href: '/admin',
+      href: '/admin/users',
     },
     // {
     //   title: 'Service',

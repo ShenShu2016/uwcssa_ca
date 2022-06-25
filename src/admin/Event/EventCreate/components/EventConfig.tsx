@@ -26,19 +26,26 @@ import { useAppSelector, useAppDispatch } from 'redux/hooks';
 import { useSwiper } from 'swiper/react';
 import { removeQuestion, reorderQuestion } from 'redux/form/formSlice';
 import Tooltip from '@mui/material/Tooltip';
-import { fetchFormItemList } from 'redux/form/formSlice';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import {SortableContainer, SortableElement, SortableHandle, SortEnd} from 'react-sortable-hoc';
 import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
 import { DialogType } from './FormItemCreate';
+import { FormItem } from 'redux/form/formSlice';
+import FormItemDetail from './FormItemDetail';
 
 const EventConfig: React.FC = () => {
   const swiper = useSwiper();
+  const [detailDialogOpen, setDetailDialogOpen] = useState<boolean>(false);
+  const [detailedItem, setDetailedItem] = useState<null | FormItem>(null);
+  const [editItem, setEditItem] = useState(null);
+  const [editDialogOpen, setEditDialogOpen] = useState<boolean>(false);
   const [dialogOpen, setDialogOpen] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const selectedQuestions = useAppSelector(state => state.form.createData.selectedQuestions);
   const rederList = [...selectedQuestions];
   rederList.sort((prev, next) => prev.order - next.order);
+
+  console.log(rederList, 8887777);
   
   const handleRemoveQuestion = (e, item) => {
     e.preventDefault();
@@ -47,15 +54,31 @@ const EventConfig: React.FC = () => {
     dispatch(removeQuestion(item));
   };
 
-  const handleCompleteCreateFormItem = () => {
-    dispatch(fetchFormItemList({ isAuth: true }));
-  };
+  // const handleCompleteCreateFormItem = () => {
+  //   dispatch(fetchFormItemList({ isAuth: true }));
+  // };
 
   const handleSortEnd = (sort: SortEnd) => {
     dispatch(reorderQuestion({
       newOrder: sort.newIndex,
       oldOrder: sort.oldIndex
     }));
+  };
+
+  const handleCheckDetail = (data) => {
+    setDetailedItem(data);
+    setDetailDialogOpen(true);
+  };
+
+  const handleEditQuestion = (data) => {
+    setEditItem(data);
+    setEditDialogOpen(true);
+    // console.log(data);
+  };
+
+  const handleCreateNew = () => {
+    setEditItem(null);
+    setDialogOpen(true);
   };
 
   const DragHandle = SortableHandle(() => (
@@ -143,6 +166,14 @@ const EventConfig: React.FC = () => {
             item.formType === FormType.Checkbox ?
               <CheckBoxGroup item={item}/> : null
           }
+          <Box
+            display={'flex'}
+            justifyContent={'space-between'}
+          >
+            {/* <Button variant="text" size='small' onClick={() => handleAddQuestion(item)}>使用问题</Button> */}
+            <Button variant="text" size='small' onClick={() => handleCheckDetail(item)}>查看详情</Button>
+            <Button variant="text" size='small' onClick={() => handleEditQuestion(item)}>编辑问题</Button>
+          </Box>
         </Box>
         <Box
           className='remove_icon'
@@ -218,7 +249,7 @@ const EventConfig: React.FC = () => {
           <Button
             variant="contained"
             sx={{width: '30%', mt: '24px'}}
-            onClick={() => setDialogOpen(true)}
+            onClick={handleCreateNew}
           >
             新建问题
           </Button>
@@ -228,8 +259,16 @@ const EventConfig: React.FC = () => {
         type={DialogType.create}
         open={dialogOpen}
         setOpen={setDialogOpen}
-        completeCreate={handleCompleteCreateFormItem}
+        // completeCreate={handleCompleteCreateFormItem}
       />
+      <FormItemCreate
+        editItem={editItem}
+        type={DialogType.edit}
+        open={editDialogOpen}
+        setOpen={setEditDialogOpen}
+        // completeCreate={handleCompleteCreateFormItem}
+      />
+      <FormItemDetail open={detailDialogOpen} setOpen={setDetailDialogOpen} item={detailedItem}/>
     </Box>
   );
 };

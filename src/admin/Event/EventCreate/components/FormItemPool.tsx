@@ -5,7 +5,7 @@
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/admin/Event/EventCreate/components/FormItemPool.tsx
  */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { fetchFormItemList, selectAllFormItems } from 'redux/form/formSlice';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import Card from '@mui/material/Card';
@@ -21,10 +21,10 @@ import RadioGroup from './FormItems/RadioGroup';
 import CheckBoxGroup from './FormItems/CheckBoxGroup';
 import Button from '@mui/material/Button';
 import { addQuestion } from 'redux/form/formSlice';
-import FormItemDetail from './FormItemDetail';
-import { FormItem } from 'redux/form/formSlice';
-import FormItemCreate from './FormItemCreate';
-import { DialogType } from './FormItemCreate';
+// import FormItemDetail from './FormItemDetail';
+// import { FormItem } from 'redux/form/formSlice';
+// import FormItemCreate from './FormItemCreate';
+// import { DialogType } from './FormItemCreate';
 
 // interface FormItemPoolProp {
 //     questions: []
@@ -32,14 +32,14 @@ import { DialogType } from './FormItemCreate';
 
 const FormItemPool: React.FC = () => {
   const formItemList = useAppSelector(selectAllFormItems);
-  const selectedList = useAppSelector(state => state.form.createData.selectedQuestions);
-  const [detailDialogOpen, setDetailDialogOpen] = useState<boolean>(false);
-  const [detailedItem, setDetailedItem] = useState<null | FormItem>(null);
-  const [editDialogOpen, setEditDialogOpen] = useState<boolean>(false);
-  const [editItem, setEditItem] = useState(null);
+  // const selectedList = useAppSelector(state => state.form.createData.selectedQuestions);
+  // const [detailDialogOpen, setDetailDialogOpen] = useState<boolean>(false);
+  // const [detailedItem, setDetailedItem] = useState<null | FormItem>(null);
+  // const [editDialogOpen, setEditDialogOpen] = useState<boolean>(false);
+  // const [editItem, setEditItem] = useState(null);
   const dispatch = useAppDispatch();
 
-  console.log(formItemList);
+  // console.log(formItemList);
 
   useEffect(() => {
     dispatch(fetchFormItemList({ isAuth: true }));
@@ -49,97 +49,96 @@ const FormItemPool: React.FC = () => {
     dispatch(addQuestion(data));
   };
 
-  const handleCheckDetail = (data) => {
-    setDetailedItem(data);
-    setDetailDialogOpen(true);
-  };
+  // const handleCheckDetail = (data) => {
+  //   setDetailedItem(data);
+  //   setDetailDialogOpen(true);
+  // };
 
-  const handleEditQuestion = (data) => {
-    setEditItem(data);
-    setEditDialogOpen(true);
-    console.log(data);
-  };
+  // const handleEditQuestion = (data) => {
+  //   setEditItem(data);
+  //   setEditDialogOpen(true);
+  //   // console.log(data);
+  // };
 
-  const handleCompleteCreateFormItem = () => {
-    dispatch(fetchFormItemList({ isAuth: true }));
-  };
+  // const handleCompleteCreateFormItem = () => {
+  //   dispatch(fetchFormItemList({ isAuth: true }));
+  // };
 
   return (
     <>
       {
         formItemList && formItemList.map(item => {
           return (
-            selectedList.findIndex(ele => ele.id === item.id) === -1 ?
-              (<Card
-                sx={{
-                  p: 1,
-                  marginY: 1,
-                  cursor: 'pointer'
-                }}
-                key={item.id}
-              >
-                {
-                  item.formType === FormType.TextFieldShort ?
-                    <TextFieldShort item={item}/> : null
-                }
+            <Card
+              sx={{
+                p: 1,
+                marginY: 1,
+                cursor: 'pointer',
+              }}
+              key={item.id}
+            >
+              {
+                item.formType === FormType.TextFieldShort ?
+                  <TextFieldShort item={item}/> : null
+              }
 
-                {
-                  item.formType === FormType.TextFieldLong ?
-                    <TextFieldLong item={item}/> : null
-                }
+              {
+                item.formType === FormType.TextFieldLong ?
+                  <TextFieldLong item={item}/> : null
+              }
              
-                {
-                  item.formType === FormType.Select || item.formType === FormType.MultipleSelect ?
-                    <Select item={item}/> : null
-                }
+              {
+                item.formType === FormType.Select || item.formType === FormType.MultipleSelect ?
+                  <Select item={item}/> : null
+              }
 
-                {
-                  item.formType === FormType.DatePicker ?
-                    <DatePicker item={item}/> : null
-                }
+              {
+                item.formType === FormType.DatePicker ?
+                  <DatePicker item={item}/> : null
+              }
 
-                {
-                  item.formType === FormType.TimePicker ?
-                    <TimePicker item={item}/> : null
-                }
+              {
+                item.formType === FormType.TimePicker ?
+                  <TimePicker item={item}/> : null
+              }
 
-                {
-                  item.formType === FormType.DateTimePicker ?
-                    <DateTimePicker item={item}/> : null
-                }
+              {
+                item.formType === FormType.DateTimePicker ?
+                  <DateTimePicker item={item}/> : null
+              }
 
-                {
-                  item.formType === FormType.RadioGroupH ||
+              {
+                item.formType === FormType.RadioGroupH ||
                   item.formType === FormType.RadioGroupV ||
                   item.formType === FormType.Boolean ?
-                    <RadioGroup item={item}/> : null
-                }
+                  <RadioGroup item={item}/> : null
+              }
 
-                {
-                  item.formType === FormType.Checkbox ?
-                    <CheckBoxGroup item={item}/> : null
-                }
-                <Box
-                  display={'flex'}
-                  justifyContent={'space-between'}
-                >
-                  <Button variant="text" size='small' onClick={() => handleAddQuestion(item)}>使用问题</Button>
-                  <Button variant="text" size='small' onClick={() => handleCheckDetail(item)}>查看详情</Button>
-                  <Button variant="text" size='small' onClick={() => handleEditQuestion(item)}>编辑问题</Button>
-                </Box>
-              </Card>)
-              : null
+              {
+                item.formType === FormType.Checkbox ?
+                  <CheckBoxGroup item={item}/> : null
+              }
+              <Box
+                paddingY={1}
+                display={'flex'}
+                justifyContent={'space-between'}
+              >
+                <Button variant="text" size='small' onClick={() => handleAddQuestion(item)}>使用问题</Button>
+                {/* <Button variant="text" size='small' onClick={() => handleCheckDetail(item)}>查看详情</Button>
+                  <Button variant="text" size='small' onClick={() => handleEditQuestion(item)}>编辑问题</Button> */}
+              </Box>
+            </Card>
           );
         })
       }
-      <FormItemCreate
+      {/* <FormItemCreate
         editItem={editItem}
         type={DialogType.edit}
         open={editDialogOpen}
         setOpen={setEditDialogOpen}
         completeCreate={handleCompleteCreateFormItem}
       />
-      <FormItemDetail open={detailDialogOpen} setOpen={setDetailDialogOpen} item={detailedItem}/>
+      <FormItemDetail open={detailDialogOpen} setOpen={setDetailDialogOpen} item={detailedItem}/> */}
     </>
   );
 };

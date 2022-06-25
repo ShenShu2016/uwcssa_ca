@@ -36,7 +36,6 @@ import {
 } from 'redux/comment/commentSlice';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import {
-  Autocomplete,
   GoogleMap,
   LoadScript,
   Marker,
@@ -44,7 +43,6 @@ import {
 import CommentOverview from 'components/Comment/CommentOverview';
 import EventJoinForm from 'components/EventContainer/components/EventJoinForm';
 import { useParams } from 'react-router-dom';
-import GoogleMaps from 'components/GoogleMap/GoogleMaps';
 
 interface EventDetailProp {
   fromPreview?: boolean;

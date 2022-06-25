@@ -27,17 +27,18 @@ import {
   TextField,
 } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { postFormItem, updateFormItemDetail } from 'redux/form/formSlice';
+// import { postFormItem, updateFormItemDetail } from 'redux/form/formSlice';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import FieldLabel from './FieldLabel';
 import { FormType } from 'redux/form/formSlice';
-import FullScreenLoading from 'components/FullScreenLoading';
+// import FullScreenLoading from 'components/FullScreenLoading';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { getOwnerUserName } from 'redux/auth/authSlice';
 import { useFormik } from 'formik';
 import { useSnackbar } from 'notistack';
+import { addQuestion, updateQuestion } from 'redux/form/formSlice';
 
 export enum DialogType {
   create,
@@ -49,7 +50,7 @@ interface FormItemCreateProp {
   editItem?: any;
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  completeCreate: () => void;
+  // completeCreate: () => void;
 }
 
 interface Option {
@@ -62,7 +63,7 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({
   editItem = null,
   open,
   setOpen,
-  completeCreate,
+  // completeCreate,
 }) => {
   const [options, setOptions] = useState<Array<Option>>([]);
   const [newOption, setNewOption] = useState<string>('');
@@ -72,10 +73,10 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({
   const handleClose = () => {
     setOpen(false);
   };
-  const [fullScreenLoading, setFullScreenLoading] = useState({
-    loading: false,
-    message: '',
-  });
+  // const [fullScreenLoading, setFullScreenLoading] = useState({
+  //   loading: false,
+  //   message: '',
+  // });
 
   const resetForm = () => {
     formik.resetForm();
@@ -164,13 +165,10 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({
       enqueueSnackbar('请完成选项配置', { variant: 'warning' });
       return;
     }
-    setFullScreenLoading({
-      loading: true,
-      message: type === DialogType.create ? '正在创建问题' : '正在修改问题配置',
-    });
     const param = {
+      id: type === DialogType.create ? undefined : editItem.id,
       question: values.title,
-      order: 1,
+      order: type === DialogType.create ? 1 : editItem.order,
       isDate: false,
       isTrim: true,
       isBoolean: values.formType === FormType.Boolean,
@@ -188,39 +186,51 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({
       formSelectChoices: options.map((item) => item.label),
       owner: ownerUserName,
       formFormItemsId: undefined,
-      isExample: true
+      isExample: false
     };
     // 通过前面的校验后 可以发送请求创建问题
-    const res =
-      type === DialogType.create
-        ? await dispatch(
-            postFormItem({
-              createFormItemInput: param,
-            }),
-          )
-        : await dispatch(
-            updateFormItemDetail({
-              updateFormItemInput: {
-                id: editItem.id,
-                ...param,
-              },
-            }),
-          );
-    if (res.meta.requestStatus === 'fulfilled') {
-      enqueueSnackbar(
+    // const res =
+    //   type === DialogType.create
+    //     ? await dispatch(
+    //         postFormItem({
+    //           createFormItemInput: param,
+    //         }),
+    //       )
+    //     : await dispatch(
+    //         updateFormItemDetail({
+    //           updateFormItemInput: {
+    //             id: editItem.id,
+    //             ...param,
+    //           },
+    //         }),
+    //       );
+    // if (res.meta.requestStatus === 'fulfilled') {
+    //   enqueueSnackbar(
+    //     type === DialogType.create
+    //       ? '问题创建成功，记得加入表单才能生效哦'
+    //       : '修改问题配置成功',
+    //     { variant: 'success' },
+    //   );
+    //   setFullScreenLoading({
+    //     loading: false,
+    //     message: '',
+    //   });
+    //   setOpen(false);
+    //   completeCreate();
+    //   resetForm();
+    // }
+    type === DialogType.create ?
+    dispatch(addQuestion(param)) :
+    dispatch(updateQuestion(param));
+    enqueueSnackbar(
         type === DialogType.create
           ? '问题创建成功，记得加入表单才能生效哦'
           : '修改问题配置成功',
         { variant: 'success' },
       );
-      setFullScreenLoading({
-        loading: false,
-        message: '',
-      });
-      setOpen(false);
-      completeCreate();
-      resetForm();
-    }
+    setOpen(false);
+    // completeCreate();
+    resetForm();
 
     return values;
   };
@@ -237,10 +247,10 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({
 
   return (
     <Dialog maxWidth={false} open={open} onClose={handleClose} scroll={'paper'}>
-      <FullScreenLoading
+      {/* <FullScreenLoading
         message={fullScreenLoading.message}
         loading={fullScreenLoading.loading}
-      />
+      /> */}
       <form onSubmit={formik.handleSubmit}>
         <DialogTitle>
           {type === DialogType.create ? '创建问题' : '编辑问题'}

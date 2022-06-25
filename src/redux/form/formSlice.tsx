@@ -32,6 +32,7 @@ import { RootState } from 'redux/store';
 import { UserProfile } from 'redux/userProfile/userProfileSlice';
 import { graphqlOperation } from '@aws-amplify/api-graphql';
 import { listFormItems } from './custom_q_m_s';
+import { v4 as uuid } from 'uuid';
 
 export type Form = {
   id: string;
@@ -342,10 +343,23 @@ const formSlice = createSlice({
         !!state.createData.posterImage;
     },
 
+    updateQuestion(state, action) {
+      console.log(action.payload);
+      // 找到元素所在index
+      const index = state.createData.selectedQuestions.findIndex((item) => {
+        console.log(item.id, action.payload.id);
+        return item.id === action.payload.id;
+      });
+      console.log(index);
+      state.createData.selectedQuestions.splice(index, 1, action.payload);
+    },
+
     addQuestion(state, action) {
       // 有新的被选中的问题塞进数组的时候 首先添加order 默认排在最后一个
+      // 选入列表的时候 需要分配一个新的id
       const selected = {
         ...action.payload,
+        id: uuid(),
         order: state.createData.selectedQuestions.length + 1,
       };
       state.createData.selectedQuestions.push(selected);
@@ -505,6 +519,7 @@ const formSlice = createSlice({
 export const {
   setBasicInfo,
   addQuestion,
+  updateQuestion,
   removeQuestion,
   reorderQuestion,
   setPosterImage,

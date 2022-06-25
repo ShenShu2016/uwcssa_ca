@@ -9,16 +9,16 @@
  */
 
 const pages = [
-  {
-    groupTitle: 'Getting Started',
-    id: 'getting-started',
-    pages: [
-      {
-        title: 'Dashboard',
-        href: '/admin',
-      },
-    ],
-  },
+  // {
+  //   groupTitle: 'Getting Started',
+  //   id: 'getting-started',
+  //   pages: [
+  //     {
+  //       title: 'Dashboard',
+  //       href: '/admin',
+  //     },
+  //   ],
+  // },
   {
     groupTitle: '用户',
     id: 'UserProfile',

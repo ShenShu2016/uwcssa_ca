@@ -33,14 +33,14 @@ function AdminRoutes(): Array<{
   const isAdmin = useAppSelector(getIsAdmin);
 
   return [
-    {
-      path: '/admin',
-      renderer: (params = {}): JSX.Element => (
-        <AdminDashboardView {...params} />
-      ),
-      isAllowed: isAdmin,
-      redirectPath: '/404',
-    },
+    // {
+    //   path: '/admin',
+    //   renderer: (params = {}): JSX.Element => (
+    //     <AdminDashboardView {...params} />
+    //   ),
+    //   isAllowed: isAdmin,
+    //   redirectPath: '/404',
+    // },
     {
       path: '/admin/users',
       renderer: (params = {}): JSX.Element => (
