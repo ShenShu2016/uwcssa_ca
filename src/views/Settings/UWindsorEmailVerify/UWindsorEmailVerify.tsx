@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-06-12 21:51:49
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-20 21:09:34
+ * @LastEditTime: 2022-06-25 17:55:50
  * @FilePath: /uwcssa_ca/src/views/Settings/UWindsorEmailVerify/UWindsorEmailVerify.tsx
  * @Description:
  *
@@ -83,11 +83,12 @@ function UWindsorEmailVerify() {
                 sx={{ marginBottom: 2 }}
                 fontWeight={700}
               >
-                账号验证，是否是温莎大学的学生
+                功能还没做好。账号验证，是否是温莎大学的学生
               </Typography>
               <TextField
                 size="small"
                 label="温莎大学邮箱"
+                disabled={true}
                 variant="outlined"
                 name={'uWindsorEmail'}
                 value={formik.values.uWindsorEmail}
@@ -106,6 +107,7 @@ function UWindsorEmailVerify() {
                 type="submit"
                 color="warning"
                 sx={{ lineHeight: 1.5, ml: '1rem' }}
+                disabled={true}
               >
                 Submit
               </Button>
