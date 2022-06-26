@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-02 19:33:37
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-21 23:51:03
+ * @LastEditTime: 2022-06-25 20:14:24
  * @FilePath: /uwcssa_ca/src/redux/auth/authSlice.tsx
  * @Description:
  *
@@ -188,10 +188,12 @@ export const loadUser = createAsyncThunk('auth/loadUser', async () => {
 export const signIn = createAsyncThunk(
   'auth/signIn',
   async ({ username, password }: { username: string; password: string }) => {
-    const [response, credentials] = await Promise.all([
-      Auth.signIn(username, password),
-      Auth.currentUserCredentials(),
-    ]);
+    // const [response, credentials] = await Promise.all([
+    //   Auth.signIn(username, password),
+    //   Auth.currentUserCredentials(),
+    // ]);
+    const response = await Auth.signIn(username, password);
+    const credentials = await Auth.currentUserCredentials();
     console.log(response);
     if (response.challengeName === 'NEW_PASSWORD_REQUIRED') {
       return response;
