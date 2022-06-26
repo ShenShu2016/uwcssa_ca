@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-24 23:30:45
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-12 18:41:52
+ * @LastEditTime: 2022-06-26 16:48:12
  * @FilePath: /uwcssa_ca/amplify/backend/function/UserImageCompressHandler/src/index.js
  * @Description:
  *
@@ -35,6 +35,10 @@ exports.handler = async (event, context, callback) => {
   );
   for (let i = 0; i < event['Records'].length; i++) {
     let record = event['Records'][i];
+    if (record.eventName !== 'INSERT') {
+      console.log('Skipping non-INSERT event');
+      continue;
+    }
     // Object key may have spaces or unicode non-ASCII characters.
     const srcKey = decodeURIComponent(
       record.dynamodb.NewImage.key.S.replace(/\+/g, ' '),

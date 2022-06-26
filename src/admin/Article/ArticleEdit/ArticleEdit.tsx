@@ -1,25 +1,35 @@
-import React, { useEffect, useState } from 'react';
-import ArticleCommon from '../ArticleCommon';
+/*
+ * @Author: 李佳修
+ * @Date: 2022-06-26 15:41:46
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-06-26 16:34:24
+ * @FilePath: /uwcssa_ca/src/admin/Article/ArticleEdit/ArticleEdit.tsx
+ * @Description:
+ *
+ */
+
 import {
   Article,
   fetchArticle,
   updateArticleDetail,
 } from 'redux/article/articleSlice';
-import { createArticleTag, createNewTag } from 'redux/tag/tagSlice';
+import React, { useEffect, useState } from 'react';
+import { postArticleTag, postTag } from 'redux/tag/tagSlice';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { useNavigate, useParams } from 'react-router-dom';
+
 import { ActiveType } from 'API';
+import ArticleCommon from '../ArticleCommon';
 import { getOwnerUserName } from 'redux/auth/authSlice';
 import { useSnackbar } from 'notistack';
 
 const ArticleEdit: React.FC = () => {
-
   const { enqueueSnackbar } = useSnackbar();
   const { id: editArticleId } = useParams();
   const navigate = useNavigate();
   const [fullScreenLoading, setFullScreenLoading] = useState({
     loading: false,
-    message: ''
+    message: '',
   });
   const [initData, setInitData] = useState(null);
   const [originOwner, setOriginOwner] = useState<string>('');
@@ -46,9 +56,9 @@ const ArticleEdit: React.FC = () => {
           content: articleInfo.content,
           coverPageDescription: articleInfo.coverPageDescription,
           tags: articleInfo.tags.items,
-          imgFile: articleInfo.coverPageImgURL
+          imgFile: articleInfo.coverPageImgURL,
         });
-       
+
         setOriginOwner(articleInfo.owner);
       } else {
         enqueueSnackbar('获取文章失败', { variant: 'error' });
@@ -85,10 +95,7 @@ const ArticleEdit: React.FC = () => {
         tagCreate.tags,
       );
       if (isConnected) {
-        enqueueSnackbar(
-          '更新完成',
-          { variant: 'success' },
-        );
+        enqueueSnackbar('更新完成', { variant: 'success' });
         setFullScreenLoading({
           loading: true,
           message: '操作成功，即将跳转',
@@ -125,18 +132,14 @@ const ArticleEdit: React.FC = () => {
       owner: originOwner,
     };
     console.log(params.owner, username, 888);
-    const articlePostRes = await dispatch(updateArticleDetail({ updateArticleInput: params }));
+    const articlePostRes = await dispatch(
+      updateArticleDetail({ updateArticleInput: params }),
+    );
     const isPosted = articlePostRes.meta.requestStatus === 'fulfilled';
     if (isPosted) {
-      enqueueSnackbar(
-        '文章已更新',
-        { variant: 'success' },
-      );
+      enqueueSnackbar('文章已更新', { variant: 'success' });
     } else {
-      enqueueSnackbar(
-        '文章更新错误',
-        { variant: 'error' },
-      );
+      enqueueSnackbar('文章更新错误', { variant: 'error' });
     }
     return {
       status: isPosted,
@@ -146,7 +149,7 @@ const ArticleEdit: React.FC = () => {
   const createTags = async (currentTags) => {
     const tagsPromises = currentTags.map((item) =>
       dispatch(
-        createNewTag({
+        postTag({
           createTagInput: {
             id: item.tagID,
             owner: username,
@@ -175,7 +178,7 @@ const ArticleEdit: React.FC = () => {
   const connectTagsAndArticle = async (articleID, tags) => {
     const connectTags = tags.map((tagID) =>
       dispatch(
-        createArticleTag({
+        postArticleTag({
           createArticleTagInput: {
             tagID,
             articleID,
@@ -187,12 +190,14 @@ const ArticleEdit: React.FC = () => {
     return resList.every((res) => res.meta.requestStatus === 'fulfilled');
   };
 
-  return (<ArticleCommon
-    pageTitle="编辑文章"
-    fullScreenLoading={fullScreenLoading}
-    initData={initData}
-    onCommit={handleSubmitArticle}
-  />);
+  return (
+    <ArticleCommon
+      pageTitle="编辑文章"
+      fullScreenLoading={fullScreenLoading}
+      initData={initData}
+      onCommit={handleSubmitArticle}
+    />
+  );
 };
 
 export default ArticleEdit;

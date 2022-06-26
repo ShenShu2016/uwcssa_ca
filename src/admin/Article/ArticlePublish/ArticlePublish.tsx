@@ -2,35 +2,31 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-20 09:30:58
- * @LastEditTime: 2022-06-26 00:00:07
+ * @LastEditTime: 2022-06-26 16:33:55
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/admin/Article/ArticlePublish/ArticlePublish.tsx
  */
 
-import {
-  Article,
-  postArticle,
-} from 'redux/article/articleSlice';
+import { Article, postArticle } from 'redux/article/articleSlice';
 import React, { useState } from 'react';
-import { createArticleTag, createNewTag } from 'redux/tag/tagSlice';
+import { postArticleTag, postTag } from 'redux/tag/tagSlice';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
-import { useNavigate } from 'react-router-dom';
+
 import { ActiveType } from 'API';
+import ArticleCommon from '../ArticleCommon';
 import { getOwnerUserName } from 'redux/auth/authSlice';
+import { useNavigate } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
 import { v4 as uuid } from 'uuid';
-import ArticleCommon from '../ArticleCommon';
 
 export interface Tag {
   tagID: string;
 }
 
 const ArticlePublish: React.FC = () => {
-
-
   const [fullScreenLoading, setFullScreenLoading] = useState({
     loading: false,
-    message: ''
+    message: '',
   });
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
@@ -59,10 +55,7 @@ const ArticlePublish: React.FC = () => {
         tagCreate.tags,
       );
       if (isConnected) {
-        enqueueSnackbar(
-          '发布完成',
-          { variant: 'success' },
-        );
+        enqueueSnackbar('发布完成', { variant: 'success' });
         setFullScreenLoading({
           loading: true,
           message: '操作成功，即将跳转',
@@ -100,18 +93,14 @@ const ArticlePublish: React.FC = () => {
       owner: username,
     };
     console.log(params.owner, username, 888);
-    const articlePostRes = await dispatch(postArticle({ createArticleInput: params }));
+    const articlePostRes = await dispatch(
+      postArticle({ createArticleInput: params }),
+    );
     const isPosted = articlePostRes.meta.requestStatus === 'fulfilled';
     if (isPosted) {
-      enqueueSnackbar(
-        '文章已发布',
-        { variant: 'success' },
-      );
+      enqueueSnackbar('文章已发布', { variant: 'success' });
     } else {
-      enqueueSnackbar(
-        '文章发布错误',
-        { variant: 'error' },
-      );
+      enqueueSnackbar('文章发布错误', { variant: 'error' });
     }
     return {
       articleID,
@@ -122,7 +111,7 @@ const ArticlePublish: React.FC = () => {
   const createTags = async (currentTags) => {
     const tagsPromises = currentTags.map((item) =>
       dispatch(
-        createNewTag({
+        postTag({
           createTagInput: {
             id: item.tagID,
             owner: username,
@@ -152,7 +141,7 @@ const ArticlePublish: React.FC = () => {
   const connectTagsAndArticle = async (articleID, tags) => {
     const connectTags = tags.map((tagID) =>
       dispatch(
-        createArticleTag({
+        postArticleTag({
           createArticleTagInput: {
             tagID,
             articleID,
@@ -171,7 +160,6 @@ const ArticlePublish: React.FC = () => {
       onCommit={handleSubmitArticle}
     />
   );
-  
 };
 
 export default ArticlePublish;
