@@ -8,7 +8,7 @@
 
 export { default as ArticlePublish } from './Article/ArticlePublish';
 export { default as AdminDashboard } from './AdminDashboard';
-export { default as ArticleEdit } from './Article/ArticleEdit';
+export { default as ArticleEdit } from './Article/ArticleManagement';
 export { default as EventCreate } from './Event/EventCreate';
 export { default as DepartmentDashboard } from './Department/DepartmentDashboard';
 export { default as UserProfileDashboard } from './UserProfile/UserProfileDashboard';

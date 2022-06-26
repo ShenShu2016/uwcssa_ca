@@ -3,7 +3,7 @@
  * @Date: 2022-05-30 10:43:28
  * @LastEditTime: 2022-05-30 20:27:36
  * @LastEditors: Shen Shu
- * @FilePath: /uwcssa_ca/src/admin/Article/ArticleEdit/ArticleEdit.tsx
+ * @FilePath: /uwcssa_ca/src/admin/Article/ArticleManagement/ArticleManagement.tsx
  */
 
 import {
@@ -29,7 +29,7 @@ import { getAuthState } from 'redux/auth/authSlice';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 
-const ArticleEdit = () => {
+const ArticleManagement = () => {
   const dispatch = useAppDispatch();
   const isAuth = useAppSelector(getAuthState);
   const articles = useAppSelector(selectAllArticles); // redux 有这种用法
@@ -115,4 +115,4 @@ const ArticleEdit = () => {
   );
 };
 
-export default ArticleEdit;
+export default ArticleManagement;

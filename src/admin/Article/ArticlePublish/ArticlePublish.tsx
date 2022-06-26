@@ -111,6 +111,7 @@ const ArticlePublish: React.FC = () => {
       setCoverPageDescription('');
       setTags([]);
       setImgFile('');
+      setOriginOwner('');
     }
   }, [editArticleId, actionType]);
 
