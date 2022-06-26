@@ -1,46 +1,73 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/*
- * @Author: 李佳修
- * @Date: 2022-05-20 09:30:58
- * @LastEditTime: 2022-06-26 00:00:07
- * @LastEditors: Shen Shu
- * @FilePath: /uwcssa_ca/src/admin/Article/ArticlePublish/ArticlePublish.tsx
- */
-
+import React, { useEffect, useState } from 'react';
+import ArticleCommon from '../ArticleCommon';
 import {
   Article,
-  postArticle,
+  fetchArticle,
+  updateArticleDetail,
 } from 'redux/article/articleSlice';
-import React, { useState } from 'react';
 import { createArticleTag, createNewTag } from 'redux/tag/tagSlice';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { ActiveType } from 'API';
 import { getOwnerUserName } from 'redux/auth/authSlice';
 import { useSnackbar } from 'notistack';
-import { v4 as uuid } from 'uuid';
-import ArticleCommon from '../ArticleCommon';
 
-export interface Tag {
-  tagID: string;
-}
+const ArticleEdit: React.FC = () => {
 
-const ArticlePublish: React.FC = () => {
-
-
+  const { enqueueSnackbar } = useSnackbar();
+  const { id: editArticleId } = useParams();
+  const navigate = useNavigate();
   const [fullScreenLoading, setFullScreenLoading] = useState({
     loading: false,
     message: ''
   });
-  const { enqueueSnackbar } = useSnackbar();
-  const navigate = useNavigate();
+  const [initData, setInitData] = useState(null);
+  const [originOwner, setOriginOwner] = useState<string>('');
   const dispatch = useAppDispatch();
   const username = useAppSelector(getOwnerUserName);
+
+  useEffect(() => {
+    const getCurrentArticle = async () => {
+      setFullScreenLoading({
+        loading: true,
+        message: '正在获取文章信息',
+      });
+      const res = await dispatch(
+        fetchArticle({
+          articleId: editArticleId,
+          isAuth: true,
+          ownerUsername: username,
+        }),
+      );
+      if (res.meta.requestStatus === 'fulfilled') {
+        const articleInfo = res.payload;
+        setInitData({
+          title: articleInfo.title,
+          content: articleInfo.content,
+          coverPageDescription: articleInfo.coverPageDescription,
+          tags: articleInfo.tags.items,
+          imgFile: articleInfo.coverPageImgURL
+        });
+       
+        setOriginOwner(articleInfo.owner);
+      } else {
+        enqueueSnackbar('获取文章失败', { variant: 'error' });
+      }
+      setFullScreenLoading({
+        loading: false,
+        message: '',
+      });
+      console.log(res);
+    };
+    if (editArticleId) {
+      getCurrentArticle();
+    }
+  }, [editArticleId]);
 
   const handleSubmitArticle = async (data) => {
     setFullScreenLoading({
       loading: true,
-      message: '正在创建标签和文章',
+      message: '正在更新标签和文章',
     });
     // 创建tag 和 创建文章异步进行 因为此时tag和文章之间没有依赖关系
     const [tagCreate, articleCommit] = await Promise.all([
@@ -52,15 +79,14 @@ const ArticlePublish: React.FC = () => {
       message: '正在关联文章和标签',
     });
     // 都完成后进行tag与文章的关联
-    console.log(tagCreate, articleCommit);
     if (tagCreate.status && articleCommit.status) {
       const isConnected = await connectTagsAndArticle(
-        articleCommit.articleID,
+        editArticleId,
         tagCreate.tags,
       );
       if (isConnected) {
         enqueueSnackbar(
-          '发布完成',
+          '更新完成',
           { variant: 'success' },
         );
         setFullScreenLoading({
@@ -88,33 +114,31 @@ const ArticlePublish: React.FC = () => {
   };
 
   const commitArticle = async (data) => {
-    const articleID = uuid();
     const params: Article = {
-      id: articleID,
+      id: editArticleId,
       title: data.title,
       content: data.content,
       active: ActiveType.T,
       isPublish: data.isPublish,
       coverPageImgURL: data.imgFile || undefined,
       coverPageDescription: data.coverPageDescription,
-      owner: username,
+      owner: originOwner,
     };
     console.log(params.owner, username, 888);
-    const articlePostRes = await dispatch(postArticle({ createArticleInput: params }));
+    const articlePostRes = await dispatch(updateArticleDetail({ updateArticleInput: params }));
     const isPosted = articlePostRes.meta.requestStatus === 'fulfilled';
     if (isPosted) {
       enqueueSnackbar(
-        '文章已发布',
+        '文章已更新',
         { variant: 'success' },
       );
     } else {
       enqueueSnackbar(
-        '文章发布错误',
+        '文章更新错误',
         { variant: 'error' },
       );
     }
     return {
-      articleID,
       status: isPosted,
     };
   };
@@ -137,7 +161,6 @@ const ArticlePublish: React.FC = () => {
         res.meta.requestStatus === 'fulfilled' ||
         res.payload[0].errorType === 'DynamoDB:ConditionalCheckFailedException',
     );
-    console.log(isAllTagCreated); //这里要改改
     if (isAllTagCreated) {
       enqueueSnackbar('标签已创建', { variant: 'success' });
     } else {
@@ -164,14 +187,12 @@ const ArticlePublish: React.FC = () => {
     return resList.every((res) => res.meta.requestStatus === 'fulfilled');
   };
 
-  return (
-    <ArticleCommon
-      pageTitle="发布文章"
-      fullScreenLoading={fullScreenLoading}
-      onCommit={handleSubmitArticle}
-    />
-  );
-  
+  return (<ArticleCommon
+    pageTitle="编辑文章"
+    fullScreenLoading={fullScreenLoading}
+    initData={initData}
+    onCommit={handleSubmitArticle}
+  />);
 };
 
-export default ArticlePublish;
+export default ArticleEdit;

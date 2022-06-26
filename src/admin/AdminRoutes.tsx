@@ -10,6 +10,7 @@ import {
   EventCreate as EventCreateView,
   AdminDashboard as AdminDashboardView,
   ArticleEdit as ArticleEditView,
+  ArticleManagement as ArticleManagementView,
   ArticlePublish as ArticlePublishView,
   DepartmentDashboard as DepartmentDashboardView,
   FormTest as FormTestView,
@@ -57,13 +58,13 @@ function AdminRoutes(): Array<{
     },
     {
       path: '/admin/article-edit',
-      renderer: (): JSX.Element => <ArticleEditView />,
+      renderer: (): JSX.Element => <ArticleManagementView />,
       isAllowed: isAdmin,
       redirectPath: '/404',
     },
     {
       path: '/admin/article-edit/:id',
-      renderer: (): JSX.Element => <ArticlePublishView />,
+      renderer: (): JSX.Element => <ArticleEditView />,
       isAllowed: isAdmin,
       redirectPath: '/404',
     },

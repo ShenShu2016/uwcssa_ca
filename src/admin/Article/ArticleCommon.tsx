@@ -6,7 +6,7 @@ import {
   FormControlLabel,
   TextField,
 } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import AddCoverPic from './ArticlePublish/components/AddCoverPic';
 import AddTags from './ArticlePublish/components/AddTags';
 import FullScreenLoading from 'components/FullScreenLoading';
@@ -23,19 +23,26 @@ export interface Tag {
 
 interface ArticleCommonProp {
   pageTitle: string;
-  actionType: string;
   fullScreenLoading: {
     loading: boolean;
     message: string;
   }
+  initData?: {
+    title: string,
+    content: string,
+    coverPageDescription: string,
+    tags: Tag[],
+    isPublish: boolean,
+    imgFile: string
+  };
   onCommit: (data: any) => void
 }
 
 
 const ArticleCommon: React.FC<ArticleCommonProp> = ({
   pageTitle,
-  actionType,
   fullScreenLoading,
+  initData=null,
   onCommit
 }) => {
 
@@ -52,6 +59,17 @@ const ArticleCommon: React.FC<ArticleCommonProp> = ({
     title: false,
     desc: false,
   });
+
+  // 如果是编辑文章的状态下 会传入文章信息作为初始状态
+  useEffect(() => {
+    if (initData) {
+      setTitle(initData.title);
+      setContent(initData.content);
+      setCoverPageDescription(initData.coverPageDescription);
+      setTags(() => initData.tags);
+      setImgFile(initData.imgFile);
+    }
+  }, [initData]);
   
   const handleFocus = (key) => {
     setInputStatus((prev) => ({
@@ -107,7 +125,8 @@ const ArticleCommon: React.FC<ArticleCommonProp> = ({
       content: content,
       coverPageDescription: coverPageDescription,
       tags: tags,
-      isPublish: isPublish
+      isPublish: isPublish,
+      imgFile: imgFile
     };
     onCommit(data);
   };
@@ -203,7 +222,7 @@ const ArticleCommon: React.FC<ArticleCommonProp> = ({
                 }}
                 onClick={handleArticleChange}
               >
-                {`${actionType}文章`}
+                {pageTitle}
               </LoadingButton>
             </Box>
           </Box>
