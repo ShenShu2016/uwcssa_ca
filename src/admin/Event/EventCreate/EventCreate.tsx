@@ -6,7 +6,7 @@
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/admin/Event/EventCreate/EventCreate.tsx
  */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PageTitle from 'admin/components/pageTitle';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
@@ -20,6 +20,7 @@ import EventPreview from './components/EventPreview';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useAppSelector } from 'redux/hooks';
 import FullScreenLoading from 'components/FullScreenLoading';
+import { useSwiper } from 'swiper/react';
 import 'swiper/css';
 
 export enum Steps {
@@ -52,6 +53,15 @@ const stepItems = [
   }
 ];
 
+const SwipeCommiter = ({ activeStep }: any) => {
+  const swiper = useSwiper();
+
+  useEffect(() => {
+    swiper.slideTo(activeStep);
+  }, [activeStep]);
+  return (<></>);
+};
+
 const EventCreate: React.FC = () => {
   const completed = useAppSelector(state => state.form.createData.completeStatus);
   const [activeStep, setActiveStep] = useState<number>(0);
@@ -67,7 +77,7 @@ const EventCreate: React.FC = () => {
         marginTop='-50px'
         description={
           <Stepper activeStep={activeStep} alternativeLabel>
-            {stepItems.map((step) => (
+            {stepItems.map((step, index) => (
               <Step
                 key={step.key}
                 completed={completed[step.key]}
@@ -88,7 +98,14 @@ const EventCreate: React.FC = () => {
                       },
                 }}
               >
-                <StepLabel>{step.label}</StepLabel>
+                <StepLabel
+                  sx={{
+                    '& svg': {
+                      cursor: 'pointer',
+                    }
+                  }}
+                  onClick={() => setActiveStep(index)}
+                >{step.label}</StepLabel>
               </Step>
             ))}
           </Stepper>
@@ -107,6 +124,7 @@ const EventCreate: React.FC = () => {
               allowTouchMove={false}
               onSlideChange={(e) => setActiveStep(e.activeIndex)}
             >
+              <SwipeCommiter activeStep={activeStep}/>
               <SwiperSlide>
                 <EventForm />
               </SwiperSlide>

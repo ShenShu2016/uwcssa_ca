@@ -325,6 +325,7 @@ const formSlice = createSlice({
         ...state.createData.basicInfo,
         ...action.payload,
       };
+      console.log(state.createData);
       // 检查basicInfo中是否所有字段都不为空
       const complete = Object.keys(state.createData.basicInfo).every(
         (key) =>
@@ -333,7 +334,6 @@ const formSlice = createSlice({
           !!state.createData.basicInfo[key] ||
           state.createData.basicInfo[key] === 0,
       );
-      console.log(state.createData.basicInfo);
       state.createData.completeStatus.EventForm = complete;
     },
 

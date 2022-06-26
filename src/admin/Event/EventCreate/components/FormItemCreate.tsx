@@ -245,6 +245,13 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({
     formik.handleChange(e);
   };
 
+  const handleInputKeyDown = (e) => {
+    if (e.keyCode === 13) {
+      e.preventDefault();
+      handleAddOption();
+    }
+  };
+
   return (
     <Dialog maxWidth={false} open={open} onClose={handleClose} scroll={'paper'}>
       {/* <FullScreenLoading
@@ -503,7 +510,8 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({
                     value={newOption}
                     onChange={(e) => setNewOption(e.target.value)}
                     sx={{ ml: '24px' }}
-                    placeholder="Placeholder"
+                    placeholder="输入选项"
+                    onKeyDown={handleInputKeyDown}
                   />
                   <AddCircleOutlineIcon
                     onClick={handleAddOption}

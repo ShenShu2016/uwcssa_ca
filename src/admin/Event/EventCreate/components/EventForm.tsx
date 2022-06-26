@@ -15,7 +15,7 @@ import { useFormik } from 'formik';
 import { useSwiper } from 'swiper/react';
 import FieldLabel from './FieldLabel';
 import { setBasicInfo } from 'redux/form/formSlice';
-import { useAppSelector, useAppDispatch } from 'redux/hooks';
+import { useAppDispatch } from 'redux/hooks';
 import GoogleMapDialog from './GoogleMapDialog';
 import * as yup from 'yup';
 
@@ -58,7 +58,17 @@ const EventForm: React.FC = () => {
   const [description, setDescription] = useState<string>('');
   const [googleMapDialog, setGoogleMapDialog] = useState<boolean>(false);
   const swiper = useSwiper();
-  const activityForm = useAppSelector(state => state.form.createData.basicInfo);
+  // const activityForm = useAppSelector(state => state.form.createData.basicInfo);
+  const [data, setData] = useState({
+    title: '',
+    startDateTime: null,
+    endDateTime: null,
+    online: false,
+    address: '',
+    limit: 0,
+    description: '',
+    content: '',
+  });
   const dispatch = useAppDispatch();
 
   const onSubmit = (values) => {
@@ -66,24 +76,27 @@ const EventForm: React.FC = () => {
   };
   
   const formik = useFormik({ 
-    initialValues: activityForm,
+    initialValues: data,
     validationSchema: validationSchema,
     onSubmit,
   });
 
   const handleFieldValueChange = (e, type: FieldType) => {
-    dispatch(setBasicInfo({
-      [type]:
-      type === FieldType.online ? 
-        e.target.checked : 
-        (
-          type === FieldType.startDateTime ||
-          type === FieldType.endDateTime ||
-          type === FieldType.content ||
-          type === FieldType.address ? 
-            e : e.target.value
-        )
-    }));
+    setData((prev) => {
+      return {
+        ...prev,
+        [type]:
+        type === FieldType.online ? 
+          e.target.checked : 
+          (
+            type === FieldType.startDateTime ||
+            type === FieldType.endDateTime ||
+            type === FieldType.content ||
+            type === FieldType.address ? 
+              e : e.target.value
+          )
+      };
+    });
     // 如果是rte传过来的内容 还需要设置一下description 是用于这个组件里显示内容的
     // 设置完之后就可以return了 因为rte和formik没关系
     if (type === FieldType.content) {
@@ -106,6 +119,11 @@ const EventForm: React.FC = () => {
     }
   };
 
+  const handleSwiperNext = () => {
+    swiper.slideNext();
+    dispatch(setBasicInfo(data));
+  };
+
   return (
     <Box p={'2px'}>
       <GoogleMapDialog open={googleMapDialog} setOpen={setGoogleMapDialog} onLocationSelect={onLocationSelect}/>
@@ -115,7 +133,7 @@ const EventForm: React.FC = () => {
             variant="contained"
             type={'submit'}
             endIcon={<ArrowForwardIcon />}
-            onClick={() => swiper.slideNext()}
+            onClick={handleSwiperNext}
           >
            添加活动海报
           </Button>

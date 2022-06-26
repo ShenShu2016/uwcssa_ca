@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /*
  * @Author: 李佳修
  * @Date: 2022-05-20 09:30:58
@@ -61,6 +62,7 @@ const ArticlePublish: React.FC = () => {
   const [coverPageDescription, setCoverPageDescription] = useState<string>('');
   const [tags, setTags] = useState<Array<Tag>>([]);
   const [imgFile, setImgFile] = useState('');
+  const [originOwner, setOriginOwner] = useState<string>('');
   const [inputStatus, setInputStatus] = useState({
     title: false,
     desc: false,
@@ -91,6 +93,7 @@ const ArticlePublish: React.FC = () => {
         setCoverPageDescription(articleInfo.coverPageDescription);
         setTags(() => articleInfo.tags.items);
         setImgFile(articleInfo.coverPageImgURL);
+        setOriginOwner(articleInfo.owner);
       } else {
         enqueueSnackbar('获取文章失败', { variant: 'error' });
       }
@@ -204,8 +207,9 @@ const ArticlePublish: React.FC = () => {
       isPublish: isPublish,
       coverPageImgURL: imgFile || undefined,
       coverPageDescription: currentCoverPageDescription,
-      owner: username,
+      owner: actionType === ActionType.create ? username : originOwner,
     };
+    console.log(params.owner, username, 888);
     const articlePostRes =
       actionType === ActionType.create
         ? await dispatch(postArticle({ createArticleInput: params }))
