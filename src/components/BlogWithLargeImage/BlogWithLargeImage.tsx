@@ -1,8 +1,8 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-19 17:21:06
- * @LastEditors: 李佳修
- * @LastEditTime: 2022-06-13 15:50:00
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-06-26 18:31:07
  * @FilePath: /uwcssa_ca/src/components/BlogWithLargeImage/BlogWithLargeImage.tsx
  * @Description:
  *
@@ -30,7 +30,7 @@ import { useAppSelector } from 'redux/hooks';
 
 const BlogWithLargeImage: React.FC = (): JSX.Element => {
   const articles = useAppSelector(selectAllArticles); // redux 有这种用法
- 
+
   return (
     <Box>
       <Grid container>
@@ -79,7 +79,7 @@ const BlogWithLargeImage: React.FC = (): JSX.Element => {
                     >
                       <Box>
                         {item?.tags
-                          ? item?.tags?.items.map((tag, i) => (
+                          ? item?.tags?.items?.map((tag, i) => (
                               <Chip
                                 key={tag.tagID + i} // 为啥有两个一样的tag
                                 label={tag.tagID}
@@ -155,7 +155,7 @@ const BlogWithLargeImage: React.FC = (): JSX.Element => {
                     </CardContent>
                     <Box
                       sx={{
-                        width: { md: '35%', height: 'auto'},
+                        width: { md: '35%', height: 'auto' },
                       }}
                     >
                       <Box

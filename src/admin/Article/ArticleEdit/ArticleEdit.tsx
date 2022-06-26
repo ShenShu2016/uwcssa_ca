@@ -2,7 +2,7 @@
  * @Author: 李佳修
  * @Date: 2022-06-26 15:41:46
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-26 16:34:24
+ * @LastEditTime: 2022-06-26 19:44:26
  * @FilePath: /uwcssa_ca/src/admin/Article/ArticleEdit/ArticleEdit.tsx
  * @Description:
  *
@@ -14,7 +14,7 @@ import {
   updateArticleDetail,
 } from 'redux/article/articleSlice';
 import React, { useEffect, useState } from 'react';
-import { postArticleTag, postTag } from 'redux/tag/tagSlice';
+import { postTag, postUpdateArticleTags } from 'redux/tag/tagSlice';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -158,7 +158,7 @@ const ArticleEdit: React.FC = () => {
       ),
     );
     const tagUploadRes = await Promise.all(tagsPromises);
-    console.log(tagUploadRes, 999);
+    //console.log(tagUploadRes);
     const isAllTagCreated = tagUploadRes.every(
       (res) =>
         res.meta.requestStatus === 'fulfilled' ||
@@ -176,18 +176,11 @@ const ArticleEdit: React.FC = () => {
   };
 
   const connectTagsAndArticle = async (articleID, tags) => {
-    const connectTags = tags.map((tagID) =>
-      dispatch(
-        postArticleTag({
-          createArticleTagInput: {
-            tagID,
-            articleID,
-          },
-        }),
-      ),
+    const response = await dispatch(
+      postUpdateArticleTags({ articleID, tagIDs: tags }),
     );
-    const resList = await Promise.all(connectTags);
-    return resList.every((res) => res.meta.requestStatus === 'fulfilled');
+    console.log(response);
+    return true;
   };
 
   return (

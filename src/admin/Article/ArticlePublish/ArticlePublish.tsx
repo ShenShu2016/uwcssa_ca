@@ -2,14 +2,14 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-20 09:30:58
- * @LastEditTime: 2022-06-26 16:33:55
+ * @LastEditTime: 2022-06-26 18:29:02
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/admin/Article/ArticlePublish/ArticlePublish.tsx
  */
 
 import { Article, postArticle } from 'redux/article/articleSlice';
 import React, { useState } from 'react';
-import { postArticleTag, postTag } from 'redux/tag/tagSlice';
+import { postTag, postUpdateArticleTags } from 'redux/tag/tagSlice';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 
 import { ActiveType } from 'API';
@@ -139,18 +139,12 @@ const ArticlePublish: React.FC = () => {
   };
 
   const connectTagsAndArticle = async (articleID, tags) => {
-    const connectTags = tags.map((tagID) =>
-      dispatch(
-        postArticleTag({
-          createArticleTagInput: {
-            tagID,
-            articleID,
-          },
-        }),
-      ),
+    const response = await dispatch(
+      postUpdateArticleTags({ articleID, tagIDs: tags }),
     );
-    const resList = await Promise.all(connectTags);
-    return resList.every((res) => res.meta.requestStatus === 'fulfilled');
+    console.log(response);
+
+    return true;
   };
 
   return (
