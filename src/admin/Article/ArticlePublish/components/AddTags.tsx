@@ -1,19 +1,18 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-21 13:07:23
- * @LastEditTime: 2022-05-30 15:48:06
- * @LastEditors: 李佳修
- * @FilePath: /uwcssa_ca/src/admin/ArticlePublish/components/AddTags.tsx
+ * @LastEditTime: 2022-06-25 23:59:23
+ * @LastEditors: Shen Shu
+ * @FilePath: /uwcssa_ca/src/admin/Article/ArticlePublish/components/AddTags.tsx
  */
-import React from 'react';
-import { styled } from '@mui/material/styles';
-import Chip from '@mui/material/Chip';
-import Input from '@mui/material/Input';
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import IconButton from '@mui/material/IconButton';
+
+import { Box, Card, Chip, Input } from '@mui/material';
+
 import DoneIcon from '@mui/icons-material/Done';
+import IconButton from '@mui/material/IconButton';
+import React from 'react';
 import { Tag } from '../ArticlePublish';
+import { styled } from '@mui/material/styles';
 
 const ListItem = styled('div')(({ theme }) => ({
   marginRight: theme.spacing(),
@@ -27,12 +26,10 @@ interface Chip {
 interface AddTagProps {
   addTag: (tag: string) => void;
   removeTag: (tag: string) => void;
-  tags: Tag[]
+  tags: Tag[];
 }
 
-const AddTags: React.FC<AddTagProps> = ({
-  addTag, removeTag, tags
-}) => {
+const AddTags: React.FC<AddTagProps> = ({ addTag, removeTag, tags }) => {
   const [tagInput, setTagInput] = React.useState<string>('');
 
   const handleDelete = (chipToDelete) => {
@@ -63,10 +60,7 @@ const AddTags: React.FC<AddTagProps> = ({
       }}
       component="ul"
     >
-      <Box
-        width='100%'
-        display='flex'
-      >
+      <Box width="100%" display="flex">
         <Input
           fullWidth
           value={tagInput}
@@ -75,11 +69,7 @@ const AddTags: React.FC<AddTagProps> = ({
           onKeyDown={(e) => handleTagInputKeyDown(e)}
           onChange={(e) => handleTagInputChange(e)}
         />
-        <IconButton
-          color="primary"
-          component="span"
-          onClick={addTagInner}
-        >
+        <IconButton color="primary" component="span" onClick={addTagInner}>
           <DoneIcon />
         </IconButton>
       </Box>
@@ -87,17 +77,17 @@ const AddTags: React.FC<AddTagProps> = ({
         sx={{
           display: 'flex',
           flexWrap: 'wrap',
-          alignContent: 'flex-start', 
+          alignContent: 'flex-start',
           height: '85%',
           overflow: 'auto',
-          padding: '12px 8px'
+          padding: '12px 8px',
         }}
       >
-        {tags.map((data) => {
+        {tags.map((data, index) => {
           return (
-            <ListItem key={data.tagID}>
+            <ListItem key={data.tagID + index}>
               <Chip
-                color='primary'
+                color="primary"
                 label={data.tagID}
                 onDelete={() => handleDelete(data)}
               />

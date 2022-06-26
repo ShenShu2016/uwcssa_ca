@@ -3,8 +3,8 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-03 09:32:30
- * @LastEditTime: 2022-06-16 14:38:10
- * @LastEditors: 李佳修
+ * @LastEditTime: 2022-06-25 23:49:26
+ * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/admin/Event/EventCreate/components/FormItemCreate.tsx
  */
 
@@ -27,18 +27,20 @@ import {
   TextField,
 } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-// import { postFormItem, updateFormItemDetail } from 'redux/form/formSlice';
+import { addQuestion, updateQuestion } from 'redux/form/formSlice';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import FieldLabel from './FieldLabel';
 import { FormType } from 'redux/form/formSlice';
-// import FullScreenLoading from 'components/FullScreenLoading';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { getOwnerUserName } from 'redux/auth/authSlice';
 import { useFormik } from 'formik';
 import { useSnackbar } from 'notistack';
-import { addQuestion, updateQuestion } from 'redux/form/formSlice';
+
+// import { postFormItem, updateFormItemDetail } from 'redux/form/formSlice';
+
+// import FullScreenLoading from 'components/FullScreenLoading';
 
 export enum DialogType {
   create,
@@ -186,7 +188,7 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({
       formSelectChoices: options.map((item) => item.label),
       owner: ownerUserName,
       formFormItemsId: undefined,
-      isExample: false
+      isExample: false,
     };
     // 通过前面的校验后 可以发送请求创建问题
     // const res =
@@ -219,15 +221,13 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({
     //   completeCreate();
     //   resetForm();
     // }
-    type === DialogType.create ?
-    dispatch(addQuestion(param)) :
-    dispatch(updateQuestion(param));
+    type === DialogType.create
+      ? dispatch(addQuestion(param))
+      : dispatch(updateQuestion(param));
     enqueueSnackbar(
-        type === DialogType.create
-          ? '问题创建成功，记得加入表单才能生效哦'
-          : '修改问题配置成功',
-        { variant: 'success' },
-      );
+      type === DialogType.create ? '问题创建成功' : '修改问题配置成功',
+      { variant: 'success' },
+    );
     setOpen(false);
     // completeCreate();
     resetForm();

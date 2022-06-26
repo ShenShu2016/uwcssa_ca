@@ -2,7 +2,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-20 09:30:58
- * @LastEditTime: 2022-06-25 20:32:17
+ * @LastEditTime: 2022-06-26 00:00:07
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/admin/Article/ArticlePublish/ArticlePublish.tsx
  */
@@ -246,7 +246,9 @@ const ArticlePublish: React.FC = () => {
     const tagUploadRes = await Promise.all(tagsPromises);
     console.log(tagUploadRes, 999);
     const isAllTagCreated = tagUploadRes.every(
-      (res) => res.meta.requestStatus === 'fulfilled',
+      (res) =>
+        res.meta.requestStatus === 'fulfilled' ||
+        res.payload[0].errorType === 'DynamoDB:ConditionalCheckFailedException',
     );
     console.log(isAllTagCreated); //这里要改改
     if (isAllTagCreated) {
@@ -261,7 +263,7 @@ const ArticlePublish: React.FC = () => {
   };
 
   const connectTagsAndArticle = async (articleID, tags) => {
-    const connectTaqs = tags.map((tagID) =>
+    const connectTags = tags.map((tagID) =>
       dispatch(
         createArticleTag({
           createArticleTagInput: {
@@ -271,7 +273,7 @@ const ArticlePublish: React.FC = () => {
         }),
       ),
     );
-    const resList = await Promise.all(connectTaqs);
+    const resList = await Promise.all(connectTags);
     return resList.every((res) => res.meta.requestStatus === 'fulfilled');
   };
 
