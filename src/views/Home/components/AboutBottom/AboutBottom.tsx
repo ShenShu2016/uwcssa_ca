@@ -1,9 +1,9 @@
 /*
  * @Author: Shikai Jin
  * @Date: 2022-05-26 22:30:04
- * @LastEditors: Shikai Jin
- * @LastEditTime: 2022-05-27 18:05:25
- * @FilePath: /uwcssa_ca/src/views/Logistics/components/AboutBottom/AboutBottom.tsx
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-06-25 22:13:52
+ * @FilePath: /uwcssa_ca/src/views/Home/components/AboutBottom/AboutBottom.tsx
  * @Description:
  *
  */
@@ -32,7 +32,7 @@ const AboutBottom = (): JSX.Element => {
           <Box
             component={LazyLoadImage}
             effect="blur"
-            src="https://assets.maccarianagency.com/backgrounds/img51.png"
+            src="https://uwcssats232508-production.s3.us-east-2.amazonaws.com/uwincssa_pictures/nightStar.jpg"
             width={1}
             height={1}
             maxWidth={400}

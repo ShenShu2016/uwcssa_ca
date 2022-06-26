@@ -1,19 +1,18 @@
 /*
  * @Author: Shikai Jin
  * @Date: 2022-06-02 20:53:01
- * @LastEditors: Shikai Jin
- * @LastEditTime: 2022-06-02 21:09:38
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-06-25 22:27:03
  * @FilePath: /uwcssa_ca/src/views/About/components/Story/Story.tsx
  * @Description:
  *
  */
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-/* eslint-disable react/no-unescaped-entities */
+
+import { Box, Grid, Typography, useMediaQuery, useTheme } from '@mui/material';
+
 import React from 'react';
-import Typography from '@mui/material/Typography';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import { useTheme } from '@mui/material/styles';
+
+/* eslint-disable react/no-unescaped-entities */
 
 const Story = (): JSX.Element => {
   const theme = useTheme();
@@ -64,7 +63,7 @@ const Story = (): JSX.Element => {
             <Box
               component={'img'}
               src={
-                'https://assets.maccarianagency.com/svg/illustrations/drawkit-illustration1.svg'
+                'https://uwcssats232508-production.s3.us-east-2.amazonaws.com/uwincssa_pictures/nightStar.jpg'
               }
               width={1}
               height={1}

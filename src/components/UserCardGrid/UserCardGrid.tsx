@@ -1,8 +1,8 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-19 17:21:06
- * @LastEditors: 李佳修
- * @LastEditTime: 2022-06-13 17:53:20
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-06-25 22:20:31
  * @FilePath: /uwcssa_ca/src/components/UserCardGrid/UserCardGrid.tsx
  * @Description:
  *
@@ -21,19 +21,6 @@ import { Link } from 'react-router-dom';
 import React from 'react';
 import { stringAvatar } from 'components/Avatar/AvatarFunction';
 import { useAppSelector } from 'redux/hooks';
-
-//import { loadUser } from 'redux/auth/authSlice';
-
-// import Container from 'components/Container';
-
-// const info = {
-//   avatar: 'https://assets.maccarianagency.com/avatars/img5.jpg',
-//   name: 'Clara Bertoletti',
-//   isVerified: true,
-//   title: 'Paradigm Technician',
-//   followers: 84,
-//   href: '#',
-// };
 
 const UserCardGrid = (): JSX.Element => {
   const theme = useTheme();
@@ -137,38 +124,36 @@ const UserCardGrid = (): JSX.Element => {
             </Button>
           </Stack>
         </>
-      ) : 
-        (
-          <Box display='flex' width='100%' justifyContent='space-around' mt={4}>
-            <Button
-              variant="contained"
-              color="primary"
-              component={Link}
-              //target="blank"
-              to="/auth/signIn"
-              size="large"
-              sx={{
-                width: '35%'
-              }}
-            >
-              登录
-            </Button>
-            <Button
-              variant="outlined"
-              color="primary"
-              component={Link}
-              //target="blank"
-              to="/auth/signUp"
-              size="large"
-              sx={{
-                width: '35%'
-              }}
-            >
-              注册
-            </Button>
-          </Box>
-          
-        )}
+      ) : (
+        <Box display="flex" width="100%" justifyContent="space-around" mt={4}>
+          <Button
+            variant="contained"
+            color="primary"
+            component={Link}
+            //target="blank"
+            to="/auth/signIn"
+            size="large"
+            sx={{
+              width: '35%',
+            }}
+          >
+            登录
+          </Button>
+          <Button
+            variant="outlined"
+            color="primary"
+            component={Link}
+            //target="blank"
+            to="/auth/signUp"
+            size="large"
+            sx={{
+              width: '35%',
+            }}
+          >
+            注册
+          </Button>
+        </Box>
+      )}
     </Box>
   );
 };

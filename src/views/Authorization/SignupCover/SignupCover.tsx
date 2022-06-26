@@ -2,8 +2,8 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 15:50:53
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-29 23:57:09
- * @FilePath: /uwcssa_ca/src/views/SignupCover/SignupCover.tsx
+ * @LastEditTime: 2022-06-25 22:02:53
+ * @FilePath: /uwcssa_ca/src/views/Authorization/SignupCover/SignupCover.tsx
  * @Description:
  *
  */
@@ -98,7 +98,7 @@ const SignupCover = (): JSX.Element => {
                         component={LazyLoadImage}
                         effect="blur"
                         src={
-                          'https://assets.maccarianagency.com/backgrounds/img4.jpg'
+                          'https://uwcssats232508-production.s3.us-east-2.amazonaws.com/uwincssa_pictures/ChancyWelcomeWithGirl.jpg'
                         }
                         height={{ xs: 'auto', md: 1 }}
                         maxHeight={{ xs: 300, md: 1 }}

@@ -1,18 +1,17 @@
 /*
  * @Author: Shikai Jin
  * @Date: 2022-06-02 20:53:01
- * @LastEditors: Shikai Jin
- * @LastEditTime: 2022-06-02 21:03:17
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-06-25 22:26:13
  * @FilePath: /uwcssa_ca/src/views/About/components/Hero/Hero.tsx
  * @Description:
  *
  */
+
+import { Box, Typography, alpha } from '@mui/material';
 import React, { useEffect } from 'react';
 
-import Box from '@mui/material/Box';
 import Container from 'components/Container';
-import Typography from '@mui/material/Typography';
-import { alpha } from '@mui/material/styles';
 
 const Hero = (): JSX.Element => {
   useEffect(() => {
@@ -58,7 +57,7 @@ const Hero = (): JSX.Element => {
           backgroundSize: 'cover',
           backgroundPosition: 'center center',
           backgroundImage:
-            'url(https://assets.maccarianagency.com/backgrounds/img52.jpg)',
+            'url(https://uwcssats232508-production.s3.us-east-2.amazonaws.com/uwincssa_pictures/aLotPresents.jpg)',
         }}
       />
       <Box

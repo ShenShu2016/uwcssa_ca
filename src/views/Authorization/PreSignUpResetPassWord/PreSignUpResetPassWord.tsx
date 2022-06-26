@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-06-21 22:26:47
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-22 01:10:13
+ * @LastEditTime: 2022-06-25 22:18:59
  * @FilePath: /uwcssa_ca/src/views/Authorization/PreSignUpResetPassWord/PreSignUpResetPassWord.tsx
  * @Description:
  *
@@ -98,7 +98,7 @@ const PreSignUpResetPassWord = (): JSX.Element => {
                         component={LazyLoadImage}
                         effect="blur"
                         src={
-                          'https://assets.maccarianagency.com/backgrounds/img18.jpg'
+                          'https://uwcssats232508-production.s3.us-east-2.amazonaws.com/uwincssa_pictures/cssaMembers2022Sumber.jpg'
                         }
                         height={{ xs: 'auto', md: 1 }}
                         maxHeight={{ xs: 300, md: 1 }}
