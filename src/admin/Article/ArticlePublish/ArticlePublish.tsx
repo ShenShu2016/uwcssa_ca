@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-20 09:30:58
- * @LastEditTime: 2022-06-25 00:29:17
+ * @LastEditTime: 2022-06-25 20:32:17
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/admin/Article/ArticlePublish/ArticlePublish.tsx
  */
@@ -167,7 +167,7 @@ const ArticlePublish: React.FC = () => {
       if (isConnected) {
         enqueueSnackbar(
           `文章${actionType === ActionType.create ? '发布' : '更新'}完成`,
-          { variant: 'error' },
+          { variant: 'success' },
         );
         setFullScreenLoading({
           loading: true,
@@ -214,12 +214,12 @@ const ArticlePublish: React.FC = () => {
     if (isPosted) {
       enqueueSnackbar(
         `文章已${actionType === ActionType.create ? '创建' : '更新'}`,
-        { variant: 'error' },
+        { variant: 'success' },
       );
     } else {
       enqueueSnackbar(
         `文章${actionType === ActionType.create ? '创建' : '更新'}错误`,
-        { variant: 'warning' },
+        { variant: 'error' },
       );
     }
     return {

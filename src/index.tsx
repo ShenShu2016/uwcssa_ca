@@ -2,13 +2,13 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-20 01:19:20
+ * @LastEditTime: 2022-06-25 20:33:01
  * @FilePath: /uwcssa_ca/src/index.tsx
  * @Description:
  *
  */
 
-import Amplify from 'aws-amplify';
+import { Amplify } from 'aws-amplify';
 import App from './App';
 import { Provider } from 'react-redux';
 import React from 'react';
@@ -46,7 +46,7 @@ Amplify.configure(updatedAwsConfig);
 ReactDOM.render(
   <Provider store={store}>
     {/* https://iamhosseindhv.com/notistack/demos#maximum-snackbars */}
-    <SnackbarProvider maxSnack={3}>
+    <SnackbarProvider maxSnack={5}>
       <App />
     </SnackbarProvider>
   </Provider>,
