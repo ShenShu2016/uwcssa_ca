@@ -1,14 +1,15 @@
 /*
  * @Author: Shikai Jin
  * @Date: 2022-06-05 19:59:54
- * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-11 17:40:38
+ * @LastEditors: Shikai Jin
+ * @LastEditTime: 2022-06-26 11:56:25
  * @FilePath: /uwcssa_ca/src/views/ResearchDevelopment/components/Team/components/DeveloperCard.tsx
  * @Description:
  *
  */
 
 import {
+  Avatar,
   Box,
   Card,
   CardContent,
@@ -53,18 +54,27 @@ const DevelopCard: React.FC<Props> = (props): JSX.Element => {
               backgroundImage: 'none',
             }}
           >
-            <Box
+            <Avatar
+              src={item.user.avatarURL?.objectCompressedURL}
+              {...stringAvatar(item.user.name, {
+                width: 'auto',
+                height: '300px',
+              })}
+              style={{ borderRadius: 0, zIndex: -1 }}
+            />
+            {/* <Box
               component={CardMedia}
               borderRadius={2}
               width={1}
               height={1}
               minHeight={300}
-              image={item.user.avatarURL?.objectCompressedURL}
-              {...stringAvatar(item.user.name, {
-                width: 'auto',
-                height: 'auto',
-              })}
-            />
+              // image={item.user.avatarURL?.objectCompressedURL}
+              // {...stringAvatar(item.user.name, {
+              //   width: '45',
+              //   height: '45',
+              // })}
+            ></Box> */}
+
             <Box component={CardContent} bgcolor={'transparent'} marginTop={-6}>
               <Box component={Card} borderRadius={2}>
                 <CardContent>
