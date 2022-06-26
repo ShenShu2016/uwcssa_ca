@@ -2,8 +2,8 @@
  * @Author: Shen Shu
  * @Date: 2022-05-26 13:57:44
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-29 23:57:04
- * @FilePath: /uwcssa_ca/src/views/SigninCover/SigninCover.tsx
+ * @LastEditTime: 2022-06-25 22:01:10
+ * @FilePath: /uwcssa_ca/src/views/Authorization/SigninCover/SigninCover.tsx
  * @Description:
  *
  */
@@ -98,7 +98,7 @@ const SigninCover = (): JSX.Element => {
                         component={LazyLoadImage}
                         effect="blur"
                         src={
-                          'https://assets.maccarianagency.com/backgrounds/img18.jpg'
+                          'https://uwcssats232508-production.s3.us-east-2.amazonaws.com/uwincssa_pictures/JiayiAndHistBF.jpg'
                         }
                         height={{ xs: 'auto', md: 1 }}
                         maxHeight={{ xs: 300, md: 1 }}

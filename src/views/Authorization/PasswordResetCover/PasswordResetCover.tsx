@@ -2,18 +2,18 @@
  * @Author: Shen Shu
  * @Date: 2022-05-26 13:57:44
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-29 23:55:44
- * @FilePath: /uwcssa_ca/src/views/PasswordResetCover/PasswordResetCover.tsx
+ * @LastEditTime: 2022-06-25 22:27:22
+ * @FilePath: /uwcssa_ca/src/views/Authorization/PasswordResetCover/PasswordResetCover.tsx
  * @Description:
  *
  */
 
-import Box from '@mui/material/Box';
+import { Box, useTheme } from '@mui/material';
+
 import Container from 'components/Container';
 import { Form } from './components';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import React from 'react';
-import { useTheme } from '@mui/material/styles';
 
 const PasswordResetCover = (): JSX.Element => {
   const theme = useTheme();
@@ -98,7 +98,7 @@ const PasswordResetCover = (): JSX.Element => {
                         component={LazyLoadImage}
                         effect="blur"
                         src={
-                          'https://assets.maccarianagency.com/backgrounds/img15.jpg'
+                          'https://uwcssats232508-production.s3.us-east-2.amazonaws.com/uwincssa_pictures/ChancyWelcome.jpg'
                         }
                         height={{ xs: 'auto', md: 1 }}
                         maxHeight={{ xs: 300, md: 1 }}

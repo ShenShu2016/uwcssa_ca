@@ -1,12 +1,25 @@
-import Avatar from '@mui/material/Avatar';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import ListItem from '@mui/material/ListItem';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import ListItemText from '@mui/material/ListItemText';
+/*
+ * @Author: Shikai Jin
+ * @Date: 2022-06-11 20:04:21
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-06-25 22:28:02
+ * @FilePath: /uwcssa_ca/src/views/Home/components/Team/Team.tsx
+ * @Description:
+ *
+ */
+
+import {
+  Avatar,
+  Box,
+  Grid,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
+  Typography,
+  useTheme,
+} from '@mui/material';
+
 import React from 'react';
-import Typography from '@mui/material/Typography';
-import { useTheme } from '@mui/material/styles';
 
 const Team = (): JSX.Element => {
   const theme = useTheme();
@@ -78,7 +91,7 @@ const Team = (): JSX.Element => {
             <Box
               component={'img'}
               src={
-                'https://uwcssats225941-devts.s3.us-east-2.amazonaws.com/protected/us-east-2:7572fa7c-2ecd-46ee-a5c8-ebb3ce30f60c/Article/5c98e0e1-6a9b-4c0a-a1c6-71d31e2c36ed.png'
+                'https://uwcssats232508-production.s3.us-east-2.amazonaws.com/uwincssa_pictures/shenshu.jpg'
               }
               alt="..."
               width={160}
@@ -99,7 +112,7 @@ const Team = (): JSX.Element => {
               width={200}
               height={200}
               src={
-                'https://uwcssats225941-devts.s3.us-east-2.amazonaws.com/protected/us-east-2:7845a883-556b-4fd6-b477-333b873abb68/Article/e75f7f3d-6ad0-466e-b5f9-e5b6b0c2b515.jpg'
+                'https://uwcssats232508-production.s3.us-east-2.amazonaws.com/uwincssa_pictures/fawubu.jpg'
               }
               alt="..."
               marginTop={'-8%'}
@@ -118,7 +131,7 @@ const Team = (): JSX.Element => {
               width={300}
               height={300}
               src={
-                'https://uwcssabucket53243-master.s3.us-east-2.amazonaws.com/public/user/BackGround/92f5ce89-2045-408b-9193-0c2ae95dab3b.jpeg'
+                'https://uwcssats232508-production.s3.us-east-2.amazonaws.com/uwincssa_pictures/chenzhenhao.jpg'
               }
               alt="..."
               marginTop={'-20%'}

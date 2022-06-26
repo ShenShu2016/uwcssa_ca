@@ -1,3 +1,13 @@
+/*
+ * @Author: Shikai Jin
+ * @Date: 2022-06-02 22:38:34
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-06-25 22:25:49
+ * @FilePath: /uwcssa_ca/src/views/About/components/Gallery/Gallery.tsx
+ * @Description:
+ *
+ */
+
 import React, { useState } from 'react';
 
 import Box from '@mui/material/Box';
@@ -31,32 +41,37 @@ const Gallery = (): JSX.Element => {
 
   const photos = [
     {
-      src: 'https://assets.maccarianagency.com/backgrounds/img23.jpg',
-      source: 'https://assets.maccarianagency.com/backgrounds/img23.jpg',
+      src: 'https://uwcssats232508-production.s3.us-east-2.amazonaws.com/uwincssa_pictures/shenshu.jpg',
+      source:
+        'https://uwcssats232508-production.s3.us-east-2.amazonaws.com/uwincssa_pictures/shenshu.jpg',
       rows: 2,
       cols: 1,
     },
     {
-      src: 'https://assets.maccarianagency.com/backgrounds/img25.jpg',
-      source: 'https://assets.maccarianagency.com/backgrounds/img25.jpg',
+      src: 'https://uwcssats232508-production.s3.us-east-2.amazonaws.com/uwincssa_pictures/chenzhenhao.jpg',
+      source:
+        'https://uwcssats232508-production.s3.us-east-2.amazonaws.com/uwincssa_pictures/chenzhenhao.jpg',
       rows: 1,
       cols: 2,
     },
     {
-      src: 'https://assets.maccarianagency.com/backgrounds/img22.jpg',
-      source: 'https://assets.maccarianagency.com/backgrounds/img22.jpg',
+      src: 'https://uwcssats232508-production.s3.us-east-2.amazonaws.com/uwincssa_pictures/DeanMaIsSpeaking.jpg',
+      source:
+        'https://uwcssats232508-production.s3.us-east-2.amazonaws.com/uwincssa_pictures/DeanMaIsSpeaking.jpg',
       rows: 1,
       cols: 1,
     },
     {
-      src: 'https://assets.maccarianagency.com/backgrounds/img24.jpg',
-      source: 'https://assets.maccarianagency.com/backgrounds/img24.jpg',
+      src: 'https://uwcssats232508-production.s3.us-east-2.amazonaws.com/uwincssa_pictures/campaign.jpg',
+      source:
+        'https://uwcssats232508-production.s3.us-east-2.amazonaws.com/uwincssa_pictures/campaign.jpg',
       rows: 1,
       cols: 1,
     },
     {
-      src: 'https://assets.maccarianagency.com/backgrounds/img21.jpg',
-      source: 'https://assets.maccarianagency.com/backgrounds/img21.jpg',
+      src: 'https://uwcssats232508-production.s3.us-east-2.amazonaws.com/uwincssa_pictures/cssaMembers2022Sumber.jpg',
+      source:
+        'https://uwcssats232508-production.s3.us-east-2.amazonaws.com/uwincssa_pictures/cssaMembers2022Sumber.jpg',
       rows: 1,
       cols: 2,
     },
