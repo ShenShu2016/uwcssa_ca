@@ -83,7 +83,7 @@
         "uwcssatsPostConfirmation": {
           "GROUP": "uwcssaUser",
           "deploymentBucketName": "amplify-uwcssa-production-232508-deployment",
-          "s3Key": "amplify-builds/uwcssatsPostConfirmation-335a4432517745755568-build.zip",
+          "s3Key": "amplify-builds/uwcssatsPostConfirmation-36564d567872686d767a-build.zip",
           "userTable": "User-wajhfftifnfjpis7ez2nxdmg4u-production",
           "userProfileTable": "UserProfile-wajhfftifnfjpis7ez2nxdmg4u-production",
           "countTable": "Count-wajhfftifnfjpis7ez2nxdmg4u-production"
@@ -94,20 +94,21 @@
         },
         "UserImageCompressHandler": {
           "deploymentBucketName": "amplify-uwcssa-production-232508-deployment",
-          "s3Key": "amplify-builds/UserImageCompressHandler-7a44524d4c4170385258-build.zip"
+          "s3Key": "amplify-builds/UserImageCompressHandler-524b6c6b426e52316878-build.zip"
         },
         "ArticlePublishHandler": {
           "deploymentBucketName": "amplify-uwcssa-production-232508-deployment",
-          "s3Key": "amplify-builds/ArticlePublishHandler-694d493455743154465a-build.zip",
+          "s3Key": "amplify-builds/ArticlePublishHandler-784c612f3775346d7877-build.zip",
           "userProfileTable": "UserProfile-wajhfftifnfjpis7ez2nxdmg4u-production"
         },
         "ContactUsHandler": {
           "deploymentBucketName": "amplify-uwcssa-production-232508-deployment",
-          "s3Key": "amplify-builds/ContactUsHandler-7666725173764d725567-build.zip"
+          "s3Key": "amplify-builds/ContactUsHandler-662f65326845494c6e79-build.zip",
+          "eventTable": "ContactUs-wajhfftifnfjpis7ez2nxdmg4u-production"
         },
         "CountHandler": {
           "deploymentBucketName": "amplify-uwcssa-production-232508-deployment",
-          "s3Key": "amplify-builds/CountHandler-686f6a693242556e7a33-build.zip",
+          "s3Key": "amplify-builds/CountHandler-524c476d64766d325544-build.zip",
           "articleTable": "Article-wajhfftifnfjpis7ez2nxdmg4u-production",
           "countTable": "Count-wajhfftifnfjpis7ez2nxdmg4u-production"
         },
