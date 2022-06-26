@@ -64,7 +64,7 @@ const Team = (): JSX.Element => {
             marginTop: theme.spacing(1),
           }}
         >
-          学生会
+          学生会组织结构
         </Typography>
       </Box>
       <>

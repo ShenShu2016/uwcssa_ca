@@ -2,8 +2,8 @@
  * @Author: Shikai Jin
  * @Date: 2022-05-26 22:30:04
  * @LastEditors: Shikai Jin
- * @LastEditTime: 2022-05-27 18:05:25
- * @FilePath: /uwcssa_ca/src/views/Logistics/components/AboutBottom/AboutBottom.tsx
+ * @LastEditTime: 2022-06-25 22:06:07
+ * @FilePath: /uwcssa_ca/src/views/Home/components/AboutBottom/AboutBottom.tsx
  * @Description:
  *
  */
@@ -48,15 +48,14 @@ const AboutBottom = (): JSX.Element => {
                 fontWeight: 700,
               }}
             >
-              Make a Donation
+              支持我们
             </Typography>
             <Typography variant="h6" data-aos={'fade-up'}>
-              When you donate to UWCCSA, you enable us to increase the speed of
-              bug fixes, web page improvements and feature development.
+              贡献一份力量，帮助我们提高错误修复、网页改进和功能开发的速度。
             </Typography>
             <Box display="flex" justifyContent={'left'} marginTop={2}>
               <Button variant="contained" color="primary" size="large">
-                Donate
+                捐款
               </Button>
             </Box>
           </Box>

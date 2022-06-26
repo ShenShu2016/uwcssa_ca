@@ -2,11 +2,12 @@
  * @Author: Shikai Jin
  * @Date: 2022-06-02 20:53:01
  * @LastEditors: Shikai Jin
- * @LastEditTime: 2022-06-02 21:03:17
+ * @LastEditTime: 2022-06-25 22:11:28
  * @FilePath: /uwcssa_ca/src/views/About/components/Hero/Hero.tsx
  * @Description:
  *
  */
+
 import React, { useEffect } from 'react';
 
 import Box from '@mui/material/Box';
@@ -85,7 +86,7 @@ const Hero = (): JSX.Element => {
               textTransform: 'uppercase',
             }}
           >
-            About us
+            关于我们
           </Typography>
           <Typography
             variant="h6"
@@ -95,8 +96,7 @@ const Hero = (): JSX.Element => {
               color: 'common.white',
             }}
           >
-            We are a non-political, non-profit and independent organization
-            composed of Chinese students and scholars.
+            一个由中国学生和学者组成的非政治性、非盈利和独立的组织
           </Typography>
         </Box>
       </Container>

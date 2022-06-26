@@ -2,18 +2,20 @@
  * @Author: Shikai Jin
  * @Date: 2022-06-02 20:53:01
  * @LastEditors: Shikai Jin
- * @LastEditTime: 2022-06-02 21:09:38
+ * @LastEditTime: 2022-06-25 22:13:39
  * @FilePath: /uwcssa_ca/src/views/About/components/Story/Story.tsx
  * @Description:
  *
  */
+
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-/* eslint-disable react/no-unescaped-entities */
 import React from 'react';
 import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
+
+/* eslint-disable react/no-unescaped-entities */
 
 const Story = (): JSX.Element => {
   const theme = useTheme();
@@ -27,28 +29,16 @@ const Story = (): JSX.Element => {
         <Grid item container alignItems={'center'} xs={12} md={6}>
           <Box>
             <Typography variant={'h4'} gutterBottom sx={{ fontWeight: 700 }}>
-              Our story
+              我们的职责 & 使命
             </Typography>
             <Typography component={'p'}>
-              The Chinese Students and Scholars Association at University of
-              Windsor (UWCSSA) is a non-political, non-profit, service-oriented
-              organization, which is officially ratified by U.W.S.A. at
-              University of Windsor. Founded in 1985 by a group of Chinese
-              students and visiting scholars, the CSSA has provided services to
-              Chinese people in Windsor for nearly 20 years.
+              温莎大学中国学生学者联谊会是在温莎大学学生会下注册的一个非政治、非赢利的服务性组织。学生会于1985年由当时的一些中国学生、访问学者组建成立，为温莎华人提供服务将近20年。
               <br />
               <br />
-              Our goal is to unite Chinese students and scholars in Windsor; to
-              help Chinese students and scholars to adjust their campus lives
-              and adopt the new culture; to provide them with comfortable
-              environment and various opportunities to communicate and thus
-              enrich their lives in Canada; and to promote Chinese culture
-              heritage and multicultural communications in Canada.
+              学生会的目标是团结在温莎的中国学生学者；帮助大家适应学校的生活和新的文化环境；提供给大家相互交流的环境和机会；发扬宣传中国的传统文化并加强多文化的交流。
               <br />
               <br />
-              We welcome all Chinese students & scholars to join us and make
-              CSSA a much bigger, stronger, and helpful association for all
-              Chinese in U of W as well as in the Great Windsor Area.
+              我们欢迎所有的温莎大学学生学者加入到学生会中，使学生会更强大，能给大家提供更多的帮助，更好的服务温莎大学的学生以及大温莎地区的华人。
             </Typography>
           </Box>
         </Grid>

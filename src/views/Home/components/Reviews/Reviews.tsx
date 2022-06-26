@@ -1,8 +1,8 @@
 /*
  * @Author: Shikai Jin
  * @Date: 2022-05-17 22:50:55
- * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-11 17:02:00
+ * @LastEditors: Shikai Jin
+ * @LastEditTime: 2022-06-25 22:00:58
  * @FilePath: /uwcssa_ca/src/views/Home/components/Reviews/Reviews.tsx
  * @Description:
  *
@@ -56,9 +56,9 @@ const Reviews = (): JSX.Element => {
             color: 'common.white',
           }}
         >
-          Trusted by the world’s most innovative businesses – big and small
+          Development Team
         </Typography>
-        <Typography
+        {/* <Typography
           variant="h6"
           align={'center'}
           data-aos={'fade-up'}
@@ -68,7 +68,7 @@ const Reviews = (): JSX.Element => {
           theFront.
           <br />
           Here’s what they have to say.
-        </Typography>
+        </Typography> */}
       </Box>
       <Grid container spacing={2}>
         {developers.map((item, i) => (

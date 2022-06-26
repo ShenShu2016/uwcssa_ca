@@ -3,9 +3,10 @@ import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Grid from '@mui/material/Grid';
-/* eslint-disable react/no-unescaped-entities */
 import React from 'react';
 import Typography from '@mui/material/Typography';
+
+/* eslint-disable react/no-unescaped-entities */
 
 export const mock = [
   {
@@ -38,9 +39,9 @@ const Jobs = (): JSX.Element => {
             fontWeight: 700,
           }}
         >
-          We are hiring
+          加入我们
         </Typography>
-        <Typography
+        {/* <Typography
           variant="h6"
           align={'center'}
           color={'text.secondary'}
@@ -50,10 +51,10 @@ const Jobs = (): JSX.Element => {
           run
           <br />
           reports against your data anywhere in the world.
-        </Typography>
+        </Typography> */}
         <Box display="flex" justifyContent={'center'} marginTop={2}>
           <Button variant="contained" color="primary" size="large">
-            View all positions
+            查看所有开放职位
           </Button>
         </Box>
       </Box>

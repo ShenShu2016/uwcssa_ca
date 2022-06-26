@@ -1,12 +1,13 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-19 21:16:43
- * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-23 12:13:59
- * @FilePath: /uwcssa_ca/frontend/src/views/ContactPage/components/Contact/Contact.tsx
+ * @LastEditors: Shikai Jin
+ * @LastEditTime: 2022-06-25 22:19:19
+ * @FilePath: /uwcssa_ca/src/views/ContactPage/components/Contact/Contact.tsx
  * @Description:
  *
  */
+
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Container from 'components/Container';
@@ -79,12 +80,10 @@ const Contact = (): JSX.Element => {
       <Box>
         <Box marginBottom={2}>
           <Typography variant={'h4'} sx={{ fontWeight: 700 }} gutterBottom>
-            Contact details
+            联系方式
           </Typography>
           <Typography color="text.secondary">
-            Rather than worrying about switching offices every couple years, you
-            can instead stay in the same location and grow-up from your shared
-            coworking space to an office that takes up an entire floor.
+            如果您有任何疑问，请不要犹豫联系我们
           </Typography>
         </Box>
         <Box

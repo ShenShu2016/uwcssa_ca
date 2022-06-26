@@ -2,8 +2,8 @@
  * @Author: Shikai Jin
  * @Date: 2022-05-26 22:30:04
  * @LastEditors: Shikai Jin
- * @LastEditTime: 2022-05-27 18:04:34
- * @FilePath: /uwcssa_ca/src/views/Logistics/components/Video/Video.tsx
+ * @LastEditTime: 2022-06-25 22:10:20
+ * @FilePath: /uwcssa_ca/src/views/Home/components/Video/Video.tsx
  * @Description:
  *
  */
@@ -39,15 +39,15 @@ const Video = (): JSX.Element => {
       <Container position={'relative'} zIndex={3}>
         <Box>
           <Box marginBottom={4}>
-            <Typography
+            {/* <Typography
               variant={'h4'}
               gutterBottom
               align={'center'}
               sx={{ fontWeight: 700, color: 'common.white' }}
             >
               Watch the video
-            </Typography>
-            <Typography
+            </Typography> */}
+            {/* <Typography
               variant={'h6'}
               component={'p'}
               color={'text.secondary'}
@@ -56,7 +56,7 @@ const Video = (): JSX.Element => {
             >
               After 3 days all of your offers will arrive and you will have
               another 7 days to select your new company.
-            </Typography>
+            </Typography> */}
           </Box>
           <Box
             sx={{

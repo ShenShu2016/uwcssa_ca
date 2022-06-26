@@ -1,9 +1,19 @@
+/*
+ * @Author: Shikai Jin
+ * @Date: 2022-06-01 00:01:32
+ * @LastEditors: Shikai Jin
+ * @LastEditTime: 2022-06-25 22:18:35
+ * @FilePath: /uwcssa_ca/src/views/ContactPage/components/Hero/Hero.tsx
+ * @Description:
+ *
+ */
 /* eslint-disable react/no-unescaped-entities */
-import React from 'react';
-import { useTheme } from '@mui/material/styles';
+
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
+import React from 'react';
+import Typography from '@mui/material/Typography';
+import { useTheme } from '@mui/material/styles';
 
 const Hero = (): JSX.Element => {
   const theme = useTheme();
@@ -20,11 +30,11 @@ const Hero = (): JSX.Element => {
                 fontWeight: 700,
               }}
             >
-              Contact us
+              联系我们
             </Typography>
           </Box>
           <Box>
-            <Typography
+            {/* <Typography
               variant="h6"
               component="p"
               color="text.secondary"
@@ -32,7 +42,7 @@ const Hero = (): JSX.Element => {
             >
               theFront will make your product look modern and professional while
               saving you precious time.
-            </Typography>
+            </Typography> */}
           </Box>
         </Box>
       </Grid>

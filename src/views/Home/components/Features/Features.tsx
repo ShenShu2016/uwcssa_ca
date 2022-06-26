@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 const mock = [
   {
     title: '新闻',
-    subtitle: '随时随地找周边房源， 覆盖多伦多、温莎等热门城市',
+    subtitle: '最即时的新闻，让你信息永不断线',
     icon: (
       <svg
         height={24}
@@ -28,13 +28,13 @@ const mock = [
         />
       </svg>
     ),
-    link: '/news'
+    link: '/news',
   },
   {
     title: '活动',
     subtitle:
       // eslint-disable-next-line quotes
-      'UWCSSA活动将您与其他学生联系起来',
+      '和朋友一起互动，不错过最新、最热门的活动',
     icon: (
       <svg
         height={24}
@@ -52,12 +52,11 @@ const mock = [
         />
       </svg>
     ),
-    link: '/history-events'
+    link: '/history-events',
   },
   {
     title: '新生必读',
-    subtitle:
-      '在二手交易平台上即时与当地的买家和卖家联系! 购买和销售广泛的产品，包括汽车，电子产品，家具，以及更多',
+    subtitle: '了解校园生活大小事，新生指南不容错过',
     icon: (
       <svg
         height={24}
@@ -158,7 +157,7 @@ const Features = (): JSX.Element => {
                 data-aos-duration={600}
                 height={1}
                 sx={{
-                  cursor: 'pointer'
+                  cursor: 'pointer',
                 }}
                 onClick={() => {
                   if (item.link) {

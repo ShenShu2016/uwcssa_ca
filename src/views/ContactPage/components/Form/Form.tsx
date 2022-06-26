@@ -1,8 +1,8 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-19 21:16:43
- * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-11 18:23:26
+ * @LastEditors: Shikai Jin
+ * @LastEditTime: 2022-06-25 22:23:31
  * @FilePath: /uwcssa_ca/src/views/ContactPage/components/Form/Form.tsx
  * @Description:
  *
@@ -98,13 +98,13 @@ const Form = (): JSX.Element => {
           gutterBottom
           align={'center'}
         >
-          Can't find the answer you need?
+          有任何问题？
         </Typography>
-        <Typography color="text.secondary" align={'center'}>
+        {/* <Typography color="text.secondary" align={'center'}>
           Keep track of what's happening with your data, change permissions, and
           run reports against your data anywhere in the world. Keep track of
           what's happening with your data, change permissions.
-        </Typography>
+        </Typography> */}
       </Box>
       <Box
         maxWidth={600}
@@ -129,10 +129,10 @@ const Form = (): JSX.Element => {
               fontWeight={700}
               gutterBottom
             >
-              Full name
+              姓名
             </Typography>
             <TextField
-              placeholder="Your full name"
+              placeholder="请输入姓名"
               variant="outlined"
               size="medium"
               name="fullName"
@@ -151,10 +151,10 @@ const Form = (): JSX.Element => {
               fontWeight={700}
               gutterBottom
             >
-              E-mail
+              邮箱
             </Typography>
             <TextField
-              placeholder="Your e-mail address"
+              placeholder="请输入邮箱"
               variant="outlined"
               size="medium"
               name="email"
@@ -173,10 +173,10 @@ const Form = (): JSX.Element => {
               fontWeight={700}
               gutterBottom
             >
-              Phone Number
+              电话号码
             </Typography>
             <TextField
-              placeholder="Your phone number"
+              placeholder="请输入电话号码"
               variant="outlined"
               size="medium"
               name="phone"
@@ -195,10 +195,10 @@ const Form = (): JSX.Element => {
               fontWeight={700}
               gutterBottom
             >
-              Message
+              内容
             </Typography>
             <TextField
-              placeholder="Your question about our services"
+              placeholder="请输入问题内容"
               variant="outlined"
               name="message"
               fullWidth
@@ -217,7 +217,7 @@ const Form = (): JSX.Element => {
               color="primary"
               size="large"
             >
-              Send the question
+              提交
             </Button>
           </Grid>
         </Grid>

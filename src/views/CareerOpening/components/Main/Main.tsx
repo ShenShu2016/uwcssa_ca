@@ -169,9 +169,9 @@ const Main = (): JSX.Element => {
             <Grid item xs={12} data-aos="fade-up">
               <Box component={Card}>
                 <CardContent>
-                  <Typography variant="h6" gutterBottom color="text.primary">
+                  {/* <Typography variant="h6" gutterBottom color="text.primary">
                     Interactive decision support system
-                  </Typography>
+                  </Typography> */}
                   <Button
                     variant="contained"
                     color="primary"

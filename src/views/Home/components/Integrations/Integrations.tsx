@@ -2,8 +2,8 @@
  * @Author: Shikai Jin
  * @Date: 2022-05-17 22:50:55
  * @LastEditors: Shikai Jin
- * @LastEditTime: 2022-05-19 13:32:38
- * @FilePath: \uwcssa_ca\frontend\src\views\Logistics\components\Integrations\Integrations.tsx
+ * @LastEditTime: 2022-06-25 22:09:34
+ * @FilePath: /uwcssa_ca/src/views/Home/components/Integrations/Integrations.tsx
  * @Description:
  *
  */
@@ -38,7 +38,7 @@ const mock = [
 const Integrations = (): JSX.Element => {
   return (
     <Box>
-      <Box marginBottom={4}>
+      {/* <Box marginBottom={4}>
         <Typography
           variant={'h4'}
           gutterBottom
@@ -57,7 +57,7 @@ const Integrations = (): JSX.Element => {
           Since UWCSSA is an open source project, we want to continue this
           movement too.
         </Typography>
-      </Box>
+      </Box> */}
       <Grid container spacing={2}>
         {mock.map((item, i) => (
           <Grid item xs={12} md={4} key={i}>

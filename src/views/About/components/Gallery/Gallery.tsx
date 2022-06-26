@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
-import Lightbox from 'react-image-lightbox';
-import { useTheme } from '@mui/material/styles';
-import useMediaQuery from '@mui/material/useMediaQuery';
+
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
-import Button from '@mui/material/Button';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import Lightbox from 'react-image-lightbox';
+import Typography from '@mui/material/Typography';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 
 const Gallery = (): JSX.Element => {
   const theme = useTheme();
@@ -66,7 +67,7 @@ const Gallery = (): JSX.Element => {
   return (
     <Box>
       <Box marginBottom={4}>
-        <Typography
+        {/* <Typography
           sx={{
             textTransform: 'uppercase',
             fontWeight: 700,
@@ -76,7 +77,7 @@ const Gallery = (): JSX.Element => {
           align={'center'}
         >
           Gallery
-        </Typography>
+        </Typography> */}
         <Typography
           variant="h4"
           align={'center'}
@@ -88,10 +89,10 @@ const Gallery = (): JSX.Element => {
         >
           Small team. Big hearts.
         </Typography>
-        <Typography variant="h6" align={'center'} color={'text.secondary'}>
+        {/* <Typography variant="h6" align={'center'} color={'text.secondary'}>
           Our focus is always on finding the best people to work with. Our bar
           is high, but you look ready to take on the challenge.
-        </Typography>
+        </Typography> */}
       </Box>
       <Box display={'flex'} justifyContent={'flex-end'} marginBottom={2}>
         <Button

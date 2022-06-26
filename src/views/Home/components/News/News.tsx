@@ -1,12 +1,14 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-23 19:00:55
- * @LastEditors: 李佳修
- * @LastEditTime: 2022-05-30 08:37:52
- * @FilePath: /uwcssa_ca/src/views/Logistics/components/News/News.tsx
+ * @LastEditors: Shikai Jin
+ * @LastEditTime: 2022-06-25 21:49:03
+ * @FilePath: /uwcssa_ca/src/views/Home/components/News/News.tsx
  * @Description:
  *
  */
+
+import './index.css';
 
 import React, { useEffect } from 'react';
 import {
@@ -27,7 +29,6 @@ import Typography from '@mui/material/Typography';
 import { getAuthState } from 'redux/auth/authSlice';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
-import './index.css';
 
 const News = (): JSX.Element => {
   const theme = useTheme();
@@ -61,7 +62,7 @@ const News = (): JSX.Element => {
           align={'center'}
           sx={{ fontWeight: 700 }}
         >
-          Our latest news
+          最新资讯
         </Typography>
         <Typography
           variant={'h6'}
@@ -69,8 +70,7 @@ const News = (): JSX.Element => {
           color={'text.secondary'}
           align={'center'}
         >
-          After 3 days all of your offers will arrive and you will have another
-          7 days to select your new company.
+          随点随看 信息快充
         </Typography>
       </Box>
       <Grid container spacing={isMd ? 4 : 2}>
@@ -102,7 +102,7 @@ const News = (): JSX.Element => {
                       width: { xs: 1, sm: 300 },
                     }}
                   />
-                  <CardContent sx={{width: { xs: '100%', sm: '60%' }}}>
+                  <CardContent sx={{ width: { xs: '100%', sm: '60%' } }}>
                     <Box>
                       <Typography
                         variant="h6"
@@ -111,7 +111,11 @@ const News = (): JSX.Element => {
                       >
                         {item.title}
                       </Typography>
-                      <Typography variant="subtitle1" color="text.secondary" className='article-list-text'>
+                      <Typography
+                        variant="subtitle1"
+                        color="text.secondary"
+                        className="article-list-text"
+                      >
                         {item.coverPageDescription}
                       </Typography>
                     </Box>
@@ -128,7 +132,7 @@ const News = (): JSX.Element => {
         </Grid>
         <Grid item xs={12} md={4}>
           <Grid container spacing={isMd ? 4 : 2} direction="column">
-            <Grid item xs={12} data-aos="fade-up">
+            {/* <Grid item xs={12} data-aos="fade-up">
               <Box component={Card} bgcolor={'primary.main'}>
                 <CardContent>
                   <Typography
@@ -149,17 +153,18 @@ const News = (): JSX.Element => {
                   </Typography>
                 </CardContent>
               </Box>
-            </Grid>
+            </Grid> */}
             <Grid item xs={12} data-aos="fade-up">
               <Box component={Card}>
                 <CardContent>
-                  <Typography variant="h6" gutterBottom color="text.primary">
+                  {/* <Typography variant="h6" gutterBottom color="text.primary">
                     Interactive decision support system
-                  </Typography>
+                  </Typography> */}
                   <Button
                     variant="contained"
                     color="primary"
                     size="large"
+                    onClick={() => window.open('/news')}
                     endIcon={
                       <Box
                         component={'svg'}
@@ -179,7 +184,7 @@ const News = (): JSX.Element => {
                       </Box>
                     }
                   >
-                    View all
+                    更多
                   </Button>
                 </CardContent>
               </Box>
