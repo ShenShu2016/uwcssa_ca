@@ -2,7 +2,7 @@
  * @Author: Shikai Jin
  * @Date: 2022-06-05 19:59:54
  * @LastEditors: Shikai Jin
- * @LastEditTime: 2022-06-26 11:56:25
+ * @LastEditTime: 2022-07-02 22:28:43
  * @FilePath: /uwcssa_ca/src/views/ResearchDevelopment/components/Team/components/DeveloperCard.tsx
  * @Description:
  *
@@ -60,20 +60,8 @@ const DevelopCard: React.FC<Props> = (props): JSX.Element => {
                 width: 'auto',
                 height: '300px',
               })}
-              style={{ borderRadius: 0, zIndex: -1 }}
+              style={{ borderRadius: 10, zIndex: -1 }}
             />
-            {/* <Box
-              component={CardMedia}
-              borderRadius={2}
-              width={1}
-              height={1}
-              minHeight={300}
-              // image={item.user.avatarURL?.objectCompressedURL}
-              // {...stringAvatar(item.user.name, {
-              //   width: '45',
-              //   height: '45',
-              // })}
-            ></Box> */}
 
             <Box component={CardContent} bgcolor={'transparent'} marginTop={-6}>
               <Box component={Card} borderRadius={2}>
