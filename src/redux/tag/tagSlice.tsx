@@ -1,15 +1,23 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-21 14:23:37
- * @LastEditTime: 2022-06-26 16:32:35
+ * @LastEditTime: 2022-06-26 19:42:43
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/redux/tag/tagSlice.tsx
  */
 
-import { CreateTagInput, UpdateTagInput } from 'API';
+import {
+  CreateArticleTagsInput,
+  CreateEventTagsInput,
+  CreateTagInput,
+  UpdateTagInput,
+} from 'API';
 import {
   createArticleTags,
+  createEventTags,
   createTag,
+  deleteArticleTags,
+  deleteEventTags,
   deleteTag,
   updateTag,
 } from 'graphql/mutations';
@@ -18,7 +26,12 @@ import {
   createEntityAdapter,
   createSlice,
 } from '@reduxjs/toolkit';
-import { getTag, listTags } from 'graphql/queries';
+import {
+  getTag,
+  listArticleTags,
+  listEventTags,
+  listTags,
+} from 'graphql/queries';
 
 import API from '@aws-amplify/api';
 import { RootState } from 'redux/store';
@@ -54,6 +67,10 @@ const initialState = tagAdapter.getInitialState({
   updateTagDetailError: null,
   removeTagStatus: 'idle',
   removeTagError: null,
+  postUpdateArticleTagsStatus: 'idle',
+  postUpdateArticleTagsError: null,
+  postUpdateEventTagsStatus: 'idle',
+  postUpdateEventTagsError: null,
 });
 
 export const fetchTagList = createAsyncThunk(
@@ -180,24 +197,165 @@ export const removeTag = createAsyncThunk(
     }
   },
 );
-
-export const postArticleTag = createAsyncThunk(
+export const postUpdateArticleTags = createAsyncThunk(
   'tag/postArticleTag',
   async (
-    { createArticleTagInput }: { createArticleTagInput: ArticleTag },
+    { articleID, tagIDs }: { articleID: string; tagIDs: Array<string> },
     { rejectWithValue },
   ) => {
-    Object.keys(createArticleTagInput).forEach((key) =>
-      createArticleTagInput[key] === null || createArticleTagInput[key] === ''
-        ? delete createArticleTagInput[key]
-        : {},
-    );
+    // 不相信redux 直接从数据库里面拉出来再删
+    let needToCreateTags;
+    let needToDeleteTags;
+    try {
+      const currentArticleTags: any = await API.graphql(
+        graphqlOperation(listArticleTags, {
+          filter: {
+            articleID: {
+              eq: articleID,
+            },
+          },
+        }),
+      );
+      console.log('我是刚刚新鲜抓取回来的', currentArticleTags);
+      // keep tagID from currentArticleTags
+      needToDeleteTags = currentArticleTags.data.listArticleTags.items.filter(
+        (item) => !tagIDs.includes(item.tagID),
+      );
+      console.log('要删掉的tags', needToDeleteTags);
+      needToCreateTags = tagIDs.filter(
+        (item) =>
+          currentArticleTags.data.listArticleTags.items
+            .map((item) => item.tagID)
+            .indexOf(item) === -1,
+      );
+      console.log('要新建的tags', needToCreateTags);
+    } catch (error) {
+      console.log(error);
+      return rejectWithValue(error.errors);
+    }
+    // 删除原来的标签
+    if (needToDeleteTags.length > 0) {
+      try {
+        const deleteResults = await Promise.all(
+          needToDeleteTags.map((item) => {
+            return API.graphql(
+              graphqlOperation(deleteArticleTags, {
+                input: {
+                  id: item.id,
+                },
+              }),
+            );
+          }),
+        );
+        console.log(deleteResults);
+      } catch (error) {
+        console.log(error);
+        return rejectWithValue(error.errors);
+      }
+    }
     try {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const result: any = await API.graphql(
-        graphqlOperation(createArticleTags, { input: createArticleTagInput }),
+      const results = await Promise.all(
+        needToCreateTags.map((tagID) => {
+          return API.graphql(
+            graphqlOperation(createArticleTags, {
+              input: {
+                id: `${articleID}-${tagID}`,
+                articleID,
+                tagID,
+              } as CreateArticleTagsInput,
+            }),
+          );
+        }),
       );
-      return result.data;
+      console.log(results);
+      const returnResult = results.map((result: any) => {
+        return result.data.createArticleTags;
+      });
+      return returnResult;
+    } catch (error) {
+      console.log(error);
+      return rejectWithValue(error.errors);
+    }
+  },
+);
+
+export const postUpdateEventTags = createAsyncThunk(
+  'tag/postUpdateEventTags',
+  async (
+    { eventID, tagIDs }: { eventID: string; tagIDs: Array<string> },
+    { rejectWithValue },
+  ) => {
+    // 不相信redux 直接从数据库里面拉出来再删
+    let needToCreateTags;
+    let needToDeleteTags;
+    try {
+      const currentEventTags: any = await API.graphql(
+        graphqlOperation(listEventTags, {
+          filter: {
+            eventID: {
+              eq: eventID,
+            },
+          },
+        }),
+      );
+      console.log('我是刚刚新鲜抓取回来的', currentEventTags);
+      // keep tagID from currentEventTags
+      needToDeleteTags = currentEventTags.data.listEventTags.items.filter(
+        (item) => !tagIDs.includes(item.tagID),
+      );
+      console.log('要删掉的tags', needToDeleteTags);
+      needToCreateTags = tagIDs.filter(
+        (item) =>
+          currentEventTags.data.listEventTags.items
+            .map((item) => item.tagID)
+            .indexOf(item) === -1,
+      );
+      console.log('要新建的tags', needToCreateTags);
+    } catch (error) {
+      console.log(error);
+      return rejectWithValue(error.errors);
+    }
+    // 删除原来的标签
+    if (needToDeleteTags.length > 0) {
+      try {
+        const deleteResults = await Promise.all(
+          needToDeleteTags.map((item) => {
+            return API.graphql(
+              graphqlOperation(deleteEventTags, {
+                input: {
+                  id: item.id,
+                },
+              }),
+            );
+          }),
+        );
+        console.log(deleteResults);
+      } catch (error) {
+        console.log(error);
+        return rejectWithValue(error.errors);
+      }
+    }
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const results = await Promise.all(
+        needToCreateTags.map((tagID) => {
+          return API.graphql(
+            graphqlOperation(createEventTags, {
+              input: {
+                id: `${eventID}-${tagID}`,
+                eventID,
+                tagID,
+              } as CreateEventTagsInput,
+            }),
+          );
+        }),
+      );
+      console.log(results);
+      const returnResult = results.map((result: any) => {
+        return result.data.createEventTags;
+      });
+      return returnResult;
     } catch (error) {
       console.log(error);
       return rejectWithValue(error.errors);
@@ -242,7 +400,6 @@ const tagSlice = createSlice({
       })
       .addCase(postTag.fulfilled, (state, action) => {
         state.postTagStatus = 'succeed';
-
         tagAdapter.addOne(state, action.payload);
       })
       .addCase(postTag.rejected, (state, action) => {
@@ -272,6 +429,30 @@ const tagSlice = createSlice({
       .addCase(removeTag.rejected, (state, action) => {
         state.removeTagStatus = 'failed';
         state.removeTagError = action.payload;
+      })
+      // Post Article Tags
+      .addCase(postUpdateArticleTags.pending, (state) => {
+        state.postUpdateArticleTagsStatus = 'loading';
+      })
+      .addCase(postUpdateArticleTags.fulfilled, (state, action) => {
+        state.postUpdateArticleTagsStatus = 'succeed';
+        tagAdapter.addMany(state, action.payload);
+      })
+      .addCase(postUpdateArticleTags.rejected, (state, action) => {
+        state.postUpdateArticleTagsStatus = 'failed';
+        state.postUpdateArticleTagsError = action.payload;
+      })
+      // Post Event Tags
+      .addCase(postUpdateEventTags.pending, (state) => {
+        state.postUpdateEventTagsStatus = 'loading';
+      })
+      .addCase(postUpdateEventTags.fulfilled, (state, action) => {
+        state.postUpdateEventTagsStatus = 'succeed';
+        tagAdapter.addMany(state, action.payload);
+      })
+      .addCase(postUpdateEventTags.rejected, (state, action) => {
+        state.postUpdateEventTagsStatus = 'failed';
+        state.postUpdateEventTagsError = action.payload;
       });
   },
 });
