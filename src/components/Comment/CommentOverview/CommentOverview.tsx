@@ -134,7 +134,14 @@ const CommentOverview = ({ comments, count }: Props): JSX.Element => {
                     {item.user.name} - {moment(item.createdAt).fromNow()}
                   </Typography>
                   {/* <Typography marginY={1}></Typography> */}
-                  <Typography>{item.content}</Typography>
+                  <Typography
+                    style={{
+                      whiteSpace: 'pre-wrap',
+                      wordBreak: 'break-word',
+                    }}
+                  >
+                    {item.content}
+                  </Typography>
                 </Box>
                 <CommentGroupButton likes={item.likes} count={item.count} />
               </Box>
