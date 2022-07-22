@@ -1,26 +1,28 @@
+/* eslint-disable indent */
 /*
  * @Author: 李佳修
  * @Date: 2022-06-03 16:11:08
- * @LastEditTime: 2022-06-16 14:56:39
- * @LastEditors: 李佳修
+ * @LastEditTime: 2022-07-21 23:24:38
+ * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/admin/Event/EventCreate/components/FormItemPool.tsx
  */
+
+import { Box, Button, Card } from '@mui/material';
 import React, { useEffect } from 'react';
 import { fetchFormItemList, selectAllFormItems } from 'redux/form/formSlice';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
-import Card from '@mui/material/Card';
-import Box from '@mui/material/Box';
-import { FormType } from 'redux/form/formSlice';
-import TextFieldShort from './FormItems/TextFieldShort';
-import TextFieldLong from './FormItems/TextFieldLong';
-import Select from './FormItems/Select';
-import DatePicker from './FormItems/DatePicker';
-import TimePicker from './FormItems/TimePicker';
-import DateTimePicker from './FormItems/DateTimePicker';
-import RadioGroup from './FormItems/RadioGroup';
+
 import CheckBoxGroup from './FormItems/CheckBoxGroup';
-import Button from '@mui/material/Button';
+import DatePicker from './FormItems/DatePicker';
+import DateTimePicker from './FormItems/DateTimePicker';
+import { FormType } from 'redux/form/formSlice';
+import RadioGroup from './FormItems/RadioGroup';
+import Select from './FormItems/Select';
+import TextFieldLong from './FormItems/TextFieldLong';
+import TextFieldShort from './FormItems/TextFieldShort';
+import TimePicker from './FormItems/TimePicker';
 import { addQuestion } from 'redux/form/formSlice';
+
 // import FormItemDetail from './FormItemDetail';
 // import { FormItem } from 'redux/form/formSlice';
 // import FormItemCreate from './FormItemCreate';
@@ -66,8 +68,8 @@ const FormItemPool: React.FC = () => {
 
   return (
     <>
-      {
-        formItemList && formItemList.map(item => {
+      {formItemList &&
+        formItemList.map((item) => {
           return (
             <Card
               sx={{
@@ -77,60 +79,58 @@ const FormItemPool: React.FC = () => {
               }}
               key={item.id}
             >
-              {
-                item.formType === FormType.TextFieldShort ?
-                  <TextFieldShort item={item}/> : null
-              }
+              {item.formType === FormType.TextFieldShort ? (
+                <TextFieldShort item={item} />
+              ) : null}
 
-              {
-                item.formType === FormType.TextFieldLong ?
-                  <TextFieldLong item={item}/> : null
-              }
-             
-              {
-                item.formType === FormType.Select || item.formType === FormType.MultipleSelect ?
-                  <Select item={item}/> : null
-              }
+              {item.formType === FormType.TextFieldLong ? (
+                <TextFieldLong item={item} />
+              ) : null}
 
-              {
-                item.formType === FormType.DatePicker ?
-                  <DatePicker item={item}/> : null
-              }
+              {item.formType === FormType.Select ||
+              item.formType === FormType.MultipleSelect ? (
+                <Select item={item} />
+              ) : null}
 
-              {
-                item.formType === FormType.TimePicker ?
-                  <TimePicker item={item}/> : null
-              }
+              {item.formType === FormType.DatePicker ? (
+                <DatePicker item={item} />
+              ) : null}
 
-              {
-                item.formType === FormType.DateTimePicker ?
-                  <DateTimePicker item={item}/> : null
-              }
+              {item.formType === FormType.TimePicker ? (
+                <TimePicker item={item} />
+              ) : null}
 
-              {
-                item.formType === FormType.RadioGroupH ||
-                  item.formType === FormType.RadioGroupV ||
-                  item.formType === FormType.Boolean ?
-                  <RadioGroup item={item}/> : null
-              }
+              {item.formType === FormType.DateTimePicker ? (
+                <DateTimePicker item={item} />
+              ) : null}
 
-              {
-                item.formType === FormType.Checkbox ?
-                  <CheckBoxGroup item={item}/> : null
-              }
+              {item.formType === FormType.RadioGroupH ||
+              item.formType === FormType.RadioGroupV ||
+              item.formType === FormType.Boolean ? (
+                <RadioGroup item={item} />
+              ) : null}
+
+              {item.formType === FormType.Checkbox ? (
+                <CheckBoxGroup item={item} />
+              ) : null}
               <Box
                 paddingY={1}
                 display={'flex'}
                 justifyContent={'space-between'}
               >
-                <Button variant="text" size='small' onClick={() => handleAddQuestion(item)}>使用问题</Button>
+                <Button
+                  variant="text"
+                  size="small"
+                  onClick={() => handleAddQuestion(item)}
+                >
+                  使用问题
+                </Button>
                 {/* <Button variant="text" size='small' onClick={() => handleCheckDetail(item)}>查看详情</Button>
                   <Button variant="text" size='small' onClick={() => handleEditQuestion(item)}>编辑问题</Button> */}
               </Box>
             </Card>
           );
-        })
-      }
+        })}
       {/* <FormItemCreate
         editItem={editItem}
         type={DialogType.edit}

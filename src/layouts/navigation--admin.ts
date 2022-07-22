@@ -48,9 +48,14 @@ const pages = [
     id: 'Activity',
     pages: [
       {
+        title: '活动详情',
+        href: '/admin/event',
+      },
+      {
         title: '发起活动',
         href: '/admin/activity-create',
       },
+
       {
         title: 'Form Test',
         href: '/admin/activity-form-test',

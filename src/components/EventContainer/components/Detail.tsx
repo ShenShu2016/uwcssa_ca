@@ -2,7 +2,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-13 09:15:49
- * @LastEditTime: 2022-06-25 14:56:16
+ * @LastEditTime: 2022-07-22 15:54:10
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/components/EventContainer/components/Detail.tsx
  */
@@ -122,9 +122,13 @@ const Details: React.FC<DetailProp> = ({
           <Button variant="contained" disabled>
             你已经报名
           </Button>
-        ) : (
+        ) : ownerUsername ? (
           <Button variant="contained" sx={{ width: '100px' }} onClick={onJoin}>
             快速报名
+          </Button>
+        ) : (
+          <Button variant="contained" component={Link} to={'/auth/signIn'}>
+            请先登录
           </Button>
         )}
       </Box>
