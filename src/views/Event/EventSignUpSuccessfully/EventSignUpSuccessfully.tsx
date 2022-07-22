@@ -1,3 +1,13 @@
+/*
+ * @Author: Shen Shu
+ * @Date: 2022-06-24 00:43:11
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-07-22 16:26:36
+ * @FilePath: /uwcssa_ca/src/views/Event/EventSignUpSuccessfully/EventSignUpSuccessfully.tsx
+ * @Description:
+ *
+ */
+
 import { Box, Button, Typography } from '@mui/material';
 
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
@@ -33,8 +43,10 @@ export default function EventSignUpSuccessfully() {
           报名成功！
         </Typography>
         <Typography component="h6" align="center" className={classes.title}>
-          你已成功报名参加本次活动！请查看邮箱！有任何问题请随时联系我们
-          uwincssa.it@gmail.com
+          你已成功报名参加本次活动！请加小助手微信： CSSA-Uwindsor
+        </Typography>
+        <Typography component="h6" align="center">
+          有任何问题请随时联系我们！ uwincssa.it@gmail.com
         </Typography>
       </Box>
       <Box className={classes.icon}>
