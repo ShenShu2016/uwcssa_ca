@@ -1,18 +1,19 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-28 16:58:31
- * @LastEditTime: 2022-06-08 13:27:46
- * @LastEditors: 李佳修
+ * @LastEditTime: 2022-07-21 23:08:54
+ * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/admin/AdminRoutes.tsx
  */
 
 import {
-  EventCreate as EventCreateView,
   AdminDashboard as AdminDashboardView,
   ArticleEdit as ArticleEditView,
   ArticleManagement as ArticleManagementView,
   ArticlePublish as ArticlePublishView,
   DepartmentDashboard as DepartmentDashboardView,
+  EventCreate as EventCreateView,
+  EventManagement as EventManagementView,
   FormTest as FormTestView,
   ResearchDevelopmentTeamDashboard as ResearchDevelopmentTeamDashboardView,
   UserProfileDashboard as UserProfileDashboardView,
@@ -69,6 +70,12 @@ function AdminRoutes(): Array<{
       redirectPath: '/404',
     },
     {
+      path: '/admin/event',
+      renderer: (): JSX.Element => <EventManagementView />,
+      isAllowed: isAdmin,
+      redirectPath: '/404',
+    },
+    {
       path: '/admin/activity-create',
       renderer: (): JSX.Element => <EventCreateView />,
       isAllowed: isAdmin,
@@ -85,7 +92,8 @@ function AdminRoutes(): Array<{
       renderer: (): JSX.Element => <DepartmentDashboardView />,
       isAllowed: isAdmin,
       redirectPath: '/404',
-    },    {
+    },
+    {
       path: '/admin/uwcssa-member',
       renderer: (): JSX.Element => <UwcssaMemberDashboardView />,
       isAllowed: isAdmin,
