@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-06-16 21:24:48
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-25 14:33:04
+ * @LastEditTime: 2022-07-22 16:59:14
  * @FilePath: /uwcssa_ca/src/redux/event/custom_q_m_s.tsx
  * @Description:
  *
@@ -39,7 +39,7 @@ export const eventSortByCreatedAt = /* GraphQL */ `
         endDate
         eventStatus
         isPublish
-        eventParticipants(limit: 1, filter: { owner: { eq: $eq } }) {
+        eventParticipants(filter: { owner: { eq: $eq } }) {
           items {
             createdAt
             id
@@ -154,7 +154,7 @@ export const getEvent = /* GraphQL */ `
         countEventId
         countCommentId
       }
-      likes(filter: { owner: { eq: $eq } }, limit: 1) {
+      likes(filter: { owner: { eq: $eq } }) {
         items {
           owner
           id
@@ -165,7 +165,7 @@ export const getEvent = /* GraphQL */ `
           id
           content
           createdAt
-          likes(filter: { owner: { eq: $eq } }, limit: 1) {
+          likes(filter: { owner: { eq: $eq } }) {
             items {
               owner
               id
@@ -199,7 +199,7 @@ export const getEvent = /* GraphQL */ `
       startDate
       endDate
       eventStatus
-      eventParticipants(limit: 1, filter: { owner: { eq: $eq } }) {
+      eventParticipants(filter: { owner: { eq: $eq } }) {
         items {
           createdAt
           id
