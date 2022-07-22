@@ -2,36 +2,43 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-03 17:10:14
- * @LastEditTime: 2022-06-07 17:13:08
- * @LastEditors: 李佳修
- * @FilePath: /uwcssa_ca/src/admin/Activity/ActivityCreate/components/FormItems/Select.tsx
+ * @LastEditTime: 2022-07-21 23:21:13
+ * @LastEditors: Shen Shu
+ * @FilePath: /uwcssa_ca/src/admin/Event/EventCreate/components/FormItems/Select.tsx
  */
+
+import { MenuItem, TextField } from '@mui/material';
 import React, { useState } from 'react';
-import TextField from '@mui/material/TextField';
+
 import FieldLabel from '../FieldLabel';
-import MenuItem from '@mui/material/MenuItem';
 import { FormType } from 'redux/form/formSlice';
 
 interface SelectInfo {
-    formSelectChoices?: string[];
-    label?: string;
-    isRequired?: boolean;
-    description?: string;
-    placeholder?: string;
-    helperText?: string;
-    [propName: string]: any
+  formSelectChoices?: string[];
+  label?: string;
+  isRequired?: boolean;
+  description?: string;
+  placeholder?: string;
+  helperText?: string;
+  [propName: string]: any;
 }
 
 interface SelectProp {
-    item: SelectInfo;
+  item: SelectInfo;
 }
 
 const Select: React.FC<SelectProp> = ({ item }) => {
-  const [value, setValue] = useState<string | string[]>(item.formType === FormType.MultipleSelect ? [] : '');
+  const [value, setValue] = useState<string | string[]>(
+    item.formType === FormType.MultipleSelect ? [] : '',
+  );
 
   return (
     <>
-      <FieldLabel name={item.question} isRequired={item.isRequired} description={item.description}/>
+      <FieldLabel
+        name={item.question}
+        isRequired={item.isRequired}
+        description={item.description}
+      />
       <TextField
         label={item.label}
         select
@@ -39,18 +46,18 @@ const Select: React.FC<SelectProp> = ({ item }) => {
         variant="outlined"
         fullWidth
         SelectProps={{
-          multiple: item.formType === FormType.MultipleSelect
+          multiple: item.formType === FormType.MultipleSelect,
         }}
-        size='small'
+        size="small"
         value={value}
         onChange={(e) => setValue(e.target.value)}
         helperText={item.helperText}
       >
-        {
-          item.formSelectChoices?.map(choice => (
-            <MenuItem value={choice} key={choice}>{choice}</MenuItem>
-          ))
-        }
+        {item.formSelectChoices?.map((choice) => (
+          <MenuItem value={choice} key={choice}>
+            {choice}
+          </MenuItem>
+        ))}
       </TextField>
     </>
   );

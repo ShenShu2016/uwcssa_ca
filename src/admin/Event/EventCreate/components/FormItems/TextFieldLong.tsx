@@ -2,25 +2,27 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-03 17:02:56
- * @LastEditTime: 2022-06-08 11:30:57
- * @LastEditors: 李佳修
- * @FilePath: /uwcssa_ca/src/admin/Activity/ActivityCreate/components/FormItems/TextFieldLong.tsx
+ * @LastEditTime: 2022-07-21 23:21:20
+ * @LastEditors: Shen Shu
+ * @FilePath: /uwcssa_ca/src/admin/Event/EventCreate/components/FormItems/TextFieldLong.tsx
  */
+
 import React, { useState } from 'react';
+
 import FieldLabel from '../FieldLabel';
-import TextField from '@mui/material/TextField';
+import { TextField } from '@mui/material';
 
 interface TextFieldLongInfo {
-    label?: string;
-    isRequired?: boolean;
-    description?: string;
-    placeholder?: string;
-    helperText?: string;
-    [propName: string]: any
+  label?: string;
+  isRequired?: boolean;
+  description?: string;
+  placeholder?: string;
+  helperText?: string;
+  [propName: string]: any;
 }
 
 interface TextFieldLongProp {
-    item: TextFieldLongInfo;
+  item: TextFieldLongInfo;
 }
 
 const TextFieldLong: React.FC<TextFieldLongProp> = ({ item }) => {
@@ -28,7 +30,11 @@ const TextFieldLong: React.FC<TextFieldLongProp> = ({ item }) => {
 
   return (
     <>
-      <FieldLabel name={item.question} isRequired={item.isRequired} description={item.description}/>
+      <FieldLabel
+        name={item.question}
+        isRequired={item.isRequired}
+        description={item.description}
+      />
       <TextField
         label={item.label}
         placeholder={item.placeholder}
@@ -38,7 +44,7 @@ const TextFieldLong: React.FC<TextFieldLongProp> = ({ item }) => {
         value={value}
         onChange={(e) => setValue(e.target.value)}
         rows={4}
-        size='small'
+        size="small"
         helperText={item.helperText}
       />
     </>

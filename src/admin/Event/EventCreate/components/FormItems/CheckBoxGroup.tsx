@@ -2,29 +2,29 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-03 17:10:14
- * @LastEditTime: 2022-06-09 11:11:41
- * @LastEditors: 李佳修
+ * @LastEditTime: 2022-07-21 23:20:16
+ * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/admin/Event/EventCreate/components/FormItems/CheckBoxGroup.tsx
  */
+
+import { Checkbox, FormControlLabel, RadioGroup } from '@mui/material';
 import React, { useState } from 'react';
+
 import FieldLabel from '../FieldLabel';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
 import { FormType } from 'redux/form/formSlice';
-import Checkbox from '@mui/material/Checkbox';
 
 interface CheckBoxGroupInfo {
-    formSelectChoices?: string[];
-    label?: string;
-    isRequired?: boolean;
-    description?: string;
-    placeholder?: string;
-    helperText?: string;
-    [propName: string]: any
+  formSelectChoices?: string[];
+  label?: string;
+  isRequired?: boolean;
+  description?: string;
+  placeholder?: string;
+  helperText?: string;
+  [propName: string]: any;
 }
 
 interface CheckBoxGroupProp {
-    item: CheckBoxGroupInfo;
+  item: CheckBoxGroupInfo;
 }
 
 const CheckBoxGroupItem: React.FC<CheckBoxGroupProp> = ({ item }) => {
@@ -32,7 +32,11 @@ const CheckBoxGroupItem: React.FC<CheckBoxGroupProp> = ({ item }) => {
 
   return (
     <>
-      <FieldLabel name={item.question} isRequired={item.isRequired} description={item.description}/>
+      <FieldLabel
+        name={item.question}
+        isRequired={item.isRequired}
+        description={item.description}
+      />
       <RadioGroup
         row={item.formType === FormType.Checkbox}
         value={value}
@@ -40,7 +44,7 @@ const CheckBoxGroupItem: React.FC<CheckBoxGroupProp> = ({ item }) => {
       >
         <FormControlLabel
           value={value}
-          control={<Checkbox size='small'/>}
+          control={<Checkbox size="small" />}
           label={item.label}
         />
       </RadioGroup>
