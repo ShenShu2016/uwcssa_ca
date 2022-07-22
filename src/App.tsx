@@ -14,6 +14,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import 'react-image-lightbox/style.css';
 import 'aos/dist/aos.css';
 
+import { Backdrop, CircularProgress } from '@mui/material';
 import React, { useEffect } from 'react';
 import { getAuthState, getOwnerUserName } from 'redux/auth/authSlice';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
@@ -40,7 +41,18 @@ const App = (): JSX.Element => {
 
   return (
     <Page>
-      <BrowserRouter>{isAuth !== null && <Routes />}</BrowserRouter>
+      <BrowserRouter>
+        {isAuth !== null ? (
+          <Routes />
+        ) : (
+          <Backdrop
+            sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 999 }}
+            open={true}
+          >
+            <CircularProgress color="inherit" />
+          </Backdrop>
+        )}
+      </BrowserRouter>
     </Page>
   );
 };
