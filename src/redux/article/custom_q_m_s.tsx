@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-21 00:00:03
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-18 17:39:12
+ * @LastEditTime: 2022-07-22 16:59:12
  * @FilePath: /uwcssa_ca/src/redux/article/custom_q_m_s.tsx
  * @Description:
  *
@@ -80,7 +80,7 @@ export const getArticle = /* GraphQL */ `
         countEventId
         countCommentId
       }
-      likes(filter: { owner: { eq: $eq } }, limit: 1) {
+      likes(filter: { owner: { eq: $eq } }) {
         items {
           owner
           id
@@ -91,7 +91,7 @@ export const getArticle = /* GraphQL */ `
           id
           content
           createdAt
-          likes(filter: { owner: { eq: $eq } }, limit: 1) {
+          likes(filter: { owner: { eq: $eq } }) {
             items {
               owner
               id
