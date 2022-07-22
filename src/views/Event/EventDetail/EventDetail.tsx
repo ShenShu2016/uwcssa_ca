@@ -4,7 +4,7 @@
  * @Author: Shen Shu
  * @Date: 2022-06-18 17:26:14
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-25 14:30:30
+ * @LastEditTime: 2022-07-22 16:01:34
  * @FilePath: /uwcssa_ca/src/views/Event/EventDetail/EventDetail.tsx
  * @Description:
  *
@@ -27,6 +27,7 @@ import {
   SimilarStories,
 } from './components';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+import { Link, useParams } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import { fetchEvent, selectEventById } from 'redux/event/eventSlice';
 import { getAuthState, getOwnerUserName } from 'redux/auth/authSlice';
@@ -39,7 +40,6 @@ import { useAppDispatch, useAppSelector } from 'redux/hooks';
 
 import CommentOverview from 'components/Comment/CommentOverview';
 import EventJoinForm from 'components/EventContainer/components/EventJoinForm';
-import { useParams } from 'react-router-dom';
 
 interface EventDetailProp {
   fromPreview?: boolean;
@@ -111,27 +111,38 @@ const EventDetail: React.FC<EventDetailProp> = ({
         <Container style={{ padding: '12px 16px' }}>
           <Grid container spacing={8}>
             <Grid item xs={12} md={8}>
-              <Button
-                size="large"
-                variant="contained"
-                fullWidth
-                disabled={
-                  ownerUsername &&
-                  event?.eventParticipants?.items[0]?.owner === ownerUsername
-                }
-                onClick={() => {
-                  if (fromPreview) {
-                    prevenJoinClick();
-                  } else {
-                    setJoinDialogOpen(true);
+              {isAuth ? (
+                <Button
+                  size="large"
+                  variant="contained"
+                  fullWidth
+                  disabled={
+                    ownerUsername &&
+                    event?.eventParticipants?.items[0]?.owner === ownerUsername
                   }
-                }}
-              >
-                {ownerUsername &&
-                event?.eventParticipants?.items[0]?.owner === ownerUsername
-                  ? '你已经报名'
-                  : '点击此处报名'}
-              </Button>
+                  onClick={() => {
+                    if (fromPreview) {
+                      prevenJoinClick();
+                    } else {
+                      setJoinDialogOpen(true);
+                    }
+                  }}
+                >
+                  {ownerUsername &&
+                  event?.eventParticipants?.items[0]?.owner === ownerUsername
+                    ? '你已经报名'
+                    : '点击此处报名'}
+                </Button>
+              ) : (
+                <Button
+                  fullWidth
+                  variant="contained"
+                  component={Link}
+                  to={'/auth/signIn'}
+                >
+                  报名请先登录
+                </Button>
+              )}
             </Grid>
             {event?.eventLocation ? (
               <Grid item xs={12} md={8}>
