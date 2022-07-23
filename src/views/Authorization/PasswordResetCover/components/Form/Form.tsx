@@ -101,7 +101,8 @@ const Form = (): JSX.Element => {
           <Grid item xs={12}>
             {signInError && (
               <Alert severity="error">
-                {signInError} 请查看邮箱是否有临时密码，请用临时密码登录.
+                {signInError}{' '}
+                请查看邮箱是否有临时密码，很有可能在垃圾（spam）信箱，请用邮件中临时密码登录.
                 如还有问题请联系uwincssa.it@gmail.com.
               </Alert>
             )}
