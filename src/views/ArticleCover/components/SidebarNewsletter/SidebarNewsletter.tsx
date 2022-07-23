@@ -11,21 +11,24 @@
 
 import * as yup from 'yup';
 
+import {
+  Box,
+  Button,
+  Card,
+  Grid,
+  Link as MUILink,
+  TextField,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
+import { googleSignIn, signIn } from 'redux/auth/authSlice';
 
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
-import Grid from '@mui/material/Grid';
-import { Link as MUILink } from '@mui/material';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import React from 'react';
-import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
-import { signIn } from 'redux/auth/authSlice';
 import { useAppDispatch } from 'redux/hooks';
 import { useFormik } from 'formik';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import { useTheme } from '@mui/material/styles';
 
 const validationSchema = yup.object({
   username: yup
@@ -70,6 +73,10 @@ const SidebarNewsletter = (): JSX.Element => {
     validationSchema: validationSchema,
     onSubmit,
   });
+
+  const handleGoogleSignIn = async () => {
+    dispatch(googleSignIn());
+  };
 
   return (
     <Box component={Card} padding={2} bgcolor={'transparent'}>
@@ -187,6 +194,24 @@ const SidebarNewsletter = (): JSX.Element => {
                     Login
                   </Button>
                 </Box>
+              </Grid>
+              <Grid item container xs={12}>
+                <Button
+                  fullWidth
+                  variant={'contained'}
+                  color={'primary'}
+                  onClick={() => handleGoogleSignIn()}
+                  sx={{ lineHeight: 1 }}
+                >
+                  <Box
+                    component={LazyLoadImage}
+                    effect="blur"
+                    src="/assets/images/icons/google-1.svg"
+                  />
+                  <Box sx={{ fontSize: '12px', marginLeft: '1rem' }}>
+                    Google登录
+                  </Box>
+                </Button>
               </Grid>
             </Grid>
           </form>
