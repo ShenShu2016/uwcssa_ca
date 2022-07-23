@@ -5,4 +5,4 @@
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/frontend/src/components/ArticleContainer/index.ts
  */
-export { default } from './ArticleContainer';
+export { default } from "./ArticleContainer";

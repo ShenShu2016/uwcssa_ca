@@ -8,10 +8,11 @@
  *
  */
 
-import { postUserImage } from 'redux/userImage/userImageSlice';
+import { postUserImage } from "redux/userImage/userImageSlice";
 
 export default class CkeditorS3UploadAdapter {
   [x: string]: any;
+
   constructor(props, dispatch, extraProps) {
     // CKEditor 5's FileLoader instance.
     this.loader = props;
@@ -41,7 +42,7 @@ export default class CkeditorS3UploadAdapter {
           }),
         );
         console.log(response.payload.objectCompressedURL);
-        console.log('waiting for another 5 second');
+        console.log("waiting for another 5 second");
         setTimeout(() => {
           resolve({
             default: response.payload.objectCompressedURL,

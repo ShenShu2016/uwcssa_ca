@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 import {
   Box,
   Button,
@@ -10,14 +10,15 @@ import {
   Grid,
   Chip,
   Typography,
-} from '@mui/material';
+} from "@mui/material";
 import {
   fetchArticleList,
   selectAllArticles,
-} from 'redux/article/articleSlice';
-import moment from 'moment';
-import { getAuthState } from 'redux/auth/authSlice';
-import { useAppDispatch, useAppSelector } from 'redux/hooks';
+} from "redux/article/articleSlice";
+import moment from "moment";
+import { getAuthState } from "redux/auth/authSlice";
+import { useAppDispatch, useAppSelector } from "redux/hooks";
+
 const NewsList: React.FC = () => {
   const dispatch = useAppDispatch();
   const isAuth = useAppSelector(getAuthState);
@@ -26,7 +27,7 @@ const NewsList: React.FC = () => {
 
   useEffect(() => {
     const getArticles = async () => {
-      if (isAuth !== null && fetchArticleListStatus === 'idle') {
+      if (isAuth !== null && fetchArticleListStatus === "idle") {
         await dispatch(
           fetchArticleList({
             isAuth,
@@ -52,35 +53,35 @@ const NewsList: React.FC = () => {
           >
             <Box
               component={Card}
-              display={'flex'}
-              flexDirection={{ xs: 'column', sm: 'row' }}
+              display="flex"
+              flexDirection={{ xs: "column", sm: "row" }}
             >
               <CardMedia
                 title={item.title}
                 image={
                   item.coverPageImgURL ||
-                  'https://uwcssabucket53243-master.s3.us-east-2.amazonaws.com/public/user/BackGround/6d328ddc-08d7-4f7d-8527-2173349796a7.jpg'
+                  "https://uwcssabucket53243-master.s3.us-east-2.amazonaws.com/public/user/BackGround/6d328ddc-08d7-4f7d-8527-2173349796a7.jpg"
                 }
                 sx={{
-                  height: { xs: 240, sm: 'auto' },
+                  height: { xs: 240, sm: "auto" },
                   width: { xs: 1, sm: 300 },
                 }}
               />
-              <CardContent sx={{ width: { xs: '100%', sm: '60%' }, ml: 4 }}>
+              <CardContent sx={{ width: { xs: "100%", sm: "60%" }, ml: 4 }}>
                 <Box mb={1}>
                   {item?.tags
                     ? item?.tags?.items.map((tag, i) => (
-                      <Chip
-                        key={tag.tagID + i} // 为啥有两个一样的tag
-                        label={tag.tagID}
-                        component={Link} //用react router
-                        to="" //用react router
-                        clickable
-                        size={'small'}
-                        color={'primary'}
-                        sx={{ marginRight: 1, fontSize: '12px' }}
-                      />
-                    ))
+                        <Chip
+                          key={tag.tagID + i} // 为啥有两个一样的tag
+                          label={tag.tagID}
+                          component={Link} // 用react router
+                          to="" // 用react router
+                          clickable
+                          size="small"
+                          color="primary"
+                          sx={{ marginRight: 1, fontSize: "12px" }}
+                        />
+                      ))
                     : null}
                 </Box>
                 <Box mb={1}>
@@ -88,12 +89,8 @@ const NewsList: React.FC = () => {
                     {item.title}
                   </Typography>
                   <Box mb={1}>
-                    <Typography
-                      variant={'caption'}
-                      color={'#616161'}
-                      component={'i'}
-                    >
-                      {item.user.name} - {moment(item.createdAt).fromNow()}
+                    <Typography variant="caption" color="#616161" component="i">
+                      {item.user.name} -{moment(item.createdAt).fromNow()}
                     </Typography>
                   </Box>
                   <Typography
@@ -105,7 +102,7 @@ const NewsList: React.FC = () => {
                   </Typography>
                 </Box>
                 <Button component={Link} to={`/article/${item.id}`}>
-                    查看详情
+                  查看详情
                 </Button>
               </CardContent>
             </Box>

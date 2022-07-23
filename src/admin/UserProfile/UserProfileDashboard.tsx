@@ -8,17 +8,17 @@
  *
  */
 
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 import {
   fetchUserProfileList,
   selectAllUserProfiles,
-} from 'redux/userProfile/userProfileSlice';
-import { useAppDispatch, useAppSelector } from 'redux/hooks';
+} from "redux/userProfile/userProfileSlice";
+import { useAppDispatch, useAppSelector } from "redux/hooks";
 
-import { Box } from '@mui/material';
-import Container from 'components/Container';
-import { CustomerListResults } from './components';
-import { getAuthState } from 'redux/auth/authSlice';
+import { Box } from "@mui/material";
+import Container from "components/Container";
+import { getAuthState } from "redux/auth/authSlice";
+import { CustomerListResults } from "./components";
 
 function UserProfileDashboard() {
   const dispatch = useAppDispatch();
@@ -30,7 +30,7 @@ function UserProfileDashboard() {
 
   useEffect(() => {
     const getUserProfileList = async () => {
-      if (isAuth !== null && fetchUserProfileListStatus === 'idle') {
+      if (isAuth !== null && fetchUserProfileListStatus === "idle") {
         await dispatch(
           fetchUserProfileList({
             isAuth,

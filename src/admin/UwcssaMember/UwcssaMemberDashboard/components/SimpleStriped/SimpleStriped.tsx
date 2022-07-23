@@ -19,27 +19,27 @@ import {
   TableRow,
   Typography,
   useTheme,
-} from '@mui/material';
-import React, { useState } from 'react';
+} from "@mui/material";
+import React, { useState } from "react";
 import {
   UwcssaMember,
   removeUwcssaMember,
-} from 'redux/uwcssaMember/uwcssaMemberSlice';
+} from "redux/uwcssaMember/uwcssaMemberSlice";
 
-import CheckIcon from '@mui/icons-material/Check';
-import CloseIcon from '@mui/icons-material/Close';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
-import EditUwcssaDepartmentForm from './components/EditUwcssaMember';
-import { stringAvatar } from 'components/Avatar/AvatarFunction';
-import { useAppDispatch } from 'redux/hooks';
-import { useConfirm } from 'material-ui-confirm';
+import CheckIcon from "@mui/icons-material/Check";
+import CloseIcon from "@mui/icons-material/Close";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
+import { stringAvatar } from "components/Avatar/AvatarFunction";
+import { useAppDispatch } from "redux/hooks";
+import { useConfirm } from "material-ui-confirm";
+import EditUwcssaDepartmentForm from "./components/EditUwcssaMember";
 
-const SimpleStriped = ({
+function SimpleStriped({
   uwcssaMemberList,
 }: {
   uwcssaMemberList: Array<UwcssaMember>;
-}): JSX.Element => {
+}): JSX.Element {
   const confirm = useConfirm();
   const theme = useTheme();
   const dispatch = useAppDispatch();
@@ -56,114 +56,113 @@ const SimpleStriped = ({
         id: item.id,
       }),
     );
-    if (response.meta.requestStatus === 'fulfilled') {
+    if (response.meta.requestStatus === "fulfilled") {
       return true;
-    } else {
-      return false;
     }
+    return false;
   };
 
   return (
     <>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 750 }} aria-label="simple table">
-          <TableHead sx={{ bgcolor: 'alternate.dark' }}>
+          <TableHead sx={{ bgcolor: "alternate.dark" }}>
             <TableRow>
               <TableCell>
                 <Typography
-                  variant={'caption'}
+                  variant="caption"
                   fontWeight={700}
-                  sx={{ textTransform: 'uppercase' }}
+                  sx={{ textTransform: "uppercase" }}
                 >
                   User
                 </Typography>
               </TableCell>
               <TableCell>
                 <Typography
-                  variant={'caption'}
+                  variant="caption"
                   fontWeight={700}
-                  sx={{ textTransform: 'uppercase' }}
+                  sx={{ textTransform: "uppercase" }}
                 >
                   name
                 </Typography>
               </TableCell>
               <TableCell>
                 <Typography
-                  variant={'caption'}
+                  variant="caption"
                   fontWeight={700}
-                  sx={{ textTransform: 'uppercase' }}
+                  sx={{ textTransform: "uppercase" }}
                 >
                   部门
                 </Typography>
               </TableCell>
               <TableCell>
                 <Typography
-                  variant={'caption'}
+                  variant="caption"
                   fontWeight={700}
-                  sx={{ textTransform: 'uppercase' }}
+                  sx={{ textTransform: "uppercase" }}
                 >
                   title
                 </Typography>
               </TableCell>
               <TableCell>
                 <Typography
-                  variant={'caption'}
+                  variant="caption"
                   fontWeight={700}
-                  sx={{ textTransform: 'uppercase' }}
+                  sx={{ textTransform: "uppercase" }}
                 >
                   subTitle
                 </Typography>
               </TableCell>
               <TableCell>
                 <Typography
-                  variant={'caption'}
+                  variant="caption"
                   fontWeight={700}
-                  sx={{ textTransform: 'uppercase' }}
+                  sx={{ textTransform: "uppercase" }}
                 >
                   content
                 </Typography>
               </TableCell>
               <TableCell>
                 <Typography
-                  variant={'caption'}
+                  variant="caption"
                   fontWeight={700}
-                  sx={{ textTransform: 'uppercase' }}
+                  sx={{ textTransform: "uppercase" }}
                 >
                   email
                 </Typography>
               </TableCell>
               <TableCell>
                 <Typography
-                  variant={'caption'}
+                  variant="caption"
                   fontWeight={700}
-                  sx={{ textTransform: 'uppercase' }}
+                  sx={{ textTransform: "uppercase" }}
                 >
                   linkedIn
                 </Typography>
               </TableCell>
               <TableCell>
                 <Typography
-                  variant={'caption'}
+                  variant="caption"
                   fontWeight={700}
-                  sx={{ textTransform: 'uppercase' }}
+                  sx={{ textTransform: "uppercase" }}
                 >
                   github
                 </Typography>
               </TableCell>
               <TableCell>
                 <Typography
-                  variant={'caption'}
+                  variant="caption"
                   fontWeight={700}
-                  sx={{ textTransform: 'uppercase' }}
+                  sx={{ textTransform: "uppercase" }}
                 >
                   website
                 </Typography>
               </TableCell>
               <TableCell>
                 <Typography
-                  variant={'caption'}
+                  variant="caption"
                   fontWeight={700}
-                  sx={{ textTransform: 'uppercase' }}
+                  sx={{ textTransform: "uppercase" }}
                 >
                   User
                 </Typography>
@@ -175,8 +174,8 @@ const SimpleStriped = ({
               <TableRow
                 key={item.id}
                 sx={{
-                  '&:last-child td, &:last-child th': { border: 0 },
-                  '&:nth-of-type(2n)': { bgcolor: 'alternate.main' },
+                  "&:last-child td, &:last-child th": { border: 0 },
+                  "&:nth-of-type(2n)": { bgcolor: "alternate.main" },
                 }}
               >
                 <TableCell component="th" scope="row">
@@ -189,13 +188,13 @@ const SimpleStriped = ({
                   />
                 </TableCell>
                 <TableCell>
-                  <Typography variant={'subtitle2'} fontWeight={700}>
+                  <Typography variant="subtitle2" fontWeight={700}>
                     {item.name || <CloseIcon color="error" />}
                   </Typography>
                 </TableCell>
                 <TableCell>
                   <Typography
-                    variant={'caption'}
+                    variant="caption"
                     fontWeight={700}
                     sx={{ color: theme.palette.success.dark }}
                   >
@@ -203,23 +202,23 @@ const SimpleStriped = ({
                   </Typography>
                 </TableCell>
                 <TableCell>
-                  <Typography color={'text.secondary'} variant={'subtitle2'}>
+                  <Typography color="text.secondary" variant="subtitle2">
                     {item.title || <CloseIcon color="error" />}
                   </Typography>
                 </TableCell>
                 <TableCell>
-                  <Typography color={'text.secondary'} variant={'subtitle2'}>
+                  <Typography color="text.secondary" variant="subtitle2">
                     {item.subTitle || <CloseIcon color="error" />}
                   </Typography>
                 </TableCell>
                 <TableCell>
                   <Typography
-                    variant={'caption'}
+                    variant="caption"
                     fontWeight={700}
                     sx={{ color: theme.palette.success.dark }}
                   >
                     {item.content ? (
-                      <CheckIcon color={'success'} />
+                      <CheckIcon color="success" />
                     ) : (
                       <CloseIcon color="error" />
                     )}
@@ -227,12 +226,12 @@ const SimpleStriped = ({
                 </TableCell>
                 <TableCell>
                   <Typography
-                    variant={'caption'}
+                    variant="caption"
                     fontWeight={700}
                     sx={{ color: theme.palette.success.dark }}
                   >
                     {item.email ? (
-                      <CheckIcon color={'success'} />
+                      <CheckIcon color="success" />
                     ) : (
                       <CloseIcon color="error" />
                     )}
@@ -240,12 +239,12 @@ const SimpleStriped = ({
                 </TableCell>
                 <TableCell>
                   <Typography
-                    variant={'caption'}
+                    variant="caption"
                     fontWeight={700}
                     sx={{ color: theme.palette.success.dark }}
                   >
                     {item.linkedIn ? (
-                      <CheckIcon color={'success'} />
+                      <CheckIcon color="success" />
                     ) : (
                       <CloseIcon color="error" />
                     )}
@@ -253,12 +252,12 @@ const SimpleStriped = ({
                 </TableCell>
                 <TableCell>
                   <Typography
-                    variant={'caption'}
+                    variant="caption"
                     fontWeight={700}
                     sx={{ color: theme.palette.success.dark }}
                   >
                     {item.github ? (
-                      <CheckIcon color={'success'} />
+                      <CheckIcon color="success" />
                     ) : (
                       <CloseIcon color="error" />
                     )}
@@ -266,12 +265,12 @@ const SimpleStriped = ({
                 </TableCell>
                 <TableCell>
                   <Typography
-                    variant={'caption'}
+                    variant="caption"
                     fontWeight={700}
                     sx={{ color: theme.palette.success.dark }}
                   >
                     {item.website ? (
-                      <CheckIcon color={'success'} />
+                      <CheckIcon color="success" />
                     ) : (
                       <CloseIcon color="error" />
                     )}
@@ -281,7 +280,7 @@ const SimpleStriped = ({
                   <Button
                     variant="text"
                     startIcon={<EditIcon />}
-                    sx={{ p: '4px', mr: '4px' }}
+                    sx={{ p: "4px", mr: "4px" }}
                     onClick={() => {
                       setUwcssaMember(item), setEditOpen(true);
                     }}
@@ -289,7 +288,7 @@ const SimpleStriped = ({
                     Edit
                   </Button>
                   <Button
-                    sx={{ p: '4px' }}
+                    sx={{ p: "4px" }}
                     variant="text"
                     startIcon={<DeleteIcon />}
                     onClick={() => {
@@ -311,6 +310,6 @@ const SimpleStriped = ({
       />
     </>
   );
-};
+}
 
 export default SimpleStriped;

@@ -8,27 +8,26 @@
  *
  */
 
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Button, Typography } from "@mui/material";
 
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import Container from 'components/Container';
-import { Link } from 'react-router-dom';
-import React from 'react';
-import { green } from '@mui/material/colors';
-import { makeStyles } from '@mui/styles';
-import { useParams } from 'react-router-dom';
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import Container from "components/Container";
+import { Link, useParams } from "react-router-dom";
+import React from "react";
+import { green } from "@mui/material/colors";
+import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles(() => ({
   box: {
-    padding: '3rem',
+    padding: "3rem",
   },
   title: {
-    marginTop: '10rem',
+    marginTop: "10rem",
   },
   icon: {
-    display: 'flex',
-    justifyContent: 'center',
-    marginBottom: '3rem',
+    display: "flex",
+    justifyContent: "center",
+    marginBottom: "3rem",
   },
 }));
 

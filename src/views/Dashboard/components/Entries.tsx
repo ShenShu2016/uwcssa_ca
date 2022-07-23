@@ -6,35 +6,35 @@
  * @FilePath: /uwcssa_ca/src/views/Dashboard/components/Entries.tsx
  */
 
-import { Box, Card, Typography, styled } from '@mui/material';
+import { Box, Card, Typography, styled } from "@mui/material";
 
-import HomeIcon from '@mui/icons-material/Home';
-import LocalActivityIcon from '@mui/icons-material/LocalActivity';
-import React from 'react';
-import SellIcon from '@mui/icons-material/Sell';
-import WorkIcon from '@mui/icons-material/Work';
+import HomeIcon from "@mui/icons-material/Home";
+import LocalActivityIcon from "@mui/icons-material/LocalActivity";
+import React from "react";
+import SellIcon from "@mui/icons-material/Sell";
+import WorkIcon from "@mui/icons-material/Work";
 
 const StyledCard = styled(Card)(({ theme }) => ({
-  width: '100%',
-  height: '65px',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  cursor: 'pointer',
-  transition: 'transform 0.2s',
-  '&:hover': {
-    transform: 'scale(1.1)',
+  width: "100%",
+  height: "65px",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  cursor: "pointer",
+  transition: "transform 0.2s",
+  "&:hover": {
+    transform: "scale(1.1)",
   },
 }));
 
-const Entries = () => {
+function Entries() {
   return (
     <Box
       sx={{
-        display: 'grid',
-        justifyContent: 'space-between',
-        gridTemplateColumns: 'repeat(2,50%)',
-        gridGap: '12px',
+        display: "grid",
+        justifyContent: "space-between",
+        gridTemplateColumns: "repeat(2,50%)",
+        gridGap: "12px",
       }}
     >
       <Box>
@@ -71,6 +71,6 @@ const Entries = () => {
       </Box>
     </Box>
   );
-};
+}
 
 export default Entries;

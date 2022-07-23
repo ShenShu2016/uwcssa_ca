@@ -5,4 +5,4 @@
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/frontend/src/views/ArticlePublish/index.ts
  */
-export { default } from './ArticlePublish';
+export { default } from "./ArticlePublish";

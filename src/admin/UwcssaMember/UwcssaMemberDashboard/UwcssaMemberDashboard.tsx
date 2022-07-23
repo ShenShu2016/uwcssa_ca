@@ -8,18 +8,18 @@
  *
  */
 
-import { Button, Typography } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import { Button, Typography } from "@mui/material";
+import React, { useEffect, useState } from "react";
 import {
   fetchUwcssaMemberList,
   selectAllUwcssaMembers,
-} from 'redux/uwcssaMember/uwcssaMemberSlice';
-import { useAppDispatch, useAppSelector } from 'redux/hooks';
+} from "redux/uwcssaMember/uwcssaMemberSlice";
+import { useAppDispatch, useAppSelector } from "redux/hooks";
 
-import AddUwcssaMemberForm from './components/AddUwcssaMember';
-import Container from 'components/Container';
-import SimpleStriped from './components/SimpleStriped';
-import { getAuthState } from 'redux/auth/authSlice';
+import Container from "components/Container";
+import { getAuthState } from "redux/auth/authSlice";
+import AddUwcssaMemberForm from "./components/AddUwcssaMember";
+import SimpleStriped from "./components/SimpleStriped";
 
 function UwcssaMemberDashboard() {
   const dispatch = useAppDispatch();
@@ -30,7 +30,7 @@ function UwcssaMemberDashboard() {
   );
   const uwcssaMemberList = useAppSelector(selectAllUwcssaMembers);
   useEffect(() => {
-    if (isAuth !== null && fetchUwcssaMemberListStatus === 'idle') {
+    if (isAuth !== null && fetchUwcssaMemberListStatus === "idle") {
       dispatch(
         fetchUwcssaMemberList({
           isAuth,
@@ -42,7 +42,7 @@ function UwcssaMemberDashboard() {
   return (
     <Container>
       <Typography variant="h4">学生会成员</Typography>
-      <Button variant="contained" size={'small'} onClick={() => setOpen(true)}>
+      <Button variant="contained" size="small" onClick={() => setOpen(true)}>
         Add 学生会成员
       </Button>
       <SimpleStriped uwcssaMemberList={uwcssaMemberList} />

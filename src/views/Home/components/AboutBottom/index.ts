@@ -1,1 +1,1 @@
-export { default } from './AboutBottom';
+export { default } from "./AboutBottom";

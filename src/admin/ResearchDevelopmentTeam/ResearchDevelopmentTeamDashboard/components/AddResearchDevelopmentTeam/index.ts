@@ -7,4 +7,4 @@
  * @Description:
  *
  */
-export { default as AddResearchDevelopmentTeamForm } from './AddResearchDevelopmentTeamForm';
+export { default as AddResearchDevelopmentTeamForm } from "./AddResearchDevelopmentTeamForm";

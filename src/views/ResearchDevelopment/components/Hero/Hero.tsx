@@ -1,63 +1,61 @@
 /* eslint-disable react/no-unescaped-entities */
 
-import * as yup from 'yup';
+import * as yup from "yup";
 
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
-import Container from 'components/Container';
-import React from 'react';
-import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
-import { useFormik } from 'formik';
-import { useTheme } from '@mui/material/styles';
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Card from "@mui/material/Card";
+import Container from "components/Container";
+import React from "react";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
+import { useFormik } from "formik";
+import { useTheme } from "@mui/material/styles";
 
 const validationSchema = yup.object({
   name: yup
     .string()
     .trim()
-    .min(2, 'Please enter a valid name')
-    .max(50, 'Please enter a valid name')
-    .required('Please specify your name'),
+    .min(2, "Please enter a valid name")
+    .max(50, "Please enter a valid name")
+    .required("Please specify your name"),
   email: yup
     .string()
     .trim()
-    .email('Please enter a valid email address')
-    .required('Email is required.'),
+    .email("Please enter a valid email address")
+    .required("Email is required."),
 });
 
-const Hero = (): JSX.Element => {
+function Hero(): JSX.Element {
   const theme = useTheme();
 
   const initialValues = {
-    name: '',
-    email: '',
+    name: "",
+    email: "",
   };
 
-  const onSubmit = (values) => {
-    return values;
-  };
+  const onSubmit = (values) => values;
 
   const formik = useFormik({
     initialValues,
-    validationSchema: validationSchema,
+    validationSchema,
     onSubmit,
   });
 
   return (
-    <Box position={'relative'} zIndex={2}>
-      <Box width={1} height={1} position={'absolute'} overflow={'hidden'}>
+    <Box position="relative" zIndex={2}>
+      <Box width={1} height={1} position="absolute" overflow="hidden">
         <Box
           width={1}
           height={1}
-          position={'absolute'}
-          top={'50%'}
-          left={'50%'}
-          sx={{ transform: 'translate(-50%,-50%)' }}
+          position="absolute"
+          top="50%"
+          left="50%"
+          sx={{ transform: "translate(-50%,-50%)" }}
         >
           <iframe
             frameBorder="0"
-            allowFullScreen={true}
+            allowFullScreen
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             title="YouTube video player"
             width="100%"
@@ -67,23 +65,23 @@ const Hero = (): JSX.Element => {
         </Box>
       </Box>
       <Box
-        position={'relative'}
+        position="relative"
         zIndex={2}
-        minHeight={{ xs: 'calc(100vh - 158px)', md: 'calc(100vh - 230px)' }}
-        display={'flex'}
-        justifyContent={'center'}
-        alignItems={'center'}
+        minHeight={{ xs: "calc(100vh - 158px)", md: "calc(100vh - 230px)" }}
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
         marginTop={-13}
         paddingTop={13}
         sx={{
-          '&::after': {
+          "&::after": {
             content: '""',
             backgroundColor: theme.palette.primary.dark,
             backgroundImage: `linear-gradient(315deg, ${theme.palette.primary.dark} 0%, #031024 60%)`,
-            opacity: '0.9',
+            opacity: "0.9",
             width: 1,
             height: 1,
-            position: 'absolute',
+            position: "absolute",
             left: 0,
             right: 0,
             top: 0,
@@ -92,12 +90,12 @@ const Hero = (): JSX.Element => {
           },
         }}
       >
-        <Container position={'relative'} zIndex={4}>
+        <Container position="relative" zIndex={4}>
           <Box>
             <Box marginBottom={4}>
               <Typography
-                variant={'h2'}
-                align={'center'}
+                variant="h2"
+                align="center"
                 gutterBottom
                 sx={{
                   color: theme.palette.common.white,
@@ -107,8 +105,8 @@ const Hero = (): JSX.Element => {
                 Engineering at UWCSSA
               </Typography>
               <Typography
-                variant={'h6'}
-                align={'center'}
+                variant="h6"
+                align="center"
                 sx={{
                   color: theme.palette.common.white,
                   fontWeight: 700,
@@ -192,6 +190,6 @@ const Hero = (): JSX.Element => {
       </Box>
     </Box>
   );
-};
+}
 
 export default Hero;

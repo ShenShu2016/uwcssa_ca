@@ -8,4 +8,4 @@
  *
  */
 
-export { default } from './EventManagement';
+export { default } from "./EventManagement";

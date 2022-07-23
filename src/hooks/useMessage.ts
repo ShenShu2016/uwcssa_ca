@@ -6,11 +6,11 @@
  * @FilePath: /uwcssa_ca/src/hooks/useMessage.ts
  */
 
-import { setAlert } from 'redux/alert/alertSlice';
-import { useAppDispatch } from 'redux/hooks';
+import { setAlert } from "redux/alert/alertSlice";
+import { useAppDispatch } from "redux/hooks";
 
 export interface AlertConfig {
-  type: 'success' | 'info' | 'warning' | 'error';
+  type: "success" | "info" | "warning" | "error";
   message: string;
 }
 
@@ -37,13 +37,13 @@ const useMessage = () => {
   const message = {
     // open: (config: AlertConfig) => handleOpenMessageAlert(config),
     success: (message: string) =>
-      handleOpenMessageAlert({ type: 'success', message }),
+      handleOpenMessageAlert({ type: "success", message }),
     info: (message: string) =>
-      handleOpenMessageAlert({ type: 'info', message }),
+      handleOpenMessageAlert({ type: "info", message }),
     warning: (message: string) =>
-      handleOpenMessageAlert({ type: 'warning', message }),
+      handleOpenMessageAlert({ type: "warning", message }),
     error: (message: string) =>
-      handleOpenMessageAlert({ type: 'error', message }),
+      handleOpenMessageAlert({ type: "error", message }),
     close: handleCloseMessageAlert,
   };
 

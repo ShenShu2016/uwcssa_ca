@@ -8,20 +8,20 @@
  *
  */
 
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 import {
   fetchResearchDevelopmentTeamList,
   selectAllResearchDevelopmentTeams,
-} from 'redux/researchDevelopmentTeam/researchDevelopmentTeamSlice';
-import { useAppDispatch, useAppSelector } from 'redux/hooks';
+} from "redux/researchDevelopmentTeam/researchDevelopmentTeamSlice";
+import { useAppDispatch, useAppSelector } from "redux/hooks";
 
-import { Box } from '@mui/system';
-import DevelopCard from './componments/DeveloperCard';
-import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
-import { getAuthState } from 'redux/auth/authSlice';
+import { Box } from "@mui/system";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+import { getAuthState } from "redux/auth/authSlice";
+import DevelopCard from "./componments/DeveloperCard";
 
-const DevelopTeam = (): JSX.Element => {
+function DevelopTeam(): JSX.Element {
   const dispatch = useAppDispatch();
   const isAuth = useAppSelector(getAuthState);
 
@@ -33,7 +33,7 @@ const DevelopTeam = (): JSX.Element => {
     const getUwcssaDepartments = async () => {
       if (
         isAuth !== null &&
-        fetchResearchDevelopmentTeamListStatus === 'idle'
+        fetchResearchDevelopmentTeamListStatus === "idle"
       ) {
         await dispatch(fetchResearchDevelopmentTeamList({ isAuth }));
       }
@@ -46,16 +46,16 @@ const DevelopTeam = (): JSX.Element => {
       <Box marginBottom={4}>
         <Typography
           sx={{
-            textTransform: 'uppercase',
-            fontWeight: 'medium',
+            textTransform: "uppercase",
+            fontWeight: "medium",
           }}
           gutterBottom
-          color={'text.secondary'}
-          align={'center'}
+          color="text.secondary"
+          align="center"
         >
           Our team
         </Typography>
-        <Typography fontWeight={700} variant={'h4'} align={'center'}>
+        <Typography fontWeight={700} variant="h4" align="center">
           Small team. Big hearts.
         </Typography>
       </Box>
@@ -64,6 +64,6 @@ const DevelopTeam = (): JSX.Element => {
       </Grid>
     </Box>
   );
-};
+}
 
 export default DevelopTeam;

@@ -7,4 +7,4 @@
  * @Description:
  *
  */
-export { default } from './UWindsorEmailVerify';
+export { default } from "./UWindsorEmailVerify";

@@ -8,16 +8,16 @@
  *
  */
 
-import { Box, Card, Typography } from '@mui/material';
+import { Box, Card, Typography } from "@mui/material";
 
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-import React from 'react';
-import { getOwnerUserName } from 'redux/auth/authSlice';
-import moment from 'moment';
-import { selectAllEvents } from 'redux/event/eventSlice';
-import { useAppSelector } from 'redux/hooks';
-import { useNavigate } from 'react-router-dom';
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import React from "react";
+import { getOwnerUserName } from "redux/auth/authSlice";
+import moment from "moment";
+import { selectAllEvents } from "redux/event/eventSlice";
+import { useAppSelector } from "redux/hooks";
+import { useNavigate } from "react-router-dom";
 
 const JoinedEvent: React.FC = () => {
   const eventList = useAppSelector(selectAllEvents);
@@ -30,24 +30,24 @@ const JoinedEvent: React.FC = () => {
         item.owner === ownerUsername;
       }) !== -1;
   });
-  //console.log(filteredEvent);
+  // console.log(filteredEvent);
   return (
     <Box
       sx={{
-        maxHeight: '50vh',
-        overflow: 'auto',
+        maxHeight: "50vh",
+        overflow: "auto",
       }}
     >
       {filteredEvent.map((item) => (
         <Card
           sx={{
             p: 1,
-            display: 'flex',
+            display: "flex",
             mt: 1,
-            justifyContent: 'space-between',
-            '&:hover': {
-              cursor: 'pointer',
-              backgroundColor: '#eeeeee',
+            justifyContent: "space-between",
+            "&:hover": {
+              cursor: "pointer",
+              backgroundColor: "#eeeeee",
             },
           }}
           //   to={`/event/${info.id}`}
@@ -61,22 +61,22 @@ const JoinedEvent: React.FC = () => {
             <Box
               sx={{
                 mt: 1,
-                fontSize: '12px',
-                display: 'flex',
-                alignItems: 'center',
+                fontSize: "12px",
+                display: "flex",
+                alignItems: "center",
               }}
             >
               <AccessTimeIcon sx={{ mr: 1 }} />
-              {`${moment(item.startDate).format('dddd, MMMM Do')} - ${moment(
+              {`${moment(item.startDate).format("dddd, MMMM Do")} - ${moment(
                 item.endDate,
-              ).format('dddd, MMMM Do')}`}
+              ).format("dddd, MMMM Do")}`}
             </Box>
             <Box
               sx={{
                 mt: 1,
-                fontSize: '12px',
-                display: 'flex',
-                alignItems: 'center',
+                fontSize: "12px",
+                display: "flex",
+                alignItems: "center",
               }}
             >
               <LocationOnIcon sx={{ mr: 1 }} />
@@ -85,16 +85,16 @@ const JoinedEvent: React.FC = () => {
           </Box>
           <Box
             sx={{
-              width: '40%',
-              '& img': {
-                width: '100%',
-                height: '130px',
-                objectFit: 'cover',
-                borderRadius: '8px',
+              width: "40%",
+              "& img": {
+                width: "100%",
+                height: "130px",
+                objectFit: "cover",
+                borderRadius: "8px",
               },
             }}
           >
-            <img src={item.coverPageImgURL} alt={'event poster'} />
+            <img src={item.coverPageImgURL} alt="event poster" />
           </Box>
         </Card>
       ))}

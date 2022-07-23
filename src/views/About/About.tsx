@@ -7,21 +7,21 @@
  * @Description:
  *
  */
-import { Application, Gallery, Hero, Story, Team } from './components';
 
-import Box from '@mui/material/Box';
-import Container from 'components/Container';
-import Divider from '@mui/material/Divider';
-import React from 'react';
+import Box from "@mui/material/Box";
+import Container from "components/Container";
+import Divider from "@mui/material/Divider";
+import React from "react";
+import { Application, Gallery, Hero, Story, Team } from "./components";
 
-const About = (): JSX.Element => {
+function About(): JSX.Element {
   return (
     <>
       <Hero />
       <Container>
         <Story />
       </Container>
-      <Container maxWidth={800} paddingY={'0 !important'}>
+      <Container maxWidth={800} paddingY="0 !important">
         <Divider />
       </Container>
       <Container>
@@ -31,11 +31,11 @@ const About = (): JSX.Element => {
       <Container>
         <Gallery />
       </Container>
-      <Container maxWidth={800} paddingTop={'0 !important'}>
+      <Container maxWidth={800} paddingTop="0 !important">
         <Application />
       </Container>
     </>
   );
-};
+}
 
 export default About;

@@ -8,18 +8,18 @@
  *
  */
 
-import { Button, Typography } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import { Button, Typography } from "@mui/material";
+import React, { useEffect, useState } from "react";
 import {
   fetchUwcssaDepartmentList,
   selectAllUwcssaDepartments,
-} from 'redux/uwcssaDepartment/uwcssaDepartmentSlice';
-import { useAppDispatch, useAppSelector } from 'redux/hooks';
+} from "redux/uwcssaDepartment/uwcssaDepartmentSlice";
+import { useAppDispatch, useAppSelector } from "redux/hooks";
 
-import { AddUwcssaDepartmentForm } from './components/AddUwcssaDepartment';
-import Container from 'components/Container';
-import SimpleStriped from './components/SimpleStriped';
-import { getAuthState } from 'redux/auth/authSlice';
+import Container from "components/Container";
+import { getAuthState } from "redux/auth/authSlice";
+import { AddUwcssaDepartmentForm } from "./components/AddUwcssaDepartment";
+import SimpleStriped from "./components/SimpleStriped";
 
 function DepartmentDashboard() {
   const dispatch = useAppDispatch();
@@ -31,7 +31,7 @@ function DepartmentDashboard() {
   const uwcssaDepartmentList = useAppSelector(selectAllUwcssaDepartments);
   useEffect(() => {
     const getUwcssaDepartments = async () => {
-      if (isAuth !== null && fetchUwcssaDepartmentListStatus === 'idle') {
+      if (isAuth !== null && fetchUwcssaDepartmentListStatus === "idle") {
         await dispatch(
           fetchUwcssaDepartmentList({
             isAuth,
@@ -45,7 +45,7 @@ function DepartmentDashboard() {
   return (
     <Container>
       <Typography variant="h4">DepartmentDashboard</Typography>
-      <Button variant="contained" size={'small'} onClick={() => setOpen(true)}>
+      <Button variant="contained" size="small" onClick={() => setOpen(true)}>
         Add Department
       </Button>
       <SimpleStriped uwcssaDepartmentList={uwcssaDepartmentList} />

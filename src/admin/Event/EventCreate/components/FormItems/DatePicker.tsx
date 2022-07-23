@@ -8,13 +8,13 @@
  * @FilePath: /uwcssa_ca/src/admin/Event/EventCreate/components/FormItems/DatePicker.tsx
  */
 
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import FieldLabel from '../FieldLabel';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { TextField } from '@mui/material';
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { TextField } from "@mui/material";
+import FieldLabel from "../FieldLabel";
 
 interface DatePickerInfo {
   formSelectChoices?: string[];

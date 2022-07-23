@@ -7,4 +7,4 @@
  * @Description:
  *
  */
-export { default } from './UserProfileDashboard';
+export { default } from "./UserProfileDashboard";

@@ -1,69 +1,69 @@
-import Avatar from '@mui/material/Avatar';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Grid from '@mui/material/Grid';
-import ListItem from '@mui/material/ListItem';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import ListItemText from '@mui/material/ListItemText';
-import React from 'react';
-import Typography from '@mui/material/Typography';
-import { useTheme } from '@mui/material/styles';
+import Avatar from "@mui/material/Avatar";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import Grid from "@mui/material/Grid";
+import ListItem from "@mui/material/ListItem";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import ListItemText from "@mui/material/ListItemText";
+import React from "react";
+import Typography from "@mui/material/Typography";
+import { useTheme } from "@mui/material/styles";
 
 const mock = [
   {
-    title: 'Starter',
-    price: '$22',
-    features: ['1 User', '1 App', 'Integrations'],
+    title: "Starter",
+    price: "$22",
+    features: ["1 User", "1 App", "Integrations"],
     isHighlighted: false,
   },
   {
-    title: 'Pro',
-    price: '$44',
+    title: "Pro",
+    price: "$44",
     features: [
-      'All in Starter plan',
-      'Google Ads',
-      'SSO via Google',
-      'API access',
+      "All in Starter plan",
+      "Google Ads",
+      "SSO via Google",
+      "API access",
     ],
     isHighlighted: true,
   },
   {
-    title: 'Enterprise',
-    price: '$77',
+    title: "Enterprise",
+    price: "$77",
     features: [
-      'All features',
-      'Email support',
-      'Google Ads',
-      'SSO via Google',
-      'API access',
-      'Facebook Ads',
+      "All features",
+      "Email support",
+      "Google Ads",
+      "SSO via Google",
+      "API access",
+      "Facebook Ads",
     ],
     isHighlighted: false,
   },
 ];
 
-const Pricing = (): JSX.Element => {
+function Pricing(): JSX.Element {
   const theme = useTheme();
 
   return (
     <Box>
       <Box marginBottom={4}>
         <Typography
-          variant={'h4'}
-          align={'center'}
+          variant="h4"
+          align="center"
           gutterBottom
           sx={{ fontWeight: 700 }}
         >
           Flexible and transparent pricing
         </Typography>
         <Typography
-          variant={'h6'}
-          component={'p'}
-          color={'text.secondary'}
-          align={'center'}
+          variant="h6"
+          component="p"
+          color="text.secondary"
+          align="center"
         >
           Whatever your status, our offers evolve according to your needs.
         </Typography>
@@ -74,8 +74,8 @@ const Pricing = (): JSX.Element => {
             <Box
               component={Card}
               height={1}
-              display={'flex'}
-              flexDirection={'column'}
+              display="flex"
+              flexDirection="column"
               boxShadow={item.isHighlighted ? 4 : 0}
             >
               <CardContent
@@ -85,21 +85,21 @@ const Pricing = (): JSX.Element => {
               >
                 <Box
                   marginBottom={4}
-                  display={'flex'}
-                  justifyContent={'space-between'}
+                  display="flex"
+                  justifyContent="space-between"
                 >
-                  <Typography variant={'h4'}>
-                    <Box component={'span'} fontWeight={600}>
+                  <Typography variant="h4">
+                    <Box component="span" fontWeight={600}>
                       {item.title}
                     </Box>
                   </Typography>
-                  <Box display={'flex'} alignItems={'baseline'}>
-                    <Typography variant={'h4'} color={'primary'}>
-                      <Box component={'span'} fontWeight={600}>
+                  <Box display="flex" alignItems="baseline">
+                    <Typography variant="h4" color="primary">
+                      <Box component="span" fontWeight={600}>
                         {item.price}
                       </Box>
                     </Typography>
-                    <Typography variant={'subtitle2'} color={'text.secondary'}>
+                    <Typography variant="subtitle2" color="text.secondary">
                       /mo
                     </Typography>
                   </Box>
@@ -110,12 +110,12 @@ const Pricing = (): JSX.Element => {
                       <Box
                         component={ListItem}
                         disableGutters
-                        width={'auto'}
+                        width="auto"
                         padding={0}
                       >
                         <Box
                           component={ListItemAvatar}
-                          minWidth={'auto !important'}
+                          minWidth="auto !important"
                           marginRight={2}
                         >
                           <Box
@@ -146,8 +146,8 @@ const Pricing = (): JSX.Element => {
                 </Grid>
               </CardContent>
               <Box flexGrow={1} />
-              <CardActions sx={{ justifyContent: 'flex-end', padding: 4 }}>
-                <Button size={'large'} variant={'contained'}>
+              <CardActions sx={{ justifyContent: "flex-end", padding: 4 }}>
+                <Button size="large" variant="contained">
                   Learn more
                 </Button>
               </CardActions>
@@ -157,6 +157,6 @@ const Pricing = (): JSX.Element => {
       </Grid>
     </Box>
   );
-};
+}
 
 export default Pricing;

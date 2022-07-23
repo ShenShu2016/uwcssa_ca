@@ -8,18 +8,18 @@
  *
  */
 
-import { CreateLikeInput, UpdateLikeInput } from 'API';
+import { CreateLikeInput, UpdateLikeInput } from "API";
 import {
   createAsyncThunk,
   createEntityAdapter,
   createSlice,
-} from '@reduxjs/toolkit';
-import { createLike, deleteLike, updateLike } from 'graphql/mutations';
-import { getLike, listLikes } from 'graphql/queries';
+} from "@reduxjs/toolkit";
+import { createLike, deleteLike, updateLike } from "graphql/mutations";
+import { getLike, listLikes } from "graphql/queries";
 
-import API from '@aws-amplify/api';
-import { RootState } from 'redux/store';
-import { graphqlOperation } from '@aws-amplify/api-graphql';
+import API from "@aws-amplify/api";
+import { RootState } from "redux/store";
+import { graphqlOperation } from "@aws-amplify/api-graphql";
 
 export type Like = {
   id: string;
@@ -40,22 +40,22 @@ const likeAdapter = createEntityAdapter<Like>({
 });
 
 const initialState = likeAdapter.getInitialState({
-  fetchLikeListStatus: 'idle',
+  fetchLikeListStatus: "idle",
   fetchLikeListError: null,
-  fetchLikeStatus: 'idle',
+  fetchLikeStatus: "idle",
   fetchLikeError: null,
-  postLikeStatus: 'idle',
+  postLikeStatus: "idle",
   postLikeError: null,
-  postLikeImgStatus: 'idle',
+  postLikeImgStatus: "idle",
   postLikeImgError: null,
-  updateLikeDetailStatus: 'idle',
+  updateLikeDetailStatus: "idle",
   updateLikeDetailError: null,
-  removeLikeStatus: 'idle',
+  removeLikeStatus: "idle",
   removeLikeError: null,
 });
 
 export const fetchLikeList = createAsyncThunk(
-  'like/fetchLikeList',
+  "like/fetchLikeList",
   async ({ isAuth }: { isAuth: boolean }, { rejectWithValue }) => {
     try {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -65,7 +65,7 @@ export const fetchLikeList = createAsyncThunk(
         //   active: 'T',
         //   sortDirection: 'DESC',
         // },
-        authMode: isAuth ? undefined : 'AWS_IAM',
+        authMode: isAuth ? undefined : "AWS_IAM",
       });
 
       return result.data.listLikes.items;
@@ -77,7 +77,7 @@ export const fetchLikeList = createAsyncThunk(
 );
 
 export const fetchLike = createAsyncThunk(
-  'like/fetchLike',
+  "like/fetchLike",
   async (
     { likeId, isAuth }: { likeId: string; isAuth: boolean },
     { rejectWithValue },
@@ -87,10 +87,10 @@ export const fetchLike = createAsyncThunk(
       const result: any = await API.graphql({
         query: getLike,
         variables: { id: likeId },
-        authMode: isAuth ? undefined : 'AWS_IAM',
+        authMode: isAuth ? undefined : "AWS_IAM",
       });
       if (result.data.getLike === null) {
-        return { id: likeId, description: 'not-found' };
+        return { id: likeId, description: "not-found" };
       }
       return result.data.getLike;
     } catch (error) {
@@ -101,13 +101,13 @@ export const fetchLike = createAsyncThunk(
 );
 
 export const postLike = createAsyncThunk(
-  'like/postLike',
+  "like/postLike",
   async (
     { createLikeInput }: { createLikeInput: CreateLikeInput },
     { rejectWithValue },
   ) => {
     Object.keys(createLikeInput).forEach((key) =>
-      createLikeInput[key] === null || createLikeInput[key] === ''
+      createLikeInput[key] === null || createLikeInput[key] === ""
         ? delete createLikeInput[key]
         : {},
     );
@@ -127,13 +127,13 @@ export const postLike = createAsyncThunk(
 );
 
 export const updateLikeDetail = createAsyncThunk(
-  'like/updateLikeDetail',
+  "like/updateLikeDetail",
   async (
     { updateLikeInput }: { updateLikeInput: UpdateLikeInput },
     { rejectWithValue },
   ) => {
     Object.keys(updateLikeInput).forEach((key) =>
-      updateLikeInput[key] === null || updateLikeInput[key] === ''
+      updateLikeInput[key] === null || updateLikeInput[key] === ""
         ? delete updateLikeInput[key]
         : {},
     );
@@ -153,7 +153,7 @@ export const updateLikeDetail = createAsyncThunk(
 );
 
 export const removeLike = createAsyncThunk(
-  'like/removeLike',
+  "like/removeLike",
   async ({ id }: { id: string }, { rejectWithValue }) => {
     try {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -171,76 +171,76 @@ export const removeLike = createAsyncThunk(
 );
 
 const likeSlice = createSlice({
-  name: 'like',
+  name: "like",
   initialState,
   reducers: {},
   extraReducers(builder) {
     builder
       // Cases for status of fetchLikeList (pending, fulfilled, and rejected)
       .addCase(fetchLikeList.pending, (state) => {
-        state.fetchLikeListStatus = 'loading';
+        state.fetchLikeListStatus = "loading";
       })
       .addCase(fetchLikeList.fulfilled, (state, action) => {
-        state.fetchLikeListStatus = 'succeed';
-        //likeAdapter.removeAll(state);
+        state.fetchLikeListStatus = "succeed";
+        // likeAdapter.removeAll(state);
         likeAdapter.upsertMany(state, action.payload);
       })
       .addCase(fetchLikeList.rejected, (state, action) => {
-        state.fetchLikeListStatus = 'failed';
+        state.fetchLikeListStatus = "failed";
         state.fetchLikeListError = action.payload;
       })
       // Cases for status of selectedLike (pending, fulfilled, and rejected)
       .addCase(fetchLike.pending, (state) => {
-        state.fetchLikeStatus = 'loading';
+        state.fetchLikeStatus = "loading";
       })
       .addCase(fetchLike.fulfilled, (state, action) => {
-        state.fetchLikeStatus = 'succeed';
+        state.fetchLikeStatus = "succeed";
         likeAdapter.upsertOne(state, action.payload);
-        //console.log(action.payload.comments.items);
+        // console.log(action.payload.comments.items);
         // store.dispatch(insertAllComments(action.payload.comments.items));
       })
       .addCase(fetchLike.rejected, (state, action) => {
-        state.fetchLikeStatus = 'failed';
+        state.fetchLikeStatus = "failed";
         state.fetchLikeError = action.payload;
       })
       // Cases for status of postLike (pending, fulfilled, and rejected)
       .addCase(postLike.pending, (state) => {
-        state.postLikeStatus = 'loading';
+        state.postLikeStatus = "loading";
       })
       .addCase(postLike.fulfilled, (state, action) => {
-        state.postLikeStatus = 'succeed';
+        state.postLikeStatus = "succeed";
         // state.likes.unshift(action.payload.data.createLike);
         likeAdapter.addOne(state, action.payload);
         // state.postLikeStatus = "idle";
       })
       .addCase(postLike.rejected, (state, action) => {
-        state.postLikeStatus = 'failed';
+        state.postLikeStatus = "failed";
         state.postLikeError = action.payload;
       })
       // Cases for status of updateLike (pending, fulfilled, and rejected)
       .addCase(updateLikeDetail.pending, (state) => {
-        state.updateLikeDetailStatus = 'loading';
+        state.updateLikeDetailStatus = "loading";
       })
       .addCase(updateLikeDetail.fulfilled, (state, action) => {
-        state.updateLikeDetailStatus = 'succeed';
+        state.updateLikeDetailStatus = "succeed";
         likeAdapter.upsertOne(state, action.payload);
       })
       .addCase(updateLikeDetail.rejected, (state, action) => {
-        state.updateLikeDetailStatus = 'failed';
+        state.updateLikeDetailStatus = "failed";
         state.updateLikeDetailError = action.payload;
       })
       .addCase(removeLike.pending, (state) => {
-        state.removeLikeStatus = 'loading';
+        state.removeLikeStatus = "loading";
       })
       .addCase(removeLike.fulfilled, (state, action) => {
-        state.removeLikeStatus = 'succeed';
+        state.removeLikeStatus = "succeed";
         console.log(action.payload);
-        //state.uwcssaMembers.unshift(action.payload.data.createUwcssaMember);
+        // state.uwcssaMembers.unshift(action.payload.data.createUwcssaMember);
         likeAdapter.removeOne(state, action.payload);
         // state.updateUwcssaMemberStatus = "idle";
       })
       .addCase(removeLike.rejected, (state, action) => {
-        state.removeLikeStatus = 'failed';
+        state.removeLikeStatus = "failed";
         state.removeLikeError = action.payload;
       });
   },

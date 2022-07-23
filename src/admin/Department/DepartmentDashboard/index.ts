@@ -7,4 +7,4 @@
  * @Description:
  *
  */
-export { default } from './DepartmentDashboard';
+export { default } from "./DepartmentDashboard";

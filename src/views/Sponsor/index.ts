@@ -7,4 +7,4 @@
  * @Description:
  *
  */
-export { default } from './Sponsor';
+export { default } from "./Sponsor";

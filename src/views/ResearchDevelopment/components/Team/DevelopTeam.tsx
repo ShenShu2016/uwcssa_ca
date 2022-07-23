@@ -8,18 +8,18 @@
  *
  */
 
-import { Box, Grid, Typography } from '@mui/material';
-import React, { useEffect } from 'react';
+import { Box, Grid, Typography } from "@mui/material";
+import React, { useEffect } from "react";
 import {
   fetchResearchDevelopmentTeamList,
   selectAllResearchDevelopmentTeams,
-} from 'redux/researchDevelopmentTeam/researchDevelopmentTeamSlice';
-import { useAppDispatch, useAppSelector } from 'redux/hooks';
+} from "redux/researchDevelopmentTeam/researchDevelopmentTeamSlice";
+import { useAppDispatch, useAppSelector } from "redux/hooks";
 
-import DevelopCard from './components/DeveloperCard';
-import { getAuthState } from 'redux/auth/authSlice';
+import { getAuthState } from "redux/auth/authSlice";
+import DevelopCard from "./components/DeveloperCard";
 
-const DevelopTeam = (): JSX.Element => {
+function DevelopTeam(): JSX.Element {
   const dispatch = useAppDispatch();
   const isAuth = useAppSelector(getAuthState);
 
@@ -28,7 +28,7 @@ const DevelopTeam = (): JSX.Element => {
     (state) => state.researchDevelopmentTeam,
   );
   useEffect(() => {
-    if (isAuth !== null && fetchResearchDevelopmentTeamListStatus === 'idle') {
+    if (isAuth !== null && fetchResearchDevelopmentTeamListStatus === "idle") {
       dispatch(fetchResearchDevelopmentTeamList({ isAuth }));
     }
   }, [isAuth, fetchResearchDevelopmentTeamListStatus]);
@@ -38,16 +38,16 @@ const DevelopTeam = (): JSX.Element => {
       <Box marginBottom={4}>
         <Typography
           sx={{
-            textTransform: 'uppercase',
-            fontWeight: 'medium',
+            textTransform: "uppercase",
+            fontWeight: "medium",
           }}
           gutterBottom
-          color={'text.secondary'}
-          align={'center'}
+          color="text.secondary"
+          align="center"
         >
           Our team
         </Typography>
-        <Typography fontWeight={700} variant={'h4'} align={'center'}>
+        <Typography fontWeight={700} variant="h4" align="center">
           Small team. Big hearts.
         </Typography>
       </Box>
@@ -56,6 +56,6 @@ const DevelopTeam = (): JSX.Element => {
       </Grid>
     </Box>
   );
-};
+}
 
 export default DevelopTeam;

@@ -8,4 +8,4 @@
  *
  */
 
-export { default } from './PreSignUpResetPassWord';
+export { default } from "./PreSignUpResetPassWord";

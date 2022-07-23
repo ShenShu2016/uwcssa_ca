@@ -8,53 +8,51 @@
  *
  */
 
-import * as yup from 'yup';
+import * as yup from "yup";
 
-import { Button, DialogActions, DialogContent, Grid } from '@mui/material';
-import { useAppDispatch, useAppSelector } from 'redux/hooks';
+import { Button, DialogActions, DialogContent, Grid } from "@mui/material";
+import { useAppDispatch, useAppSelector } from "redux/hooks";
 
-import { EventParticipantStatus } from 'API';
-import FormInputFieldComponent from './components/FormItemForm/FormInputFieldComponent';
-import { FormItem } from 'redux/form/formSlice';
-import React from 'react';
-import { getOwnerUserName } from 'redux/auth/authSlice';
-import { postEventParticipant } from 'redux/eventParticipant/eventParticipantSlice';
-import { useFormik } from 'formik';
-import { useNavigate } from 'react-router-dom';
-import { useSnackbar } from 'notistack';
+import { EventParticipantStatus } from "API";
+import { FormItem } from "redux/form/formSlice";
+import React from "react";
+import { getOwnerUserName } from "redux/auth/authSlice";
+import { postEventParticipant } from "redux/eventParticipant/eventParticipantSlice";
+import { useFormik } from "formik";
+import { useNavigate } from "react-router-dom";
+import { useSnackbar } from "notistack";
+import FormInputFieldComponent from "./components/FormItemForm/FormInputFieldComponent";
 
 function getYupValidation(formItem: FormItem) {
   let validation: any = yup;
-  if (formItem.formType === 'MultipleSelect') {
-    return validation.array().of(yup.string()); //github ai帮忙写的。。牛逼
+  if (formItem.formType === "MultipleSelect") {
+    return validation.array().of(yup.string()); // github ai帮忙写的。。牛逼
   }
-  if (formItem.formType === 'Boolean' || formItem.formType === 'Checkbox') {
+  if (formItem.formType === "Boolean" || formItem.formType === "Checkbox") {
     validation = validation.boolean();
+  } else if (formItem.isNumber) {
+    validation = validation.number("Please enter a valid number");
   } else {
-    if (formItem.isNumber) {
-      validation = validation.number('Please enter a valid number');
-    } else {
-      validation = validation.string();
-      if (formItem.isEmail) {
-        validation = validation.email('Please enter a valid email address');
-      }
-      if (formItem.minLength) {
-        validation = validation.min(
-          formItem.minLength,
-          'Please enter more than ' + formItem.minLength + ' characters',
-        );
-      }
-      if (formItem.maxLength) {
-        validation = validation.max(
-          formItem.maxLength,
-          'Please enter less than ' + formItem.maxLength + ' characters',
-        );
-      }
+    validation = validation.string();
+    if (formItem.isEmail) {
+      validation = validation.email("Please enter a valid email address");
+    }
+    if (formItem.minLength) {
+      validation = validation.min(
+        formItem.minLength,
+        `Please enter more than ${formItem.minLength} characters`,
+      );
+    }
+    if (formItem.maxLength) {
+      validation = validation.max(
+        formItem.maxLength,
+        `Please enter less than ${formItem.maxLength} characters`,
+      );
     }
   }
 
   if (formItem.isRequired) {
-    validation = validation.required('This field is required'); //required 要放在最后面
+    validation = validation.required("This field is required"); // required 要放在最后面
   }
   return validation;
 }
@@ -68,7 +66,7 @@ function DynamicForm({
   setOpen: any;
   eventId: string | undefined;
 }) {
-  //const { eventId } = useParams();
+  // const { eventId } = useParams();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
@@ -80,10 +78,10 @@ function DynamicForm({
   const yupObject = {};
 
   formItemListSortByOrder.forEach((item) => {
-    if (item.formType === 'Checkbox') {
+    if (item.formType === "Checkbox") {
       initialValues[`content${item.order}`] = false;
     } else {
-      initialValues[`content${item.order}`] = '';
+      initialValues[`content${item.order}`] = "";
     }
     yupObject[`content${item.order}`] = item && getYupValidation(item);
   });
@@ -91,7 +89,7 @@ function DynamicForm({
   const validationSchema = yup.object(yupObject);
 
   const onSubmit = async (values) => {
-    console.log('表单提交', JSON.stringify(values));
+    console.log("表单提交", JSON.stringify(values));
     const eventParticipantFormItemIds = {};
     formItemListSortByOrder.forEach((item) => {
       eventParticipantFormItemIds[`eventParticipantFormItem${item.order}Id`] =
@@ -105,52 +103,49 @@ function DynamicForm({
       ...eventParticipantFormItemIds,
       owner: ownerUsername,
     };
-    console.log('createEventParticipantInput', createEventParticipantInput);
+    console.log("createEventParticipantInput", createEventParticipantInput);
 
     const response = await dispatch(
       postEventParticipant({ createEventParticipantInput }),
     );
 
-    if (response.meta.requestStatus === 'fulfilled') {
+    if (response.meta.requestStatus === "fulfilled") {
       setOpen(false);
       formik.resetForm();
-      enqueueSnackbar('报名成功', { variant: 'success' });
+      enqueueSnackbar("报名成功", { variant: "success" });
       navigate(`/event/eventSignUpSuccessfully/${eventId}`, { replace: true });
       return true;
-    } else {
-      enqueueSnackbar('报名失败', { variant: 'error' });
-      return false;
     }
+    enqueueSnackbar("报名失败", { variant: "error" });
+    return false;
   };
 
   const formik = useFormik({
     initialValues,
-    validationSchema: validationSchema,
+    validationSchema,
     onSubmit,
   });
 
   const handleSubmitClicked = (values) => {
     if (!formik.isValid) {
-      //console.error('表单未完成' + formik.errors);
+      // console.error('表单未完成' + formik.errors);
     } else {
-      //console.log('表单完成', values);
+      // console.log('表单完成', values);
     }
   };
   return (
     <form onSubmit={formik.handleSubmit}>
       <DialogContent dividers>
         <Grid container spacing={4}>
-          {formItemListSortByOrder.map((formItem) => {
-            return (
-              <Grid item xs={12} sm={12} key={formItem.id} marginX={4}>
-                <FormInputFieldComponent formItem={formItem} formik={formik} />
-              </Grid>
-            );
-          })}
+          {formItemListSortByOrder.map((formItem) => (
+            <Grid item xs={12} sm={12} key={formItem.id} marginX={4}>
+              <FormInputFieldComponent formItem={formItem} formik={formik} />
+            </Grid>
+          ))}
         </Grid>
       </DialogContent>
       <DialogActions>
-        <Button type={'submit'} onClick={handleSubmitClicked} disabled={!eventId}>
+        <Button type="submit" onClick={handleSubmitClicked} disabled={!eventId}>
           提交
         </Button>
       </DialogActions>

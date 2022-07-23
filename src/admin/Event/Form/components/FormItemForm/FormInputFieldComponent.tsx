@@ -25,16 +25,16 @@ import {
   Select,
   // Switch,
   TextField,
-} from '@mui/material';
+} from "@mui/material";
 
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
-import { FormItem } from 'redux/form/formSlice';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
-import React from 'react';
-import { TimePicker } from '@mui/x-date-pickers/TimePicker';
-import FieldLabel from '../../../EventCreate/components/FieldLabel';
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
+import { FormItem } from "redux/form/formSlice";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
+import React from "react";
+import { TimePicker } from "@mui/x-date-pickers/TimePicker";
+import FieldLabel from "../../../EventCreate/components/FieldLabel";
 
 function FormInputFieldComponent({
   formik,
@@ -43,18 +43,21 @@ function FormInputFieldComponent({
   formik: any;
   formItem: FormItem;
 }) {
-  
   function getInputLabelId(id: string) {
-    return 'input-label-id' + id;
+    return `input-label-id${id}`;
   }
   function getInputId(id: string) {
-    return 'input-id-' + id;
+    return `input-id-${id}`;
   }
 
-  if (formItem.formType === 'TextFieldShort') {
+  if (formItem.formType === "TextFieldShort") {
     return (
       <>
-        <FieldLabel name={formItem.question} isRequired={formItem.isRequired} description={formItem.description}/>
+        <FieldLabel
+          name={formItem.question}
+          isRequired={formItem.isRequired}
+          description={formItem.description}
+        />
         <TextField
           label={formItem.label}
           variant="outlined"
@@ -63,20 +66,21 @@ function FormInputFieldComponent({
           value={formik.values[formItem.id]}
           onChange={formik.handleChange}
           error={
-            formik.touched[formItem.id] &&
-            Boolean(formik.errors[formItem.id])
+            formik.touched[formItem.id] && Boolean(formik.errors[formItem.id])
           }
-          helperText={
-            formik.touched[formItem.id] &&
-            formik.errors[formItem.id]
-          }
+          helperText={formik.touched[formItem.id] && formik.errors[formItem.id]}
         />
       </>
     );
-  } else if (formItem.formType === 'TextFieldLong') {
+  }
+  if (formItem.formType === "TextFieldLong") {
     return (
       <>
-        <FieldLabel name={formItem.question} isRequired={formItem.isRequired} description={formItem.description}/>
+        <FieldLabel
+          name={formItem.question}
+          isRequired={formItem.isRequired}
+          description={formItem.description}
+        />
         <TextField
           label={formItem.label}
           variant="outlined"
@@ -87,36 +91,57 @@ function FormInputFieldComponent({
           value={formik.values[formItem.id]}
           onChange={formik.handleChange}
           error={
-            formik.touched[formItem.id] &&
-            Boolean(formik.errors[formItem.id])
+            formik.touched[formItem.id] && Boolean(formik.errors[formItem.id])
           }
-          helperText={
-            formik.touched[formItem.id] &&
-            formik.errors[formItem.id]
-          }
+          helperText={formik.touched[formItem.id] && formik.errors[formItem.id]}
         />
       </>
     );
-  } else if (formItem.formType === 'Checkbox') {
+  }
+  if (formItem.formType === "Checkbox") {
     return (
       <>
-        <FieldLabel name={formItem.question} isRequired={formItem.isRequired} description={formItem.description}/>
+        <FieldLabel
+          name={formItem.question}
+          isRequired={formItem.isRequired}
+          description={formItem.description}
+        />
         <FormControlLabel
           name={formItem.id}
           value={Boolean(formik.values[formItem.id])}
           onChange={formik.handleChange}
-          control={<Checkbox size='small' sx={{ color: formik.touched[formItem.id] && Boolean(formik.errors[formItem.id]) ? '#d32f2f' : '' }}/>}
+          control={
+            <Checkbox
+              size="small"
+              sx={{
+                color:
+                  formik.touched[formItem.id] &&
+                  Boolean(formik.errors[formItem.id])
+                    ? "#d32f2f"
+                    : "",
+              }}
+            />
+          }
           label={formItem.label}
         />
         <FormHelperText
-          error={formik.touched[formItem.id] && Boolean(formik.errors[formItem.id])}
-        >{formik.touched[formItem.id] && formik.errors[formItem.id]}</FormHelperText>
+          error={
+            formik.touched[formItem.id] && Boolean(formik.errors[formItem.id])
+          }
+        >
+          {formik.touched[formItem.id] && formik.errors[formItem.id]}
+        </FormHelperText>
       </>
     );
-  } else if (formItem.formType === 'Boolean') {
+  }
+  if (formItem.formType === "Boolean") {
     return (
       <>
-        <FieldLabel name={formItem.question} isRequired={formItem.isRequired} description={formItem.description}/>
+        <FieldLabel
+          name={formItem.question}
+          isRequired={formItem.isRequired}
+          description={formItem.description}
+        />
         {/* switch的初始状态有点问题 赋默认值false 赋不进去 如果这个字段是required 校验不通过 有点问题 */}
         {/* 而且就算赋默认值是false了 这相当于是强制用户选了false 如果这个字段不是required 是应该允许空值的 */}
         {/* <FormControlLabel
@@ -127,7 +152,9 @@ function FormInputFieldComponent({
           label={formItem.label}
         /> */}
         <FormControl
-          error={formik.touched[formItem.id] && Boolean(formik.errors[formItem.id])}
+          error={
+            formik.touched[formItem.id] && Boolean(formik.errors[formItem.id])
+          }
           variant="standard"
         >
           <RadioGroup
@@ -138,27 +165,58 @@ function FormInputFieldComponent({
           >
             {/* 可以写 required={formItem.isRequired} */}
             <FormControlLabel
-              value={'T'}
-              control={<Radio size='small' sx={{ color: formik.touched[formItem.id] && Boolean(formik.errors[formItem.id]) ? '#d32f2f' : '' }}/>}
-              label={'是'}
+              value="T"
+              control={
+                <Radio
+                  size="small"
+                  sx={{
+                    color:
+                      formik.touched[formItem.id] &&
+                      Boolean(formik.errors[formItem.id])
+                        ? "#d32f2f"
+                        : "",
+                  }}
+                />
+              }
+              label="是"
             />
             <FormControlLabel
-              value={'F'}
-              control={<Radio size='small' sx={{ color: formik.touched[formItem.id] && Boolean(formik.errors[formItem.id]) ? '#d32f2f' : '' }}/>}
-              label={'否'}
+              value="F"
+              control={
+                <Radio
+                  size="small"
+                  sx={{
+                    color:
+                      formik.touched[formItem.id] &&
+                      Boolean(formik.errors[formItem.id])
+                        ? "#d32f2f"
+                        : "",
+                  }}
+                />
+              }
+              label="否"
             />
           </RadioGroup>
           <FormHelperText
-            error={formik.touched[formItem.id] && Boolean(formik.errors[formItem.id])}
-          >{formik.touched[formItem.id] && formik.errors[formItem.id]}</FormHelperText>
+            error={
+              formik.touched[formItem.id] && Boolean(formik.errors[formItem.id])
+            }
+          >
+            {formik.touched[formItem.id] && formik.errors[formItem.id]}
+          </FormHelperText>
         </FormControl>
       </>
     );
-  } else if (formItem.formType === 'MultipleSelect') {
-    //之后这里放switch
+  }
+  if (formItem.formType === "MultipleSelect") {
+    // 之后这里放switch
     return (
       <>
-        <FieldLabel name={formItem.question} isRequired={formItem.isRequired} description={formItem.description}/>
+        <FieldLabel
+          name={formItem.question}
+          isRequired={formItem.isRequired}
+          description={formItem.description}
+        />
         <FormControl fullWidth>
           <InputLabel id={getInputLabelId(formItem.id)}>
             {formItem.label}
@@ -168,42 +226,39 @@ function FormInputFieldComponent({
             multiple
             id={getInputId(formItem.id)}
             name={formItem.id}
-            value={formik.values[formItem.id] || []} //！！太重要了这个是为了防止没有值的时候报错
+            value={formik.values[formItem.id] || []} // ！！太重要了这个是为了防止没有值的时候报错
             label={formItem.label}
             onChange={formik.handleChange}
             error={
-              formik.touched[formItem.id] &&
-              Boolean(formik.errors[formItem.id])
+              formik.touched[formItem.id] && Boolean(formik.errors[formItem.id])
             }
-            input={
-              <OutlinedInput
-                id={getInputId(formItem.id)}
-                label="Chip"
-              />
-            }
+            input={<OutlinedInput id={getInputId(formItem.id)} label="Chip" />}
             renderValue={(selected) => (
-              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+              <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
                 {selected.map((value) => (
                   <Chip key={value} label={value} />
                 ))}
               </Box>
             )}
           >
-            {formItem.formSelectChoices.map((option, index) => {
-              return (
-                <MenuItem key={index} value={option}>
-                  {option}
-                </MenuItem>
-              );
-            })}
+            {formItem.formSelectChoices.map((option, index) => (
+              <MenuItem key={index} value={option}>
+                {option}
+              </MenuItem>
+            ))}
           </Select>
         </FormControl>
       </>
     );
-  } else if (formItem.formType === 'Select') {
+  }
+  if (formItem.formType === "Select") {
     return (
       <>
-        <FieldLabel name={formItem.question} isRequired={formItem.isRequired} description={formItem.description}/>
+        <FieldLabel
+          name={formItem.question}
+          isRequired={formItem.isRequired}
+          description={formItem.description}
+        />
         <FormControl fullWidth>
           <InputLabel id={getInputLabelId(formItem.id)}>
             {formItem.label}
@@ -216,82 +271,97 @@ function FormInputFieldComponent({
             label={formItem.label}
             onChange={formik.handleChange}
             error={
-              formik.touched[formItem.id] &&
-              Boolean(formik.errors[formItem.id])
+              formik.touched[formItem.id] && Boolean(formik.errors[formItem.id])
             }
           >
-            {formItem.formSelectChoices.map((option, index) => {
-              return (
-                <MenuItem key={index} value={option}>
-                  {option}
-                </MenuItem>
-              );
-            })}
+            {formItem.formSelectChoices.map((option, index) => (
+              <MenuItem key={index} value={option}>
+                {option}
+              </MenuItem>
+            ))}
           </Select>
           <FormHelperText>
-            {
-              formik.touched[formItem.id] &&
-                  formik.errors[formItem.id]
-            }
+            {formik.touched[formItem.id] && formik.errors[formItem.id]}
           </FormHelperText>
         </FormControl>
       </>
     );
-  } else if (formItem.formType === 'FileUpload') {
+  }
+  if (formItem.formType === "FileUpload") {
     return null;
-  } else if (
-    formItem.formType === 'RadioGroupH' ||
-    formItem.formType === 'RadioGroupV'
+  }
+  if (
+    formItem.formType === "RadioGroupH" ||
+    formItem.formType === "RadioGroupV"
   ) {
     return (
       <>
-        <FieldLabel name={formItem.question} isRequired={formItem.isRequired} description={formItem.description}/>
+        <FieldLabel
+          name={formItem.question}
+          isRequired={formItem.isRequired}
+          description={formItem.description}
+        />
         <FormControl
-          error={formik.touched[formItem.id] && Boolean(formik.errors[formItem.id])}
+          error={
+            formik.touched[formItem.id] && Boolean(formik.errors[formItem.id])
+          }
         >
           {/* <FormLabel id={getInputLabelId(formItem.id)}>
             {formItem.label}
           </FormLabel> */}
           <RadioGroup
-            row={formItem.formType === 'RadioGroupH'}
+            row={formItem.formType === "RadioGroupH"}
             aria-labelledby={getInputLabelId(formItem.id)}
             name={formItem.id}
             onChange={formik.handleChange}
             value={formik.values[formItem.id]}
           >
-            {formItem.formSelectChoices.map((option, index) => {
-              return (
-                <FormControlLabel
-                  key={index}
-                  value={option}
-                  control={<Radio size='small' sx={{ color: formik.touched[formItem.id] && Boolean(formik.errors[formItem.id]) ? '#d32f2f' : '' }}/>}
-                  label={option}
-                />
-              );
-            })}
+            {formItem.formSelectChoices.map((option, index) => (
+              <FormControlLabel
+                key={index}
+                value={option}
+                control={
+                  <Radio
+                    size="small"
+                    sx={{
+                      color:
+                        formik.touched[formItem.id] &&
+                        Boolean(formik.errors[formItem.id])
+                          ? "#d32f2f"
+                          : "",
+                    }}
+                  />
+                }
+                label={option}
+              />
+            ))}
           </RadioGroup>
           <FormHelperText
-            error={formik.touched[formItem.id] && Boolean(formik.errors[formItem.id])}
+            error={
+              formik.touched[formItem.id] && Boolean(formik.errors[formItem.id])
+            }
           >
-            { formik.touched[formItem.id] && formik.errors[formItem.id] }
+            {formik.touched[formItem.id] && formik.errors[formItem.id]}
           </FormHelperText>
         </FormControl>
       </>
     );
-  } else if (formItem.formType === 'DatePicker') {
+  }
+  if (formItem.formType === "DatePicker") {
     return (
       <>
-        <FieldLabel name={formItem.question} isRequired={formItem.isRequired} description={formItem.description}/>
+        <FieldLabel
+          name={formItem.question}
+          isRequired={formItem.isRequired}
+          description={formItem.description}
+        />
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <MobileDatePicker
             label={formItem.label}
             inputFormat="MM/dd/yyyy"
             value={formik.values[formItem.id] || null}
             onChange={(value) => {
-              formik.setFieldValue(
-                formItem.id,
-                value,
-              );
+              formik.setFieldValue(formItem.id, value);
             }}
             renderInput={(params) => (
               <TextField
@@ -302,8 +372,7 @@ function FormInputFieldComponent({
                   Boolean(formik.errors[formItem.id])
                 }
                 helperText={
-                  formik.touched[formItem.id] &&
-                  formik.errors[formItem.id]
+                  formik.touched[formItem.id] && formik.errors[formItem.id]
                 }
               />
             )}
@@ -311,19 +380,21 @@ function FormInputFieldComponent({
         </LocalizationProvider>
       </>
     );
-  } else if (formItem.formType === 'DateTimePicker') {
+  }
+  if (formItem.formType === "DateTimePicker") {
     return (
       <>
-        <FieldLabel name={formItem.question} isRequired={formItem.isRequired} description={formItem.description}/>
+        <FieldLabel
+          name={formItem.question}
+          isRequired={formItem.isRequired}
+          description={formItem.description}
+        />
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <DateTimePicker
             label={formItem.label}
             value={formik.values[formItem.id] || null}
             onChange={(value) => {
-              formik.setFieldValue(
-                formItem.id,
-                value,
-              );
+              formik.setFieldValue(formItem.id, value);
             }}
             renderInput={(params) => (
               <TextField
@@ -334,8 +405,7 @@ function FormInputFieldComponent({
                   Boolean(formik.errors[formItem.id])
                 }
                 helperText={
-                  formik.touched[formItem.id] &&
-                  formik.errors[formItem.id]
+                  formik.touched[formItem.id] && formik.errors[formItem.id]
                 }
               />
             )}
@@ -343,19 +413,21 @@ function FormInputFieldComponent({
         </LocalizationProvider>
       </>
     );
-  } else if (formItem.formType === 'TimePicker') {
+  }
+  if (formItem.formType === "TimePicker") {
     return (
       <>
-        <FieldLabel name={formItem.question} isRequired={formItem.isRequired} description={formItem.description}/>
+        <FieldLabel
+          name={formItem.question}
+          isRequired={formItem.isRequired}
+          description={formItem.description}
+        />
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <TimePicker
             label={formItem.label}
             value={formik.values[formItem.id] || null}
             onChange={(value) => {
-              formik.setFieldValue(
-                formItem.id,
-                value,
-              );
+              formik.setFieldValue(formItem.id, value);
             }}
             renderInput={(params) => (
               <TextField
@@ -366,8 +438,7 @@ function FormInputFieldComponent({
                   Boolean(formik.errors[formItem.id])
                 }
                 helperText={
-                  formik.touched[formItem.id] &&
-                  formik.errors[formItem.id]
+                  formik.touched[formItem.id] && formik.errors[formItem.id]
                 }
               />
             )}
@@ -375,9 +446,8 @@ function FormInputFieldComponent({
         </LocalizationProvider>
       </>
     );
-  } else {
-    console.error(`Unknown form type: ${formItem.formType}`);
   }
+  console.error(`Unknown form type: ${formItem.formType}`);
 }
 
 export default FormInputFieldComponent;

@@ -7,4 +7,4 @@
  * @Description:
  *
  */
-export { default } from './ContactCard';
+export { default } from "./ContactCard";

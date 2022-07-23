@@ -7,4 +7,4 @@
  * @Description:
  *
  */
-export { default } from './EditUwcssaMemberForm';
+export { default } from "./EditUwcssaMemberForm";

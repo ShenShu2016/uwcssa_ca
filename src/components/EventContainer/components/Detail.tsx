@@ -7,18 +7,18 @@
  * @FilePath: /uwcssa_ca/src/components/EventContainer/components/Detail.tsx
  */
 
-import './index.css';
+import "./index.css";
 
-import { Box, Button, Chip, Typography } from '@mui/material';
+import { Box, Button, Chip, Typography } from "@mui/material";
 
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import { Event } from 'redux/event/eventSlice';
-import { Link } from 'react-router-dom';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-import React from 'react';
-import { getOwnerUserName } from 'redux/auth/authSlice';
-import moment from 'moment';
-import { useAppSelector } from 'redux/hooks';
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import { Event } from "redux/event/eventSlice";
+import { Link } from "react-router-dom";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import React from "react";
+import { getOwnerUserName } from "redux/auth/authSlice";
+import moment from "moment";
+import { useAppSelector } from "redux/hooks";
 
 // import ReactHtmlParser from 'react-html-parser';
 
@@ -33,23 +33,23 @@ const Details: React.FC<DetailProp> = ({
   fromPreview = false,
   onJoin,
 }): JSX.Element => {
-  //console.log(info);
+  // console.log(info);
   const ownerUsername = useAppSelector(getOwnerUserName);
-  //console.log(ownerUsername);
+  // console.log(ownerUsername);
   return (
     <Box>
       <Box
         sx={{
-          display: 'flex',
+          display: "flex",
           flexDirection: {
-            md: 'row',
-            xs: 'column',
+            md: "row",
+            xs: "column",
           },
-          justifyContent: 'space-between',
+          justifyContent: "space-between",
         }}
       >
         <Typography
-          variant={'h6'}
+          variant="h6"
           fontWeight={700}
           p={{
             md: 0,
@@ -74,32 +74,32 @@ const Details: React.FC<DetailProp> = ({
       <Box
         sx={{
           mt: 1,
-          fontSize: '14px',
-          display: 'flex',
-          alignItems: 'center',
+          fontSize: "14px",
+          display: "flex",
+          alignItems: "center",
         }}
       >
         <AccessTimeIcon sx={{ mr: 2 }} />
-        {`${moment(info.startDate).format('dddd, MMMM Do')} - ${moment(
+        {`${moment(info.startDate).format("dddd, MMMM Do")} - ${moment(
           info.endDate,
-        ).format('dddd, MMMM Do')}`}
+        ).format("dddd, MMMM Do")}`}
       </Box>
       <Box
         sx={{
           mt: 1,
-          fontSize: '14px',
-          display: 'flex',
-          alignItems: 'center',
+          fontSize: "14px",
+          display: "flex",
+          alignItems: "center",
         }}
       >
         <LocationOnIcon sx={{ mr: 2 }} />
-        {info.eventLocation?.name ?? '未知地点'}
+        {info.eventLocation?.name ?? "未知地点"}
       </Box>
       <Box sx={{ paddingY: 1, mt: 1 }}>
         <Typography
           color="#616161"
-          component={'i'}
-          sx={{ fontSize: '14px' }}
+          component="i"
+          sx={{ fontSize: "14px" }}
           className="detail-text"
         >
           {info.coverPageDescription}
@@ -108,7 +108,7 @@ const Details: React.FC<DetailProp> = ({
       <Box mt={1} display="flex" justifyContent="space-between">
         <Button
           variant="outlined"
-          sx={{ width: '100px' }}
+          sx={{ width: "100px" }}
           component={Link}
           to={`/event/${info?.id}`}
           disabled={fromPreview}
@@ -123,11 +123,11 @@ const Details: React.FC<DetailProp> = ({
             你已经报名
           </Button>
         ) : ownerUsername ? (
-          <Button variant="contained" sx={{ width: '100px' }} onClick={onJoin}>
+          <Button variant="contained" sx={{ width: "100px" }} onClick={onJoin}>
             快速报名
           </Button>
         ) : (
-          <Button variant="contained" component={Link} to={'/auth/signIn'}>
+          <Button variant="contained" component={Link} to="/auth/signIn">
             请先登录
           </Button>
         )}

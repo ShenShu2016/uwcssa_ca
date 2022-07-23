@@ -6,12 +6,12 @@
  * @FilePath: /uwcssa_ca/src/components/Message/Message.tsx
  */
 
-import MuiAlert, { AlertProps } from '@mui/material/Alert';
+import MuiAlert, { AlertProps } from "@mui/material/Alert";
 
-import React from 'react';
-import { Snackbar } from '@mui/material';
-import { useAppSelector } from 'redux/hooks';
-import useMessage from 'hooks/useMessage';
+import React from "react";
+import { Snackbar } from "@mui/material";
+import { useAppSelector } from "redux/hooks";
+import useMessage from "hooks/useMessage";
 
 // import { useSelector } from 'react-redux';
 
@@ -19,12 +19,9 @@ interface messageProps {
   children: React.ReactNode;
 }
 
-const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
-  props,
-  ref,
-) {
-  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
+const Alert = React.forwardRef<HTMLDivElement, AlertProps>((props, ref) => (
+  <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />
+));
 
 const Message: React.FC<messageProps> = ({ children }) => {
   const alertState = useAppSelector((state) => state.alert);
@@ -34,7 +31,7 @@ const Message: React.FC<messageProps> = ({ children }) => {
     event?: React.SyntheticEvent | Event,
     reason?: string,
   ) => {
-    if (reason === 'clickaway') {
+    if (reason === "clickaway") {
       return;
     }
     message.close();
@@ -51,14 +48,14 @@ const Message: React.FC<messageProps> = ({ children }) => {
         autoHideDuration={2500}
         onClose={handleClose}
         anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'center',
+          vertical: "top",
+          horizontal: "center",
         }}
       >
         <Alert
           onClose={handleClose}
           severity={alertState.type}
-          sx={{ width: '100%' }}
+          sx={{ width: "100%" }}
         >
           {alertState.message}
         </Alert>

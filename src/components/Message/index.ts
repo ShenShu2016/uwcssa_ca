@@ -5,4 +5,4 @@
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/frontend/src/components/Message/index.ts
  */
-export { default } from './Message';
+export { default } from "./Message";

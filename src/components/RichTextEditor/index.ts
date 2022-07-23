@@ -5,4 +5,4 @@
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/components/RichTextEditor/index.ts
  */
-export { default } from './RichTextEditor';
+export { default } from "./RichTextEditor";

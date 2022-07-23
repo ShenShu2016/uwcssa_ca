@@ -15,16 +15,16 @@ import {
   Stack,
   Typography,
   useTheme,
-} from '@mui/material';
+} from "@mui/material";
 
-import { Link } from 'react-router-dom';
-import React from 'react';
-import { stringAvatar } from 'components/Avatar/AvatarFunction';
-import { useAppSelector } from 'redux/hooks';
+import { Link } from "react-router-dom";
+import React from "react";
+import { stringAvatar } from "components/Avatar/AvatarFunction";
+import { useAppSelector } from "redux/hooks";
 
-const UserCardGrid = (): JSX.Element => {
+function UserCardGrid(): JSX.Element {
   const theme = useTheme();
-  //const userInfo = useAppSelector(getUserInfo); //用这个代替直接从store拿，但是要注意google 登录的话sub 和username不一样，owner一定要用username，有另一个api叫 getOwnerUserName
+  // const userInfo = useAppSelector(getUserInfo); //用这个代替直接从store拿，但是要注意google 登录的话sub 和username不一样，owner一定要用username，有另一个api叫 getOwnerUserName
   const myUserProfile = useAppSelector(
     (state) => state.userProfile.myUserProfile,
   );
@@ -33,12 +33,12 @@ const UserCardGrid = (): JSX.Element => {
     <Box
       sx={{
         p: { xs: 2, md: 4 },
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
         width: 1,
         height: 1,
-        background: 'transparent',
+        background: "transparent",
         backgroundImage: `linear-gradient(0deg, ${theme.palette.background.paper} 75%, ${theme.palette.primary.main} 0%)`,
       }}
     >
@@ -46,31 +46,31 @@ const UserCardGrid = (): JSX.Element => {
         <>
           <Avatar
             src={myUserProfile.avatarURL?.objectCompressedURL}
-            variant={'circular'}
+            variant="circular"
             alt={myUserProfile.name}
             {...stringAvatar(myUserProfile.name, {
               width: 50,
               height: 50,
-              fontSize: { xs: '24px', sm: '32px' },
+              fontSize: { xs: "24px", sm: "32px" },
             })}
           />
           <Box
-            display={'flex'}
-            justifyContent={'center'}
-            alignItems={'center'}
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
             marginTop={2}
           >
             <Typography fontWeight={600}>{myUserProfile.name}</Typography>
             {myUserProfile.id ? (
               <Box
-                component={'svg'}
+                component="svg"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
                 width={22}
                 height={22}
-                color={'primary.main'}
+                color="primary.main"
                 marginLeft={1}
               >
                 <path
@@ -82,11 +82,11 @@ const UserCardGrid = (): JSX.Element => {
               </Box>
             ) : null}
           </Box>
-          <Typography fontSize={12} color={'text.secondary'}>
+          <Typography fontSize={12} color="text.secondary">
             {myUserProfile.contactEmail}
           </Typography>
           <Box flexGrow={1} />
-          <Stack spacing={2} marginTop={2} width={1} alignItems={'center'}>
+          <Stack spacing={2} marginTop={2} width={1} alignItems="center">
             {/* <Box
               display={'flex'}
               justifyContent={'center'}
@@ -116,9 +116,9 @@ const UserCardGrid = (): JSX.Element => {
             </Box> */}
             <Button
               component={Link}
-              variant={'outlined'}
-              color={'primary'}
-              to={'/settings/general'}
+              variant="outlined"
+              color="primary"
+              to="/settings/general"
             >
               View profile
             </Button>
@@ -130,11 +130,11 @@ const UserCardGrid = (): JSX.Element => {
             variant="contained"
             color="primary"
             component={Link}
-            //target="blank"
+            // target="blank"
             to="/auth/signIn"
             size="large"
             sx={{
-              width: '35%',
+              width: "35%",
             }}
           >
             登录
@@ -143,11 +143,11 @@ const UserCardGrid = (): JSX.Element => {
             variant="outlined"
             color="primary"
             component={Link}
-            //target="blank"
+            // target="blank"
             to="/auth/signUp"
             size="large"
             sx={{
-              width: '35%',
+              width: "35%",
             }}
           >
             注册
@@ -156,6 +156,6 @@ const UserCardGrid = (): JSX.Element => {
       )}
     </Box>
   );
-};
+}
 
 export default UserCardGrid;

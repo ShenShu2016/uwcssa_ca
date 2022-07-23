@@ -7,4 +7,4 @@
  * @Description:
  *
  */
-export { default } from './SimpleStriped';
+export { default } from "./SimpleStriped";

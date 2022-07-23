@@ -7,4 +7,4 @@
  * @Description:
  *
  */
-export { default as AddUwcssaDepartmentForm } from './AddUwcssaDepartmentForm';
+export { default as AddUwcssaDepartmentForm } from "./AddUwcssaDepartmentForm";

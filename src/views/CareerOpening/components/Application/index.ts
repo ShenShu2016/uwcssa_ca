@@ -7,4 +7,4 @@
  * @Description:
  *
  */
-export { default } from './Application';
+export { default } from "./Application";

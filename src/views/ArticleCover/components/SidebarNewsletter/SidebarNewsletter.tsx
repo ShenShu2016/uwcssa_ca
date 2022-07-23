@@ -9,7 +9,7 @@
  */
 /* eslint-disable react/no-unescaped-entities */
 
-import * as yup from 'yup';
+import * as yup from "yup";
 
 import {
   Box,
@@ -21,46 +21,46 @@ import {
   Typography,
   useMediaQuery,
   useTheme,
-} from '@mui/material';
-import { Link, useNavigate } from 'react-router-dom';
-import { googleSignIn, signIn } from 'redux/auth/authSlice';
+} from "@mui/material";
+import { Link, useNavigate } from "react-router-dom";
+import { googleSignIn, signIn } from "redux/auth/authSlice";
 
-import { LazyLoadImage } from 'react-lazy-load-image-component';
-import React from 'react';
-import { useAppDispatch } from 'redux/hooks';
-import { useFormik } from 'formik';
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import React from "react";
+import { useAppDispatch } from "redux/hooks";
+import { useFormik } from "formik";
 
 const validationSchema = yup.object({
   username: yup
     .string()
     .trim()
-    .email('Please enter a valid email address')
-    .required('Email is required.'),
+    .email("Please enter a valid email address")
+    .required("Email is required."),
   password: yup
     .string()
-    .required('Please specify your password')
-    .min(8, 'The password should have at minimum length of 8'),
+    .required("Please specify your password")
+    .min(8, "The password should have at minimum length of 8"),
 });
 
-const SidebarNewsletter = (): JSX.Element => {
+function SidebarNewsletter(): JSX.Element {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const theme = useTheme();
-  const isMd = useMediaQuery(theme.breakpoints.up('md'), {
+  const isMd = useMediaQuery(theme.breakpoints.up("md"), {
     defaultMatches: true,
   });
 
   const initialValues = {
-    username: '',
-    password: '',
+    username: "",
+    password: "",
   };
 
   const onSubmit = async (values) => {
     console.log(JSON.stringify(values));
     const { username, password } = values;
     const response = await dispatch(signIn({ username, password }));
-    if (response.meta.requestStatus === 'fulfilled') {
-      navigate('', { replace: true });
+    if (response.meta.requestStatus === "fulfilled") {
+      navigate("", { replace: true });
     } else {
       return false;
     }
@@ -70,7 +70,7 @@ const SidebarNewsletter = (): JSX.Element => {
 
   const formik = useFormik({
     initialValues,
-    validationSchema: validationSchema,
+    validationSchema,
     onSubmit,
   });
 
@@ -79,21 +79,19 @@ const SidebarNewsletter = (): JSX.Element => {
   };
 
   return (
-    <Box component={Card} padding={2} bgcolor={'transparent'}>
+    <Box component={Card} padding={2} bgcolor="transparent">
       <Grid container spacing={4}>
         {isMd ? (
-          <Grid item container justifyContent={'center'} xs={12}>
-            <Box height={1} width={1} maxWidth={'80%'}>
+          <Grid item container justifyContent="center" xs={12}>
+            <Box height={1} width={1} maxWidth="80%">
               <Box
-                component={'img'}
-                src={
-                  'https://assets.maccarianagency.com/svg/illustrations/drawkit-illustration2.svg'
-                }
+                component="img"
+                src="https://assets.maccarianagency.com/svg/illustrations/drawkit-illustration2.svg"
                 width={1}
                 height={1}
                 sx={{
                   filter:
-                    theme.palette.mode === 'dark' ? 'brightness(0.8)' : 'none',
+                    theme.palette.mode === "dark" ? "brightness(0.8)" : "none",
                 }}
               />
             </Box>
@@ -112,13 +110,13 @@ const SidebarNewsletter = (): JSX.Element => {
           <form onSubmit={formik.handleSubmit}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
-                <Typography variant={'subtitle2'} sx={{ marginBottom: 2 }}>
+                <Typography variant="subtitle2" sx={{ marginBottom: 2 }}>
                   Enter your email
                 </Typography>
                 <TextField
                   label="Email *"
                   variant="outlined"
-                  name={'username'}
+                  name="username"
                   fullWidth
                   value={formik.values.username}
                   onChange={formik.handleChange}
@@ -131,23 +129,23 @@ const SidebarNewsletter = (): JSX.Element => {
               <Grid item xs={12}>
                 <Box
                   display="flex"
-                  flexDirection={{ xs: 'column', sm: 'row' }}
-                  alignItems={{ xs: 'stretched', sm: 'center' }}
-                  justifyContent={'space-between'}
+                  flexDirection={{ xs: "column", sm: "row" }}
+                  alignItems={{ xs: "stretched", sm: "center" }}
+                  justifyContent="space-between"
                   width={1}
                   marginBottom={2}
                 >
                   <Box marginBottom={{ xs: 1, sm: 0 }}>
-                    <Typography variant={'subtitle2'}>
+                    <Typography variant="subtitle2">
                       Enter your password
                     </Typography>
                   </Box>
-                  <Typography variant={'subtitle2'}>
+                  <Typography variant="subtitle2">
                     <MUILink
                       component={Link}
-                      color={'primary'}
-                      to={'/auth/passwordReset'}
-                      underline={'none'}
+                      color="primary"
+                      to="/auth/passwordReset"
+                      underline="none"
                     >
                       Forgot your password?
                     </MUILink>
@@ -156,8 +154,8 @@ const SidebarNewsletter = (): JSX.Element => {
                 <TextField
                   label="Password *"
                   variant="outlined"
-                  name={'password'}
-                  type={'password'}
+                  name="password"
+                  type="password"
                   fullWidth
                   value={formik.values.password}
                   onChange={formik.handleChange}
@@ -170,27 +168,27 @@ const SidebarNewsletter = (): JSX.Element => {
               <Grid item container xs={12}>
                 <Box
                   display="flex"
-                  flexDirection={{ xs: 'column', sm: 'row' }}
-                  alignItems={{ xs: 'stretched', sm: 'center' }}
-                  justifyContent={'space-between'}
+                  flexDirection={{ xs: "column", sm: "row" }}
+                  alignItems={{ xs: "stretched", sm: "center" }}
+                  justifyContent="space-between"
                   width={1}
                   maxWidth={600}
-                  margin={'0 auto'}
+                  margin="0 auto"
                 >
                   <Box marginBottom={{ xs: 1, sm: 0 }}>
-                    <Typography variant={'subtitle2'}>
-                      Don't have an account yet?{' '}
+                    <Typography variant="subtitle2">
+                      Don't have an account yet?{" "}
                       <MUILink
                         component={Link}
-                        color={'primary'}
-                        to={'/auth/signUp'}
-                        underline={'none'}
+                        color="primary"
+                        to="/auth/signUp"
+                        underline="none"
                       >
                         Sign up here.
                       </MUILink>
                     </Typography>
                   </Box>
-                  <Button size={'large'} variant={'contained'} type={'submit'}>
+                  <Button size="large" variant="contained" type="submit">
                     Login
                   </Button>
                 </Box>
@@ -198,8 +196,8 @@ const SidebarNewsletter = (): JSX.Element => {
               <Grid item container xs={12}>
                 <Button
                   fullWidth
-                  variant={'contained'}
-                  color={'primary'}
+                  variant="contained"
+                  color="primary"
                   onClick={() => handleGoogleSignIn()}
                   sx={{ lineHeight: 1 }}
                 >
@@ -208,7 +206,7 @@ const SidebarNewsletter = (): JSX.Element => {
                     effect="blur"
                     src="/assets/images/icons/google-1.svg"
                   />
-                  <Box sx={{ fontSize: '12px', marginLeft: '1rem' }}>
+                  <Box sx={{ fontSize: "12px", marginLeft: "1rem" }}>
                     Google登录
                   </Box>
                 </Button>
@@ -219,6 +217,6 @@ const SidebarNewsletter = (): JSX.Element => {
       </Grid>
     </Box>
   );
-};
+}
 
 export default SidebarNewsletter;

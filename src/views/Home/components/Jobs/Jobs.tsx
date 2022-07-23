@@ -1,39 +1,39 @@
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Grid from '@mui/material/Grid';
-import React from 'react';
-import Typography from '@mui/material/Typography';
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Grid from "@mui/material/Grid";
+import React from "react";
+import Typography from "@mui/material/Typography";
 
 /* eslint-disable react/no-unescaped-entities */
 
 export const mock = [
   {
-    title: 'Front-End Developer',
-    location: 'Madrid',
-    type: 'Remote',
+    title: "Front-End Developer",
+    location: "Madrid",
+    type: "Remote",
   },
   {
-    title: 'Community Manager',
-    location: 'Paris',
-    type: 'Full time',
+    title: "Community Manager",
+    location: "Paris",
+    type: "Full time",
   },
   {
-    title: 'UX/UI Designer',
-    location: 'Yerevan',
-    type: 'Part time',
+    title: "UX/UI Designer",
+    location: "Yerevan",
+    type: "Part time",
   },
 ];
 
-const Jobs = (): JSX.Element => {
+function Jobs(): JSX.Element {
   return (
     <Box>
       <Box marginBottom={4}>
         <Typography
           variant="h4"
-          align={'center'}
-          data-aos={'fade-up'}
+          align="center"
+          data-aos="fade-up"
           gutterBottom
           sx={{
             fontWeight: 700,
@@ -52,52 +52,48 @@ const Jobs = (): JSX.Element => {
           <br />
           reports against your data anywhere in the world.
         </Typography> */}
-        <Box display="flex" justifyContent={'center'} marginTop={2}>
+        <Box display="flex" justifyContent="center" marginTop={2}>
           <Button variant="contained" color="primary" size="large">
             查看所有开放职位
           </Button>
         </Box>
       </Box>
-      <Box maxWidth={800} margin={'0 auto'}>
+      <Box maxWidth={800} margin="0 auto">
         <Grid container spacing={2}>
           {mock.map((item, i) => (
             <Grid item xs={12} key={i}>
               <Box
                 component={Card}
-                variant={'outlined'}
-                bgcolor={'transparent'}
+                variant="outlined"
+                bgcolor="transparent"
                 sx={{
-                  '&:hover': {
+                  "&:hover": {
                     boxShadow: 2,
                   },
                 }}
               >
-                <Box
-                  component={CardContent}
-                  display={'flex'}
-                  alignItems={'center'}
-                >
+                <Box component={CardContent} display="flex" alignItems="center">
                   <Box
-                    display={'flex'}
-                    flexDirection={{ xs: 'column', sm: 'row' }}
-                    flex={'1 1 100%'}
-                    justifyContent={{ sm: 'space-between' }}
-                    alignItems={{ sm: 'center' }}
+                    display="flex"
+                    flexDirection={{ xs: "column", sm: "row" }}
+                    flex="1 1 100%"
+                    justifyContent={{ sm: "space-between" }}
+                    alignItems={{ sm: "center" }}
                   >
                     <Typography
-                      variant={'h6'}
+                      variant="h6"
                       fontWeight={700}
                       sx={{ marginBottom: { xs: 1, sm: 0 } }}
                     >
                       {item.title}
                     </Typography>
-                    <Typography variant={'subtitle1'} color={'text.secondary'}>
+                    <Typography variant="subtitle1" color="text.secondary">
                       {`${item.location} / ${item.type}`}
                     </Typography>
                   </Box>
-                  <Box marginLeft={2} color={'primary.main'}>
+                  <Box marginLeft={2} color="primary.main">
                     <Box
-                      component={'svg'}
+                      component="svg"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 20 20"
                       fill="currentColor"
@@ -119,6 +115,6 @@ const Jobs = (): JSX.Element => {
       </Box>
     </Box>
   );
-};
+}
 
 export default Jobs;

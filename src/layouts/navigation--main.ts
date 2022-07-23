@@ -27,12 +27,12 @@ const pages = {
     //   href: '/expo',
     // },
     {
-      title: 'Home',
-      href: '/',
+      title: "Home",
+      href: "/",
     },
     {
-      title: '后台管理系统',
-      href: '/admin/users',
+      title: "后台管理系统",
+      href: "/admin/users",
     },
     // {
     //   title: 'Service',
@@ -88,16 +88,16 @@ const pages = {
     // },
   ],
   dashboard: {
-    title: 'dashboard',
-    href: '/dashboard',
+    title: "dashboard",
+    href: "/dashboard",
   },
-  freshman:  {
-    title: '新生手册',
-    href: '/career',
+  freshman: {
+    title: "新生手册",
+    href: "/career",
   },
   news: {
-    title: '新闻',
-    href: '/news',
+    title: "新闻",
+    href: "/news",
   },
   // house: [
   //   // {
@@ -146,37 +146,37 @@ const pages = {
   //   // },
   // ],
   activity: {
-    title: '活动列表',
-    href: '/history-events',
+    title: "活动列表",
+    href: "/history-events",
   },
   jobs: [
     {
-      title: 'Careers',
-      href: '/career',
+      title: "Careers",
+      href: "/career",
     },
     {
-      title: '某一个职位',
-      href: '/career/6566',
+      title: "某一个职位",
+      href: "/career/6566",
     },
   ],
   about: [
     {
-      title: '关于我们',
-      href: '/about',
+      title: "关于我们",
+      href: "/about",
     },
     {
-      title: '合作伙伴',
-      href: '/partners',
+      title: "合作伙伴",
+      href: "/partners",
     },
     {
-      title: 'Research & Development Team',
-      href: '/research-development-team',
+      title: "Research & Development Team",
+      href: "/research-development-team",
     },
   ],
 
   contact: {
-    title: 'contact Us',
-    href: '/contactUs',
+    title: "contact Us",
+    href: "/contactUs",
   },
 };
 

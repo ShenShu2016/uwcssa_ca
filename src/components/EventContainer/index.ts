@@ -5,4 +5,4 @@
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/components/EventContainer/index.ts
  */
-export { default } from './EventContainer';
+export { default } from "./EventContainer";

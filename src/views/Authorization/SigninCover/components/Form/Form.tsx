@@ -9,7 +9,7 @@
  */
 /* eslint-disable react/no-unescaped-entities */
 
-import * as yup from 'yup';
+import * as yup from "yup";
 
 import {
   Alert,
@@ -20,70 +20,70 @@ import {
   Link as MUILink,
   TextField,
   Typography,
-} from '@mui/material';
-import { Link, useNavigate } from 'react-router-dom';
-import React, { useState } from 'react';
-import { googleSignIn, signIn } from 'redux/auth/authSlice';
+} from "@mui/material";
+import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { googleSignIn, signIn } from "redux/auth/authSlice";
 
-import { LazyLoadImage } from 'react-lazy-load-image-component';
-import { useAppDispatch } from 'redux/hooks';
-import { useFormik } from 'formik';
-import { useSnackbar } from 'notistack';
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import { useAppDispatch } from "redux/hooks";
+import { useFormik } from "formik";
+import { useSnackbar } from "notistack";
 
 const validationSchema = yup.object({
   username: yup
     .string()
     .trim()
-    .email('Please enter a valid email address')
-    .required('Email is required.'),
+    .email("Please enter a valid email address")
+    .required("Email is required."),
   password: yup
     .string()
-    .required('Please specify your password')
-    .min(8, 'Password must be at least 8 characters long.')
+    .required("Please specify your password")
+    .min(8, "Password must be at least 8 characters long.")
     .matches(
       /^(?=.*[a-z])(?=.*[A-Z])/,
-      'Must Contain One Uppercase, One Lowercase',
+      "Must Contain One Uppercase, One Lowercase",
     )
     .matches(
       // eslint-disable-next-line no-useless-escape
       /^[0-9A-Za-z]*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?][0-9a-zA-Z]*$/,
-      'Need one special character',
+      "Need one special character",
     )
-    .matches(/^(?=.{8,}$)\D*\d/, 'Must Contain One Number'),
+    .matches(/^(?=.{8,}$)\D*\d/, "Must Contain One Number"),
 });
 
-const Form = (): JSX.Element => {
+function Form(): JSX.Element {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const [signInError, setSignInError] = useState('');
+  const [signInError, setSignInError] = useState("");
   const { enqueueSnackbar } = useSnackbar();
   // const { signInError } = useAppSelector((state) => state.auth);
   const initialValues = {
-    username: '',
-    password: '',
+    username: "",
+    password: "",
   };
 
   const onSubmit = async (values) => {
-    const response: any = await dispatch(signIn(values)); //!! 这里有毛病，后期需要改一改
+    const response: any = await dispatch(signIn(values)); //! ! 这里有毛病，后期需要改一改
     console.log(response);
-    if (response.payload?.challengeName === 'NEW_PASSWORD_REQUIRED') {
-      navigate('/auth/PreSignUpResetPassWord');
+    if (response.payload?.challengeName === "NEW_PASSWORD_REQUIRED") {
+      navigate("/auth/PreSignUpResetPassWord");
       enqueueSnackbar(
         `欢迎回来: ${response.payload.challengeParam.userAttributes.name},由于网站更新请重置您的密码`,
         {
-          variant: 'info',
+          variant: "info",
         },
       );
-    } else if (response.meta?.requestStatus === 'fulfilled') {
+    } else if (response.meta?.requestStatus === "fulfilled") {
       enqueueSnackbar(
         `登录成功！ 欢迎回来 ${response.payload.attributes.name}`,
-        { variant: 'success' },
+        { variant: "success" },
       );
-      //!! viewroutes 中redirect 当auth 成功后，会直接给你转到/dashboard 所以这里写啥都不会改变任何东西
-      //navigate('/dashboard');
+      //! ! viewroutes 中redirect 当auth 成功后，会直接给你转到/dashboard 所以这里写啥都不会改变任何东西
+      // navigate('/dashboard');
     } else {
       setSignInError(response.error.message);
-      enqueueSnackbar(response.error.message, { variant: 'error' });
+      enqueueSnackbar(response.error.message, { variant: "error" });
       return false;
     }
 
@@ -92,7 +92,7 @@ const Form = (): JSX.Element => {
 
   const formik = useFormik({
     initialValues,
-    validationSchema: validationSchema,
+    validationSchema,
     onSubmit,
   });
 
@@ -104,11 +104,11 @@ const Form = (): JSX.Element => {
       <Box marginBottom={4}>
         <Typography
           sx={{
-            textTransform: 'uppercase',
-            fontWeight: 'medium',
+            textTransform: "uppercase",
+            fontWeight: "medium",
           }}
           gutterBottom
-          color={'text.secondary'}
+          color="text.secondary"
         >
           登录
         </Typography>
@@ -133,7 +133,7 @@ const Form = (): JSX.Element => {
             <TextField
               label="请输入邮箱 *"
               variant="outlined"
-              name={'username'}
+              name="username"
               type="email"
               fullWidth
               value={formik.values.username}
@@ -145,9 +145,9 @@ const Form = (): JSX.Element => {
           <Grid item xs={12}>
             <Box
               display="flex"
-              flexDirection={{ xs: 'column', sm: 'row' }}
-              alignItems={{ xs: 'stretched', sm: 'center' }}
-              justifyContent={'space-between'}
+              flexDirection={{ xs: "column", sm: "row" }}
+              alignItems={{ xs: "stretched", sm: "center" }}
+              justifyContent="space-between"
               width={1}
               marginBottom={2}
             >
@@ -156,12 +156,12 @@ const Form = (): JSX.Element => {
                   Enter your password
                 </Typography> */}
               </Box>
-              <Typography variant={'subtitle2'}>
+              <Typography variant="subtitle2">
                 <MUILink
                   component={Link}
-                  color={'primary'}
-                  to={'/auth/passwordReset'}
-                  underline={'none'}
+                  color="primary"
+                  to="/auth/passwordReset"
+                  underline="none"
                 >
                   忘记密码?
                 </MUILink>
@@ -170,8 +170,8 @@ const Form = (): JSX.Element => {
             <TextField
               label="请输入密码 *"
               variant="outlined"
-              name={'password'}
-              type={'password'}
+              name="password"
+              type="password"
               fullWidth
               value={formik.values.password}
               onChange={formik.handleChange}
@@ -185,21 +185,21 @@ const Form = (): JSX.Element => {
           <Grid item container xs={12}>
             <Box
               display="flex"
-              flexDirection={{ xs: 'column', sm: 'row' }}
-              alignItems={{ xs: 'stretched', sm: 'center' }}
-              justifyContent={'space-between'}
+              flexDirection={{ xs: "column", sm: "row" }}
+              alignItems={{ xs: "stretched", sm: "center" }}
+              justifyContent="space-between"
               width={1}
               maxWidth={600}
-              margin={'0 auto'}
+              margin="0 auto"
             >
               <Box marginBottom={{ xs: 1, sm: 0 }}>
-                <Typography variant={'subtitle2'}>
-                  首次使用？{' '}
+                <Typography variant="subtitle2">
+                  首次使用？{" "}
                   <MUILink
                     component={Link}
-                    color={'primary'}
-                    to={'/auth/signUp'}
-                    underline={'none'}
+                    color="primary"
+                    to="/auth/signUp"
+                    underline="none"
                   >
                     点我注册
                   </MUILink>
@@ -208,25 +208,25 @@ const Form = (): JSX.Element => {
               <Button
                 startIcon={
                   <LazyLoadImage
-                    src={'/assets/images/uwcssa_logo.svg'}
+                    src="/assets/images/uwcssa_logo.svg"
                     width="20px"
-                    style={{ marginRight: '0.5rem' }}
+                    style={{ marginRight: "0.5rem" }}
                   />
                 }
-                size={'large'}
-                variant={'contained'}
-                type={'submit'}
+                size="large"
+                variant="contained"
+                type="submit"
               >
                 登录
               </Button>
             </Box>
           </Grid>
           <Grid item container xs={12}>
-            <Divider sx={{ px: '1rem', width: '100%', lineHeight: '0' }}>
+            <Divider sx={{ px: "1rem", width: "100%", lineHeight: "0" }}>
               其他方式登录
             </Divider>
           </Grid>
-          <Grid item container xs={12} sx={{ justifyContent: 'center' }}>
+          <Grid item container xs={12} sx={{ justifyContent: "center" }}>
             {/* <Box
               display="flex"
               flexDirection={{ xs: 'column', sm: 'row' }}
@@ -237,8 +237,8 @@ const Form = (): JSX.Element => {
               margin={'0 auto'}
             > */}
             <Button
-              variant={'contained'}
-              color={'primary'}
+              variant="contained"
+              color="primary"
               onClick={() => handleGoogleSignIn()}
               sx={{ lineHeight: 1 }}
             >
@@ -247,7 +247,7 @@ const Form = (): JSX.Element => {
                 effect="blur"
                 src="/assets/images/icons/google-1.svg"
               />
-              <Box sx={{ fontSize: '12px', marginLeft: '1rem' }}>
+              <Box sx={{ fontSize: "12px", marginLeft: "1rem" }}>
                 Google登录
               </Box>
             </Button>
@@ -257,6 +257,6 @@ const Form = (): JSX.Element => {
       </form>
     </Box>
   );
-};
+}
 
 export default Form;

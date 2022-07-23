@@ -8,31 +8,31 @@
  *
  */
 
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import React from 'react';
-import Typography from '@mui/material/Typography';
-import { useTheme } from '@mui/material/styles';
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import React from "react";
+import Typography from "@mui/material/Typography";
+import { useTheme } from "@mui/material/styles";
 
-const Story = (): JSX.Element => {
+function Story(): JSX.Element {
   const theme = useTheme();
   return (
     <Box>
       <Grid container spacing={4}>
         <Grid item xs={12} md={6}>
-          <Typography fontWeight={700} variant={'h4'}>
+          <Typography fontWeight={700} variant="h4">
             A Word About Open-source
           </Typography>
-          <Typography variant={'h6'} marginTop={4} sx={{ fontStyle: 'italic' }}>
+          <Typography variant="h6" marginTop={4} sx={{ fontStyle: "italic" }}>
             “It is not our abilities that show what we truly are… it is our
             choices.”
           </Typography>
-          <Typography variant={'body1'}>
+          <Typography variant="body1">
             — Albus Dumbledore, Harry Potter & the Chamber of Secrets
           </Typography>
         </Grid>
         <Grid item xs={12} md={6}>
-          <Typography component={'p'} color={'text.secondary'} fontWeight={400}>
+          <Typography component="p" color="text.secondary" fontWeight={400}>
             We leverage our tech stack to reflect who we are: a fast-growing
             team committed to integrating with the latest and greatest - when it
             makes sense - in order to offer the best possible experience for our
@@ -74,6 +74,6 @@ const Story = (): JSX.Element => {
       </Grid>
     </Box>
   );
-};
+}
 
 export default Story;

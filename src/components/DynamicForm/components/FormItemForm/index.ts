@@ -8,4 +8,4 @@
  *
  */
 
-export { default } from './FormInputFieldComponent';
+export { default } from "./FormInputFieldComponent";

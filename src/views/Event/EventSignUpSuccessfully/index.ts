@@ -7,4 +7,4 @@
  * @Description:
  *
  */
-export { default } from './EventSignUpSuccessfully';
+export { default } from "./EventSignUpSuccessfully";

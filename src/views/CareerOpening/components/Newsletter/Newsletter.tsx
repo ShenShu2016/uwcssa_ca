@@ -8,14 +8,14 @@
  *
  */
 
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Grid from '@mui/material/Grid';
-import React from 'react';
-import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
+import React from "react";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
 
-const Newsletter = (): JSX.Element => {
+function Newsletter(): JSX.Element {
   return (
     <Box>
       <Grid container spacing={2}>
@@ -26,22 +26,22 @@ const Newsletter = (): JSX.Element => {
         </Grid>
         <Grid item xs={12} md={6}>
           <Box
-            component={'form'}
+            component="form"
             noValidate
             autoComplete="off"
             sx={{
-              '& .MuiInputBase-input.MuiOutlinedInput-input': {
-                bgcolor: 'background.paper',
+              "& .MuiInputBase-input.MuiOutlinedInput-input": {
+                bgcolor: "background.paper",
               },
             }}
           >
             <Box
               display="flex"
-              flexDirection={{ xs: 'column', sm: 'row' }}
-              alignItems={{ xs: 'stretched', sm: 'flex-start' }}
+              flexDirection={{ xs: "column", sm: "row" }}
+              alignItems={{ xs: "stretched", sm: "flex-start" }}
             >
               <Box
-                flex={'1 1 auto'}
+                flex="1 1 auto"
                 component={TextField}
                 label="Enter your email"
                 variant="outlined"
@@ -66,6 +66,6 @@ const Newsletter = (): JSX.Element => {
       </Grid>
     </Box>
   );
-};
+}
 
 export default Newsletter;

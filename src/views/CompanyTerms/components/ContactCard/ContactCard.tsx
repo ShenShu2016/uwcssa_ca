@@ -8,13 +8,13 @@
  *
  */
 
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import React from 'react';
-import Typography from '@mui/material/Typography';
-import { useTheme } from '@mui/material/styles';
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+import React from "react";
+import Typography from "@mui/material/Typography";
+import { useTheme } from "@mui/material/styles";
 
-const ContactCard = (): JSX.Element => {
+function ContactCard(): JSX.Element {
   const theme = useTheme();
 
   return (
@@ -26,15 +26,15 @@ const ContactCard = (): JSX.Element => {
       <Box padding={{ xs: 2, sm: 3 }}>
         <Typography
           sx={{
-            fontWeight: '700',
+            fontWeight: "700",
           }}
           gutterBottom
         >
           How can you contact us about this notice?
         </Typography>
         <Typography
-          variant={'body2'}
-          color={'text.secondary'}
+          variant="body2"
+          color="text.secondary"
           sx={{
             marginBottom: 2,
           }}
@@ -42,7 +42,7 @@ const ContactCard = (): JSX.Element => {
           If you have any questions or concerns about the privacy policy please
           contact us.
         </Typography>
-        <Typography variant={'subtitle2'}>
+        <Typography variant="subtitle2">
           hi@maccarianagency.com
           <br />
           via Gola 4
@@ -54,6 +54,6 @@ const ContactCard = (): JSX.Element => {
       </Box>
     </Box>
   );
-};
+}
 
 export default ContactCard;

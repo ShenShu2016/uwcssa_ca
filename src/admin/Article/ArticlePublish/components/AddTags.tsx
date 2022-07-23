@@ -6,15 +6,15 @@
  * @FilePath: /uwcssa_ca/src/admin/Article/ArticlePublish/components/AddTags.tsx
  */
 
-import { Box, Card, Chip, Input } from '@mui/material';
+import { Box, Card, Chip, Input } from "@mui/material";
 
-import DoneIcon from '@mui/icons-material/Done';
-import IconButton from '@mui/material/IconButton';
-import React from 'react';
-import { Tag } from '../ArticlePublish';
-import { styled } from '@mui/material/styles';
+import DoneIcon from "@mui/icons-material/Done";
+import IconButton from "@mui/material/IconButton";
+import React from "react";
+import { styled } from "@mui/material/styles";
+import { Tag } from "../ArticlePublish";
 
-const ListItem = styled('div')(({ theme }) => ({
+const ListItem = styled("div")(({ theme }) => ({
   marginRight: theme.spacing(),
   marginBottom: theme.spacing(),
 }));
@@ -30,7 +30,7 @@ interface AddTagProps {
 }
 
 const AddTags: React.FC<AddTagProps> = ({ addTag, removeTag, tags }) => {
-  const [tagInput, setTagInput] = React.useState<string>('');
+  const [tagInput, setTagInput] = React.useState<string>("");
 
   const handleDelete = (chipToDelete) => {
     removeTag(chipToDelete.tagID);
@@ -41,22 +41,22 @@ const AddTags: React.FC<AddTagProps> = ({ addTag, removeTag, tags }) => {
   };
 
   const handleTagInputKeyDown = (e) => {
-    if (e.code === 'Enter') {
+    if (e.code === "Enter") {
       addTagInner();
     }
   };
 
   const addTagInner = () => {
     addTag(tagInput);
-    setTagInput('');
+    setTagInput("");
   };
 
   return (
     <Card
       sx={{
         margin: 0,
-        p: '12px',
-        height: '25vh',
+        p: "12px",
+        height: "25vh",
       }}
       component="ul"
     >
@@ -75,25 +75,23 @@ const AddTags: React.FC<AddTagProps> = ({ addTag, removeTag, tags }) => {
       </Box>
       <Box
         sx={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          alignContent: 'flex-start',
-          height: '85%',
-          overflow: 'auto',
-          padding: '12px 8px',
+          display: "flex",
+          flexWrap: "wrap",
+          alignContent: "flex-start",
+          height: "85%",
+          overflow: "auto",
+          padding: "12px 8px",
         }}
       >
-        {tags.map((data, index) => {
-          return (
-            <ListItem key={data.tagID + index}>
-              <Chip
-                color="primary"
-                label={data.tagID}
-                onDelete={() => handleDelete(data)}
-              />
-            </ListItem>
-          );
-        })}
+        {tags.map((data, index) => (
+          <ListItem key={data.tagID + index}>
+            <Chip
+              color="primary"
+              label={data.tagID}
+              onDelete={() => handleDelete(data)}
+            />
+          </ListItem>
+        ))}
       </Box>
     </Card>
   );

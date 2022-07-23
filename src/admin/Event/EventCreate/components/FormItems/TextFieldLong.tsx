@@ -7,10 +7,10 @@
  * @FilePath: /uwcssa_ca/src/admin/Event/EventCreate/components/FormItems/TextFieldLong.tsx
  */
 
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import FieldLabel from '../FieldLabel';
-import { TextField } from '@mui/material';
+import { TextField } from "@mui/material";
+import FieldLabel from "../FieldLabel";
 
 interface TextFieldLongInfo {
   label?: string;
@@ -26,7 +26,7 @@ interface TextFieldLongProp {
 }
 
 const TextFieldLong: React.FC<TextFieldLongProp> = ({ item }) => {
-  const [value, setValue] = useState<string>('');
+  const [value, setValue] = useState<string>("");
 
   return (
     <>

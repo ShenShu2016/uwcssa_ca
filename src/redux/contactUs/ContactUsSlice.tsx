@@ -8,18 +8,18 @@
  *
  */
 
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-import API from '@aws-amplify/api';
-import { createContactUs } from 'graphql/mutations';
+import API from "@aws-amplify/api";
+import { createContactUs } from "graphql/mutations";
 
 export interface ContactUsState {
-  postContactUsStatus: 'idle' | 'loading' | 'failed' | 'succeed';
+  postContactUsStatus: "idle" | "loading" | "failed" | "succeed";
   postContactUsError: null | unknown;
 }
 
 const initialState: ContactUsState = {
-  postContactUsStatus: 'idle',
+  postContactUsStatus: "idle",
   postContactUsError: null,
 };
 
@@ -33,7 +33,7 @@ type ContactUs = {
 };
 
 export const postContactUs = createAsyncThunk(
-  'contactUs/postContactUs',
+  "contactUs/postContactUs",
   async (
     { createContactUsInput }: { createContactUsInput: ContactUs },
     { rejectWithValue },
@@ -45,10 +45,10 @@ export const postContactUs = createAsyncThunk(
           variables: {
             input: createContactUsInput,
           },
-          authMode: createContactUsInput.owner ? undefined : 'AWS_IAM',
+          authMode: createContactUsInput.owner ? undefined : "AWS_IAM",
         },
 
-        //graphqlOperation(createContactUs, { input: createContactUsInput }),
+        // graphqlOperation(createContactUs, { input: createContactUsInput }),
       );
     } catch (error) {
       console.log(error);
@@ -58,21 +58,21 @@ export const postContactUs = createAsyncThunk(
 );
 
 const contactUsSlice = createSlice({
-  name: 'contactUs',
+  name: "contactUs",
   initialState,
   reducers: {
-    //有API call 的不能放这里
+    // 有API call 的不能放这里
   },
   extraReducers(builder) {
     builder
       .addCase(postContactUs.pending, (state) => {
-        state.postContactUsStatus = 'loading';
+        state.postContactUsStatus = "loading";
       })
       .addCase(postContactUs.fulfilled, (state) => {
-        state.postContactUsStatus = 'succeed';
+        state.postContactUsStatus = "succeed";
       })
       .addCase(postContactUs.rejected, (state, action) => {
-        state.postContactUsStatus = 'failed';
+        state.postContactUsStatus = "failed";
         state.postContactUsError = action.payload;
       });
   },

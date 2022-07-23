@@ -8,4 +8,4 @@
  *
  */
 
-export { default } from './SidebarEvents';
+export { default } from "./SidebarEvents";

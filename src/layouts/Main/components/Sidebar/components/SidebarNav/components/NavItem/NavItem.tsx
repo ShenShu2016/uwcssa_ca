@@ -6,29 +6,29 @@
  * @FilePath: /uwcssa_ca/src/layouts/Main/components/Sidebar/components/SidebarNav/components/NavItem/NavItem.tsx
  */
 
-import React, { useEffect, useState } from 'react';
-import { alpha, useTheme } from '@mui/material/styles';
-import { matchPath, useLocation, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { alpha, useTheme } from "@mui/material/styles";
+import { matchPath, useLocation, useNavigate, Link } from "react-router-dom";
 
-import Accordion from '@mui/material/Accordion';
-import AccordionDetails from '@mui/material/AccordionDetails';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import Grid from '@mui/material/Grid';
-import { Link } from 'react-router-dom';
-import Typography from '@mui/material/Typography';
+import Accordion from "@mui/material/Accordion";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import Grid from "@mui/material/Grid";
+
+import Typography from "@mui/material/Typography";
 
 interface Props {
   title: string;
   items: Array<PageItem> | PageItem;
 }
 
-const NavItem = ({ title, items }: Props): JSX.Element => {
+function NavItem({ title, items }: Props): JSX.Element {
   const theme = useTheme();
   const navigate = useNavigate();
-  const [activeLink, setActiveLink] = useState('');
+  const [activeLink, setActiveLink] = useState("");
   const location = useLocation();
 
   useEffect(() => {
@@ -38,9 +38,8 @@ const NavItem = ({ title, items }: Props): JSX.Element => {
   const hasActiveLink = () => {
     if (items instanceof Array) {
       return items.find((i) => matchPath(i.href, activeLink));
-    } else {
-      return matchPath(items.href, activeLink);
     }
+    return matchPath(items.href, activeLink);
   };
 
   return (
@@ -49,7 +48,7 @@ const NavItem = ({ title, items }: Props): JSX.Element => {
         <Accordion
           disableGutters
           elevation={0}
-          sx={{ backgroundColor: 'transparent' }}
+          sx={{ backgroundColor: "transparent" }}
         >
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
@@ -59,7 +58,7 @@ const NavItem = ({ title, items }: Props): JSX.Element => {
           >
             <Typography
               fontWeight={hasActiveLink() ? 600 : 400}
-              color={hasActiveLink() ? 'primary' : 'text.primary'}
+              color={hasActiveLink() ? "primary" : "text.primary"}
             >
               {title}
             </Typography>
@@ -69,12 +68,12 @@ const NavItem = ({ title, items }: Props): JSX.Element => {
               {items.map((p, i) => (
                 <Grid item key={i} xs={12}>
                   <Button
-                    size={'large'}
+                    size="large"
                     component={Link}
                     to={p.href}
                     fullWidth
                     sx={{
-                      justifyContent: 'flex-start',
+                      justifyContent: "flex-start",
                       color:
                         activeLink === p.href
                           ? theme.palette.primary.main
@@ -82,7 +81,7 @@ const NavItem = ({ title, items }: Props): JSX.Element => {
                       backgroundColor:
                         activeLink === p.href
                           ? alpha(theme.palette.primary.main, 0.1)
-                          : 'transparent',
+                          : "transparent",
                       fontWeight: activeLink === p.href ? 600 : 400,
                     }}
                   >
@@ -90,14 +89,14 @@ const NavItem = ({ title, items }: Props): JSX.Element => {
                     {p.isNew && (
                       <Box
                         padding={0.5}
-                        display={'inline-flex'}
+                        display="inline-flex"
                         borderRadius={1}
-                        bgcolor={'primary.main'}
+                        bgcolor="primary.main"
                         marginLeft={2}
                       >
                         <Typography
-                          variant={'caption'}
-                          sx={{ color: 'common.white', lineHeight: 1 }}
+                          variant="caption"
+                          sx={{ color: "common.white", lineHeight: 1 }}
                         >
                           new
                         </Typography>
@@ -118,7 +117,7 @@ const NavItem = ({ title, items }: Props): JSX.Element => {
         >
           <Typography
             fontWeight={hasActiveLink() ? 600 : 400}
-            color={hasActiveLink() ? 'primary' : 'text.primary'}
+            color={hasActiveLink() ? "primary" : "text.primary"}
           >
             {title}
           </Typography>
@@ -126,6 +125,6 @@ const NavItem = ({ title, items }: Props): JSX.Element => {
       )}
     </Box>
   );
-};
+}
 
 export default NavItem;

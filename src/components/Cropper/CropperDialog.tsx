@@ -20,24 +20,24 @@ import {
   Typography,
   useMediaQuery,
   useTheme,
-} from '@mui/material';
-import React, { useRef, useState } from 'react';
-import { useAppDispatch, useAppSelector } from 'redux/hooks';
+} from "@mui/material";
+import React, { useRef, useState } from "react";
+import { useAppDispatch, useAppSelector } from "redux/hooks";
 
-import Cropper from 'react-easy-crop';
-import { PhotoCamera } from '@mui/icons-material';
-import { dataURLtoFile } from './conponents/CropperDialogContent/dataURLtoFile';
-import getCroppedImg from './conponents/CropperDialogContent/canvasUtils';
-import { getOwnerUserName } from 'redux/auth/authSlice';
-import { grey } from '@mui/material/colors';
-import { postUserImage } from 'redux/userImage/userImageSlice';
-import { updateUserProfileData } from 'redux/userProfile/userProfileSlice';
-import { v4 as uuid } from 'uuid';
+import Cropper from "react-easy-crop";
+import { PhotoCamera } from "@mui/icons-material";
+import { getOwnerUserName } from "redux/auth/authSlice";
+import { grey } from "@mui/material/colors";
+import { postUserImage } from "redux/userImage/userImageSlice";
+import { updateUserProfileData } from "redux/userProfile/userProfileSlice";
+import { v4 as uuid } from "uuid";
+import getCroppedImg from "./conponents/CropperDialogContent/canvasUtils";
+import { dataURLtoFile } from "./conponents/CropperDialogContent/dataURLtoFile";
 
 function readFile(file) {
   return new Promise((resolve) => {
     const reader = new FileReader();
-    reader.addEventListener('load', () => resolve(reader.result), false);
+    reader.addEventListener("load", () => resolve(reader.result), false);
     reader.readAsDataURL(file);
   });
 }
@@ -45,8 +45,8 @@ function readFile(file) {
 export default function CropperDialog() {
   const [open, setOpen] = useState(false);
   const theme = useTheme();
-  const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
-  const isSm = useMediaQuery(theme.breakpoints.up('sm'), {
+  const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
+  const isSm = useMediaQuery(theme.breakpoints.up("sm"), {
     defaultMatches: true,
   });
   const handleClickOpen = () => {
@@ -66,7 +66,7 @@ export default function CropperDialog() {
   const myUserProfile = useAppSelector(
     (state) => state.userProfile.myUserProfile,
   );
-  //console.log('myUserProfile', myUserProfile);
+  // console.log('myUserProfile', myUserProfile);
   const [loading, setLoading] = useState(false);
   const [avatarImgURL, setAvatarImgURL] = useState<string | undefined>(
     myUserProfile.avatarURL?.objectURL,
@@ -92,7 +92,7 @@ export default function CropperDialog() {
     setLoading(true);
     const canvas = await getCroppedImg(avatarImageSrc, croppedArea);
     console.log(canvas);
-    const canvasDataUrl = canvas.toDataURL('image/jpeg');
+    const canvasDataUrl = canvas.toDataURL("image/jpeg");
     // console.log(canvasDataUrl);
     const convertedUrlToFile = dataURLtoFile(
       canvasDataUrl,
@@ -100,7 +100,7 @@ export default function CropperDialog() {
     );
     console.log(convertedUrlToFile);
 
-    const targetTable = 'userProfile';
+    const targetTable = "userProfile";
     const response = await dispatch(
       postUserImage({
         targetTable,
@@ -110,8 +110,8 @@ export default function CropperDialog() {
         thumbnailWidth: 50,
       }),
     );
-    if (response.meta.requestStatus === 'fulfilled') {
-      console.log('response', response);
+    if (response.meta.requestStatus === "fulfilled") {
+      console.log("response", response);
       setAvatarImgURL(response.payload.objectURL);
       setLoading(false);
       setZoom(1);
@@ -139,11 +139,11 @@ export default function CropperDialog() {
   };
   return (
     <div>
-      <Box position={'absolute'} right={0} top={'70%'} sx={{ zIndex: 1 }}>
+      <Box position="absolute" right={0} top="70%" sx={{ zIndex: 1 }}>
         <IconButton
           sx={{
             backgroundColor: grey[300],
-            '&:hover, &.Mui-focusVisible': {
+            "&:hover, &.Mui-focusVisible": {
               backgroundColor: grey[400],
             },
           }}
@@ -153,108 +153,103 @@ export default function CropperDialog() {
         </IconButton>
       </Box>
 
-      <React.Fragment>
-        <Dialog fullScreen={fullScreen} open={open} onClose={handleClose}>
-          <DialogTitle>编辑 头像</DialogTitle>
-          <DialogContent
+      <Dialog fullScreen={fullScreen} open={open} onClose={handleClose}>
+        <DialogTitle>编辑 头像</DialogTitle>
+        <DialogContent
+          sx={{
+            backgroundColor: "rgba(0, 0, 0, 0.9)",
+            padding: "1rem",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <div style={{ marginBlock: "2.5rem" }} />
+          <Box
             sx={{
-              backgroundColor: 'rgba(0, 0, 0, 0.9)',
-              padding: '1rem',
-              alignItems: 'center',
-              justifyContent: 'center',
+              position: "relative",
+              width: "100%",
+              height: isSm ? 400 : 200,
+              background: "#333",
             }}
           >
-            <div style={{ marginBlock: '2.5rem' }} />
+            <Cropper
+              image={avatarImageSrc || avatarImgURL}
+              crop={crop}
+              zoom={zoom}
+              aspect={1}
+              cropShape="round"
+              showGrid={false}
+              onCropChange={setCrop}
+              onCropComplete={onCropComplete}
+              onZoomChange={setZoom}
+            />
+          </Box>
+          <Box>
             <Box
               sx={{
-                position: 'relative',
-                width: '100%',
-                height: isSm ? 400 : 200,
-                background: '#333',
+                display: "flex",
+                flex: "1",
+                alignItems: "center",
+                flexDirection: isSm ? null : "column",
+                margin: "1rem 0",
               }}
             >
-              <Cropper
-                image={avatarImageSrc ? avatarImageSrc : avatarImgURL}
-                crop={crop}
-                zoom={zoom}
-                aspect={1}
-                cropShape="round"
-                showGrid={false}
-                onCropChange={setCrop}
-                onCropComplete={onCropComplete}
-                onZoomChange={setZoom}
-              />
-            </Box>
-            <Box>
-              <Box
+              <Typography
+                variant="overline"
                 sx={{
-                  display: 'flex',
-                  flex: '1',
-                  alignItems: 'center',
-                  flexDirection: isSm ? null : 'column',
-                  margin: '1rem 0',
+                  minWidth: isSm ? 25 : 65,
+                  color: "white",
                 }}
               >
-                <Typography
-                  variant="overline"
-                  sx={{
-                    minWidth: isSm ? 25 : 65,
-                    color: 'white',
-                  }}
-                >
-                  缩放
-                </Typography>
-                <Slider
-                  style={{
-                    color: '#ffff',
-                    padding: '22px 0px',
-                    marginLeft: 16,
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    margin: '0 16px',
-                    minWidth: isSm ? '500px' : '200px',
-                  }}
-                  value={zoom}
-                  min={1}
-                  max={3}
-                  step={0.1}
-                  aria-labelledby="Zoom"
-                  onChange={(e, zoom) => setZoom(Number(zoom))}
-                  disabled={avatarImageSrc ? false : true}
-                />
-              </Box>
-            </Box>
-          </DialogContent>
-          <DialogActions>
-            <Button autoFocus onClick={noChange}>
-              取消
-            </Button>
-
-            {avatarImageSrc ? (
-              <Button
-                type={'submit'}
-                variant="contained"
+                缩放
+              </Typography>
+              <Slider
+                style={{
+                  color: "#ffff",
+                  padding: "22px 0px",
+                  marginLeft: 16,
+                  flexDirection: "row",
+                  alignItems: "center",
+                  margin: "0 16px",
+                  minWidth: isSm ? "500px" : "200px",
+                }}
+                value={zoom}
+                min={1}
+                max={3}
+                step={0.1}
+                aria-labelledby="Zoom"
+                onChange={(e, zoom) => setZoom(Number(zoom))}
                 disabled={!avatarImageSrc}
-                onClick={uploadAvatarImg}
-              >
-                保存头像
-              </Button>
-            ) : (
-              <>
-                <input
-                  type="file"
-                  accept="image/*"
-                  ref={inputAvatarRef}
-                  onChange={onAvatarImgFileChange}
-                  style={{ display: 'none' }}
-                />
-                <Button
-                  variant="text"
-                  onClick={triggerAvatarFileSelectPopup}
-                  // disabled={loading}
-                >
-                  上传头像
-                  {/* {loading && (
+              />
+            </Box>
+          </Box>
+        </DialogContent>
+        <DialogActions>
+          <Button autoFocus onClick={noChange}>
+            取消
+          </Button>
+
+          {avatarImageSrc ? (
+            <Button
+              type="submit"
+              variant="contained"
+              disabled={!avatarImageSrc}
+              onClick={uploadAvatarImg}
+            >
+              保存头像
+            </Button>
+          ) : (
+            <>
+              <input
+                type="file"
+                accept="image/*"
+                ref={inputAvatarRef}
+                onChange={onAvatarImgFileChange}
+                style={{ display: "none" }}
+              />
+              <Button variant="text" onClick={triggerAvatarFileSelectPopup}>
+                上传头像
+                {/* {loading && (
                   <CircularProgress
                     size={24}
                     sx={{
@@ -267,12 +262,11 @@ export default function CropperDialog() {
                     }}
                   />
                 )} */}
-                </Button>
-              </>
-            )}
-          </DialogActions>
-        </Dialog>
-      </React.Fragment>
+              </Button>
+            </>
+          )}
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }

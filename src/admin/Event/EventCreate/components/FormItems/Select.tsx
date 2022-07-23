@@ -7,11 +7,11 @@
  * @FilePath: /uwcssa_ca/src/admin/Event/EventCreate/components/FormItems/Select.tsx
  */
 
-import { MenuItem, TextField } from '@mui/material';
-import React, { useState } from 'react';
+import { MenuItem, TextField } from "@mui/material";
+import React, { useState } from "react";
 
-import FieldLabel from '../FieldLabel';
-import { FormType } from 'redux/form/formSlice';
+import { FormType } from "redux/form/formSlice";
+import FieldLabel from "../FieldLabel";
 
 interface SelectInfo {
   formSelectChoices?: string[];
@@ -29,7 +29,7 @@ interface SelectProp {
 
 const Select: React.FC<SelectProp> = ({ item }) => {
   const [value, setValue] = useState<string | string[]>(
-    item.formType === FormType.MultipleSelect ? [] : '',
+    item.formType === FormType.MultipleSelect ? [] : "",
   );
 
   return (

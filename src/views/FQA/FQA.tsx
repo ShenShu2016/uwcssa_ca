@@ -16,39 +16,39 @@ import {
   ListItem,
   ListItemAvatar,
   ListItemText,
-} from '@mui/material';
+} from "@mui/material";
 
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import Grid from '@mui/material/Grid';
-import React from 'react';
-import Typography from '@mui/material/Typography';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import { useTheme } from '@mui/material/styles';
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import Grid from "@mui/material/Grid";
+import React from "react";
+import Typography from "@mui/material/Typography";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
 
 const mock = [
   {
-    question: 'General settings',
-    answer: 'Motivation is the first step to success',
+    question: "General settings",
+    answer: "Motivation is the first step to success",
   },
   {
-    question: 'General settings',
-    answer: 'Motivation is the first step to success',
+    question: "General settings",
+    answer: "Motivation is the first step to success",
   },
   {
-    question: 'General settings',
-    answer: 'Motivation is the first step to success',
+    question: "General settings",
+    answer: "Motivation is the first step to success",
   },
 ];
 
-const Question = (): JSX.Element => {
+function Question(): JSX.Element {
   const theme = useTheme();
-  const isMd = useMediaQuery(theme.breakpoints.up('md'), {
+  const isMd = useMediaQuery(theme.breakpoints.up("md"), {
     defaultMatches: true,
   });
   const [expanded, setExpanded] = React.useState<string | false>(false);
@@ -61,18 +61,18 @@ const Question = (): JSX.Element => {
     <>
       <Box marginBottom={4}>
         <Typography
-          variant={'h4'}
+          variant="h4"
           gutterBottom
-          align={'center'}
+          align="center"
           sx={{ fontWeight: 700 }}
         >
           Frequently Asked Questions
         </Typography>
         <Typography
-          variant={'h6'}
-          component={'p'}
-          color={'text.secondary'}
-          align={'center'}
+          variant="h6"
+          component="p"
+          color="text.secondary"
+          align="center"
         >
           We are here to help
         </Typography>
@@ -95,18 +95,18 @@ const Question = (): JSX.Element => {
                 sx={{
                   borderBottom: `1px solid ${theme.palette.divider}`,
                   backgroundColor:
-                    theme.palette.mode === 'dark'
-                      ? 'rgba(255, 255, 255, .05)'
-                      : 'rgba(0, 0, 0, .03)',
-                  '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
-                    transform: 'rotate(90deg)',
+                    theme.palette.mode === "dark"
+                      ? "rgba(255, 255, 255, .05)"
+                      : "rgba(0, 0, 0, .03)",
+                  "& .MuiAccordionSummary-expandIconWrapper.Mui-expanded": {
+                    transform: "rotate(90deg)",
                   },
-                  '& .MuiAccordionSummary-content': {
+                  "& .MuiAccordionSummary-content": {
                     marginLeft: theme.spacing(1),
                   },
                 }}
               >
-                <Typography variant="h6" sx={{ width: '33%', flexShrink: 0 }}>
+                <Typography variant="h6" sx={{ width: "33%", flexShrink: 0 }}>
                   {item.question}
                 </Typography>
               </AccordionSummary>
@@ -119,6 +119,6 @@ const Question = (): JSX.Element => {
       </Grid>
     </>
   );
-};
+}
 
 export default Question;

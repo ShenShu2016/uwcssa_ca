@@ -1,17 +1,17 @@
 /* eslint-disable react/no-unescaped-entities */
 
-import Avatar from '@mui/material/Avatar';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import React from 'react';
-import Typography from '@mui/material/Typography';
-import { useTheme } from '@mui/material/styles';
+import Avatar from "@mui/material/Avatar";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import React from "react";
+import Typography from "@mui/material/Typography";
+import { useTheme } from "@mui/material/styles";
 
 const mock = [
   {
-    title: 'Web design',
+    title: "Web design",
     subtitle:
-      'We design and develop beautiful, lightning fast, scalable, and marketing-focused websites tailored to grow your business.',
+      "We design and develop beautiful, lightning fast, scalable, and marketing-focused websites tailored to grow your business.",
     icon: (
       <svg
         height={24}
@@ -31,9 +31,9 @@ const mock = [
     ),
   },
   {
-    title: 'UI / UX Design',
+    title: "UI / UX Design",
     subtitle:
-      'We craft great user centered interfaces for web and mobile apps. We ensure to deliver intuitive and seamless experiences.',
+      "We craft great user centered interfaces for web and mobile apps. We ensure to deliver intuitive and seamless experiences.",
     icon: (
       <svg
         height={24}
@@ -53,9 +53,9 @@ const mock = [
     ),
   },
   {
-    title: 'Product Design',
+    title: "Product Design",
     subtitle:
-      'We help you to carefully improve your digital product to deliver a great user experience, grow its user base and increase retention.',
+      "We help you to carefully improve your digital product to deliver a great user experience, grow its user base and increase retention.",
     icon: (
       <svg
         height={24}
@@ -75,9 +75,9 @@ const mock = [
     ),
   },
   {
-    title: 'Branding',
+    title: "Branding",
     subtitle:
-      'We transform businesses into brands through high quality brand identity design.',
+      "We transform businesses into brands through high quality brand identity design.",
     icon: (
       <svg
         height={24}
@@ -97,9 +97,9 @@ const mock = [
     ),
   },
   {
-    title: 'Optimization',
+    title: "Optimization",
     subtitle:
-      'We help you optimize your website or mobile app to increase your conversion rates.',
+      "We help you optimize your website or mobile app to increase your conversion rates.",
     icon: (
       <svg
         height={24}
@@ -119,9 +119,9 @@ const mock = [
     ),
   },
   {
-    title: 'Automation',
+    title: "Automation",
     subtitle:
-      'We help your business gain leverage and efficiency through smart automation.',
+      "We help your business gain leverage and efficiency through smart automation.",
     icon: (
       <svg
         height={24}
@@ -142,35 +142,35 @@ const mock = [
   },
 ];
 
-const Features = (): JSX.Element => {
+function Features(): JSX.Element {
   const theme = useTheme();
   return (
     <Box>
       <Box marginBottom={4}>
         <Typography
           sx={{
-            textTransform: 'uppercase',
-            fontWeight: 'medium',
+            textTransform: "uppercase",
+            fontWeight: "medium",
           }}
           gutterBottom
-          color={'text.secondary'}
-          align={'center'}
+          color="text.secondary"
+          align="center"
         >
           WHAT WE DO?
         </Typography>
         <Typography
-          variant={'h4'}
+          variant="h4"
           gutterBottom
-          align={'center'}
+          align="center"
           sx={{ fontWeight: 700 }}
         >
           We craft beautiful websites and digital products
         </Typography>
         <Typography
-          variant={'h6'}
-          component={'p'}
-          color={'text.secondary'}
-          align={'center'}
+          variant="h6"
+          component="p"
+          color="text.secondary"
+          align="center"
         >
           We design, develop and launch websites and products for startups,
           companies and ourselves.
@@ -183,15 +183,15 @@ const Features = (): JSX.Element => {
               <Box
                 width={1}
                 height={1}
-                data-aos={'fade-up'}
+                data-aos="fade-up"
                 data-aos-delay={i * 100}
                 data-aos-offset={100}
                 data-aos-duration={600}
               >
                 <Box
-                  display={'flex'}
-                  flexDirection={'column'}
-                  alignItems={'flex-start'}
+                  display="flex"
+                  flexDirection="column"
+                  alignItems="flex-start"
                 >
                   <Box
                     component={Avatar}
@@ -204,7 +204,7 @@ const Features = (): JSX.Element => {
                     {item.icon}
                   </Box>
                   <Typography
-                    variant={'h6'}
+                    variant="h6"
                     gutterBottom
                     sx={{ fontWeight: 700 }}
                   >
@@ -221,6 +221,6 @@ const Features = (): JSX.Element => {
       </Box>
     </Box>
   );
-};
+}
 
 export default Features;

@@ -8,27 +8,27 @@
  *
  */
 
-import { Action, ThunkAction, configureStore } from '@reduxjs/toolkit';
+import { Action, ThunkAction, configureStore } from "@reduxjs/toolkit";
 
-import addressReducer from './address/addressSlice';
-import alertReducer from './alert/alertSlice';
-import articleReducer from './article/articleSlice';
-import authReducer from './auth/authSlice';
-import commentReducer from './comment/commentSlice';
-import contactUsReducer from './contactUs/ContactUsSlice';
-import countReducer from './count/countSlice';
-import eventParticipantReducer from './eventParticipant/eventParticipantSlice';
-import eventReducer from './event/eventSlice';
-import formReducer from './form/formSlice';
-import likeReducer from './like/likeSlice';
-import researchDevelopmentTeamReducer from './researchDevelopmentTeam/researchDevelopmentTeamSlice';
-import resumeReducer from './resume/resumeSlice';
-import tagReducer from './tag/tagSlice';
-import userImageReducer from './userImage/userImageSlice';
-import userProfileReducer from './userProfile/userProfileSlice';
-import uwcssaCareerReducer from './uwcssaCareer/uwcssaCareerSlice';
-import uwcssaDepartmentReducer from './uwcssaDepartment/uwcssaDepartmentSlice';
-import uwcssaMemberReducer from './uwcssaMember/uwcssaMemberSlice';
+import addressReducer from "./address/addressSlice";
+import alertReducer from "./alert/alertSlice";
+import articleReducer from "./article/articleSlice";
+import authReducer from "./auth/authSlice";
+import commentReducer from "./comment/commentSlice";
+import contactUsReducer from "./contactUs/ContactUsSlice";
+import countReducer from "./count/countSlice";
+import eventParticipantReducer from "./eventParticipant/eventParticipantSlice";
+import eventReducer from "./event/eventSlice";
+import formReducer from "./form/formSlice";
+import likeReducer from "./like/likeSlice";
+import researchDevelopmentTeamReducer from "./researchDevelopmentTeam/researchDevelopmentTeamSlice";
+import resumeReducer from "./resume/resumeSlice";
+import tagReducer from "./tag/tagSlice";
+import userImageReducer from "./userImage/userImageSlice";
+import userProfileReducer from "./userProfile/userProfileSlice";
+import uwcssaCareerReducer from "./uwcssaCareer/uwcssaCareerSlice";
+import uwcssaDepartmentReducer from "./uwcssaDepartment/uwcssaDepartmentSlice";
+import uwcssaMemberReducer from "./uwcssaMember/uwcssaMemberSlice";
 
 export const store = configureStore({
   reducer: {
@@ -53,7 +53,7 @@ export const store = configureStore({
     tag: tagReducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({ serializableCheck: false }), //https://stackoverflow.com/questions/61704805/getting-an-error-a-non-serializable-value-was-detected-in-the-state-when-using,
+    getDefaultMiddleware({ serializableCheck: false }), // https://stackoverflow.com/questions/61704805/getting-an-error-a-non-serializable-value-was-detected-in-the-state-when-using,
 });
 
 export type AppDispatch = typeof store.dispatch;

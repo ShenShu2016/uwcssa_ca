@@ -7,51 +7,51 @@
  * @Description:
  *
  */
-import React, { useState } from 'react';
-import { alpha, useTheme } from '@mui/material/styles';
+import React, { useState } from "react";
+import { alpha, useTheme } from "@mui/material/styles";
 
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Container from 'components/Container';
-import { FeedbackForm } from './components';
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Container from "components/Container";
+import { FeedbackForm } from "./components";
 
-const CommentDialog = (): JSX.Element => {
+function CommentDialog(): JSX.Element {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
 
   return (
-    <Container display={'flex'} justifyContent={'center'} alignItems={'center'}>
+    <Container display="flex" justifyContent="center" alignItems="center">
       <Box maxWidth={320} width={1}>
         <Box
           sx={{
             borderRadius: 2,
             width: 1,
             height: 380,
-            bgcolor: 'divider',
+            bgcolor: "divider",
             marginBottom: 2,
           }}
         />
         <Box
           sx={{
             borderRadius: 2,
-            width: '80%',
+            width: "80%",
             height: 4,
-            bgcolor: 'divider',
+            bgcolor: "divider",
             marginBottom: 1,
           }}
         />
         <Box
           sx={{
             borderRadius: 2,
-            width: '60%',
+            width: "60%",
             height: 4,
-            bgcolor: 'divider',
+            bgcolor: "divider",
             marginBottom: 2,
           }}
         />
         <Button
-          color={'primary'}
-          size={'large'}
+          color="primary"
+          size="large"
           fullWidth
           sx={{
             bgcolor: alpha(theme.palette.primary.light, 0.1),
@@ -80,6 +80,6 @@ const CommentDialog = (): JSX.Element => {
       </Box>
     </Container>
   );
-};
+}
 
 export default CommentDialog;

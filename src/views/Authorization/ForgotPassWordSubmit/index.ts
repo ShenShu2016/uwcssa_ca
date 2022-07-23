@@ -7,4 +7,4 @@
  * @Description:
  *
  */
-export { default } from './ForgotPassWordSubmit';
+export { default } from "./ForgotPassWordSubmit";

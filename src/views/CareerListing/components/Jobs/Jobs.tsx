@@ -1,88 +1,88 @@
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import FormControl from '@mui/material/FormControl';
-import Grid from '@mui/material/Grid';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import React from 'react';
-import Select from '@mui/material/Select';
-import Typography from '@mui/material/Typography';
-import { useTheme } from '@mui/material/styles';
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import FormControl from "@mui/material/FormControl";
+import Grid from "@mui/material/Grid";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import React from "react";
+import Select from "@mui/material/Select";
+import Typography from "@mui/material/Typography";
+import { useTheme } from "@mui/material/styles";
 
 export const mock = [
   {
-    title: 'Front-End Developer',
-    location: 'Madrid',
-    type: 'Remote',
-    team: 'Consumer',
-    subtitle: 'Responsible for design systems and brand management.',
+    title: "Front-End Developer",
+    location: "Madrid",
+    type: "Remote",
+    team: "Consumer",
+    subtitle: "Responsible for design systems and brand management.",
   },
   {
-    title: 'Community Manager',
-    location: 'Paris',
-    type: 'Full time',
-    team: 'Consulting',
-    subtitle: 'Responsible for creating life in our apps.',
+    title: "Community Manager",
+    location: "Paris",
+    type: "Full time",
+    team: "Consulting",
+    subtitle: "Responsible for creating life in our apps.",
   },
   {
-    title: 'UX/UI Designer',
-    location: 'Yerevan',
-    type: 'Part time',
-    team: 'Internal tools',
-    subtitle: 'Help us make the best decisions with qualitative experiments.',
+    title: "UX/UI Designer",
+    location: "Yerevan",
+    type: "Part time",
+    team: "Internal tools",
+    subtitle: "Help us make the best decisions with qualitative experiments.",
   },
   {
-    title: 'Front-End Developer',
-    location: 'Madrid',
-    type: 'Remote',
-    team: 'Internal tools',
-    subtitle: 'Responsible for design systems and brand management.',
+    title: "Front-End Developer",
+    location: "Madrid",
+    type: "Remote",
+    team: "Internal tools",
+    subtitle: "Responsible for design systems and brand management.",
   },
   {
-    title: 'Community Manager',
-    location: 'Paris',
-    type: 'Full time',
-    team: 'Consulting',
-    subtitle: 'Responsible for creating life in our apps.',
+    title: "Community Manager",
+    location: "Paris",
+    type: "Full time",
+    team: "Consulting",
+    subtitle: "Responsible for creating life in our apps.",
   },
   {
-    title: 'UX/UI Designer',
-    location: 'Yerevan',
-    type: 'Part time',
-    team: 'Consumer',
-    subtitle: 'Help us make the best decisions with qualitative experiments.',
+    title: "UX/UI Designer",
+    location: "Yerevan",
+    type: "Part time",
+    team: "Consumer",
+    subtitle: "Help us make the best decisions with qualitative experiments.",
   },
   {
-    title: 'Front-End Developer',
-    location: 'Madrid',
-    type: 'Remote',
-    team: 'Consumer',
-    subtitle: 'Responsible for design systems and brand management.',
+    title: "Front-End Developer",
+    location: "Madrid",
+    type: "Remote",
+    team: "Consumer",
+    subtitle: "Responsible for design systems and brand management.",
   },
   {
-    title: 'Community Manager',
-    location: 'Paris',
-    type: 'Full time',
-    team: 'Consulting',
-    subtitle: 'Responsible for creating life in our apps.',
+    title: "Community Manager",
+    location: "Paris",
+    type: "Full time",
+    team: "Consulting",
+    subtitle: "Responsible for creating life in our apps.",
   },
 ];
 
-const Jobs = (): JSX.Element => {
+function Jobs(): JSX.Element {
   const theme = useTheme();
   return (
     <Box>
       <Box marginBottom={4}>
         <Typography
-          align={'center'}
-          color={'text.secondary'}
-          sx={{ textTransform: 'uppercase' }}
-          variant={'subtitle2'}
+          align="center"
+          color="text.secondary"
+          sx={{ textTransform: "uppercase" }}
+          variant="subtitle2"
           fontWeight={600}
         >
           Open positions
         </Typography>
-        <Typography fontWeight={700} variant={'h4'} align={'center'}>
+        <Typography fontWeight={700} variant="h4" align="center">
           Current job openings
         </Typography>
       </Box>
@@ -90,7 +90,7 @@ const Jobs = (): JSX.Element => {
         container
         spacing={4}
         sx={{
-          '.MuiOutlinedInput-root': {
+          ".MuiOutlinedInput-root": {
             background: theme.palette.background.paper,
           },
         }}
@@ -102,10 +102,10 @@ const Jobs = (): JSX.Element => {
               <MenuItem value="">
                 <em>All roles</em>
               </MenuItem>
-              <MenuItem value={'design'}>Design</MenuItem>
-              <MenuItem value={'engineering'}>Engineering</MenuItem>
-              <MenuItem value={'product'}>Product</MenuItem>
-              <MenuItem value={'support'}>Support</MenuItem>
+              <MenuItem value="design">Design</MenuItem>
+              <MenuItem value="engineering">Engineering</MenuItem>
+              <MenuItem value="product">Product</MenuItem>
+              <MenuItem value="support">Support</MenuItem>
             </Select>
           </FormControl>
         </Grid>
@@ -116,9 +116,9 @@ const Jobs = (): JSX.Element => {
               <MenuItem value="">
                 <em>All teams</em>
               </MenuItem>
-              <MenuItem value={'consumer'}>Consumer</MenuItem>
-              <MenuItem value={'consulting'}>Consulting</MenuItem>
-              <MenuItem value={'internal-tools'}>Internal tools</MenuItem>
+              <MenuItem value="consumer">Consumer</MenuItem>
+              <MenuItem value="consulting">Consulting</MenuItem>
+              <MenuItem value="internal-tools">Internal tools</MenuItem>
             </Select>
           </FormControl>
         </Grid>
@@ -134,40 +134,40 @@ const Jobs = (): JSX.Element => {
               <MenuItem value="">
                 <em>All locations</em>
               </MenuItem>
-              <MenuItem value={'milan'}>Milan</MenuItem>
-              <MenuItem value={'yerevan'}>Yerevan</MenuItem>
-              <MenuItem value={'paris'}>Paris</MenuItem>
+              <MenuItem value="milan">Milan</MenuItem>
+              <MenuItem value="yerevan">Yerevan</MenuItem>
+              <MenuItem value="paris">Paris</MenuItem>
             </Select>
           </FormControl>
         </Grid>
       </Grid>
       <Box
-        display={'flex'}
-        flexDirection={{ xs: 'column', sm: 'row' }}
-        flex={'1 1 100%'}
-        justifyContent={{ sm: 'space-between' }}
-        alignItems={{ xs: 'flex-start', sm: 'center' }}
+        display="flex"
+        flexDirection={{ xs: "column", sm: "row" }}
+        flex="1 1 100%"
+        justifyContent={{ sm: "space-between" }}
+        alignItems={{ xs: "flex-start", sm: "center" }}
         marginY={4}
       >
         <Box marginBottom={{ xs: 1, sm: 0 }}>
-          <Typography variant={'h6'} fontWeight={700}>
+          <Typography variant="h6" fontWeight={700}>
             Design & UX, Engineering
           </Typography>
-          <Typography color={'text.secondary'}>
+          <Typography color="text.secondary">
             User experience and design are top priorities at theFront.
           </Typography>
         </Box>
         <Box
           paddingY={1 / 2}
           paddingX={1}
-          bgcolor={'secondary.main'}
+          bgcolor="secondary.main"
           borderRadius={2}
           marginRight={1}
         >
           <Typography
-            variant={'caption'}
+            variant="caption"
             fontWeight={700}
-            sx={{ color: 'common.black' }}
+            sx={{ color: "common.black" }}
           >
             {mock.length} openings
           </Typography>
@@ -187,28 +187,28 @@ const Jobs = (): JSX.Element => {
             key={i}
             sx={{
               borderBottom: `1px solid ${theme.palette.divider}`,
-              '&:last-child': {
+              "&:last-child": {
                 borderBottom: 0,
               },
             }}
           >
-            <Box padding={2} display={'flex'} alignItems={'center'}>
+            <Box padding={2} display="flex" alignItems="center">
               <Box
-                display={'flex'}
-                flexDirection={{ xs: 'column', sm: 'row' }}
-                flex={'1 1 100%'}
-                justifyContent={{ sm: 'space-between' }}
-                alignItems={{ sm: 'center' }}
+                display="flex"
+                flexDirection={{ xs: "column", sm: "row" }}
+                flex="1 1 100%"
+                justifyContent={{ sm: "space-between" }}
+                alignItems={{ sm: "center" }}
               >
                 <Box marginBottom={{ xs: 1, sm: 0 }}>
-                  <Typography variant={'subtitle1'} fontWeight={700}>
+                  <Typography variant="subtitle1" fontWeight={700}>
                     {item.title}
                   </Typography>
-                  <Typography color={'text.secondary'}>
+                  <Typography color="text.secondary">
                     {item.subtitle}
                   </Typography>
                 </Box>
-                <Typography color={'text.secondary'}>
+                <Typography color="text.secondary">
                   {`${item.team} / ${item.location}`}
                 </Typography>
               </Box>
@@ -219,7 +219,7 @@ const Jobs = (): JSX.Element => {
                   size="small"
                   endIcon={
                     <Box
-                      component={'svg'}
+                      component="svg"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 20 20"
                       fill="currentColor"
@@ -243,6 +243,6 @@ const Jobs = (): JSX.Element => {
       </Grid>
     </Box>
   );
-};
+}
 
 export default Jobs;

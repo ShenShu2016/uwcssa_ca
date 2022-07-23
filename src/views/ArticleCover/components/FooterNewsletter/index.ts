@@ -7,4 +7,4 @@
  * @Description:
  *
  */
-export { default } from './FooterNewsletter';
+export { default } from "./FooterNewsletter";

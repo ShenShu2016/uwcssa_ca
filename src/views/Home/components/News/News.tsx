@@ -8,41 +8,41 @@
  *
  */
 
-import './index.css';
+import "./index.css";
 
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 import {
   fetchArticleList,
   selectAllArticles,
-} from 'redux/article/articleSlice';
-import { useAppDispatch, useAppSelector } from 'redux/hooks';
+} from "redux/article/articleSlice";
+import { useAppDispatch, useAppSelector } from "redux/hooks";
 
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Grid from '@mui/material/Grid';
-import { Link } from 'react-router-dom';
-import Typography from '@mui/material/Typography';
-import { getAuthState } from 'redux/auth/authSlice';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import { useTheme } from '@mui/material/styles';
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Grid from "@mui/material/Grid";
+import { Link } from "react-router-dom";
+import Typography from "@mui/material/Typography";
+import { getAuthState } from "redux/auth/authSlice";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
 
-const News = (): JSX.Element => {
+function News(): JSX.Element {
   const theme = useTheme();
-  const isMd = useMediaQuery(theme.breakpoints.up('md'), {
+  const isMd = useMediaQuery(theme.breakpoints.up("md"), {
     defaultMatches: true,
   });
   const dispatch = useAppDispatch();
-  const isAuth = useAppSelector(getAuthState); //看一下Auth的选项他有可能会返回null 或者false 现在前面没有load 好user 就不让你进了，所以有可能不需要 ！==null的判断了
+  const isAuth = useAppSelector(getAuthState); // 看一下Auth的选项他有可能会返回null 或者false 现在前面没有load 好user 就不让你进了，所以有可能不需要 ！==null的判断了
   const articles = useAppSelector(selectAllArticles); // redux 有这种用法
   const { fetchArticleListStatus } = useAppSelector((state) => state.article);
 
   useEffect(() => {
     const getArticles = async () => {
-      if (isAuth !== null && fetchArticleListStatus === 'idle') {
+      if (isAuth !== null && fetchArticleListStatus === "idle") {
         await dispatch(
           fetchArticleList({
             isAuth,
@@ -57,18 +57,18 @@ const News = (): JSX.Element => {
     <Box>
       <Box marginBottom={4}>
         <Typography
-          variant={'h4'}
+          variant="h4"
           gutterBottom
-          align={'center'}
+          align="center"
           sx={{ fontWeight: 700 }}
         >
           最新资讯
         </Typography>
         <Typography
-          variant={'h6'}
-          component={'p'}
-          color={'text.secondary'}
-          align={'center'}
+          variant="h6"
+          component="p"
+          color="text.secondary"
+          align="center"
         >
           随点随看 信息快充
         </Typography>
@@ -88,21 +88,21 @@ const News = (): JSX.Element => {
               >
                 <Box
                   component={Card}
-                  display={'flex'}
-                  flexDirection={{ xs: 'column', sm: 'row' }}
+                  display="flex"
+                  flexDirection={{ xs: "column", sm: "row" }}
                 >
                   <CardMedia
                     title={item.title}
                     image={
                       item.coverPageImgURL ||
-                      'https://uwcssabucket53243-master.s3.us-east-2.amazonaws.com/public/user/BackGround/6d328ddc-08d7-4f7d-8527-2173349796a7.jpg'
+                      "https://uwcssabucket53243-master.s3.us-east-2.amazonaws.com/public/user/BackGround/6d328ddc-08d7-4f7d-8527-2173349796a7.jpg"
                     }
                     sx={{
-                      height: { xs: 240, sm: 'auto' },
+                      height: { xs: 240, sm: "auto" },
                       width: { xs: 1, sm: 300 },
                     }}
                   />
-                  <CardContent sx={{ width: { xs: '100%', sm: '60%' } }}>
+                  <CardContent sx={{ width: { xs: "100%", sm: "60%" } }}>
                     <Box>
                       <Typography
                         variant="h6"
@@ -119,7 +119,7 @@ const News = (): JSX.Element => {
                         {item.coverPageDescription}
                       </Typography>
                     </Box>
-                    <CardActions sx={{ justifyContent: 'flex-end' }}>
+                    <CardActions sx={{ justifyContent: "flex-end" }}>
                       <Button component={Link} to={`/article/${item.id}`}>
                         Read More
                       </Button>
@@ -164,10 +164,10 @@ const News = (): JSX.Element => {
                     variant="contained"
                     color="primary"
                     size="large"
-                    onClick={() => window.open('/news')}
+                    onClick={() => window.open("/news")}
                     endIcon={
                       <Box
-                        component={'svg'}
+                        component="svg"
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"
@@ -194,6 +194,6 @@ const News = (): JSX.Element => {
       </Grid>
     </Box>
   );
-};
+}
 
 export default News;

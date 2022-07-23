@@ -8,14 +8,14 @@
  *
  */
 
-import { Box, Divider } from '@mui/material';
-import { Features, Hero, Partners, Story, Team } from './components';
+import { Box, Divider } from "@mui/material";
 
-import Container from 'components/Container';
-import React from 'react';
-import { Work } from '@mui/icons-material';
+import Container from "components/Container";
+import React from "react";
+import { Work } from "@mui/icons-material";
+import { Features, Hero, Partners, Story, Team } from "./components";
 
-const ResearchDevelopment = (): JSX.Element => {
+function ResearchDevelopment(): JSX.Element {
   return (
     <Box>
       <Hero />
@@ -26,21 +26,21 @@ const ResearchDevelopment = (): JSX.Element => {
       <Container>
         <Story />
       </Container>
-      <Box bgcolor={'primary.main'}>
-        <Container paddingX={'0 !important'} maxWidth={1}>
+      <Box bgcolor="primary.main">
+        <Container paddingX="0 !important" maxWidth={1}>
           <Partners />
         </Container>
       </Box>
       <Container>
         <Features />
       </Container>
-      <Container maxWidth={'800px !important'}>
+      <Container maxWidth="800px !important">
         <Divider />
       </Container>
       <Container>
         <Work />
       </Container>
-      <Container maxWidth={'800px !important'}>
+      <Container maxWidth="800px !important">
         <Divider />
       </Container>
       <Container>
@@ -48,6 +48,6 @@ const ResearchDevelopment = (): JSX.Element => {
       </Container>
     </Box>
   );
-};
+}
 
 export default ResearchDevelopment;

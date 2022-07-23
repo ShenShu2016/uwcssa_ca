@@ -16,39 +16,39 @@ import {
   LinearProgress,
   Typography,
   styled,
-} from '@mui/material';
-import React, { useEffect, useState } from 'react';
-import { getAuthState, getOwnerUserName } from 'redux/auth/authSlice';
-import { useAppDispatch, useAppSelector } from 'redux/hooks';
+} from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { getAuthState, getOwnerUserName } from "redux/auth/authSlice";
+import { useAppDispatch, useAppSelector } from "redux/hooks";
 
-import ArticleContainer from 'components/ArticleContainer';
-import EventContainer from 'components/EventContainer';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import JoinedEvent from './components/JoinedEvent';
-import Section from './components/Section';
-import UserCardGrid from 'components/UserCardGrid';
-import { fetchArticleList } from 'redux/article/articleSlice';
-import { fetchEventList } from 'redux/event/eventSlice';
+import ArticleContainer from "components/ArticleContainer";
+import EventContainer from "components/EventContainer";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import UserCardGrid from "components/UserCardGrid";
+import { fetchArticleList } from "redux/article/articleSlice";
+import { fetchEventList } from "redux/event/eventSlice";
+import Section from "./components/Section";
+import JoinedEvent from "./components/JoinedEvent";
 
 // import Entries from './components/Entries';
 
 const StickyAccordion = styled(AccordionSummary)(() => ({
-  position: 'sticky',
-  top: '58px',
+  position: "sticky",
+  top: "58px",
   zIndex: 100,
-  background: '#ffffff',
+  background: "#ffffff",
 }));
 
-const Dashboard = (): React.ReactElement => {
+function Dashboard(): React.ReactElement {
   const dispatch = useAppDispatch();
-  const isAuth = useAppSelector(getAuthState); //看一下Auth的选项他有可能会返回null 或者false 现在前面没有load 好user 就不让你进了，所以有可能不需要 ！==null的判断了
+  const isAuth = useAppSelector(getAuthState); // 看一下Auth的选项他有可能会返回null 或者false 现在前面没有load 好user 就不让你进了，所以有可能不需要 ！==null的判断了
   const ownerUsername = useAppSelector(getOwnerUserName);
   const [loading, setLoading] = useState<boolean>(true);
   const { fetchArticleListStatus } = useAppSelector((state) => state.article);
   const { fetchEventListStatus } = useAppSelector((state) => state.event);
 
   useEffect(() => {
-    if (fetchArticleListStatus === 'idle') {
+    if (fetchArticleListStatus === "idle") {
       dispatch(
         fetchArticleList({
           isAuth,
@@ -56,20 +56,20 @@ const Dashboard = (): React.ReactElement => {
       );
     }
     if (
-      ['succeed', 'failed'].includes(fetchArticleListStatus) &&
-      ['succeed', 'failed'].includes(fetchEventListStatus)
+      ["succeed", "failed"].includes(fetchArticleListStatus) &&
+      ["succeed", "failed"].includes(fetchEventListStatus)
     ) {
       setLoading(false);
     }
   }, [fetchArticleListStatus]);
 
   useEffect(() => {
-    if (fetchEventListStatus === 'idle') {
+    if (fetchEventListStatus === "idle") {
       dispatch(fetchEventList({ isAuth, ownerUsername }));
     }
     if (
-      ['succeed', 'failed'].includes(fetchArticleListStatus) &&
-      ['succeed', 'failed'].includes(fetchEventListStatus)
+      ["succeed", "failed"].includes(fetchArticleListStatus) &&
+      ["succeed", "failed"].includes(fetchEventListStatus)
     ) {
       setLoading(false);
     }
@@ -80,10 +80,10 @@ const Dashboard = (): React.ReactElement => {
       {/* PC端显示界面 */}
       <Box
         sx={{
-          padding: '24px 10%',
+          padding: "24px 10%",
           display: {
-            md: 'block',
-            xs: 'none',
+            md: "block",
+            xs: "none",
           },
         }}
       >
@@ -98,10 +98,10 @@ const Dashboard = (): React.ReactElement => {
               <LinearProgress />
               <Typography
                 sx={{
-                  fontSize: '20px',
-                  color: '#bdbdbd',
+                  fontSize: "20px",
+                  color: "#bdbdbd",
                   padding: 2,
-                  textAlign: 'center',
+                  textAlign: "center",
                 }}
               >
                 LOADING...
@@ -113,7 +113,7 @@ const Dashboard = (): React.ReactElement => {
             <Section
               title="活动"
               sx={{
-                height: 'auto',
+                height: "auto",
               }}
             >
               <EventContainer />
@@ -140,7 +140,7 @@ const Dashboard = (): React.ReactElement => {
                   <UserCardGrid />
                 </Section>
 
-                <Card sx={{ margin: '12px 8px' }}>
+                <Card sx={{ margin: "12px 8px" }}>
                   <Button fullWidth>新生必读</Button>
                 </Card>
 
@@ -164,10 +164,10 @@ const Dashboard = (): React.ReactElement => {
       <Box
         sx={{
           display: {
-            md: 'none',
-            xs: 'block',
+            md: "none",
+            xs: "block",
           },
-          padding: '8px',
+          padding: "8px",
         }}
       >
         {loading ? (
@@ -181,10 +181,10 @@ const Dashboard = (): React.ReactElement => {
               <LinearProgress />
               <Typography
                 sx={{
-                  fontSize: '20px',
-                  color: '#bdbdbd',
+                  fontSize: "20px",
+                  color: "#bdbdbd",
                   padding: 2,
-                  textAlign: 'center',
+                  textAlign: "center",
                 }}
               >
                 LOADING...
@@ -196,7 +196,7 @@ const Dashboard = (): React.ReactElement => {
             <Section
               title="活动"
               sx={{
-                height: 'auto',
+                height: "auto",
               }}
             >
               <EventContainer />
@@ -218,8 +218,8 @@ const Dashboard = (): React.ReactElement => {
                   sx={{
                     flex: 1,
                     minHeight: {
-                      xs: 'unset',
-                      md: '100vh',
+                      xs: "unset",
+                      md: "100vh",
                     },
                   }}
                 >
@@ -265,7 +265,7 @@ const Dashboard = (): React.ReactElement => {
                   <UserCardGrid />
                 </Section>
 
-                <Card sx={{ margin: '12px 8px' }}>
+                <Card sx={{ margin: "12px 8px" }}>
                   <Button fullWidth>新生必读</Button>
                 </Card>
 
@@ -303,6 +303,6 @@ const Dashboard = (): React.ReactElement => {
       </Box>
     </>
   );
-};
+}
 
 export default Dashboard;

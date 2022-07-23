@@ -8,4 +8,4 @@
  *
  */
 
-export { default } from './SimilarStories';
+export { default } from "./SimilarStories";

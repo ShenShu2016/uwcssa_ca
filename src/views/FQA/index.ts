@@ -7,4 +7,4 @@
  * @Description:
  *
  */
-export { default } from './FQA';
+export { default } from "./FQA";

@@ -8,17 +8,17 @@
  *
  */
 
-import { AccountMenu, NavItem } from './components';
-import { alpha, useTheme } from '@mui/material/styles';
+import { alpha, useTheme } from "@mui/material/styles";
 
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import { Link } from 'react-router-dom';
-import MenuIcon from '@mui/icons-material/Menu';
-import React from 'react';
-import { Typography } from '@mui/material';
-import { getAuthState } from 'redux/auth/authSlice';
-import { useAppSelector } from 'redux/hooks';
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import { Link } from "react-router-dom";
+import MenuIcon from "@mui/icons-material/Menu";
+import React from "react";
+import { Typography } from "@mui/material";
+import { getAuthState } from "redux/auth/authSlice";
+import { useAppSelector } from "redux/hooks";
+import { AccountMenu, NavItem } from "./components";
 
 interface Props {
   // eslint-disable-next-line @typescript-eslint/ban-types
@@ -37,11 +37,11 @@ interface Props {
   colorInvert?: boolean;
 }
 
-const Topbar = ({
+function Topbar({
   onSidebarOpen,
   pages,
   colorInvert = false,
-}: Props): JSX.Element => {
+}: Props): JSX.Element {
   const theme = useTheme();
   const { mode } = theme.palette;
   const {
@@ -60,65 +60,65 @@ const Topbar = ({
 
   return (
     <Box
-      display={'flex'}
-      justifyContent={'space-between'}
-      alignItems={'center'}
+      display="flex"
+      justifyContent="space-between"
+      alignItems="center"
       width={1}
     >
       <Box
-        display={'flex'}
+        display="flex"
         component={Link}
         to="/"
         title="UWCSSA"
         height={{ xs: 24, md: 29 }}
         sx={{
-          textDecoration: 'none',
-          color: mode === 'light' && !colorInvert ? 'black' : 'white',
+          textDecoration: "none",
+          color: mode === "light" && !colorInvert ? "black" : "white",
         }}
       >
         <Box
-          component={'img'}
+          component="img"
           src={
-            mode === 'light' && !colorInvert
-              ? '/assets/images/uwcssa_logo.svg'
-              : '/assets/images/uwcssa_logo.svg'
+            mode === "light" && !colorInvert
+              ? "/assets/images/uwcssa_logo.svg"
+              : "/assets/images/uwcssa_logo.svg"
           }
           height={1}
           width={1}
         />
-        <Typography variant="h5" sx={{ ml: '1rem', fontWeight: '700' }}>
+        <Typography variant="h5" sx={{ ml: "1rem", fontWeight: "700" }}>
           UWCSSA
         </Typography>
       </Box>
-      <Box sx={{ display: { xs: 'none', md: 'flex' } }} alignItems={'center'}>
+      <Box sx={{ display: { xs: "none", md: "flex" } }} alignItems="center">
         <Box>
           <NavItem
-            title={'UWCSSA'}
-            id={'UWCSSA-pages'}
+            title="UWCSSA"
+            id="UWCSSA-pages"
             items={UWCSSAPages}
             colorInvert={colorInvert}
           />
         </Box>
         <Box marginLeft={4}>
           <NavItem
-            title={'首页'}
-            id={'dashboard-pages'}
+            title="首页"
+            id="dashboard-pages"
             items={dashboardPages}
             colorInvert={colorInvert}
           />
         </Box>
         <Box marginLeft={4}>
           <NavItem
-            title={'新生手册'}
-            id={'freshman-pages'}
+            title="新生手册"
+            id="freshman-pages"
             items={freshmanPages}
             colorInvert={colorInvert}
           />
         </Box>
         <Box marginLeft={4}>
           <NavItem
-            title={'新闻'}
-            id={'news-pages'}
+            title="新闻"
+            id="news-pages"
             items={newsPages}
             colorInvert={colorInvert}
           />
@@ -133,8 +133,8 @@ const Topbar = ({
         </Box> */}
         <Box marginLeft={4}>
           <NavItem
-            title={'活动'}
-            id={'activity-pages'}
+            title="活动"
+            id="activity-pages"
             items={activityPages}
             colorInvert={colorInvert}
           />
@@ -149,16 +149,16 @@ const Topbar = ({
         </Box> */}
         <Box marginLeft={4}>
           <NavItem
-            title={'关于我们'}
-            id={'about-pages'}
+            title="关于我们"
+            id="about-pages"
             items={aboutPages}
             colorInvert={colorInvert}
           />
         </Box>
         <Box marginLeft={4}>
           <NavItem
-            title={'联系我们'}
-            id={'contact-pages'}
+            title="联系我们"
+            id="contact-pages"
             items={contactPages}
             colorInvert={colorInvert}
           />
@@ -171,7 +171,7 @@ const Topbar = ({
               variant="contained"
               color="primary"
               component={Link}
-              //target="blank"
+              // target="blank"
               to="/auth/signIn"
               size="large"
             >
@@ -180,7 +180,7 @@ const Topbar = ({
           )}
         </Box>
       </Box>
-      <Box sx={{ display: { xs: 'flex', md: 'none' } }} alignItems={'center'}>
+      <Box sx={{ display: { xs: "flex", md: "none" } }} alignItems="center">
         {isAuth ? (
           <AccountMenu />
         ) : (
@@ -188,10 +188,10 @@ const Topbar = ({
             variant="contained"
             color="primary"
             component={Link}
-            //target="blank"
+            // target="blank"
             to="/auth/signIn"
             size="small"
-            sx={{ mr: '1rem' }}
+            sx={{ mr: "1rem" }}
           >
             Sign in
           </Button>
@@ -199,10 +199,10 @@ const Topbar = ({
         <Button
           onClick={() => onSidebarOpen()}
           aria-label="Menu"
-          variant={'outlined'}
+          variant="outlined"
           sx={{
             borderRadius: 2,
-            minWidth: 'auto',
+            minWidth: "auto",
             padding: 1,
             borderColor: alpha(theme.palette.divider, 0.2),
           }}
@@ -212,6 +212,6 @@ const Topbar = ({
       </Box>
     </Box>
   );
-};
+}
 
 export default Topbar;

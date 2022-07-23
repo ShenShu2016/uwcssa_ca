@@ -7,9 +7,9 @@
  * @Description:
  *
  */
-export { default as Content } from './Content';
+export { default as Content } from "./Content";
 
-export { default as Hero } from './Hero';
-export { default as SidebarEvents } from './SidebarEvents';
-export { default as SimilarStories } from './SimilarStories';
-export { default as SidebarNewsletter } from './SidebarNewsletter';
+export { default as Hero } from "./Hero";
+export { default as SidebarEvents } from "./SidebarEvents";
+export { default as SimilarStories } from "./SimilarStories";
+export { default as SidebarNewsletter } from "./SidebarNewsletter";

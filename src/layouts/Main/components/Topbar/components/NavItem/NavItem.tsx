@@ -8,18 +8,17 @@
  *
  */
 
-import React, { useEffect, useState } from 'react';
-import { alpha, useTheme } from '@mui/material/styles';
-import { matchPath, useNavigate } from 'react-router';
+import React, { useEffect, useState } from "react";
+import { alpha, useTheme } from "@mui/material/styles";
+import { matchPath, useNavigate } from "react-router";
 
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import Grid from '@mui/material/Grid';
-import { Link } from 'react-router-dom';
-import Popover from '@mui/material/Popover';
-import Typography from '@mui/material/Typography';
-import { useLocation } from 'react-router-dom';
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import Grid from "@mui/material/Grid";
+import { Link, useLocation } from "react-router-dom";
+import Popover from "@mui/material/Popover";
+import Typography from "@mui/material/Typography";
 
 interface Props {
   title: string;
@@ -28,12 +27,12 @@ interface Props {
   colorInvert?: boolean;
 }
 
-const NavItem = ({
+function NavItem({
   title,
   id,
   items,
   colorInvert = false,
-}: Props): JSX.Element => {
+}: Props): JSX.Element {
   const theme = useTheme();
   const navigate = useNavigate();
   const location = useLocation();
@@ -51,31 +50,30 @@ const NavItem = ({
     setOpenedPopoverId(null);
   };
 
-  const [activeLink, setActiveLink] = useState('');
+  const [activeLink, setActiveLink] = useState("");
 
   useEffect(() => {
     handleClose(); // 不知道为什么改了这个后，点击才会关闭之前是没有的
     setActiveLink(location.pathname);
-  }, [location.pathname]); //这个变了就会触发
+  }, [location.pathname]); // 这个变了就会触发
 
   const hasActiveLink = () => {
     if (items instanceof Array) {
       return items.find((i) => matchPath(i.href, activeLink));
-    } else {
-      return matchPath(items.href, activeLink);
     }
+    return matchPath(items.href, activeLink);
   };
-  const linkColor = colorInvert ? 'common.white' : 'text.primary';
+  const linkColor = colorInvert ? "common.white" : "text.primary";
 
   return (
     <Box>
       {items instanceof Array && items?.length ? (
         <>
           <Box
-            display={'flex'}
-            alignItems={'center'}
+            display="flex"
+            alignItems="center"
             aria-describedby={id}
-            sx={{ cursor: 'pointer' }}
+            sx={{ cursor: "pointer" }}
             onClick={(e) => handleClick(e, id)}
           >
             <Typography
@@ -89,7 +87,7 @@ const NavItem = ({
                 marginLeft: theme.spacing(1 / 4),
                 width: 16,
                 height: 16,
-                transform: openedPopoverId === id ? 'rotate(180deg)' : 'none',
+                transform: openedPopoverId === id ? "rotate(180deg)" : "none",
                 color: linkColor,
               }}
             />
@@ -101,15 +99,15 @@ const NavItem = ({
             anchorEl={anchorEl}
             onClose={handleClose}
             anchorOrigin={{
-              vertical: 'bottom',
-              horizontal: 'center',
+              vertical: "bottom",
+              horizontal: "center",
             }}
             transformOrigin={{
-              vertical: 'top',
-              horizontal: 'center',
+              vertical: "top",
+              horizontal: "center",
             }}
             sx={{
-              '.MuiPaper-root': {
+              ".MuiPaper-root": {
                 maxWidth: items.length > 12 ? 350 : 250,
                 padding: 2,
                 marginTop: 2,
@@ -129,7 +127,7 @@ const NavItem = ({
                     to={p.href}
                     fullWidth
                     sx={{
-                      justifyContent: 'flex-start',
+                      justifyContent: "flex-start",
                       color:
                         activeLink === p.href
                           ? theme.palette.primary.main
@@ -137,7 +135,7 @@ const NavItem = ({
                       backgroundColor:
                         activeLink === p.href
                           ? alpha(theme.palette.primary.main, 0.1)
-                          : 'transparent',
+                          : "transparent",
                       fontWeight: activeLink === p.href ? 600 : 400,
                     }}
                   >
@@ -145,14 +143,14 @@ const NavItem = ({
                     {p.isNew && (
                       <Box
                         padding={0.5}
-                        display={'inline-flex'}
+                        display="inline-flex"
                         borderRadius={1}
-                        bgcolor={'primary.main'}
+                        bgcolor="primary.main"
                         marginLeft={2}
                       >
                         <Typography
-                          variant={'caption'}
-                          sx={{ color: 'common.white', lineHeight: 1 }}
+                          variant="caption"
+                          sx={{ color: "common.white", lineHeight: 1 }}
                         >
                           new
                         </Typography>
@@ -165,25 +163,23 @@ const NavItem = ({
           </Popover>
         </>
       ) : (
-        <>
-          <Box
-            display={'flex'}
-            alignItems={'center'}
-            aria-describedby={id}
-            sx={{ cursor: 'pointer' }}
-            onClick={() => navigate((items as PageItem).href)}
+        <Box
+          display="flex"
+          alignItems="center"
+          aria-describedby={id}
+          sx={{ cursor: "pointer" }}
+          onClick={() => navigate((items as PageItem).href)}
+        >
+          <Typography
+            fontWeight={hasActiveLink() ? 700 : 400}
+            color={linkColor}
           >
-            <Typography
-              fontWeight={hasActiveLink() ? 700 : 400}
-              color={linkColor}
-            >
-              {title}
-            </Typography>
-          </Box>
-        </>
+            {title}
+          </Typography>
+        </Box>
       )}
     </Box>
   );
-};
+}
 
 export default NavItem;

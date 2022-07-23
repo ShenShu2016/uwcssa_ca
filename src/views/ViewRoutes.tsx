@@ -35,13 +35,13 @@ import {
   SigninCover as SigninCoverView,
   SignupCover as SignupCoverView,
   UWindsorEmailVerify as UWindsorEmailVerifyView,
-} from 'views';
-import { getAuthState, getIsAdmin } from 'redux/auth/authSlice';
+} from "views";
+import { getAuthState, getIsAdmin } from "redux/auth/authSlice";
 
-import React from 'react';
-import { useAppSelector } from 'redux/hooks';
+import React from "react";
+import { useAppSelector } from "redux/hooks";
 
-//console.log(isAuth, isAdmin);
+// console.log(isAuth, isAdmin);
 function ViewRoutes(): Array<{
   path: string;
   // eslint-disable-next-line @typescript-eslint/ban-types
@@ -55,56 +55,56 @@ function ViewRoutes(): Array<{
 
   return [
     {
-      path: '/',
+      path: "/",
       renderer: (params = {}): JSX.Element => <HomeView {...params} />,
       isAllowed: true,
       redirectPath: undefined,
     },
     {
-      path: '/dashboard',
+      path: "/dashboard",
       renderer: (): JSX.Element => <DashboardView />,
       isAllowed: true,
       redirectPath: undefined,
     },
     {
-      path: '/news',
+      path: "/news",
       renderer: (): JSX.Element => <NewsListView />,
       isAllowed: true,
       redirectPath: undefined,
     },
     {
-      path: '/history-events',
+      path: "/history-events",
       renderer: (): JSX.Element => <EventListView />,
       isAllowed: true,
       redirectPath: undefined,
     },
     {
-      path: '/career',
+      path: "/career",
       renderer: (params = {}): JSX.Element => <CareerListingView {...params} />,
       isAllowed: true,
       redirectPath: undefined,
     },
     {
-      path: '/career/:id',
+      path: "/career/:id",
       renderer: (params = {}): JSX.Element => <CareerOpeningView {...params} />,
       isAllowed: true,
       redirectPath: undefined,
     },
     {
-      path: '/terms',
+      path: "/terms",
       renderer: (params = {}): JSX.Element => <CompanyTermsView {...params} />,
       isAllowed: true,
       redirectPath: undefined,
     },
     {
-      path: '/about',
+      path: "/about",
       renderer: (params = {}): JSX.Element => <AboutView {...params} />,
       isAllowed: true,
       redirectPath: undefined,
       colorInvert: true,
     },
     {
-      path: '/research-development-team',
+      path: "/research-development-team",
       renderer: (params = {}): JSX.Element => (
         <ResearchDevelopmentView {...params} />
       ),
@@ -113,146 +113,146 @@ function ViewRoutes(): Array<{
       colorInvert: true,
     },
     {
-      path: '/contactUs',
+      path: "/contactUs",
       renderer: (params = {}): JSX.Element => <ContactPageView {...params} />,
       isAllowed: true,
       redirectPath: undefined,
     },
     {
-      path: '/article/:articleId',
+      path: "/article/:articleId",
       renderer: (params = {}): JSX.Element => <ArticleCoverView {...params} />,
       isAllowed: true,
-      redirectPath: '/',
+      redirectPath: "/",
       colorInvert: true,
     },
     {
-      path: '/event/:eventId',
+      path: "/event/:eventId",
       renderer: (params = {}): JSX.Element => <EventDetailView {...params} />,
       isAllowed: true,
-      redirectPath: '/',
+      redirectPath: "/",
       colorInvert: true,
     },
     {
-      path: '/event/eventSignUpSuccessfully/:eventId',
+      path: "/event/eventSignUpSuccessfully/:eventId",
       renderer: (params = {}): JSX.Element => (
         <EventSignUpSuccessfullyView {...params} />
       ),
       isAllowed: true,
-      redirectPath: '/',
-    }, //!! 这里会碰到问题 比如每个人都会进去
+      redirectPath: "/",
+    }, //! ! 这里会碰到问题 比如每个人都会进去
 
     {
-      path: '/auth/passwordReset',
+      path: "/auth/passwordReset",
       renderer: (params = {}): JSX.Element => (
         <PasswordResetCoverView {...params} />
       ),
       isAllowed: true,
-      redirectPath: '/',
+      redirectPath: "/",
     },
     {
-      path: '/auth/passWordResetSubmit/:username',
+      path: "/auth/passWordResetSubmit/:username",
       renderer: (params = {}): JSX.Element => (
         <ForgotPassWordSubmitView {...params} />
       ),
       isAllowed: true,
-      redirectPath: '/',
+      redirectPath: "/",
     },
     {
-      path: '/auth/PreSignUpResetPassWord',
+      path: "/auth/PreSignUpResetPassWord",
       renderer: (params = {}): JSX.Element => (
         <PreSignUpResetPassWordView {...params} />
       ),
       isAllowed: true,
-      redirectPath: '/',
+      redirectPath: "/",
     },
 
     {
-      path: '/auth/signIn',
+      path: "/auth/signIn",
       renderer: (params = {}): JSX.Element => <SigninCoverView {...params} />,
       isAllowed: !isAuth,
-      redirectPath: '/dashboard',
+      redirectPath: "/dashboard",
     },
 
     {
-      path: '/auth/signUp',
+      path: "/auth/signUp",
       renderer: (params = {}): JSX.Element => <SignupCoverView {...params} />,
       isAllowed: !isAuth,
-      redirectPath: '/settings/general',
+      redirectPath: "/settings/general",
     },
     {
-      path: '/auth/emailConfirmation', //!! 这里也不知道怎么处理，如果username 不存在，会报错
+      path: "/auth/emailConfirmation", //! ! 这里也不知道怎么处理，如果username 不存在，会报错
       renderer: (params = {}): JSX.Element => (
         <EmailConfirmationCoverView {...params} />
       ),
       isAllowed: !isAuth,
-      redirectPath: '/settings/general',
+      redirectPath: "/settings/general",
     },
     {
-      path: '/auth/emailConfirmation/:username', // username is the email
+      path: "/auth/emailConfirmation/:username", // username is the email
       renderer: (params = {}): JSX.Element => (
         <EmailConfirmationCoverView {...params} />
       ),
       isAllowed: !isAuth,
-      redirectPath: '/settings/general',
+      redirectPath: "/settings/general",
     },
     {
-      path: '/settings',
+      path: "/settings",
       renderer: (params = {}): JSX.Element => (
         <AccountGeneralView {...params} />
       ),
       isAllowed: isAuth,
-      redirectPath: '/settings/general',
+      redirectPath: "/settings/general",
     },
     {
-      path: '/settings/general',
+      path: "/settings/general",
       renderer: (params = {}): JSX.Element => (
         <AccountGeneralView {...params} />
       ),
       isAllowed: isAuth,
-      redirectPath: '/',
+      redirectPath: "/",
     },
     {
-      path: '/settings/profile',
+      path: "/settings/profile",
       renderer: (params = {}): JSX.Element => (
         <AccountProfileView {...params} />
       ),
       isAllowed: isAuth,
-      redirectPath: '/',
+      redirectPath: "/",
     },
     {
-      path: '/settings/uwindsorVerify',
+      path: "/settings/uwindsorVerify",
       renderer: (params = {}): JSX.Element => (
         <UWindsorEmailVerifyView {...params} />
       ),
       isAllowed: isAuth,
-      redirectPath: '/',
+      redirectPath: "/",
     },
     {
-      path: '/settings/notifications',
+      path: "/settings/notifications",
       renderer: (params = {}): JSX.Element => (
         <AccountNotificationsView {...params} />
       ),
       isAllowed: isAuth,
-      redirectPath: '/',
+      redirectPath: "/",
     },
     {
-      path: '/settings/security',
+      path: "/settings/security",
       renderer: (params = {}): JSX.Element => (
         <AccountSecurityView {...params} />
       ),
       isAllowed: isAuth,
-      redirectPath: '/',
+      redirectPath: "/",
     },
     {
-      path: '/settings/billing',
+      path: "/settings/billing",
       renderer: (params = {}): JSX.Element => (
         <AccountBillingView {...params} />
       ),
       isAllowed: isAuth,
-      redirectPath: '/',
+      redirectPath: "/",
     },
     {
-      path: '/404',
+      path: "/404",
       renderer: (params = {}): JSX.Element => <NotFoundCoverView {...params} />,
       isAllowed: true,
       redirectPath: undefined,

@@ -7,4 +7,4 @@
  * @Description:
  *
  */
-export { default } from './AdminDashboard';
+export { default } from "./AdminDashboard";

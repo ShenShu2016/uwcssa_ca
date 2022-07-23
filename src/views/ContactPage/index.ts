@@ -7,4 +7,4 @@
  * @Description:
  *
  */
-export { default } from './ContactPage';
+export { default } from "./ContactPage";

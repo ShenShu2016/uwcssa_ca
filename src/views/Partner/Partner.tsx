@@ -1,33 +1,33 @@
-import Box from '@mui/material/Box';
-import React from 'react';
-import Slider from 'react-slick';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import { useTheme } from '@mui/material/styles';
+import Box from "@mui/material/Box";
+import React from "react";
+import Slider from "react-slick";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
 
 const mock = [
-  'https://assets.maccarianagency.com/svg/logos/airbnb-original.svg',
-  'https://assets.maccarianagency.com/svg/logos/amazon-original.svg',
-  'https://assets.maccarianagency.com/svg/logos/fitbit-original.svg',
-  'https://assets.maccarianagency.com/svg/logos/netflix-original.svg',
-  'https://assets.maccarianagency.com/svg/logos/google-original.svg',
-  'https://assets.maccarianagency.com/svg/logos/paypal-original.svg',
-  'https://assets.maccarianagency.com/svg/logos/hubspot-original.svg',
-  'https://assets.maccarianagency.com/svg/logos/mapbox-original.svg',
-  'https://assets.maccarianagency.com/svg/logos/slack-original.svg',
+  "https://assets.maccarianagency.com/svg/logos/airbnb-original.svg",
+  "https://assets.maccarianagency.com/svg/logos/amazon-original.svg",
+  "https://assets.maccarianagency.com/svg/logos/fitbit-original.svg",
+  "https://assets.maccarianagency.com/svg/logos/netflix-original.svg",
+  "https://assets.maccarianagency.com/svg/logos/google-original.svg",
+  "https://assets.maccarianagency.com/svg/logos/paypal-original.svg",
+  "https://assets.maccarianagency.com/svg/logos/hubspot-original.svg",
+  "https://assets.maccarianagency.com/svg/logos/mapbox-original.svg",
+  "https://assets.maccarianagency.com/svg/logos/slack-original.svg",
 ];
 
-const Partner = (): JSX.Element => {
+function Partner(): JSX.Element {
   const theme = useTheme();
-  const isXs = useMediaQuery(theme.breakpoints.up('xs'), {
+  const isXs = useMediaQuery(theme.breakpoints.up("xs"), {
     defaultMatches: true,
   });
-  const isSm = useMediaQuery(theme.breakpoints.up('sm'), {
+  const isSm = useMediaQuery(theme.breakpoints.up("sm"), {
     defaultMatches: true,
   });
-  const isMd = useMediaQuery(theme.breakpoints.up('md'), {
+  const isMd = useMediaQuery(theme.breakpoints.up("md"), {
     defaultMatches: true,
   });
-  const isLg = useMediaQuery(theme.breakpoints.up('lg'), {
+  const isLg = useMediaQuery(theme.breakpoints.up("lg"), {
     defaultMatches: true,
   });
 
@@ -68,7 +68,7 @@ const Partner = (): JSX.Element => {
               src={item}
               alt="..."
               sx={{
-                filter: 'brightness(0) invert(1)',
+                filter: "brightness(0) invert(1)",
               }}
             />
           </Box>
@@ -76,6 +76,6 @@ const Partner = (): JSX.Element => {
       </Slider>
     </Box>
   );
-};
+}
 
 export default Partner;

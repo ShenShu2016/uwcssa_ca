@@ -8,6 +8,23 @@
  *
  */
 
+import React, { useEffect } from "react";
+import { fetchArticle, selectArticleById } from "redux/article/articleSlice";
+import { getAuthState, getOwnerUserName } from "redux/auth/authSlice";
+import {
+  insertAllComments,
+  removeAllComments,
+  selectAllComments,
+} from "redux/comment/commentSlice";
+import { useAppDispatch, useAppSelector } from "redux/hooks";
+
+import Box from "@mui/material/Box";
+import CommentOverview from "components/Comment/CommentOverview";
+import Container from "components/Container";
+import Grid from "@mui/material/Grid";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useParams } from "react-router-dom";
+import { useTheme } from "@mui/material/styles";
 import {
   Content,
   FooterNewsletter,
@@ -15,30 +32,13 @@ import {
   SidebarArticles,
   SidebarNewsletter,
   SimilarStories,
-} from './components';
-import React, { useEffect } from 'react';
-import { fetchArticle, selectArticleById } from 'redux/article/articleSlice';
-import { getAuthState, getOwnerUserName } from 'redux/auth/authSlice';
-import {
-  insertAllComments,
-  removeAllComments,
-  selectAllComments,
-} from 'redux/comment/commentSlice';
-import { useAppDispatch, useAppSelector } from 'redux/hooks';
+} from "./components";
 
-import Box from '@mui/material/Box';
-import CommentOverview from 'components/Comment/CommentOverview';
-import Container from 'components/Container';
-import Grid from '@mui/material/Grid';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import { useParams } from 'react-router-dom';
-import { useTheme } from '@mui/material/styles';
-
-const ArticleCover = (): JSX.Element => {
+function ArticleCover(): JSX.Element {
   const theme = useTheme();
   const dispatch = useAppDispatch();
   const isAuth = useAppSelector(getAuthState);
-  const isMd = useMediaQuery(theme.breakpoints.up('md'), {
+  const isMd = useMediaQuery(theme.breakpoints.up("md"), {
     defaultMatches: true,
   });
   const ownerUsername = useAppSelector(getOwnerUserName);
@@ -58,8 +58,8 @@ const ArticleCover = (): JSX.Element => {
             ownerUsername,
           }),
         );
-        //console.log('response', response);
-        dispatch(insertAllComments(response.payload.comments.items)); //这种方法不太好
+        // console.log('response', response);
+        dispatch(insertAllComments(response.payload.comments.items)); // 这种方法不太好
       }
     };
     getArticle();
@@ -72,7 +72,7 @@ const ArticleCover = (): JSX.Element => {
     <>
       <Box>
         {article && <Hero article={article} />}
-        <Container style={{ padding: '12px 16px' }}>
+        <Container style={{ padding: "12px 16px" }}>
           <Grid container spacing={8}>
             <Grid item xs={12} md={8}>
               {article && <Content article={article} />}
@@ -91,7 +91,7 @@ const ArticleCover = (): JSX.Element => {
           )}
         </Container>
         <Box
-          component={'svg'}
+          component="svg"
           preserveAspectRatio="none"
           xmlns="http://www.w3.org/2000/svg"
           x="0px"
@@ -105,10 +105,10 @@ const ArticleCover = (): JSX.Element => {
           <path
             fill={theme.palette.alternate.main}
             d="M0,0c0,0,934.4,93.4,1920,0v100.1H0L0,0z"
-          ></path>
+          />
         </Box>
       </Box>
-      <Box bgcolor={'alternate.main'}>
+      <Box bgcolor="alternate.main">
         <Container>
           <SimilarStories />
         </Container>
@@ -116,7 +116,7 @@ const ArticleCover = (): JSX.Element => {
           <FooterNewsletter />
         </Container>
         <Box
-          component={'svg'}
+          component="svg"
           preserveAspectRatio="none"
           xmlns="http://www.w3.org/2000/svg"
           x="0px"
@@ -130,11 +130,11 @@ const ArticleCover = (): JSX.Element => {
           <path
             fill={theme.palette.background.paper}
             d="M0,0c0,0,934.4,93.4,1920,0v100.1H0L0,0z"
-          ></path>
+          />
         </Box>
       </Box>
     </>
   );
-};
+}
 
 export default ArticleCover;

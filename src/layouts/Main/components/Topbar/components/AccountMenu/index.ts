@@ -7,4 +7,4 @@
  * @Description:
  *
  */
-export { default } from './AccountMenu';
+export { default } from "./AccountMenu";

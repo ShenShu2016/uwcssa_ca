@@ -7,4 +7,4 @@
  * @Description:
  *
  */
-export { default } from './ResearchDevelopmentTeamDashboard';
+export { default } from "./ResearchDevelopmentTeamDashboard";

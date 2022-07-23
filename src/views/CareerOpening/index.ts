@@ -7,4 +7,4 @@
  * @Description:
  *
  */
-export { default } from './CareerOpening';
+export { default } from "./CareerOpening";

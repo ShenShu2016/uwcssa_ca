@@ -7,4 +7,4 @@
  * @Description:
  *
  */
-export { default } from './EditResearchDevelopmentTeamForm';
+export { default } from "./EditResearchDevelopmentTeamForm";

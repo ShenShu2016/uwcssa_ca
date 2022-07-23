@@ -14,7 +14,7 @@ function stringToColorAvatar(string: string) {
   for (i = 0; i < string?.length; i += 1) {
     hash = string.charCodeAt(i) + ((hash << 5) - hash);
   }
-  let color = '#';
+  let color = "#";
 
   for (i = 0; i < 3; i += 1) {
     const value = (hash >> (i * 8)) & 0xff;
@@ -24,13 +24,13 @@ function stringToColorAvatar(string: string) {
   return color;
 }
 
-const getInitialsAvatar = (name = '') =>
+const getInitialsAvatar = (name = "") =>
   name
-    .replace(/\s+/, ' ')
-    .split(' ')
+    .replace(/\s+/, " ")
+    .split(" ")
     .slice(0, 2)
     .map((v) => v && v[0].toUpperCase())
-    .join('');
+    .join("");
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function stringAvatar(name: string, sx: any = undefined) {

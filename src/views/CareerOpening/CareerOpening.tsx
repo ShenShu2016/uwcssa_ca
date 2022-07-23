@@ -8,19 +8,18 @@
  *
  */
 
-import { Application, Main as MainSection, Newsletter } from './components';
+import Box from "@mui/material/Box";
+import Container from "components/Container";
+import React from "react";
+import { Application, Main as MainSection, Newsletter } from "./components";
 
-import Box from '@mui/material/Box';
-import Container from 'components/Container';
-import React from 'react';
-
-const CareerOpening = (): JSX.Element => {
+function CareerOpening(): JSX.Element {
   return (
     <>
       <Container>
         <MainSection />
       </Container>
-      <Box bgcolor={'alternate.main'}>
+      <Box bgcolor="alternate.main">
         <Container>
           <Application />
         </Container>
@@ -30,6 +29,6 @@ const CareerOpening = (): JSX.Element => {
       </Container>
     </>
   );
-};
+}
 
 export default CareerOpening;

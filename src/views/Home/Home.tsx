@@ -8,6 +8,11 @@
  *
  */
 
+import { alpha, useTheme } from "@mui/material/styles";
+
+import Box from "@mui/material/Box";
+import Container from "components/Container";
+import React from "react";
 import {
   AboutBottom,
   Features,
@@ -18,31 +23,26 @@ import {
   Reviews,
   Team,
   Video,
-} from './components';
-import { alpha, useTheme } from '@mui/material/styles';
+} from "./components";
 
-import Box from '@mui/material/Box';
-import Container from 'components/Container';
-import React from 'react';
-
-const Home = (): JSX.Element => {
+function Home(): JSX.Element {
   const theme = useTheme();
 
   return (
     <>
       <Box
-        bgcolor={'alternate.main'}
+        bgcolor="alternate.main"
         sx={{
-          position: 'relative',
-          '&::after': {
-            position: 'absolute',
+          position: "relative",
+          "&::after": {
+            position: "absolute",
             content: '""',
-            width: '30%',
+            width: "30%",
             zIndex: 1,
             top: 0,
-            left: '5%',
-            height: '100%',
-            backgroundSize: '18px 18px',
+            left: "5%",
+            height: "100%",
+            backgroundSize: "18px 18px",
             backgroundImage: `radial-gradient(${alpha(
               theme.palette.primary.dark,
               0.4,
@@ -51,7 +51,7 @@ const Home = (): JSX.Element => {
           },
         }}
       >
-        <Box position={'relative'} zIndex={3}>
+        <Box position="relative" zIndex={3}>
           <Hero />
         </Box>
       </Box>
@@ -62,7 +62,7 @@ const Home = (): JSX.Element => {
       <Container>
         <Features />
       </Container>
-      <Box bgcolor={'alternate.main'}>
+      <Box bgcolor="alternate.main">
         <Container>
           <News />
         </Container>
@@ -71,7 +71,7 @@ const Home = (): JSX.Element => {
         <Team />
       </Container>
       <Video />
-      <Box bgcolor={'#11092d'}>
+      <Box bgcolor="#11092d">
         <Container>
           <Integrations />
         </Container>
@@ -79,7 +79,7 @@ const Home = (): JSX.Element => {
       {/* <Container>
         <Pricings />
       </Container> */}
-      <Box bgcolor={'alternate.main'}>
+      <Box bgcolor="alternate.main">
         <Container>
           <Jobs />
         </Container>
@@ -87,13 +87,13 @@ const Home = (): JSX.Element => {
       <Container>
         <AboutBottom />
       </Container>
-      <Box bgcolor={'primary.main'}>
+      <Box bgcolor="primary.main">
         <Container>
           <Reviews />
         </Container>
       </Box>
     </>
   );
-};
+}
 
 export default Home;

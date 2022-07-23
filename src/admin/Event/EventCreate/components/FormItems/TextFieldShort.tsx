@@ -7,10 +7,10 @@
  * @FilePath: /uwcssa_ca/src/admin/Event/EventCreate/components/FormItems/TextFieldShort.tsx
  */
 
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import FieldLabel from '../FieldLabel';
-import { TextField } from '@mui/material';
+import { TextField } from "@mui/material";
+import FieldLabel from "../FieldLabel";
 
 interface TextFieldShortInfo {
   label?: string;
@@ -26,7 +26,7 @@ interface TextFieldShortProp {
 }
 
 const TextFieldShort: React.FC<TextFieldShortProp> = ({ item }) => {
-  const [value, setValue] = useState<string>('');
+  const [value, setValue] = useState<string>("");
   return (
     <>
       <FieldLabel

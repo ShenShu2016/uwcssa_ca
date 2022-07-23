@@ -19,14 +19,13 @@ import {
   TablePagination,
   TableRow,
   Typography,
-} from '@mui/material';
+} from "@mui/material";
 
-import { AvatarURL } from 'redux/userProfile/userProfileSlice';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
-import React from 'react';
-import moment from 'moment';
-import { stringAvatar } from 'components/Avatar/AvatarFunction';
-import { useState } from 'react';
+import { AvatarURL } from "redux/userProfile/userProfileSlice";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import React, { useState } from "react";
+import moment from "moment";
+import { stringAvatar } from "components/Avatar/AvatarFunction";
 
 type UserProfileType = {
   id: string;
@@ -61,7 +60,7 @@ function CustomerListResults({
 
   return (
     <Card {...rest}>
-      <Box sx={{ width: '100%', overflow: 'auto' }}>
+      <Box sx={{ width: "100%", overflow: "auto" }}>
         <Table>
           <TableHead>
             <TableRow>
@@ -78,8 +77,8 @@ function CustomerListResults({
                   <TableCell>
                     <Box
                       sx={{
-                        alignItems: 'center',
-                        display: 'flex',
+                        alignItems: "center",
+                        display: "flex",
                       }}
                     >
                       <Avatar
@@ -89,20 +88,20 @@ function CustomerListResults({
 
                       <Typography color="textPrimary" variant="body1">
                         {customer.name}
-                        {customer.id.slice(0, 6) === 'google' && (
+                        {customer.id.slice(0, 6) === "google" && (
                           <Box
                             component={LazyLoadImage}
                             effect="blur"
                             src="/assets/images/icons/google-1.svg"
-                            sx={{ mx: '0.5rem' }}
+                            sx={{ mx: "0.5rem" }}
                           />
                         )}
-                        {customer.email.includes('@uwindsor.ca') && (
+                        {customer.email.includes("@uwindsor.ca") && (
                           <Box
                             component={LazyLoadImage}
                             effect="blur"
                             src="/assets/images/icons/uwindsor_shield.svg"
-                            sx={{ mx: '0.5rem', height: '20px' }}
+                            sx={{ mx: "0.5rem", height: "20px" }}
                           />
                         )}
                       </Typography>
@@ -110,12 +109,12 @@ function CustomerListResults({
                   </TableCell>
                   <TableCell>{customer.email}</TableCell>
                   <TableCell>
-                    <Box sx={{ display: 'flex' }}>
-                      {moment(customer.createdAt).format('YYYY/MM/DD')}
+                    <Box sx={{ display: "flex" }}>
+                      {moment(customer.createdAt).format("YYYY/MM/DD")}
                       <Typography
                         fontSize={10}
                         variant="subtitle2"
-                        sx={{ ml: '4px' }}
+                        sx={{ ml: "4px" }}
                       >
                         ({moment(customer.createdAt).fromNow()})
                       </Typography>

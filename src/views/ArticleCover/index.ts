@@ -7,4 +7,4 @@
  * @Description:
  *
  */
-export { default } from './ArticleCover';
+export { default } from "./ArticleCover";

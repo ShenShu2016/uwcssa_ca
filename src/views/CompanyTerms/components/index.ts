@@ -7,5 +7,5 @@
  * @Description:
  *
  */
-export { default as ContactCard } from './ContactCard';
-export { default as Content } from './Content';
+export { default as ContactCard } from "./ContactCard";
+export { default as Content } from "./Content";

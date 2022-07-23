@@ -1,19 +1,19 @@
-import { ComponentsOverrides, createTheme } from '@mui/material/styles';
-import { Theme, responsiveFontSizes } from '@mui/material';
-import { dark, light } from './palette';
+import { ComponentsOverrides, createTheme } from "@mui/material/styles";
+import { Theme, responsiveFontSizes } from "@mui/material";
+import { dark, light } from "./palette";
 
-import shadows from './shadows';
+import shadows from "./shadows";
 
 const getTheme = (mode: string, themeToggler: () => void): Theme =>
   responsiveFontSizes(
     createTheme({
-      palette: mode === 'light' ? light : dark,
+      palette: mode === "light" ? light : dark,
       shadows: shadows(mode),
       typography: {
         fontFamily: '"Inter", sans-serif,"Noto Sans SC","Noto Serif SC", serif',
         button: {
-          textTransform: 'none',
-          fontWeight: 'medium' as React.CSSProperties['fontWeight'],
+          textTransform: "none",
+          fontWeight: "medium" as React.CSSProperties["fontWeight"],
         },
       },
       zIndex: {
@@ -29,15 +29,15 @@ const getTheme = (mode: string, themeToggler: () => void): Theme =>
               paddingTop: 10,
               paddingBottom: 10,
             },
-            containedSecondary: mode === 'light' ? { color: 'white' } : {},
-          } as ComponentsOverrides['MuiButton'],
+            containedSecondary: mode === "light" ? { color: "white" } : {},
+          } as ComponentsOverrides["MuiButton"],
         },
         MuiInputBase: {
           styleOverrides: {
             root: {
               borderRadius: 5,
             },
-          } as ComponentsOverrides['MuiInputBase'],
+          } as ComponentsOverrides["MuiInputBase"],
         },
         MuiOutlinedInput: {
           styleOverrides: {
@@ -47,14 +47,14 @@ const getTheme = (mode: string, themeToggler: () => void): Theme =>
             input: {
               borderRadius: 5,
             },
-          } as ComponentsOverrides['MuiOutlinedInput'],
+          } as ComponentsOverrides["MuiOutlinedInput"],
         },
         MuiCard: {
           styleOverrides: {
             root: {
               borderRadius: 8,
             },
-          } as ComponentsOverrides['MuiCard'],
+          } as ComponentsOverrides["MuiCard"],
         },
       },
       themeToggler,

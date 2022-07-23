@@ -8,60 +8,60 @@
  *
  */
 
-import { Link as MUILink, Typography } from '@mui/material';
-import { alpha, useTheme } from '@mui/material/styles';
+import { Link as MUILink, Typography } from "@mui/material";
+import { alpha, useTheme } from "@mui/material/styles";
 
-import { AccountMenu } from 'layouts/Main/components/Topbar/components';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import { Link } from 'react-router-dom';
-import MenuIcon from '@mui/icons-material/Menu';
-import React from 'react';
-import { ThemeModeToggler } from './components';
+import { AccountMenu } from "layouts/Main/components/Topbar/components";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import { Link } from "react-router-dom";
+import MenuIcon from "@mui/icons-material/Menu";
+import React from "react";
+import { ThemeModeToggler } from "./components";
 
 interface Props {
   // eslint-disable-next-line @typescript-eslint/ban-types
   onSidebarOpen: () => void;
 }
 
-const Topbar = ({ onSidebarOpen }: Props): JSX.Element => {
+function Topbar({ onSidebarOpen }: Props): JSX.Element {
   const theme = useTheme();
   const { mode } = theme.palette;
 
   return (
     <Box
-      display={'flex'}
-      justifyContent={'space-between'}
-      alignItems={'center'}
+      display="flex"
+      justifyContent="space-between"
+      alignItems="center"
       width={1}
     >
       <Box
-        display={'flex'}
+        display="flex"
         component={Link}
         to="/"
         title="UWCSSA"
         width={{ xs: 100, md: 120 }}
         sx={{
-          textDecoration: 'none',
-          color: mode === 'light' ? 'black' : 'white',
+          textDecoration: "none",
+          color: mode === "light" ? "black" : "white",
         }}
       >
         <Box
-          component={'img'}
+          component="img"
           src={
-            mode === 'light'
-              ? '/assets/images/uwcssa_logo.svg'
-              : '/assets/images/uwcssa_logo.svg'
+            mode === "light"
+              ? "/assets/images/uwcssa_logo.svg"
+              : "/assets/images/uwcssa_logo.svg"
           }
           height={{ xs: 24, md: 29 }}
         />
-        <Typography variant="h5" sx={{ ml: '1rem', fontWeight: '700' }}>
+        <Typography variant="h5" sx={{ ml: "1rem", fontWeight: "700" }}>
           UWCSSA
         </Typography>
       </Box>
 
-      <Box sx={{ display: { xs: 'none', md: 'flex' } }} alignItems={'center'}>
-        <Box marginLeft={3} sx={{ textDecoration: 'none' }}>
+      <Box sx={{ display: { xs: "none", md: "flex" } }} alignItems="center">
+        <Box marginLeft={3} sx={{ textDecoration: "none" }}>
           <AccountMenu />
         </Box>
         <Box marginLeft={3}>
@@ -79,7 +79,7 @@ const Topbar = ({ onSidebarOpen }: Props): JSX.Element => {
           </Button>
         </Box>
       </Box>
-      <Box sx={{ display: { xs: 'flex', md: 'none' } }} alignItems={'center'}>
+      <Box sx={{ display: { xs: "flex", md: "none" } }} alignItems="center">
         <AccountMenu />
         <Box marginRight={1}>
           <ThemeModeToggler />
@@ -87,10 +87,10 @@ const Topbar = ({ onSidebarOpen }: Props): JSX.Element => {
         <Button
           onClick={() => onSidebarOpen()}
           aria-label="Menu"
-          variant={'outlined'}
+          variant="outlined"
           sx={{
             borderRadius: 2,
-            minWidth: 'auto',
+            minWidth: "auto",
             padding: 1,
             borderColor: alpha(theme.palette.divider, 0.2),
           }}
@@ -100,6 +100,6 @@ const Topbar = ({ onSidebarOpen }: Props): JSX.Element => {
       </Box>
     </Box>
   );
-};
+}
 
 export default Topbar;

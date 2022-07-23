@@ -6,18 +6,18 @@
  * @FilePath: /uwcssa_ca/src/layouts/Main/Main.tsx
  */
 
-import { Footer, Sidebar, Topbar } from './components';
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Container from 'components/Container';
-import Divider from '@mui/material/Divider';
-import TopNav from 'components/TopNav';
-import pages from '../navigation--main';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import useScrollTrigger from '@mui/material/useScrollTrigger';
-import { useTheme } from '@mui/material/styles';
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Container from "components/Container";
+import Divider from "@mui/material/Divider";
+import TopNav from "components/TopNav";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import useScrollTrigger from "@mui/material/useScrollTrigger";
+import { useTheme } from "@mui/material/styles";
+import pages from "../navigation--main";
+import { Footer, Sidebar, Topbar } from "./components";
 
 interface Props {
   children: React.ReactNode;
@@ -32,14 +32,14 @@ interface Props {
 //   padding: '24px 5%',
 //   background: '#f5f5f5'
 // }));
-//这里改了会导致后面的东西都会有奇奇怪怪的毛病
-const Main = ({
+// 这里改了会导致后面的东西都会有奇奇怪怪的毛病
+function Main({
   children,
   colorInvert = false,
-  bgcolor = 'transparent',
-}: Props): JSX.Element => {
+  bgcolor = "transparent",
+}: Props): JSX.Element {
   const theme = useTheme();
-  const isMd = useMediaQuery(theme.breakpoints.up('md'), {
+  const isMd = useMediaQuery(theme.breakpoints.up("md"), {
     defaultMatches: true,
   });
 
@@ -62,13 +62,13 @@ const Main = ({
 
   return (
     <Box>
-      <Box bgcolor={bgcolor} position={'relative'} zIndex={theme.zIndex.appBar}>
-        <Container paddingTop={'0px !important'} paddingBottom={'0 !important'}>
+      <Box bgcolor={bgcolor} position="relative" zIndex={theme.zIndex.appBar}>
+        <Container paddingTop="0px !important" paddingBottom="0 !important">
           <TopNav colorInvert={colorInvert} />
         </Container>
       </Box>
       <AppBar
-        position={'sticky'}
+        position="sticky"
         sx={{
           top: 0,
           // boxShadow: '0px 15px 10px -15px #bdbdbd',
@@ -102,6 +102,6 @@ const Main = ({
       </Container>
     </Box>
   );
-};
+}
 
 export default Main;

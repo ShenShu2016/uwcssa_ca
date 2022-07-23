@@ -7,4 +7,4 @@
  * @Description:
  *
  */
-export { default } from './SidebarNewsletter';
+export { default } from "./SidebarNewsletter";

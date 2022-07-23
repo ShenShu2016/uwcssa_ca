@@ -8,18 +8,18 @@
  *
  */
 
-import { CreateResumeInput, UpdateResumeInput } from 'API';
+import { CreateResumeInput, UpdateResumeInput } from "API";
 import {
   createAsyncThunk,
   createEntityAdapter,
   createSlice,
-} from '@reduxjs/toolkit';
-import { createResume, deleteResume, updateResume } from 'graphql/mutations';
-import { getResume, listResumes } from 'graphql/queries';
+} from "@reduxjs/toolkit";
+import { createResume, deleteResume, updateResume } from "graphql/mutations";
+import { getResume, listResumes } from "graphql/queries";
 
-import API from '@aws-amplify/api';
-import { RootState } from 'redux/store';
-import { graphqlOperation } from '@aws-amplify/api-graphql';
+import API from "@aws-amplify/api";
+import { RootState } from "redux/store";
+import { graphqlOperation } from "@aws-amplify/api-graphql";
 
 export type Resume = {
   id: string;
@@ -45,28 +45,28 @@ const resumeAdapter = createEntityAdapter<Resume>({
 });
 
 const initialState = resumeAdapter.getInitialState({
-  fetchResumeListStatus: 'idle',
+  fetchResumeListStatus: "idle",
   fetchResumeListError: null,
-  fetchResumeStatus: 'idle',
+  fetchResumeStatus: "idle",
   fetchResumeError: null,
-  postResumeStatus: 'idle',
+  postResumeStatus: "idle",
   postResumeError: null,
-  postResumeImgStatus: 'idle',
+  postResumeImgStatus: "idle",
   postResumeImgError: null,
-  updateResumeDetailStatus: 'idle',
+  updateResumeDetailStatus: "idle",
   updateResumeDetailError: null,
-  removeResumeStatus: 'idle',
+  removeResumeStatus: "idle",
   removeResumeError: null,
 });
 
 export const fetchResumeList = createAsyncThunk(
-  'resume/fetchResumeList',
+  "resume/fetchResumeList",
   async ({ isAuth }: { isAuth: boolean }, { rejectWithValue }) => {
     try {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const result: any = await API.graphql({
         query: listResumes,
-        authMode: isAuth ? undefined : 'AWS_IAM',
+        authMode: isAuth ? undefined : "AWS_IAM",
       });
 
       return result.data.listResumes.items;
@@ -78,7 +78,7 @@ export const fetchResumeList = createAsyncThunk(
 );
 
 export const fetchResume = createAsyncThunk(
-  'resume/fetchResume',
+  "resume/fetchResume",
   async (
     {
       resumeId,
@@ -94,10 +94,10 @@ export const fetchResume = createAsyncThunk(
       const result: any = await API.graphql({
         query: getResume,
         variables: { id: resumeId },
-        authMode: isAuth ? undefined : 'AWS_IAM',
+        authMode: isAuth ? undefined : "AWS_IAM",
       });
       if (result.data.getResume === null) {
-        return { id: resumeId, description: 'not-found' };
+        return { id: resumeId, description: "not-found" };
       }
       return result.data.getResume;
     } catch (error) {
@@ -108,7 +108,7 @@ export const fetchResume = createAsyncThunk(
 );
 
 export const postResume = createAsyncThunk(
-  'resume/postResume',
+  "resume/postResume",
   async (
     {
       createResumeInput,
@@ -118,7 +118,7 @@ export const postResume = createAsyncThunk(
     { rejectWithValue },
   ) => {
     Object.keys(createResumeInput).forEach((key) =>
-      createResumeInput[key] === null || createResumeInput[key] === ''
+      createResumeInput[key] === null || createResumeInput[key] === ""
         ? delete createResumeInput[key]
         : {},
     );
@@ -138,7 +138,7 @@ export const postResume = createAsyncThunk(
 );
 
 export const updateResumeDetail = createAsyncThunk(
-  'resume/updateResumeDetail',
+  "resume/updateResumeDetail",
   async (
     {
       updateResumeInput,
@@ -148,7 +148,7 @@ export const updateResumeDetail = createAsyncThunk(
     { rejectWithValue },
   ) => {
     Object.keys(updateResumeInput).forEach((key) =>
-      updateResumeInput[key] === null || updateResumeInput[key] === ''
+      updateResumeInput[key] === null || updateResumeInput[key] === ""
         ? delete updateResumeInput[key]
         : {},
     );
@@ -168,7 +168,7 @@ export const updateResumeDetail = createAsyncThunk(
 );
 
 export const removeResume = createAsyncThunk(
-  'resume/removeResume',
+  "resume/removeResume",
   async ({ id }: { id: string }, { rejectWithValue }) => {
     try {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -187,71 +187,71 @@ export const removeResume = createAsyncThunk(
 );
 
 const resumeSlice = createSlice({
-  name: 'resume',
+  name: "resume",
   initialState,
   reducers: {},
   extraReducers(builder) {
     builder
       // Fetch ResumeList
       .addCase(fetchResumeList.pending, (state) => {
-        state.fetchResumeListStatus = 'loading';
+        state.fetchResumeListStatus = "loading";
       })
       .addCase(fetchResumeList.fulfilled, (state, action) => {
-        state.fetchResumeListStatus = 'succeed';
+        state.fetchResumeListStatus = "succeed";
         resumeAdapter.upsertMany(state, action.payload);
       })
 
       .addCase(fetchResumeList.rejected, (state, action) => {
-        state.fetchResumeListStatus = 'failed';
+        state.fetchResumeListStatus = "failed";
         state.fetchResumeListError = action.payload;
       })
       // Fetch Resume
       .addCase(fetchResume.pending, (state) => {
-        state.fetchResumeStatus = 'loading';
+        state.fetchResumeStatus = "loading";
       })
       .addCase(fetchResume.fulfilled, (state, action) => {
-        state.fetchResumeStatus = 'succeed';
+        state.fetchResumeStatus = "succeed";
         resumeAdapter.upsertOne(state, action.payload);
       })
       .addCase(fetchResume.rejected, (state, action) => {
-        state.fetchResumeStatus = 'failed';
+        state.fetchResumeStatus = "failed";
         state.fetchResumeError = action.payload;
       })
       // Post Resume
       .addCase(postResume.pending, (state) => {
-        state.postResumeStatus = 'loading';
+        state.postResumeStatus = "loading";
       })
       .addCase(postResume.fulfilled, (state, action) => {
-        state.postResumeStatus = 'succeed';
+        state.postResumeStatus = "succeed";
 
         resumeAdapter.addOne(state, action.payload);
       })
       .addCase(postResume.rejected, (state, action) => {
-        state.postResumeStatus = 'failed';
+        state.postResumeStatus = "failed";
         state.postResumeError = action.payload;
       })
       // Update ResumeDetail
       .addCase(updateResumeDetail.pending, (state) => {
-        state.updateResumeDetailStatus = 'loading';
+        state.updateResumeDetailStatus = "loading";
       })
       .addCase(updateResumeDetail.fulfilled, (state, action) => {
-        state.updateResumeDetailStatus = 'succeed';
+        state.updateResumeDetailStatus = "succeed";
         resumeAdapter.upsertOne(state, action.payload);
       })
       .addCase(updateResumeDetail.rejected, (state, action) => {
-        state.updateResumeDetailStatus = 'failed';
+        state.updateResumeDetailStatus = "failed";
         state.updateResumeDetailError = action.payload;
       })
       // Remove Resume
       .addCase(removeResume.pending, (state) => {
-        state.removeResumeStatus = 'loading';
+        state.removeResumeStatus = "loading";
       })
       .addCase(removeResume.fulfilled, (state, action) => {
-        state.removeResumeStatus = 'succeed';
+        state.removeResumeStatus = "succeed";
         resumeAdapter.removeOne(state, action.payload);
       })
       .addCase(removeResume.rejected, (state, action) => {
-        state.removeResumeStatus = 'failed';
+        state.removeResumeStatus = "failed";
         state.removeResumeError = action.payload;
       });
   },

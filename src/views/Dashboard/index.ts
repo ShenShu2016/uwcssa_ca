@@ -6,4 +6,4 @@
  * @FilePath: /uwcssa_ca/src/views/Dashboard/index.ts
  */
 
-export { default } from './Dashboard';
+export { default } from "./Dashboard";

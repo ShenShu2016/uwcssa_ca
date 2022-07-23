@@ -5,23 +5,22 @@
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/frontend/src/redux/alert/alertSlice.tsx
  */
-import { createSlice } from '@reduxjs/toolkit';
-
+import { createSlice } from "@reduxjs/toolkit";
 
 interface AlertState {
-    isOpen: boolean;
-    type: 'success' | 'info' | 'warning' | 'error';
-    message: string;
+  isOpen: boolean;
+  type: "success" | "info" | "warning" | "error";
+  message: string;
 }
 
 const initialState: AlertState = {
   isOpen: false,
-  type: 'info',
-  message: 'alert message'
+  type: "info",
+  message: "alert message",
 };
 
 const alertSlice = createSlice({
-  name: 'alert',
+  name: "alert",
   initialState,
   reducers: {
     setAlert(state, action) {
@@ -30,7 +29,7 @@ const alertSlice = createSlice({
         state.message = action.payload.message;
       }
       state.isOpen = action.payload.isOpen;
-    }
+    },
   },
 });
 

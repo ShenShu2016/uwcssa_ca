@@ -1,42 +1,42 @@
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Grid from '@mui/material/Grid';
-import React from 'react';
-import Typography from '@mui/material/Typography';
-import { useTheme } from '@mui/material/styles';
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
+import React from "react";
+import Typography from "@mui/material/Typography";
+import { useTheme } from "@mui/material/styles";
 
 const mock = [
   {
-    title: 'Your brand platform',
+    title: "Your brand platform",
     description:
-      'Monetize your website and manage all guest interactions with your own brand, logo and domains.',
+      "Monetize your website and manage all guest interactions with your own brand, logo and domains.",
     illustration:
-      'https://assets.maccarianagency.com/svg/illustrations/illustration4.svg',
+      "https://assets.maccarianagency.com/svg/illustrations/illustration4.svg",
     illustrationDark:
-      'https://assets.maccarianagency.com/svg/illustrations/illustration4--dark.svg',
+      "https://assets.maccarianagency.com/svg/illustrations/illustration4--dark.svg",
   },
   {
-    title: 'Mobile compatible platform',
+    title: "Mobile compatible platform",
     description:
-      'Introduce your brand-new mobile friendly website to your customers. Seamlessly integrates with WiFi hardware and marketing automation software.',
+      "Introduce your brand-new mobile friendly website to your customers. Seamlessly integrates with WiFi hardware and marketing automation software.",
     illustration:
-      'https://assets.maccarianagency.com/svg/illustrations/illustration1.svg',
+      "https://assets.maccarianagency.com/svg/illustrations/illustration1.svg",
     illustrationDark:
-      'https://assets.maccarianagency.com/svg/illustrations/illustration1--dark.svg',
+      "https://assets.maccarianagency.com/svg/illustrations/illustration1--dark.svg",
   },
   {
-    label: 'Client portal access',
-    title: 'Simple customer dashboards',
+    label: "Client portal access",
+    title: "Simple customer dashboards",
     description:
-      'Give sub-users access to a simplified dashboard with limited permission levels to offer remote management and real-time analytics.',
+      "Give sub-users access to a simplified dashboard with limited permission levels to offer remote management and real-time analytics.",
     illustration:
-      'https://assets.maccarianagency.com/svg/illustrations/illustration2.svg',
+      "https://assets.maccarianagency.com/svg/illustrations/illustration2.svg",
     illustrationDark:
-      'https://assets.maccarianagency.com/svg/illustrations/illustration2--dark.svg',
+      "https://assets.maccarianagency.com/svg/illustrations/illustration2--dark.svg",
   },
 ];
 
-const Work = (): JSX.Element => {
+function Work(): JSX.Element {
   const theme = useTheme();
 
   return (
@@ -44,32 +44,32 @@ const Work = (): JSX.Element => {
       <Box marginBottom={4}>
         <Typography
           sx={{
-            textTransform: 'uppercase',
-            fontWeight: 'medium',
+            textTransform: "uppercase",
+            fontWeight: "medium",
           }}
           gutterBottom
-          color={'text.secondary'}
-          align={'center'}
+          color="text.secondary"
+          align="center"
         >
           Our work
         </Typography>
-        <Typography variant={'h4'} sx={{ fontWeight: 700 }} align={'center'}>
+        <Typography variant="h4" sx={{ fontWeight: 700 }} align="center">
           We are a small agency of talented designers & developers
         </Typography>
         <Typography
           variant="h6"
           component="p"
           color="text.secondary"
-          align={'center'}
+          align="center"
         >
           Unlike teams from big agencies, we will treat your project as ours. We
           will walk you through our smooth and simple process.
         </Typography>
-        <Box marginTop={2} display={'flex'} justifyContent={'center'}>
+        <Box marginTop={2} display="flex" justifyContent="center">
           <Button
-            color={'primary'}
-            variant={'contained'}
-            size={'large'}
+            color="primary"
+            variant="contained"
+            size="large"
             startIcon={
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -82,7 +82,7 @@ const Work = (): JSX.Element => {
                 <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
               </svg>
             }
-            onClick={() => window.open('mailto:uwincssa.it@gmail.com')}
+            onClick={() => window.open("mailto:uwincssa.it@gmail.com")}
           >
             Contact us
           </Button>
@@ -100,26 +100,22 @@ const Work = (): JSX.Element => {
             container
             xs={12}
             spacing={4}
-            direction={i % 2 === 1 ? 'row-reverse' : 'row'}
+            direction={i % 2 === 1 ? "row-reverse" : "row"}
           >
-            <Grid item container alignItems={'center'} xs={12} sm={6}>
+            <Grid item container alignItems="center" xs={12} sm={6}>
               <Box>
-                <Typography
-                  variant={'h6'}
-                  gutterBottom
-                  sx={{ fontWeight: 700 }}
-                >
+                <Typography variant="h6" gutterBottom sx={{ fontWeight: 700 }}>
                   {item.title}
                 </Typography>
                 <Typography color="text.secondary">
                   {item.description}
                 </Typography>
                 <Button
-                  size={'large'}
+                  size="large"
                   sx={{ marginTop: 2 }}
                   endIcon={
                     <Box
-                      component={'svg'}
+                      component="svg"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
                       viewBox="0 0 24 24"
@@ -143,21 +139,21 @@ const Work = (): JSX.Element => {
             <Grid
               item
               container
-              justifyContent={'center'}
-              alignItems={'center'}
+              justifyContent="center"
+              alignItems="center"
               xs={12}
               sm={6}
             >
               <Box
-                component={'img'}
+                component="img"
                 src={`${
-                  theme.palette.mode === 'light'
+                  theme.palette.mode === "light"
                     ? item.illustration
                     : item.illustrationDark
                 }`}
                 alt={item.title}
                 width={1}
-                maxWidth={'80%'}
+                maxWidth="80%"
               />
             </Grid>
           </Grid>
@@ -165,6 +161,6 @@ const Work = (): JSX.Element => {
       </Grid>
     </Box>
   );
-};
+}
 
 export default Work;

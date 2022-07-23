@@ -11,26 +11,26 @@ import {
   GoogleMap,
   LoadScript,
   Marker,
-} from '@react-google-maps/api';
-import React, { useEffect, useState } from 'react';
+} from "@react-google-maps/api";
+import React, { useEffect, useState } from "react";
 
-import TextField from '@mui/material/TextField';
-import { setEventCreateAddress } from 'redux/address/addressSlice';
-import { useAppDispatch } from 'redux/hooks';
+import TextField from "@mui/material/TextField";
+import { setEventCreateAddress } from "redux/address/addressSlice";
+import { useAppDispatch } from "redux/hooks";
 
 const containerStyle = {
-  width: '600px',
-  height: '400px',
+  width: "600px",
+  height: "400px",
 };
 
 type Libraries = (
-  | 'drawing'
-  | 'geometry'
-  | 'localContext'
-  | 'places'
-  | 'visualization'
+  | "drawing"
+  | "geometry"
+  | "localContext"
+  | "places"
+  | "visualization"
 )[];
-const libraries: Libraries = ['places'];
+const libraries: Libraries = ["places"];
 
 interface GoogleMapsProp {
   setLocation: React.Dispatch<React.SetStateAction<object>>;
@@ -40,7 +40,7 @@ const GoogleMaps: React.FC<GoogleMapsProp> = ({ setLocation }) => {
   const dispatch = useAppDispatch();
 
   const [autoComplete, setAutoComplete] = useState(null);
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState("");
   // 温莎大学图书馆 默认地址
   const [center, setCenter] = useState({
     lat: 42.307,
@@ -66,23 +66,23 @@ const GoogleMaps: React.FC<GoogleMapsProp> = ({ setLocation }) => {
       const location = autoComplete.getPlace();
       const geometry = location.geometry.location;
       setLocation(location);
-      dispatch(setEventCreateAddress({ ...location })); //！！这里会报一次红，但是没啥太大问题
+      dispatch(setEventCreateAddress({ ...location })); // ！！这里会报一次红，但是没啥太大问题
       setCenter({
         lat: geometry.lat(),
         lng: geometry.lng(),
       });
       setInput(location.formatted_address);
     } else {
-      console.log('Autocomplete is not loaded yet!');
+      console.log("Autocomplete is not loaded yet!");
     }
   };
 
   useEffect(() => {
     const options: NodeListOf<HTMLElement> =
-      document.querySelectorAll('.pac-container');
+      document.querySelectorAll(".pac-container");
     if (options) {
       for (let i = 0; i < options.length; i++) {
-        options[i].style.zIndex = '9999';
+        options[i].style.zIndex = "9999";
       }
     }
   });
@@ -109,7 +109,7 @@ const GoogleMaps: React.FC<GoogleMapsProp> = ({ setLocation }) => {
           sx={{ mt: 2 }}
           label="Title"
           variant="outlined"
-          name={'title'}
+          name="title"
           fullWidth
           size="small"
           value={input}

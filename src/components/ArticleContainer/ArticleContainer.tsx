@@ -5,15 +5,15 @@
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/frontend/src/components/ArticleContainer/ArticleContainer.tsx
  */
-import React from 'react';
-import BlogWithLargeImage from '../BlogWithLargeImage';
+import React from "react";
+import BlogWithLargeImage from "../BlogWithLargeImage";
 
-const ArticleContainer = (): React.ReactElement => {
+function ArticleContainer(): React.ReactElement {
   return (
     <div>
       <BlogWithLargeImage />
     </div>
   );
-};
+}
 
 export default ArticleContainer;

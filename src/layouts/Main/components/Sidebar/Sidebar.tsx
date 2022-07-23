@@ -6,16 +6,16 @@
  * @FilePath: /uwcssa_ca/src/layouts/Main/components/Sidebar/Sidebar.tsx
  */
 
-import Box from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
-import React from 'react';
-import { SidebarNav } from './components';
+import Box from "@mui/material/Box";
+import Drawer from "@mui/material/Drawer";
+import React from "react";
+import { SidebarNav } from "./components";
 
 interface Props {
   // eslint-disable-next-line @typescript-eslint/ban-types
   onClose: () => void;
   open: boolean;
-  variant: 'permanent' | 'persistent' | 'temporary' | undefined;
+  variant: "permanent" | "persistent" | "temporary" | undefined;
   pages: {
     dashboard: Array<PageItem> | PageItem;
     UWCSSA: Array<PageItem> | PageItem;
@@ -29,7 +29,7 @@ interface Props {
   };
 }
 
-const Sidebar = ({ pages, open, variant, onClose }: Props): JSX.Element => {
+function Sidebar({ pages, open, variant, onClose }: Props): JSX.Element {
   return (
     <Drawer
       anchor="left"
@@ -37,15 +37,15 @@ const Sidebar = ({ pages, open, variant, onClose }: Props): JSX.Element => {
       open={open}
       variant={variant}
       sx={{
-        '& .MuiPaper-root': {
-          width: '100%',
+        "& .MuiPaper-root": {
+          width: "100%",
           maxWidth: 280,
         },
       }}
     >
       <Box
         sx={{
-          height: '100%',
+          height: "100%",
           padding: 1,
         }}
       >
@@ -53,6 +53,6 @@ const Sidebar = ({ pages, open, variant, onClose }: Props): JSX.Element => {
       </Box>
     </Drawer>
   );
-};
+}
 
 export default Sidebar;

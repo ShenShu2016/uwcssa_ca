@@ -8,8 +8,8 @@
  *
  */
 
-export { default as Hero } from './Hero';
-export { default as Team } from './Team';
-export { default as Partners } from './Partners';
-export { default as Story } from './Story';
-export { default as Features } from './Features';
+export { default as Hero } from "./Hero";
+export { default as Team } from "./Team";
+export { default as Partners } from "./Partners";
+export { default as Story } from "./Story";
+export { default as Features } from "./Features";

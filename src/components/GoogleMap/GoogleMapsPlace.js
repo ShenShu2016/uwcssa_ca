@@ -8,63 +8,59 @@
  *
  */
 
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from "react";
 
-import Autocomplete from '@mui/material/Autocomplete';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
-import parse from 'autosuggest-highlight/parse';
-import throttle from 'lodash/throttle';
+import Autocomplete from "@mui/material/Autocomplete";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
+import parse from "autosuggest-highlight/parse";
+import throttle from "lodash/throttle";
 
 let address = null;
 let geocoder;
 
 export async function GetAddress() {
-  console.log('我正在找经纬度');
+  console.log("我正在找经纬度");
   let newAddress;
   // console.log("getAddress");
   console.log(address);
   if (address.place_id) {
     await new Promise((resolve) => {
-      geocoder.geocode(
-        { placeId: address.place_id },
-        function (results, status) {
-          if (status === window.google.maps.GeocoderStatus.OK) {
-            const lat = results[0].geometry.location.lat();
-            const lng = results[0].geometry.location.lng();
-            newAddress = {
-              ...address,
-              lat: Number(lat),
-              lng: Number(lng),
-              geocodingResult: results,
-            };
-            resolve();
-          } else {
-            console.log(
-              'Geocode was not successful for the following reason: ' + status,
-            );
-          }
-        },
-      );
+      geocoder.geocode({ placeId: address.place_id }, (results, status) => {
+        if (status === window.google.maps.GeocoderStatus.OK) {
+          const lat = results[0].geometry.location.lat();
+          const lng = results[0].geometry.location.lng();
+          newAddress = {
+            ...address,
+            lat: Number(lat),
+            lng: Number(lng),
+            geocodingResult: results,
+          };
+          resolve();
+        } else {
+          console.log(
+            `Geocode was not successful for the following reason: ${status}`,
+          );
+        }
+      });
     });
     return newAddress;
-  } else {
-    return undefined;
   }
+  return undefined;
 }
 
 function loadScript(src, position, id) {
-  console.log('我正在loadScript');
+  console.log("我正在loadScript");
   if (!position) {
     return;
   }
 
-  const script = document.createElement('script');
-  script.setAttribute('async', '');
-  script.setAttribute('id', id);
+  const script = document.createElement("script");
+  script.setAttribute("async", "");
+  script.setAttribute("id", id);
   script.src = src;
   position.appendChild(script);
 }
@@ -73,11 +69,11 @@ const autocompleteService = { current: null };
 // console.log("autocompleteService", autocompleteService);
 export default function GoogleMaps({
   userInputValue = null,
-  label = '加拿大地址',
+  label = "加拿大地址",
   ...rest
 }) {
   const [value, setValue] = useState(userInputValue);
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState("");
   // const [apartmentNumbers, setApartmentNumbers] = useState("");
   const [options, setOptions] = useState([]);
   const loaded = useRef(false);
@@ -94,17 +90,17 @@ export default function GoogleMaps({
     };
   });
 
-  if (typeof window !== 'undefined' && !loaded.current) {
+  if (typeof window !== "undefined" && !loaded.current) {
     // console.log(
     //   'typeof window !== "undefined" && !loaded.current',
     //   typeof window !== "undefined",
     //   !loaded.current
     // );
-    if (!document.querySelector('#google-maps')) {
+    if (!document.querySelector("#google-maps")) {
       loadScript(
-        'https://maps.googleapis.com/maps/api/js?key=AIzaSyCKR_7S6WE5ETziYlastsHnmKuvELeFTW4&libraries=places',
-        document.querySelector('head'),
-        'google-maps',
+        "https://maps.googleapis.com/maps/api/js?key=AIzaSyCKR_7S6WE5ETziYlastsHnmKuvELeFTW4&libraries=places",
+        document.querySelector("head"),
+        "google-maps",
       );
     }
 
@@ -137,7 +133,7 @@ export default function GoogleMaps({
       return undefined;
     }
 
-    if (inputValue === '') {
+    if (inputValue === "") {
       setOptions(value ? [value] : []);
       return undefined;
     }
@@ -177,7 +173,7 @@ export default function GoogleMaps({
       <Autocomplete
         id="google-map-demo"
         getOptionLabel={(option) =>
-          typeof option === 'string' ? option : option.description
+          typeof option === "string" ? option : option.description
         }
         filterOptions={(x) => x}
         // {...rest}
@@ -210,7 +206,7 @@ export default function GoogleMaps({
                   <Grid item>
                     <Box
                       component={LocationOnIcon}
-                      sx={{ color: 'text.secondary', mr: 2 }}
+                      sx={{ color: "text.secondary", mr: 2 }}
                     />
                   </Grid>
                   <Grid item xs>
@@ -218,7 +214,7 @@ export default function GoogleMaps({
                       <div key={index}>
                         <span
                           style={{
-                            color: 'green',
+                            color: "green",
                             fontWeight: part.highlight ? 700 : 400,
                           }}
                         >
@@ -236,11 +232,11 @@ export default function GoogleMaps({
           );
         }}
       />
-      <Box sx={{ my: 1, height: '15px' }}>
+      <Box sx={{ my: 1, height: "15px" }}>
         <img
           src="https://developers.google.com/maps/documentation/images/powered_by_google_on_white.png"
           alt="Powered by Google"
-          style={{ float: 'right', height: '100%' }}
+          style={{ float: "right", height: "100%" }}
         />
       </Box>
     </Box>

@@ -7,4 +7,4 @@
  * @Description:
  *
  */
-export { default } from './Partner';
+export { default } from "./Partner";

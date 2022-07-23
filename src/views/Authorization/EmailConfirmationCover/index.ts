@@ -7,4 +7,4 @@
  * @Description:
  *
  */
-export { default } from './EmailConfirmationCover';
+export { default } from "./EmailConfirmationCover";

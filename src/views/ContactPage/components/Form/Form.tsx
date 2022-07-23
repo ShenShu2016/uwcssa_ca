@@ -8,7 +8,7 @@
  *
  */
 
-import * as yup from 'yup';
+import * as yup from "yup";
 
 import {
   Box,
@@ -18,14 +18,14 @@ import {
   Typography,
   useMediaQuery,
   useTheme,
-} from '@mui/material';
-import { useAppDispatch, useAppSelector } from 'redux/hooks';
+} from "@mui/material";
+import { useAppDispatch, useAppSelector } from "redux/hooks";
 
-import React from 'react';
-import { getOwnerUserName } from 'redux/auth/authSlice';
-import { postContactUs } from 'redux/contactUs/ContactUsSlice';
-import { useFormik } from 'formik';
-import { useSnackbar } from 'notistack';
+import React from "react";
+import { getOwnerUserName } from "redux/auth/authSlice";
+import { postContactUs } from "redux/contactUs/ContactUsSlice";
+import { useFormik } from "formik";
+import { useSnackbar } from "notistack";
 
 /* eslint-disable react/no-unescaped-entities */
 
@@ -33,37 +33,37 @@ const validationSchema = yup.object({
   fullName: yup
     .string()
     .trim()
-    .min(2, 'Please enter a valid full name')
-    .max(50, 'Please enter a valid full name')
-    .required('Please specify your full name'),
-  message: yup.string().trim().required('Please specify your message'),
+    .min(2, "Please enter a valid full name")
+    .max(50, "Please enter a valid full name")
+    .required("Please specify your full name"),
+  message: yup.string().trim().required("Please specify your message"),
   email: yup
     .string()
     .trim()
-    .email('Please enter a valid email address')
-    .required('Email is required'),
+    .email("Please enter a valid email address")
+    .required("Email is required"),
   phone: yup
     .string()
     .trim()
-    .min(9, 'Please enter a valid phone number')
-    .max(15, 'Please enter a valid phone number'),
-  //.required('Please specify your phone number'),
+    .min(9, "Please enter a valid phone number")
+    .max(15, "Please enter a valid phone number"),
+  // .required('Please specify your phone number'),
 });
 
-const Form = (): JSX.Element => {
+function Form(): JSX.Element {
   const theme = useTheme();
   const dispatch = useAppDispatch();
   const ownerUserName = useAppSelector(getOwnerUserName);
   const { enqueueSnackbar } = useSnackbar();
-  const isMd = useMediaQuery(theme.breakpoints.up('md'), {
+  const isMd = useMediaQuery(theme.breakpoints.up("md"), {
     defaultMatches: true,
   });
 
   const initialValues = {
-    fullName: '',
-    message: '',
-    email: '',
-    phone: '',
+    fullName: "",
+    message: "",
+    email: "",
+    phone: "",
   };
 
   const onSubmit = async (values) => {
@@ -73,11 +73,11 @@ const Form = (): JSX.Element => {
       owner: ownerUserName && ownerUserName,
     };
     const response = await dispatch(postContactUs({ createContactUsInput }));
-    if (response.meta.requestStatus === 'fulfilled') {
+    if (response.meta.requestStatus === "fulfilled") {
       formik.resetForm();
-      enqueueSnackbar('Message sent successfully', { variant: 'success' });
+      enqueueSnackbar("Message sent successfully", { variant: "success" });
     } else {
-      enqueueSnackbar('Message failed to send', { variant: 'error' });
+      enqueueSnackbar("Message failed to send", { variant: "error" });
       return false;
     }
     return values;
@@ -85,7 +85,7 @@ const Form = (): JSX.Element => {
 
   const formik = useFormik({
     initialValues,
-    validationSchema: validationSchema,
+    validationSchema,
     onSubmit,
   });
 
@@ -93,10 +93,10 @@ const Form = (): JSX.Element => {
     <Box>
       <Box marginBottom={2}>
         <Typography
-          variant={'h4'}
+          variant="h4"
           sx={{ fontWeight: 700 }}
           gutterBottom
-          align={'center'}
+          align="center"
         >
           有任何问题？
         </Typography>
@@ -108,14 +108,14 @@ const Form = (): JSX.Element => {
       </Box>
       <Box
         maxWidth={600}
-        margin={'0 auto'}
-        component={'form'}
+        margin="0 auto"
+        component="form"
         onSubmit={formik.handleSubmit}
         sx={{
-          '& .MuiOutlinedInput-root.MuiInputBase-multiline': {
+          "& .MuiOutlinedInput-root.MuiInputBase-multiline": {
             padding: 0,
           },
-          '& .MuiOutlinedInput-input': {
+          "& .MuiOutlinedInput-input": {
             background: theme.palette.background.paper,
             padding: 2,
           },
@@ -181,7 +181,7 @@ const Form = (): JSX.Element => {
               size="medium"
               name="phone"
               fullWidth
-              //type="email"
+              // type="email"
               value={formik.values.phone}
               onChange={formik.handleChange}
               error={formik.touched.phone && Boolean(formik.errors.phone)}
@@ -224,6 +224,6 @@ const Form = (): JSX.Element => {
       </Box>
     </Box>
   );
-};
+}
 
 export default Form;

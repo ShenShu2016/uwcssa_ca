@@ -7,4 +7,4 @@
  * @Description:
  *
  */
-export { default } from './DeveloperCard';
+export { default } from "./DeveloperCard";

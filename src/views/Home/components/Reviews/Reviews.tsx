@@ -18,18 +18,18 @@ import {
   ListItemAvatar,
   ListItemText,
   Typography,
-} from '@mui/material';
-import React, { useEffect } from 'react';
+} from "@mui/material";
+import React, { useEffect } from "react";
 import {
   fetchResearchDevelopmentTeamList,
   selectAllResearchDevelopmentTeams,
-} from 'redux/researchDevelopmentTeam/researchDevelopmentTeamSlice';
-import { useAppDispatch, useAppSelector } from 'redux/hooks';
+} from "redux/researchDevelopmentTeam/researchDevelopmentTeamSlice";
+import { useAppDispatch, useAppSelector } from "redux/hooks";
 
-import { getAuthState } from 'redux/auth/authSlice';
-import { stringAvatar } from 'components/Avatar/AvatarFunction';
+import { getAuthState } from "redux/auth/authSlice";
+import { stringAvatar } from "components/Avatar/AvatarFunction";
 
-const Reviews = (): JSX.Element => {
+function Reviews(): JSX.Element {
   const dispatch = useAppDispatch();
   const isAuth = useAppSelector(getAuthState);
 
@@ -38,7 +38,7 @@ const Reviews = (): JSX.Element => {
     (state) => state.researchDevelopmentTeam,
   );
   useEffect(() => {
-    if (isAuth !== null && fetchResearchDevelopmentTeamListStatus === 'idle') {
+    if (isAuth !== null && fetchResearchDevelopmentTeamListStatus === "idle") {
       dispatch(fetchResearchDevelopmentTeamList({ isAuth }));
     }
   }, [isAuth, fetchResearchDevelopmentTeamListStatus]);
@@ -48,12 +48,12 @@ const Reviews = (): JSX.Element => {
       <Box marginBottom={4}>
         <Typography
           variant="h4"
-          align={'center'}
-          data-aos={'fade-up'}
+          align="center"
+          data-aos="fade-up"
           gutterBottom
           sx={{
             fontWeight: 700,
-            color: 'common.white',
+            color: "common.white",
           }}
         >
           Development Team
@@ -76,21 +76,21 @@ const Reviews = (): JSX.Element => {
             <Box
               width={1}
               height={1}
-              data-aos={'fade-up'}
+              data-aos="fade-up"
               data-aos-delay={i * 100}
               data-aos-offset={100}
               data-aos-duration={600}
               component={Card}
-              display={'flex'}
-              flexDirection={'column'}
-              alignItems={'center'}
+              display="flex"
+              flexDirection="column"
+              alignItems="center"
               boxShadow={0}
-              variant={'outlined'}
+              variant="outlined"
             >
               <CardContent
                 sx={{
-                  display: 'flex',
-                  flexDirection: 'column',
+                  display: "flex",
+                  flexDirection: "column",
                 }}
               >
                 <Box sx={{ paddingBottom: 2 }}>
@@ -98,7 +98,7 @@ const Reviews = (): JSX.Element => {
                     <ListItemAvatar sx={{ marginRight: 3 }}>
                       <Avatar
                         src={item.user.avatarURL?.objectCompressedURL}
-                        variant={'rounded'}
+                        variant="rounded"
                         {...stringAvatar(item.user.name, {
                           width: 100,
                           height: 100,
@@ -121,6 +121,6 @@ const Reviews = (): JSX.Element => {
       </Grid>
     </Box>
   );
-};
+}
 
 export default Reviews;

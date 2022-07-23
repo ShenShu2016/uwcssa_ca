@@ -8,14 +8,14 @@
  *
  */
 
-import { Link, useLocation } from 'react-router-dom';
-import React, { useEffect, useState } from 'react';
-import { alpha, useTheme } from '@mui/material/styles';
+import { Link, useLocation } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { alpha, useTheme } from "@mui/material/styles";
 
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import CloseIcon from '@mui/icons-material/Close';
-import Typography from '@mui/material/Typography';
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import CloseIcon from "@mui/icons-material/Close";
+import Typography from "@mui/material/Typography";
 
 interface Props {
   // eslint-disable-next-line @typescript-eslint/ban-types
@@ -26,10 +26,10 @@ interface Props {
   }>;
 }
 
-const SidebarNav = ({ pages, onClose }: Props): JSX.Element => {
+function SidebarNav({ pages, onClose }: Props): JSX.Element {
   const theme = useTheme();
   const location = useLocation();
-  const [activeLink, setActiveLink] = useState('');
+  const [activeLink, setActiveLink] = useState("");
 
   useEffect(() => {
     setActiveLink(location.pathname);
@@ -38,9 +38,9 @@ const SidebarNav = ({ pages, onClose }: Props): JSX.Element => {
   return (
     <Box paddingBottom={2}>
       <Box
-        justifyContent={'flex-end'}
+        justifyContent="flex-end"
         onClick={() => onClose()}
-        display={{ xs: 'flex', md: 'none' }}
+        display={{ xs: "flex", md: "none" }}
       >
         <CloseIcon fontSize="small" />
       </Box>
@@ -51,9 +51,9 @@ const SidebarNav = ({ pages, onClose }: Props): JSX.Element => {
               variant="caption"
               sx={{
                 fontWeight: 700,
-                textTransform: 'uppercase',
+                textTransform: "uppercase",
                 marginBottom: 1,
-                display: 'block',
+                display: "block",
               }}
             >
               {item.groupTitle}
@@ -67,7 +67,7 @@ const SidebarNav = ({ pages, onClose }: Props): JSX.Element => {
                     target={p.target}
                     fullWidth
                     sx={{
-                      justifyContent: 'flex-start',
+                      justifyContent: "flex-start",
                       color:
                         activeLink === p.href
                           ? theme.palette.primary.main
@@ -75,7 +75,7 @@ const SidebarNav = ({ pages, onClose }: Props): JSX.Element => {
                       backgroundColor:
                         activeLink === p.href
                           ? alpha(theme.palette.primary.main, 0.1)
-                          : 'transparent',
+                          : "transparent",
                       fontWeight: activeLink === p.href ? 600 : 400,
                     }}
                     onClick={() => onClose()}
@@ -107,6 +107,6 @@ const SidebarNav = ({ pages, onClose }: Props): JSX.Element => {
       </Box>
     </Box>
   );
-};
+}
 
 export default SidebarNav;

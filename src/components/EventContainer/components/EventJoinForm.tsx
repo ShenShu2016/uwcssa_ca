@@ -7,11 +7,11 @@
  * @FilePath: /uwcssa_ca/src/components/EventContainer/components/EventJoinForm.tsx
  */
 
-import { Dialog, DialogTitle } from '@mui/material';
+import { Dialog, DialogTitle } from "@mui/material";
 
-import DynamicForm from 'components/DynamicForm';
+import DynamicForm from "components/DynamicForm";
 // import { Event } from 'redux/event/eventSlice';
-import React from 'react';
+import React from "react";
 
 interface EventJoinFormProp {
   open: boolean;
@@ -23,24 +23,22 @@ const EventJoinForm: React.FC<EventJoinFormProp> = ({
   open,
   setOpen,
   event,
-}) => {
-  return (
-    <Dialog
-      open={open}
-      // maxWidth="xs"
-      fullWidth
-      onClose={() => setOpen(false)}
-      scroll={'paper'}
-    >
-      <DialogTitle>{event ? event.title : '活动报名'}</DialogTitle>
+}) => (
+  <Dialog
+    open={open}
+    // maxWidth="xs"
+    fullWidth
+    onClose={() => setOpen(false)}
+    scroll="paper"
+  >
+    <DialogTitle>{event ? event.title : "活动报名"}</DialogTitle>
 
-      <DynamicForm
-        formItemList={event?.form?.formItems?.items}
-        setOpen={setOpen}
-        eventId={event?.id}
-      />
-    </Dialog>
-  );
-};
+    <DynamicForm
+      formItemList={event?.form?.formItems?.items}
+      setOpen={setOpen}
+      eventId={event?.id}
+    />
+  </Dialog>
+);
 
 export default EventJoinForm;

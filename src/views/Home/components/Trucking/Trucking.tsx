@@ -1,23 +1,23 @@
-import Avatar from '@mui/material/Avatar';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import LaptopSkeletonIllustration from 'svg/illustrations/LaptopSkeleton';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import ListItemText from '@mui/material/ListItemText';
+import Avatar from "@mui/material/Avatar";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import LaptopSkeletonIllustration from "svg/illustrations/LaptopSkeleton";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import ListItemText from "@mui/material/ListItemText";
 /* eslint-disable react/no-unescaped-entities */
-import React from 'react';
-import Typography from '@mui/material/Typography';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import { useTheme } from '@mui/material/styles';
+import React from "react";
+import Typography from "@mui/material/Typography";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
 
 const mock = [
   {
-    title: 'Built for developers',
+    title: "Built for developers",
     subtitle:
-      'theFront is built to make your life easier. Variables, build tooling, documentation, and reusable components.',
+      "theFront is built to make your life easier. Variables, build tooling, documentation, and reusable components.",
     icon: (
       <svg
         height={24}
@@ -37,9 +37,9 @@ const mock = [
     ),
   },
   {
-    title: 'Designed to be modern',
+    title: "Designed to be modern",
     subtitle:
-      'Designed with the latest design trends in mind. theFront feels modern, minimal, and beautiful.',
+      "Designed with the latest design trends in mind. theFront feels modern, minimal, and beautiful.",
     icon: (
       <svg
         height={24}
@@ -59,7 +59,7 @@ const mock = [
     ),
   },
   {
-    title: 'Documentation for everything',
+    title: "Documentation for everything",
     subtitle:
       // eslint-disable-next-line quotes
       "We've written extensive documentation for components and tools, so you never have to reverse engineer anything.",
@@ -83,123 +83,129 @@ const mock = [
   },
 ];
 
-const Trucking = (): JSX.Element => {
+function Trucking(): JSX.Element {
   const theme = useTheme();
-  const isMd = useMediaQuery(theme.breakpoints.up('md'), {
+  const isMd = useMediaQuery(theme.breakpoints.up("md"), {
     defaultMatches: true,
   });
 
-  const LeftSide = () => (
-    <List disablePadding>
-      {mock.map((item, index) => (
-        <ListItem
-          key={index}
-          disableGutters
-          data-aos="fade-up"
-          data-aos-delay={index * 300}
-          data-aos-offset={100}
-          data-aos-duration={600}
-        >
-          <ListItemAvatar>
-            <Box
-              component={Avatar}
-              variant={'rounded'}
-              color={theme.palette.primary.dark}
-              bgcolor={`${theme.palette.primary.light}22`}
-            >
-              {item.icon}
-            </Box>
-          </ListItemAvatar>
-          <ListItemText primary={item.title} secondary={item.subtitle} />
-        </ListItem>
-      ))}
-    </List>
-  );
+  function LeftSide() {
+    return (
+      <List disablePadding>
+        {mock.map((item, index) => (
+          <ListItem
+            key={index}
+            disableGutters
+            data-aos="fade-up"
+            data-aos-delay={index * 300}
+            data-aos-offset={100}
+            data-aos-duration={600}
+          >
+            <ListItemAvatar>
+              <Box
+                component={Avatar}
+                variant="rounded"
+                color={theme.palette.primary.dark}
+                bgcolor={`${theme.palette.primary.light}22`}
+              >
+                {item.icon}
+              </Box>
+            </ListItemAvatar>
+            <ListItemText primary={item.title} secondary={item.subtitle} />
+          </ListItem>
+        ))}
+      </List>
+    );
+  }
 
-  const RightSide = () => (
-    <Box width={1}>
-      <Box
-        sx={{
-          position: 'relative',
-          marginX: 'auto',
-        }}
-      >
+  function RightSide() {
+    return (
+      <Box width={1}>
         <Box
           sx={{
-            position: 'relative',
-            marginX: 'auto',
+            position: "relative",
+            marginX: "auto",
           }}
         >
-          <Box>
-            <Box
-              position={'relative'}
-              zIndex={2}
-              maxWidth={1}
-              height={'auto'}
-              sx={{ verticalAlign: 'middle' }}
-            >
-              <LaptopSkeletonIllustration />
-            </Box>
-            <Box
-              position={'absolute'}
-              top={'8.4%'}
-              left={'12%'}
-              width={'76%'}
-              height={'83%'}
-              border={`1px solid ${theme.palette.alternate.dark}`}
-              zIndex={3}
-              sx={{
-                '& .lazy-load-image-loaded': {
-                  height: 1,
-                  width: 1,
-                },
-              }}
-            >
+          <Box
+            sx={{
+              position: "relative",
+              marginX: "auto",
+            }}
+          >
+            <Box>
               <Box
-                component={LazyLoadImage}
-                effect="blur"
-                src="https://assets.maccarianagency.com/screenshots/dashboard.png"
-                alt="Image Description"
-                width={1}
-                height={1}
+                position="relative"
+                zIndex={2}
+                maxWidth={1}
+                height="auto"
+                sx={{ verticalAlign: "middle" }}
+              >
+                <LaptopSkeletonIllustration />
+              </Box>
+              <Box
+                position="absolute"
+                top="8.4%"
+                left="12%"
+                width="76%"
+                height="83%"
+                border={`1px solid ${theme.palette.alternate.dark}`}
+                zIndex={3}
                 sx={{
-                  objectFit: 'cover',
-                  filter:
-                    theme.palette.mode === 'dark' ? 'brightness(0.7)' : 'none',
+                  "& .lazy-load-image-loaded": {
+                    height: 1,
+                    width: 1,
+                  },
                 }}
-              />
+              >
+                <Box
+                  component={LazyLoadImage}
+                  effect="blur"
+                  src="https://assets.maccarianagency.com/screenshots/dashboard.png"
+                  alt="Image Description"
+                  width={1}
+                  height={1}
+                  sx={{
+                    objectFit: "cover",
+                    filter:
+                      theme.palette.mode === "dark"
+                        ? "brightness(0.7)"
+                        : "none",
+                  }}
+                />
+              </Box>
             </Box>
           </Box>
         </Box>
       </Box>
-    </Box>
-  );
+    );
+  }
 
   return (
     <Box>
       <Box marginBottom={4}>
         <Box marginBottom={2}>
-          <Typography variant="h4" align={'center'} sx={{ fontWeight: 700 }}>
+          <Typography variant="h4" align="center" sx={{ fontWeight: 700 }}>
             Trucking
           </Typography>
         </Box>
-        <Typography variant="h6" component="p" align={'center'}>
+        <Typography variant="h6" component="p" align="center">
           Decision problems faced by less than truckload (LTL) companies are
           highly complex.
         </Typography>
       </Box>
       <Grid container spacing={4}>
-        <Grid item container alignItems={'center'} xs={12} md={6}>
-          <Box data-aos={isMd ? 'fade-right' : 'fade-up'}>
+        <Grid item container alignItems="center" xs={12} md={6}>
+          <Box data-aos={isMd ? "fade-right" : "fade-up"}>
             <LeftSide />
           </Box>
         </Grid>
-        <Grid item container alignItems={'center'} xs={12} md={6}>
+        <Grid item container alignItems="center" xs={12} md={6}>
           <RightSide />
         </Grid>
       </Grid>
     </Box>
   );
-};
+}
 
 export default Trucking;

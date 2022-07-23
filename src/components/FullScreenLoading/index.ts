@@ -5,4 +5,4 @@
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/components/FullScreenLoading/index.ts
  */
-export { default } from './FullScreenLoading';
+export { default } from "./FullScreenLoading";
