@@ -22,9 +22,10 @@ import {
   useTheme,
 } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
+import { googleSignIn, signIn } from 'redux/auth/authSlice';
 
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import React from 'react';
-import { signIn } from 'redux/auth/authSlice';
 import { useAppDispatch } from 'redux/hooks';
 import { useFormik } from 'formik';
 
@@ -81,6 +82,10 @@ const SidebarNewsletter = (): JSX.Element => {
     validationSchema: validationSchema,
     onSubmit,
   });
+
+  const handleGoogleSignIn = async () => {
+    dispatch(googleSignIn());
+  };
 
   return (
     <Box component={Card} padding={2} bgcolor={'transparent'}>
@@ -199,6 +204,24 @@ const SidebarNewsletter = (): JSX.Element => {
                     Login
                   </Button>
                 </Box>
+              </Grid>
+              <Grid item container xs={12}>
+                <Button
+                  fullWidth
+                  variant={'contained'}
+                  color={'primary'}
+                  onClick={() => handleGoogleSignIn()}
+                  sx={{ lineHeight: 1 }}
+                >
+                  <Box
+                    component={LazyLoadImage}
+                    effect="blur"
+                    src="/assets/images/icons/google-1.svg"
+                  />
+                  <Box sx={{ fontSize: '12px', marginLeft: '1rem' }}>
+                    Google登录
+                  </Box>
+                </Button>
               </Grid>
             </Grid>
           </form>
