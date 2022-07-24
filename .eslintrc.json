@@ -27,6 +27,13 @@
     "react/jsx-uses-react": ["off"],
     "react/jsx-props-no-spreading": ["off"],
     "react/no-unescaped-entities": ["off"],
-    "no-console": "off"
+    "no-console": "off",
+    "no-param-reassign": [
+      "error",
+      {
+        "props": true,
+        "ignorePropertyModificationsFor": ["state"]
+      }
+    ]
   }
 }

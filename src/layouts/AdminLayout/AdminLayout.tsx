@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-28 16:04:22
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-07-23 15:36:52
+ * @LastEditTime: 2022-07-24 14:03:13
  * @FilePath: /uwcssa_ca/src/layouts/AdminLayout/AdminLayout.tsx
  * @Description:
  *
@@ -19,9 +19,10 @@ import {
 import React, { useState } from "react";
 
 import Container from "components/Container";
-import { Footer, Topbar } from "./components";
+import Footer from "./components/Footer/Footer";
 import Sidebar from "./components/Sidebar/Sidebar";
 import pages from "../navigation--admin";
+import Topbar from "./components/Topbar/Topbar";
 
 interface Props {
   children: React.ReactNode;

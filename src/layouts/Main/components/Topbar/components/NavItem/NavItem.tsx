@@ -2,29 +2,33 @@
  * @Author: Shen Shu
  * @Date: 2022-05-19 17:21:07
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-30 00:16:17
+ * @LastEditTime: 2022-07-24 14:34:20
  * @FilePath: /uwcssa_ca/src/layouts/Main/components/Topbar/components/NavItem/NavItem.tsx
  * @Description:
  *
  */
 
 import React, { useEffect, useState } from "react";
-import { alpha, useTheme } from "@mui/material/styles";
+import {
+  alpha,
+  useTheme,
+  Box,
+  Button,
+  Grid,
+  Popover,
+  Typography,
+} from "@mui/material";
 import { matchPath, useNavigate } from "react-router";
 
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import Grid from "@mui/material/Grid";
+
 import { Link, useLocation } from "react-router-dom";
-import Popover from "@mui/material/Popover";
-import Typography from "@mui/material/Typography";
 
 interface Props {
   title: string;
   id: string;
-  items?: Array<PageItem> | PageItem;
-  colorInvert?: boolean;
+  items: Array<PageItem> | PageItem | undefined;
+  colorInvert: boolean | undefined;
 }
 
 function NavItem({
@@ -120,8 +124,8 @@ function NavItem({
             }}
           >
             <Grid container spacing={0.5}>
-              {items.map((p, i) => (
-                <Grid item key={i} xs={items.length > 12 ? 6 : 12}>
+              {items.map((p) => (
+                <Grid item key={p.title} xs={items.length > 12 ? 6 : 12}>
                   <Button
                     component={Link}
                     to={p.href}

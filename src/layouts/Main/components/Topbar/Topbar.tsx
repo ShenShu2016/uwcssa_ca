@@ -1,27 +1,24 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
- * @LastEditors: Shikai Jin
- * @LastEditTime: 2022-06-21 22:44:21
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-07-24 14:33:22
  * @FilePath: /uwcssa_ca/src/layouts/Main/components/Topbar/Topbar.tsx
  * @Description:
  *
  */
 
-import { alpha, useTheme } from "@mui/material/styles";
+import { Button, Box, alpha, useTheme, Typography } from "@mui/material";
 
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import React from "react";
-import { Typography } from "@mui/material";
 import { getAuthState } from "redux/auth/authSlice";
 import { useAppSelector } from "redux/hooks";
-import { AccountMenu, NavItem } from "./components";
+import NavItem from "./components/NavItem/NavItem";
+import AccountMenu from "./components/AccountMenu/AccountMenu";
 
 interface Props {
-  // eslint-disable-next-line @typescript-eslint/ban-types
   onSidebarOpen: () => void;
   pages: {
     dashboard: Array<PageItem> | PageItem;
@@ -34,7 +31,7 @@ interface Props {
     activity: Array<PageItem> | PageItem;
     contact: Array<PageItem> | PageItem;
   };
-  colorInvert?: boolean;
+  colorInvert: boolean | undefined;
 }
 
 function Topbar({

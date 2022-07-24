@@ -1,10 +1,18 @@
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
+/*
+ * @Author: Shen Shu
+ * @Date: 2022-06-14 10:58:14
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-07-24 14:28:48
+ * @FilePath: /uwcssa_ca/src/layouts/Main/components/Sidebar/components/SidebarNav/SidebarNav.tsx
+ * @Description:
+ *
+ */
+import { Box, Button, Typography, useTheme } from "@mui/material";
+
 import { Link } from "react-router-dom";
 import React from "react";
-import { Typography } from "@mui/material";
-import { useTheme } from "@mui/material/styles";
-import NavItem from "./components/NavItem";
+
+import NavItem from "./components/NavItem/NavItem";
 
 interface Props {
   pages: {

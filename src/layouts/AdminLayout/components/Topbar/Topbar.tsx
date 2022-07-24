@@ -2,22 +2,20 @@
  * @Author: Shen Shu
  * @Date: 2022-05-28 16:04:31
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-01 20:06:33
+ * @LastEditTime: 2022-07-24 14:18:26
  * @FilePath: /uwcssa_ca/src/layouts/AdminLayout/components/Topbar/Topbar.tsx
  * @Description:
  *
  */
 
-import { Link as MUILink, Typography } from "@mui/material";
-import { alpha, useTheme } from "@mui/material/styles";
+import { Typography, alpha, useTheme, Box, Button } from "@mui/material";
 
-import { AccountMenu } from "layouts/Main/components/Topbar/components";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
+import AccountMenu from "layouts/Main/components/Topbar/components/AccountMenu/AccountMenu";
+
 import { Link } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import React from "react";
-import { ThemeModeToggler } from "./components";
+import ThemeModeToggler from "./components/ThemeModeToggler/ThemeModeToggler";
 
 interface Props {
   // eslint-disable-next-line @typescript-eslint/ban-types
