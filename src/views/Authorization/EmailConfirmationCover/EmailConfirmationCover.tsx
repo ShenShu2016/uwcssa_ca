@@ -1,9 +1,18 @@
-import Box from "@mui/material/Box";
+/*
+ * @Author: Shen Shu
+ * @Date: 2022-06-14 10:58:14
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-07-24 16:16:09
+ * @FilePath: /uwcssa_ca/src/views/Authorization/EmailConfirmationCover/EmailConfirmationCover.tsx
+ * @Description:
+ *
+ */
+
 import Container from "components/Container";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import React from "react";
-import { useTheme } from "@mui/material/styles";
-import { Form } from "./components";
+import { useTheme, Box } from "@mui/material";
+import Form from "./components/Form/Form";
 
 function EmailConfirmationCover(): JSX.Element {
   const theme = useTheme();

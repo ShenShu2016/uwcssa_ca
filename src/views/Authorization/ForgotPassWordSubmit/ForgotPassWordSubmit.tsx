@@ -2,18 +2,18 @@
  * @Author: Shen Shu
  * @Date: 2022-05-18 15:31:43
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-06 21:06:26
- * @FilePath: /uwcssa_ca/src/views/ForgotPassWordSubmit/ForgotPassWordSubmit.tsx
+ * @LastEditTime: 2022-07-24 16:17:34
+ * @FilePath: /uwcssa_ca/src/views/Authorization/ForgotPassWordSubmit/ForgotPassWordSubmit.tsx
  * @Description:
  *
  */
-/* eslint-disable react/no-unescaped-entities */
 
 import { Box, Grid, useTheme } from "@mui/material";
 
 import Container from "components/Container";
 import React from "react";
-import { Form, Headline } from "./components";
+import Form from "./components/Form/Form";
+import Headline from "./components/Headline/Headline";
 
 function ForgotPassWordSubmit(): JSX.Element {
   const theme = useTheme();

@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-26 13:57:44
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-25 22:27:22
+ * @LastEditTime: 2022-07-24 16:15:24
  * @FilePath: /uwcssa_ca/src/views/Authorization/PasswordResetCover/PasswordResetCover.tsx
  * @Description:
  *
@@ -13,7 +13,7 @@ import { Box, useTheme } from "@mui/material";
 import Container from "components/Container";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import React from "react";
-import { Form } from "./components";
+import Form from "./components/Form/Form";
 
 function PasswordResetCover(): JSX.Element {
   const theme = useTheme();

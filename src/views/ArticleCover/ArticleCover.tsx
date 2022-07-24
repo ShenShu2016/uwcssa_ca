@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-25 19:05:54
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-07-24 16:04:21
+ * @LastEditTime: 2022-07-24 16:16:29
  * @FilePath: /uwcssa_ca/src/views/ArticleCover/ArticleCover.tsx
  * @Description:
  *
@@ -61,7 +61,7 @@ function ArticleCover(): JSX.Element {
     return () => {
       dispatch(removeAllComments());
     };
-  }, [articleId]);
+  }, [articleId, dispatch, isAuth, ownerUsername]);
 
   return (
     <>

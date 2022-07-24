@@ -2,20 +2,11 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-07-24 16:07:03
+ * @LastEditTime: 2022-07-24 16:13:48
  * @FilePath: /uwcssa_ca/src/views/ViewRoutes.tsx
  * @Description:
  *
  */
-
-import {
-  EmailConfirmationCover as EmailConfirmationCoverView,
-  ForgotPassWordSubmit as ForgotPassWordSubmitView,
-  PasswordResetCover as PasswordResetCoverView,
-  PreSignUpResetPassWord as PreSignUpResetPassWordView,
-  SigninCover as SigninCoverView,
-  SignupCover as SignupCoverView,
-} from "views";
 
 import React from "react";
 import { getAuthState } from "redux/auth/authSlice";
@@ -40,7 +31,13 @@ import EventSignUpSuccessfully from "./Event/EventSignUpSuccessfully/EventSignUp
 import ArticleCover from "./ArticleCover/ArticleCover";
 import Dashboard from "./Dashboard/Dashboard";
 import Home from "./Home/Home";
-// console.log(isAuth, isAdmin);
+import PasswordResetCover from "./Authorization/PasswordResetCover/PasswordResetCover";
+import ForgotPassWordSubmit from "./Authorization/ForgotPassWordSubmit/ForgotPassWordSubmit";
+import PreSignUpResetPassWord from "./Authorization/PreSignUpResetPassWord/PreSignUpResetPassWord";
+import SigninCover from "./Authorization/SigninCover/SigninCover";
+import SignupCover from "./Authorization/SignupCover/SignupCover";
+import EmailConfirmationCover from "./Authorization/EmailConfirmationCover/EmailConfirmationCover";
+
 function ViewRoutes(): Array<{
   path: string;
   renderer: Function;
@@ -142,7 +139,7 @@ function ViewRoutes(): Array<{
     {
       path: "/auth/passwordReset",
       renderer: (params = {}): JSX.Element => (
-        <PasswordResetCoverView {...params} />
+        <PasswordResetCover {...params} />
       ),
       isAllowed: true,
       redirectPath: "/",
@@ -150,7 +147,7 @@ function ViewRoutes(): Array<{
     {
       path: "/auth/passWordResetSubmit/:username",
       renderer: (params = {}): JSX.Element => (
-        <ForgotPassWordSubmitView {...params} />
+        <ForgotPassWordSubmit {...params} />
       ),
       isAllowed: true,
       redirectPath: "/",
@@ -158,7 +155,7 @@ function ViewRoutes(): Array<{
     {
       path: "/auth/PreSignUpResetPassWord",
       renderer: (params = {}): JSX.Element => (
-        <PreSignUpResetPassWordView {...params} />
+        <PreSignUpResetPassWord {...params} />
       ),
       isAllowed: true,
       redirectPath: "/",
@@ -166,21 +163,21 @@ function ViewRoutes(): Array<{
 
     {
       path: "/auth/signIn",
-      renderer: (params = {}): JSX.Element => <SigninCoverView {...params} />,
+      renderer: (params = {}): JSX.Element => <SigninCover {...params} />,
       isAllowed: !isAuth,
       redirectPath: "/dashboard",
     },
 
     {
       path: "/auth/signUp",
-      renderer: (params = {}): JSX.Element => <SignupCoverView {...params} />,
+      renderer: (params = {}): JSX.Element => <SignupCover {...params} />,
       isAllowed: !isAuth,
       redirectPath: "/settings/general",
     },
     {
       path: "/auth/emailConfirmation", //! ! 这里也不知道怎么处理，如果username 不存在，会报错
       renderer: (params = {}): JSX.Element => (
-        <EmailConfirmationCoverView {...params} />
+        <EmailConfirmationCover {...params} />
       ),
       isAllowed: !isAuth,
       redirectPath: "/settings/general",
@@ -188,7 +185,7 @@ function ViewRoutes(): Array<{
     {
       path: "/auth/emailConfirmation/:username", // username is the email
       renderer: (params = {}): JSX.Element => (
-        <EmailConfirmationCoverView {...params} />
+        <EmailConfirmationCover {...params} />
       ),
       isAllowed: !isAuth,
       redirectPath: "/settings/general",

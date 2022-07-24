@@ -2,18 +2,17 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 15:50:53
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-25 22:02:53
+ * @LastEditTime: 2022-07-24 16:14:28
  * @FilePath: /uwcssa_ca/src/views/Authorization/SignupCover/SignupCover.tsx
  * @Description:
  *
  */
 
-import Box from "@mui/material/Box";
+import { Box, useTheme } from "@mui/material";
 import Container from "components/Container";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import React from "react";
-import { useTheme } from "@mui/material/styles";
-import { Form } from "./components";
+import Form from "./components/Form/Form";
 
 function SignupCover(): JSX.Element {
   const theme = useTheme();
