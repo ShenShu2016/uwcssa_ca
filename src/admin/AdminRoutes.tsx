@@ -1,28 +1,24 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-28 16:58:31
- * @LastEditTime: 2022-07-21 23:08:54
+ * @LastEditTime: 2022-07-24 14:56:42
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/admin/AdminRoutes.tsx
  */
 
-import {
-  AdminDashboard as AdminDashboardView,
-  ArticleEdit as ArticleEditView,
-  ArticleManagement as ArticleManagementView,
-  ArticlePublish as ArticlePublishView,
-  DepartmentDashboard as DepartmentDashboardView,
-  EventCreate as EventCreateView,
-  EventManagement as EventManagementView,
-  FormTest as FormTestView,
-  ResearchDevelopmentTeamDashboard as ResearchDevelopmentTeamDashboardView,
-  UserProfileDashboard as UserProfileDashboardView,
-  UwcssaMemberDashboard as UwcssaMemberDashboardView,
-} from "admin";
-
 import React from "react";
 import { getIsAdmin } from "redux/auth/authSlice";
 import { useAppSelector } from "redux/hooks";
+import ArticleEdit from "./Article/ArticleEdit/ArticleEdit";
+import ArticleManagement from "./Article/ArticleManagement/ArticleManagement";
+import ArticlePublish from "./Article/ArticlePublish/ArticlePublish";
+import DepartmentDashboard from "./Department/DepartmentDashboard/DepartmentDashboard";
+import EventCreate from "./Event/EventCreate/EventCreate";
+import EventManagement from "./Event/EventManagement/EventManagement";
+import FormTest from "./Event/Form/FormTest";
+import ResearchDevelopmentTeamDashboard from "./ResearchDevelopmentTeam/ResearchDevelopmentTeamDashboard/ResearchDevelopmentTeamDashboard";
+import UserProfileDashboard from "./UserProfile/UserProfileDashboard";
+import UwcssaMemberDashboard from "./UwcssaMember/UwcssaMemberDashboard/UwcssaMemberDashboard";
 
 function AdminRoutes(): Array<{
   path: string;
@@ -46,62 +42,62 @@ function AdminRoutes(): Array<{
     {
       path: "/admin/users",
       renderer: (params = {}): JSX.Element => (
-        <UserProfileDashboardView {...params} />
+        <UserProfileDashboard {...params} />
       ),
       isAllowed: isAdmin,
       redirectPath: "/404",
     },
     {
       path: "/admin/article-publish",
-      renderer: (): JSX.Element => <ArticlePublishView />,
+      renderer: (): JSX.Element => <ArticlePublish />,
       isAllowed: isAdmin,
       redirectPath: "/404",
     },
     {
       path: "/admin/article-edit",
-      renderer: (): JSX.Element => <ArticleManagementView />,
+      renderer: (): JSX.Element => <ArticleManagement />,
       isAllowed: isAdmin,
       redirectPath: "/404",
     },
     {
       path: "/admin/article-edit/:id",
-      renderer: (): JSX.Element => <ArticleEditView />,
+      renderer: (): JSX.Element => <ArticleEdit />,
       isAllowed: isAdmin,
       redirectPath: "/404",
     },
     {
       path: "/admin/event",
-      renderer: (): JSX.Element => <EventManagementView />,
+      renderer: (): JSX.Element => <EventManagement />,
       isAllowed: isAdmin,
       redirectPath: "/404",
     },
     {
       path: "/admin/activity-create",
-      renderer: (): JSX.Element => <EventCreateView />,
+      renderer: (): JSX.Element => <EventCreate />,
       isAllowed: isAdmin,
       redirectPath: "/404",
     },
     {
       path: "/admin/activity-form-test",
-      renderer: (): JSX.Element => <FormTestView />,
+      renderer: (): JSX.Element => <FormTest />,
       isAllowed: isAdmin,
       redirectPath: "/404",
     },
     {
       path: "/admin/uwcssa-department",
-      renderer: (): JSX.Element => <DepartmentDashboardView />,
+      renderer: (): JSX.Element => <DepartmentDashboard />,
       isAllowed: isAdmin,
       redirectPath: "/404",
     },
     {
       path: "/admin/uwcssa-member",
-      renderer: (): JSX.Element => <UwcssaMemberDashboardView />,
+      renderer: (): JSX.Element => <UwcssaMemberDashboard />,
       isAllowed: isAdmin,
       redirectPath: "/404",
     },
     {
       path: "/admin/uwcssa-research-development",
-      renderer: (): JSX.Element => <ResearchDevelopmentTeamDashboardView />,
+      renderer: (): JSX.Element => <ResearchDevelopmentTeamDashboard />,
       isAllowed: isAdmin,
       redirectPath: "/404",
     },

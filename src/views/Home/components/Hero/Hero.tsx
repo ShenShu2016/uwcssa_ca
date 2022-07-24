@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-19 17:21:07
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-07-24 00:43:49
+ * @LastEditTime: 2022-07-24 14:37:02
  * @FilePath: /uwcssa_ca/src/views/Home/components/Hero/Hero.tsx
  * @Description:
  *
@@ -70,10 +70,7 @@ function Hero(): JSX.Element {
         </Box>
 
         {isAuth ? (
-          <Typography variant="h4">
-            Welcome
-            {userInfo.name}!
-          </Typography>
+          <Typography variant="h4">Welcome {userInfo.name}!</Typography>
         ) : (
           <Box>
             <Button

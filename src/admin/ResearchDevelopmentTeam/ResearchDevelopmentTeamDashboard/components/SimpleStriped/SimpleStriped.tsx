@@ -24,7 +24,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import { stringAvatar } from "components/Avatar/AvatarFunction";
 import { useAppDispatch } from "redux/hooks";
 import { useConfirm } from "material-ui-confirm";
-import EditUwcssaDepartmentForm from "./components/EditResearchDevelopmentTeam";
+import EditUwcssaDepartmentForm from "admin/Department/DepartmentDashboard/components/SimpleStriped/components/EditUwcssaDepartment/EditUwcssaDepartmentForm/EditUwcssaDepartmentForm";
 
 function SimpleStriped({
   researchDevelopmentTeamList,
@@ -53,6 +53,12 @@ function SimpleStriped({
     }
     return false;
   };
+
+  function handleEditOpen(item: ResearchDevelopmentTeam) {
+    setEditOpen(true);
+    setResearchDevelopmentMember(item);
+  }
+
   return (
     <>
       <TableContainer component={Paper}>
@@ -254,9 +260,7 @@ function SimpleStriped({
                     variant="text"
                     startIcon={<EditIcon />}
                     sx={{ p: "4px", mr: "4px" }}
-                    onClick={() => {
-                      setResearchDevelopmentMember(item), setEditOpen(true);
-                    }}
+                    onClick={() => handleEditOpen(item)}
                   >
                     Edit
                   </Button>

@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-30 14:17:41
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-06 15:25:51
+ * @LastEditTime: 2022-07-24 15:05:42
  * @FilePath: /uwcssa_ca/src/admin/ResearchDevelopmentTeam/ResearchDevelopmentTeamDashboard/ResearchDevelopmentTeamDashboard.tsx
  * @Description:
  *
@@ -18,8 +18,8 @@ import { useAppDispatch, useAppSelector } from "redux/hooks";
 
 import Container from "components/Container";
 import { getAuthState } from "redux/auth/authSlice";
-import { AddResearchDevelopmentTeamForm } from "./components/AddResearchDevelopmentTeam";
-import SimpleStriped from "./components/SimpleStriped";
+import SimpleStriped from "./components/SimpleStriped/SimpleStriped";
+import AddResearchDevelopmentTeamForm from "./components/AddResearchDevelopmentTeam/AddResearchDevelopmentTeamForm/AddResearchDevelopmentTeamForm";
 
 function ResearchDevelopmentTeamDashboard() {
   const dispatch = useAppDispatch();
@@ -39,7 +39,7 @@ function ResearchDevelopmentTeamDashboard() {
         }),
       );
     }
-  }, [isAuth, fetchResearchDevelopmentTeamListStatus]);
+  }, [isAuth, fetchResearchDevelopmentTeamListStatus, dispatch]);
 
   return (
     <Container>

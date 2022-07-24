@@ -17,7 +17,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { useConfirm } from "material-ui-confirm";
-import EditUwcssaDepartmentForm from "./components/EditUwcssaDepartment/EditUwcssaDepartmentForm";
+import EditUwcssaDepartmentForm from "./components/EditUwcssaDepartment/EditUwcssaDepartmentForm/EditUwcssaDepartmentForm";
 // import { removeUwcssaDepartment } from 'redux/uwcssaDepartment/uwcssaDepartmentSlice';
 // import { useAppDispatch } from 'redux/hooks';
 
@@ -66,6 +66,10 @@ function SimpleStriped({
     // }
   };
 
+  const handleEditDepartment = (item) => {
+    setDepartment(item);
+    setOpen(true);
+  };
   return (
     <>
       <TableContainer component={Paper}>
@@ -188,7 +192,7 @@ function SimpleStriped({
                     startIcon={<EditIcon />}
                     sx={{ p: "4px", mr: "4px" }}
                     onClick={() => {
-                      setDepartment(item), setOpen(true);
+                      handleEditDepartment(item);
                     }}
                   >
                     Edit

@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-06-04 22:41:09
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-23 12:06:07
+ * @LastEditTime: 2022-07-24 15:19:53
  * @FilePath: /uwcssa_ca/src/admin/UwcssaMember/UwcssaMemberDashboard/components/SimpleStriped/SimpleStriped.tsx
  * @Description:
  *
@@ -33,7 +33,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import { stringAvatar } from "components/Avatar/AvatarFunction";
 import { useAppDispatch } from "redux/hooks";
 import { useConfirm } from "material-ui-confirm";
-import EditUwcssaDepartmentForm from "./components/EditUwcssaMember";
+import EditUwcssaMemberForm from "./components/EditUwcssaMember/EditUwcssaMemberForm/EditUwcssaMemberForm";
 
 function SimpleStriped({
   uwcssaMemberList,
@@ -62,6 +62,10 @@ function SimpleStriped({
     return false;
   };
 
+  function handleEditOpen(item: UwcssaMember) {
+    setUwcssaMember(item);
+    setEditOpen(true);
+  }
   return (
     <>
       <TableContainer component={Paper}>
@@ -281,9 +285,7 @@ function SimpleStriped({
                     variant="text"
                     startIcon={<EditIcon />}
                     sx={{ p: "4px", mr: "4px" }}
-                    onClick={() => {
-                      setUwcssaMember(item), setEditOpen(true);
-                    }}
+                    onClick={() => handleEditOpen(item)}
                   >
                     Edit
                   </Button>
@@ -303,7 +305,7 @@ function SimpleStriped({
           </TableBody>
         </Table>
       </TableContainer>
-      <EditUwcssaDepartmentForm
+      <EditUwcssaMemberForm
         open={editOpen}
         item={uwcssaMember}
         onClose={() => setEditOpen(false)}

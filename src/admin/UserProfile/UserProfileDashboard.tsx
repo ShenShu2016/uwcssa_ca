@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-31 23:01:18
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-01 21:50:46
+ * @LastEditTime: 2022-07-24 15:02:03
  * @FilePath: /uwcssa_ca/src/admin/UserProfile/UserProfileDashboard.tsx
  * @Description:
  *
@@ -18,7 +18,7 @@ import { useAppDispatch, useAppSelector } from "redux/hooks";
 import { Box } from "@mui/material";
 import Container from "components/Container";
 import { getAuthState } from "redux/auth/authSlice";
-import { CustomerListResults } from "./components";
+import CustomerListResults from "./components/CustomerListResults";
 
 function UserProfileDashboard() {
   const dispatch = useAppDispatch();
@@ -39,7 +39,7 @@ function UserProfileDashboard() {
       }
     };
     getUserProfileList();
-  }, [isAuth, fetchUserProfileListStatus]);
+  }, [isAuth, fetchUserProfileListStatus, dispatch]);
 
   return (
     <div>

@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-30 14:17:41
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-06 17:05:54
+ * @LastEditTime: 2022-07-24 14:58:54
  * @FilePath: /uwcssa_ca/src/admin/UwcssaMember/UwcssaMemberDashboard/UwcssaMemberDashboard.tsx
  * @Description:
  *
@@ -18,8 +18,8 @@ import { useAppDispatch, useAppSelector } from "redux/hooks";
 
 import Container from "components/Container";
 import { getAuthState } from "redux/auth/authSlice";
-import AddUwcssaMemberForm from "./components/AddUwcssaMember";
-import SimpleStriped from "./components/SimpleStriped";
+import SimpleStriped from "./components/SimpleStriped/SimpleStriped";
+import AddUwcssaMemberForm from "./components/AddUwcssaMember/AddUwcssaMemberForm/AddUwcssaMemberForm";
 
 function UwcssaMemberDashboard() {
   const dispatch = useAppDispatch();
@@ -37,7 +37,7 @@ function UwcssaMemberDashboard() {
         }),
       );
     }
-  }, [isAuth, fetchUwcssaMemberListStatus]);
+  }, [isAuth, fetchUwcssaMemberListStatus, dispatch]);
 
   return (
     <Container>
