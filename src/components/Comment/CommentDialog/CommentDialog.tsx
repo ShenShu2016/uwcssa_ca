@@ -2,18 +2,16 @@
  * @Author: Shen Shu
  * @Date: 2022-05-26 16:50:46
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-26 16:51:39
+ * @LastEditTime: 2022-07-24 15:59:43
  * @FilePath: /uwcssa_ca/src/components/Comment/CommentDialog/CommentDialog.tsx
  * @Description:
  *
  */
 import React, { useState } from "react";
-import { alpha, useTheme } from "@mui/material/styles";
+import { alpha, useTheme, Box, Button } from "@mui/material";
 
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import Container from "components/Container";
-import { FeedbackForm } from "./components";
+import FeedbackForm from "./components/FeedbackForm/FeedbackForm";
 
 function CommentDialog(): JSX.Element {
   const theme = useTheme();

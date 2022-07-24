@@ -4,7 +4,7 @@
  * @Author: Shen Shu
  * @Date: 2022-06-18 17:26:14
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-07-24 00:18:52
+ * @LastEditTime: 2022-07-24 15:44:27
  * @FilePath: /uwcssa_ca/src/views/Event/EventDetail/EventDetail.tsx
  * @Description:
  *
@@ -31,15 +31,13 @@ import {
 } from "redux/comment/commentSlice";
 import { useAppDispatch, useAppSelector } from "redux/hooks";
 
-import CommentOverview from "components/Comment/CommentOverview";
 import EventJoinForm from "components/EventContainer/components/EventJoinForm";
-import {
-  Content,
-  Hero,
-  SidebarEvents,
-  SidebarNewsletter,
-  SimilarStories,
-} from "./components";
+import CommentOverview from "components/Comment/CommentOverview/CommentOverview";
+import Hero from "./components/Hero/Hero";
+import SidebarEvents from "./components/SidebarEvents/SidebarEvents";
+import SidebarNewsletter from "./components/SidebarNewsletter/SidebarNewsletter";
+import Content from "./components/Content/Content";
+import SimilarStories from "./components/SimilarStories/SimilarStories";
 
 interface EventDetailProp {
   fromPreview?: boolean;

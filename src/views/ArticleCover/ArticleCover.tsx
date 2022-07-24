@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-25 19:05:54
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-08 19:27:57
+ * @LastEditTime: 2022-07-24 16:01:17
  * @FilePath: /uwcssa_ca/src/views/ArticleCover/ArticleCover.tsx
  * @Description:
  *
@@ -18,13 +18,10 @@ import {
 } from "redux/comment/commentSlice";
 import { useAppDispatch, useAppSelector } from "redux/hooks";
 
-import Box from "@mui/material/Box";
-import CommentOverview from "components/Comment/CommentOverview";
+import { Box, Grid, useMediaQuery, useTheme } from "@mui/material";
 import Container from "components/Container";
-import Grid from "@mui/material/Grid";
-import useMediaQuery from "@mui/material/useMediaQuery";
 import { useParams } from "react-router-dom";
-import { useTheme } from "@mui/material/styles";
+import CommentOverview from "components/Comment/CommentOverview/CommentOverview";
 import {
   Content,
   FooterNewsletter,

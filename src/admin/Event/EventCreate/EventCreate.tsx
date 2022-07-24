@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /*
  * @Author: 李佳修
  * @Date: 2022-05-31 10:20:04
- * @LastEditTime: 2022-07-21 23:25:41
+ * @LastEditTime: 2022-07-24 15:40:36
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/admin/Event/EventCreate/EventCreate.tsx
  */
@@ -13,9 +14,9 @@ import { Box, Card, Step, StepLabel, Stepper } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
 
-import FullScreenLoading from "components/FullScreenLoading";
 import PageTitle from "admin/components/pageTitle";
 import { useAppSelector } from "redux/hooks";
+import FullScreenLoading from "components/FullScreenLoading/FullScreenLoading";
 import EventConfig from "./components/EventConfig";
 import EventForm from "./components/EventForm";
 import EventPoster from "./components/EventPoster";
@@ -60,10 +61,10 @@ function SwipeCommiter({ activeStep }: any) {
   useEffect(() => {
     swiper.slideTo(activeStep);
   }, [activeStep]);
+  // eslint-disable-next-line react/jsx-no-useless-fragment
   return <></>;
 }
-
-const EventCreate: React.FC = () => {
+function EventCreate(): React.ReactElement {
   const completed = useAppSelector(
     (state) => state.form.createData.completeStatus,
   );
@@ -146,5 +147,5 @@ const EventCreate: React.FC = () => {
       </Box>
     </PageTitle>
   );
-};
+}
 export default EventCreate;

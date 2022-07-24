@@ -1,3 +1,5 @@
+/* eslint-disable react/function-component-definition */
+/* eslint-disable react/require-default-props */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   Box,
@@ -7,15 +9,18 @@ import {
   TextField,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import FullScreenLoading from "components/FullScreenLoading";
+
 import LoadingButton from "@mui/lab/LoadingButton";
 import PageTitle from "admin/components/pageTitle";
-import RichTextEditor from "components/RichTextEditor";
+
 import { useConfirm } from "material-ui-confirm";
 import { useSnackbar } from "notistack";
+import RichTextEditor from "components/RichTextEditor/RichTextEditor";
+import FullScreenLoading from "components/FullScreenLoading/FullScreenLoading";
 import MyImageList from "./ArticlePublish/components/MyImageList";
-import AddTags from "./ArticlePublish/components/AddTags";
+
 import AddCoverPic from "./ArticlePublish/components/AddCoverPic";
+import AddTags from "./ArticlePublish/components/AddTags";
 
 export interface Tag {
   tagID: string;
@@ -69,14 +74,17 @@ const ArticleCommon: React.FC<ArticleCommonProp> = ({
     }
   }, [initData]);
 
-  const handleFocus = (key) => {
+  const handleFocus = (key: string) => {
     setInputStatus((prev) => ({
       ...prev,
       [key]: false,
     }));
   };
 
-  const useImgFromRecent = (item) => {
+  const useImgFromRecent = (item: {
+    objectCompressedURL: any;
+    objectURL: any;
+  }) => {
     setImgFile(item.objectCompressedURL || item.objectURL);
   };
 

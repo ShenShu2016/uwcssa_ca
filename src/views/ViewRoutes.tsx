@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-07-24 01:27:52
+ * @LastEditTime: 2022-07-24 16:00:41
  * @FilePath: /uwcssa_ca/src/views/ViewRoutes.tsx
  * @Description:
  *
@@ -12,9 +12,6 @@ import {
   ArticleCover as ArticleCoverView,
   Dashboard as DashboardView,
   EmailConfirmationCover as EmailConfirmationCoverView,
-  EventDetail as EventDetailView,
-  EventList as EventListView,
-  EventSignUpSuccessfully as EventSignUpSuccessfullyView,
   ForgotPassWordSubmit as ForgotPassWordSubmitView,
   Home as HomeView,
   PasswordResetCover as PasswordResetCoverView,
@@ -40,10 +37,12 @@ import CareerListing from "./CareerListing/CareerListing";
 import CareerOpening from "./CareerOpening/CareerOpening";
 import CompanyTerms from "./CompanyTerms/CompanyTerms";
 import ContactPage from "./ContactPage/ContactPage";
+import EventDetail from "./Event/EventDetail/EventDetail";
+import EventList from "./Event/EventList/EventList";
+import EventSignUpSuccessfully from "./Event/EventSignUpSuccessfully/EventSignUpSuccessfully";
 // console.log(isAuth, isAdmin);
 function ViewRoutes(): Array<{
   path: string;
-  // eslint-disable-next-line @typescript-eslint/ban-types
   renderer: Function;
   isAllowed: boolean | void;
   redirectPath: string | undefined;
@@ -73,7 +72,7 @@ function ViewRoutes(): Array<{
     },
     {
       path: "/history-events",
-      renderer: (): JSX.Element => <EventListView />,
+      renderer: (): JSX.Element => <EventList />,
       isAllowed: true,
       redirectPath: undefined,
     },
@@ -126,7 +125,7 @@ function ViewRoutes(): Array<{
     },
     {
       path: "/event/:eventId",
-      renderer: (params = {}): JSX.Element => <EventDetailView {...params} />,
+      renderer: (params = {}): JSX.Element => <EventDetail {...params} />,
       isAllowed: true,
       redirectPath: "/",
       colorInvert: true,
@@ -134,7 +133,7 @@ function ViewRoutes(): Array<{
     {
       path: "/event/eventSignUpSuccessfully/:eventId",
       renderer: (params = {}): JSX.Element => (
-        <EventSignUpSuccessfullyView {...params} />
+        <EventSignUpSuccessfully {...params} />
       ),
       isAllowed: true,
       redirectPath: "/",

@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-18 13:56:36
- * @LastEditTime: 2022-06-25 15:06:09
+ * @LastEditTime: 2022-07-24 15:26:09
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/views/Dashboard/Dashboard.tsx
  */
@@ -21,14 +21,15 @@ import React, { useEffect, useState } from "react";
 import { getAuthState, getOwnerUserName } from "redux/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "redux/hooks";
 
-import ArticleContainer from "components/ArticleContainer";
-import EventContainer from "components/EventContainer";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import UserCardGrid from "components/UserCardGrid";
+
 import { fetchArticleList } from "redux/article/articleSlice";
 import { fetchEventList } from "redux/event/eventSlice";
-import Section from "./components/Section";
+import EventContainer from "components/EventContainer/EventContainer";
+import ArticleContainer from "components/ArticleContainer/ArticleContainer";
+import UserCardGrid from "components/UserCardGrid/UserCardGrid";
 import JoinedEvent from "./components/JoinedEvent";
+import Section from "./components/Section";
 
 // import Entries from './components/Entries';
 

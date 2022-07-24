@@ -1,9 +1,10 @@
-/* eslint-disable indent */
+/* eslint-disable @typescript-eslint/no-unused-expressions */
+/* eslint-disable no-nested-ternary */
 /*
  * @Author: 李佳修
  * @Date: 2022-06-08 10:31:57
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-07-21 23:24:00
+ * @LastEditTime: 2022-07-24 15:39:40
  * @FilePath: /uwcssa_ca/src/admin/Event/EventCreate/components/EventForm.tsx
  * @Description:
  *
@@ -26,11 +27,11 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import RichTextEditor from "components/RichTextEditor";
 import { setBasicInfo } from "redux/form/formSlice";
 import { useAppDispatch } from "redux/hooks";
 import { useFormik } from "formik";
 import { useSwiper } from "swiper/react";
+import RichTextEditor from "components/RichTextEditor/RichTextEditor";
 import GoogleMapDialog from "./GoogleMapDialog";
 import FieldLabel from "./FieldLabel";
 
@@ -52,8 +53,7 @@ const validationSchema = yup.object({
   limit: yup.number().min(0, "输入人数无效").required("请输入活动最多限制人数"),
   description: yup.string().trim().required("请输入活动描述"),
 });
-
-const EventForm: React.FC = () => {
+function EventForm() {
   const [description, setDescription] = useState<string>("");
   const [googleMapDialog, setGoogleMapDialog] = useState<boolean>(false);
   const swiper = useSwiper();
@@ -278,6 +278,6 @@ const EventForm: React.FC = () => {
       </form>
     </Box>
   );
-};
+}
 
 export default EventForm;

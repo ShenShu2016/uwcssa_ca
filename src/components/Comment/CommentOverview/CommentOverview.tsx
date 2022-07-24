@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-26 16:50:34
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-08 19:26:18
+ * @LastEditTime: 2022-07-24 15:33:19
  * @FilePath: /uwcssa_ca/src/components/Comment/CommentOverview/CommentOverview.tsx
  * @Description:
  *
@@ -16,8 +16,8 @@ import Container from "components/Container";
 import { Count } from "redux/count/countSlice";
 import moment from "moment";
 import { stringAvatar } from "components/Avatar/AvatarFunction";
-import { FeedbackForm } from "../CommentDialog/components";
 import CommentGroupButton from "./components/CommentGroupButton";
+import FeedbackForm from "../CommentDialog/components/FeedbackForm/FeedbackForm";
 
 interface Props {
   comments: Array<Comment>;

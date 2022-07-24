@@ -2,7 +2,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-01 09:18:34
- * @LastEditTime: 2022-06-24 00:33:17
+ * @LastEditTime: 2022-07-24 15:45:36
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/admin/Event/EventCreate/components/EventPreview.tsx
  */
@@ -14,8 +14,6 @@ import { useAppDispatch, useAppSelector } from "redux/hooks";
 
 import { ActiveType } from "API";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import DynamicForm from "components/DynamicForm";
-import { EventDetail } from "views";
 import EventSwiperItem from "components/EventContainer/components/EventSwiperItem";
 // import FullScreenLoading from 'components/FullScreenLoading';
 import NotInterestedIcon from "@mui/icons-material/NotInterested";
@@ -25,6 +23,8 @@ import { postEvent } from "redux/event/eventSlice";
 import { useSnackbar } from "notistack";
 import { useSwiper } from "swiper/react";
 import { v4 as uuid } from "uuid";
+import DynamicForm from "components/DynamicForm/DynamicForm";
+import EventDetail from "views/Event/EventDetail/EventDetail";
 
 interface EventPreviewProp {
   setLoading: React.Dispatch<
@@ -34,8 +34,7 @@ interface EventPreviewProp {
     }>
   >;
 }
-
-const EventPreview: React.FC<EventPreviewProp> = ({ setLoading }) => {
+function EventPreview({ setLoading }: EventPreviewProp) {
   const swiper = useSwiper();
   const dispatch = useAppDispatch();
   const { enqueueSnackbar } = useSnackbar();
@@ -94,6 +93,7 @@ const EventPreview: React.FC<EventPreviewProp> = ({ setLoading }) => {
       status: true,
       message: "正在创建报名表单",
     });
+    // eslint-disable-next-line @typescript-eslint/no-use-before-define
     const formId = await createForm();
     if (!formId) {
       enqueueSnackbar("表单创建错误，请重试", { variant: "error" });
@@ -201,6 +201,7 @@ const EventPreview: React.FC<EventPreviewProp> = ({ setLoading }) => {
     } else {
       return;
     }
+    // eslint-disable-next-line consistent-return
     return formRes.payload.id;
   };
 
@@ -286,6 +287,6 @@ const EventPreview: React.FC<EventPreviewProp> = ({ setLoading }) => {
       </Box>
     </Box>
   );
-};
+}
 
 export default EventPreview;

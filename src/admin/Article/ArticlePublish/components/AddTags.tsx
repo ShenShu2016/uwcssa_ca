@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-21 13:07:23
- * @LastEditTime: 2022-06-25 23:59:23
+ * @LastEditTime: 2022-07-24 15:55:11
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/admin/Article/ArticlePublish/components/AddTags.tsx
  */
@@ -12,16 +12,15 @@ import DoneIcon from "@mui/icons-material/Done";
 import IconButton from "@mui/material/IconButton";
 import React from "react";
 import { styled } from "@mui/material/styles";
-import { Tag } from "../ArticlePublish";
+import { Tag } from "admin/Article/ArticleCommon";
+// export interface Tag {
+//   tagID: string;
+// }
 
 const ListItem = styled("div")(({ theme }) => ({
   marginRight: theme.spacing(),
   marginBottom: theme.spacing(),
 }));
-interface Chip {
-  tagID: string;
-  label: string;
-}
 
 interface AddTagProps {
   addTag: (tag: string) => void;
@@ -29,7 +28,7 @@ interface AddTagProps {
   tags: Tag[];
 }
 
-const AddTags: React.FC<AddTagProps> = ({ addTag, removeTag, tags }) => {
+function AddTags({ addTag, removeTag, tags }: AddTagProps) {
   const [tagInput, setTagInput] = React.useState<string>("");
 
   const handleDelete = (chipToDelete) => {
@@ -40,15 +39,15 @@ const AddTags: React.FC<AddTagProps> = ({ addTag, removeTag, tags }) => {
     setTagInput(e.target.value);
   };
 
+  const addTagInner = () => {
+    addTag(tagInput);
+    setTagInput("");
+  };
+
   const handleTagInputKeyDown = (e) => {
     if (e.code === "Enter") {
       addTagInner();
     }
-  };
-
-  const addTagInner = () => {
-    addTag(tagInput);
-    setTagInput("");
   };
 
   return (
@@ -83,8 +82,8 @@ const AddTags: React.FC<AddTagProps> = ({ addTag, removeTag, tags }) => {
           padding: "12px 8px",
         }}
       >
-        {tags.map((data, index) => (
-          <ListItem key={data.tagID + index}>
+        {tags.map((data) => (
+          <ListItem key={data.tagID}>
             <Chip
               color="primary"
               label={data.tagID}
@@ -95,6 +94,6 @@ const AddTags: React.FC<AddTagProps> = ({ addTag, removeTag, tags }) => {
       </Box>
     </Card>
   );
-};
+}
 
 export default AddTags;
