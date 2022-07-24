@@ -1,132 +1,132 @@
-import {
-  Avatar,
-  Grid,
-  ListItem,
-  ListItemAvatar,
-  ListItemText,
-} from "@mui/material";
+/*
+ * @Author: Shen Shu
+ * @Date: 2022-06-14 10:58:14
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-07-24 00:52:29
+ * @FilePath: /uwcssa_ca/src/views/Sponsor/Sponsor.tsx
+ * @Description:
+ *
+ */
+import { Box, Divider } from "@mui/material";
 
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import Container from "components/Container";
-import Divider from "@mui/material/Divider";
-import { LazyLoadImage } from "react-lazy-load-image-component";
+
 import React from "react";
-import Typography from "@mui/material/Typography";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import { useTheme } from "@mui/material/styles";
+
+// import useMediaQuery from "@mui/material/useMediaQuery";
+// import { useTheme } from "@mui/material/styles";
 
 function Sponsor(): JSX.Element {
-  const theme = useTheme();
-  const isMd = useMediaQuery(theme.breakpoints.up("md"), {
-    defaultMatches: true,
-  });
+  // const theme = useTheme();
+  // const isMd = useMediaQuery(theme.breakpoints.up("md"), {
+  //   defaultMatches: true,
+  // });
 
-  function LeftSide() {
-    return (
-      <Box data-aos={isMd ? "fade-right" : "fade-up"}>
-        <Box marginBottom={2}>
-          <Typography
-            variant="h4"
-            color="text.primary"
-            sx={{ fontWeight: 700 }}
-          >
-            Our Sponsors
-          </Typography>
-        </Box>
-        <Box marginBottom={4}>
-          <Typography variant="h6" color="text.secondary" gutterBottom>
-            Why sponsor us?
-          </Typography>
-          <Grid container spacing={1}>
-            {[
-              "When you connect with our student organization, you can increase your audience by the number of students attending the university.",
-              "By us acting as an influencer and ambassador and increasing brand awareness, your company can gain more customers.",
-              "It shows consumers that you value higher education and philanthropy.",
-            ].map((item, i) => (
-              <Grid item xs={12} key={i}>
-                <Box
-                  component={ListItem}
-                  disableGutters
-                  width="auto"
-                  padding={0}
-                >
-                  <Box
-                    component={ListItemAvatar}
-                    minWidth="auto !important"
-                    marginRight={2}
-                  >
-                    <Box
-                      component={Avatar}
-                      bgcolor={theme.palette.secondary.main}
-                      width={20}
-                      height={20}
-                    >
-                      <svg
-                        width={12}
-                        height={12}
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </Box>
-                  </Box>
-                  <ListItemText primary={item} />
-                </Box>
-              </Grid>
-            ))}
-          </Grid>
-        </Box>
-        <Box
-          display="flex"
-          flexDirection={{ xs: "column", sm: "row" }}
-          alignItems={{ xs: "stretched", sm: "flex-start" }}
-        >
-          <Button
-            variant="contained"
-            color="primary"
-            size="large"
-            fullWidth={!isMd}
-          >
-            Sponsor
-          </Button>
-        </Box>
-      </Box>
-    );
-  }
+  // function LeftSide() {
+  //   return (
+  //     <Box data-aos={isMd ? "fade-right" : "fade-up"}>
+  //       <Box marginBottom={2}>
+  //         <Typography
+  //           variant="h4"
+  //           color="text.primary"
+  //           sx={{ fontWeight: 700 }}
+  //         >
+  //           Our Sponsors
+  //         </Typography>
+  //       </Box>
+  //       <Box marginBottom={4}>
+  //         <Typography variant="h6" color="text.secondary" gutterBottom>
+  //           Why sponsor us?
+  //         </Typography>
+  //         <Grid container spacing={1}>
+  //           {[
+  //             "When you connect with our student organization, you can increase your audience by the number of students attending the university.",
+  //             "By us acting as an influencer and ambassador and increasing brand awareness, your company can gain more customers.",
+  //             "It shows consumers that you value higher education and philanthropy.",
+  //           ].map((item, i) => (
+  //             <Grid item xs={12} key={i}>
+  //               <Box
+  //                 component={ListItem}
+  //                 disableGutters
+  //                 width="auto"
+  //                 padding={0}
+  //               >
+  //                 <Box
+  //                   component={ListItemAvatar}
+  //                   minWidth="auto !important"
+  //                   marginRight={2}
+  //                 >
+  //                   <Box
+  //                     component={Avatar}
+  //                     bgcolor={theme.palette.secondary.main}
+  //                     width={20}
+  //                     height={20}
+  //                   >
+  //                     <svg
+  //                       width={12}
+  //                       height={12}
+  //                       xmlns="http://www.w3.org/2000/svg"
+  //                       viewBox="0 0 20 20"
+  //                       fill="currentColor"
+  //                     >
+  //                       <path
+  //                         fillRule="evenodd"
+  //                         d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+  //                         clipRule="evenodd"
+  //                       />
+  //                     </svg>
+  //                   </Box>
+  //                 </Box>
+  //                 <ListItemText primary={item} />
+  //               </Box>
+  //             </Grid>
+  //           ))}
+  //         </Grid>
+  //       </Box>
+  //       <Box
+  //         display="flex"
+  //         flexDirection={{ xs: "column", sm: "row" }}
+  //         alignItems={{ xs: "stretched", sm: "flex-start" }}
+  //       >
+  //         <Button
+  //           variant="contained"
+  //           color="primary"
+  //           size="large"
+  //           fullWidth={!isMd}
+  //         >
+  //           Sponsor
+  //         </Button>
+  //       </Box>
+  //     </Box>
+  //   );
+  // }
 
-  function RightSide(): JSX.Element {
-    return (
-      <Box
-        sx={{
-          height: { xs: "auto", md: 1 },
-          "& img": {
-            objectFit: "cover",
-          },
-          "& .lazy-load-image-loaded": {
-            height: 1,
-            width: 1,
-          },
-        }}
-      >
-        <Box
-          component={LazyLoadImage}
-          effect="blur"
-          src="https://assets.maccarianagency.com/backgrounds/img19.jpg"
-          height={{ xs: "auto", md: 1 }}
-          maxHeight={{ xs: 300, md: 1 }}
-          width={1}
-          maxWidth={1}
-        />
-      </Box>
-    );
-  }
+  // function RightSide(): JSX.Element {
+  //   return (
+  //     <Box
+  //       sx={{
+  //         height: { xs: "auto", md: 1 },
+  //         "& img": {
+  //           objectFit: "cover",
+  //         },
+  //         "& .lazy-load-image-loaded": {
+  //           height: 1,
+  //           width: 1,
+  //         },
+  //       }}
+  //     >
+  //       <Box
+  //         component={LazyLoadImage}
+  //         effect="blur"
+  //         src="https://assets.maccarianagency.com/backgrounds/img19.jpg"
+  //         height={{ xs: "auto", md: 1 }}
+  //         maxHeight={{ xs: 300, md: 1 }}
+  //         width={1}
+  //         maxWidth={1}
+  //       />
+  //     </Box>
+  //   );
+  // }
 
   return (
     <Box
@@ -143,9 +143,7 @@ function Sponsor(): JSX.Element {
           position="relative"
         >
           <Box width={1} order={{ xs: 2, md: 1 }}>
-            <Container>
-              <LeftSide />
-            </Container>
+            <Container>{/* <LeftSide /> */}</Container>
           </Box>
           <Box
             sx={{
@@ -178,7 +176,7 @@ function Sponsor(): JSX.Element {
                     position: { xs: "relative", md: "absolute" },
                   }}
                 >
-                  <RightSide />
+                  {/* <RightSide /> */}
                 </Box>
               </Box>
             </Box>

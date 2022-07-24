@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-06-18 17:53:42
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-20 01:14:45
+ * @LastEditTime: 2022-07-24 00:14:57
  * @FilePath: /uwcssa_ca/src/views/Event/EventDetail/components/SidebarEvents/SidebarEvents.tsx
  * @Description:
  *
@@ -27,12 +27,11 @@ import { Link, useParams } from "react-router-dom";
 import moment from "moment";
 
 interface SidebarEventsProp {
-  fromPreview?: boolean;
+  fromPreview: boolean;
 }
-
-const SidebarEvents: React.FC<SidebarEventsProp> = ({
+function SidebarEvents({
   fromPreview = false,
-}): JSX.Element => {
+}: SidebarEventsProp): JSX.Element {
   const theme = useTheme();
   const dispatch = useAppDispatch();
   const isAuth = useAppSelector(getAuthState);
@@ -51,7 +50,7 @@ const SidebarEvents: React.FC<SidebarEventsProp> = ({
       }
     };
     getEvents();
-  }, [fetchEventListStatus]);
+  }, [dispatch, fetchEventListStatus, isAuth, ownerUsername]);
   const events = useAppSelector(selectAllEvents);
   const eventsWhereIdNotEqualToArticleId = events
     .filter((event) => event.id !== eventId)
@@ -160,6 +159,6 @@ const SidebarEvents: React.FC<SidebarEventsProp> = ({
       )}
     </Box>
   );
-};
+}
 
 export default SidebarEvents;

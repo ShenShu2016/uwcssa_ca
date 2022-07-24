@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-07-23 15:28:49
+ * @LastEditTime: 2022-07-24 00:40:15
  * @FilePath: /uwcssa_ca/src/views/ViewRoutes.tsx
  * @Description:
  *
@@ -10,11 +10,6 @@
 
 import {
   About as AboutView,
-  AccountBilling as AccountBillingView,
-  AccountGeneral as AccountGeneralView,
-  AccountNotifications as AccountNotificationsView,
-  AccountProfile as AccountProfileView,
-  AccountSecurity as AccountSecurityView,
   ArticleCover as ArticleCoverView,
   CareerListing as CareerListingView,
   CareerOpening as CareerOpeningView,
@@ -37,9 +32,14 @@ import {
 } from "views";
 
 import React from "react";
-import UWindsorEmailVerify from "views/Settings/UWindsorEmailVerify/UWindsorEmailVerify";
 import { getAuthState } from "redux/auth/authSlice";
 import { useAppSelector } from "redux/hooks";
+import UWindsorEmailVerify from "./Settings/UWindsorEmailVerify/UWindsorEmailVerify";
+import Security from "./Settings/Security/Security";
+import Profile from "./Settings/Profile/Profile";
+import Notifications from "./Settings/Notifications/Notifications";
+import General from "./Settings/General/General";
+import Billing from "./Settings/Billing/Billing";
 
 // console.log(isAuth, isAdmin);
 function ViewRoutes(): Array<{
@@ -197,25 +197,19 @@ function ViewRoutes(): Array<{
     },
     {
       path: "/settings",
-      renderer: (params = {}): JSX.Element => (
-        <AccountGeneralView {...params} />
-      ),
+      renderer: (params = {}): JSX.Element => <General {...params} />,
       isAllowed: isAuth,
       redirectPath: "/settings/general",
     },
     {
       path: "/settings/general",
-      renderer: (params = {}): JSX.Element => (
-        <AccountGeneralView {...params} />
-      ),
+      renderer: (params = {}): JSX.Element => <General {...params} />,
       isAllowed: isAuth,
       redirectPath: "/",
     },
     {
       path: "/settings/profile",
-      renderer: (params = {}): JSX.Element => (
-        <AccountProfileView {...params} />
-      ),
+      renderer: (params = {}): JSX.Element => <Profile {...params} />,
       isAllowed: isAuth,
       redirectPath: "/",
     },
@@ -229,25 +223,19 @@ function ViewRoutes(): Array<{
     },
     {
       path: "/settings/notifications",
-      renderer: (params = {}): JSX.Element => (
-        <AccountNotificationsView {...params} />
-      ),
+      renderer: (params = {}): JSX.Element => <Notifications {...params} />,
       isAllowed: isAuth,
       redirectPath: "/",
     },
     {
       path: "/settings/security",
-      renderer: (params = {}): JSX.Element => (
-        <AccountSecurityView {...params} />
-      ),
+      renderer: (params = {}): JSX.Element => <Security {...params} />,
       isAllowed: isAuth,
       redirectPath: "/",
     },
     {
       path: "/settings/billing",
-      renderer: (params = {}): JSX.Element => (
-        <AccountBillingView {...params} />
-      ),
+      renderer: (params = {}): JSX.Element => <Billing {...params} />,
       isAllowed: isAuth,
       redirectPath: "/",
     },

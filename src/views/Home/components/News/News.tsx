@@ -1,8 +1,8 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-23 19:00:55
- * @LastEditors: Shikai Jin
- * @LastEditTime: 2022-06-25 21:49:03
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-07-24 00:46:10
  * @FilePath: /uwcssa_ca/src/views/Home/components/News/News.tsx
  * @Description:
  *
@@ -17,18 +17,22 @@ import {
 } from "redux/article/articleSlice";
 import { useAppDispatch, useAppSelector } from "redux/hooks";
 
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Grid from "@mui/material/Grid";
+import {
+  Box,
+  Button,
+  Card,
+  CardActions,
+  useMediaQuery,
+  useTheme,
+  Typography,
+  Grid,
+  CardContent,
+  CardMedia,
+} from "@mui/material";
+
 import { Link } from "react-router-dom";
-import Typography from "@mui/material/Typography";
+
 import { getAuthState } from "redux/auth/authSlice";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import { useTheme } from "@mui/material/styles";
 
 function News(): JSX.Element {
   const theme = useTheme();
@@ -51,7 +55,7 @@ function News(): JSX.Element {
       }
     };
     getArticles();
-  }, [isAuth, fetchArticleListStatus]);
+  }, [isAuth, fetchArticleListStatus, dispatch]);
 
   return (
     <Box>

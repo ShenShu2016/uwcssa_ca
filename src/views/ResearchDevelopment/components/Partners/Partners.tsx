@@ -2,7 +2,7 @@
  * @Author: Shikai Jin
  * @Date: 2022-06-01 00:01:32
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-11 17:39:57
+ * @LastEditTime: 2022-07-24 00:23:59
  * @FilePath: /uwcssa_ca/src/views/ResearchDevelopment/components/Partners/Partners.tsx
  * @Description:
  *
@@ -71,8 +71,8 @@ function Partners(): JSX.Element {
   return (
     <Box>
       <Slider {...sliderOpts}>
-        {mock.map((item, i) => (
-          <Box key={i} sx={{ height: "90px", width: "100%" }}>
+        {mock.map((item) => (
+          <Box key={item} sx={{ height: "90px", width: "100%" }}>
             <Box
               component="img"
               height={1}

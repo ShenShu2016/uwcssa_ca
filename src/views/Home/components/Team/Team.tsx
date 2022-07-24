@@ -2,7 +2,7 @@
  * @Author: Shikai Jin
  * @Date: 2022-06-11 20:04:21
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-25 22:28:02
+ * @LastEditTime: 2022-07-23 23:33:10
  * @FilePath: /uwcssa_ca/src/views/Home/components/Team/Team.tsx
  * @Description:
  *
@@ -43,10 +43,9 @@ function Team(): JSX.Element {
               {[
                 "Our sign up is dead simple. We only require your basic company information",
                 "We support bulk uploading via SQL, integrations with most data storage products",
-                // eslint-disable-next-line quotes
                 "Simply select where you'd like to transfer your data",
-              ].map((item, i) => (
-                <Grid item xs={12} key={i}>
+              ].map((item) => (
+                <Grid item xs={12} key={item}>
                   <Box
                     component={ListItem}
                     disableGutters

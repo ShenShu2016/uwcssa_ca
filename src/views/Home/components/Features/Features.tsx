@@ -1,10 +1,24 @@
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import Grid from "@mui/material/Grid";
+/*
+ * @Author: Shen Shu
+ * @Date: 2022-06-14 10:58:14
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-07-24 00:42:37
+ * @FilePath: /uwcssa_ca/src/views/Home/components/Features/Features.tsx
+ * @Description:
+ *
+ */
+
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  Grid,
+  Typography,
+} from "@mui/material";
+
 import React from "react";
-import Typography from "@mui/material/Typography";
+
 import { useNavigate } from "react-router-dom";
 
 const mock = [
@@ -149,7 +163,7 @@ function Features(): JSX.Element {
       <Box>
         <Grid container spacing={2}>
           {mock.map((item, i) => (
-            <Grid item xs={12} md={3} key={i}>
+            <Grid item xs={12} md={3} key={item.title}>
               <Box
                 data-aos="fade-up"
                 data-aos-delay={i * 100}

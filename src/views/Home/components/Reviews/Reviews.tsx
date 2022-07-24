@@ -1,8 +1,8 @@
 /*
  * @Author: Shikai Jin
  * @Date: 2022-05-17 22:50:55
- * @LastEditors: Shikai Jin
- * @LastEditTime: 2022-06-25 22:00:58
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-07-23 23:39:47
  * @FilePath: /uwcssa_ca/src/views/Home/components/Reviews/Reviews.tsx
  * @Description:
  *
@@ -41,7 +41,7 @@ function Reviews(): JSX.Element {
     if (isAuth !== null && fetchResearchDevelopmentTeamListStatus === "idle") {
       dispatch(fetchResearchDevelopmentTeamList({ isAuth }));
     }
-  }, [isAuth, fetchResearchDevelopmentTeamListStatus]);
+  }, [isAuth, fetchResearchDevelopmentTeamListStatus, dispatch]);
 
   return (
     <Box>
@@ -72,7 +72,7 @@ function Reviews(): JSX.Element {
       </Box>
       <Grid container spacing={2}>
         {developers.map((item, i) => (
-          <Grid item xs={12} md={4} key={i}>
+          <Grid item xs={12} md={4} key={item.id}>
             <Box
               width={1}
               height={1}

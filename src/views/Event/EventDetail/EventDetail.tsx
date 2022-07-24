@@ -1,10 +1,10 @@
-/* eslint-disable indent */
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable react/require-default-props */
+/* eslint-disable react/function-component-definition */
 /*
  * @Author: Shen Shu
  * @Date: 2022-06-18 17:26:14
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-07-22 16:01:34
+ * @LastEditTime: 2022-07-24 00:18:52
  * @FilePath: /uwcssa_ca/src/views/Event/EventDetail/EventDetail.tsx
  * @Description:
  *
@@ -73,10 +73,12 @@ const EventDetail: React.FC<EventDetailProp> = ({
   const isMd = useMediaQuery(theme.breakpoints.up("md"), {
     defaultMatches: true,
   });
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const { eventId } = fromPreview ? { eventId: null } : useParams();
   const event = fromPreview
     ? previewEvent
-    : useAppSelector((state) => selectEventById(state, eventId));
+    : // eslint-disable-next-line react-hooks/rules-of-hooks
+      useAppSelector((state) => selectEventById(state, eventId));
   const ownerUsername = useAppSelector(getOwnerUserName);
   const comments = useAppSelector(selectAllComments);
 

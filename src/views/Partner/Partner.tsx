@@ -1,8 +1,15 @@
-import Box from "@mui/material/Box";
+/*
+ * @Author: Shen Shu
+ * @Date: 2022-06-14 10:58:14
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-07-24 00:50:20
+ * @FilePath: /uwcssa_ca/src/views/Partner/Partner.tsx
+ * @Description:
+ *
+ */
+import { Box, useMediaQuery, useTheme } from "@mui/material";
 import React from "react";
 import Slider from "react-slick";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import { useTheme } from "@mui/material/styles";
 
 const mock = [
   "https://assets.maccarianagency.com/svg/logos/airbnb-original.svg",
@@ -59,8 +66,8 @@ function Partner(): JSX.Element {
   return (
     <Box>
       <Slider {...sliderOpts}>
-        {mock.map((item, i) => (
-          <Box maxWidth={120} key={i} marginX={3}>
+        {mock.map((item) => (
+          <Box maxWidth={120} key={item} marginX={3}>
             <Box
               component="img"
               height={1}

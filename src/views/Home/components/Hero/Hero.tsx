@@ -1,27 +1,31 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-19 17:21:07
- * @LastEditors: Shikai Jin
- * @LastEditTime: 2022-06-21 22:50:17
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-07-24 00:43:49
  * @FilePath: /uwcssa_ca/src/views/Home/components/Hero/Hero.tsx
  * @Description:
  *
  */
 
-import { alpha, useTheme } from "@mui/material/styles";
 import { getAuthState, getUserInfo } from "redux/auth/authSlice";
 
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
+import {
+  Box,
+  alpha,
+  useTheme,
+  Button,
+  Divider,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
+
 import Container from "components/Container";
-import Divider from "@mui/material/Divider";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Link, useNavigate } from "react-router-dom";
 import React from "react";
-import Typography from "@mui/material/Typography";
 import { useAppSelector } from "redux/hooks";
-import useMediaQuery from "@mui/material/useMediaQuery";
 
 function Hero(): JSX.Element {
   const theme = useTheme();
@@ -31,6 +35,8 @@ function Hero(): JSX.Element {
   const navigate = useNavigate();
   const isAuth = useAppSelector(getAuthState);
   const userInfo = useAppSelector(getUserInfo);
+
+  // eslint-disable-next-line react/no-unstable-nested-components
   function LeftSide() {
     return (
       <Box data-aos={isMd ? "fade-right" : "fade-up"}>
@@ -100,6 +106,7 @@ function Hero(): JSX.Element {
     );
   }
 
+  // eslint-disable-next-line react/no-unstable-nested-components
   function RightSide(): JSX.Element {
     return (
       <Box

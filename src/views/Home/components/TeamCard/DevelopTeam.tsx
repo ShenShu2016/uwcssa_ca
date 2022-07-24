@@ -1,9 +1,9 @@
 /*
  * @Author: Shikai Jin
  * @Date: 2022-06-04 21:45:47
- * @LastEditors: Shikai Jin
- * @LastEditTime: 2022-06-05 20:47:52
- * @FilePath: /uwcssa_ca/src/views/Developers/components/Team/DevelopTeam.tsx
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-07-24 00:48:16
+ * @FilePath: /uwcssa_ca/src/views/Home/components/TeamCard/DevelopTeam.tsx
  * @Description:
  *
  */
@@ -15,9 +15,8 @@ import {
 } from "redux/researchDevelopmentTeam/researchDevelopmentTeamSlice";
 import { useAppDispatch, useAppSelector } from "redux/hooks";
 
-import { Box } from "@mui/system";
-import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
+import { Box, Grid, Typography } from "@mui/material";
+
 import { getAuthState } from "redux/auth/authSlice";
 import DevelopCard from "./componments/DeveloperCard";
 
@@ -39,7 +38,7 @@ function DevelopTeam(): JSX.Element {
       }
     };
     getUwcssaDepartments();
-  }, [fetchResearchDevelopmentTeamListStatus]);
+  }, [dispatch, fetchResearchDevelopmentTeamListStatus, isAuth]);
 
   return (
     <Box>

@@ -1,20 +1,34 @@
-import Avatar from "@mui/material/Avatar";
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
+/*
+ * @Author: Shen Shu
+ * @Date: 2022-06-14 10:58:14
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-07-24 00:49:24
+ * @FilePath: /uwcssa_ca/src/views/Home/components/Trucking/Trucking.tsx
+ * @Description:
+ *
+ */
+
+import {
+  Avatar,
+  Box,
+  Grid,
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
+
 import LaptopSkeletonIllustration from "svg/illustrations/LaptopSkeleton";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemAvatar from "@mui/material/ListItemAvatar";
-import ListItemText from "@mui/material/ListItemText";
-/* eslint-disable react/no-unescaped-entities */
+
 import React from "react";
-import Typography from "@mui/material/Typography";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import { useTheme } from "@mui/material/styles";
 
 const mock = [
   {
+    id: 1,
     title: "Built for developers",
     subtitle:
       "theFront is built to make your life easier. Variables, build tooling, documentation, and reusable components.",
@@ -37,6 +51,7 @@ const mock = [
     ),
   },
   {
+    id: 2,
     title: "Designed to be modern",
     subtitle:
       "Designed with the latest design trends in mind. theFront feels modern, minimal, and beautiful.",
@@ -59,6 +74,7 @@ const mock = [
     ),
   },
   {
+    id: 3,
     title: "Documentation for everything",
     subtitle:
       // eslint-disable-next-line quotes
@@ -89,12 +105,13 @@ function Trucking(): JSX.Element {
     defaultMatches: true,
   });
 
+  // eslint-disable-next-line react/no-unstable-nested-components
   function LeftSide() {
     return (
       <List disablePadding>
         {mock.map((item, index) => (
           <ListItem
-            key={index}
+            key={item.id}
             disableGutters
             data-aos="fade-up"
             data-aos-delay={index * 300}
@@ -118,6 +135,7 @@ function Trucking(): JSX.Element {
     );
   }
 
+  // eslint-disable-next-line react/no-unstable-nested-components
   function RightSide() {
     return (
       <Box width={1}>

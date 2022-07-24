@@ -1,9 +1,9 @@
 /*
  * @Author: Shikai Jin
  * @Date: 2022-06-05 19:59:54
- * @LastEditors: Shikai Jin
- * @LastEditTime: 2022-06-07 20:26:55
- * @FilePath: /uwcssa_ca/src/views/Developers/components/Team/componments/DeveloperCard.tsx
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-07-24 00:13:24
+ * @FilePath: /uwcssa_ca/src/views/Home/components/TeamCard/componments/DeveloperCard.tsx
  * @Description:
  *
  */
@@ -30,8 +30,7 @@ import { stringAvatar } from "components/Avatar/AvatarFunction";
 type Props = {
   developers: ResearchDevelopmentTeam[];
 };
-
-const DevelopCard: React.FC<Props> = (props): JSX.Element => {
+function DevelopCard(props: Props): JSX.Element {
   const theme = useTheme();
   const { developers } = props;
 
@@ -115,6 +114,6 @@ const DevelopCard: React.FC<Props> = (props): JSX.Element => {
       ))}
     </>
   );
-};
+}
 
 export default DevelopCard;

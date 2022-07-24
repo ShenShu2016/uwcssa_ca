@@ -9,11 +9,11 @@
  */
 
 import { Amplify } from "aws-amplify";
-import App from "./App";
 import { Provider } from "react-redux";
 import React from "react";
 import ReactDOM from "react-dom";
 import { SnackbarProvider } from "notistack";
+import App from "./App";
 import config from "./aws-exports";
 import reportWebVitals from "./reportWebVitals";
 import { store } from "./redux/store";

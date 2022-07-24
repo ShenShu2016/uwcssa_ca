@@ -1,16 +1,28 @@
-import Avatar from "@mui/material/Avatar";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import Grid from "@mui/material/Grid";
-import ListItem from "@mui/material/ListItem";
-import ListItemAvatar from "@mui/material/ListItemAvatar";
-import ListItemText from "@mui/material/ListItemText";
+/*
+ * @Author: Shen Shu
+ * @Date: 2022-06-14 10:58:14
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-07-24 00:47:36
+ * @FilePath: /uwcssa_ca/src/views/Home/components/Pricings/Pricings.tsx
+ * @Description:
+ *
+ */
+import {
+  Avatar,
+  Box,
+  Typography,
+  useTheme,
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  Grid,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
+} from "@mui/material";
+
 import React from "react";
-import Typography from "@mui/material/Typography";
-import { useTheme } from "@mui/material/styles";
 
 const mock = [
   {
@@ -18,6 +30,7 @@ const mock = [
     price: "$22",
     features: ["1 User", "1 App", "Integrations"],
     isHighlighted: false,
+    id: 1,
   },
   {
     title: "Pro",
@@ -29,6 +42,7 @@ const mock = [
       "API access",
     ],
     isHighlighted: true,
+    id: 2,
   },
   {
     title: "Enterprise",
@@ -42,6 +56,7 @@ const mock = [
       "Facebook Ads",
     ],
     isHighlighted: false,
+    id: 3,
   },
 ];
 
@@ -69,8 +84,8 @@ function Pricing(): JSX.Element {
         </Typography>
       </Box>
       <Grid container spacing={4}>
-        {mock.map((item, i) => (
-          <Grid item xs={12} md={4} key={i}>
+        {mock.map((item) => (
+          <Grid item xs={12} md={4} key={item.id}>
             <Box
               component={Card}
               height={1}
@@ -105,8 +120,8 @@ function Pricing(): JSX.Element {
                   </Box>
                 </Box>
                 <Grid container spacing={1}>
-                  {item.features.map((feature, j) => (
-                    <Grid item xs={12} key={j}>
+                  {item.features.map((feature) => (
+                    <Grid item xs={12} key={feature}>
                       <Box
                         component={ListItem}
                         disableGutters

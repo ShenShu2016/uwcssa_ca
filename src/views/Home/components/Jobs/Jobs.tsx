@@ -1,12 +1,23 @@
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import Grid from "@mui/material/Grid";
-import React from "react";
-import Typography from "@mui/material/Typography";
+/*
+ * @Author: Shen Shu
+ * @Date: 2022-06-14 10:58:14
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-07-24 00:44:48
+ * @FilePath: /uwcssa_ca/src/views/Home/components/Jobs/Jobs.tsx
+ * @Description:
+ *
+ */
 
-/* eslint-disable react/no-unescaped-entities */
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  Typography,
+  Grid,
+} from "@mui/material";
+
+import React from "react";
 
 export const mock = [
   {
@@ -60,8 +71,8 @@ function Jobs(): JSX.Element {
       </Box>
       <Box maxWidth={800} margin="0 auto">
         <Grid container spacing={2}>
-          {mock.map((item, i) => (
-            <Grid item xs={12} key={i}>
+          {mock.map((item) => (
+            <Grid item xs={12} key={item.title}>
               <Box
                 component={Card}
                 variant="outlined"

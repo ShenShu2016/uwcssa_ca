@@ -1,11 +1,17 @@
+/*
+ * @Author: Shen Shu
+ * @Date: 2022-06-26 15:19:17
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-07-24 00:42:05
+ * @FilePath: /uwcssa_ca/src/views/Event/EventList/EventList.tsx
+ * @Description:
+ *
+ */
 import React, { useState, useEffect } from "react";
 import Container from "components/Container";
 import PropTypes from "prop-types";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
+import { Tabs, Tab, Box, Card } from "@mui/material";
+
 import { useAppSelector, useAppDispatch } from "redux/hooks";
 import EventSwiperItem from "components/EventContainer/components/EventSwiperItem";
 import EventJoinForm from "components/EventContainer/components/EventJoinForm";
@@ -24,7 +30,7 @@ function TabPanel(props) {
     if (fetchEventListStatus === "idle") {
       dispatch(fetchEventList({ isAuth, ownerUsername }));
     }
-  }, [fetchEventListStatus]);
+  }, [dispatch, fetchEventListStatus, isAuth, ownerUsername]);
 
   return (
     <div
@@ -47,12 +53,12 @@ function a11yProps(index) {
 }
 
 TabPanel.propTypes = {
+  // eslint-disable-next-line react/require-default-props
   children: PropTypes.node,
   index: PropTypes.number.isRequired,
   value: PropTypes.number.isRequired,
 };
-
-const EventList: React.FC = () => {
+function EventList(): JSX.Element {
   const eventList = useAppSelector((state) => state.event);
   const [value, setValue] = useState(0);
   const [joinDialogOpen, setJoinDialogOpen] = useState<boolean>(false);
@@ -77,11 +83,11 @@ const EventList: React.FC = () => {
       )
     : [];
 
-  const handleChange = (event, newValue) => {
+  const handleChange = (newValue) => {
     setValue(newValue);
   };
 
-  const handleJoinEvent = (event: Event) => {
+  const handleJoinEvent = () => {
     setEvent(event);
     setJoinDialogOpen(true);
   };
@@ -159,6 +165,6 @@ const EventList: React.FC = () => {
       </Box>
     </Container>
   );
-};
+}
 
 export default EventList;

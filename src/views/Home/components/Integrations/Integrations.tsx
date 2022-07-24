@@ -1,18 +1,16 @@
 /*
  * @Author: Shikai Jin
  * @Date: 2022-05-17 22:50:55
- * @LastEditors: Shikai Jin
- * @LastEditTime: 2022-06-25 22:09:34
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-07-24 00:44:33
  * @FilePath: /uwcssa_ca/src/views/Home/components/Integrations/Integrations.tsx
  * @Description:
  *
  */
 
-import Avatar from "@mui/material/Avatar";
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
+import { Avatar, Box, Grid, Typography } from "@mui/material";
+
 import React from "react";
-import Typography from "@mui/material/Typography";
 
 // 暂时先这样，之后再细改
 const mock = [
@@ -59,8 +57,8 @@ function Integrations(): JSX.Element {
         </Typography>
       </Box> */}
       <Grid container spacing={2}>
-        {mock.map((item, i) => (
-          <Grid item xs={12} md={4} key={i}>
+        {mock.map((item) => (
+          <Grid item xs={12} md={4} key={item.title}>
             <Box
               sx={{
                 display: "flex",

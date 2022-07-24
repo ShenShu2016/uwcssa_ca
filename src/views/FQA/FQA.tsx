@@ -1,8 +1,8 @@
 /*
  * @Author: Shikai Jin
  * @Date: 2022-05-26 22:59:47
- * @LastEditors: Shikai Jin
- * @LastEditTime: 2022-05-27 18:09:31
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-07-24 00:14:18
  * @FilePath: /uwcssa_ca/src/views/FQA/FQA.tsx
  * @Description:
  *
@@ -12,45 +12,37 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
-  Avatar,
-  ListItem,
-  ListItemAvatar,
-  ListItemText,
+  Box,
+  Grid,
+  Typography,
+  useTheme,
 } from "@mui/material";
 
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import Grid from "@mui/material/Grid";
+
 import React from "react";
-import Typography from "@mui/material/Typography";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import { useTheme } from "@mui/material/styles";
 
 const mock = [
   {
     question: "General settings",
     answer: "Motivation is the first step to success",
+    id: 1,
   },
   {
     question: "General settings",
     answer: "Motivation is the first step to success",
+    id: 2,
   },
   {
     question: "General settings",
     answer: "Motivation is the first step to success",
+    id: 3,
   },
 ];
 
 function Question(): JSX.Element {
   const theme = useTheme();
-  const isMd = useMediaQuery(theme.breakpoints.up("md"), {
-    defaultMatches: true,
-  });
+
   const [expanded, setExpanded] = React.useState<string | false>(false);
 
   const handleChange =
@@ -81,7 +73,7 @@ function Question(): JSX.Element {
         <Grid item xs={12} md={10}>
           {mock.map((item, i) => (
             <Accordion
-              key={i}
+              key={item.id}
               expanded={expanded === `${i}`}
               onChange={handleChange(`${i}`)}
               disableGutters

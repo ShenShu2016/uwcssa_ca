@@ -1,46 +1,47 @@
-/* eslint-disable react/no-unescaped-entities */
+/*
+ * @Author: Shen Shu
+ * @Date: 2022-06-14 10:58:14
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-07-24 00:11:53
+ * @FilePath: /uwcssa_ca/src/views/ResearchDevelopment/components/Hero/Hero.tsx
+ * @Description:
+ *
+ */
 
-import * as yup from "yup";
+import { Box, Typography, useTheme } from "@mui/material";
 
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Card from "@mui/material/Card";
 import Container from "components/Container";
 import React from "react";
-import TextField from "@mui/material/TextField";
-import Typography from "@mui/material/Typography";
-import { useFormik } from "formik";
-import { useTheme } from "@mui/material/styles";
 
-const validationSchema = yup.object({
-  name: yup
-    .string()
-    .trim()
-    .min(2, "Please enter a valid name")
-    .max(50, "Please enter a valid name")
-    .required("Please specify your name"),
-  email: yup
-    .string()
-    .trim()
-    .email("Please enter a valid email address")
-    .required("Email is required."),
-});
+// const validationSchema = yup.object({
+//   name: yup
+//     .string()
+//     .trim()
+//     .min(2, "Please enter a valid name")
+//     .max(50, "Please enter a valid name")
+//     .required("Please specify your name"),
+//   email: yup
+//     .string()
+//     .trim()
+//     .email("Please enter a valid email address")
+//     .required("Email is required."),
+// });
 
 function Hero(): JSX.Element {
   const theme = useTheme();
 
-  const initialValues = {
-    name: "",
-    email: "",
-  };
+  // const initialValues = {
+  //   name: "",
+  //   email: "",
+  // };
 
-  const onSubmit = (values) => values;
+  // const onSubmit = (values) => values;
 
-  const formik = useFormik({
-    initialValues,
-    validationSchema,
-    onSubmit,
-  });
+  // const formik = useFormik({
+  //   initialValues,
+  //   validationSchema,
+  //   onSubmit,
+  // });
 
   return (
     <Box position="relative" zIndex={2}>

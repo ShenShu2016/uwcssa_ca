@@ -1,8 +1,8 @@
 /*
  * @Author: Shikai Jin
  * @Date: 2022-06-05 19:59:54
- * @LastEditors: Shikai Jin
- * @LastEditTime: 2022-07-02 22:28:43
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-07-23 23:28:07
  * @FilePath: /uwcssa_ca/src/views/ResearchDevelopment/components/Team/components/DeveloperCard.tsx
  * @Description:
  *
@@ -13,7 +13,6 @@ import {
   Box,
   Card,
   CardContent,
-  CardMedia,
   Grid,
   IconButton,
   ListItemText,
@@ -30,7 +29,7 @@ type Props = {
   developers: ResearchDevelopmentTeam[];
 };
 
-const DevelopCard: React.FC<Props> = (props): JSX.Element => {
+function DevelopCard(props: Props): JSX.Element {
   const { developers } = props;
 
   return (
@@ -111,6 +110,6 @@ const DevelopCard: React.FC<Props> = (props): JSX.Element => {
       ))}
     </>
   );
-};
+}
 
 export default DevelopCard;

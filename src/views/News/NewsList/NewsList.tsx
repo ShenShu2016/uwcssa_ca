@@ -1,3 +1,13 @@
+/*
+ * @Author: Shen Shu
+ * @Date: 2022-06-26 15:19:17
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-07-23 23:28:52
+ * @FilePath: /uwcssa_ca/src/views/News/NewsList/NewsList.tsx
+ * @Description:
+ *
+ */
+
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
@@ -19,7 +29,7 @@ import moment from "moment";
 import { getAuthState } from "redux/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "redux/hooks";
 
-const NewsList: React.FC = () => {
+function NewsList(): JSX.Element {
   const dispatch = useAppDispatch();
   const isAuth = useAppSelector(getAuthState);
   const articles = useAppSelector(selectAllArticles); // redux 有这种用法
@@ -36,7 +46,7 @@ const NewsList: React.FC = () => {
       }
     };
     getArticles();
-  }, [isAuth, fetchArticleListStatus]);
+  }, [isAuth, fetchArticleListStatus, dispatch]);
 
   return (
     <Container>
@@ -70,9 +80,9 @@ const NewsList: React.FC = () => {
               <CardContent sx={{ width: { xs: "100%", sm: "60%" }, ml: 4 }}>
                 <Box mb={1}>
                   {item?.tags
-                    ? item?.tags?.items.map((tag, i) => (
+                    ? item?.tags?.items.map((tag) => (
                         <Chip
-                          key={tag.tagID + i} // 为啥有两个一样的tag
+                          key={tag.tagID} // 为啥有两个一样的tag
                           label={tag.tagID}
                           component={Link} // 用react router
                           to="" // 用react router
@@ -111,6 +121,6 @@ const NewsList: React.FC = () => {
       </Grid>
     </Container>
   );
-};
+}
 
 export default NewsList;

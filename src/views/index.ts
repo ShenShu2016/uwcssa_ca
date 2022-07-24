@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-16 22:03:25
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-07-23 15:25:08
+ * @LastEditTime: 2022-07-24 00:30:58
  * @FilePath: /uwcssa_ca/src/views/index.ts
  * @Description:
  */
@@ -24,12 +24,6 @@ export { default as PreSignUpResetPassWord } from "./Authorization/PreSignUpRese
 export { default as SigninCover } from "./Authorization/SigninCover";
 export { default as SignupCover } from "./Authorization/SignupCover";
 export { default as EmailConfirmationCover } from "./Authorization/EmailConfirmationCover";
-export { default as AccountBilling } from "./Settings/Billing";
-export { default as AccountGeneral } from "./Settings/General";
-
-export { default as AccountNotifications } from "./Settings/Notifications";
-export { default as AccountSecurity } from "./Settings/Security";
-export { default as AccountProfile } from "./Settings/Profile";
 export { default as NotFoundCover } from "./NotFoundCover";
 export { default as About } from "./About";
 export { default as ResearchDevelopment } from "./ResearchDevelopment";

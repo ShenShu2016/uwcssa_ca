@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-30 15:13:57
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-06 17:18:33
+ * @LastEditTime: 2022-07-24 00:26:44
  * @FilePath: /uwcssa_ca/src/admin/UwcssaMember/UwcssaMemberDashboard/components/SimpleStriped/components/EditUwcssaMember/EditUwcssaMemberForm/EditUwcssaMemberForm.tsx
  * @Description:
  *
@@ -31,7 +31,6 @@ import {
 import { useAppDispatch, useAppSelector } from "redux/hooks";
 
 import { getAuthState } from "redux/auth/authSlice";
-import { updateResearchDevelopmentTeamDetail } from "redux/researchDevelopmentTeam/researchDevelopmentTeamSlice";
 import { updateUwcssaMemberDetail } from "redux/uwcssaMember/uwcssaMemberSlice";
 import { useFormik } from "formik";
 
@@ -131,6 +130,7 @@ function EditUwcssaMemberForm({ onClose, open, item }: Props): JSX.Element {
     );
     if (response.meta.requestStatus === "fulfilled") {
       onClose();
+      // eslint-disable-next-line @typescript-eslint/no-use-before-define
       formik.resetForm();
       return true;
     }
@@ -200,8 +200,8 @@ function EditUwcssaMemberForm({ onClose, open, item }: Props): JSX.Element {
                       Boolean(formik.errors.uwcssaDepartmentUwcssaMembersId)
                     }
                   >
-                    {uwcssaDepartmentList.map((option, index) => (
-                      <MenuItem key={index} value={option.id}>
+                    {uwcssaDepartmentList.map((option) => (
+                      <MenuItem key={option.id} value={option.id}>
                         {option.id}
                       </MenuItem>
                     ))}
