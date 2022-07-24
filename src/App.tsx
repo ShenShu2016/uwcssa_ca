@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-12 19:49:43
+ * @LastEditTime: 2022-07-23 21:59:32
  * @FilePath: /uwcssa_ca/src/App.tsx
  * @Description:
  *
@@ -30,13 +30,13 @@ function App(): JSX.Element {
   const ownerUser = useAppSelector(getOwnerUserName);
   useEffect(() => {
     dispatch(loadUser());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     if (ownerUser) {
       dispatch(fetchUserProfile(ownerUser));
     }
-  }, [ownerUser]);
+  }, [dispatch, ownerUser]);
 
   return (
     <Page>
