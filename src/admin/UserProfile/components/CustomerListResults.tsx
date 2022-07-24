@@ -25,7 +25,7 @@ import { AvatarURL } from "redux/userProfile/userProfileSlice";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import React, { useState } from "react";
 import moment from "moment";
-import { stringAvatar } from "components/Avatar/AvatarFunction";
+import stringAvatar from "components/Avatar/AvatarFunction";
 
 type UserProfileType = {
   id: string;

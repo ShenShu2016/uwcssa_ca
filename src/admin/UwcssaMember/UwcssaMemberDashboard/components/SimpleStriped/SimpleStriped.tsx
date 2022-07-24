@@ -30,7 +30,7 @@ import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-import { stringAvatar } from "components/Avatar/AvatarFunction";
+import stringAvatar from "components/Avatar/AvatarFunction";
 import { useAppDispatch } from "redux/hooks";
 import { useConfirm } from "material-ui-confirm";
 import EditUwcssaMemberForm from "./components/EditUwcssaMember/EditUwcssaMemberForm/EditUwcssaMemberForm";

@@ -2,20 +2,20 @@
  * @Author: Shen Shu
  * @Date: 2022-05-25 19:05:54
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-01 22:19:19
+ * @LastEditTime: 2022-07-24 17:51:00
  * @FilePath: /uwcssa_ca/src/views/ArticleCover/components/Hero/Hero.tsx
  * @Description:
  *
  */
 
-import { Avatar, Box, ListItemText, Typography } from "@mui/material";
+import { Avatar, Box, ListItemText, Typography, alpha } from "@mui/material";
 import React, { useEffect } from "react";
 
 import { Article } from "redux/article/articleSlice";
 import Container from "components/Container";
-import { alpha } from "@mui/material/styles";
+
 import moment from "moment";
-import { stringAvatar } from "components/Avatar/AvatarFunction";
+import stringAvatar from "components/Avatar/AvatarFunction";
 
 function Hero({ article }: { article: Article }): JSX.Element {
   useEffect(() => {

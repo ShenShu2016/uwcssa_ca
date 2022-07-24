@@ -15,7 +15,7 @@ import { Comment } from "redux/comment/commentSlice";
 import Container from "components/Container";
 import { Count } from "redux/count/countSlice";
 import moment from "moment";
-import { stringAvatar } from "components/Avatar/AvatarFunction";
+import stringAvatar from "components/Avatar/AvatarFunction";
 import CommentGroupButton from "./components/CommentGroupButton";
 import FeedbackForm from "../CommentDialog/components/FeedbackForm/FeedbackForm";
 

@@ -2,7 +2,7 @@
  * @Author: Shikai Jin
  * @Date: 2022-06-05 19:59:54
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-07-24 01:05:37
+ * @LastEditTime: 2022-07-24 17:49:05
  * @FilePath: /uwcssa_ca/src/views/ResearchDevelopment/components/Team/components/DeveloperCard.tsx
  * @Description:
  *
@@ -23,7 +23,7 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import React from "react";
 import { ResearchDevelopmentTeam } from "redux/researchDevelopmentTeam/researchDevelopmentTeamSlice";
-import { stringAvatar } from "components/Avatar/AvatarFunction";
+import stringAvatar from "components/Avatar/AvatarFunction";
 
 type Props = {
   developers: ResearchDevelopmentTeam[];

@@ -29,7 +29,7 @@ import Settings from "@mui/icons-material/Settings";
 import { blue } from "@mui/material/colors";
 import { removeMyUserProfile } from "redux/userProfile/userProfileSlice";
 import { signOut } from "redux/auth/authSlice";
-import { stringAvatar } from "components/Avatar/AvatarFunction";
+import stringAvatar from "components/Avatar/AvatarFunction";
 
 export default function AccountMenu() {
   const theme = useTheme();

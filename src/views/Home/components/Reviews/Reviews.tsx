@@ -27,7 +27,7 @@ import {
 import { useAppDispatch, useAppSelector } from "redux/hooks";
 
 import { getAuthState } from "redux/auth/authSlice";
-import { stringAvatar } from "components/Avatar/AvatarFunction";
+import stringAvatar from "components/Avatar/AvatarFunction";
 
 function Reviews(): JSX.Element {
   const dispatch = useAppDispatch();

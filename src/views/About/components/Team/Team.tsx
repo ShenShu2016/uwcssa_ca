@@ -32,7 +32,7 @@ import {
 } from "@mui/material";
 
 import { getAuthState } from "redux/auth/authSlice";
-import { stringAvatar } from "components/Avatar/AvatarFunction";
+import stringAvatar from "components/Avatar/AvatarFunction";
 
 function Team(): JSX.Element {
   const theme = useTheme();

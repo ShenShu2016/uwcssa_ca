@@ -18,7 +18,7 @@ import React from "react";
 import ReactHtmlParser from "react-html-parser";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import moment from "moment";
-import { stringAvatar } from "components/Avatar/AvatarFunction";
+import stringAvatar from "components/Avatar/AvatarFunction";
 
 function Content({ event }: { event: Event }): JSX.Element {
   return (

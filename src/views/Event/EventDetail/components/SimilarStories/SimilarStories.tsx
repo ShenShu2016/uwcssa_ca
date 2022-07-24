@@ -25,7 +25,7 @@ import { Link, useNavigate } from "react-router-dom";
 import React from "react";
 import moment from "moment";
 import { selectAllEvents } from "redux/event/eventSlice";
-import { stringAvatar } from "components/Avatar/AvatarFunction";
+import stringAvatar from "components/Avatar/AvatarFunction";
 import { useAppSelector } from "redux/hooks";
 
 function SimilarStories(): JSX.Element {

@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-18 09:12:03
- * @LastEditTime: 2022-06-10 20:22:35
+ * @LastEditTime: 2022-07-24 17:45:19
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/layouts/Main/components/Sidebar/components/SidebarNav/components/NavItem/NavItem.tsx
  */
@@ -10,15 +10,17 @@ import React, { useEffect, useState } from "react";
 import { alpha, useTheme } from "@mui/material/styles";
 import { matchPath, useLocation, useNavigate, Link } from "react-router-dom";
 
-import Accordion from "@mui/material/Accordion";
-import AccordionDetails from "@mui/material/AccordionDetails";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import Grid from "@mui/material/Grid";
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Box,
+  Button,
+  Grid,
+  Typography,
+} from "@mui/material";
 
-import Typography from "@mui/material/Typography";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 interface Props {
   title: string;
@@ -65,8 +67,8 @@ function NavItem({ title, items }: Props): JSX.Element {
           </AccordionSummary>
           <AccordionDetails sx={{ padding: 0 }}>
             <Grid container spacing={1}>
-              {items.map((p, i) => (
-                <Grid item key={i} xs={12}>
+              {items.map((p) => (
+                <Grid item key={p.title} xs={12}>
                   <Button
                     size="large"
                     component={Link}

@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-30 15:13:57
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-06 17:35:08
+ * @LastEditTime: 2022-07-24 17:48:15
  * @FilePath: /uwcssa_ca/src/admin/ResearchDevelopmentTeam/ResearchDevelopmentTeamDashboard/components/AddResearchDevelopmentTeam/AddResearchDevelopmentTeamForm/AddResearchDevelopmentTeamForm.tsx
  * @Description:
  *
@@ -38,7 +38,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { getAuthState } from "redux/auth/authSlice";
 import { postResearchDevelopmentTeam } from "redux/researchDevelopmentTeam/researchDevelopmentTeamSlice";
-import { stringAvatar } from "components/Avatar/AvatarFunction";
+import stringAvatar from "components/Avatar/AvatarFunction";
 import { useFormik } from "formik";
 
 const validationSchema = yup.object({
@@ -194,8 +194,8 @@ function AddResearchDevelopmentTeamForm({ onClose, open }: Props): JSX.Element {
                     onChange={formik.handleChange}
                     error={formik.touched.owner && Boolean(formik.errors.owner)}
                   >
-                    {userProfileList.map((option, index) => (
-                      <MenuItem key={index} value={option.id}>
+                    {userProfileList.map((option) => (
+                      <MenuItem key={option.id} value={option.id}>
                         <Avatar
                           src={option.avatarURL?.objectThumbnailURL}
                           {...stringAvatar(option.name, {

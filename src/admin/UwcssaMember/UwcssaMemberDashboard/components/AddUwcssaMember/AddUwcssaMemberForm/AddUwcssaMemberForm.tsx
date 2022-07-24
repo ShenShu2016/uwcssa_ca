@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-30 15:13:57
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-06 17:35:46
+ * @LastEditTime: 2022-07-24 17:47:34
  * @FilePath: /uwcssa_ca/src/admin/UwcssaMember/UwcssaMemberDashboard/components/AddUwcssaMember/AddUwcssaMemberForm/AddUwcssaMemberForm.tsx
  * @Description:
  *
@@ -42,7 +42,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { getAuthState } from "redux/auth/authSlice";
 import { postUwcssaMember } from "redux/uwcssaMember/uwcssaMemberSlice";
-import { stringAvatar } from "components/Avatar/AvatarFunction";
+import stringAvatar from "components/Avatar/AvatarFunction";
 import { useFormik } from "formik";
 
 const validationSchema = yup.object({
@@ -210,10 +210,10 @@ function AddUwcssaMemberForm({ onClose, open }: Props): JSX.Element {
                       Boolean(formik.errors.uwcssaDepartmentUwcssaMembersId)
                     }
                   >
-                    {uwcssaDepartmentList.map((option, index) => {
+                    {uwcssaDepartmentList.map((option) => {
                       console.log();
                       return (
-                        <MenuItem key={index} value={option.id}>
+                        <MenuItem key={option.id} value={option.id}>
                           {option.id}
                         </MenuItem>
                       );
@@ -251,8 +251,8 @@ function AddUwcssaMemberForm({ onClose, open }: Props): JSX.Element {
                     onChange={formik.handleChange}
                     error={formik.touched.owner && Boolean(formik.errors.owner)}
                   >
-                    {userProfileList.map((option, index) => (
-                      <MenuItem key={index} value={option.id}>
+                    {userProfileList.map((option) => (
+                      <MenuItem key={option.id} value={option.id}>
                         <Avatar
                           src={option.avatarURL?.objectThumbnailURL}
                           {...stringAvatar(option.name, {

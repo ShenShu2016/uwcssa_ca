@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-26 13:57:44
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-10 20:21:41
+ * @LastEditTime: 2022-07-24 17:49:42
  * @FilePath: /uwcssa_ca/src/views/Settings/Profile/Profile.tsx
  * @Description:
  *
@@ -22,7 +22,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Container from "components/Container";
 import CropperDialog from "components/Cropper/CropperDialog";
 import React from "react";
-import { stringAvatar } from "components/Avatar/AvatarFunction";
+import stringAvatar from "components/Avatar/AvatarFunction";
 import { useAppSelector } from "redux/hooks";
 
 // import CropperDialog from 'components/Cropper/CropperDialog';

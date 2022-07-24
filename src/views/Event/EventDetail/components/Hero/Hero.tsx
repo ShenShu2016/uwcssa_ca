@@ -14,7 +14,7 @@ import React, { useEffect } from "react";
 import Container from "components/Container";
 import { Event } from "redux/event/eventSlice";
 import moment from "moment";
-import { stringAvatar } from "components/Avatar/AvatarFunction";
+import stringAvatar from "components/Avatar/AvatarFunction";
 
 function Hero({ event }: { event: Event }): JSX.Element {
   console.log(event.user);
