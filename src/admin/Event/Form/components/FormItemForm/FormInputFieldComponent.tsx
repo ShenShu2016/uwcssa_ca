@@ -1,9 +1,8 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 /*
  * @Author: Shen Shu
  * @Date: 2022-06-03 16:35:33
- * @LastEditors: 李佳修
- * @LastEditTime: 2022-06-09 11:41:18
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-07-24 17:20:15
  * @FilePath: /uwcssa_ca/src/admin/Event/Form/components/FormItemForm/FormInputFieldComponent.tsx
  * @Description:
  *
@@ -241,8 +240,8 @@ function FormInputFieldComponent({
               </Box>
             )}
           >
-            {formItem.formSelectChoices.map((option, index) => (
-              <MenuItem key={index} value={option}>
+            {formItem.formSelectChoices.map((option) => (
+              <MenuItem key={option} value={option}>
                 {option}
               </MenuItem>
             ))}
@@ -274,8 +273,8 @@ function FormInputFieldComponent({
               formik.touched[formItem.id] && Boolean(formik.errors[formItem.id])
             }
           >
-            {formItem.formSelectChoices.map((option, index) => (
-              <MenuItem key={index} value={option}>
+            {formItem.formSelectChoices.map((option) => (
+              <MenuItem key={option} value={option}>
                 {option}
               </MenuItem>
             ))}
@@ -316,9 +315,9 @@ function FormInputFieldComponent({
             onChange={formik.handleChange}
             value={formik.values[formItem.id]}
           >
-            {formItem.formSelectChoices.map((option, index) => (
+            {formItem.formSelectChoices.map((option) => (
               <FormControlLabel
-                key={index}
+                key={option}
                 value={option}
                 control={
                   <Radio

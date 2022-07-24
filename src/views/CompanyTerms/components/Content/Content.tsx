@@ -2,15 +2,14 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 16:01:18
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-17 16:02:01
- * @FilePath: \uwcssa_ca\frontend\src\views\CompanyTerms\components\Content\Content.tsx
+ * @LastEditTime: 2022-07-24 17:37:43
+ * @FilePath: /uwcssa_ca/src/views/CompanyTerms/components/Content/Content.tsx
  * @Description:
  *
  */
 
-import Box from "@mui/material/Box";
+import { Box, Typography } from "@mui/material/";
 import React from "react";
-import Typography from "@mui/material/Typography";
 
 const mock = [
   {
@@ -85,7 +84,7 @@ function Content(): JSX.Element {
   return (
     <Box>
       {mock.map((item, i) => (
-        <Box key={i} marginBottom={i < mock.length - 1 ? 4 : 0}>
+        <Box key={item.title} marginBottom={i < mock.length - 1 ? 4 : 0}>
           <PrivacySection {...item} />
         </Box>
       ))}

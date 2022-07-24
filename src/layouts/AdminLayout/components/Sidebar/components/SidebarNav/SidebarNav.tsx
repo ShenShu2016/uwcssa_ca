@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-28 16:04:29
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-30 00:16:22
+ * @LastEditTime: 2022-07-24 17:35:55
  * @FilePath: /uwcssa_ca/src/layouts/AdminLayout/components/Sidebar/components/SidebarNav/SidebarNav.tsx
  * @Description:
  *
@@ -10,12 +10,9 @@
 
 import { Link, useLocation } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import { alpha, useTheme } from "@mui/material/styles";
+import { alpha, useTheme, Box, Button, Typography } from "@mui/material";
 
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import CloseIcon from "@mui/icons-material/Close";
-import Typography from "@mui/material/Typography";
 
 interface Props {
   // eslint-disable-next-line @typescript-eslint/ban-types
@@ -45,8 +42,8 @@ function SidebarNav({ pages, onClose }: Props): JSX.Element {
         <CloseIcon fontSize="small" />
       </Box>
       <Box paddingX={2}>
-        {pages.map((item, i) => (
-          <Box key={i} marginBottom={3}>
+        {pages.map((item) => (
+          <Box key={item.groupTitle} marginBottom={3}>
             <Typography
               variant="caption"
               sx={{
@@ -59,8 +56,8 @@ function SidebarNav({ pages, onClose }: Props): JSX.Element {
               {item.groupTitle}
             </Typography>
             <Box>
-              {item.pages.map((p, i) => (
-                <Box marginBottom={1 / 2} key={i}>
+              {item.pages.map((p) => (
+                <Box marginBottom={1 / 2} key={p.title}>
                   <Button
                     component={Link}
                     to={p.href}

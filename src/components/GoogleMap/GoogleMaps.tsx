@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-14 15:09:24
- * @LastEditTime: 2022-06-23 23:16:49
+ * @LastEditTime: 2022-07-24 17:05:22
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/components/GoogleMap/GoogleMaps.tsx
  */
@@ -35,8 +35,7 @@ const libraries: Libraries = ["places"];
 interface GoogleMapsProp {
   setLocation: React.Dispatch<React.SetStateAction<object>>;
 }
-
-const GoogleMaps: React.FC<GoogleMapsProp> = ({ setLocation }) => {
+function GoogleMaps({ setLocation }: GoogleMapsProp) {
   const dispatch = useAppDispatch();
 
   const [autoComplete, setAutoComplete] = useState(null);
@@ -118,6 +117,6 @@ const GoogleMaps: React.FC<GoogleMapsProp> = ({ setLocation }) => {
       </Autocomplete>
     </LoadScript>
   );
-};
+}
 
 export default GoogleMaps;

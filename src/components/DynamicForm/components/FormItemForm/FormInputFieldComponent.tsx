@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-06-16 21:53:41
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-19 23:28:52
+ * @LastEditTime: 2022-07-24 17:09:40
  * @FilePath: /uwcssa_ca/src/components/DynamicForm/components/FormItemForm/FormInputFieldComponent.tsx
  * @Description:
  *
@@ -257,8 +257,8 @@ function FormInputFieldComponent({
               </Box>
             )}
           >
-            {formItem.formSelectChoices.map((option, index) => (
-              <MenuItem key={index} value={option}>
+            {formItem.formSelectChoices.map((option) => (
+              <MenuItem key={option} value={option}>
                 {option}
               </MenuItem>
             ))}
@@ -292,7 +292,7 @@ function FormInputFieldComponent({
             }
           >
             {formItem.formSelectChoices.map((option, index) => (
-              <MenuItem key={index} value={option}>
+              <MenuItem key={option} value={option}>
                 {option}
               </MenuItem>
             ))}
@@ -335,9 +335,9 @@ function FormInputFieldComponent({
             onChange={formik.handleChange}
             value={formik.values[`content${formItem.order}`]}
           >
-            {formItem.formSelectChoices.map((option, index) => (
+            {formItem.formSelectChoices.map((option) => (
               <FormControlLabel
-                key={index}
+                key={option}
                 value={option}
                 control={
                   <Radio

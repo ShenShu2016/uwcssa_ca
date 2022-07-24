@@ -1,9 +1,8 @@
-/* eslint-disable react/prop-types */
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-23 13:50:22
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-11 18:26:13
+ * @LastEditTime: 2022-07-24 17:24:37
  * @FilePath: /uwcssa_ca/src/admin/Article/ArticlePublish/components/MyImageList.tsx
  * @Description:
  *
@@ -35,7 +34,8 @@ import { useSnackbar } from "notistack";
 
 // import ListSubheader from '@mui/material/ListSubheader';
 
-function MyImageList({ useImgFromRecent }) {
+// eslint-disable-next-line react/prop-types
+function MyImageList({ handleUseImgFromRecent }) {
   const dispatch = useAppDispatch();
   const { enqueueSnackbar } = useSnackbar();
   const userImages = useAppSelector(selectAllUserImages);
@@ -50,7 +50,8 @@ function MyImageList({ useImgFromRecent }) {
   }, []);
 
   const handleUseImg = (item) => {
-    useImgFromRecent(item);
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    handleUseImgFromRecent(item);
   };
 
   return (

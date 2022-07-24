@@ -29,11 +29,26 @@
     "react/no-unescaped-entities": ["off"],
     "no-console": "off",
     "no-param-reassign": [
-      "error",
+      "warn",
       {
         "props": true,
         "ignorePropertyModificationsFor": ["state"]
       }
-    ]
+    ],
+    "react/require-default-props": "warn",
+    "@typescript-eslint/naming-convention": ["warn"],
+    "import/prefer-default-export": "warn",
+    "no-return-assign": "warn",
+    "@typescript-eslint/no-unused-vars": "warn",
+    "@typescript-eslint/no-shadow": ["warn"],
+    "@typescript-eslint/no-unused-expressions": "warn",
+    "consistent-return": "warn",
+    "no-plusplus": "warn",
+    "@typescript-eslint/no-use-before-define": "warn",
+    "react/function-component-definition": "warn",
+    "no-nested-ternary": "warn",
+    "jsx-a11y/click-events-have-key-events": "warn",
+    "jsx-a11y/no-static-element-interactions": "warn",
+    "jsx-a11y/label-has-associated-control": "warn"
   }
 }

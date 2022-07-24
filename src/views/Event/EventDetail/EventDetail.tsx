@@ -4,7 +4,7 @@
  * @Author: Shen Shu
  * @Date: 2022-06-18 17:26:14
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-07-24 15:44:27
+ * @LastEditTime: 2022-07-24 16:26:22
  * @FilePath: /uwcssa_ca/src/views/Event/EventDetail/EventDetail.tsx
  * @Description:
  *
@@ -97,7 +97,7 @@ const EventDetail: React.FC<EventDetailProp> = ({
     return () => {
       dispatch(removeAllComments());
     };
-  }, [eventId]);
+  }, [dispatch, eventId, isAuth, ownerUsername]);
 
   return (
     <>

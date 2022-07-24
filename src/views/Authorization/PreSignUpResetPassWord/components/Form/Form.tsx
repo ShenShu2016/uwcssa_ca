@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-06-21 22:26:42
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-25 17:28:35
+ * @LastEditTime: 2022-07-24 16:39:04
  * @FilePath: /uwcssa_ca/src/views/Authorization/PreSignUpResetPassWord/components/Form/Form.tsx
  * @Description:
  *
@@ -60,6 +60,7 @@ function Form(): JSX.Element {
 
   const onSubmit = async (values) => {
     console.log(values);
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     const { new_password } = values;
 
     const response: any = await dispatch(

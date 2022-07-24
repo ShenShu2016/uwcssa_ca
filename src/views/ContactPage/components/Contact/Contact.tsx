@@ -1,23 +1,28 @@
+/* eslint-disable react/no-unstable-nested-components */
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-19 21:16:43
- * @LastEditors: Shikai Jin
- * @LastEditTime: 2022-06-25 22:19:19
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-07-24 17:38:27
  * @FilePath: /uwcssa_ca/src/views/ContactPage/components/Contact/Contact.tsx
  * @Description:
  *
  */
 
-import Avatar from "@mui/material/Avatar";
-import Box from "@mui/material/Box";
+import {
+  Avatar,
+  useTheme,
+  Box,
+  Typography,
+  Divider,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
+} from "@mui/material";
+
 import Container from "components/Container";
-import Divider from "@mui/material/Divider";
-import ListItem from "@mui/material/ListItem";
-import ListItemAvatar from "@mui/material/ListItemAvatar";
-import ListItemText from "@mui/material/ListItemText";
+
 import React from "react";
-import Typography from "@mui/material/Typography";
-import { useTheme } from "@mui/material/styles";
 
 const mock = [
   {
@@ -91,9 +96,9 @@ function Contact(): JSX.Element {
           flexDirection="column"
           justifyContent="space-between"
         >
-          {mock.map((item, i) => (
+          {mock.map((item) => (
             <Box
-              key={i}
+              key={item.label}
               component={ListItem}
               disableGutters
               width="auto"

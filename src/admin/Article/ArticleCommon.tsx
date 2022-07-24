@@ -81,7 +81,7 @@ const ArticleCommon: React.FC<ArticleCommonProp> = ({
     }));
   };
 
-  const useImgFromRecent = (item: {
+  const handleUseImgFromRecent = (item: {
     objectCompressedURL: any;
     objectURL: any;
   }) => {
@@ -210,7 +210,7 @@ const ArticleCommon: React.FC<ArticleCommonProp> = ({
             justifyContent="space-between"
           >
             <AddTags addTag={addTag} tags={tags} removeTag={removeTag} />
-            <MyImageList useImgFromRecent={useImgFromRecent} />
+            <MyImageList handleUseImgFromRecent={handleUseImgFromRecent} />
             <Box>
               <AddCoverPic setImgFile={setImgFile} imgFile={imgFile} />
               <FormControlLabel

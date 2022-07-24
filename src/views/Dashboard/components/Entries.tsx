@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-27 17:23:40
- * @LastEditTime: 2022-06-11 16:32:55
+ * @LastEditTime: 2022-07-24 16:32:32
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/views/Dashboard/components/Entries.tsx
  */
@@ -14,7 +14,7 @@ import React from "react";
 import SellIcon from "@mui/icons-material/Sell";
 import WorkIcon from "@mui/icons-material/Work";
 
-const StyledCard = styled(Card)(({ theme }) => ({
+const StyledCard = styled(Card)(() => ({
   width: "100%",
   height: "65px",
   display: "flex",

@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-30 15:13:57
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-07-24 00:26:44
+ * @LastEditTime: 2022-07-24 17:12:37
  * @FilePath: /uwcssa_ca/src/admin/UwcssaMember/UwcssaMemberDashboard/components/SimpleStriped/components/EditUwcssaMember/EditUwcssaMemberForm/EditUwcssaMemberForm.tsx
  * @Description:
  *
@@ -130,7 +130,7 @@ function EditUwcssaMemberForm({ onClose, open, item }: Props): JSX.Element {
     );
     if (response.meta.requestStatus === "fulfilled") {
       onClose();
-      // eslint-disable-next-line @typescript-eslint/no-use-before-define
+
       formik.resetForm();
       return true;
     }

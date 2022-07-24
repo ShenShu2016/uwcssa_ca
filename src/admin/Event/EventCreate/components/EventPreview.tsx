@@ -2,7 +2,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-01 09:18:34
- * @LastEditTime: 2022-07-24 15:45:36
+ * @LastEditTime: 2022-07-24 17:12:27
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/admin/Event/EventCreate/components/EventPreview.tsx
  */
@@ -93,7 +93,7 @@ function EventPreview({ setLoading }: EventPreviewProp) {
       status: true,
       message: "正在创建报名表单",
     });
-    // eslint-disable-next-line @typescript-eslint/no-use-before-define
+
     const formId = await createForm();
     if (!formId) {
       enqueueSnackbar("表单创建错误，请重试", { variant: "error" });
@@ -201,7 +201,6 @@ function EventPreview({ setLoading }: EventPreviewProp) {
     } else {
       return;
     }
-    // eslint-disable-next-line consistent-return
     return formRes.payload.id;
   };
 

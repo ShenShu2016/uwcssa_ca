@@ -1,17 +1,30 @@
-import Avatar from "@mui/material/Avatar";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import Divider from "@mui/material/Divider";
-import Grid from "@mui/material/Grid";
-import ListItem from "@mui/material/ListItem";
-import ListItemAvatar from "@mui/material/ListItemAvatar";
-import ListItemText from "@mui/material/ListItemText";
+/*
+ * @Author: Shen Shu
+ * @Date: 2022-06-14 10:58:14
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-07-24 17:36:35
+ * @FilePath: /uwcssa_ca/src/views/CareerOpening/components/Main/Main.tsx
+ * @Description:
+ *
+ */
+
+import {
+  useMediaQuery,
+  Grid,
+  useTheme,
+  Avatar,
+  Box,
+  Typography,
+  Button,
+  Divider,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
+  Card,
+  CardContent,
+} from "@mui/material";
+
 import React from "react";
-import Typography from "@mui/material/Typography";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import { useTheme } from "@mui/material/styles";
 
 function Main(): JSX.Element {
   const theme = useTheme();
@@ -86,8 +99,8 @@ function Main(): JSX.Element {
                 "We support bulk uploading via SQL, integrations with most data storage products",
                 // eslint-disable-next-line quotes
                 "Simply select where you'd like to transfer your data",
-              ].map((item, i) => (
-                <Grid item xs={12} key={i}>
+              ].map((item) => (
+                <Grid item xs={12} key={item}>
                   <Box
                     component={ListItem}
                     disableGutters

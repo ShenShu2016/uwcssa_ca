@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-21 14:23:37
- * @LastEditTime: 2022-06-26 19:42:43
+ * @LastEditTime: 2022-07-24 17:33:51
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/redux/tag/tagSlice.tsx
  */
@@ -37,11 +37,11 @@ import API from "@aws-amplify/api";
 import { RootState } from "redux/store";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
 
-type ArticleTag = {
-  id?: string | null;
-  tagID: string;
-  articleID: string;
-};
+// type ArticleTag = {
+//   id?: string | null;
+//   tagID: string;
+//   articleID: string;
+// };
 
 type Tag = {
   id?: string | null;
@@ -308,6 +308,7 @@ export const postUpdateEventTags = createAsyncThunk(
       needToCreateTags = tagIDs.filter(
         (item) =>
           currentEventTags.data.listEventTags.items
+
             .map((item) => item.tagID)
             .indexOf(item) === -1,
       );

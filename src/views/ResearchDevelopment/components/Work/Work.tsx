@@ -1,9 +1,15 @@
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Grid from "@mui/material/Grid";
+/*
+ * @Author: Shen Shu
+ * @Date: 2022-06-14 10:58:14
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-07-24 16:25:03
+ * @FilePath: /uwcssa_ca/src/views/ResearchDevelopment/components/Work/Work.tsx
+ * @Description:
+ *
+ */
+import { Box, Button, Grid, Typography, useTheme } from "@mui/material";
+
 import React from "react";
-import Typography from "@mui/material/Typography";
-import { useTheme } from "@mui/material/styles";
 
 const mock = [
   {
@@ -14,6 +20,7 @@ const mock = [
       "https://assets.maccarianagency.com/svg/illustrations/illustration4.svg",
     illustrationDark:
       "https://assets.maccarianagency.com/svg/illustrations/illustration4--dark.svg",
+    id: 1,
   },
   {
     title: "Mobile compatible platform",
@@ -23,6 +30,7 @@ const mock = [
       "https://assets.maccarianagency.com/svg/illustrations/illustration1.svg",
     illustrationDark:
       "https://assets.maccarianagency.com/svg/illustrations/illustration1--dark.svg",
+    id: 2,
   },
   {
     label: "Client portal access",
@@ -33,6 +41,7 @@ const mock = [
       "https://assets.maccarianagency.com/svg/illustrations/illustration2.svg",
     illustrationDark:
       "https://assets.maccarianagency.com/svg/illustrations/illustration2--dark.svg",
+    id: 3,
   },
 ];
 
@@ -95,7 +104,7 @@ function Work(): JSX.Element {
             data-aos-delay={i * 100}
             data-aos-offset={100}
             data-aos-duration={600}
-            key={i}
+            key={item.id}
             item
             container
             xs={12}

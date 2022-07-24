@@ -2,7 +2,7 @@
  * @Author: Shikai Jin
  * @Date: 2022-06-02 22:38:34
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-25 22:25:49
+ * @LastEditTime: 2022-07-24 17:34:33
  * @FilePath: /uwcssa_ca/src/views/About/components/Gallery/Gallery.tsx
  * @Description:
  *
@@ -10,15 +10,18 @@
 
 import React, { useState } from "react";
 
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import ImageList from "@mui/material/ImageList";
-import ImageListItem from "@mui/material/ImageListItem";
+import {
+  Box,
+  Button,
+  ImageList,
+  ImageListItem,
+  Typography,
+  useTheme,
+  useMediaQuery,
+} from "@mui/material";
+
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import Lightbox from "react-image-lightbox";
-import Typography from "@mui/material/Typography";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import { useTheme } from "@mui/material/styles";
 
 function Gallery(): JSX.Element {
   const theme = useTheme();
@@ -144,7 +147,7 @@ function Gallery(): JSX.Element {
         >
           {photosToShow.map((item, i) => (
             <ImageListItem
-              key={i}
+              key={item.source}
               cols={isMd ? item.cols || 1 : 2}
               rows={isMd ? item.rows || 1 : 1}
             >

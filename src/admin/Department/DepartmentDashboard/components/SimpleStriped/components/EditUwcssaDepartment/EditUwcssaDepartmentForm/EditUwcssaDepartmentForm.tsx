@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-30 15:13:57
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-07-24 15:18:55
+ * @LastEditTime: 2022-07-24 17:12:24
  * @FilePath: /uwcssa_ca/src/admin/Department/DepartmentDashboard/components/SimpleStriped/components/EditUwcssaDepartment/EditUwcssaDepartmentForm/EditUwcssaDepartmentForm.tsx
  * @Description:
  *
@@ -71,7 +71,6 @@ function EditUwcssaDepartmentForm({ onClose, open, item }: Props): JSX.Element {
     if (response.meta.requestStatus === "fulfilled") {
       onClose();
       enqueueSnackbar("修改成功！", { variant: "success" });
-      // eslint-disable-next-line @typescript-eslint/no-use-before-define
       formik.resetForm();
       return true;
     }

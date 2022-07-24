@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-19 21:16:43
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-07-24 01:34:49
+ * @LastEditTime: 2022-07-24 17:12:33
  * @FilePath: /uwcssa_ca/src/views/ContactPage/components/Form/Form.tsx
  * @Description:
  *
@@ -72,7 +72,6 @@ function Form(): JSX.Element {
     };
     const response = await dispatch(postContactUs({ createContactUsInput }));
     if (response.meta.requestStatus === "fulfilled") {
-      // eslint-disable-next-line @typescript-eslint/no-use-before-define
       formik.resetForm();
       enqueueSnackbar("Message sent successfully", { variant: "success" });
     } else {

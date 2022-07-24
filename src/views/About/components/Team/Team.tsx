@@ -1,3 +1,12 @@
+/*
+ * @Author: Shen Shu
+ * @Date: 2022-06-14 10:58:14
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-07-24 17:35:22
+ * @FilePath: /uwcssa_ca/src/views/About/components/Team/Team.tsx
+ * @Description:
+ *
+ */
 import React, { useEffect } from "react";
 import {
   fetchUwcssaDepartmentList,
@@ -9,18 +18,21 @@ import {
 } from "redux/uwcssaMember/uwcssaMemberSlice";
 import { useAppDispatch, useAppSelector } from "redux/hooks";
 
-import Avatar from "@mui/material/Avatar";
-import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import Grid from "@mui/material/Grid";
-import ListItem from "@mui/material/ListItem";
-import ListItemAvatar from "@mui/material/ListItemAvatar";
-import ListItemText from "@mui/material/ListItemText";
-import Typography from "@mui/material/Typography";
+import {
+  Avatar,
+  useTheme,
+  Card,
+  Grid,
+  Typography,
+  Box,
+  CardContent,
+  ListItem,
+  ListItemText,
+  ListItemAvatar,
+} from "@mui/material";
+
 import { getAuthState } from "redux/auth/authSlice";
 import { stringAvatar } from "components/Avatar/AvatarFunction";
-import { useTheme } from "@mui/material/styles";
 
 function Team(): JSX.Element {
   const theme = useTheme();
@@ -68,8 +80,8 @@ function Team(): JSX.Element {
         </Typography>
       </Box>
       <>
-        {departments.map((department, i) => (
-          <Box key={i} marginBottom={4}>
+        {departments.map((department) => (
+          <Box key={department.id} marginBottom={4}>
             <Box marginBottom={4}>
               <Typography variant="h6" align="center" color="text.secondary">
                 {department.id}
@@ -81,8 +93,8 @@ function Team(): JSX.Element {
                 .filter(
                   (x) => x.uwcssaDepartmentUwcssaMembersId === department.id,
                 )
-                .map((item, i) => (
-                  <Grid item xs={12} md={4} key={i}>
+                .map((item) => (
+                  <Grid item xs={12} md={4} key={item.id}>
                     <Box
                       width={1}
                       height={1}

@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-18 15:31:43
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-25 17:28:26
+ * @LastEditTime: 2022-07-24 16:39:27
  * @FilePath: /uwcssa_ca/src/views/Authorization/ForgotPassWordSubmit/components/Form/Form.tsx
  * @Description:
  *
@@ -81,6 +81,7 @@ function Form(): JSX.Element {
       setSignInError(response.error.message);
       return false;
     }
+    return false;
   };
 
   const formik = useFormik({

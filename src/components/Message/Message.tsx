@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-21 14:00:36
- * @LastEditTime: 2022-06-10 20:21:09
+ * @LastEditTime: 2022-07-24 17:04:55
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/components/Message/Message.tsx
  */
@@ -23,7 +23,7 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>((props, ref) => (
   <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />
 ));
 
-const Message: React.FC<messageProps> = ({ children }) => {
+function Message({ children }: messageProps): JSX.Element {
   const alertState = useAppSelector((state) => state.alert);
   const message = useMessage();
 
@@ -62,6 +62,6 @@ const Message: React.FC<messageProps> = ({ children }) => {
       </Snackbar>
     </>
   );
-};
+}
 
 export default Message;

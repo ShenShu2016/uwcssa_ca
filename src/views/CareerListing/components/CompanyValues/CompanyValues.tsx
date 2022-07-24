@@ -2,16 +2,15 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 16:27:30
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-17 16:31:29
- * @FilePath: \uwcssa_ca\frontend\src\views\CareerListing\components\CompanyValues\CompanyValues.tsx
+ * @LastEditTime: 2022-07-24 17:36:25
+ * @FilePath: /uwcssa_ca/src/views/CareerListing/components/CompanyValues/CompanyValues.tsx
  * @Description:
  *
  */
 
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
+import { Box, Grid, Typography } from "@mui/material";
+
 import React from "react";
-import Typography from "@mui/material/Typography";
 
 const mock = [
   {
@@ -64,8 +63,8 @@ function CompanyValues(): JSX.Element {
         </Typography>
       </Box>
       <Grid container spacing={4}>
-        {mock.map((item, i) => (
-          <Grid key={i} item xs={12} sm={6} md={4}>
+        {mock.map((item) => (
+          <Grid key={item.title} item xs={12} sm={6} md={4}>
             <Typography variant="h6" fontWeight={600} gutterBottom>
               {item.title}
             </Typography>
