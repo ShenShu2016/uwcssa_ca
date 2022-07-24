@@ -2,19 +2,14 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-07-24 01:04:58
+ * @LastEditTime: 2022-07-24 01:27:52
  * @FilePath: /uwcssa_ca/src/views/ViewRoutes.tsx
  * @Description:
  *
  */
 
 import {
-  About as AboutView,
   ArticleCover as ArticleCoverView,
-  CareerListing as CareerListingView,
-  CareerOpening as CareerOpeningView,
-  CompanyTerms as CompanyTermsView,
-  ContactPage as ContactPageView,
   Dashboard as DashboardView,
   EmailConfirmationCover as EmailConfirmationCoverView,
   EventDetail as EventDetailView,
@@ -22,8 +17,6 @@ import {
   EventSignUpSuccessfully as EventSignUpSuccessfullyView,
   ForgotPassWordSubmit as ForgotPassWordSubmitView,
   Home as HomeView,
-  NewsList as NewsListView,
-  NotFoundCover as NotFoundCoverView,
   PasswordResetCover as PasswordResetCoverView,
   PreSignUpResetPassWord as PreSignUpResetPassWordView,
   SigninCover as SigninCoverView,
@@ -40,6 +33,13 @@ import Notifications from "./Settings/Notifications/Notifications";
 import General from "./Settings/General/General";
 import Billing from "./Settings/Billing/Billing";
 import ResearchDevelopment from "./ResearchDevelopment/ResearchDevelopment";
+import NotFoundCover from "./NotFoundCover/NotFoundCover";
+import NewsList from "./News/NewsList/NewsList";
+import About from "./About/About";
+import CareerListing from "./CareerListing/CareerListing";
+import CareerOpening from "./CareerOpening/CareerOpening";
+import CompanyTerms from "./CompanyTerms/CompanyTerms";
+import ContactPage from "./ContactPage/ContactPage";
 // console.log(isAuth, isAdmin);
 function ViewRoutes(): Array<{
   path: string;
@@ -67,7 +67,7 @@ function ViewRoutes(): Array<{
     },
     {
       path: "/news",
-      renderer: (): JSX.Element => <NewsListView />,
+      renderer: (): JSX.Element => <NewsList />,
       isAllowed: true,
       redirectPath: undefined,
     },
@@ -79,25 +79,25 @@ function ViewRoutes(): Array<{
     },
     {
       path: "/career",
-      renderer: (params = {}): JSX.Element => <CareerListingView {...params} />,
+      renderer: (params = {}): JSX.Element => <CareerListing {...params} />,
       isAllowed: true,
       redirectPath: undefined,
     },
     {
       path: "/career/:id",
-      renderer: (params = {}): JSX.Element => <CareerOpeningView {...params} />,
+      renderer: (params = {}): JSX.Element => <CareerOpening {...params} />,
       isAllowed: true,
       redirectPath: undefined,
     },
     {
       path: "/terms",
-      renderer: (params = {}): JSX.Element => <CompanyTermsView {...params} />,
+      renderer: (params = {}): JSX.Element => <CompanyTerms {...params} />,
       isAllowed: true,
       redirectPath: undefined,
     },
     {
       path: "/about",
-      renderer: (params = {}): JSX.Element => <AboutView {...params} />,
+      renderer: (params = {}): JSX.Element => <About {...params} />,
       isAllowed: true,
       redirectPath: undefined,
       colorInvert: true,
@@ -113,7 +113,7 @@ function ViewRoutes(): Array<{
     },
     {
       path: "/contactUs",
-      renderer: (params = {}): JSX.Element => <ContactPageView {...params} />,
+      renderer: (params = {}): JSX.Element => <ContactPage {...params} />,
       isAllowed: true,
       redirectPath: undefined,
     },
@@ -240,7 +240,7 @@ function ViewRoutes(): Array<{
     },
     {
       path: "/404",
-      renderer: (params = {}): JSX.Element => <NotFoundCoverView {...params} />,
+      renderer: (params = {}): JSX.Element => <NotFoundCover {...params} />,
       isAllowed: true,
       redirectPath: undefined,
     },

@@ -1,8 +1,8 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-19 21:16:43
- * @LastEditors: Shikai Jin
- * @LastEditTime: 2022-06-25 22:23:31
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-07-24 01:34:49
  * @FilePath: /uwcssa_ca/src/views/ContactPage/components/Form/Form.tsx
  * @Description:
  *
@@ -26,8 +26,6 @@ import { getOwnerUserName } from "redux/auth/authSlice";
 import { postContactUs } from "redux/contactUs/ContactUsSlice";
 import { useFormik } from "formik";
 import { useSnackbar } from "notistack";
-
-/* eslint-disable react/no-unescaped-entities */
 
 const validationSchema = yup.object({
   fullName: yup
@@ -74,6 +72,7 @@ function Form(): JSX.Element {
     };
     const response = await dispatch(postContactUs({ createContactUsInput }));
     if (response.meta.requestStatus === "fulfilled") {
+      // eslint-disable-next-line @typescript-eslint/no-use-before-define
       formik.resetForm();
       enqueueSnackbar("Message sent successfully", { variant: "success" });
     } else {

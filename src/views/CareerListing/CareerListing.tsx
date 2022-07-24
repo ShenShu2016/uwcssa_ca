@@ -2,18 +2,22 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 16:27:30
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-29 23:49:59
+ * @LastEditTime: 2022-07-24 01:38:05
  * @FilePath: /uwcssa_ca/src/views/CareerListing/CareerListing.tsx
  * @Description:
  *
  */
 
-import Box from "@mui/material/Box";
+import { Box, Divider, useTheme } from "@mui/material";
 import Container from "components/Container";
-import Divider from "@mui/material/Divider";
+
 import React from "react";
-import { useTheme } from "@mui/material/styles";
-import { About, CompanyValues, Hero, Jobs, Newsletter } from "./components";
+
+import About from "./components/About/About";
+import CompanyValues from "./components/CompanyValues/CompanyValues";
+import Hero from "./components/Hero/Hero";
+import Jobs from "./components/Jobs/Jobs";
+import Newsletter from "./components/Newsletter/Newsletter";
 
 function CareerListing(): JSX.Element {
   const theme = useTheme();

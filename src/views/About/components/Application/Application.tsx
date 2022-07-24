@@ -1,8 +1,14 @@
-/* eslint-disable react/no-unescaped-entities */
+/*
+ * @Author: Shen Shu
+ * @Date: 2022-06-14 10:58:14
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-07-24 01:37:44
+ * @FilePath: /uwcssa_ca/src/views/About/components/Application/Application.tsx
+ * @Description:
+ *
+ */
 import React from "react";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
+import { Box, Button, Typography } from "@mui/material";
 
 function Application(): JSX.Element {
   return (

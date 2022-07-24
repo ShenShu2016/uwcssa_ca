@@ -1,13 +1,25 @@
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import FormControl from "@mui/material/FormControl";
-import Grid from "@mui/material/Grid";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
+/*
+ * @Author: Shen Shu
+ * @Date: 2022-07-24 01:18:10
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-07-24 01:38:15
+ * @FilePath: /uwcssa_ca/src/views/CareerListing/components/Jobs/Jobs.tsx
+ * @Description:
+ *
+ */
+import {
+  Box,
+  Button,
+  useTheme,
+  FormControl,
+  Grid,
+  InputLabel,
+  MenuItem,
+  Select,
+  Typography,
+} from "@mui/material";
+
 import React from "react";
-import Select from "@mui/material/Select";
-import Typography from "@mui/material/Typography";
-import { useTheme } from "@mui/material/styles";
 
 export const mock = [
   {
@@ -180,11 +192,11 @@ function Jobs(): JSX.Element {
           borderRadius: 2,
         }}
       >
-        {mock.map((item, i) => (
+        {mock.map((item) => (
           <Grid
             item
             xs={12}
-            key={i}
+            key={item.title}
             sx={{
               borderBottom: `1px solid ${theme.palette.divider}`,
               "&:last-child": {

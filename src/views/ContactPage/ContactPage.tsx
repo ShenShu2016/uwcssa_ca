@@ -2,17 +2,20 @@
  * @Author: Shen Shu
  * @Date: 2022-05-19 21:16:43
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-29 23:50:32
+ * @LastEditTime: 2022-07-24 01:41:51
  * @FilePath: /uwcssa_ca/src/views/ContactPage/ContactPage.tsx
  * @Description:
  *
  */
 
-import Box from "@mui/material/Box";
+import { Box, useTheme } from "@mui/material";
 import Container from "components/Container";
 import React from "react";
-import { useTheme } from "@mui/material/styles";
-import { Contact, Form, Hero, Newsletter } from "./components";
+
+import Contact from "./components/Contact/Contact";
+import Hero from "./components/Hero/Hero";
+import Newsletter from "./components/Newsletter/Newsletter";
+import Form from "./components/Form/Form";
 
 function ContactPage(): JSX.Element {
   const theme = useTheme();
