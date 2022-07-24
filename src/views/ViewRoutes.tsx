@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-07-24 00:40:15
+ * @LastEditTime: 2022-07-24 01:04:58
  * @FilePath: /uwcssa_ca/src/views/ViewRoutes.tsx
  * @Description:
  *
@@ -26,7 +26,6 @@ import {
   NotFoundCover as NotFoundCoverView,
   PasswordResetCover as PasswordResetCoverView,
   PreSignUpResetPassWord as PreSignUpResetPassWordView,
-  ResearchDevelopment as ResearchDevelopmentView,
   SigninCover as SigninCoverView,
   SignupCover as SignupCoverView,
 } from "views";
@@ -40,7 +39,7 @@ import Profile from "./Settings/Profile/Profile";
 import Notifications from "./Settings/Notifications/Notifications";
 import General from "./Settings/General/General";
 import Billing from "./Settings/Billing/Billing";
-
+import ResearchDevelopment from "./ResearchDevelopment/ResearchDevelopment";
 // console.log(isAuth, isAdmin);
 function ViewRoutes(): Array<{
   path: string;
@@ -106,7 +105,7 @@ function ViewRoutes(): Array<{
     {
       path: "/research-development-team",
       renderer: (params = {}): JSX.Element => (
-        <ResearchDevelopmentView {...params} />
+        <ResearchDevelopment {...params} />
       ),
       isAllowed: true,
       redirectPath: undefined,

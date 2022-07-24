@@ -2,7 +2,7 @@
  * @Author: Shikai Jin
  * @Date: 2022-06-05 19:59:54
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-07-23 23:28:07
+ * @LastEditTime: 2022-07-24 01:05:37
  * @FilePath: /uwcssa_ca/src/views/ResearchDevelopment/components/Team/components/DeveloperCard.tsx
  * @Description:
  *
@@ -40,7 +40,7 @@ function DevelopCard(props: Props): JSX.Element {
           xs={12}
           sm={6}
           md={3}
-          key={i}
+          key={item.id}
           data-aos="fade-up"
           data-aos-delay={i * 100}
           data-aos-offset={100}

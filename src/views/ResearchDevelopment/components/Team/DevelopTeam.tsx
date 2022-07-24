@@ -2,7 +2,7 @@
  * @Author: Shikai Jin
  * @Date: 2022-06-04 21:45:47
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-11 17:40:16
+ * @LastEditTime: 2022-07-24 01:07:56
  * @FilePath: /uwcssa_ca/src/views/ResearchDevelopment/components/Team/DevelopTeam.tsx
  * @Description:
  *
@@ -31,7 +31,7 @@ function DevelopTeam(): JSX.Element {
     if (isAuth !== null && fetchResearchDevelopmentTeamListStatus === "idle") {
       dispatch(fetchResearchDevelopmentTeamList({ isAuth }));
     }
-  }, [isAuth, fetchResearchDevelopmentTeamListStatus]);
+  }, [isAuth, fetchResearchDevelopmentTeamListStatus, dispatch]);
 
   return (
     <Box>

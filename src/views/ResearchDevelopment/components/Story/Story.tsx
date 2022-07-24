@@ -1,21 +1,18 @@
 /*
  * @Author: Shikai Jin
  * @Date: 2022-06-04 18:07:29
- * @LastEditors: Shikai Jin
- * @LastEditTime: 2022-06-07 20:49:06
- * @FilePath: /uwcssa_ca/src/views/Developers/components/Story/Story.tsx
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-07-24 01:08:28
+ * @FilePath: /uwcssa_ca/src/views/ResearchDevelopment/components/Story/Story.tsx
  * @Description:
  *
  */
 
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
+import { Box, Grid, Typography } from "@mui/material";
+
 import React from "react";
-import Typography from "@mui/material/Typography";
-import { useTheme } from "@mui/material/styles";
 
 function Story(): JSX.Element {
-  const theme = useTheme();
   return (
     <Box>
       <Grid container spacing={4}>
