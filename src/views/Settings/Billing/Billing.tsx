@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-26 13:57:44
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-29 23:56:13
+ * @LastEditTime: 2022-07-23 21:27:42
  * @FilePath: /uwcssa_ca/src/views/Settings/Billing/Billing.tsx
  * @Description:
  *
@@ -15,12 +15,12 @@ import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
 import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
+import Page from "views/Settings/components/Page/Page";
 import React from "react";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { useFormik } from "formik";
 import valid from "card-validator";
-import Page from "../components/Page";
 
 const validationSchema = yup.object({
   cardNumber: yup

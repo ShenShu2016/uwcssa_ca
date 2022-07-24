@@ -16,7 +16,7 @@ import Typography from "@mui/material/Typography";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 
-function Spoonsor(): JSX.Element {
+function Sponsor(): JSX.Element {
   const theme = useTheme();
   const isMd = useMediaQuery(theme.breakpoints.up("md"), {
     defaultMatches: true,
@@ -190,4 +190,4 @@ function Spoonsor(): JSX.Element {
   );
 }
 
-export default Spoonsor;
+export default Sponsor;

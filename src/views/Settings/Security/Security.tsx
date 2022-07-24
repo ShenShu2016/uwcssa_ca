@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-26 13:57:44
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-25 17:31:07
+ * @LastEditTime: 2022-07-23 21:29:36
  * @FilePath: /uwcssa_ca/src/views/Settings/Security/Security.tsx
  * @Description:
  *
@@ -23,9 +23,9 @@ import {
 } from "@mui/material";
 
 import { Link } from "react-router-dom";
+import Page from "views/Settings/components/Page/Page";
 import React from "react";
 import { useFormik } from "formik";
-import Page from "../components/Page";
 
 const validationSchema = yup.object({
   currentPassword: yup.string().required("Please specify your password"),

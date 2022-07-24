@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-26 13:57:44
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-20 21:00:30
+ * @LastEditTime: 2022-07-23 21:32:01
  * @FilePath: /uwcssa_ca/src/views/Settings/General/General.tsx
  * @Description:
  *
@@ -22,12 +22,12 @@ import {
 import { useAppDispatch, useAppSelector } from "redux/hooks";
 
 import { Link } from "react-router-dom";
+import Page from "views/Settings/components/Page/Page";
 import React from "react";
 import { getOwnerUserName } from "redux/auth/authSlice";
 import { updateUserProfileData } from "redux/userProfile/userProfileSlice";
 import { useFormik } from "formik";
 import { useSnackbar } from "notistack";
-import Page from "../components/Page";
 
 const validationSchema = yup.object({
   fullName: yup

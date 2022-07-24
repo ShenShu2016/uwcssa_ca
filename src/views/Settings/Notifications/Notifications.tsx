@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-26 13:57:44
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-11 18:23:03
+ * @LastEditTime: 2022-07-23 21:30:33
  * @FilePath: /uwcssa_ca/src/views/Settings/Notifications/Notifications.tsx
  * @Description:
  *
@@ -24,11 +24,11 @@ import { getOwnerUserName, getUserInfo } from "redux/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "redux/hooks";
 
 import { Link } from "react-router-dom";
+import Page from "views/Settings/components/Page/Page";
 import React from "react";
 import { updateUserProfileData } from "redux/userProfile/userProfileSlice";
 import { useFormik } from "formik";
 import { useSnackbar } from "notistack";
-import Page from "../components/Page";
 
 const validationSchema = yup.object({
   emailSubscription: yup.boolean(),

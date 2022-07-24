@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-21 23:42:03
+ * @LastEditTime: 2022-07-23 15:28:49
  * @FilePath: /uwcssa_ca/src/views/ViewRoutes.tsx
  * @Description:
  *
@@ -21,24 +21,24 @@ import {
   CompanyTerms as CompanyTermsView,
   ContactPage as ContactPageView,
   Dashboard as DashboardView,
-  EventList as EventListView,
-  NewsList as NewsListView,
   EmailConfirmationCover as EmailConfirmationCoverView,
   EventDetail as EventDetailView,
+  EventList as EventListView,
   EventSignUpSuccessfully as EventSignUpSuccessfullyView,
   ForgotPassWordSubmit as ForgotPassWordSubmitView,
   Home as HomeView,
+  NewsList as NewsListView,
   NotFoundCover as NotFoundCoverView,
   PasswordResetCover as PasswordResetCoverView,
   PreSignUpResetPassWord as PreSignUpResetPassWordView,
   ResearchDevelopment as ResearchDevelopmentView,
   SigninCover as SigninCoverView,
   SignupCover as SignupCoverView,
-  UWindsorEmailVerify as UWindsorEmailVerifyView,
 } from "views";
-import { getAuthState, getIsAdmin } from "redux/auth/authSlice";
 
 import React from "react";
+import UWindsorEmailVerify from "views/Settings/UWindsorEmailVerify/UWindsorEmailVerify";
+import { getAuthState } from "redux/auth/authSlice";
 import { useAppSelector } from "redux/hooks";
 
 // console.log(isAuth, isAdmin);
@@ -51,7 +51,7 @@ function ViewRoutes(): Array<{
   colorInvert?: boolean;
 }> {
   const isAuth = useAppSelector(getAuthState);
-  const isAdmin = useAppSelector(getIsAdmin);
+  // const isAdmin = useAppSelector(getIsAdmin);
 
   return [
     {
@@ -222,7 +222,7 @@ function ViewRoutes(): Array<{
     {
       path: "/settings/uwindsorVerify",
       renderer: (params = {}): JSX.Element => (
-        <UWindsorEmailVerifyView {...params} />
+        <UWindsorEmailVerify {...params} />
       ),
       isAllowed: isAuth,
       redirectPath: "/",

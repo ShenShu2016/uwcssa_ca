@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-06-12 21:51:49
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-25 17:55:50
+ * @LastEditTime: 2022-07-23 21:32:13
  * @FilePath: /uwcssa_ca/src/views/Settings/UWindsorEmailVerify/UWindsorEmailVerify.tsx
  * @Description:
  *
@@ -10,20 +10,12 @@
 
 import * as yup from "yup";
 
-import {
-  Box,
-  Button,
-  Divider,
-  Link as MUILink,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Divider, TextField, Typography } from "@mui/material";
 
-import { Link } from "react-router-dom";
+import Page from "views/Settings/components/Page/Page";
 import React from "react";
-import { useAppSelector } from "redux/hooks";
+// import { useAppSelector } from "redux/hooks";
 import { useFormik } from "formik";
-import Page from "../components/Page";
 
 const validationSchema = yup.object({
   uWindsorEmail: yup
@@ -35,9 +27,9 @@ const validationSchema = yup.object({
 });
 
 function UWindsorEmailVerify() {
-  const myUserProfile = useAppSelector(
-    (state) => state.userProfile.myUserProfile,
-  );
+  // const myUserProfile = useAppSelector(
+  //   (state) => state.userProfile.myUserProfile,
+  // );
 
   const initialValues = {
     uWindsorEmail: "@uwindsor.ca",

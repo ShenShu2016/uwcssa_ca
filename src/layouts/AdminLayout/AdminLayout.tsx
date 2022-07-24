@@ -1,23 +1,27 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-28 16:04:22
- * @LastEditors: 李佳修
- * @LastEditTime: 2022-05-30 15:43:55
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-07-23 15:36:52
  * @FilePath: /uwcssa_ca/src/layouts/AdminLayout/AdminLayout.tsx
  * @Description:
  *
  */
 
+import {
+  AppBar,
+  Box,
+  Divider,
+  alpha,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
+import { Footer, Topbar } from "./components";
 import React, { useState } from "react";
-import { alpha, useTheme } from "@mui/material/styles";
 
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
 import Container from "components/Container";
-import Divider from "@mui/material/Divider";
-import useMediaQuery from "@mui/material/useMediaQuery";
+import Sidebar from "./components/Sidebar/Sidebar";
 import pages from "../navigation--admin";
-import { Footer, Sidebar, Topbar } from "./components";
 
 interface Props {
   children: React.ReactNode;

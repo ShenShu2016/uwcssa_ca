@@ -1,7 +1,16 @@
-import React from "react";
-import Drawer from "@mui/material/Drawer";
+/*
+ * @Author: Shen Shu
+ * @Date: 2022-06-14 10:58:14
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-07-23 15:35:11
+ * @FilePath: /uwcssa_ca/src/layouts/AdminLayout/components/Sidebar/Sidebar.tsx
+ * @Description:
+ *
+ */
 import Box from "@mui/material/Box";
-import { SidebarNav } from "./components";
+import Drawer from "@mui/material/Drawer";
+import React from "react";
+import SidebarNav from "./components/SidebarNav/SidebarNav";
 
 interface Props {
   // eslint-disable-next-line @typescript-eslint/ban-types
