@@ -2,18 +2,15 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-07-24 16:00:41
+ * @LastEditTime: 2022-07-24 16:07:03
  * @FilePath: /uwcssa_ca/src/views/ViewRoutes.tsx
  * @Description:
  *
  */
 
 import {
-  ArticleCover as ArticleCoverView,
-  Dashboard as DashboardView,
   EmailConfirmationCover as EmailConfirmationCoverView,
   ForgotPassWordSubmit as ForgotPassWordSubmitView,
-  Home as HomeView,
   PasswordResetCover as PasswordResetCoverView,
   PreSignUpResetPassWord as PreSignUpResetPassWordView,
   SigninCover as SigninCoverView,
@@ -40,6 +37,9 @@ import ContactPage from "./ContactPage/ContactPage";
 import EventDetail from "./Event/EventDetail/EventDetail";
 import EventList from "./Event/EventList/EventList";
 import EventSignUpSuccessfully from "./Event/EventSignUpSuccessfully/EventSignUpSuccessfully";
+import ArticleCover from "./ArticleCover/ArticleCover";
+import Dashboard from "./Dashboard/Dashboard";
+import Home from "./Home/Home";
 // console.log(isAuth, isAdmin);
 function ViewRoutes(): Array<{
   path: string;
@@ -54,13 +54,13 @@ function ViewRoutes(): Array<{
   return [
     {
       path: "/",
-      renderer: (params = {}): JSX.Element => <HomeView {...params} />,
+      renderer: (params = {}): JSX.Element => <Home {...params} />,
       isAllowed: true,
       redirectPath: undefined,
     },
     {
       path: "/dashboard",
-      renderer: (): JSX.Element => <DashboardView />,
+      renderer: (): JSX.Element => <Dashboard />,
       isAllowed: true,
       redirectPath: undefined,
     },
@@ -118,7 +118,7 @@ function ViewRoutes(): Array<{
     },
     {
       path: "/article/:articleId",
-      renderer: (params = {}): JSX.Element => <ArticleCoverView {...params} />,
+      renderer: (params = {}): JSX.Element => <ArticleCover {...params} />,
       isAllowed: true,
       redirectPath: "/",
       colorInvert: true,

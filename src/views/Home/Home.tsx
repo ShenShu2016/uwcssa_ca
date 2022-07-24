@@ -1,29 +1,26 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-18 13:56:36
- * @LastEditTime: 2022-06-12 11:59:17
- * @LastEditors: 李佳修
+ * @LastEditTime: 2022-07-24 16:07:18
+ * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/views/Home/Home.tsx
  * @Description:
  *
  */
 
-import { alpha, useTheme } from "@mui/material/styles";
+import { alpha, useTheme, Box } from "@mui/material";
 
-import Box from "@mui/material/Box";
 import Container from "components/Container";
 import React from "react";
-import {
-  AboutBottom,
-  Features,
-  Hero,
-  Integrations,
-  Jobs,
-  News,
-  Reviews,
-  Team,
-  Video,
-} from "./components";
+import Features from "./components/Features/Features";
+import AboutBottom from "./components/AboutBottom/AboutBottom";
+import Hero from "./components/Hero/Hero";
+import Integrations from "./components/Integrations/Integrations";
+import Jobs from "./components/Jobs/Jobs";
+import News from "./components/News/News";
+import Team from "./components/Team/Team";
+import Video from "./components/Video/Video";
+import Reviews from "./components/Reviews/Reviews";
 
 function Home(): JSX.Element {
   const theme = useTheme();

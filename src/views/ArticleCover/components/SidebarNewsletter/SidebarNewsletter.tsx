@@ -2,12 +2,11 @@
  * @Author: Shen Shu
  * @Date: 2022-05-25 19:05:54
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-26 22:26:14
+ * @LastEditTime: 2022-07-24 16:03:04
  * @FilePath: /uwcssa_ca/src/views/ArticleCover/components/SidebarNewsletter/SidebarNewsletter.tsx
  * @Description:
  *
  */
-/* eslint-disable react/no-unescaped-entities */
 
 import * as yup from "yup";
 

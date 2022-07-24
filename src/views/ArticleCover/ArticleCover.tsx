@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-25 19:05:54
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-07-24 16:01:17
+ * @LastEditTime: 2022-07-24 16:04:21
  * @FilePath: /uwcssa_ca/src/views/ArticleCover/ArticleCover.tsx
  * @Description:
  *
@@ -22,14 +22,12 @@ import { Box, Grid, useMediaQuery, useTheme } from "@mui/material";
 import Container from "components/Container";
 import { useParams } from "react-router-dom";
 import CommentOverview from "components/Comment/CommentOverview/CommentOverview";
-import {
-  Content,
-  FooterNewsletter,
-  Hero,
-  SidebarArticles,
-  SidebarNewsletter,
-  SimilarStories,
-} from "./components";
+import Hero from "./components/Hero/Hero";
+import Content from "./components/Content/Content";
+import SidebarArticles from "./components/SidebarArticles/SidebarArticles";
+import SidebarNewsletter from "./components/SidebarNewsletter/SidebarNewsletter";
+import SimilarStories from "./components/SimilarStories/SimilarStories";
+import FooterNewsletter from "./components/FooterNewsletter/FooterNewsletter";
 
 function ArticleCover(): JSX.Element {
   const theme = useTheme();
