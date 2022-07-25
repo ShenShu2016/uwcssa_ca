@@ -2,13 +2,13 @@
  * @Author: Shen Shu
  * @Date: 2022-05-30 15:13:57
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-06 17:18:33
+ * @LastEditTime: 2022-07-24 17:12:37
  * @FilePath: /uwcssa_ca/src/admin/UwcssaMember/UwcssaMemberDashboard/components/SimpleStriped/components/EditUwcssaMember/EditUwcssaMemberForm/EditUwcssaMemberForm.tsx
  * @Description:
  *
  */
 
-import * as yup from 'yup';
+import * as yup from "yup";
 
 import {
   Box,
@@ -22,24 +22,23 @@ import {
   Select,
   TextField,
   Typography,
-} from '@mui/material';
-import React, { useEffect } from 'react';
+} from "@mui/material";
+import React, { useEffect } from "react";
 import {
   fetchUwcssaDepartmentList,
   selectAllUwcssaDepartments,
-} from 'redux/uwcssaDepartment/uwcssaDepartmentSlice';
-import { useAppDispatch, useAppSelector } from 'redux/hooks';
+} from "redux/uwcssaDepartment/uwcssaDepartmentSlice";
+import { useAppDispatch, useAppSelector } from "redux/hooks";
 
-import { getAuthState } from 'redux/auth/authSlice';
-import { updateResearchDevelopmentTeamDetail } from 'redux/researchDevelopmentTeam/researchDevelopmentTeamSlice';
-import { updateUwcssaMemberDetail } from 'redux/uwcssaMember/uwcssaMemberSlice';
-import { useFormik } from 'formik';
+import { getAuthState } from "redux/auth/authSlice";
+import { updateUwcssaMemberDetail } from "redux/uwcssaMember/uwcssaMemberSlice";
+import { useFormik } from "formik";
 
 const validationSchema = yup.object({
   uwcssaDepartmentUwcssaMembersId: yup
     .string()
     .trim()
-    .required('Department is required'),
+    .required("Department is required"),
   name: yup.string().trim(),
   title: yup.string().trim(),
   subTitle: yup.string().trim(),
@@ -49,21 +48,21 @@ const validationSchema = yup.object({
     .string()
     .matches(
       /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
-      'Enter correct url!',
+      "Enter correct url!",
     )
     .trim(),
   github: yup
     .string()
     .matches(
       /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
-      'Enter correct url!',
+      "Enter correct url!",
     )
     .trim(),
   website: yup
     .string()
     .matches(
       /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
-      'Enter correct url!',
+      "Enter correct url!",
     )
     .trim(),
 });
@@ -86,7 +85,7 @@ interface Props {
   };
 }
 
-const EditUwcssaMemberForm = ({ onClose, open, item }: Props): JSX.Element => {
+function EditUwcssaMemberForm({ onClose, open, item }: Props): JSX.Element {
   const dispatch = useAppDispatch();
   const isAuth = useAppSelector(getAuthState);
   const { fetchUwcssaDepartmentListStatus } = useAppSelector(
@@ -95,7 +94,7 @@ const EditUwcssaMemberForm = ({ onClose, open, item }: Props): JSX.Element => {
   const uwcssaDepartmentList = useAppSelector(selectAllUwcssaDepartments);
 
   useEffect(() => {
-    if (isAuth !== null && fetchUwcssaDepartmentListStatus === 'idle') {
+    if (isAuth !== null && fetchUwcssaDepartmentListStatus === "idle") {
       dispatch(
         fetchUwcssaDepartmentList({
           isAuth,
@@ -105,17 +104,17 @@ const EditUwcssaMemberForm = ({ onClose, open, item }: Props): JSX.Element => {
   }, [isAuth, fetchUwcssaDepartmentListStatus]);
 
   const initialValues = {
-    id: item?.id || '',
-    name: item?.name || '',
-    title: item?.title || '',
-    subTitle: item?.subTitle || '',
-    content: item?.content || '',
-    email: item?.email || '',
+    id: item?.id || "",
+    name: item?.name || "",
+    title: item?.title || "",
+    subTitle: item?.subTitle || "",
+    content: item?.content || "",
+    email: item?.email || "",
     uwcssaDepartmentUwcssaMembersId:
-      item?.uwcssaDepartmentUwcssaMembersId || '',
-    linkedIn: item?.linkedIn || '',
-    website: item?.website || '',
-    github: item?.github || '',
+      item?.uwcssaDepartmentUwcssaMembersId || "",
+    linkedIn: item?.linkedIn || "",
+    website: item?.website || "",
+    github: item?.github || "",
   };
 
   const onSubmit = async (values) => {
@@ -129,19 +128,19 @@ const EditUwcssaMemberForm = ({ onClose, open, item }: Props): JSX.Element => {
         updateUwcssaMemberInput,
       }),
     );
-    if (response.meta.requestStatus === 'fulfilled') {
+    if (response.meta.requestStatus === "fulfilled") {
       onClose();
+
       formik.resetForm();
       return true;
-    } else {
-      return false;
     }
+    return false;
   };
 
   const formik = useFormik({
     initialValues,
     enableReinitialize: true,
-    validationSchema: validationSchema,
+    validationSchema,
     onSubmit,
   });
 
@@ -149,20 +148,20 @@ const EditUwcssaMemberForm = ({ onClose, open, item }: Props): JSX.Element => {
     <Dialog
       onClose={onClose}
       open={open}
-      maxWidth={'sm'}
+      maxWidth="sm"
       sx={{
-        '& .MuiPaper-root': {
+        "& .MuiPaper-root": {
           borderRadius: 2,
         },
       }}
     >
       <Box paddingY={2} paddingX={4}>
-        <Box paddingY={2} display={'flex'} justifyContent={'space-between'}>
-          <Typography variant={'h5'} fontWeight={700}>
+        <Box paddingY={2} display="flex" justifyContent="space-between">
+          <Typography variant="h5" fontWeight={700}>
             编辑成员
           </Typography>
           <Box
-            component={'svg'}
+            component="svg"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
@@ -170,7 +169,7 @@ const EditUwcssaMemberForm = ({ onClose, open, item }: Props): JSX.Element => {
             width={24}
             height={24}
             onClick={onClose}
-            sx={{ cursor: 'pointer' }}
+            sx={{ cursor: "pointer" }}
           >
             <path
               strokeLinecap="round"
@@ -184,32 +183,28 @@ const EditUwcssaMemberForm = ({ onClose, open, item }: Props): JSX.Element => {
           <form onSubmit={formik.handleSubmit}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
-                <Typography variant={'subtitle2'} sx={{ marginBottom: 1 }}>
+                <Typography variant="subtitle2" sx={{ marginBottom: 1 }}>
                   部门
                 </Typography>
                 <FormControl fullWidth>
-                  <InputLabel id={'getDepartment-label-id'}>
-                    {'选择部门'}
-                  </InputLabel>
+                  <InputLabel id="getDepartment-label-id">选择部门</InputLabel>
                   <Select
-                    labelId={'getDepartment-label-id'}
-                    //id={getInputFieldName({ order: formItem.order })}
-                    name={'uwcssaDepartmentUwcssaMembersId'}
+                    labelId="getDepartment-label-id"
+                    // id={getInputFieldName({ order: formItem.order })}
+                    name="uwcssaDepartmentUwcssaMembersId"
                     value={formik.values.uwcssaDepartmentUwcssaMembersId}
-                    label={'部门'}
+                    label="部门"
                     onChange={formik.handleChange}
                     error={
                       formik.touched.uwcssaDepartmentUwcssaMembersId &&
                       Boolean(formik.errors.uwcssaDepartmentUwcssaMembersId)
                     }
                   >
-                    {uwcssaDepartmentList.map((option, index) => {
-                      return (
-                        <MenuItem key={index} value={option.id}>
-                          {option.id}
-                        </MenuItem>
-                      );
-                    })}
+                    {uwcssaDepartmentList.map((option) => (
+                      <MenuItem key={option.id} value={option.id}>
+                        {option.id}
+                      </MenuItem>
+                    ))}
                   </Select>
                   <FormHelperText>
                     {formik.touched.uwcssaDepartmentUwcssaMembersId &&
@@ -218,13 +213,13 @@ const EditUwcssaMemberForm = ({ onClose, open, item }: Props): JSX.Element => {
                 </FormControl>
               </Grid>
               <Grid item xs={12}>
-                <Typography variant={'subtitle2'} sx={{ marginBottom: 1 }}>
+                <Typography variant="subtitle2" sx={{ marginBottom: 1 }}>
                   Name
                 </Typography>
                 <TextField
                   label="成员名字"
                   variant="outlined"
-                  name={'name'}
+                  name="name"
                   fullWidth
                   value={formik.values.name}
                   onChange={formik.handleChange}
@@ -233,13 +228,13 @@ const EditUwcssaMemberForm = ({ onClose, open, item }: Props): JSX.Element => {
                 />
               </Grid>
               <Grid item xs={12}>
-                <Typography variant={'subtitle2'} sx={{ marginBottom: 1 }}>
+                <Typography variant="subtitle2" sx={{ marginBottom: 1 }}>
                   Title
                 </Typography>
                 <TextField
                   label="Title"
                   variant="outlined"
-                  name={'title'}
+                  name="title"
                   fullWidth
                   value={formik.values.title}
                   onChange={formik.handleChange}
@@ -248,13 +243,13 @@ const EditUwcssaMemberForm = ({ onClose, open, item }: Props): JSX.Element => {
                 />
               </Grid>
               <Grid item xs={12}>
-                <Typography variant={'subtitle2'} sx={{ marginBottom: 1 }}>
+                <Typography variant="subtitle2" sx={{ marginBottom: 1 }}>
                   Sub Title
                 </Typography>
                 <TextField
                   label="Sub Title"
                   variant="outlined"
-                  name={'subTitle'}
+                  name="subTitle"
                   fullWidth
                   value={formik.values.subTitle}
                   onChange={formik.handleChange}
@@ -265,13 +260,13 @@ const EditUwcssaMemberForm = ({ onClose, open, item }: Props): JSX.Element => {
                 />
               </Grid>
               <Grid item xs={12}>
-                <Typography variant={'subtitle2'} sx={{ marginBottom: 1 }}>
+                <Typography variant="subtitle2" sx={{ marginBottom: 1 }}>
                   Introduce your self
                 </Typography>
                 <TextField
                   label="个人简介"
                   variant="outlined"
-                  name={'content'}
+                  name="content"
                   fullWidth
                   multiline
                   rows={5}
@@ -283,13 +278,13 @@ const EditUwcssaMemberForm = ({ onClose, open, item }: Props): JSX.Element => {
                   helperText={formik.touched.content && formik.errors.content}
                 />
                 <Grid item xs={12}>
-                  <Typography variant={'subtitle2'} sx={{ my: 1 }}>
+                  <Typography variant="subtitle2" sx={{ my: 1 }}>
                     联系 Email
                   </Typography>
                   <TextField
                     label="Email"
                     variant="outlined"
-                    name={'email'}
+                    name="email"
                     fullWidth
                     value={formik.values.email}
                     onChange={formik.handleChange}
@@ -298,13 +293,13 @@ const EditUwcssaMemberForm = ({ onClose, open, item }: Props): JSX.Element => {
                   />
                 </Grid>
                 <Grid item xs={12}>
-                  <Typography variant={'subtitle2'} sx={{ my: 1 }}>
+                  <Typography variant="subtitle2" sx={{ my: 1 }}>
                     LinkedIn
                   </Typography>
                   <TextField
                     label="linkedIn"
                     variant="outlined"
-                    name={'linkedIn'}
+                    name="linkedIn"
                     fullWidth
                     value={formik.values.linkedIn}
                     onChange={formik.handleChange}
@@ -317,13 +312,13 @@ const EditUwcssaMemberForm = ({ onClose, open, item }: Props): JSX.Element => {
                   />
                 </Grid>
                 <Grid item xs={12}>
-                  <Typography variant={'subtitle2'} sx={{ my: 1 }}>
+                  <Typography variant="subtitle2" sx={{ my: 1 }}>
                     Github
                   </Typography>
                   <TextField
                     label="github"
                     variant="outlined"
-                    name={'github'}
+                    name="github"
                     fullWidth
                     value={formik.values.github}
                     onChange={formik.handleChange}
@@ -334,13 +329,13 @@ const EditUwcssaMemberForm = ({ onClose, open, item }: Props): JSX.Element => {
                   />
                 </Grid>
                 <Grid item xs={12}>
-                  <Typography variant={'subtitle2'} sx={{ my: 1 }}>
+                  <Typography variant="subtitle2" sx={{ my: 1 }}>
                     Website
                   </Typography>
                   <TextField
                     label="website"
                     variant="outlined"
-                    name={'website'}
+                    name="website"
                     fullWidth
                     value={formik.values.website}
                     onChange={formik.handleChange}
@@ -353,13 +348,13 @@ const EditUwcssaMemberForm = ({ onClose, open, item }: Props): JSX.Element => {
               </Grid>
 
               <Grid item container xs={12}>
-                <Button size={'large'} variant={'contained'} type={'submit'}>
+                <Button size="large" variant="contained" type="submit">
                   Submit
                 </Button>
                 <Button
-                  size={'large'}
-                  variant={'text'}
-                  sx={{ ml: '2rem' }}
+                  size="large"
+                  variant="text"
+                  sx={{ ml: "2rem" }}
                   onClick={() => onClose()}
                 >
                   Cancel
@@ -371,6 +366,6 @@ const EditUwcssaMemberForm = ({ onClose, open, item }: Props): JSX.Element => {
       </Box>
     </Dialog>
   );
-};
+}
 
 export default EditUwcssaMemberForm;

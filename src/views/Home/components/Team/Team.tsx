@@ -2,7 +2,7 @@
  * @Author: Shikai Jin
  * @Date: 2022-06-11 20:04:21
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-25 22:28:02
+ * @LastEditTime: 2022-07-23 23:33:10
  * @FilePath: /uwcssa_ca/src/views/Home/components/Team/Team.tsx
  * @Description:
  *
@@ -17,20 +17,20 @@ import {
   ListItemText,
   Typography,
   useTheme,
-} from '@mui/material';
+} from "@mui/material";
 
-import React from 'react';
+import React from "react";
 
-const Team = (): JSX.Element => {
+function Team(): JSX.Element {
   const theme = useTheme();
 
   return (
     <Box>
       <Grid container spacing={4}>
-        <Grid item container alignItems={'center'} xs={12} md={6}>
+        <Grid item container alignItems="center" xs={12} md={6}>
           <Box>
             <Box marginBottom={2}>
-              <Typography variant={'h4'} sx={{ fontWeight: 700 }} gutterBottom>
+              <Typography variant="h4" sx={{ fontWeight: 700 }} gutterBottom>
                 Our leaders will help you
               </Typography>
               <Typography color="text.secondary">
@@ -41,21 +41,20 @@ const Team = (): JSX.Element => {
             </Box>
             <Grid container spacing={1}>
               {[
-                'Our sign up is dead simple. We only require your basic company information',
-                'We support bulk uploading via SQL, integrations with most data storage products',
-                // eslint-disable-next-line quotes
+                "Our sign up is dead simple. We only require your basic company information",
+                "We support bulk uploading via SQL, integrations with most data storage products",
                 "Simply select where you'd like to transfer your data",
-              ].map((item, i) => (
-                <Grid item xs={12} key={i}>
+              ].map((item) => (
+                <Grid item xs={12} key={item}>
                   <Box
                     component={ListItem}
                     disableGutters
-                    width={'auto'}
+                    width="auto"
                     padding={0}
                   >
                     <Box
                       component={ListItemAvatar}
-                      minWidth={'auto !important'}
+                      minWidth="auto !important"
                       marginRight={2}
                     >
                       <Box
@@ -87,63 +86,57 @@ const Team = (): JSX.Element => {
           </Box>
         </Grid>
         <Grid item xs={12} md={6}>
-          <Box height={1} width={1} display={'flex'} flexDirection={'column'}>
+          <Box height={1} width={1} display="flex" flexDirection="column">
             <Box
-              component={'img'}
-              src={
-                'https://uwcssats232508-production.s3.us-east-2.amazonaws.com/uwincssa_pictures/shenshu.jpg'
-              }
+              component="img"
+              src="https://uwcssats232508-production.s3.us-east-2.amazonaws.com/uwincssa_pictures/shenshu.jpg"
               alt="..."
               width={160}
               height={160}
-              marginLeft={'calc(60% - 160px)'}
+              marginLeft="calc(60% - 160px)"
               zIndex={3}
-              borderRadius={'100%'}
+              borderRadius="100%"
               boxShadow={4}
-              data-aos={'fade-up'}
+              data-aos="fade-up"
               sx={{
-                objectFit: 'cover',
+                objectFit: "cover",
                 filter:
-                  theme.palette.mode === 'dark' ? 'brightness(0.5)' : 'none',
+                  theme.palette.mode === "dark" ? "brightness(0.5)" : "none",
               }}
             />
             <Box
-              component={'img'}
+              component="img"
               width={200}
               height={200}
-              src={
-                'https://uwcssats232508-production.s3.us-east-2.amazonaws.com/uwincssa_pictures/fawubu.jpg'
-              }
+              src="https://uwcssats232508-production.s3.us-east-2.amazonaws.com/uwincssa_pictures/fawubu.jpg"
               alt="..."
-              marginTop={'-8%'}
+              marginTop="-8%"
               zIndex={2}
-              borderRadius={'100%'}
+              borderRadius="100%"
               boxShadow={4}
-              data-aos={'fade-up'}
+              data-aos="fade-up"
               sx={{
-                objectFit: 'cover',
+                objectFit: "cover",
                 filter:
-                  theme.palette.mode === 'dark' ? 'brightness(0.5)' : 'none',
+                  theme.palette.mode === "dark" ? "brightness(0.5)" : "none",
               }}
             />
             <Box
-              component={'img'}
+              component="img"
               width={300}
               height={300}
-              src={
-                'https://uwcssats232508-production.s3.us-east-2.amazonaws.com/uwincssa_pictures/chenzhenhao.jpg'
-              }
+              src="https://uwcssats232508-production.s3.us-east-2.amazonaws.com/uwincssa_pictures/chenzhenhao.jpg"
               alt="..."
-              marginTop={'-20%'}
-              marginLeft={'calc(100% - 300px)'}
+              marginTop="-20%"
+              marginLeft="calc(100% - 300px)"
               zIndex={1}
-              borderRadius={'100%'}
+              borderRadius="100%"
               boxShadow={4}
-              data-aos={'fade-up'}
+              data-aos="fade-up"
               sx={{
-                objectFit: 'cover',
+                objectFit: "cover",
                 filter:
-                  theme.palette.mode === 'dark' ? 'brightness(0.5)' : 'none',
+                  theme.palette.mode === "dark" ? "brightness(0.5)" : "none",
               }}
             />
           </Box>
@@ -151,6 +144,6 @@ const Team = (): JSX.Element => {
       </Grid>
     </Box>
   );
-};
+}
 
 export default Team;

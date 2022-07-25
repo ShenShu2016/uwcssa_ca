@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-06-16 21:53:41
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-19 23:28:52
+ * @LastEditTime: 2022-07-24 17:09:40
  * @FilePath: /uwcssa_ca/src/components/DynamicForm/components/FormItemForm/FormInputFieldComponent.tsx
  * @Description:
  *
@@ -22,16 +22,16 @@ import {
   RadioGroup,
   Select,
   TextField,
-} from '@mui/material';
+} from "@mui/material";
 
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
-import FieldLabel from '../FieldLabel';
-import { FormItem } from 'redux/form/formSlice';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
-import React from 'react';
-import { TimePicker } from '@mui/x-date-pickers/TimePicker';
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
+import { FormItem } from "redux/form/formSlice";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
+import React from "react";
+import { TimePicker } from "@mui/x-date-pickers/TimePicker";
+import FieldLabel from "../FieldLabel";
 
 function FormInputFieldComponent({
   formik,
@@ -41,13 +41,13 @@ function FormInputFieldComponent({
   formItem: FormItem;
 }) {
   function getInputLabelId(id: string) {
-    return 'input-label-id' + id;
+    return `input-label-id${id}`;
   }
   function getInputId(id: string) {
-    return 'input-id-' + id;
+    return `input-id-${id}`;
   }
 
-  if (formItem.formType === 'TextFieldShort') {
+  if (formItem.formType === "TextFieldShort") {
     return (
       <>
         <FieldLabel
@@ -73,7 +73,8 @@ function FormInputFieldComponent({
         />
       </>
     );
-  } else if (formItem.formType === 'TextFieldLong') {
+  }
+  if (formItem.formType === "TextFieldLong") {
     return (
       <>
         <FieldLabel
@@ -101,7 +102,8 @@ function FormInputFieldComponent({
         />
       </>
     );
-  } else if (formItem.formType === 'Checkbox') {
+  }
+  if (formItem.formType === "Checkbox") {
     return (
       <>
         <FieldLabel
@@ -120,8 +122,8 @@ function FormInputFieldComponent({
                 color:
                   formik.touched[`content${formItem.order}`] &&
                   Boolean(formik.errors[`content${formItem.order}`])
-                    ? '#d32f2f'
-                    : '',
+                    ? "#d32f2f"
+                    : "",
               }}
             />
           }
@@ -138,7 +140,8 @@ function FormInputFieldComponent({
         </FormHelperText>
       </>
     );
-  } else if (formItem.formType === 'Boolean') {
+  }
+  if (formItem.formType === "Boolean") {
     return (
       <>
         <FieldLabel
@@ -170,7 +173,7 @@ function FormInputFieldComponent({
           >
             {/* 可以写 required={formItem.isRequired} */}
             <FormControlLabel
-              value={true}
+              value
               control={
                 <Radio
                   size="small"
@@ -178,12 +181,12 @@ function FormInputFieldComponent({
                     color:
                       formik.touched[`content${formItem.order}`] &&
                       Boolean(formik.errors[`content${formItem.order}`])
-                        ? '#d32f2f'
-                        : '',
+                        ? "#d32f2f"
+                        : "",
                   }}
                 />
               }
-              label={'是'}
+              label="是"
             />
             <FormControlLabel
               value={false}
@@ -194,12 +197,12 @@ function FormInputFieldComponent({
                     color:
                       formik.touched[`content${formItem.order}`] &&
                       Boolean(formik.errors[`content${formItem.order}`])
-                        ? '#d32f2f'
-                        : '',
+                        ? "#d32f2f"
+                        : "",
                   }}
                 />
               }
-              label={'否'}
+              label="否"
             />
           </RadioGroup>
           <FormHelperText
@@ -214,8 +217,9 @@ function FormInputFieldComponent({
         </FormControl>
       </>
     );
-  } else if (formItem.formType === 'MultipleSelect') {
-    //之后这里放switch
+  }
+  if (formItem.formType === "MultipleSelect") {
+    // 之后这里放switch
     return (
       <>
         <FieldLabel
@@ -232,7 +236,7 @@ function FormInputFieldComponent({
             multiple
             id={getInputId(`content${formItem.order}`)}
             name={`content${formItem.order}`}
-            value={formik.values[`content${formItem.order}`] || []} //！！太重要了这个是为了防止没有值的时候报错
+            value={formik.values[`content${formItem.order}`] || []} // ！！太重要了这个是为了防止没有值的时候报错
             label={formItem.label}
             onChange={formik.handleChange}
             error={
@@ -246,25 +250,24 @@ function FormInputFieldComponent({
               />
             }
             renderValue={(selected) => (
-              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+              <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
                 {selected.map((value) => (
                   <Chip key={value} label={value} />
                 ))}
               </Box>
             )}
           >
-            {formItem.formSelectChoices.map((option, index) => {
-              return (
-                <MenuItem key={index} value={option}>
-                  {option}
-                </MenuItem>
-              );
-            })}
+            {formItem.formSelectChoices.map((option) => (
+              <MenuItem key={option} value={option}>
+                {option}
+              </MenuItem>
+            ))}
           </Select>
         </FormControl>
       </>
     );
-  } else if (formItem.formType === 'Select') {
+  }
+  if (formItem.formType === "Select") {
     return (
       <>
         <FieldLabel
@@ -288,13 +291,11 @@ function FormInputFieldComponent({
               Boolean(formik.errors[`content${formItem.order}`])
             }
           >
-            {formItem.formSelectChoices.map((option, index) => {
-              return (
-                <MenuItem key={index} value={option}>
-                  {option}
-                </MenuItem>
-              );
-            })}
+            {formItem.formSelectChoices.map((option, index) => (
+              <MenuItem key={option} value={option}>
+                {option}
+              </MenuItem>
+            ))}
           </Select>
           <FormHelperText>
             {formik.touched[`content${formItem.order}`] &&
@@ -303,11 +304,13 @@ function FormInputFieldComponent({
         </FormControl>
       </>
     );
-  } else if (formItem.formType === 'FileUpload') {
+  }
+  if (formItem.formType === "FileUpload") {
     return null;
-  } else if (
-    formItem.formType === 'RadioGroupH' ||
-    formItem.formType === 'RadioGroupV'
+  }
+  if (
+    formItem.formType === "RadioGroupH" ||
+    formItem.formType === "RadioGroupV"
   ) {
     return (
       <>
@@ -326,33 +329,31 @@ function FormInputFieldComponent({
             {formItem.label}
           </FormLabel> */}
           <RadioGroup
-            row={formItem.formType === 'RadioGroupH'}
+            row={formItem.formType === "RadioGroupH"}
             aria-labelledby={getInputLabelId(`content${formItem.order}`)}
             name={`content${formItem.order}`}
             onChange={formik.handleChange}
             value={formik.values[`content${formItem.order}`]}
           >
-            {formItem.formSelectChoices.map((option, index) => {
-              return (
-                <FormControlLabel
-                  key={index}
-                  value={option}
-                  control={
-                    <Radio
-                      size="small"
-                      sx={{
-                        color:
-                          formik.touched[`content${formItem.order}`] &&
-                          Boolean(formik.errors[`content${formItem.order}`])
-                            ? '#d32f2f'
-                            : '',
-                      }}
-                    />
-                  }
-                  label={option}
-                />
-              );
-            })}
+            {formItem.formSelectChoices.map((option) => (
+              <FormControlLabel
+                key={option}
+                value={option}
+                control={
+                  <Radio
+                    size="small"
+                    sx={{
+                      color:
+                        formik.touched[`content${formItem.order}`] &&
+                        Boolean(formik.errors[`content${formItem.order}`])
+                          ? "#d32f2f"
+                          : "",
+                    }}
+                  />
+                }
+                label={option}
+              />
+            ))}
           </RadioGroup>
           <FormHelperText
             error={
@@ -366,7 +367,8 @@ function FormInputFieldComponent({
         </FormControl>
       </>
     );
-  } else if (formItem.formType === 'DatePicker') {
+  }
+  if (formItem.formType === "DatePicker") {
     return (
       <>
         <FieldLabel
@@ -400,7 +402,8 @@ function FormInputFieldComponent({
         </LocalizationProvider>
       </>
     );
-  } else if (formItem.formType === 'DateTimePicker') {
+  }
+  if (formItem.formType === "DateTimePicker") {
     return (
       <>
         <FieldLabel
@@ -433,7 +436,8 @@ function FormInputFieldComponent({
         </LocalizationProvider>
       </>
     );
-  } else if (formItem.formType === 'TimePicker') {
+  }
+  if (formItem.formType === "TimePicker") {
     return (
       <>
         <FieldLabel
@@ -466,9 +470,8 @@ function FormInputFieldComponent({
         </LocalizationProvider>
       </>
     );
-  } else {
-    console.error(`Unknown form type: ${formItem.formType}`);
   }
+  console.error(`Unknown form type: ${formItem.formType}`);
 }
 
 export default FormInputFieldComponent;

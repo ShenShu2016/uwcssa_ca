@@ -33,6 +33,5 @@
     "uwcssats",
     "uwindsor",
     "webp"
-  ],
-  "python.formatting.provider": "black"
+  ]
 }

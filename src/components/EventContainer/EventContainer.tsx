@@ -6,19 +6,19 @@
  * @FilePath: /uwcssa_ca/src/components/EventContainer/EventContainer.tsx
  */
 
-import 'swiper/css';
-import 'swiper/css/pagination';
+import "swiper/css";
+import "swiper/css/pagination";
 
-import { Autoplay, Pagination } from 'swiper';
-import { Box, Button } from '@mui/material';
-import { Event, selectAllEvents } from 'redux/event/eventSlice';
-import React, { useState } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, Pagination } from "swiper";
+import { Box, Button } from "@mui/material";
+import { Event, selectAllEvents } from "redux/event/eventSlice";
+import React, { useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
 
-import EventJoinForm from './components/EventJoinForm';
-import EventSwiperItem from './components/EventSwiperItem';
-import { Link } from 'react-router-dom';
-import { useAppSelector } from 'redux/hooks';
+import { Link } from "react-router-dom";
+import { useAppSelector } from "redux/hooks";
+import EventJoinForm from "./components/EventJoinForm";
+import EventSwiperItem from "./components/EventSwiperItem";
 
 // import Details from './components/Detail';/
 
@@ -34,7 +34,7 @@ const EventContainer: React.FC = () => {
     setJoinDialogOpen(true);
   };
 
-  //console.log(eventList);
+  // console.log(eventList);
 
   return (
     <Box p={1}>
@@ -44,14 +44,14 @@ const EventContainer: React.FC = () => {
         event={event}
       />
       <Swiper
-        pagination={true}
+        pagination
         speed={1500}
         autoplay={{
           delay: 5000,
           disableOnInteraction: false,
           pauseOnMouseEnter: true,
         }}
-        loop={true}
+        loop
         spaceBetween={100}
         modules={[Autoplay, Pagination]}
       >
@@ -65,8 +65,13 @@ const EventContainer: React.FC = () => {
         variant="outlined"
         component={Link}
         size="small"
-        sx={{ float: 'right', height: '30px', marginTop: '-25px', zIndex: 999 }}
-        to={'/history-events'}
+        sx={{
+          float: "right",
+          height: "30px",
+          marginTop: "-25px",
+          zIndex: 999,
+        }}
+        to="/history-events"
       >
         查看所有活动
       </Button>

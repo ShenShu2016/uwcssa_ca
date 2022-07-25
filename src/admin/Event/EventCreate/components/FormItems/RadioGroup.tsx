@@ -7,11 +7,11 @@
  * @FilePath: /uwcssa_ca/src/admin/Event/EventCreate/components/FormItems/RadioGroup.tsx
  */
 
-import { FormControlLabel, Radio, RadioGroup } from '@mui/material';
-import React, { useState } from 'react';
+import { FormControlLabel, Radio, RadioGroup } from "@mui/material";
+import React, { useState } from "react";
 
-import FieldLabel from '../FieldLabel';
-import { FormType } from 'redux/form/formSlice';
+import { FormType } from "redux/form/formSlice";
+import FieldLabel from "../FieldLabel";
 
 interface RadioGroupInfo {
   formSelectChoices?: string[];
@@ -28,7 +28,7 @@ interface RadioGroupProp {
 }
 
 const RadioGroupItem: React.FC<RadioGroupProp> = ({ item }) => {
-  const [value, setValue] = useState<string>('');
+  const [value, setValue] = useState<string>("");
 
   return (
     <>
@@ -54,14 +54,14 @@ const RadioGroupItem: React.FC<RadioGroupProp> = ({ item }) => {
         {item.isBoolean ? (
           <>
             <FormControlLabel
-              value={true}
+              value
               control={<Radio size="small" />}
-              label={'是'}
+              label="是"
             />
             <FormControlLabel
               value={false}
               control={<Radio size="small" />}
-              label={'否'}
+              label="否"
             />
           </>
         ) : null}

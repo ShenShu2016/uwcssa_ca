@@ -1,27 +1,26 @@
 /*
  * @Author: Shikai Jin
  * @Date: 2022-06-04 21:45:47
- * @LastEditors: Shikai Jin
- * @LastEditTime: 2022-06-05 20:47:52
- * @FilePath: /uwcssa_ca/src/views/Developers/components/Team/DevelopTeam.tsx
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-07-24 00:48:16
+ * @FilePath: /uwcssa_ca/src/views/Home/components/TeamCard/DevelopTeam.tsx
  * @Description:
  *
  */
 
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 import {
   fetchResearchDevelopmentTeamList,
   selectAllResearchDevelopmentTeams,
-} from 'redux/researchDevelopmentTeam/researchDevelopmentTeamSlice';
-import { useAppDispatch, useAppSelector } from 'redux/hooks';
+} from "redux/researchDevelopmentTeam/researchDevelopmentTeamSlice";
+import { useAppDispatch, useAppSelector } from "redux/hooks";
 
-import { Box } from '@mui/system';
-import DevelopCard from './componments/DeveloperCard';
-import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
-import { getAuthState } from 'redux/auth/authSlice';
+import { Box, Grid, Typography } from "@mui/material";
 
-const DevelopTeam = (): JSX.Element => {
+import { getAuthState } from "redux/auth/authSlice";
+import DevelopCard from "./componments/DeveloperCard";
+
+function DevelopTeam(): JSX.Element {
   const dispatch = useAppDispatch();
   const isAuth = useAppSelector(getAuthState);
 
@@ -33,29 +32,29 @@ const DevelopTeam = (): JSX.Element => {
     const getUwcssaDepartments = async () => {
       if (
         isAuth !== null &&
-        fetchResearchDevelopmentTeamListStatus === 'idle'
+        fetchResearchDevelopmentTeamListStatus === "idle"
       ) {
         await dispatch(fetchResearchDevelopmentTeamList({ isAuth }));
       }
     };
     getUwcssaDepartments();
-  }, [fetchResearchDevelopmentTeamListStatus]);
+  }, [dispatch, fetchResearchDevelopmentTeamListStatus, isAuth]);
 
   return (
     <Box>
       <Box marginBottom={4}>
         <Typography
           sx={{
-            textTransform: 'uppercase',
-            fontWeight: 'medium',
+            textTransform: "uppercase",
+            fontWeight: "medium",
           }}
           gutterBottom
-          color={'text.secondary'}
-          align={'center'}
+          color="text.secondary"
+          align="center"
         >
           Our team
         </Typography>
-        <Typography fontWeight={700} variant={'h4'} align={'center'}>
+        <Typography fontWeight={700} variant="h4" align="center">
           Small team. Big hearts.
         </Typography>
       </Box>
@@ -64,6 +63,6 @@ const DevelopTeam = (): JSX.Element => {
       </Grid>
     </Box>
   );
-};
+}
 
 export default DevelopTeam;

@@ -8,22 +8,22 @@
  *
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
-import AOS from 'aos';
-import { ConfirmProvider } from 'material-ui-confirm';
-import CssBaseline from '@mui/material/CssBaseline';
-import Paper from '@mui/material/Paper';
-import { ThemeProvider } from '@mui/material/styles';
-import getTheme from 'theme';
+import AOS from "aos";
+import { ConfirmProvider } from "material-ui-confirm";
+import CssBaseline from "@mui/material/CssBaseline";
+import Paper from "@mui/material/Paper";
+import { ThemeProvider } from "@mui/material/styles";
+import getTheme from "theme";
 
 export const useDarkMode = (): [string, () => void, boolean] => {
-  const [themeMode, setTheme] = useState('light');
+  const [themeMode, setTheme] = useState("light");
   const [mountedComponent, setMountedComponent] = useState(false);
 
   const setMode = (mode: string) => {
     try {
-      window.localStorage.setItem('themeMode', mode);
+      window.localStorage.setItem("themeMode", mode);
     } catch {
       /* do nothing */
     }
@@ -32,15 +32,15 @@ export const useDarkMode = (): [string, () => void, boolean] => {
   };
 
   const themeToggler = (): void => {
-    themeMode === 'light' ? setMode('dark') : setMode('light');
+    themeMode === "light" ? setMode("dark") : setMode("light");
   };
 
   useEffect(() => {
     try {
-      const localTheme = window.localStorage.getItem('themeMode');
-      localTheme ? setTheme(localTheme) : setMode('light');
+      const localTheme = window.localStorage.getItem("themeMode");
+      localTheme ? setTheme(localTheme) : setMode("light");
     } catch {
-      setMode('light');
+      setMode("light");
     }
 
     setMountedComponent(true);
@@ -56,7 +56,7 @@ interface Props {
 export default function Page({ children }: Props): JSX.Element {
   useEffect(() => {
     // Remove the server-side injected CSS.
-    const jssStyles = document.querySelector('#jss-server-side');
+    const jssStyles = document.querySelector("#jss-server-side");
     if (jssStyles) {
       jssStyles.parentElement.removeChild(jssStyles);
     }
@@ -65,7 +65,7 @@ export default function Page({ children }: Props): JSX.Element {
       once: true,
       delay: 50,
       duration: 500,
-      easing: 'ease-in-out',
+      easing: "ease-in-out",
     });
   }, []);
 

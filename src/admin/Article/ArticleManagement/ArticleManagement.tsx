@@ -16,33 +16,33 @@ import {
   Container,
   Grid,
   Typography,
-} from '@mui/material';
-import React, { useEffect } from 'react';
+} from "@mui/material";
+import React, { useEffect } from "react";
 import {
   fetchArticleList,
   selectAllArticles,
-} from 'redux/article/articleSlice';
-import { useAppDispatch, useAppSelector } from 'redux/hooks';
+} from "redux/article/articleSlice";
+import { useAppDispatch, useAppSelector } from "redux/hooks";
 
-import { Link } from 'react-router-dom';
-import { getAuthState } from 'redux/auth/authSlice';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import { useTheme } from '@mui/material/styles';
+import { Link } from "react-router-dom";
+import { getAuthState } from "redux/auth/authSlice";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
 
-const ArticleManagement = () => {
+function ArticleManagement() {
   const dispatch = useAppDispatch();
   const isAuth = useAppSelector(getAuthState);
   const articles = useAppSelector(selectAllArticles); // redux 有这种用法
   const { fetchArticleListStatus } = useAppSelector((state) => state.article);
 
   const theme = useTheme();
-  const isMd = useMediaQuery(theme.breakpoints.up('md'), {
+  const isMd = useMediaQuery(theme.breakpoints.up("md"), {
     defaultMatches: true,
   });
 
   useEffect(() => {
     const getArticles = async () => {
-      if (isAuth !== null && fetchArticleListStatus === 'idle') {
+      if (isAuth !== null && fetchArticleListStatus === "idle") {
         await dispatch(
           fetchArticleList({
             isAuth,
@@ -68,21 +68,21 @@ const ArticleManagement = () => {
           >
             <Box
               component={Card}
-              display={'flex'}
-              flexDirection={{ xs: 'column', sm: 'row' }}
+              display="flex"
+              flexDirection={{ xs: "column", sm: "row" }}
             >
               <CardMedia
                 title={item.title}
                 image={
                   item.coverPageImgURL ||
-                  'https://uwcssabucket53243-master.s3.us-east-2.amazonaws.com/public/user/BackGround/6d328ddc-08d7-4f7d-8527-2173349796a7.jpg'
+                  "https://uwcssabucket53243-master.s3.us-east-2.amazonaws.com/public/user/BackGround/6d328ddc-08d7-4f7d-8527-2173349796a7.jpg"
                 }
                 sx={{
-                  height: { xs: 240, sm: 'auto' },
+                  height: { xs: 240, sm: "auto" },
                   width: { xs: 1, sm: 300 },
                 }}
               />
-              <CardContent sx={{ width: { xs: '100%', sm: '60%' } }}>
+              <CardContent sx={{ width: { xs: "100%", sm: "60%" } }}>
                 <Box>
                   <Typography variant="h6" gutterBottom color="text.primary">
                     {item.title}
@@ -95,7 +95,7 @@ const ArticleManagement = () => {
                     {item.coverPageDescription}
                   </Typography>
                 </Box>
-                <CardActions sx={{ justifyContent: 'space-between' }}>
+                <CardActions sx={{ justifyContent: "space-between" }}>
                   <Button
                     component={Link}
                     to={`/admin/article-edit/${item.id}`}
@@ -113,6 +113,6 @@ const ArticleManagement = () => {
       </Grid>
     </Container>
   );
-};
+}
 
 export default ArticleManagement;

@@ -2,38 +2,39 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-01 09:18:34
- * @LastEditTime: 2022-06-24 00:33:17
+ * @LastEditTime: 2022-07-24 17:12:27
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/admin/Event/EventCreate/components/EventPreview.tsx
  */
 
-import { Box, Button, Card, Dialog, DialogTitle } from '@mui/material';
-import { EventStatus, postForm, postFormItem } from 'redux/form/formSlice';
-import React, { useState } from 'react';
-import { useAppDispatch, useAppSelector } from 'redux/hooks';
+import { Box, Button, Card, Dialog, DialogTitle } from "@mui/material";
+import { EventStatus, postForm, postFormItem } from "redux/form/formSlice";
+import React, { useState } from "react";
+import { useAppDispatch, useAppSelector } from "redux/hooks";
 
-import { ActiveType } from 'API';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import DynamicForm from 'components/DynamicForm';
-import { EventDetail } from 'views';
-import EventSwiperItem from 'components/EventContainer/components/EventSwiperItem';
+import { ActiveType } from "API";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import EventSwiperItem from "components/EventContainer/components/EventSwiperItem";
 // import FullScreenLoading from 'components/FullScreenLoading';
-import NotInterestedIcon from '@mui/icons-material/NotInterested';
-import { getOwnerUserName } from 'redux/auth/authSlice';
-import { postAddress } from 'redux/address/addressSlice';
-import { postEvent } from 'redux/event/eventSlice';
-import { useSnackbar } from 'notistack';
-import { useSwiper } from 'swiper/react';
-import { v4 as uuid } from 'uuid';
+import NotInterestedIcon from "@mui/icons-material/NotInterested";
+import { getOwnerUserName } from "redux/auth/authSlice";
+import { postAddress } from "redux/address/addressSlice";
+import { postEvent } from "redux/event/eventSlice";
+import { useSnackbar } from "notistack";
+import { useSwiper } from "swiper/react";
+import { v4 as uuid } from "uuid";
+import DynamicForm from "components/DynamicForm/DynamicForm";
+import EventDetail from "views/Event/EventDetail/EventDetail";
 
 interface EventPreviewProp {
-  setLoading:  React.Dispatch<React.SetStateAction<{
-    status: boolean;
-    message: string;
-  }>>
+  setLoading: React.Dispatch<
+    React.SetStateAction<{
+      status: boolean;
+      message: string;
+    }>
+  >;
 }
-
-const EventPreview: React.FC<EventPreviewProp> = ({ setLoading }) => {
+function EventPreview({ setLoading }: EventPreviewProp) {
   const swiper = useSwiper();
   const dispatch = useAppDispatch();
   const { enqueueSnackbar } = useSnackbar();
@@ -54,9 +55,9 @@ const EventPreview: React.FC<EventPreviewProp> = ({ setLoading }) => {
     startDate: createData.basicInfo.startDateTime,
     endDate: createData.basicInfo.endDateTime,
     eventStatus: EventStatus.ComingSoon,
-    eventEventLocationId: undefined, //这东西要跟google map api结合 和另一个 Address 表联动。。
-    eventFormId: undefined, //这东西要跟google map api结合 和另一个 Address 表联动。。
-    active: 'T',
+    eventEventLocationId: undefined, // 这东西要跟google map api结合 和另一个 Address 表联动。。
+    eventFormId: undefined, // 这东西要跟google map api结合 和另一个 Address 表联动。。
+    active: "T",
   };
   console.log(createData.completeStatus);
 
@@ -90,16 +91,17 @@ const EventPreview: React.FC<EventPreviewProp> = ({ setLoading }) => {
   const completeActivityCreate = async () => {
     setLoading({
       status: true,
-      message: '正在创建报名表单',
+      message: "正在创建报名表单",
     });
+
     const formId = await createForm();
     if (!formId) {
-      enqueueSnackbar('表单创建错误，请重试', { variant: 'error' });
+      enqueueSnackbar("表单创建错误，请重试", { variant: "error" });
       return;
     }
     setLoading({
       status: true,
-      message: '正在发布活动',
+      message: "正在发布活动",
     });
     const createAddressInput = {
       id: preAddressId,
@@ -116,7 +118,7 @@ const EventPreview: React.FC<EventPreviewProp> = ({ setLoading }) => {
     console.log(createAddressInput);
     setLoading({
       status: true,
-      message: '正在创建地址',
+      message: "正在创建地址",
     });
     const responseAddress = await dispatch(postAddress({ createAddressInput }));
     console.log(responseAddress);
@@ -127,21 +129,21 @@ const EventPreview: React.FC<EventPreviewProp> = ({ setLoading }) => {
       coverPageImgURL: createData.posterImage,
       content: createData.basicInfo.content,
       online: createData.basicInfo.online,
-      group: false, //这个好像还没做
+      group: false, // 这个好像还没做
       eventFormId: formId,
       startDate: createData.basicInfo.startDateTime,
       endDate: createData.basicInfo.endDateTime,
       eventStatus: EventStatus.ComingSoon,
       // eventEventLocationId: undefined, //这东西要跟google map api结合 和另一个 Address 表联动。。
       eventEventLocationId: preAddressId,
-      eventCountId: uuid(), //这个东西我要在slice里面处理。 就undefined 放着
+      eventCountId: uuid(), // 这个东西我要在slice里面处理。 就undefined 放着
       active: ActiveType.T,
       owner: ownerUsername,
     };
-    console.log(98989 ,createEventInput);
+    console.log(98989, createEventInput);
     setLoading({
       status: true,
-      message: '正在创建活动',
+      message: "正在创建活动",
     });
     const response = await dispatch(
       postEvent({
@@ -149,14 +151,14 @@ const EventPreview: React.FC<EventPreviewProp> = ({ setLoading }) => {
       }),
     );
     console.log(response);
-    if (response.meta.requestStatus === 'fulfilled') {
-      enqueueSnackbar('活动创建成功', { variant: 'success' });
+    if (response.meta.requestStatus === "fulfilled") {
+      enqueueSnackbar("活动创建成功", { variant: "success" });
     } else {
-      enqueueSnackbar('活动创建失败', { variant: 'error' });
+      enqueueSnackbar("活动创建失败", { variant: "error" });
     }
     setLoading({
       status: false,
-      message: '',
+      message: "",
     });
   };
 
@@ -169,7 +171,7 @@ const EventPreview: React.FC<EventPreviewProp> = ({ setLoading }) => {
         },
       }),
     );
-    if (formRes.meta.requestStatus === 'fulfilled') {
+    if (formRes.meta.requestStatus === "fulfilled") {
       console.log(formRes);
       const formId = formRes.payload.id;
       const reqList = createData.selectedQuestions.map((item) => ({
@@ -190,7 +192,7 @@ const EventPreview: React.FC<EventPreviewProp> = ({ setLoading }) => {
         ),
       );
       const complete = resList.every(
-        (item) => item.meta.requestStatus === 'fulfilled',
+        (item) => item.meta.requestStatus === "fulfilled",
       );
       if (!complete) {
         return;
@@ -209,10 +211,10 @@ const EventPreview: React.FC<EventPreviewProp> = ({ setLoading }) => {
         maxWidth="xs"
         fullWidth
         onClose={() => setOpen(false)}
-        scroll={'paper'}
+        scroll="paper"
       >
         <DialogTitle>
-          {previewData ? previewData.title : '活动报名'}
+          {previewData ? previewData.title : "活动报名"}
         </DialogTitle>
 
         <DynamicForm
@@ -232,17 +234,17 @@ const EventPreview: React.FC<EventPreviewProp> = ({ setLoading }) => {
       </Box>
       {createData.completeStatus.EventForm &&
       createData.completeStatus.EventPoster ? (
-        <Box sx={{ m: '2rem' }}>
+        <Box sx={{ m: "2rem" }}>
           <Card sx={{ p: 2 }}>
             <EventSwiperItem
               event={previewData}
               handleJoinEvent={() => setOpen(true)}
-              fromPreview={true}
+              fromPreview
             />
           </Card>
           <Box mt={2} p={2} component={Card} height="60vh" overflow="auto">
             <EventDetail
-              fromPreview={true}
+              fromPreview
               previewEvent={previewData}
               prevenJoinClick={() => setOpen(true)}
             />
@@ -252,14 +254,14 @@ const EventPreview: React.FC<EventPreviewProp> = ({ setLoading }) => {
         <Card
           sx={{
             mt: 2,
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            flexDirection: 'column',
-            minHeight: '30vh',
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "column",
+            minHeight: "30vh",
           }}
         >
-          <NotInterestedIcon sx={{ fontSize: '60px', color: '#9e9e9e' }} />
+          <NotInterestedIcon sx={{ fontSize: "60px", color: "#9e9e9e" }} />
           <Box mt={2}>请完成所有必填信息后再进行预览和确认提交</Box>
         </Card>
       )}
@@ -271,7 +273,7 @@ const EventPreview: React.FC<EventPreviewProp> = ({ setLoading }) => {
         <br /> */}
         <Button
           size="large"
-          sx={{ m: '24px', width: '50%' }}
+          sx={{ m: "24px", width: "50%" }}
           variant="contained"
           onClick={completeActivityCreate}
           disabled={
@@ -284,6 +286,6 @@ const EventPreview: React.FC<EventPreviewProp> = ({ setLoading }) => {
       </Box>
     </Box>
   );
-};
+}
 
 export default EventPreview;

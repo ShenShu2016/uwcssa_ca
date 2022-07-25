@@ -1,28 +1,40 @@
-import React, { useEffect } from 'react';
+/*
+ * @Author: Shen Shu
+ * @Date: 2022-06-14 10:58:14
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-07-24 17:35:22
+ * @FilePath: /uwcssa_ca/src/views/About/components/Team/Team.tsx
+ * @Description:
+ *
+ */
+import React, { useEffect } from "react";
 import {
   fetchUwcssaDepartmentList,
   selectAllUwcssaDepartments,
-} from 'redux/uwcssaDepartment/uwcssaDepartmentSlice';
+} from "redux/uwcssaDepartment/uwcssaDepartmentSlice";
 import {
   fetchUwcssaMemberList,
   selectAllUwcssaMembers,
-} from 'redux/uwcssaMember/uwcssaMemberSlice';
-import { useAppDispatch, useAppSelector } from 'redux/hooks';
+} from "redux/uwcssaMember/uwcssaMemberSlice";
+import { useAppDispatch, useAppSelector } from "redux/hooks";
 
-import Avatar from '@mui/material/Avatar';
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Grid from '@mui/material/Grid';
-import ListItem from '@mui/material/ListItem';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import ListItemText from '@mui/material/ListItemText';
-import Typography from '@mui/material/Typography';
-import { getAuthState } from 'redux/auth/authSlice';
-import { stringAvatar } from 'components/Avatar/AvatarFunction';
-import { useTheme } from '@mui/material/styles';
+import {
+  Avatar,
+  useTheme,
+  Card,
+  Grid,
+  Typography,
+  Box,
+  CardContent,
+  ListItem,
+  ListItemText,
+  ListItemAvatar,
+} from "@mui/material";
 
-const Team = (): JSX.Element => {
+import { getAuthState } from "redux/auth/authSlice";
+import stringAvatar from "components/Avatar/AvatarFunction";
+
+function Team(): JSX.Element {
   const theme = useTheme();
   const isAuth = useAppSelector(getAuthState);
   const dispatch = useAppDispatch();
@@ -36,7 +48,7 @@ const Team = (): JSX.Element => {
   );
   useEffect(() => {
     const getUwcssaMembers = async () => {
-      if (isAuth !== null && fetchUwcssaMemberListStatus === 'idle') {
+      if (isAuth !== null && fetchUwcssaMemberListStatus === "idle") {
         await dispatch(fetchUwcssaMemberList({ isAuth }));
       }
     };
@@ -45,7 +57,7 @@ const Team = (): JSX.Element => {
 
   useEffect(() => {
     const getUwcssaDepartments = async () => {
-      if (isAuth !== null && fetchUwcssaDepartmentListStatus === 'idle') {
+      if (isAuth !== null && fetchUwcssaDepartmentListStatus === "idle") {
         await dispatch(fetchUwcssaDepartmentList({ isAuth }));
       }
     };
@@ -57,7 +69,7 @@ const Team = (): JSX.Element => {
       <Box marginBottom={4}>
         <Typography
           variant="h4"
-          align={'center'}
+          align="center"
           gutterBottom
           sx={{
             fontWeight: 700,
@@ -68,75 +80,67 @@ const Team = (): JSX.Element => {
         </Typography>
       </Box>
       <>
-        {departments.map((department, i) => {
-          return (
-            <Box key={i} marginBottom={4}>
-              <Box marginBottom={4}>
-                <Typography
-                  variant="h6"
-                  align={'center'}
-                  color={'text.secondary'}
-                >
-                  {department.id}
-                </Typography>
-              </Box>
-
-              <Grid container spacing={2}>
-                {uwcssaMembers
-                  .filter(
-                    (x) => x.uwcssaDepartmentUwcssaMembersId === department.id,
-                  )
-                  .map((item, i) => {
-                    return (
-                      <Grid item xs={12} md={4} key={i}>
-                        <Box
-                          width={1}
-                          height={1}
-                          component={Card}
-                          boxShadow={0}
-                          variant={'outlined'}
-                          bgcolor={'alternate.main'}
-                        >
-                          <CardContent sx={{ padding: 3 }}>
-                            <ListItem
-                              component="div"
-                              disableGutters
-                              sx={{ padding: 0 }}
-                            >
-                              <ListItemAvatar sx={{ marginRight: 3 }}>
-                                <Avatar
-                                  src={item.user.avatarURL?.objectCompressedURL}
-                                  {...stringAvatar(item.user.name, {
-                                    width: 80,
-                                    height: 80,
-                                  })}
-                                />
-                              </ListItemAvatar>
-                              <ListItemText
-                                sx={{ margin: 0 }}
-                                primary={item.name || 'null'}
-                                secondary={item.title || 'null'}
-                                primaryTypographyProps={{
-                                  variant: 'h6',
-                                  fontWeight: 700,
-                                }}
-                                secondaryTypographyProps={{
-                                  variant: 'subtitle1',
-                                }}
-                              />
-                            </ListItem>
-                          </CardContent>
-                        </Box>
-                      </Grid>
-                    );
-                  })}
-              </Grid>
+        {departments.map((department) => (
+          <Box key={department.id} marginBottom={4}>
+            <Box marginBottom={4}>
+              <Typography variant="h6" align="center" color="text.secondary">
+                {department.id}
+              </Typography>
             </Box>
-          );
-        })}
+
+            <Grid container spacing={2}>
+              {uwcssaMembers
+                .filter(
+                  (x) => x.uwcssaDepartmentUwcssaMembersId === department.id,
+                )
+                .map((item) => (
+                  <Grid item xs={12} md={4} key={item.id}>
+                    <Box
+                      width={1}
+                      height={1}
+                      component={Card}
+                      boxShadow={0}
+                      variant="outlined"
+                      bgcolor="alternate.main"
+                    >
+                      <CardContent sx={{ padding: 3 }}>
+                        <ListItem
+                          component="div"
+                          disableGutters
+                          sx={{ padding: 0 }}
+                        >
+                          <ListItemAvatar sx={{ marginRight: 3 }}>
+                            <Avatar
+                              src={item.user.avatarURL?.objectCompressedURL}
+                              {...stringAvatar(item.user.name, {
+                                width: 80,
+                                height: 80,
+                              })}
+                            />
+                          </ListItemAvatar>
+                          <ListItemText
+                            sx={{ margin: 0 }}
+                            primary={item.name || "null"}
+                            secondary={item.title || "null"}
+                            primaryTypographyProps={{
+                              variant: "h6",
+                              fontWeight: 700,
+                            }}
+                            secondaryTypographyProps={{
+                              variant: "subtitle1",
+                            }}
+                          />
+                        </ListItem>
+                      </CardContent>
+                    </Box>
+                  </Grid>
+                ))}
+            </Grid>
+          </Box>
+        ))}
       </>
     </Box>
   );
-};
+}
 
 export default Team;

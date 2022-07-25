@@ -1,10 +1,10 @@
-/* eslint-disable indent */
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable react/require-default-props */
+/* eslint-disable react/function-component-definition */
 /*
  * @Author: Shen Shu
  * @Date: 2022-06-18 17:26:14
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-07-22 16:01:34
+ * @LastEditTime: 2022-07-24 16:26:22
  * @FilePath: /uwcssa_ca/src/views/Event/EventDetail/EventDetail.tsx
  * @Description:
  *
@@ -18,28 +18,26 @@ import {
   Typography,
   useMediaQuery,
   useTheme,
-} from '@mui/material';
-import {
-  Content,
-  Hero,
-  SidebarEvents,
-  SidebarNewsletter,
-  SimilarStories,
-} from './components';
-import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
-import { Link, useParams } from 'react-router-dom';
-import React, { useEffect, useState } from 'react';
-import { fetchEvent, selectEventById } from 'redux/event/eventSlice';
-import { getAuthState, getOwnerUserName } from 'redux/auth/authSlice';
+} from "@mui/material";
+import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+import { Link, useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { fetchEvent, selectEventById } from "redux/event/eventSlice";
+import { getAuthState, getOwnerUserName } from "redux/auth/authSlice";
 import {
   insertAllComments,
   removeAllComments,
   selectAllComments,
-} from 'redux/comment/commentSlice';
-import { useAppDispatch, useAppSelector } from 'redux/hooks';
+} from "redux/comment/commentSlice";
+import { useAppDispatch, useAppSelector } from "redux/hooks";
 
-import CommentOverview from 'components/Comment/CommentOverview';
-import EventJoinForm from 'components/EventContainer/components/EventJoinForm';
+import EventJoinForm from "components/EventContainer/components/EventJoinForm";
+import CommentOverview from "components/Comment/CommentOverview/CommentOverview";
+import Hero from "./components/Hero/Hero";
+import SidebarEvents from "./components/SidebarEvents/SidebarEvents";
+import SidebarNewsletter from "./components/SidebarNewsletter/SidebarNewsletter";
+import Content from "./components/Content/Content";
+import SimilarStories from "./components/SimilarStories/SimilarStories";
 
 interface EventDetailProp {
   fromPreview?: boolean;
@@ -48,17 +46,17 @@ interface EventDetailProp {
 }
 
 type Libraries = (
-  | 'drawing'
-  | 'geometry'
-  | 'localContext'
-  | 'places'
-  | 'visualization'
+  | "drawing"
+  | "geometry"
+  | "localContext"
+  | "places"
+  | "visualization"
 )[];
-const libraries: Libraries = ['places'];
+const libraries: Libraries = ["places"];
 
 const containerStyle = {
-  width: '100%',
-  height: '500px',
+  width: "100%",
+  height: "500px",
 };
 
 const EventDetail: React.FC<EventDetailProp> = ({
@@ -70,13 +68,15 @@ const EventDetail: React.FC<EventDetailProp> = ({
   const dispatch = useAppDispatch();
   const [joinDialogOpen, setJoinDialogOpen] = useState<boolean>(false);
   const isAuth = useAppSelector(getAuthState);
-  const isMd = useMediaQuery(theme.breakpoints.up('md'), {
+  const isMd = useMediaQuery(theme.breakpoints.up("md"), {
     defaultMatches: true,
   });
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const { eventId } = fromPreview ? { eventId: null } : useParams();
   const event = fromPreview
     ? previewEvent
-    : useAppSelector((state) => selectEventById(state, eventId));
+    : // eslint-disable-next-line react-hooks/rules-of-hooks
+      useAppSelector((state) => selectEventById(state, eventId));
   const ownerUsername = useAppSelector(getOwnerUserName);
   const comments = useAppSelector(selectAllComments);
 
@@ -90,14 +90,14 @@ const EventDetail: React.FC<EventDetailProp> = ({
             ownerUsername,
           }),
         );
-        dispatch(insertAllComments(response?.payload?.comments?.items)); //这种方法不太好
+        dispatch(insertAllComments(response?.payload?.comments?.items)); // 这种方法不太好
       }
     };
     getEvent();
     return () => {
       dispatch(removeAllComments());
     };
-  }, [eventId]);
+  }, [dispatch, eventId, isAuth, ownerUsername]);
 
   return (
     <>
@@ -108,7 +108,7 @@ const EventDetail: React.FC<EventDetailProp> = ({
       />
       <Box>
         {event && <Hero event={event} />}
-        <Container style={{ padding: '12px 16px' }}>
+        <Container style={{ padding: "12px 16px" }}>
           <Grid container spacing={8}>
             <Grid item xs={12} md={8}>
               {isAuth ? (
@@ -130,15 +130,15 @@ const EventDetail: React.FC<EventDetailProp> = ({
                 >
                   {ownerUsername &&
                   event?.eventParticipants?.items[0]?.owner === ownerUsername
-                    ? '你已经报名'
-                    : '点击此处报名'}
+                    ? "你已经报名"
+                    : "点击此处报名"}
                 </Button>
               ) : (
                 <Button
                   fullWidth
                   variant="contained"
                   component={Link}
-                  to={'/auth/signIn'}
+                  to="/auth/signIn"
                 >
                   报名请先登录
                 </Button>
@@ -168,7 +168,7 @@ const EventDetail: React.FC<EventDetailProp> = ({
                 </LoadScript>
                 <Typography
                   color="#616161"
-                  sx={{ fontSize: '18px', fontWeight: 600, paddingY: 2 }}
+                  sx={{ fontSize: "18px", fontWeight: 600, paddingY: 2 }}
                 >
                   {`地址：${event.eventLocation.formatted_address}`}
                 </Typography>
@@ -191,7 +191,7 @@ const EventDetail: React.FC<EventDetailProp> = ({
           )}
         </Container>
         <Box
-          component={'svg'}
+          component="svg"
           preserveAspectRatio="none"
           xmlns="http://www.w3.org/2000/svg"
           x="0px"
@@ -205,17 +205,14 @@ const EventDetail: React.FC<EventDetailProp> = ({
           <path
             fill={theme.palette.alternate.main}
             d="M0,0c0,0,934.4,93.4,1920,0v100.1H0L0,0z"
-          ></path>
+          />
         </Box>
-        <Box
-          bgcolor={'alternate.main'}
-          display={fromPreview ? 'none' : 'block'}
-        >
+        <Box bgcolor="alternate.main" display={fromPreview ? "none" : "block"}>
           <Container>
             <SimilarStories />
           </Container>
           <Box
-            component={'svg'}
+            component="svg"
             preserveAspectRatio="none"
             xmlns="http://www.w3.org/2000/svg"
             x="0px"
@@ -229,7 +226,7 @@ const EventDetail: React.FC<EventDetailProp> = ({
             <path
               fill={theme.palette.background.paper}
               d="M0,0c0,0,934.4,93.4,1920,0v100.1H0L0,0z"
-            ></path>
+            />
           </Box>
         </Box>
       </Box>

@@ -8,26 +8,26 @@
  *
  */
 
-import { CreateEventInput, UpdateEventInput } from 'API';
+import { CreateEventInput, UpdateEventInput } from "API";
 import {
   createAsyncThunk,
   createEntityAdapter,
   createSlice,
-} from '@reduxjs/toolkit';
+} from "@reduxjs/toolkit";
 import {
   createCount,
   createEvent,
   deleteEvent,
   updateEvent,
-} from 'graphql/mutations';
-import { eventSortByCreatedAt, getEvent } from './custom_q_m_s';
+} from "graphql/mutations";
 
-import API from '@aws-amplify/api';
-import { Address } from 'redux/address/addressSlice';
-import { RootState } from 'redux/store';
-import { graphqlOperation } from '@aws-amplify/api-graphql';
+import API from "@aws-amplify/api";
+import { Address } from "redux/address/addressSlice";
+import { RootState } from "redux/store";
+import { graphqlOperation } from "@aws-amplify/api-graphql";
+import { eventSortByCreatedAt, getEvent } from "./custom_q_m_s";
 
-//import { commentAdapter } from 'redux/comment/commentSlice';
+// import { commentAdapter } from 'redux/comment/commentSlice';
 
 export type Event = {
   id: string;
@@ -45,7 +45,7 @@ export type Event = {
   eventFormId?: string;
   count?: any;
   likes?: any;
-  active: 'T' | 'F';
+  active: "T" | "F";
   coverPageImgURL?: string | null;
   coverPageDescription?: string | null;
   eventLocation?: Address;
@@ -144,22 +144,22 @@ const eventAdapter = createEntityAdapter<Event>({
 });
 
 const initialState = eventAdapter.getInitialState({
-  fetchEventListStatus: 'idle',
+  fetchEventListStatus: "idle",
   fetchEventListError: null,
-  fetchEventStatus: 'idle',
+  fetchEventStatus: "idle",
   fetchEventError: null,
-  postEventStatus: 'idle',
+  postEventStatus: "idle",
   postEventError: null,
-  postEventImgStatus: 'idle',
+  postEventImgStatus: "idle",
   postEventImgError: null,
-  updateEventDetailStatus: 'idle',
+  updateEventDetailStatus: "idle",
   updateEventDetailError: null,
-  removeEventStatus: 'idle',
+  removeEventStatus: "idle",
   removeEventError: null,
 });
 
 export const fetchEventList = createAsyncThunk(
-  'event/fetchEventList',
+  "event/fetchEventList",
   async (
     {
       isAuth,
@@ -172,12 +172,12 @@ export const fetchEventList = createAsyncThunk(
       const result: any = await API.graphql({
         query: eventSortByCreatedAt,
         variables: {
-          active: 'T',
-          sortDirection: 'DESC',
+          active: "T",
+          sortDirection: "DESC",
           limit: 10,
           eq: ownerUsername || null,
         },
-        authMode: isAuth ? undefined : 'AWS_IAM',
+        authMode: isAuth ? undefined : "AWS_IAM",
       });
       return result.data.eventSortByCreatedAt.items;
     } catch (error) {
@@ -188,7 +188,7 @@ export const fetchEventList = createAsyncThunk(
 );
 
 export const fetchEvent = createAsyncThunk(
-  'event/fetchEvent',
+  "event/fetchEvent",
   async (
     {
       eventId,
@@ -202,10 +202,10 @@ export const fetchEvent = createAsyncThunk(
       const result: any = await API.graphql({
         query: getEvent,
         variables: { id: eventId, eq: ownerUsername || null },
-        authMode: isAuth ? undefined : 'AWS_IAM',
+        authMode: isAuth ? undefined : "AWS_IAM",
       });
       if (result.data.getEvent === null) {
-        return { id: eventId, description: 'not-found' };
+        return { id: eventId, description: "not-found" };
       }
       return result.data.getEvent;
     } catch (error) {
@@ -216,7 +216,7 @@ export const fetchEvent = createAsyncThunk(
 );
 
 export const postEvent = createAsyncThunk(
-  'event/postEvent',
+  "event/postEvent",
   async (
     { createEventInput }: { createEventInput: CreateEventInput },
     { rejectWithValue },
@@ -237,7 +237,7 @@ export const postEvent = createAsyncThunk(
                 count: undefined,
                 commentCount: 0,
                 like: 0,
-                targetTable: 'Event',
+                targetTable: "Event",
                 countEventId: createEventInput.id,
                 owner: createEventInput.owner,
               },
@@ -254,7 +254,7 @@ export const postEvent = createAsyncThunk(
 );
 
 export const updateEventDetail = createAsyncThunk(
-  'event/updateEventDetail',
+  "event/updateEventDetail",
   async (
     { updateEventInput }: { updateEventInput: UpdateEventInput },
     { rejectWithValue },
@@ -273,7 +273,7 @@ export const updateEventDetail = createAsyncThunk(
 );
 
 export const removeEvent = createAsyncThunk(
-  'event/removeEvent',
+  "event/removeEvent",
   async ({ id }: { id: string }, { rejectWithValue }) => {
     try {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -292,67 +292,67 @@ export const removeEvent = createAsyncThunk(
 );
 
 const eventSlice = createSlice({
-  name: 'event',
+  name: "event",
   initialState,
   reducers: {},
   extraReducers(builder) {
     builder
       .addCase(fetchEventList.pending, (state) => {
-        state.fetchEventListStatus = 'loading';
+        state.fetchEventListStatus = "loading";
       })
       .addCase(fetchEventList.fulfilled, (state, action) => {
-        state.fetchEventListStatus = 'succeed';
+        state.fetchEventListStatus = "succeed";
         eventAdapter.upsertMany(state, action.payload);
       })
       .addCase(fetchEventList.rejected, (state, action: any) => {
         eventAdapter.upsertMany(
           state,
           action.payload.data.eventSortByCreatedAt.items,
-        ); //!!这里会有一些问题需要处理
-        state.fetchEventListStatus = 'failed';
+        ); //! !这里会有一些问题需要处理
+        state.fetchEventListStatus = "failed";
         state.fetchEventListError = action.payload.errors;
       })
       .addCase(fetchEvent.pending, (state) => {
-        state.fetchEventStatus = 'loading';
+        state.fetchEventStatus = "loading";
       })
       .addCase(fetchEvent.fulfilled, (state, action) => {
-        state.fetchEventStatus = 'succeed';
+        state.fetchEventStatus = "succeed";
         eventAdapter.upsertOne(state, action.payload);
       })
       .addCase(fetchEvent.rejected, (state, action) => {
-        state.fetchEventStatus = 'failed';
+        state.fetchEventStatus = "failed";
         state.fetchEventError = action.payload;
       })
       .addCase(postEvent.pending, (state) => {
-        state.postEventStatus = 'loading';
+        state.postEventStatus = "loading";
       })
       .addCase(postEvent.fulfilled, (state, action) => {
-        state.postEventStatus = 'succeed';
+        state.postEventStatus = "succeed";
         eventAdapter.addOne(state, action.payload);
       })
       .addCase(postEvent.rejected, (state, action) => {
-        state.postEventStatus = 'failed';
+        state.postEventStatus = "failed";
         state.postEventError = action.payload;
       })
 
       .addCase(updateEventDetail.pending, (state) => {
-        state.updateEventDetailStatus = 'loading';
+        state.updateEventDetailStatus = "loading";
       })
       .addCase(updateEventDetail.fulfilled, (state) => {
-        state.updateEventDetailStatus = 'succeed';
+        state.updateEventDetailStatus = "succeed";
       })
       .addCase(updateEventDetail.rejected, (state, action) => {
-        state.updateEventDetailStatus = 'failed';
+        state.updateEventDetailStatus = "failed";
         state.updateEventDetailError = action.payload;
       })
       .addCase(removeEvent.pending, (state) => {
-        state.removeEventStatus = 'loading';
+        state.removeEventStatus = "loading";
       })
       .addCase(removeEvent.fulfilled, (state) => {
-        state.removeEventStatus = 'succeed';
+        state.removeEventStatus = "succeed";
       })
       .addCase(removeEvent.rejected, (state, action) => {
-        state.removeEventStatus = 'failed';
+        state.removeEventStatus = "failed";
         state.removeEventError = action.payload;
       });
   },

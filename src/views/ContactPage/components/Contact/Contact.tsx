@@ -1,28 +1,33 @@
+/* eslint-disable react/no-unstable-nested-components */
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-19 21:16:43
- * @LastEditors: Shikai Jin
- * @LastEditTime: 2022-06-25 22:19:19
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-07-24 17:38:27
  * @FilePath: /uwcssa_ca/src/views/ContactPage/components/Contact/Contact.tsx
  * @Description:
  *
  */
 
-import Avatar from '@mui/material/Avatar';
-import Box from '@mui/material/Box';
-import Container from 'components/Container';
-import Divider from '@mui/material/Divider';
-import ListItem from '@mui/material/ListItem';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import ListItemText from '@mui/material/ListItemText';
-import React from 'react';
-import Typography from '@mui/material/Typography';
-import { useTheme } from '@mui/material/styles';
+import {
+  Avatar,
+  useTheme,
+  Box,
+  Typography,
+  Divider,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
+} from "@mui/material";
+
+import Container from "components/Container";
+
+import React from "react";
 
 const mock = [
   {
-    label: 'Phone',
-    value: '+1 647-871-0781',
+    label: "Phone",
+    value: "+1 647-871-0781",
     icon: (
       <svg
         width={20}
@@ -36,8 +41,8 @@ const mock = [
     ),
   },
   {
-    label: 'Email',
-    value: 'uwincssa.it@gmail.com',
+    label: "Email",
+    value: "uwincssa.it@gmail.com",
     icon: (
       <svg
         width={20}
@@ -72,14 +77,14 @@ const mock = [
   // },
 ];
 
-const Contact = (): JSX.Element => {
+function Contact(): JSX.Element {
   const theme = useTheme();
 
-  const LeftSide = (): JSX.Element => {
+  function LeftSide(): JSX.Element {
     return (
       <Box>
         <Box marginBottom={2}>
-          <Typography variant={'h4'} sx={{ fontWeight: 700 }} gutterBottom>
+          <Typography variant="h4" sx={{ fontWeight: 700 }} gutterBottom>
             联系方式
           </Typography>
           <Typography color="text.secondary">
@@ -87,21 +92,21 @@ const Contact = (): JSX.Element => {
           </Typography>
         </Box>
         <Box
-          display={'flex'}
-          flexDirection={'column'}
-          justifyContent={'space-between'}
+          display="flex"
+          flexDirection="column"
+          justifyContent="space-between"
         >
-          {mock.map((item, i) => (
+          {mock.map((item) => (
             <Box
-              key={i}
+              key={item.label}
               component={ListItem}
               disableGutters
-              width={'auto'}
+              width="auto"
               padding={0}
             >
               <Box
                 component={ListItemAvatar}
-                minWidth={'auto !important'}
+                minWidth="auto !important"
                 marginRight={2}
               >
                 <Box
@@ -119,9 +124,9 @@ const Contact = (): JSX.Element => {
         </Box>
       </Box>
     );
-  };
+  }
 
-  const RightSide = (): JSX.Element => {
+  function RightSide(): JSX.Element {
     return (
       <iframe
         width="100%"
@@ -135,31 +140,31 @@ const Contact = (): JSX.Element => {
         style={{
           minHeight: 300,
           filter:
-            theme.palette.mode === 'dark'
-              ? 'grayscale(0.5) opacity(0.7)'
-              : 'none',
+            theme.palette.mode === "dark"
+              ? "grayscale(0.5) opacity(0.7)"
+              : "none",
         }}
       />
     );
-  };
+  }
 
   return (
     <Box
       sx={{
         width: 1,
         height: 1,
-        overflow: 'hidden',
+        overflow: "hidden",
       }}
     >
       <Container paddingX={0} paddingY={0} maxWidth={{ sm: 1, md: 1236 }}>
         <Box
-          display={'flex'}
-          flexDirection={{ xs: 'column', md: 'row' }}
-          position={'relative'}
+          display="flex"
+          flexDirection={{ xs: "column", md: "row" }}
+          position="relative"
         >
           <Box
-            display={'flex'}
-            alignItems={'center'}
+            display="flex"
+            alignItems="center"
             width={1}
             order={{ xs: 2, md: 1 }}
           >
@@ -169,34 +174,34 @@ const Contact = (): JSX.Element => {
           </Box>
           <Box
             sx={{
-              flex: { xs: '0 0 100%', md: '0 0 50%' },
-              position: 'relative',
-              maxWidth: { xs: '100%', md: '50%' },
+              flex: { xs: "0 0 100%", md: "0 0 50%" },
+              position: "relative",
+              maxWidth: { xs: "100%", md: "50%" },
               minHeight: { xs: 300, md: 600 },
               order: { xs: 1, md: 2 },
             }}
           >
             <Box
               sx={{
-                width: { xs: 1, md: '50vw' },
-                height: '100%',
-                position: 'relative',
+                width: { xs: 1, md: "50vw" },
+                height: "100%",
+                position: "relative",
               }}
             >
               <Box
                 sx={{
-                  width: '100%',
-                  height: '100%',
-                  overflow: 'hidden',
+                  width: "100%",
+                  height: "100%",
+                  overflow: "hidden",
                 }}
               >
                 <Box
                   sx={{
-                    overflow: 'hidden',
-                    left: '0%',
+                    overflow: "hidden",
+                    left: "0%",
                     width: 1,
                     height: 1,
-                    position: { xs: 'relative', md: 'absolute' },
+                    position: { xs: "relative", md: "absolute" },
                   }}
                 >
                   <RightSide />
@@ -209,6 +214,6 @@ const Contact = (): JSX.Element => {
       <Divider />
     </Box>
   );
-};
+}
 
 export default Contact;

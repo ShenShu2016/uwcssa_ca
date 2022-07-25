@@ -1,48 +1,45 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-18 13:56:36
- * @LastEditTime: 2022-06-12 11:59:17
- * @LastEditors: 李佳修
+ * @LastEditTime: 2022-07-24 16:07:18
+ * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/views/Home/Home.tsx
  * @Description:
  *
  */
 
-import {
-  AboutBottom,
-  Features,
-  Hero,
-  Integrations,
-  Jobs,
-  News,
-  Reviews,
-  Team,
-  Video,
-} from './components';
-import { alpha, useTheme } from '@mui/material/styles';
+import { alpha, useTheme, Box } from "@mui/material";
 
-import Box from '@mui/material/Box';
-import Container from 'components/Container';
-import React from 'react';
+import Container from "components/Container";
+import React from "react";
+import Features from "./components/Features/Features";
+import AboutBottom from "./components/AboutBottom/AboutBottom";
+import Hero from "./components/Hero/Hero";
+import Integrations from "./components/Integrations/Integrations";
+import Jobs from "./components/Jobs/Jobs";
+import News from "./components/News/News";
+import Team from "./components/Team/Team";
+import Video from "./components/Video/Video";
+import Reviews from "./components/Reviews/Reviews";
 
-const Home = (): JSX.Element => {
+function Home(): JSX.Element {
   const theme = useTheme();
 
   return (
     <>
       <Box
-        bgcolor={'alternate.main'}
+        bgcolor="alternate.main"
         sx={{
-          position: 'relative',
-          '&::after': {
-            position: 'absolute',
+          position: "relative",
+          "&::after": {
+            position: "absolute",
             content: '""',
-            width: '30%',
+            width: "30%",
             zIndex: 1,
             top: 0,
-            left: '5%',
-            height: '100%',
-            backgroundSize: '18px 18px',
+            left: "5%",
+            height: "100%",
+            backgroundSize: "18px 18px",
             backgroundImage: `radial-gradient(${alpha(
               theme.palette.primary.dark,
               0.4,
@@ -51,7 +48,7 @@ const Home = (): JSX.Element => {
           },
         }}
       >
-        <Box position={'relative'} zIndex={3}>
+        <Box position="relative" zIndex={3}>
           <Hero />
         </Box>
       </Box>
@@ -62,7 +59,7 @@ const Home = (): JSX.Element => {
       <Container>
         <Features />
       </Container>
-      <Box bgcolor={'alternate.main'}>
+      <Box bgcolor="alternate.main">
         <Container>
           <News />
         </Container>
@@ -71,7 +68,7 @@ const Home = (): JSX.Element => {
         <Team />
       </Container>
       <Video />
-      <Box bgcolor={'#11092d'}>
+      <Box bgcolor="#11092d">
         <Container>
           <Integrations />
         </Container>
@@ -79,7 +76,7 @@ const Home = (): JSX.Element => {
       {/* <Container>
         <Pricings />
       </Container> */}
-      <Box bgcolor={'alternate.main'}>
+      <Box bgcolor="alternate.main">
         <Container>
           <Jobs />
         </Container>
@@ -87,13 +84,13 @@ const Home = (): JSX.Element => {
       <Container>
         <AboutBottom />
       </Container>
-      <Box bgcolor={'primary.main'}>
+      <Box bgcolor="primary.main">
         <Container>
           <Reviews />
         </Container>
       </Box>
     </>
   );
-};
+}
 
 export default Home;

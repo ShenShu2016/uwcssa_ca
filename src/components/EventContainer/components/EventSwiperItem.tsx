@@ -1,23 +1,35 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import React from 'react';
-import { Box } from '@mui/material';
-import Details from './Detail';
-import Image from './Image';
+/*
+ * @Author: Shen Shu
+ * @Date: 2022-06-26 15:19:17
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-07-24 17:09:02
+ * @FilePath: /uwcssa_ca/src/components/EventContainer/components/EventSwiperItem.tsx
+ * @Description:
+ *
+ */
+
+import React from "react";
+import { Box } from "@mui/material";
+import Details from "./Detail";
+import Image from "./Image";
 // import { Event } from 'redux/event/eventSlice';
 
 interface EventSwiperItemProp {
-    event: any;
-    fromPreview?: boolean;
-    handleJoinEvent: (event: any) => void
+  event: any;
+  fromPreview?: boolean;
+  handleJoinEvent: (event: any) => void;
 }
-
-const EventSwiperItem: React.FC<EventSwiperItemProp> = ({ event, fromPreview=false, handleJoinEvent }) => {
+function EventSwiperItem({
+  event,
+  fromPreview = false,
+  handleJoinEvent,
+}: EventSwiperItemProp) {
   return (
     <Box
       display="flex"
       flexDirection={{
-        md: 'row',
-        xs: 'column',
+        md: "row",
+        xs: "column",
       }}
       mb={4}
     >
@@ -33,6 +45,6 @@ const EventSwiperItem: React.FC<EventSwiperItemProp> = ({ event, fromPreview=fal
       </Box>
     </Box>
   );
-};
+}
 
 export default EventSwiperItem;

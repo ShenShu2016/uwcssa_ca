@@ -1,77 +1,75 @@
-import * as yup from 'yup';
+import * as yup from "yup";
 
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Grid from '@mui/material/Grid';
-import React from 'react';
-import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
-import { useFormik } from 'formik';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import { useTheme } from '@mui/material/styles';
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
+import React from "react";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
+import { useFormik } from "formik";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
 
 const validationSchema = yup.object({
   fullName: yup
     .string()
     .trim()
-    .min(2, 'Please enter a valid full name')
-    .max(50, 'Please enter a valid full name')
-    .required('Please specify your full name'),
-  message: yup.string().trim().required('Please specify your message'),
+    .min(2, "Please enter a valid full name")
+    .max(50, "Please enter a valid full name")
+    .required("Please specify your full name"),
+  message: yup.string().trim().required("Please specify your message"),
   email: yup
     .string()
     .trim()
-    .email('Please enter a valid email address')
-    .required('Email is required'),
+    .email("Please enter a valid email address")
+    .required("Email is required"),
 });
 
-const Application = (): JSX.Element => {
+function Application(): JSX.Element {
   const theme = useTheme();
-  const isMd = useMediaQuery(theme.breakpoints.up('md'), {
+  const isMd = useMediaQuery(theme.breakpoints.up("md"), {
     defaultMatches: true,
   });
 
   const initialValues = {
-    fullName: '',
-    message: '',
-    email: '',
+    fullName: "",
+    message: "",
+    email: "",
   };
 
-  const onSubmit = (values) => {
-    return values;
-  };
+  const onSubmit = (values) => values;
 
   const formik = useFormik({
     initialValues,
-    validationSchema: validationSchema,
+    validationSchema,
     onSubmit,
   });
 
   return (
-    <Box maxWidth={800} margin={'0 auto'}>
+    <Box maxWidth={800} margin="0 auto">
       <Box marginBottom={2}>
         <Typography
-          variant={'h4'}
+          variant="h4"
           sx={{ fontWeight: 700 }}
           gutterBottom
-          align={'center'}
+          align="center"
         >
           Apply for this job
         </Typography>
-        <Typography color="text.secondary" align={'center'}>
+        <Typography color="text.secondary" align="center">
           We develop intelligent solutions for companies to reduce their
           operational costs, increase their profitability and improve service
           quality.
         </Typography>
       </Box>
       <Box
-        component={'form'}
+        component="form"
         onSubmit={formik.handleSubmit}
         sx={{
-          '& .MuiOutlinedInput-root.MuiInputBase-multiline': {
+          "& .MuiOutlinedInput-root.MuiInputBase-multiline": {
             padding: 0,
           },
-          '& .MuiOutlinedInput-input': {
+          "& .MuiOutlinedInput-input": {
             background: theme.palette.background.paper,
             padding: 2,
           },
@@ -131,7 +129,7 @@ const Application = (): JSX.Element => {
               size="large"
               startIcon={
                 <Box
-                  component={'svg'}
+                  component="svg"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="currentColor"
                   viewBox="0 0 20 20"
@@ -147,7 +145,7 @@ const Application = (): JSX.Element => {
               }
             >
               Upload CV
-              <input type="file" style={{ display: 'none' }} />
+              <input type="file" style={{ display: "none" }} />
             </Button>
           </Grid>
           <Grid item xs={12} sm={6} data-aos="fade-up">
@@ -159,7 +157,7 @@ const Application = (): JSX.Element => {
               size="large"
               startIcon={
                 <Box
-                  component={'svg'}
+                  component="svg"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="currentColor"
                   viewBox="0 0 20 20"
@@ -175,7 +173,7 @@ const Application = (): JSX.Element => {
               }
             >
               Upload cover letter
-              <input type="file" style={{ display: 'none' }} />
+              <input type="file" style={{ display: "none" }} />
             </Button>
           </Grid>
           <Grid item xs={12} data-aos="fade-up">
@@ -214,6 +212,6 @@ const Application = (): JSX.Element => {
       </Box>
     </Box>
   );
-};
+}
 
 export default Application;

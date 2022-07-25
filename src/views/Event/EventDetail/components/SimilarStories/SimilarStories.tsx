@@ -19,16 +19,16 @@ import {
   Grid,
   Typography,
   useTheme,
-} from '@mui/material';
-import { Link, useNavigate } from 'react-router-dom';
+} from "@mui/material";
+import { Link, useNavigate } from "react-router-dom";
 
-import React from 'react';
-import moment from 'moment';
-import { selectAllEvents } from 'redux/event/eventSlice';
-import { stringAvatar } from 'components/Avatar/AvatarFunction';
-import { useAppSelector } from 'redux/hooks';
+import React from "react";
+import moment from "moment";
+import { selectAllEvents } from "redux/event/eventSlice";
+import stringAvatar from "components/Avatar/AvatarFunction";
+import { useAppSelector } from "redux/hooks";
 
-const SimilarStories = (): JSX.Element => {
+function SimilarStories(): JSX.Element {
   const theme = useTheme();
   const navigate = useNavigate();
   const events = useAppSelector(selectAllEvents);
@@ -40,17 +40,17 @@ const SimilarStories = (): JSX.Element => {
   return (
     <Box>
       <Box
-        display={'flex'}
-        justifyContent={'space-between'}
-        alignItems={{ xs: 'flex-start', sm: 'center' }}
-        flexDirection={{ xs: 'column', sm: 'row' }}
+        display="flex"
+        justifyContent="space-between"
+        alignItems={{ xs: "flex-start", sm: "center" }}
+        flexDirection={{ xs: "column", sm: "row" }}
         marginBottom={4}
       >
         <Box>
-          <Typography fontWeight={700} variant={'h6'} gutterBottom>
+          <Typography fontWeight={700} variant="h6" gutterBottom>
             Similar stories
           </Typography>
-          <Typography color={'text.secondary'}>
+          <Typography color="text.secondary">
             Here’s what we’ve been up to recently.
           </Typography>
         </Box>
@@ -62,7 +62,7 @@ const SimilarStories = (): JSX.Element => {
             size="large"
             marginLeft={2}
             onClick={() => {
-              navigate('/dashboard');
+              navigate("/dashboard");
             }}
           >
             View all
@@ -75,13 +75,13 @@ const SimilarStories = (): JSX.Element => {
             <Box
               component={Link}
               to={`/event/${item.id}`}
-              display={'block'}
+              display="block"
               width={1}
               height={1}
               sx={{
-                textDecoration: 'none',
-                transition: 'all .2s ease-in-out',
-                '&:hover': {
+                textDecoration: "none",
+                transition: "all .2s ease-in-out",
+                "&:hover": {
                   transform: `translateY(-${theme.spacing(1 / 2)})`,
                 },
               }}
@@ -91,31 +91,31 @@ const SimilarStories = (): JSX.Element => {
                 width={1}
                 height={1}
                 boxShadow={4}
-                display={'flex'}
-                flexDirection={'column'}
-                sx={{ backgroundImage: 'none' }}
+                display="flex"
+                flexDirection="column"
+                sx={{ backgroundImage: "none" }}
               >
                 <CardMedia
                   image={item.coverPageImgURL}
                   title={item.title}
                   sx={{
                     height: { xs: 300, md: 360 },
-                    position: 'relative',
+                    position: "relative",
                   }}
                 >
                   <Box
-                    component={'svg'}
+                    component="svg"
                     viewBox="0 0 2880 480"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
                     sx={{
-                      position: 'absolute',
+                      position: "absolute",
                       bottom: 0,
                       color: theme.palette.background.paper,
-                      transform: 'scale(2)',
-                      height: 'auto',
+                      transform: "scale(2)",
+                      height: "auto",
                       width: 1,
-                      transformOrigin: 'top center',
+                      transformOrigin: "top center",
                     }}
                   >
                     <path
@@ -126,8 +126,8 @@ const SimilarStories = (): JSX.Element => {
                     />
                   </Box>
                 </CardMedia>
-                <Box component={CardContent} position={'relative'}>
-                  <Typography variant={'h6'} gutterBottom>
+                <Box component={CardContent} position="relative">
+                  <Typography variant="h6" gutterBottom>
                     {item.title}
                   </Typography>
                   <Typography color="text.secondary">
@@ -135,28 +135,28 @@ const SimilarStories = (): JSX.Element => {
                   </Typography>
                 </Box>
                 <Box flexGrow={1} />
-                <Box padding={2} display={'flex'} flexDirection={'column'}>
+                <Box padding={2} display="flex" flexDirection="column">
                   <Box marginBottom={2}>
                     <Divider />
                   </Box>
                   <Box
-                    display={'flex'}
-                    justifyContent={'space-between'}
-                    alignItems={'center'}
+                    display="flex"
+                    justifyContent="space-between"
+                    alignItems="center"
                   >
-                    <Box display={'flex'} alignItems={'center'}>
+                    <Box display="flex" alignItems="center">
                       <Avatar
                         src={item.user.avatarURL?.objectThumbnailURL}
                         {...stringAvatar(item.user.name, {
-                          marginRight: '1rem',
+                          marginRight: "1rem",
                         })}
                       />
-                      <Typography color={'text.secondary'}>
+                      <Typography color="text.secondary">
                         {item.user.name}
                       </Typography>
                     </Box>
-                    <Typography color={'text.secondary'}>
-                      {moment(item.createdAt).format('DD MMM')}
+                    <Typography color="text.secondary">
+                      {moment(item.createdAt).format("DD MMM")}
                     </Typography>
                   </Box>
                 </Box>
@@ -167,6 +167,6 @@ const SimilarStories = (): JSX.Element => {
       </Grid>
     </Box>
   );
-};
+}
 
 export default SimilarStories;

@@ -9,24 +9,24 @@
  */
 
 import {
-  commentSortByArticleCommentsIdCreatedAt,
-  createComment,
-} from './custom_q_m_s';
-import {
   createAsyncThunk,
   createEntityAdapter,
   createSlice,
-} from '@reduxjs/toolkit';
-import { createCount, updateComment } from 'graphql/mutations';
+} from "@reduxjs/toolkit";
+import { createCount, updateComment } from "graphql/mutations";
 
-import API from '@aws-amplify/api';
-import { Article } from 'redux/article/articleSlice';
-import { CreateCommentInput } from 'API';
-import { RootState } from 'redux/store';
-import { UserProfile } from 'redux/userProfile/userProfileSlice';
-import { getComment } from 'graphql/queries';
-import { graphqlOperation } from '@aws-amplify/api-graphql';
-import { v4 as uuid } from 'uuid';
+import API from "@aws-amplify/api";
+import { Article } from "redux/article/articleSlice";
+import { CreateCommentInput } from "API";
+import { RootState } from "redux/store";
+import { UserProfile } from "redux/userProfile/userProfileSlice";
+import { getComment } from "graphql/queries";
+import { graphqlOperation } from "@aws-amplify/api-graphql";
+import { v4 as uuid } from "uuid";
+import {
+  commentSortByArticleCommentsIdCreatedAt,
+  createComment,
+} from "./custom_q_m_s";
 
 export type Comment = {
   id: string;
@@ -50,20 +50,20 @@ export const commentAdapter = createEntityAdapter<Comment>({
 });
 
 const initialState = commentAdapter.getInitialState({
-  fetchCommentListStatus: 'idle',
+  fetchCommentListStatus: "idle",
   fetchCommentListError: null,
-  fetchCommentStatus: 'idle',
+  fetchCommentStatus: "idle",
   fetchCommentError: null,
-  postCommentStatus: 'idle',
+  postCommentStatus: "idle",
   postCommentError: null,
-  postCommentImgStatus: 'idle',
+  postCommentImgStatus: "idle",
   postCommentImgError: null,
-  updateCommentDetailStatus: 'idle',
+  updateCommentDetailStatus: "idle",
   updateCommentDetailError: null,
 });
 
 export const fetchCommentList = createAsyncThunk(
-  'comment/fetchCommentList',
+  "comment/fetchCommentList",
   async (
     {
       isAuth,
@@ -79,12 +79,12 @@ export const fetchCommentList = createAsyncThunk(
       const result: any = await API.graphql({
         query: commentSortByArticleCommentsIdCreatedAt,
         variables: {
-          articleCommentsId: articleCommentsId,
+          articleCommentsId,
           isDeleted: false,
-          sortDirection: 'DESC',
+          sortDirection: "DESC",
           limit: 10,
         },
-        authMode: isAuth ? undefined : 'AWS_IAM',
+        authMode: isAuth ? undefined : "AWS_IAM",
       });
       return result.data.commentSortByArticleCommentsIdCreatedAt.items;
     } catch (error) {
@@ -95,7 +95,7 @@ export const fetchCommentList = createAsyncThunk(
 );
 
 export const fetchComment = createAsyncThunk(
-  'comment/fetchComment',
+  "comment/fetchComment",
   async (
     { commentId, isAuth }: { commentId: string; isAuth: boolean },
     { rejectWithValue },
@@ -105,10 +105,10 @@ export const fetchComment = createAsyncThunk(
       const result: any = await API.graphql({
         query: getComment,
         variables: { id: commentId },
-        authMode: isAuth ? undefined : 'AWS_IAM',
+        authMode: isAuth ? undefined : "AWS_IAM",
       });
       if (result.data.getComment === null) {
-        return { id: commentId, description: 'not-found' };
+        return { id: commentId, description: "not-found" };
       }
       return result.data.getComment;
     } catch (error) {
@@ -119,7 +119,7 @@ export const fetchComment = createAsyncThunk(
 );
 
 export const postComment = createAsyncThunk(
-  'comment/postComment',
+  "comment/postComment",
   async (
     {
       createCommentInput,
@@ -150,7 +150,7 @@ export const postComment = createAsyncThunk(
                 count: undefined,
                 commentCount: undefined,
                 like: 0,
-                targetTable: 'Comment',
+                targetTable: "Comment",
                 countCommentId: commentId,
                 owner: createCommentInput.owner,
               },
@@ -167,7 +167,7 @@ export const postComment = createAsyncThunk(
 );
 
 export const updateCommentDetail = createAsyncThunk(
-  'comment/updateCommentDetail',
+  "comment/updateCommentDetail",
   async (
     { updateCommentInput }: { updateCommentInput: Comment },
     { rejectWithValue },
@@ -186,61 +186,61 @@ export const updateCommentDetail = createAsyncThunk(
 );
 
 const commentSlice = createSlice({
-  name: 'comment',
+  name: "comment",
   initialState,
   reducers: {
     removeAllComments(state) {
       commentAdapter.removeAll(state);
     },
     insertAllComments(state, data) {
-      //console.log(data);
+      // console.log(data);
       commentAdapter.upsertMany(state, data);
     },
   },
   extraReducers(builder) {
     builder
       .addCase(fetchCommentList.pending, (state) => {
-        state.fetchCommentListStatus = 'loading';
+        state.fetchCommentListStatus = "loading";
       })
       .addCase(fetchCommentList.fulfilled, (state, action) => {
-        state.fetchCommentListStatus = 'succeed';
+        state.fetchCommentListStatus = "succeed";
         commentAdapter.upsertMany(state, action.payload);
       })
       .addCase(fetchCommentList.rejected, (state, action) => {
-        state.fetchCommentListStatus = 'failed';
+        state.fetchCommentListStatus = "failed";
         state.fetchCommentListError = action.payload;
       })
       .addCase(fetchComment.pending, (state) => {
-        state.fetchCommentStatus = 'loading';
+        state.fetchCommentStatus = "loading";
       })
       .addCase(fetchComment.fulfilled, (state, action) => {
-        state.fetchCommentStatus = 'succeed';
+        state.fetchCommentStatus = "succeed";
         commentAdapter.upsertOne(state, action.payload);
       })
       .addCase(fetchComment.rejected, (state, action) => {
-        state.fetchCommentStatus = 'failed';
+        state.fetchCommentStatus = "failed";
         state.fetchCommentError = action.payload;
       })
       .addCase(postComment.pending, (state) => {
-        state.postCommentStatus = 'loading';
+        state.postCommentStatus = "loading";
       })
       .addCase(postComment.fulfilled, (state, action) => {
-        state.postCommentStatus = 'succeed';
+        state.postCommentStatus = "succeed";
         commentAdapter.addOne(state, action.payload);
       })
       .addCase(postComment.rejected, (state, action) => {
-        state.postCommentStatus = 'failed';
+        state.postCommentStatus = "failed";
         state.postCommentError = action.payload;
       })
       .addCase(updateCommentDetail.pending, (state) => {
-        state.updateCommentDetailStatus = 'loading';
+        state.updateCommentDetailStatus = "loading";
       })
       .addCase(updateCommentDetail.fulfilled, (state, action) => {
-        state.updateCommentDetailStatus = 'succeed';
+        state.updateCommentDetailStatus = "succeed";
         commentAdapter.updateOne(state, action.payload);
       })
       .addCase(updateCommentDetail.rejected, (state, action) => {
-        state.updateCommentDetailStatus = 'failed';
+        state.updateCommentDetailStatus = "failed";
         state.updateCommentDetailError = action.payload;
       });
   },

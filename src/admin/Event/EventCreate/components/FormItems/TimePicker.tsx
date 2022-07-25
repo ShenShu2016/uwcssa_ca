@@ -8,13 +8,13 @@
  * @FilePath: /uwcssa_ca/src/admin/Event/EventCreate/components/FormItems/TimePicker.tsx
  */
 
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import FieldLabel from '../FieldLabel';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { TextField } from '@mui/material';
-import { TimePicker } from '@mui/x-date-pickers/TimePicker';
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { TextField } from "@mui/material";
+import { TimePicker } from "@mui/x-date-pickers/TimePicker";
+import FieldLabel from "../FieldLabel";
 
 interface TimePickerInfo {
   formSelectChoices?: string[];

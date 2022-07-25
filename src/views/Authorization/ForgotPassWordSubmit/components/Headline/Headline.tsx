@@ -8,11 +8,11 @@
  *
  */
 /* eslint-disable react/no-unescaped-entities */
-import Box from '@mui/material/Box';
-import React from 'react';
-import Typography from '@mui/material/Typography';
+import Box from "@mui/material/Box";
+import React from "react";
+import Typography from "@mui/material/Typography";
 
-const Headline = (): JSX.Element => {
+function Headline(): JSX.Element {
   return (
     <Box>
       <Typography
@@ -20,7 +20,7 @@ const Headline = (): JSX.Element => {
         gutterBottom
         sx={{
           fontWeight: 900,
-          color: 'common.white',
+          color: "common.white",
         }}
       >
         Join the world's leading companies at TheFront 2021
@@ -31,7 +31,7 @@ const Headline = (): JSX.Element => {
         color="text.primary"
         sx={{
           fontWeight: 500,
-          color: 'common.white',
+          color: "common.white",
         }}
       >
         Whether it’s Porsche, Stripe, Intercom, Amazon, or Google, something
@@ -43,6 +43,6 @@ const Headline = (): JSX.Element => {
       </Typography>
     </Box>
   );
-};
+}
 
 export default Headline;

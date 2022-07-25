@@ -13,23 +13,23 @@ import {
   CreateEventParticipantInput,
   EventParticipantStatus,
   UpdateEventParticipantInput,
-} from 'API';
+} from "API";
 import {
   createAsyncThunk,
   createEntityAdapter,
   createSlice,
-} from '@reduxjs/toolkit';
+} from "@reduxjs/toolkit";
 import {
   createEventParticipant,
   deleteEventParticipant,
   updateEventParticipant,
-} from 'graphql/mutations';
-import { getEventParticipant, listEventParticipants } from 'graphql/queries';
+} from "graphql/mutations";
+import { getEventParticipant, listEventParticipants } from "graphql/queries";
 
-import API from '@aws-amplify/api';
-import { FormItem } from 'redux/form/formSlice';
-import { RootState } from 'redux/store';
-import { graphqlOperation } from '@aws-amplify/api-graphql';
+import API from "@aws-amplify/api";
+import { FormItem } from "redux/form/formSlice";
+import { RootState } from "redux/store";
+import { graphqlOperation } from "@aws-amplify/api-graphql";
 
 export type EventParticipant = {
   id: string;
@@ -103,28 +103,28 @@ const eventParticipantAdapter = createEntityAdapter<EventParticipant>({
 });
 
 const initialState = eventParticipantAdapter.getInitialState({
-  fetchEventParticipantListStatus: 'idle',
+  fetchEventParticipantListStatus: "idle",
   fetchEventParticipantListError: null,
-  fetchEventParticipantStatus: 'idle',
+  fetchEventParticipantStatus: "idle",
   fetchEventParticipantError: null,
-  postEventParticipantStatus: 'idle',
+  postEventParticipantStatus: "idle",
   postEventParticipantError: null,
-  postEventParticipantImgStatus: 'idle',
+  postEventParticipantImgStatus: "idle",
   postEventParticipantImgError: null,
-  updateEventParticipantDetailStatus: 'idle',
+  updateEventParticipantDetailStatus: "idle",
   updateEventParticipantDetailError: null,
-  removeEventParticipantStatus: 'idle',
+  removeEventParticipantStatus: "idle",
   removeEventParticipantError: null,
 });
 
 export const fetchEventParticipantList = createAsyncThunk(
-  'eventParticipant/fetchEventParticipantList',
+  "eventParticipant/fetchEventParticipantList",
   async ({ isAuth }: { isAuth: boolean }, { rejectWithValue }) => {
     try {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const result: any = await API.graphql({
         query: listEventParticipants,
-        authMode: isAuth ? undefined : 'AWS_IAM',
+        authMode: isAuth ? undefined : "AWS_IAM",
       });
 
       return result.data.listEventParticipants.items;
@@ -136,7 +136,7 @@ export const fetchEventParticipantList = createAsyncThunk(
 );
 
 export const fetchEventParticipant = createAsyncThunk(
-  'eventParticipant/fetchEventParticipant',
+  "eventParticipant/fetchEventParticipant",
   async (
     {
       eventParticipantId,
@@ -152,10 +152,10 @@ export const fetchEventParticipant = createAsyncThunk(
       const result: any = await API.graphql({
         query: getEventParticipant,
         variables: { id: eventParticipantId },
-        authMode: isAuth ? undefined : 'AWS_IAM',
+        authMode: isAuth ? undefined : "AWS_IAM",
       });
       if (result.data.getEventParticipant === null) {
-        return { id: eventParticipantId, description: 'not-found' };
+        return { id: eventParticipantId, description: "not-found" };
       }
       return result.data.getEventParticipant;
     } catch (error) {
@@ -166,7 +166,7 @@ export const fetchEventParticipant = createAsyncThunk(
 );
 
 export const postEventParticipant = createAsyncThunk(
-  'eventParticipant/postEventParticipant',
+  "eventParticipant/postEventParticipant",
   async (
     {
       createEventParticipantInput,
@@ -177,7 +177,7 @@ export const postEventParticipant = createAsyncThunk(
   ) => {
     Object.keys(createEventParticipantInput).forEach((key) =>
       createEventParticipantInput[key] === null ||
-      createEventParticipantInput[key] === ''
+      createEventParticipantInput[key] === ""
         ? delete createEventParticipantInput[key]
         : {},
     );
@@ -197,7 +197,7 @@ export const postEventParticipant = createAsyncThunk(
 );
 
 export const updateEventParticipantDetail = createAsyncThunk(
-  'eventParticipant/updateEventParticipantDetail',
+  "eventParticipant/updateEventParticipantDetail",
   async (
     {
       updateEventParticipantInput,
@@ -208,7 +208,7 @@ export const updateEventParticipantDetail = createAsyncThunk(
   ) => {
     Object.keys(updateEventParticipantInput).forEach((key) =>
       updateEventParticipantInput[key] === null ||
-      updateEventParticipantInput[key] === ''
+      updateEventParticipantInput[key] === ""
         ? delete updateEventParticipantInput[key]
         : {},
     );
@@ -228,7 +228,7 @@ export const updateEventParticipantDetail = createAsyncThunk(
 );
 
 export const removeEventParticipant = createAsyncThunk(
-  'eventParticipant/removeEventParticipant',
+  "eventParticipant/removeEventParticipant",
   async ({ id }: { id: string }, { rejectWithValue }) => {
     try {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -247,71 +247,71 @@ export const removeEventParticipant = createAsyncThunk(
 );
 
 const eventParticipantSlice = createSlice({
-  name: 'eventParticipant',
+  name: "eventParticipant",
   initialState,
   reducers: {},
   extraReducers(builder) {
     builder
       // Fetch EventParticipantList
       .addCase(fetchEventParticipantList.pending, (state) => {
-        state.fetchEventParticipantListStatus = 'loading';
+        state.fetchEventParticipantListStatus = "loading";
       })
       .addCase(fetchEventParticipantList.fulfilled, (state, action) => {
-        state.fetchEventParticipantListStatus = 'succeed';
+        state.fetchEventParticipantListStatus = "succeed";
         eventParticipantAdapter.upsertMany(state, action.payload);
       })
 
       .addCase(fetchEventParticipantList.rejected, (state, action) => {
-        state.fetchEventParticipantListStatus = 'failed';
+        state.fetchEventParticipantListStatus = "failed";
         state.fetchEventParticipantListError = action.payload;
       })
       // Fetch EventParticipant
       .addCase(fetchEventParticipant.pending, (state) => {
-        state.fetchEventParticipantStatus = 'loading';
+        state.fetchEventParticipantStatus = "loading";
       })
       .addCase(fetchEventParticipant.fulfilled, (state, action) => {
-        state.fetchEventParticipantStatus = 'succeed';
+        state.fetchEventParticipantStatus = "succeed";
         eventParticipantAdapter.upsertOne(state, action.payload);
       })
       .addCase(fetchEventParticipant.rejected, (state, action) => {
-        state.fetchEventParticipantStatus = 'failed';
+        state.fetchEventParticipantStatus = "failed";
         state.fetchEventParticipantError = action.payload;
       })
       // Post EventParticipant
       .addCase(postEventParticipant.pending, (state) => {
-        state.postEventParticipantStatus = 'loading';
+        state.postEventParticipantStatus = "loading";
       })
       .addCase(postEventParticipant.fulfilled, (state, action) => {
-        state.postEventParticipantStatus = 'succeed';
+        state.postEventParticipantStatus = "succeed";
 
         eventParticipantAdapter.addOne(state, action.payload);
       })
       .addCase(postEventParticipant.rejected, (state, action) => {
-        state.postEventParticipantStatus = 'failed';
+        state.postEventParticipantStatus = "failed";
         state.postEventParticipantError = action.payload;
       })
       // Update EventParticipantDetail
       .addCase(updateEventParticipantDetail.pending, (state) => {
-        state.updateEventParticipantDetailStatus = 'loading';
+        state.updateEventParticipantDetailStatus = "loading";
       })
       .addCase(updateEventParticipantDetail.fulfilled, (state, action) => {
-        state.updateEventParticipantDetailStatus = 'succeed';
+        state.updateEventParticipantDetailStatus = "succeed";
         eventParticipantAdapter.upsertOne(state, action.payload);
       })
       .addCase(updateEventParticipantDetail.rejected, (state, action) => {
-        state.updateEventParticipantDetailStatus = 'failed';
+        state.updateEventParticipantDetailStatus = "failed";
         state.updateEventParticipantDetailError = action.payload;
       })
       // Remove EventParticipant
       .addCase(removeEventParticipant.pending, (state) => {
-        state.removeEventParticipantStatus = 'loading';
+        state.removeEventParticipantStatus = "loading";
       })
       .addCase(removeEventParticipant.fulfilled, (state, action) => {
-        state.removeEventParticipantStatus = 'succeed';
+        state.removeEventParticipantStatus = "succeed";
         eventParticipantAdapter.removeOne(state, action.payload);
       })
       .addCase(removeEventParticipant.rejected, (state, action) => {
-        state.removeEventParticipantStatus = 'failed';
+        state.removeEventParticipantStatus = "failed";
         state.removeEventParticipantError = action.payload;
       });
   },

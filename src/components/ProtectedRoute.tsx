@@ -8,8 +8,8 @@
  *
  */
 
-import { Navigate } from 'react-router-dom';
-import React from 'react';
+import { Navigate } from "react-router-dom";
+import React from "react";
 
 interface ProtectedRouteProps {
   isAllowed: boolean | void;
@@ -19,7 +19,7 @@ interface ProtectedRouteProps {
 
 function ProtectedRoute({
   isAllowed = false,
-  redirectPath = '/404',
+  redirectPath = "/404",
   children,
 }: ProtectedRouteProps) {
   if (!isAllowed) {

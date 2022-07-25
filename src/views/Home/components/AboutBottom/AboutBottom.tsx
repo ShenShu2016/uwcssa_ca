@@ -10,27 +10,27 @@
  *
  */
 
-import Box from '@mui/material/Box';
-import { Button } from '@mui/material';
-import Grid from '@mui/material/Grid';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
-import React from 'react';
-import Typography from '@mui/material/Typography';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import { useTheme } from '@mui/material/styles';
+import Box from "@mui/material/Box";
+import { Button } from "@mui/material";
+import Grid from "@mui/material/Grid";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import React from "react";
+import Typography from "@mui/material/Typography";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
 
 /* eslint-disable react/no-unescaped-entities */
 
-const AboutBottom = (): JSX.Element => {
+function AboutBottom(): JSX.Element {
   const theme = useTheme();
-  const isMd = useMediaQuery(theme.breakpoints.up('md'), {
+  const isMd = useMediaQuery(theme.breakpoints.up("md"), {
     defaultMatches: true,
   });
 
   return (
     <Box>
       <Grid container spacing={isMd ? 4 : 2}>
-        <Grid item container justifyContent={'center'} xs={12} md={6}>
+        <Grid item container justifyContent="center" xs={12} md={6}>
           <Box
             component={LazyLoadImage}
             effect="blur"
@@ -44,7 +44,7 @@ const AboutBottom = (): JSX.Element => {
           <Box>
             <Typography
               variant="h4"
-              data-aos={'fade-up'}
+              data-aos="fade-up"
               gutterBottom
               sx={{
                 fontWeight: 700,
@@ -52,10 +52,10 @@ const AboutBottom = (): JSX.Element => {
             >
               支持我们
             </Typography>
-            <Typography variant="h6" data-aos={'fade-up'}>
+            <Typography variant="h6" data-aos="fade-up">
               贡献一份力量，帮助我们提高错误修复、网页改进和功能开发的速度。
             </Typography>
-            <Box display="flex" justifyContent={'left'} marginTop={2}>
+            <Box display="flex" justifyContent="left" marginTop={2}>
               <Button variant="contained" color="primary" size="large">
                 捐款
               </Button>
@@ -65,6 +65,6 @@ const AboutBottom = (): JSX.Element => {
       </Grid>
     </Box>
   );
-};
+}
 
 export default AboutBottom;

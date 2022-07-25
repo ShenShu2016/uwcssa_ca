@@ -1,41 +1,39 @@
 /*
  * @Author: Shikai Jin
  * @Date: 2022-05-17 22:50:55
- * @LastEditors: Shikai Jin
- * @LastEditTime: 2022-06-25 22:09:34
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-07-24 00:44:33
  * @FilePath: /uwcssa_ca/src/views/Home/components/Integrations/Integrations.tsx
  * @Description:
  *
  */
 
-import Avatar from '@mui/material/Avatar';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import React from 'react';
-import Typography from '@mui/material/Typography';
+import { Avatar, Box, Grid, Typography } from "@mui/material";
+
+import React from "react";
 
 // 暂时先这样，之后再细改
 const mock = [
   {
-    title: 'Github',
-    subtitle: 'Contribute to our project and help our community!',
-    icon: 'https://www.logo.wine/a/logo/GitHub/GitHub-Icon-White-Dark-Background-Logo.wine.svg',
-    link: 'https://github.com/ShenShu2016/uwcssa_ca',
+    title: "Github",
+    subtitle: "Contribute to our project and help our community!",
+    icon: "https://www.logo.wine/a/logo/GitHub/GitHub-Icon-White-Dark-Background-Logo.wine.svg",
+    link: "https://github.com/ShenShu2016/uwcssa_ca",
   },
   {
-    title: 'WeChat',
-    subtitle: 'Join our WeChat community and let’s get to know each other.',
-    icon: 'https://www.logo.wine/a/logo/WeChat/WeChat-Icon-Logo.wine.svg',
+    title: "WeChat",
+    subtitle: "Join our WeChat community and let’s get to know each other.",
+    icon: "https://www.logo.wine/a/logo/WeChat/WeChat-Icon-Logo.wine.svg",
   },
   {
-    title: 'Facebook',
-    subtitle: 'Follow us on Facebook and keep up-to-date with our latest news.',
-    icon: 'https://www.logo.wine/a/logo/Facebook/Facebook-f_Logo-Blue-Logo.wine.svg',
-    link: 'https://www.facebook.com/uwincssa',
+    title: "Facebook",
+    subtitle: "Follow us on Facebook and keep up-to-date with our latest news.",
+    icon: "https://www.logo.wine/a/logo/Facebook/Facebook-f_Logo-Blue-Logo.wine.svg",
+    link: "https://www.facebook.com/uwincssa",
   },
 ];
 
-const Integrations = (): JSX.Element => {
+function Integrations(): JSX.Element {
   return (
     <Box>
       {/* <Box marginBottom={4}>
@@ -59,13 +57,13 @@ const Integrations = (): JSX.Element => {
         </Typography>
       </Box> */}
       <Grid container spacing={2}>
-        {mock.map((item, i) => (
-          <Grid item xs={12} md={4} key={i}>
+        {mock.map((item) => (
+          <Grid item xs={12} md={4} key={item.title}>
             <Box
               sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
               }}
             >
               <Box
@@ -76,21 +74,21 @@ const Integrations = (): JSX.Element => {
                 marginBottom={2}
                 src={item.icon}
                 sx={{
-                  position: 'relative',
-                  top: '0',
-                  transition: 'top ease 0.3s',
-                  '&:hover': { top: '-5px' },
+                  position: "relative",
+                  top: "0",
+                  transition: "top ease 0.3s",
+                  "&:hover": { top: "-5px" },
                 }}
               />
               <Typography
-                variant={'h6'}
+                variant="h6"
                 gutterBottom
-                align={'center'}
-                sx={{ fontWeight: 600, color: 'common.white' }}
+                align="center"
+                sx={{ fontWeight: 600, color: "common.white" }}
               >
                 {item.title}
               </Typography>
-              <Typography sx={{ color: 'common.white' }} align={'center'}>
+              <Typography sx={{ color: "common.white" }} align="center">
                 {item.subtitle}
               </Typography>
             </Box>
@@ -99,6 +97,6 @@ const Integrations = (): JSX.Element => {
       </Grid>
     </Box>
   );
-};
+}
 
 export default Integrations;

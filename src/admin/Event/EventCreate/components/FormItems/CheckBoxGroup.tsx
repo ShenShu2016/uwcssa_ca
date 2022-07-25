@@ -7,11 +7,11 @@
  * @FilePath: /uwcssa_ca/src/admin/Event/EventCreate/components/FormItems/CheckBoxGroup.tsx
  */
 
-import { Checkbox, FormControlLabel, RadioGroup } from '@mui/material';
-import React, { useState } from 'react';
+import { Checkbox, FormControlLabel, RadioGroup } from "@mui/material";
+import React, { useState } from "react";
 
-import FieldLabel from '../FieldLabel';
-import { FormType } from 'redux/form/formSlice';
+import { FormType } from "redux/form/formSlice";
+import FieldLabel from "../FieldLabel";
 
 interface CheckBoxGroupInfo {
   formSelectChoices?: string[];
@@ -28,7 +28,7 @@ interface CheckBoxGroupProp {
 }
 
 const CheckBoxGroupItem: React.FC<CheckBoxGroupProp> = ({ item }) => {
-  const [value, setValue] = useState<string>('');
+  const [value, setValue] = useState<string>("");
 
   return (
     <>

@@ -8,7 +8,7 @@
  *
  */
 
-import * as yup from 'yup';
+import * as yup from "yup";
 
 import {
   Box,
@@ -17,14 +17,14 @@ import {
   Grid,
   TextField,
   Typography,
-} from '@mui/material';
-import { useAppDispatch, useAppSelector } from 'redux/hooks';
+} from "@mui/material";
+import { useAppDispatch, useAppSelector } from "redux/hooks";
 
-import React from 'react';
-import { getOwnerUserName } from 'redux/auth/authSlice';
-import { postUwcssaDepartment } from 'redux/uwcssaDepartment/uwcssaDepartmentSlice';
-import { useFormik } from 'formik';
-import { useSnackbar } from 'notistack';
+import React from "react";
+import { getOwnerUserName } from "redux/auth/authSlice";
+import { postUwcssaDepartment } from "redux/uwcssaDepartment/uwcssaDepartmentSlice";
+import { useFormik } from "formik";
+import { useSnackbar } from "notistack";
 
 const validationSchema = yup.object({
   id: yup.string().required(),
@@ -38,15 +38,15 @@ interface Props {
   open: boolean;
 }
 
-const AddUwcssaDepartmentForm = ({ onClose, open }: Props): JSX.Element => {
+function AddUwcssaDepartmentForm({ onClose, open }: Props): JSX.Element {
   const dispatch = useAppDispatch();
   const ownerUsername = useAppSelector(getOwnerUserName);
   const { enqueueSnackbar } = useSnackbar();
   const initialValues = {
-    id: '',
-    introduction: '',
-    email: '',
-    leader: '',
+    id: "",
+    introduction: "",
+    email: "",
+    leader: "",
   };
 
   const onSubmit = async (values) => {
@@ -58,20 +58,19 @@ const AddUwcssaDepartmentForm = ({ onClose, open }: Props): JSX.Element => {
     const response = await dispatch(
       postUwcssaDepartment({ createUwcssaDepartmentInput }),
     );
-    if (response.meta.requestStatus === 'fulfilled') {
+    if (response.meta.requestStatus === "fulfilled") {
       onClose();
-      enqueueSnackbar('添加成功！', { variant: 'success' });
+      enqueueSnackbar("添加成功！", { variant: "success" });
       formik.resetForm();
       return true;
-    } else {
-      enqueueSnackbar({ variant: 'error' }, response.payload[0].errorType);
-      return false;
     }
+    enqueueSnackbar({ variant: "error" }, response.payload[0].errorType);
+    return false;
   };
 
   const formik = useFormik({
     initialValues,
-    validationSchema: validationSchema,
+    validationSchema,
     onSubmit,
   });
 
@@ -79,20 +78,20 @@ const AddUwcssaDepartmentForm = ({ onClose, open }: Props): JSX.Element => {
     <Dialog
       onClose={onClose}
       open={open}
-      maxWidth={'sm'}
+      maxWidth="sm"
       sx={{
-        '& .MuiPaper-root': {
+        "& .MuiPaper-root": {
           borderRadius: 2,
         },
       }}
     >
       <Box paddingY={2} paddingX={4}>
-        <Box paddingY={2} display={'flex'} justifyContent={'space-between'}>
-          <Typography variant={'h5'} fontWeight={700}>
+        <Box paddingY={2} display="flex" justifyContent="space-between">
+          <Typography variant="h5" fontWeight={700}>
             Add a new Department
           </Typography>
           <Box
-            component={'svg'}
+            component="svg"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
@@ -100,7 +99,7 @@ const AddUwcssaDepartmentForm = ({ onClose, open }: Props): JSX.Element => {
             width={24}
             height={24}
             onClick={onClose}
-            sx={{ cursor: 'pointer' }}
+            sx={{ cursor: "pointer" }}
           >
             <path
               strokeLinecap="round"
@@ -114,13 +113,13 @@ const AddUwcssaDepartmentForm = ({ onClose, open }: Props): JSX.Element => {
           <form onSubmit={formik.handleSubmit}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
-                <Typography variant={'subtitle2'} sx={{ marginBottom: 1 }}>
+                <Typography variant="subtitle2" sx={{ marginBottom: 1 }}>
                   New Department Name
                 </Typography>
                 <TextField
                   label="部门名称 *"
                   variant="outlined"
-                  name={'id'}
+                  name="id"
                   fullWidth
                   value={formik.values.id}
                   onChange={formik.handleChange}
@@ -129,13 +128,13 @@ const AddUwcssaDepartmentForm = ({ onClose, open }: Props): JSX.Element => {
                 />
               </Grid>
               <Grid item xs={12}>
-                <Typography variant={'subtitle2'} sx={{ marginBottom: 1 }}>
+                <Typography variant="subtitle2" sx={{ marginBottom: 1 }}>
                   Department Email
                 </Typography>
                 <TextField
                   label="部门 Email *"
                   variant="outlined"
-                  name={'email'}
+                  name="email"
                   fullWidth
                   value={formik.values.email}
                   onChange={formik.handleChange}
@@ -144,13 +143,13 @@ const AddUwcssaDepartmentForm = ({ onClose, open }: Props): JSX.Element => {
                 />
               </Grid>
               <Grid item xs={12}>
-                <Typography variant={'subtitle2'} sx={{ marginBottom: 1 }}>
+                <Typography variant="subtitle2" sx={{ marginBottom: 1 }}>
                   Department introduction
                 </Typography>
                 <TextField
                   label="部门简介 *"
                   variant="outlined"
-                  name={'introduction'}
+                  name="introduction"
                   fullWidth
                   multiline
                   rows={5}
@@ -166,13 +165,13 @@ const AddUwcssaDepartmentForm = ({ onClose, open }: Props): JSX.Element => {
                 />
               </Grid>
               <Grid item container xs={12}>
-                <Button size={'large'} variant={'contained'} type={'submit'}>
+                <Button size="large" variant="contained" type="submit">
                   Submit
                 </Button>
                 <Button
-                  size={'large'}
-                  variant={'text'}
-                  sx={{ ml: '2rem' }}
+                  size="large"
+                  variant="text"
+                  sx={{ ml: "2rem" }}
                   onClick={() => onClose()}
                 >
                   Cancel
@@ -184,6 +183,6 @@ const AddUwcssaDepartmentForm = ({ onClose, open }: Props): JSX.Element => {
       </Box>
     </Dialog>
   );
-};
+}
 
 export default AddUwcssaDepartmentForm;

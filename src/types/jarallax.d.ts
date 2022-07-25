@@ -1,1 +1,1 @@
-declare module 'jarallax';
+declare module "jarallax";

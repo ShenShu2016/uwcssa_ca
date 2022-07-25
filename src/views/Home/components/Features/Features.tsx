@@ -1,16 +1,30 @@
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Grid from '@mui/material/Grid';
-import React from 'react';
-import Typography from '@mui/material/Typography';
-import { useNavigate } from 'react-router-dom';
+/*
+ * @Author: Shen Shu
+ * @Date: 2022-06-14 10:58:14
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-07-24 00:42:37
+ * @FilePath: /uwcssa_ca/src/views/Home/components/Features/Features.tsx
+ * @Description:
+ *
+ */
+
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  Grid,
+  Typography,
+} from "@mui/material";
+
+import React from "react";
+
+import { useNavigate } from "react-router-dom";
 
 const mock = [
   {
-    title: '新闻',
-    subtitle: '最即时的新闻，让你信息永不断线',
+    title: "新闻",
+    subtitle: "最即时的新闻，让你信息永不断线",
     icon: (
       <svg
         height={24}
@@ -28,13 +42,13 @@ const mock = [
         />
       </svg>
     ),
-    link: '/news',
+    link: "/news",
   },
   {
-    title: '活动',
+    title: "活动",
     subtitle:
       // eslint-disable-next-line quotes
-      '和朋友一起互动，不错过最新、最热门的活动',
+      "和朋友一起互动，不错过最新、最热门的活动",
     icon: (
       <svg
         height={24}
@@ -52,11 +66,11 @@ const mock = [
         />
       </svg>
     ),
-    link: '/history-events',
+    link: "/history-events",
   },
   {
-    title: '新生必读',
-    subtitle: '了解校园生活大小事，新生指南不容错过',
+    title: "新生必读",
+    subtitle: "了解校园生活大小事，新生指南不容错过",
     icon: (
       <svg
         height={24}
@@ -76,8 +90,8 @@ const mock = [
     ),
   },
   {
-    title: '加入我们',
-    subtitle: '海量的工作机会，随时随地找工作',
+    title: "加入我们",
+    subtitle: "海量的工作机会，随时随地找工作",
     icon: (
       <svg
         height={24}
@@ -98,15 +112,15 @@ const mock = [
   },
 ];
 
-const Features = (): JSX.Element => {
+function Features(): JSX.Element {
   const navigate = useNavigate();
   return (
     <Box>
       <Box marginBottom={4}>
         <Typography
-          variant={'h4'}
+          variant="h4"
           gutterBottom
-          align={'center'}
+          align="center"
           sx={{ fontWeight: 700 }}
         >
           了解最新动态？
@@ -119,7 +133,7 @@ const Features = (): JSX.Element => {
         >
           Fill out our standardized application on our platform.
         </Typography> */}
-        <Box marginTop={3} display={'flex'} justifyContent={'center'}>
+        <Box marginTop={3} display="flex" justifyContent="center">
           <Button
             variant="contained"
             color="primary"
@@ -149,15 +163,15 @@ const Features = (): JSX.Element => {
       <Box>
         <Grid container spacing={2}>
           {mock.map((item, i) => (
-            <Grid item xs={12} md={3} key={i}>
+            <Grid item xs={12} md={3} key={item.title}>
               <Box
-                data-aos={'fade-up'}
+                data-aos="fade-up"
                 data-aos-delay={i * 100}
                 data-aos-offset={100}
                 data-aos-duration={600}
                 height={1}
                 sx={{
-                  cursor: 'pointer',
+                  cursor: "pointer",
                 }}
                 onClick={() => {
                   if (item.link) {
@@ -167,24 +181,24 @@ const Features = (): JSX.Element => {
               >
                 <Box
                   component={Card}
-                  variant={'outlined'}
+                  variant="outlined"
                   height={1}
                   padding={3}
                   sx={{
-                    transition: 'all .2s ease-in-out',
-                    '&:hover': {
-                      transform: 'translateY(-4px)',
+                    transition: "all .2s ease-in-out",
+                    "&:hover": {
+                      transform: "translateY(-4px)",
                       boxShadow: 2,
                     },
                   }}
                 >
                   <CardContent>
                     <Box>
-                      <Box marginBottom={2} color={'secondary.main'}>
+                      <Box marginBottom={2} color="secondary.main">
                         {item.icon}
                       </Box>
                       <Typography
-                        variant={'h5'}
+                        variant="h5"
                         gutterBottom
                         sx={{ fontWeight: 700 }}
                       >
@@ -203,6 +217,6 @@ const Features = (): JSX.Element => {
       </Box>
     </Box>
   );
-};
+}
 
 export default Features;

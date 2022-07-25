@@ -8,28 +8,28 @@
  *
  */
 
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
-import React from 'react';
-import Typography from '@mui/material/Typography';
-import { useTheme } from '@mui/material/styles';
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import React from "react";
+import Typography from "@mui/material/Typography";
+import { useTheme } from "@mui/material/styles";
 
-const About = (): JSX.Element => {
+function About(): JSX.Element {
   const theme = useTheme();
   return (
     <Box>
       <Box marginBottom={4}>
         <Typography
-          align={'center'}
-          color={'text.secondary'}
-          sx={{ textTransform: 'uppercase' }}
-          variant={'subtitle2'}
+          align="center"
+          color="text.secondary"
+          sx={{ textTransform: "uppercase" }}
+          variant="subtitle2"
           fontWeight={600}
         >
           About
         </Typography>
-        <Typography fontWeight={700} variant={'h4'} align={'center'}>
+        <Typography fontWeight={700} variant="h4" align="center">
           About our company
         </Typography>
       </Box>
@@ -37,11 +37,11 @@ const About = (): JSX.Element => {
         <Grid
           item
           container
-          justifyContent={{ xs: 'flex-start', md: 'flex-end' }}
+          justifyContent={{ xs: "flex-start", md: "flex-end" }}
           xs={12}
           md={6}
         >
-          <Typography color={'text.secondary'}>
+          <Typography color="text.secondary">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
             ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -55,7 +55,7 @@ const About = (): JSX.Element => {
           </Typography>
         </Grid>
         <Grid item container xs={12} md={6}>
-          <Typography color={'text.secondary'}>
+          <Typography color="text.secondary">
             Sed ut perspiciatis unde omnis iste natus error sit voluptatem
             accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
             quae ab illo inventore veritatis et quasi architecto beatae vitae
@@ -79,9 +79,9 @@ const About = (): JSX.Element => {
           container
           xs={12}
           sx={{
-            '& .lazy-load-image-background.lazy-load-image-loaded': {
-              width: '100%',
-              height: '100%',
+            "& .lazy-load-image-background.lazy-load-image-loaded": {
+              width: "100%",
+              height: "100%",
             },
           }}
         >
@@ -91,19 +91,19 @@ const About = (): JSX.Element => {
             width={1}
             maxHeight={{ xs: 300, sm: 400, md: 520 }}
             borderRadius={2}
-            src={'https://assets.maccarianagency.com/backgrounds/img1.jpg'}
+            src="https://assets.maccarianagency.com/backgrounds/img1.jpg"
             alt="..."
             effect="blur"
             sx={{
-              objectFit: 'cover',
+              objectFit: "cover",
               filter:
-                theme.palette.mode === 'dark' ? 'brightness(0.6)' : 'none',
+                theme.palette.mode === "dark" ? "brightness(0.6)" : "none",
             }}
           />
         </Grid>
       </Grid>
     </Box>
   );
-};
+}
 
 export default About;

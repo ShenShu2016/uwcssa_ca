@@ -14,12 +14,12 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
-} from '@mui/material';
-import React, { useEffect, useState } from 'react';
+} from "@mui/material";
+import React, { useEffect, useState } from "react";
 
-import GoogleMaps from 'components/GoogleMap/GoogleMaps';
-import { setEventCreateAddress } from 'redux/address/addressSlice';
-import { useAppDispatch } from 'redux/hooks';
+import GoogleMaps from "components/GoogleMap/GoogleMaps";
+import { setEventCreateAddress } from "redux/address/addressSlice";
+import { useAppDispatch } from "redux/hooks";
 
 interface GoogleMapDialogProp {
   open: boolean;
@@ -44,7 +44,7 @@ const GoogleMapDialog: React.FC<GoogleMapDialogProp> = ({
       open={open}
       maxWidth={false}
       onClose={() => setOpen(false)}
-      scroll={'paper'}
+      scroll="paper"
     >
       <DialogTitle>选取地点</DialogTitle>
       <DialogContent dividers>

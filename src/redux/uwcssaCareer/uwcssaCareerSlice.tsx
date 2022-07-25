@@ -8,22 +8,22 @@
  *
  */
 
-import { CreateUwcssaCareerInput, UpdateUwcssaCareerInput } from 'API';
+import { CreateUwcssaCareerInput, UpdateUwcssaCareerInput } from "API";
 import {
   createAsyncThunk,
   createEntityAdapter,
   createSlice,
-} from '@reduxjs/toolkit';
+} from "@reduxjs/toolkit";
 import {
   createUwcssaCareer,
   deleteUwcssaCareer,
   updateUwcssaCareer,
-} from 'graphql/mutations';
-import { getUwcssaCareer, listUwcssaCareers } from 'graphql/queries';
+} from "graphql/mutations";
+import { getUwcssaCareer, listUwcssaCareers } from "graphql/queries";
 
-import API from '@aws-amplify/api';
-import { RootState } from 'redux/store';
-import { graphqlOperation } from '@aws-amplify/api-graphql';
+import API from "@aws-amplify/api";
+import { RootState } from "redux/store";
+import { graphqlOperation } from "@aws-amplify/api-graphql";
 
 export type UwcssaCareer = {
   id: string;
@@ -49,28 +49,28 @@ const uwcssaCareerAdapter = createEntityAdapter<UwcssaCareer>({
 });
 
 const initialState = uwcssaCareerAdapter.getInitialState({
-  fetchUwcssaCareerListStatus: 'idle',
+  fetchUwcssaCareerListStatus: "idle",
   fetchUwcssaCareerListError: null,
-  fetchUwcssaCareerStatus: 'idle',
+  fetchUwcssaCareerStatus: "idle",
   fetchUwcssaCareerError: null,
-  postUwcssaCareerStatus: 'idle',
+  postUwcssaCareerStatus: "idle",
   postUwcssaCareerError: null,
-  postUwcssaCareerImgStatus: 'idle',
+  postUwcssaCareerImgStatus: "idle",
   postUwcssaCareerImgError: null,
-  updateUwcssaCareerDetailStatus: 'idle',
+  updateUwcssaCareerDetailStatus: "idle",
   updateUwcssaCareerDetailError: null,
-  removeUwcssaCareerStatus: 'idle',
+  removeUwcssaCareerStatus: "idle",
   removeUwcssaCareerError: null,
 });
 
 export const fetchUwcssaCareerList = createAsyncThunk(
-  'uwcssaCareer/fetchUwcssaCareerList',
+  "uwcssaCareer/fetchUwcssaCareerList",
   async ({ isAuth }: { isAuth: boolean }, { rejectWithValue }) => {
     try {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const result: any = await API.graphql({
         query: listUwcssaCareers,
-        authMode: isAuth ? undefined : 'AWS_IAM',
+        authMode: isAuth ? undefined : "AWS_IAM",
       });
 
       return result.data.listUwcssaCareers.items;
@@ -82,7 +82,7 @@ export const fetchUwcssaCareerList = createAsyncThunk(
 );
 
 export const fetchUwcssaCareer = createAsyncThunk(
-  'uwcssaCareer/fetchUwcssaCareer',
+  "uwcssaCareer/fetchUwcssaCareer",
   async (
     {
       uwcssaCareerId,
@@ -98,10 +98,10 @@ export const fetchUwcssaCareer = createAsyncThunk(
       const result: any = await API.graphql({
         query: getUwcssaCareer,
         variables: { id: uwcssaCareerId },
-        authMode: isAuth ? undefined : 'AWS_IAM',
+        authMode: isAuth ? undefined : "AWS_IAM",
       });
       if (result.data.getUwcssaCareer === null) {
-        return { id: uwcssaCareerId, description: 'not-found' };
+        return { id: uwcssaCareerId, description: "not-found" };
       }
       return result.data.getUwcssaCareer;
     } catch (error) {
@@ -112,7 +112,7 @@ export const fetchUwcssaCareer = createAsyncThunk(
 );
 
 export const postUwcssaCareer = createAsyncThunk(
-  'uwcssaCareer/postUwcssaCareer',
+  "uwcssaCareer/postUwcssaCareer",
   async (
     {
       createUwcssaCareerInput,
@@ -123,7 +123,7 @@ export const postUwcssaCareer = createAsyncThunk(
   ) => {
     Object.keys(createUwcssaCareerInput).forEach((key) =>
       createUwcssaCareerInput[key] === null ||
-      createUwcssaCareerInput[key] === ''
+      createUwcssaCareerInput[key] === ""
         ? delete createUwcssaCareerInput[key]
         : {},
     );
@@ -143,7 +143,7 @@ export const postUwcssaCareer = createAsyncThunk(
 );
 
 export const updateUwcssaCareerDetail = createAsyncThunk(
-  'uwcssaCareer/updateUwcssaCareerDetail',
+  "uwcssaCareer/updateUwcssaCareerDetail",
   async (
     {
       updateUwcssaCareerInput,
@@ -154,7 +154,7 @@ export const updateUwcssaCareerDetail = createAsyncThunk(
   ) => {
     Object.keys(updateUwcssaCareerInput).forEach((key) =>
       updateUwcssaCareerInput[key] === null ||
-      updateUwcssaCareerInput[key] === ''
+      updateUwcssaCareerInput[key] === ""
         ? delete updateUwcssaCareerInput[key]
         : {},
     );
@@ -174,7 +174,7 @@ export const updateUwcssaCareerDetail = createAsyncThunk(
 );
 
 export const removeUwcssaCareer = createAsyncThunk(
-  'uwcssaCareer/removeUwcssaCareer',
+  "uwcssaCareer/removeUwcssaCareer",
   async ({ id }: { id: string }, { rejectWithValue }) => {
     try {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -193,71 +193,71 @@ export const removeUwcssaCareer = createAsyncThunk(
 );
 
 const uwcssaCareerSlice = createSlice({
-  name: 'uwcssaCareer',
+  name: "uwcssaCareer",
   initialState,
   reducers: {},
   extraReducers(builder) {
     builder
       // Fetch UwcssaCareerList
       .addCase(fetchUwcssaCareerList.pending, (state) => {
-        state.fetchUwcssaCareerListStatus = 'loading';
+        state.fetchUwcssaCareerListStatus = "loading";
       })
       .addCase(fetchUwcssaCareerList.fulfilled, (state, action) => {
-        state.fetchUwcssaCareerListStatus = 'succeed';
+        state.fetchUwcssaCareerListStatus = "succeed";
         uwcssaCareerAdapter.upsertMany(state, action.payload);
       })
 
       .addCase(fetchUwcssaCareerList.rejected, (state, action) => {
-        state.fetchUwcssaCareerListStatus = 'failed';
+        state.fetchUwcssaCareerListStatus = "failed";
         state.fetchUwcssaCareerListError = action.payload;
       })
       // Fetch UwcssaCareer
       .addCase(fetchUwcssaCareer.pending, (state) => {
-        state.fetchUwcssaCareerStatus = 'loading';
+        state.fetchUwcssaCareerStatus = "loading";
       })
       .addCase(fetchUwcssaCareer.fulfilled, (state, action) => {
-        state.fetchUwcssaCareerStatus = 'succeed';
+        state.fetchUwcssaCareerStatus = "succeed";
         uwcssaCareerAdapter.upsertOne(state, action.payload);
       })
       .addCase(fetchUwcssaCareer.rejected, (state, action) => {
-        state.fetchUwcssaCareerStatus = 'failed';
+        state.fetchUwcssaCareerStatus = "failed";
         state.fetchUwcssaCareerError = action.payload;
       })
       // Post UwcssaCareer
       .addCase(postUwcssaCareer.pending, (state) => {
-        state.postUwcssaCareerStatus = 'loading';
+        state.postUwcssaCareerStatus = "loading";
       })
       .addCase(postUwcssaCareer.fulfilled, (state, action) => {
-        state.postUwcssaCareerStatus = 'succeed';
+        state.postUwcssaCareerStatus = "succeed";
 
         uwcssaCareerAdapter.addOne(state, action.payload);
       })
       .addCase(postUwcssaCareer.rejected, (state, action) => {
-        state.postUwcssaCareerStatus = 'failed';
+        state.postUwcssaCareerStatus = "failed";
         state.postUwcssaCareerError = action.payload;
       })
       // Update UwcssaCareerDetail
       .addCase(updateUwcssaCareerDetail.pending, (state) => {
-        state.updateUwcssaCareerDetailStatus = 'loading';
+        state.updateUwcssaCareerDetailStatus = "loading";
       })
       .addCase(updateUwcssaCareerDetail.fulfilled, (state, action) => {
-        state.updateUwcssaCareerDetailStatus = 'succeed';
+        state.updateUwcssaCareerDetailStatus = "succeed";
         uwcssaCareerAdapter.upsertOne(state, action.payload);
       })
       .addCase(updateUwcssaCareerDetail.rejected, (state, action) => {
-        state.updateUwcssaCareerDetailStatus = 'failed';
+        state.updateUwcssaCareerDetailStatus = "failed";
         state.updateUwcssaCareerDetailError = action.payload;
       })
       // Remove UwcssaCareer
       .addCase(removeUwcssaCareer.pending, (state) => {
-        state.removeUwcssaCareerStatus = 'loading';
+        state.removeUwcssaCareerStatus = "loading";
       })
       .addCase(removeUwcssaCareer.fulfilled, (state, action) => {
-        state.removeUwcssaCareerStatus = 'succeed';
+        state.removeUwcssaCareerStatus = "succeed";
         uwcssaCareerAdapter.removeOne(state, action.payload);
       })
       .addCase(removeUwcssaCareer.rejected, (state, action) => {
-        state.removeUwcssaCareerStatus = 'failed';
+        state.removeUwcssaCareerStatus = "failed";
         state.removeUwcssaCareerError = action.payload;
       });
   },
