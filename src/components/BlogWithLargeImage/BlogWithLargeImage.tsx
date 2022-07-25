@@ -28,7 +28,7 @@ import moment from "moment";
 import { selectAllArticles } from "redux/article/articleSlice";
 import { useAppSelector } from "redux/hooks";
 
-const BlogWithLargeImage: React.FC = (): JSX.Element => {
+function BlogWithLargeImage() {
   const articles = useAppSelector(selectAllArticles); // redux 有这种用法
 
   return (
@@ -78,9 +78,9 @@ const BlogWithLargeImage: React.FC = (): JSX.Element => {
                   >
                     <Box>
                       {item?.tags
-                        ? item?.tags?.items?.map((tag, i) => (
+                        ? item?.tags?.items?.map((tag) => (
                             <Chip
-                              key={tag.tagID + i} // 为啥有两个一样的tag
+                              key={tag.tagID} // 为啥有两个一样的tag
                               label={tag.tagID}
                               component={Link} // 用react router
                               to="" // 用react router
@@ -179,6 +179,6 @@ const BlogWithLargeImage: React.FC = (): JSX.Element => {
       </Grid>
     </Box>
   );
-};
+}
 
 export default BlogWithLargeImage;
