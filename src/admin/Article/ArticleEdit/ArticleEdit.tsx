@@ -2,7 +2,7 @@
  * @Author: 李佳修
  * @Date: 2022-06-26 15:41:46
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-26 19:44:26
+ * @LastEditTime: 2022-07-25 22:28:55
  * @FilePath: /uwcssa_ca/src/admin/Article/ArticleEdit/ArticleEdit.tsx
  * @Description:
  *
@@ -23,7 +23,7 @@ import { getOwnerUserName } from "redux/auth/authSlice";
 import { useSnackbar } from "notistack";
 import ArticleCommon from "../ArticleCommon";
 
-const ArticleEdit: React.FC = () => {
+function ArticleEdit(): JSX.Element {
   const { enqueueSnackbar } = useSnackbar();
   const { id: editArticleId } = useParams();
   const navigate = useNavigate();
@@ -191,6 +191,6 @@ const ArticleEdit: React.FC = () => {
       onCommit={handleSubmitArticle}
     />
   );
-};
+}
 
 export default ArticleEdit;

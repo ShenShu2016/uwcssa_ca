@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-30 15:13:57
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-07-24 17:47:34
+ * @LastEditTime: 2022-07-25 22:31:49
  * @FilePath: /uwcssa_ca/src/admin/UwcssaMember/UwcssaMemberDashboard/components/AddUwcssaMember/AddUwcssaMemberForm/AddUwcssaMemberForm.tsx
  * @Description:
  *
@@ -79,7 +79,6 @@ const validationSchema = yup.object({
   owner: yup.string().trim().required("Owner is required"),
 });
 interface Props {
-  // eslint-disable-next-line @typescript-eslint/ban-types
   onClose: () => void;
   open: boolean;
 }
@@ -94,14 +93,14 @@ function AddUwcssaMemberForm({ onClose, open }: Props): JSX.Element {
   const uwcssaDepartmentList = useAppSelector(selectAllUwcssaDepartments);
 
   useEffect(() => {
-    if (isAuth !== null && fetchUwcssaDepartmentListStatus === "idle") {
+    if (fetchUwcssaDepartmentListStatus === "idle") {
       dispatch(
         fetchUwcssaDepartmentList({
           isAuth,
         }),
       );
     }
-  }, [isAuth, fetchUwcssaDepartmentListStatus]);
+  }, [isAuth, fetchUwcssaDepartmentListStatus, dispatch]);
 
   const { fetchUserProfileListStatus } = useAppSelector(
     (state) => state.userProfile,
@@ -109,14 +108,14 @@ function AddUwcssaMemberForm({ onClose, open }: Props): JSX.Element {
   const userProfileList = useAppSelector(selectAllUserProfiles);
 
   useEffect(() => {
-    if (isAuth !== null && fetchUserProfileListStatus === "idle") {
+    if (fetchUserProfileListStatus === "idle") {
       dispatch(
         fetchUserProfileList({
           isAuth,
         }),
       );
     }
-  }, [isAuth, fetchUserProfileListStatus]);
+  }, [isAuth, fetchUserProfileListStatus, dispatch]);
 
   const initialValues = {
     title: "",
@@ -142,6 +141,7 @@ function AddUwcssaMemberForm({ onClose, open }: Props): JSX.Element {
     );
     if (response.meta.requestStatus === "fulfilled") {
       onClose();
+      // eslint-disable-next-line @typescript-eslint/no-use-before-define
       formik.resetForm();
       return true;
     }

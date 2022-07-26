@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-26 16:50:46
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-18 22:52:32
+ * @LastEditTime: 2022-07-25 22:22:03
  * @FilePath: /uwcssa_ca/src/components/Comment/CommentDialog/components/FeedbackForm/FeedbackForm.tsx
  * @Description:
  *
@@ -31,7 +31,6 @@ const validationSchema = yup.object({
   content: yup.string().trim().required("content is required."),
 });
 interface Props {
-  // eslint-disable-next-line @typescript-eslint/ban-types
   onClose: () => void;
   open: boolean;
   commentCount?: number;
@@ -67,6 +66,7 @@ function FeedbackForm({
     const response = await dispatch(postComment({ createCommentInput }));
     if (response.meta.requestStatus === "fulfilled") {
       onClose();
+      // eslint-disable-next-line @typescript-eslint/no-use-before-define
       formik.resetForm();
       setCommentCount(commentCount + 1);
       enqueueSnackbar("评论成功", { variant: "success" });

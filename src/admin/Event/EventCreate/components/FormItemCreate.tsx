@@ -1,9 +1,8 @@
-/* eslint-disable indent */
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-use-before-define */
 /*
  * @Author: 李佳修
  * @Date: 2022-06-03 09:32:30
- * @LastEditTime: 2022-06-25 23:49:26
+ * @LastEditTime: 2022-07-25 22:30:23
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/admin/Event/EventCreate/components/FormItemCreate.tsx
  */
@@ -59,14 +58,13 @@ interface Option {
   label: string;
   key: string;
 }
-
-const FormItemCreate: React.FC<FormItemCreateProp> = ({
+function FormItemCreate({
   type,
   editItem = null,
   open,
   setOpen,
-  // completeCreate,
-}) => {
+}: // completeCreate,
+FormItemCreateProp): JSX.Element {
   const [options, setOptions] = useState<Array<Option>>([]);
   const [newOption, setNewOption] = useState<string>("");
   const ownerUserName = useAppSelector(getOwnerUserName);
@@ -614,6 +612,6 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({
       </form>
     </Dialog>
   );
-};
+}
 
 export default FormItemCreate;

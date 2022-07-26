@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-20 21:02:00
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-18 18:08:10
+ * @LastEditTime: 2022-07-25 22:11:29
  * @FilePath: /uwcssa_ca/src/redux/article/articleSlice.tsx
  * @Description:
  *
@@ -147,27 +147,26 @@ export const postArticle = createAsyncThunk(
     try {
       const countId = uuid();
 
-      const [createArticleResult, createCountResult]: [any, any] =
-        await Promise.all([
-          API.graphql(
-            graphqlOperation(createArticle, {
-              input: { articleCountId: countId, ...createArticleInput },
-            }),
-          ),
-          API.graphql(
-            graphqlOperation(createCount, {
-              input: {
-                id: countId,
-                count: undefined,
-                commentCount: 0,
-                like: 0,
-                targetTable: "Article",
-                countArticleId: createArticleInput.id,
-                owner: createArticleInput.owner,
-              },
-            }),
-          ),
-        ]);
+      const [createArticleResult]: [any, any] = await Promise.all([
+        API.graphql(
+          graphqlOperation(createArticle, {
+            input: { articleCountId: countId, ...createArticleInput },
+          }),
+        ),
+        API.graphql(
+          graphqlOperation(createCount, {
+            input: {
+              id: countId,
+              count: undefined,
+              commentCount: 0,
+              like: 0,
+              targetTable: "Article",
+              countArticleId: createArticleInput.id,
+              owner: createArticleInput.owner,
+            },
+          }),
+        ),
+      ]);
       return createArticleResult.data.createArticle;
     } catch (error) {
       console.log(error);

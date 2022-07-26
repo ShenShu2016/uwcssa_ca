@@ -2,7 +2,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-20 09:30:58
- * @LastEditTime: 2022-06-26 18:29:02
+ * @LastEditTime: 2022-07-25 22:27:55
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/admin/Article/ArticlePublish/ArticlePublish.tsx
  */
@@ -22,8 +22,7 @@ import ArticleCommon from "../ArticleCommon";
 export interface Tag {
   tagID: string;
 }
-
-const ArticlePublish: React.FC = () => {
+function ArticlePublish(): JSX.Element {
   const [fullScreenLoading, setFullScreenLoading] = useState({
     loading: false,
     message: "",
@@ -154,6 +153,6 @@ const ArticlePublish: React.FC = () => {
       onCommit={handleSubmitArticle}
     />
   );
-};
+}
 
 export default ArticlePublish;

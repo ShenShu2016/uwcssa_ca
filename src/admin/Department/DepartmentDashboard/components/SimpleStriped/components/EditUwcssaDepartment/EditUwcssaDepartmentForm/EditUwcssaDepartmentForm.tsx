@@ -33,7 +33,6 @@ const validationSchema = yup.object({
   leader: yup.string().trim(),
 });
 interface Props {
-  // eslint-disable-next-line @typescript-eslint/ban-types
   onClose: () => void;
   open: boolean;
   item: {
@@ -71,6 +70,7 @@ function EditUwcssaDepartmentForm({ onClose, open, item }: Props): JSX.Element {
     if (response.meta.requestStatus === "fulfilled") {
       onClose();
       enqueueSnackbar("修改成功！", { variant: "success" });
+      // eslint-disable-next-line @typescript-eslint/no-use-before-define
       formik.resetForm();
       return true;
     }

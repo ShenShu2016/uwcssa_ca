@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-29 22:42:19
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-11 01:37:26
+ * @LastEditTime: 2022-07-25 22:04:55
  * @FilePath: /uwcssa_ca/src/redux/uwcssaMember/uwcssaMemberSlice.tsx
  * @Description:
  * import uwcssaMemberReducer from './uwcssaMember/uwcssaMemberSlice';
@@ -138,7 +138,6 @@ export const postUwcssaMember = createAsyncThunk(
         : {},
     );
     try {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const result: any = await API.graphql(
         graphqlOperation(createUwcssaMember, {
           input: createUwcssaMemberInput,

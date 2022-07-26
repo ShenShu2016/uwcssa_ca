@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-06-14 10:58:14
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-07-24 17:35:22
+ * @LastEditTime: 2022-07-25 22:06:24
  * @FilePath: /uwcssa_ca/src/views/About/components/Team/Team.tsx
  * @Description:
  *
@@ -53,7 +53,7 @@ function Team(): JSX.Element {
       }
     };
     getUwcssaMembers();
-  }, [fetchUwcssaMemberListStatus]);
+  }, [dispatch, fetchUwcssaMemberListStatus, isAuth]);
 
   useEffect(() => {
     const getUwcssaDepartments = async () => {
@@ -62,7 +62,7 @@ function Team(): JSX.Element {
       }
     };
     getUwcssaDepartments();
-  }, [fetchUwcssaDepartmentListStatus]);
+  }, [dispatch, fetchUwcssaDepartmentListStatus, isAuth]);
 
   return (
     <Box>

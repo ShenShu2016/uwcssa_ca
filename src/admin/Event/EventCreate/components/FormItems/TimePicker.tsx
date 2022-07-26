@@ -1,9 +1,7 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 /*
  * @Author: 李佳修
  * @Date: 2022-06-03 17:10:14
- * @LastEditTime: 2022-07-21 23:21:38
+ * @LastEditTime: 2022-07-25 22:24:24
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/admin/Event/EventCreate/components/FormItems/TimePicker.tsx
  */
@@ -30,7 +28,7 @@ interface TimePickerProp {
   item: TimePickerInfo;
 }
 
-const TimePickerItem: React.FC<TimePickerProp> = ({ item }) => {
+function TimePickerItem({ item }: TimePickerProp): JSX.Element {
   const [value, setValue] = useState<Date | null>(null);
   return (
     <>
@@ -56,6 +54,6 @@ const TimePickerItem: React.FC<TimePickerProp> = ({ item }) => {
       </LocalizationProvider>
     </>
   );
-};
+}
 
 export default TimePickerItem;

@@ -1,8 +1,7 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 /*
  * @Author: 李佳修
  * @Date: 2022-06-14 15:03:43
- * @LastEditTime: 2022-07-21 23:25:16
+ * @LastEditTime: 2022-07-25 22:23:11
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/admin/Event/EventCreate/components/GoogleMapDialog.tsx
  */
@@ -15,23 +14,20 @@ import {
   DialogContent,
   DialogTitle,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import GoogleMaps from "components/GoogleMap/GoogleMaps";
-import { setEventCreateAddress } from "redux/address/addressSlice";
-import { useAppDispatch } from "redux/hooks";
 
 interface GoogleMapDialogProp {
   open: boolean;
   onLocationSelect: (location: any) => void;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
-
-const GoogleMapDialog: React.FC<GoogleMapDialogProp> = ({
+function GoogleMapDialog({
   open,
   setOpen,
   onLocationSelect,
-}) => {
+}: GoogleMapDialogProp): JSX.Element {
   const [location, setLocation] = useState(null);
 
   const handleLocationSelect = () => {
@@ -57,6 +53,6 @@ const GoogleMapDialog: React.FC<GoogleMapDialogProp> = ({
       </DialogActions>
     </Dialog>
   );
-};
+}
 
 export default GoogleMapDialog;

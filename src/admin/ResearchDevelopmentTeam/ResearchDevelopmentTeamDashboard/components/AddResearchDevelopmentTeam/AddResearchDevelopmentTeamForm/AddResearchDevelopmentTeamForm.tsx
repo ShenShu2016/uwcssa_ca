@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-30 15:13:57
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-07-24 17:48:15
+ * @LastEditTime: 2022-07-25 22:22:52
  * @FilePath: /uwcssa_ca/src/admin/ResearchDevelopmentTeam/ResearchDevelopmentTeamDashboard/components/AddResearchDevelopmentTeam/AddResearchDevelopmentTeamForm/AddResearchDevelopmentTeamForm.tsx
  * @Description:
  *
@@ -86,14 +86,14 @@ function AddResearchDevelopmentTeamForm({ onClose, open }: Props): JSX.Element {
   const userProfileList = useAppSelector(selectAllUserProfiles);
 
   useEffect(() => {
-    if (isAuth !== null && fetchUserProfileListStatus === "idle") {
+    if (fetchUserProfileListStatus === "idle") {
       dispatch(
         fetchUserProfileList({
           isAuth,
         }),
       );
     }
-  }, [isAuth, fetchUserProfileListStatus]);
+  }, [isAuth, fetchUserProfileListStatus, dispatch]);
 
   const initialValues = {
     name: "",
@@ -119,6 +119,7 @@ function AddResearchDevelopmentTeamForm({ onClose, open }: Props): JSX.Element {
     );
     if (response.meta.requestStatus === "fulfilled") {
       onClose();
+      // eslint-disable-next-line @typescript-eslint/no-use-before-define
       formik.resetForm();
       return true;
     }

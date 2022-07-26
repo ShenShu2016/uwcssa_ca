@@ -111,6 +111,7 @@ function DynamicForm({
 
     if (response.meta.requestStatus === "fulfilled") {
       setOpen(false);
+      // eslint-disable-next-line @typescript-eslint/no-use-before-define
       formik.resetForm();
       enqueueSnackbar("报名成功", { variant: "success" });
       navigate(`/event/eventSignUpSuccessfully/${eventId}`, { replace: true });

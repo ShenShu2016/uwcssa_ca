@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-20 21:02:00
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-11 01:20:14
+ * @LastEditTime: 2022-07-25 22:10:19
  * @FilePath: /uwcssa_ca/src/redux/comment/commentSlice.tsx
  * @Description:
  *
@@ -131,32 +131,31 @@ export const postComment = createAsyncThunk(
     try {
       const countId = uuid();
       const commentId = uuid();
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const [createCommentResult, createCountResult]: [any, any] =
-        await Promise.all([
-          API.graphql(
-            graphqlOperation(createComment, {
-              input: {
-                id: commentId,
-                commentCountId: countId,
-                ...createCommentInput,
-              },
-            }),
-          ),
-          API.graphql(
-            graphqlOperation(createCount, {
-              input: {
-                id: countId,
-                count: undefined,
-                commentCount: undefined,
-                like: 0,
-                targetTable: "Comment",
-                countCommentId: commentId,
-                owner: createCommentInput.owner,
-              },
-            }),
-          ),
-        ]);
+
+      const [createCommentResult]: [any, any] = await Promise.all([
+        API.graphql(
+          graphqlOperation(createComment, {
+            input: {
+              id: commentId,
+              commentCountId: countId,
+              ...createCommentInput,
+            },
+          }),
+        ),
+        API.graphql(
+          graphqlOperation(createCount, {
+            input: {
+              id: countId,
+              count: undefined,
+              commentCount: undefined,
+              like: 0,
+              targetTable: "Comment",
+              countCommentId: commentId,
+              owner: createCommentInput.owner,
+            },
+          }),
+        ),
+      ]);
 
       return createCommentResult.data.createComment;
     } catch (error) {

@@ -2,7 +2,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-03 17:02:56
- * @LastEditTime: 2022-07-21 23:21:26
+ * @LastEditTime: 2022-07-25 22:30:52
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/admin/Event/EventCreate/components/FormItems/TextFieldShort.tsx
  */
@@ -25,7 +25,7 @@ interface TextFieldShortProp {
   item: TextFieldShortInfo;
 }
 
-const TextFieldShort: React.FC<TextFieldShortProp> = ({ item }) => {
+function TextFieldShort({ item }: TextFieldShortProp): JSX.Element {
   const [value, setValue] = useState<string>("");
   return (
     <>
@@ -46,6 +46,6 @@ const TextFieldShort: React.FC<TextFieldShortProp> = ({ item }) => {
       />
     </>
   );
-};
+}
 
 export default TextFieldShort;

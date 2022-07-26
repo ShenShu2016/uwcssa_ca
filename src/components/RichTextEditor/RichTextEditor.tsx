@@ -1,12 +1,12 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-31 13:20:05
- * @LastEditTime: 2022-05-31 13:39:42
- * @LastEditors: 李佳修
+ * @LastEditTime: 2022-07-25 22:33:47
+ * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/components/RichTextEditor/RichTextEditor.tsx
  */
 import React from "react";
-import Box from "@mui/material/Box";
+import { Box } from "@mui/material";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import CkeditorS3UploadAdapter from "components/CkeditorS3UploadAdapter";
 import Editor from "ckeditor5-custom-build/build/ckeditor";
@@ -20,11 +20,11 @@ interface RichTextEditorProp {
   height?: string;
 }
 
-const RichTextEditor: React.FC<RichTextEditorProp> = ({
+function RichTextEditor({
   content,
   setContent,
   height = "auto",
-}) => {
+}: RichTextEditorProp) {
   const theme = useTheme();
   const dispatch = useAppDispatch();
   const authUser = useAppSelector((state) => state.auth.user);
@@ -78,6 +78,6 @@ const RichTextEditor: React.FC<RichTextEditorProp> = ({
       />
     </Box>
   );
-};
+}
 
 export default RichTextEditor;

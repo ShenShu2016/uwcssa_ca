@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-21 00:37:27
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-11 01:21:04
+ * @LastEditTime: 2022-07-25 22:09:03
  * @FilePath: /uwcssa_ca/src/redux/contactUs/ContactUsSlice.tsx
  * @Description:
  *
@@ -39,17 +39,14 @@ export const postContactUs = createAsyncThunk(
     { rejectWithValue },
   ) => {
     try {
-      await API.graphql(
-        {
-          query: createContactUs,
-          variables: {
-            input: createContactUsInput,
-          },
-          authMode: createContactUsInput.owner ? undefined : "AWS_IAM",
+      await API.graphql({
+        query: createContactUs,
+        variables: {
+          input: createContactUsInput,
         },
-
-        // graphqlOperation(createContactUs, { input: createContactUsInput }),
-      );
+        authMode: createContactUsInput.owner ? undefined : "AWS_IAM",
+      });
+      return null;
     } catch (error) {
       console.log(error);
       return rejectWithValue(error.errors);

@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-18 13:56:36
- * @LastEditTime: 2022-07-24 15:26:09
+ * @LastEditTime: 2022-07-25 22:34:45
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/views/Dashboard/Dashboard.tsx
  */
@@ -62,7 +62,7 @@ function Dashboard(): React.ReactElement {
     ) {
       setLoading(false);
     }
-  }, [fetchArticleListStatus]);
+  }, [dispatch, fetchArticleListStatus, fetchEventListStatus, isAuth]);
 
   useEffect(() => {
     if (fetchEventListStatus === "idle") {
@@ -74,7 +74,13 @@ function Dashboard(): React.ReactElement {
     ) {
       setLoading(false);
     }
-  }, [fetchEventListStatus]);
+  }, [
+    dispatch,
+    fetchArticleListStatus,
+    fetchEventListStatus,
+    isAuth,
+    ownerUsername,
+  ]);
 
   return (
     <>

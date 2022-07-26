@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-01 09:18:34
- * @LastEditTime: 2022-06-11 18:25:33
+ * @LastEditTime: 2022-07-25 22:26:59
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/admin/Event/EventCreate/components/EventPoster.tsx
  */
@@ -24,7 +24,7 @@ const Input = styled("input")({
   display: "none",
 });
 
-const EventPoster: React.FC = () => {
+function EventPoster() {
   const swiper = useSwiper();
   const { enqueueSnackbar } = useSnackbar();
   const dispatch = useAppDispatch();
@@ -193,6 +193,6 @@ const EventPoster: React.FC = () => {
       </Box>
     </Box>
   );
-};
+}
 
 export default EventPoster;

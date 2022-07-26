@@ -1,8 +1,7 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 /*
  * @Author: 李佳修
  * @Date: 2022-06-03 17:02:56
- * @LastEditTime: 2022-07-21 23:21:20
+ * @LastEditTime: 2022-07-25 21:54:52
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/admin/Event/EventCreate/components/FormItems/TextFieldLong.tsx
  */
@@ -24,8 +23,7 @@ interface TextFieldLongInfo {
 interface TextFieldLongProp {
   item: TextFieldLongInfo;
 }
-
-const TextFieldLong: React.FC<TextFieldLongProp> = ({ item }) => {
+function TextFieldLong({ item }: TextFieldLongProp) {
   const [value, setValue] = useState<string>("");
 
   return (
@@ -49,6 +47,6 @@ const TextFieldLong: React.FC<TextFieldLongProp> = ({ item }) => {
       />
     </>
   );
-};
+}
 
 export default TextFieldLong;

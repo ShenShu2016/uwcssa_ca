@@ -51,7 +51,7 @@ function ArticleManagement() {
       }
     };
     getArticles();
-  }, [isAuth, fetchArticleListStatus]);
+  }, [isAuth, fetchArticleListStatus, dispatch]);
 
   return (
     <Container>

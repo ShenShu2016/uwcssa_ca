@@ -1,21 +1,18 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-18 09:12:03
- * @LastEditTime: 2022-06-21 21:59:44
- * @LastEditors: Shikai Jin
+ * @LastEditTime: 2022-07-25 22:31:58
+ * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/components/TopNav.tsx
  */
 
-import { Button, IconButton } from "@mui/material";
+import { IconButton, Box } from "@mui/material";
 
-import Box from "@mui/material/Box";
 import ChatIcon from "@mui/icons-material/Chat";
 import GitHubButton from "react-github-btn";
 import GitHubIcon from "@mui/icons-material/GitHub";
-import Link from "@mui/material/Link";
 import React from "react";
 import ThemeModeToggler from "components/ThemeModeToggler";
-import Typography from "@mui/material/Typography";
 import { blue } from "@mui/material/colors";
 
 interface Props {
