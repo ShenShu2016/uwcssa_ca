@@ -2,9 +2,9 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-01 09:18:34
- * @LastEditTime: 2022-07-21 23:22:17
- * @LastEditors: Shen Shu
- * @FilePath: /uwcssa_ca/src/admin/Event/EventCreate/components/EventConfig.tsx
+ * @LastEditTime: 2022-07-26 11:59:22
+ * @LastEditors: Leo
+ * @FilePath: \uwcssa_ca\src\admin\Event\EventCreate\components\EventConfig.tsx
  */
 
 import { Box, Button, Tooltip, Typography } from "@mui/material";
@@ -42,7 +42,7 @@ import TextFieldLong from "./FormItems/TextFieldLong";
 import TextFieldShort from "./FormItems/TextFieldShort";
 import TimePicker from "./FormItems/TimePicker";
 
-const EventConfig: React.FC = () => {
+function EventConfig(): JSX.Element {
   const swiper = useSwiper();
   const [detailDialogOpen, setDetailDialogOpen] = useState<boolean>(false);
   const [detailedItem, setDetailedItem] = useState<null | FormItem>(null);
@@ -295,6 +295,6 @@ const EventConfig: React.FC = () => {
       />
     </Box>
   );
-};
+}
 
 export default EventConfig;
