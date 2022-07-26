@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-28 16:58:31
- * @LastEditTime: 2022-07-24 14:56:42
+ * @LastEditTime: 2022-07-26 15:53:21
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/admin/AdminRoutes.tsx
  */
@@ -15,6 +15,7 @@ import ArticlePublish from "./Article/ArticlePublish/ArticlePublish";
 import DepartmentDashboard from "./Department/DepartmentDashboard/DepartmentDashboard";
 import EventCreate from "./Event/EventCreate/EventCreate";
 import EventManagement from "./Event/EventManagement/EventManagement";
+import EventParticipant from "./Event/EventParticipant/EventParticipant";
 import FormTest from "./Event/Form/FormTest";
 import ResearchDevelopmentTeamDashboard from "./ResearchDevelopmentTeam/ResearchDevelopmentTeamDashboard/ResearchDevelopmentTeamDashboard";
 import UserProfileDashboard from "./UserProfile/UserProfileDashboard";
@@ -68,6 +69,12 @@ function AdminRoutes(): Array<{
     {
       path: "/admin/event",
       renderer: (): JSX.Element => <EventManagement />,
+      isAllowed: isAdmin,
+      redirectPath: "/404",
+    },
+    {
+      path: "/admin/event/eventParticipant/:eventId/:formFormItemsId",
+      renderer: (): JSX.Element => <EventParticipant />,
       isAllowed: isAdmin,
       redirectPath: "/404",
     },

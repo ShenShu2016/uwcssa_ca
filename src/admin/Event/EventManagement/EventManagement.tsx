@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-07-21 23:02:26
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-07-21 23:07:38
+ * @LastEditTime: 2022-07-26 15:53:55
  * @FilePath: /uwcssa_ca/src/admin/Event/EventManagement/EventManagement.tsx
  * @Description:
  *
@@ -42,13 +42,10 @@ function EventManagement() {
   });
 
   useEffect(() => {
-    const getEvents = async () => {
-      if (isAuth !== null && fetchEventListStatus === "idle") {
-        await dispatch(fetchEventList({ isAuth, ownerUsername }));
-      }
-    };
-    getEvents();
-  }, [isAuth, fetchEventListStatus]);
+    if (fetchEventListStatus === "idle") {
+      dispatch(fetchEventList({ isAuth, ownerUsername }));
+    }
+  }, [isAuth, fetchEventListStatus, dispatch, ownerUsername]);
 
   return (
     <Container>
@@ -98,6 +95,12 @@ function EventManagement() {
                   </Button>
                   <Button component={Link} to={`/event/${item.id}`}>
                     查看详情
+                  </Button>
+                  <Button
+                    component={Link}
+                    to={`/admin/event/EventParticipant/${item.id}/${item.form.id}`}
+                  >
+                    报名情况
                   </Button>
                 </CardActions>
               </CardContent>

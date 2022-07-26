@@ -1,8 +1,8 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-06-02 17:10:21
- * @LastEditors: 李佳修
- * @LastEditTime: 2022-06-16 15:19:03
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-07-26 16:12:16
  * @FilePath: /uwcssa_ca/src/redux/form/formSlice.tsx
  * @Description:
  *
@@ -226,14 +226,16 @@ export const updateFormDetail = createAsyncThunk(
 
 export const fetchFormItemList = createAsyncThunk(
   "form/formItem/fetchFormItemList",
-  async ({ isAuth }: { isAuth: boolean }, { rejectWithValue }) => {
+  async (
+    { isAuth, filter }: { isAuth: boolean; filter: any },
+    { rejectWithValue },
+  ) => {
     try {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const result: any = await API.graphql({
         query: listFormItems,
         // 改成动态的之后 不用再限制条目了
         variables: {
-          filter: { isExample: { eq: true } },
+          filter,
         },
         authMode: isAuth ? undefined : "AWS_IAM",
       });
@@ -392,6 +394,9 @@ const formSlice = createSlice({
       current.forEach((item, index) => (item.order = index + 1));
       state.createData.selectedQuestions = current;
     },
+    removeAllFormItems(state) {
+      formItemAdapter.removeAll(state.formItem);
+    },
   },
   extraReducers(builder) {
     builder
@@ -523,6 +528,7 @@ export const {
   removeQuestion,
   reorderQuestion,
   setPosterImage,
+  removeAllFormItems,
 } = formSlice.actions;
 
 export const {

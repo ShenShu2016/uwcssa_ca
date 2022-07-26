@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-29 22:41:37
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-19 23:43:13
+ * @LastEditTime: 2022-07-26 14:24:18
  * @FilePath: /uwcssa_ca/src/redux/eventParticipant/eventParticipantSlice.tsx
  * @Description:
  * import eventParticipantReducer from './eventParticipant/eventParticipantSlice';
@@ -24,12 +24,13 @@ import {
   deleteEventParticipant,
   updateEventParticipant,
 } from "graphql/mutations";
-import { getEventParticipant, listEventParticipants } from "graphql/queries";
+import { getEventParticipant } from "graphql/queries";
 
 import API from "@aws-amplify/api";
 import { FormItem } from "redux/form/formSlice";
 import { RootState } from "redux/store";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
+import { listEventParticipants } from "./custom_q_m_s";
 
 export type EventParticipant = {
   id: string;
@@ -119,12 +120,14 @@ const initialState = eventParticipantAdapter.getInitialState({
 
 export const fetchEventParticipantList = createAsyncThunk(
   "eventParticipant/fetchEventParticipantList",
-  async ({ isAuth }: { isAuth: boolean }, { rejectWithValue }) => {
+  async ({ eventId }: { eventId: string }, { rejectWithValue }) => {
     try {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const result: any = await API.graphql({
         query: listEventParticipants,
-        authMode: isAuth ? undefined : "AWS_IAM",
+        variables: {
+          filter: { eventEventParticipantsId: { eq: eventId } },
+        },
       });
 
       return result.data.listEventParticipants.items;
@@ -249,7 +252,11 @@ export const removeEventParticipant = createAsyncThunk(
 const eventParticipantSlice = createSlice({
   name: "eventParticipant",
   initialState,
-  reducers: {},
+  reducers: {
+    removeAllEventParticipants(state) {
+      eventParticipantAdapter.removeAll(state);
+    },
+  },
   extraReducers(builder) {
     builder
       // Fetch EventParticipantList
@@ -324,5 +331,5 @@ export const {
 } = eventParticipantAdapter.getSelectors(
   (state: RootState) => state.eventParticipant,
 );
-
+export const { removeAllEventParticipants } = eventParticipantSlice.actions;
 export default eventParticipantSlice.reducer;

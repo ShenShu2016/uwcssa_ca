@@ -1,8 +1,8 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-06-02 18:10:36
- * @LastEditors: 李佳修
- * @LastEditTime: 2022-06-08 16:45:07
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-07-26 15:42:24
  * @FilePath: /uwcssa_ca/src/admin/Event/Form/FormTest.tsx
  * @Description:
  *
@@ -30,14 +30,15 @@ function FormTest() {
   );
 
   useEffect(() => {
-    if (isAuth !== null && fetchFormItemListStatus === "idle") {
+    if (fetchFormItemListStatus === "idle") {
       dispatch(
         fetchFormItemList({
           isAuth,
+          filter: { isExample: { eq: true } },
         }),
       );
     }
-  }, [isAuth, fetchFormItemListStatus]);
+  }, [isAuth, fetchFormItemListStatus, dispatch]);
 
   return (
     <Box sx={{ p: "1rem" }}>

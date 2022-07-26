@@ -2,7 +2,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-03 16:11:08
- * @LastEditTime: 2022-07-21 23:24:38
+ * @LastEditTime: 2022-07-26 16:15:37
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/admin/Event/EventCreate/components/FormItemPool.tsx
  */
@@ -35,8 +35,7 @@ import TimePicker from "./FormItems/TimePicker";
 // interface FormItemPoolProp {
 //     questions: []
 // }
-
-const FormItemPool: React.FC = () => {
+function FormItemPool() {
   const formItemList = useAppSelector(selectAllFormItems);
   // const selectedList = useAppSelector(state => state.form.createData.selectedQuestions);
   // const [detailDialogOpen, setDetailDialogOpen] = useState<boolean>(false);
@@ -48,7 +47,9 @@ const FormItemPool: React.FC = () => {
   // console.log(formItemList);
 
   useEffect(() => {
-    dispatch(fetchFormItemList({ isAuth: true }));
+    dispatch(
+      fetchFormItemList({ isAuth: true, filter: { isExample: { eq: true } } }),
+    );
   }, []);
 
   const handleAddQuestion = (data) => {
@@ -139,6 +140,6 @@ const FormItemPool: React.FC = () => {
       <FormItemDetail open={detailDialogOpen} setOpen={setDetailDialogOpen} item={detailedItem}/> */}
     </>
   );
-};
+}
 
 export default FormItemPool;

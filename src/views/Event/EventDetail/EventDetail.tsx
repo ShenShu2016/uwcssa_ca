@@ -1,10 +1,10 @@
 /* eslint-disable react/require-default-props */
-/* eslint-disable react/function-component-definition */
+
 /*
  * @Author: Shen Shu
  * @Date: 2022-06-18 17:26:14
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-07-24 16:26:22
+ * @LastEditTime: 2022-07-26 13:31:52
  * @FilePath: /uwcssa_ca/src/views/Event/EventDetail/EventDetail.tsx
  * @Description:
  *
@@ -58,12 +58,11 @@ const containerStyle = {
   width: "100%",
   height: "500px",
 };
-
-const EventDetail: React.FC<EventDetailProp> = ({
+function EventDetail({
   fromPreview = false,
   previewEvent,
   prevenJoinClick,
-}) => {
+}: EventDetailProp) {
   const theme = useTheme();
   const dispatch = useAppDispatch();
   const [joinDialogOpen, setJoinDialogOpen] = useState<boolean>(false);
@@ -232,6 +231,6 @@ const EventDetail: React.FC<EventDetailProp> = ({
       </Box>
     </>
   );
-};
+}
 
 export default EventDetail;

@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-31 23:01:18
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-07-24 15:02:03
+ * @LastEditTime: 2022-07-26 14:11:00
  * @FilePath: /uwcssa_ca/src/admin/UserProfile/UserProfileDashboard.tsx
  * @Description:
  *
@@ -30,7 +30,7 @@ function UserProfileDashboard() {
 
   useEffect(() => {
     const getUserProfileList = async () => {
-      if (isAuth !== null && fetchUserProfileListStatus === "idle") {
+      if (fetchUserProfileListStatus === "idle") {
         await dispatch(
           fetchUserProfileList({
             isAuth,
