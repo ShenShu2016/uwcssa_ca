@@ -20,75 +20,75 @@ const pages = [
   //   ],
   // },
   {
-    groupTitle: '用户',
-    id: 'UserProfile',
+    groupTitle: "用户",
+    id: "UserProfile",
     pages: [
       {
-        title: '用户管理',
-        href: '/admin/users',
+        title: "用户管理",
+        href: "/admin/users",
       },
     ],
   },
   {
-    groupTitle: '新闻 & 文章管理',
-    id: 'Article',
+    groupTitle: "新闻 & 文章管理",
+    id: "Article",
     pages: [
       {
-        title: '发布文章',
-        href: '/admin/article-publish',
+        title: "发布文章",
+        href: "/admin/article-publish",
       },
       {
-        title: '编辑文章',
-        href: '/admin/article-edit',
+        title: "编辑文章",
+        href: "/admin/article-edit",
       },
     ],
   },
   {
-    groupTitle: '活动管理',
-    id: 'Activity',
+    groupTitle: "活动管理",
+    id: "Activity",
     pages: [
       {
-        title: '活动详情',
-        href: '/admin/event',
+        title: "活动详情",
+        href: "/admin/event",
       },
       {
-        title: '发起活动',
-        href: '/admin/activity-create',
+        title: "发起活动",
+        href: "/admin/activity-create",
       },
 
       {
-        title: 'Form Test',
-        href: '/admin/activity-form-test',
+        title: "Form Test",
+        href: "/admin/activity-form-test",
       },
     ],
   },
   {
-    groupTitle: 'UWCSSA Department',
-    id: 'uwcssa-department',
+    groupTitle: "UWCSSA Department",
+    id: "uwcssa-department",
     pages: [
       {
-        title: 'Department',
-        href: '/admin/uwcssa-department',
+        title: "Department",
+        href: "/admin/uwcssa-department",
       },
     ],
   },
   {
-    groupTitle: 'UWCSSA Member',
-    id: 'uwcssa-member',
+    groupTitle: "UWCSSA Member",
+    id: "uwcssa-member",
     pages: [
       {
-        title: '学生会成员管理',
-        href: '/admin/uwcssa-member',
+        title: "学生会成员管理",
+        href: "/admin/uwcssa-member",
       },
     ],
   },
   {
-    groupTitle: 'UWCSSA Research & Development',
-    id: 'uwcssa-research-development',
+    groupTitle: "UWCSSA Research & Development",
+    id: "uwcssa-research-development",
     pages: [
       {
-        title: 'Research & Development',
-        href: '/admin/uwcssa-research-development',
+        title: "Research & Development",
+        href: "/admin/uwcssa-research-development",
       },
     ],
   },

@@ -2,23 +2,23 @@
  * @Author: Shen Shu
  * @Date: 2022-05-31 23:01:18
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-01 21:50:46
+ * @LastEditTime: 2022-07-26 14:11:00
  * @FilePath: /uwcssa_ca/src/admin/UserProfile/UserProfileDashboard.tsx
  * @Description:
  *
  */
 
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 import {
   fetchUserProfileList,
   selectAllUserProfiles,
-} from 'redux/userProfile/userProfileSlice';
-import { useAppDispatch, useAppSelector } from 'redux/hooks';
+} from "redux/userProfile/userProfileSlice";
+import { useAppDispatch, useAppSelector } from "redux/hooks";
 
-import { Box } from '@mui/material';
-import Container from 'components/Container';
-import { CustomerListResults } from './components';
-import { getAuthState } from 'redux/auth/authSlice';
+import { Box } from "@mui/material";
+import Container from "components/Container";
+import { getAuthState } from "redux/auth/authSlice";
+import CustomerListResults from "./components/CustomerListResults";
 
 function UserProfileDashboard() {
   const dispatch = useAppDispatch();
@@ -30,7 +30,7 @@ function UserProfileDashboard() {
 
   useEffect(() => {
     const getUserProfileList = async () => {
-      if (isAuth !== null && fetchUserProfileListStatus === 'idle') {
+      if (fetchUserProfileListStatus === "idle") {
         await dispatch(
           fetchUserProfileList({
             isAuth,
@@ -39,7 +39,7 @@ function UserProfileDashboard() {
       }
     };
     getUserProfileList();
-  }, [isAuth, fetchUserProfileListStatus]);
+  }, [isAuth, fetchUserProfileListStatus, dispatch]);
 
   return (
     <div>

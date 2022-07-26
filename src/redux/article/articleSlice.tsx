@@ -2,32 +2,32 @@
  * @Author: Shen Shu
  * @Date: 2022-05-20 21:02:00
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-18 18:08:10
+ * @LastEditTime: 2022-07-25 22:11:29
  * @FilePath: /uwcssa_ca/src/redux/article/articleSlice.tsx
  * @Description:
  *
  */
 
 import {
-  articleSortByCreatedAt,
-  createArticle,
-  getArticle,
-} from './custom_q_m_s';
-import {
   createAsyncThunk,
   createEntityAdapter,
   createSlice,
-} from '@reduxjs/toolkit';
-import { createCount, updateArticle } from 'graphql/mutations';
+} from "@reduxjs/toolkit";
+import { createCount, updateArticle } from "graphql/mutations";
 
-import API from '@aws-amplify/api';
-import { AvatarURL } from 'redux/userProfile/userProfileSlice';
-import { CreateArticleInput } from 'API';
-import { RootState } from 'redux/store';
-import { graphqlOperation } from '@aws-amplify/api-graphql';
-import { v4 as uuid } from 'uuid';
+import API from "@aws-amplify/api";
+import { AvatarURL } from "redux/userProfile/userProfileSlice";
+import { CreateArticleInput } from "API";
+import { RootState } from "redux/store";
+import { graphqlOperation } from "@aws-amplify/api-graphql";
+import { v4 as uuid } from "uuid";
+import {
+  articleSortByCreatedAt,
+  createArticle,
+  getArticle,
+} from "./custom_q_m_s";
 
-//import { commentAdapter } from 'redux/comment/commentSlice';
+// import { commentAdapter } from 'redux/comment/commentSlice';
 
 export type Article = {
   id: string;
@@ -60,39 +60,39 @@ export type Article = {
 };
 
 enum ActiveType {
-  T = 'T',
-  F = 'F',
+  T = "T",
+  F = "F",
 }
 const articleAdapter = createEntityAdapter<Article>({
   sortComparer: (a, b) => b.createdAt.localeCompare(a.createdAt),
 });
 
 const initialState = articleAdapter.getInitialState({
-  fetchArticleListStatus: 'idle',
+  fetchArticleListStatus: "idle",
   fetchArticleListError: null,
-  fetchArticleStatus: 'idle',
+  fetchArticleStatus: "idle",
   fetchArticleError: null,
-  postArticleStatus: 'idle',
+  postArticleStatus: "idle",
   postArticleError: null,
-  postArticleImgStatus: 'idle',
+  postArticleImgStatus: "idle",
   postArticleImgError: null,
-  updateArticleDetailStatus: 'idle',
+  updateArticleDetailStatus: "idle",
   updateArticleDetailError: null,
 });
 
 export const fetchArticleList = createAsyncThunk(
-  'article/fetchArticleList',
+  "article/fetchArticleList",
   async ({ isAuth }: { isAuth: boolean }, { rejectWithValue }) => {
     try {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const result: any = await API.graphql({
         query: articleSortByCreatedAt,
         variables: {
-          active: 'T',
-          sortDirection: 'DESC',
+          active: "T",
+          sortDirection: "DESC",
           limit: 10,
         },
-        authMode: isAuth ? undefined : 'AWS_IAM',
+        authMode: isAuth ? undefined : "AWS_IAM",
       });
       return result.data.articleSortByCreatedAt.items;
     } catch (error) {
@@ -103,7 +103,7 @@ export const fetchArticleList = createAsyncThunk(
 );
 
 export const fetchArticle = createAsyncThunk(
-  'article/fetchArticle',
+  "article/fetchArticle",
   async (
     {
       articleId,
@@ -121,10 +121,10 @@ export const fetchArticle = createAsyncThunk(
       const result: any = await API.graphql({
         query: getArticle,
         variables: { id: articleId, eq: ownerUsername || null },
-        authMode: isAuth ? undefined : 'AWS_IAM',
+        authMode: isAuth ? undefined : "AWS_IAM",
       });
       if (result.data.getArticle === null) {
-        return { id: articleId, description: 'not-found' };
+        return { id: articleId, description: "not-found" };
       }
       return result.data.getArticle;
     } catch (error) {
@@ -135,7 +135,7 @@ export const fetchArticle = createAsyncThunk(
 );
 
 export const postArticle = createAsyncThunk(
-  'article/postArticle',
+  "article/postArticle",
   async (
     {
       createArticleInput,
@@ -147,27 +147,26 @@ export const postArticle = createAsyncThunk(
     try {
       const countId = uuid();
 
-      const [createArticleResult, createCountResult]: [any, any] =
-        await Promise.all([
-          API.graphql(
-            graphqlOperation(createArticle, {
-              input: { articleCountId: countId, ...createArticleInput },
-            }),
-          ),
-          API.graphql(
-            graphqlOperation(createCount, {
-              input: {
-                id: countId,
-                count: undefined,
-                commentCount: 0,
-                like: 0,
-                targetTable: 'Article',
-                countArticleId: createArticleInput.id,
-                owner: createArticleInput.owner,
-              },
-            }),
-          ),
-        ]);
+      const [createArticleResult]: [any, any] = await Promise.all([
+        API.graphql(
+          graphqlOperation(createArticle, {
+            input: { articleCountId: countId, ...createArticleInput },
+          }),
+        ),
+        API.graphql(
+          graphqlOperation(createCount, {
+            input: {
+              id: countId,
+              count: undefined,
+              commentCount: 0,
+              like: 0,
+              targetTable: "Article",
+              countArticleId: createArticleInput.id,
+              owner: createArticleInput.owner,
+            },
+          }),
+        ),
+      ]);
       return createArticleResult.data.createArticle;
     } catch (error) {
       console.log(error);
@@ -177,7 +176,7 @@ export const postArticle = createAsyncThunk(
 );
 
 export const updateArticleDetail = createAsyncThunk(
-  'article/updateArticleDetail',
+  "article/updateArticleDetail",
   async (
     { updateArticleInput }: { updateArticleInput: Article },
     { rejectWithValue },
@@ -196,7 +195,7 @@ export const updateArticleDetail = createAsyncThunk(
 );
 
 const articleSlice = createSlice({
-  name: 'article',
+  name: "article",
   initialState,
   // initialState: articleAdapter.getInitialState({
   //   ...initialState,
@@ -208,61 +207,61 @@ const articleSlice = createSlice({
     builder
       // Cases for status of fetchArticleList (pending, fulfilled, and rejected)
       .addCase(fetchArticleList.pending, (state) => {
-        state.fetchArticleListStatus = 'loading';
+        state.fetchArticleListStatus = "loading";
       })
       .addCase(fetchArticleList.fulfilled, (state, action) => {
-        state.fetchArticleListStatus = 'succeed';
-        //articleAdapter.removeAll(state);
+        state.fetchArticleListStatus = "succeed";
+        // articleAdapter.removeAll(state);
         articleAdapter.upsertMany(state, action.payload);
       })
       .addCase(fetchArticleList.rejected, (state, action) => {
-        state.fetchArticleListStatus = 'failed';
+        state.fetchArticleListStatus = "failed";
         state.fetchArticleListError = action.payload;
       })
       // Cases for status of selectedArticle (pending, fulfilled, and rejected)
       .addCase(fetchArticle.pending, (state) => {
-        state.fetchArticleStatus = 'loading';
+        state.fetchArticleStatus = "loading";
       })
       .addCase(fetchArticle.fulfilled, (state, action) => {
-        state.fetchArticleStatus = 'succeed';
+        state.fetchArticleStatus = "succeed";
         articleAdapter.upsertOne(state, action.payload);
         // commentAdapter.upsertMany(
         //   state.comments,
         //   action.payload.comments.items,
         // );
-        //console.log(action.payload.comments.items);
+        // console.log(action.payload.comments.items);
         // store.dispatch(insertAllComments(action.payload.comments.items));
       })
       .addCase(fetchArticle.rejected, (state, action) => {
-        state.fetchArticleStatus = 'failed';
+        state.fetchArticleStatus = "failed";
         state.fetchArticleError = action.payload;
       })
       // Cases for status of postArticle (pending, fulfilled, and rejected)
       .addCase(postArticle.pending, (state) => {
-        state.postArticleStatus = 'loading';
+        state.postArticleStatus = "loading";
       })
       .addCase(postArticle.fulfilled, (state, action) => {
-        state.postArticleStatus = 'succeed';
+        state.postArticleStatus = "succeed";
         // state.articles.unshift(action.payload.data.createArticle);
         articleAdapter.addOne(state, action.payload);
         // state.postArticleStatus = "idle";
       })
       .addCase(postArticle.rejected, (state, action) => {
-        state.postArticleStatus = 'failed';
+        state.postArticleStatus = "failed";
         state.postArticleError = action.payload;
       })
       // Cases for status of updateArticle (pending, fulfilled, and rejected)
       .addCase(updateArticleDetail.pending, (state) => {
-        state.updateArticleDetailStatus = 'loading';
+        state.updateArticleDetailStatus = "loading";
       })
       .addCase(updateArticleDetail.fulfilled, (state, action) => {
-        state.updateArticleDetailStatus = 'succeed';
-        //state.articles.unshift(action.payload.data.createArticle);
+        state.updateArticleDetailStatus = "succeed";
+        // state.articles.unshift(action.payload.data.createArticle);
         articleAdapter.upsertOne(state, action.payload);
         // state.updateArticleStatus = "idle";
       })
       .addCase(updateArticleDetail.rejected, (state, action) => {
-        state.updateArticleDetailStatus = 'failed';
+        state.updateArticleDetailStatus = "failed";
         state.updateArticleDetailError = action.payload;
       });
   },

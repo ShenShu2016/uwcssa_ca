@@ -1,31 +1,36 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-28 16:04:22
- * @LastEditors: 李佳修
- * @LastEditTime: 2022-05-30 15:43:55
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-07-24 14:03:13
  * @FilePath: /uwcssa_ca/src/layouts/AdminLayout/AdminLayout.tsx
  * @Description:
  *
  */
 
-import { Footer, Sidebar, Topbar } from './components';
-import React, { useState } from 'react';
-import { alpha, useTheme } from '@mui/material/styles';
+import {
+  AppBar,
+  Box,
+  Divider,
+  alpha,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
+import React, { useState } from "react";
 
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Container from 'components/Container';
-import Divider from '@mui/material/Divider';
-import pages from '../navigation--admin';
-import useMediaQuery from '@mui/material/useMediaQuery';
+import Container from "components/Container";
+import Footer from "./components/Footer/Footer";
+import Sidebar from "./components/Sidebar/Sidebar";
+import pages from "../navigation--admin";
+import Topbar from "./components/Topbar/Topbar";
 
 interface Props {
   children: React.ReactNode;
 }
 
-const AdminLayout = ({ children }: Props): JSX.Element => {
+function AdminLayout({ children }: Props): JSX.Element {
   const theme = useTheme();
-  const isMd = useMediaQuery(theme.breakpoints.up('md'), {
+  const isMd = useMediaQuery(theme.breakpoints.up("md"), {
     defaultMatches: true,
   });
 
@@ -44,7 +49,7 @@ const AdminLayout = ({ children }: Props): JSX.Element => {
   return (
     <Box>
       <AppBar
-        position={'fixed'}
+        position="fixed"
         sx={{
           backgroundColor: theme.palette.background.paper,
           borderBottom: `1px solid ${alpha(theme.palette.divider, 0.1)}`,
@@ -58,7 +63,7 @@ const AdminLayout = ({ children }: Props): JSX.Element => {
       <Sidebar
         onClose={handleSidebarClose}
         open={open}
-        variant={isMd ? 'permanent' : 'temporary'}
+        variant={isMd ? "permanent" : "temporary"}
         pages={pages}
       />
       <main>
@@ -67,7 +72,7 @@ const AdminLayout = ({ children }: Props): JSX.Element => {
           display="flex"
           flex="1 1 auto"
           overflow="hidden"
-          paddingLeft={{ md: '256px' }}
+          paddingLeft={{ md: "256px" }}
         >
           <Box display="flex" flex="1 1 auto" overflow="hidden">
             <Box flex="1 1 auto" height="100%" overflow="auto">
@@ -82,6 +87,6 @@ const AdminLayout = ({ children }: Props): JSX.Element => {
       </main>
     </Box>
   );
-};
+}
 
 export default AdminLayout;

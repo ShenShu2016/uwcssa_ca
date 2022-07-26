@@ -1,30 +1,27 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-18 09:12:03
- * @LastEditTime: 2022-06-21 21:59:44
- * @LastEditors: Shikai Jin
+ * @LastEditTime: 2022-07-25 22:31:58
+ * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/components/TopNav.tsx
  */
 
-import { Button, IconButton } from '@mui/material';
+import { IconButton, Box } from "@mui/material";
 
-import Box from '@mui/material/Box';
-import ChatIcon from '@mui/icons-material/Chat';
-import GitHubButton from 'react-github-btn';
-import GitHubIcon from '@mui/icons-material/GitHub';
-import Link from '@mui/material/Link';
-import React from 'react';
-import ThemeModeToggler from 'components/ThemeModeToggler';
-import Typography from '@mui/material/Typography';
-import { blue } from '@mui/material/colors';
+import ChatIcon from "@mui/icons-material/Chat";
+import GitHubButton from "react-github-btn";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import React from "react";
+import ThemeModeToggler from "components/ThemeModeToggler";
+import { blue } from "@mui/material/colors";
 
 interface Props {
   colorInvert?: boolean;
 }
 
-const TopNav = ({ colorInvert = false }: Props): JSX.Element => {
+function TopNav({ colorInvert = false }: Props): JSX.Element {
   return (
-    <Box display={'flex'} justifyContent={'flex-end'} alignItems={'center'}>
+    <Box display="flex" justifyContent="flex-end" alignItems="center">
       <Box marginRight={{ xs: 1, sm: 2 }} marginTop={{ xs: 1 }}>
         <GitHubButton
           href="https://github.com/ShenShu2016/uwcssa_ca"
@@ -74,19 +71,19 @@ const TopNav = ({ colorInvert = false }: Props): JSX.Element => {
         <IconButton
           size="small"
           onClick={() =>
-            window.open('https://github.com/ShenShu2016/uwcssa_ca/discussions')
+            window.open("https://github.com/ShenShu2016/uwcssa_ca/discussions")
           }
           sx={{
             color: colorInvert ? blue[50] : blue[700],
-            border: '1px solid #bdbdbd',
-            borderRadius: '10px',
+            border: "1px solid #bdbdbd",
+            borderRadius: "10px",
           }}
         >
           <ChatIcon
             fontSize="small"
             sx={{
-              height: '20px',
-              width: '20px',
+              height: "20px",
+              width: "20px",
             }}
           />
         </IconButton>
@@ -95,19 +92,19 @@ const TopNav = ({ colorInvert = false }: Props): JSX.Element => {
         <IconButton
           size="small"
           onClick={() =>
-            window.open('https://github.com/ShenShu2016/uwcssa_ca')
+            window.open("https://github.com/ShenShu2016/uwcssa_ca")
           }
           sx={{
             color: colorInvert ? blue[50] : blue[700],
-            border: '1px solid #bdbdbd',
-            borderRadius: '10px',
+            border: "1px solid #bdbdbd",
+            borderRadius: "10px",
           }}
         >
           <GitHubIcon
             fontSize="small"
             sx={{
-              height: '20px',
-              width: '20px',
+              height: "20px",
+              width: "20px",
             }}
           />
         </IconButton>
@@ -117,6 +114,6 @@ const TopNav = ({ colorInvert = false }: Props): JSX.Element => {
       </Box>
     </Box>
   );
-};
+}
 
 export default TopNav;

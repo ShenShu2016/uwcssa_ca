@@ -8,52 +8,47 @@
  *
  */
 
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import React from 'react';
-import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import React from "react";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
 
-const Newsletter = (): JSX.Element => {
+function Newsletter(): JSX.Element {
   return (
     <Box>
       <Box marginBottom={4}>
-        <Typography
-          fontWeight={700}
-          variant={'h4'}
-          align={'center'}
-          gutterBottom
-        >
+        <Typography fontWeight={700} variant="h4" align="center" gutterBottom>
           Get our stories delivered
         </Typography>
         <Typography
-          variant={'h6'}
-          component={'p'}
-          color={'text.secondary'}
-          align={'center'}
+          variant="h6"
+          component="p"
+          color="text.secondary"
+          align="center"
         >
           From us to your inbox weekly.
         </Typography>
       </Box>
-      <Box maxWidth={600} margin={'0 auto'}>
+      <Box maxWidth={600} margin="0 auto">
         <Box
-          component={'form'}
+          component="form"
           noValidate
           autoComplete="off"
           sx={{
-            '& .MuiInputBase-input.MuiOutlinedInput-input': {
-              bgcolor: 'background.paper',
+            "& .MuiInputBase-input.MuiOutlinedInput-input": {
+              bgcolor: "background.paper",
             },
           }}
         >
           <Box
             display="flex"
-            flexDirection={{ xs: 'column', md: 'row' }}
-            alignItems={{ xs: 'center', md: 'flex-start' }}
-            justifyContent={{ xs: 'center' }}
+            flexDirection={{ xs: "column", md: "row" }}
+            alignItems={{ xs: "center", md: "flex-start" }}
+            justifyContent={{ xs: "center" }}
           >
             <Box
-              flex={'1 1 auto'}
+              flex="1 1 auto"
               component={TextField}
               label="Enter your email"
               variant="outlined"
@@ -80,6 +75,6 @@ const Newsletter = (): JSX.Element => {
       </Box>
     </Box>
   );
-};
+}
 
 export default Newsletter;

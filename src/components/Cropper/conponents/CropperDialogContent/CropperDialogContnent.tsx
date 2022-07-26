@@ -8,20 +8,18 @@
  *
  */
 
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
 
 export default function CropperDialogContent(): JSX.Element {
   return (
-    <>
-      <DialogContent>
-        <DialogContentText>
-          Let Google help apps determine location. This means sending anonymous
-          location data to Google, even when no apps are running.
-        </DialogContentText>
-      </DialogContent>
-    </>
+    <DialogContent>
+      <DialogContentText>
+        Let Google help apps determine location. This means sending anonymous
+        location data to Google, even when no apps are running.
+      </DialogContentText>
+    </DialogContent>
   );
 }

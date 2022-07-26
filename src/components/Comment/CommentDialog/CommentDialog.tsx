@@ -2,56 +2,54 @@
  * @Author: Shen Shu
  * @Date: 2022-05-26 16:50:46
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-26 16:51:39
+ * @LastEditTime: 2022-07-24 15:59:43
  * @FilePath: /uwcssa_ca/src/components/Comment/CommentDialog/CommentDialog.tsx
  * @Description:
  *
  */
-import React, { useState } from 'react';
-import { alpha, useTheme } from '@mui/material/styles';
+import React, { useState } from "react";
+import { alpha, useTheme, Box, Button } from "@mui/material";
 
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Container from 'components/Container';
-import { FeedbackForm } from './components';
+import Container from "components/Container";
+import FeedbackForm from "./components/FeedbackForm/FeedbackForm";
 
-const CommentDialog = (): JSX.Element => {
+function CommentDialog(): JSX.Element {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
 
   return (
-    <Container display={'flex'} justifyContent={'center'} alignItems={'center'}>
+    <Container display="flex" justifyContent="center" alignItems="center">
       <Box maxWidth={320} width={1}>
         <Box
           sx={{
             borderRadius: 2,
             width: 1,
             height: 380,
-            bgcolor: 'divider',
+            bgcolor: "divider",
             marginBottom: 2,
           }}
         />
         <Box
           sx={{
             borderRadius: 2,
-            width: '80%',
+            width: "80%",
             height: 4,
-            bgcolor: 'divider',
+            bgcolor: "divider",
             marginBottom: 1,
           }}
         />
         <Box
           sx={{
             borderRadius: 2,
-            width: '60%',
+            width: "60%",
             height: 4,
-            bgcolor: 'divider',
+            bgcolor: "divider",
             marginBottom: 2,
           }}
         />
         <Button
-          color={'primary'}
-          size={'large'}
+          color="primary"
+          size="large"
           fullWidth
           sx={{
             bgcolor: alpha(theme.palette.primary.light, 0.1),
@@ -80,6 +78,6 @@ const CommentDialog = (): JSX.Element => {
       </Box>
     </Container>
   );
-};
+}
 
 export default CommentDialog;

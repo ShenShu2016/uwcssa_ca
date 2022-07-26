@@ -1,45 +1,41 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-18 09:12:03
- * @LastEditTime: 2022-06-23 12:26:37
+ * @LastEditTime: 2022-07-24 14:30:05
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/layouts/Main/Main.tsx
  */
 
-import { Footer, Sidebar, Topbar } from './components';
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Container from 'components/Container';
-import Divider from '@mui/material/Divider';
-import TopNav from 'components/TopNav';
-import pages from '../navigation--main';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import useScrollTrigger from '@mui/material/useScrollTrigger';
-import { useTheme } from '@mui/material/styles';
+import {
+  AppBar,
+  Box,
+  Divider,
+  useMediaQuery,
+  useTheme,
+  useScrollTrigger,
+} from "@mui/material";
+
+import Container from "components/Container";
+import TopNav from "components/TopNav";
+import pages from "../navigation--main";
+import Footer from "./components/Footer/Footer";
+import Sidebar from "./components/Sidebar/Sidebar";
+import Topbar from "./components/Topbar/Topbar";
 
 interface Props {
   children: React.ReactNode;
-  colorInvert?: boolean;
-  bgcolor?: string;
+  colorInvert: boolean | undefined;
+  bgcolor: string | undefined;
 }
-
-// // eslint-disable-next-line @typescript-eslint/no-unused-vars
-// const Content = styled(Box)(({theme}) => ({
-//   width: '100%',
-//   // minHeight: '100vh',
-//   padding: '24px 5%',
-//   background: '#f5f5f5'
-// }));
-//这里改了会导致后面的东西都会有奇奇怪怪的毛病
-const Main = ({
+function Main({
   children,
   colorInvert = false,
-  bgcolor = 'transparent',
-}: Props): JSX.Element => {
+  bgcolor = "transparent",
+}: Props): JSX.Element {
   const theme = useTheme();
-  const isMd = useMediaQuery(theme.breakpoints.up('md'), {
+  const isMd = useMediaQuery(theme.breakpoints.up("md"), {
     defaultMatches: true,
   });
 
@@ -62,13 +58,13 @@ const Main = ({
 
   return (
     <Box>
-      <Box bgcolor={bgcolor} position={'relative'} zIndex={theme.zIndex.appBar}>
-        <Container paddingTop={'0px !important'} paddingBottom={'0 !important'}>
+      <Box bgcolor={bgcolor} position="relative" zIndex={theme.zIndex.appBar}>
+        <Container paddingTop="0px !important" paddingBottom="0 !important">
           <TopNav colorInvert={colorInvert} />
         </Container>
       </Box>
       <AppBar
-        position={'sticky'}
+        position="sticky"
         sx={{
           top: 0,
           // boxShadow: '0px 15px 10px -15px #bdbdbd',
@@ -102,6 +98,6 @@ const Main = ({
       </Container>
     </Box>
   );
-};
+}
 
 export default Main;

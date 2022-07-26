@@ -2,31 +2,30 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-20 09:30:58
- * @LastEditTime: 2022-06-26 18:29:02
+ * @LastEditTime: 2022-07-25 22:27:55
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/admin/Article/ArticlePublish/ArticlePublish.tsx
  */
 
-import { Article, postArticle } from 'redux/article/articleSlice';
-import React, { useState } from 'react';
-import { postTag, postUpdateArticleTags } from 'redux/tag/tagSlice';
-import { useAppDispatch, useAppSelector } from 'redux/hooks';
+import { Article, postArticle } from "redux/article/articleSlice";
+import React, { useState } from "react";
+import { postTag, postUpdateArticleTags } from "redux/tag/tagSlice";
+import { useAppDispatch, useAppSelector } from "redux/hooks";
 
-import { ActiveType } from 'API';
-import ArticleCommon from '../ArticleCommon';
-import { getOwnerUserName } from 'redux/auth/authSlice';
-import { useNavigate } from 'react-router-dom';
-import { useSnackbar } from 'notistack';
-import { v4 as uuid } from 'uuid';
+import { ActiveType } from "API";
+import { getOwnerUserName } from "redux/auth/authSlice";
+import { useNavigate } from "react-router-dom";
+import { useSnackbar } from "notistack";
+import { v4 as uuid } from "uuid";
+import ArticleCommon from "../ArticleCommon";
 
 export interface Tag {
   tagID: string;
 }
-
-const ArticlePublish: React.FC = () => {
+function ArticlePublish(): JSX.Element {
   const [fullScreenLoading, setFullScreenLoading] = useState({
     loading: false,
-    message: '',
+    message: "",
   });
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
@@ -36,7 +35,7 @@ const ArticlePublish: React.FC = () => {
   const handleSubmitArticle = async (data) => {
     setFullScreenLoading({
       loading: true,
-      message: '正在创建标签和文章',
+      message: "正在创建标签和文章",
     });
     // 创建tag 和 创建文章异步进行 因为此时tag和文章之间没有依赖关系
     const [tagCreate, articleCommit] = await Promise.all([
@@ -45,7 +44,7 @@ const ArticlePublish: React.FC = () => {
     ]);
     setFullScreenLoading({
       loading: true,
-      message: '正在关联文章和标签',
+      message: "正在关联文章和标签",
     });
     // 都完成后进行tag与文章的关联
     console.log(tagCreate, articleCommit);
@@ -55,27 +54,27 @@ const ArticlePublish: React.FC = () => {
         tagCreate.tags,
       );
       if (isConnected) {
-        enqueueSnackbar('发布完成', { variant: 'success' });
+        enqueueSnackbar("发布完成", { variant: "success" });
         setFullScreenLoading({
           loading: true,
-          message: '操作成功，即将跳转',
+          message: "操作成功，即将跳转",
         });
         setTimeout(() => {
           setFullScreenLoading({
             loading: false,
-            message: '',
+            message: "",
           });
-          navigate('/dashboard', { replace: true });
+          navigate("/dashboard", { replace: true });
         }, 1000);
       } else {
-        enqueueSnackbar('文章操作有误', { variant: 'warning' });
+        enqueueSnackbar("文章操作有误", { variant: "warning" });
       }
     } else {
-      console.error('文章上传或标签上传出现错误');
-      enqueueSnackbar('文章上传或标签上传出现错误', { variant: 'error' });
+      console.error("文章上传或标签上传出现错误");
+      enqueueSnackbar("文章上传或标签上传出现错误", { variant: "error" });
       setFullScreenLoading({
         loading: false,
-        message: '',
+        message: "",
       });
     }
   };
@@ -96,11 +95,11 @@ const ArticlePublish: React.FC = () => {
     const articlePostRes = await dispatch(
       postArticle({ createArticleInput: params }),
     );
-    const isPosted = articlePostRes.meta.requestStatus === 'fulfilled';
+    const isPosted = articlePostRes.meta.requestStatus === "fulfilled";
     if (isPosted) {
-      enqueueSnackbar('文章已发布', { variant: 'success' });
+      enqueueSnackbar("文章已发布", { variant: "success" });
     } else {
-      enqueueSnackbar('文章发布错误', { variant: 'error' });
+      enqueueSnackbar("文章发布错误", { variant: "error" });
     }
     return {
       articleID,
@@ -123,14 +122,14 @@ const ArticlePublish: React.FC = () => {
     console.log(tagUploadRes, 999);
     const isAllTagCreated = tagUploadRes.every(
       (res) =>
-        res.meta.requestStatus === 'fulfilled' ||
-        res.payload[0].errorType === 'DynamoDB:ConditionalCheckFailedException',
+        res.meta.requestStatus === "fulfilled" ||
+        res.payload[0].errorType === "DynamoDB:ConditionalCheckFailedException",
     );
-    console.log(isAllTagCreated); //这里要改改
+    console.log(isAllTagCreated); // 这里要改改
     if (isAllTagCreated) {
-      enqueueSnackbar('标签已创建', { variant: 'success' });
+      enqueueSnackbar("标签已创建", { variant: "success" });
     } else {
-      enqueueSnackbar('标签创建错误', { variant: 'warning' });
+      enqueueSnackbar("标签创建错误", { variant: "warning" });
     }
     return {
       tags: tagUploadRes.map((tag) => tag.meta.arg.createTagInput.id),
@@ -154,6 +153,6 @@ const ArticlePublish: React.FC = () => {
       onCommit={handleSubmitArticle}
     />
   );
-};
+}
 
 export default ArticlePublish;

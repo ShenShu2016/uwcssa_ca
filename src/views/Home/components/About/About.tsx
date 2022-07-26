@@ -1,45 +1,45 @@
-import Avatar from '@mui/material/Avatar';
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Container from 'components/Container';
-import Grid from '@mui/material/Grid';
-import ListItem from '@mui/material/ListItem';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import ListItemText from '@mui/material/ListItemText';
+import Avatar from "@mui/material/Avatar";
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import Container from "components/Container";
+import Grid from "@mui/material/Grid";
+import ListItem from "@mui/material/ListItem";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import ListItemText from "@mui/material/ListItemText";
 /* eslint-disable react/no-unescaped-entities */
-import React from 'react';
-import Typography from '@mui/material/Typography';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import { useTheme } from '@mui/material/styles';
+import React from "react";
+import Typography from "@mui/material/Typography";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
 
-const About = (): JSX.Element => {
+function About(): JSX.Element {
   const theme = useTheme();
-  const isMd = useMediaQuery(theme.breakpoints.up('md'), {
+  const isMd = useMediaQuery(theme.breakpoints.up("md"), {
     defaultMatches: true,
   });
 
   return (
-    <Box bgcolor={'#0c133e'}>
-      <Container paddingY={{ xs: 4, sm: 6, md: '0 !important' }}>
+    <Box bgcolor="#0c133e">
+      <Container paddingY={{ xs: 4, sm: 6, md: "0 !important" }}>
         <Grid container spacing={isMd ? 0 : 2}>
           <Grid
             item
             container
-            alignItems={'center'}
+            alignItems="center"
             xs={12}
             md={6}
             data-aos="fade-up"
           >
-            <Container paddingLeft={'0 !important'}>
+            <Container paddingLeft="0 !important">
               <Box>
                 <Box marginBottom={2}>
                   <Typography
                     sx={{
-                      textTransform: 'uppercase',
-                      fontWeight: 'medium',
-                      color: 'common.white',
+                      textTransform: "uppercase",
+                      fontWeight: "medium",
+                      color: "common.white",
                     }}
                   >
                     COMPLETE CONTROL
@@ -47,9 +47,9 @@ const About = (): JSX.Element => {
                 </Box>
                 <Box marginBottom={2}>
                   <Typography
-                    component={'span'}
+                    component="span"
                     variant="h4"
-                    sx={{ fontWeight: 700, color: 'common.white' }}
+                    sx={{ fontWeight: 700, color: "common.white" }}
                   >
                     Monitor and analyze usage patterns.
                   </Typography>
@@ -57,7 +57,7 @@ const About = (): JSX.Element => {
                 <Typography
                   variant="h6"
                   component="p"
-                  sx={{ color: 'common.white' }}
+                  sx={{ color: "common.white" }}
                 >
                   Keep track of what's happening with your data, change
                   permissions, and run reports against your data anywhere in the
@@ -72,21 +72,21 @@ const About = (): JSX.Element => {
           <Grid item xs={12} md={6}>
             <Box
               width={1}
-              data-aos={'fade-up'}
+              data-aos="fade-up"
               component={Card}
-              display={'flex'}
-              flexDirection={'column'}
+              display="flex"
+              flexDirection="column"
               borderRadius={0}
               sx={{ borderBottomLeftRadius: 8, borderBottomRightRadius: 8 }}
             >
               <CardContent
                 sx={{
-                  display: 'flex',
-                  flexDirection: 'column',
+                  display: "flex",
+                  flexDirection: "column",
                 }}
               >
                 <Box marginBottom={1}>
-                  <Box display={'flex'} justifyContent={'flex-start'}>
+                  <Box display="flex" justifyContent="flex-start">
                     {[1, 2, 3, 4, 5].map((item) => (
                       <Box key={item} color={theme.palette.secondary.main}>
                         <svg
@@ -110,16 +110,12 @@ const About = (): JSX.Element => {
               <CardActions sx={{ paddingBottom: 2 }}>
                 <ListItem component="div" disableGutters sx={{ padding: 0 }}>
                   <ListItemAvatar>
-                    <Avatar
-                      src={
-                        'https://assets.maccarianagency.com/avatars/img1.jpg'
-                      }
-                    />
+                    <Avatar src="https://assets.maccarianagency.com/avatars/img1.jpg" />
                   </ListItemAvatar>
                   <ListItemText
                     sx={{ margin: 0 }}
-                    primary={'Clara Bertoletti'}
-                    secondary={'MUI lover'}
+                    primary="Clara Bertoletti"
+                    secondary="MUI lover"
                   />
                 </ListItem>
               </CardActions>
@@ -129,6 +125,6 @@ const About = (): JSX.Element => {
       </Container>
     </Box>
   );
-};
+}
 
 export default About;

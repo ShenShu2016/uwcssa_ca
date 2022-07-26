@@ -2,24 +2,24 @@
  * @Author: Shen Shu
  * @Date: 2022-05-30 14:17:41
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-06 15:25:51
+ * @LastEditTime: 2022-07-24 15:05:42
  * @FilePath: /uwcssa_ca/src/admin/ResearchDevelopmentTeam/ResearchDevelopmentTeamDashboard/ResearchDevelopmentTeamDashboard.tsx
  * @Description:
  *
  */
 
-import { Button, Typography } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import { Button, Typography } from "@mui/material";
+import React, { useEffect, useState } from "react";
 import {
   fetchResearchDevelopmentTeamList,
   selectAllResearchDevelopmentTeams,
-} from 'redux/researchDevelopmentTeam/researchDevelopmentTeamSlice';
-import { useAppDispatch, useAppSelector } from 'redux/hooks';
+} from "redux/researchDevelopmentTeam/researchDevelopmentTeamSlice";
+import { useAppDispatch, useAppSelector } from "redux/hooks";
 
-import { AddResearchDevelopmentTeamForm } from './components/AddResearchDevelopmentTeam';
-import Container from 'components/Container';
-import SimpleStriped from './components/SimpleStriped';
-import { getAuthState } from 'redux/auth/authSlice';
+import Container from "components/Container";
+import { getAuthState } from "redux/auth/authSlice";
+import SimpleStriped from "./components/SimpleStriped/SimpleStriped";
+import AddResearchDevelopmentTeamForm from "./components/AddResearchDevelopmentTeam/AddResearchDevelopmentTeamForm/AddResearchDevelopmentTeamForm";
 
 function ResearchDevelopmentTeamDashboard() {
   const dispatch = useAppDispatch();
@@ -32,19 +32,19 @@ function ResearchDevelopmentTeamDashboard() {
     selectAllResearchDevelopmentTeams,
   );
   useEffect(() => {
-    if (isAuth !== null && fetchResearchDevelopmentTeamListStatus === 'idle') {
+    if (isAuth !== null && fetchResearchDevelopmentTeamListStatus === "idle") {
       dispatch(
         fetchResearchDevelopmentTeamList({
           isAuth,
         }),
       );
     }
-  }, [isAuth, fetchResearchDevelopmentTeamListStatus]);
+  }, [isAuth, fetchResearchDevelopmentTeamListStatus, dispatch]);
 
   return (
     <Container>
       <Typography variant="h4">Research & Development Team</Typography>
-      <Button variant="contained" size={'small'} onClick={() => setOpen(true)}>
+      <Button variant="contained" size="small" onClick={() => setOpen(true)}>
         Add Developer
       </Button>
       <SimpleStriped

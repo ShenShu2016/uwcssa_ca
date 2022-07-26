@@ -1,9 +1,8 @@
-/* eslint-disable react/prop-types */
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-23 13:50:22
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-11 18:26:13
+ * @LastEditTime: 2022-07-24 17:24:37
  * @FilePath: /uwcssa_ca/src/admin/Article/ArticlePublish/components/MyImageList.tsx
  * @Description:
  *
@@ -19,23 +18,24 @@ import {
   ImageListItemBar,
   Tooltip,
   Typography,
-} from '@mui/material';
-import React, { useEffect } from 'react';
+} from "@mui/material";
+import React, { useEffect } from "react";
 import {
   fetchUserImageList,
   getNextToken,
   moreUserImageList,
   selectAllUserImages,
-} from 'redux/userImage/userImageSlice';
-import { useAppDispatch, useAppSelector } from 'redux/hooks';
+} from "redux/userImage/userImageSlice";
+import { useAppDispatch, useAppSelector } from "redux/hooks";
 
-import ContentCopyIcon from '@mui/icons-material/ContentCopy';
-import moment from 'moment';
-import { useSnackbar } from 'notistack';
+import ContentCopyIcon from "@mui/icons-material/ContentCopy";
+import moment from "moment";
+import { useSnackbar } from "notistack";
 
 // import ListSubheader from '@mui/material/ListSubheader';
 
-function MyImageList({ useImgFromRecent }) {
+// eslint-disable-next-line react/prop-types
+function MyImageList({ handleUseImgFromRecent }) {
   const dispatch = useAppDispatch();
   const { enqueueSnackbar } = useSnackbar();
   const userImages = useAppSelector(selectAllUserImages);
@@ -44,17 +44,18 @@ function MyImageList({ useImgFromRecent }) {
     (state) => state.userImage,
   );
   useEffect(() => {
-    if (fetchUserImageListStatus === 'idle') {
+    if (fetchUserImageListStatus === "idle") {
       dispatch(fetchUserImageList());
     }
   }, []);
 
   const handleUseImg = (item) => {
-    useImgFromRecent(item);
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    handleUseImgFromRecent(item);
   };
 
   return (
-    <Box sx={{ margin: '8px 0px' }}>
+    <Box sx={{ margin: "8px 0px" }}>
       <Typography
         variant="subtitle1"
         gutterBottom
@@ -64,29 +65,29 @@ function MyImageList({ useImgFromRecent }) {
         近期上传图片
       </Typography>
       <Card>
-        <ImageList sx={{ width: '100%', height: 450, margin: 0 }}>
+        <ImageList sx={{ width: "100%", height: 450, margin: 0 }}>
           {/* <ImageListItem key="Subheader" cols={2}>
         <ListSubheader component="div">My Recent Images</ListSubheader>
       </ImageListItem> */}
           {userImages.map((item) => (
             <ImageListItem
               key={item.id}
-              style={{ cursor: 'pointer' }}
+              style={{ cursor: "pointer" }}
               title="点击使用图片"
               onClick={() => handleUseImg(item)}
             >
               <img
                 src={
-                  moment().diff(item.createdAt, 'seconds') > 100 //100秒够运行了，最多也就5秒，25秒就会报错
+                  moment().diff(item.createdAt, "seconds") > 100 // 100秒够运行了，最多也就5秒，25秒就会报错
                     ? item.objectThumbnailURL || item.objectURL
                     : item.objectURL
-                } //这边的意思是，如果是刚上传的，这个照片压缩还需要时间，所以用原图。 如果这个图片没有thumbnail 的话就还是用原图，下面也一样
+                } // 这边的意思是，如果是刚上传的，这个照片压缩还需要时间，所以用原图。 如果这个图片没有thumbnail 的话就还是用原图，下面也一样
                 srcSet={
-                  moment().diff(item.createdAt, 'seconds') > 100
+                  moment().diff(item.createdAt, "seconds") > 100
                     ? item.objectThumbnailURL || item.objectURL
                     : item.objectURL
                 }
-                alt={''}
+                alt=""
                 loading="lazy"
               />
 
@@ -97,7 +98,7 @@ function MyImageList({ useImgFromRecent }) {
                   <Tooltip title="复制链接" placement="top" arrow>
                     <IconButton
                       sx={{
-                        color: 'rgba(255, 255, 255, 0.54)',
+                        color: "rgba(255, 255, 255, 0.54)",
                       }}
                       aria-label={`info about ${item.name}`}
                       onClick={(e) => {
@@ -108,10 +109,10 @@ function MyImageList({ useImgFromRecent }) {
                           navigator.clipboard.writeText(
                             item.objectCompressedURL || item.objectURL,
                           );
-                          enqueueSnackbar('链接已复制', { variant: 'success' });
+                          enqueueSnackbar("链接已复制", { variant: "success" });
                         } catch (err) {
                           console.error(err);
-                          enqueueSnackbar('复制有误', { variant: 'error' });
+                          enqueueSnackbar("复制有误", { variant: "error" });
                         }
                       }}
                     >
@@ -127,7 +128,7 @@ function MyImageList({ useImgFromRecent }) {
           <Button
             variant="contained"
             fullWidth
-            sx={{ my: '1rem' }}
+            sx={{ my: "1rem" }}
             onClick={() => {
               dispatch(moreUserImageList(nextToken));
             }}

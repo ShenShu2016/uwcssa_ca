@@ -8,29 +8,29 @@
  *
  */
 
-import { Box, Grid, Typography, useMediaQuery, useTheme } from '@mui/material';
+import { Box, Grid, Typography, useMediaQuery, useTheme } from "@mui/material";
 
-import React from 'react';
-
-/* eslint-disable react/no-unescaped-entities */
+import React from "react";
 
 /* eslint-disable react/no-unescaped-entities */
 
-const Story = (): JSX.Element => {
+/* eslint-disable react/no-unescaped-entities */
+
+function Story(): JSX.Element {
   const theme = useTheme();
-  const isMd = useMediaQuery(theme.breakpoints.up('md'), {
+  const isMd = useMediaQuery(theme.breakpoints.up("md"), {
     defaultMatches: true,
   });
 
   return (
     <Box>
-      <Grid container spacing={4} direction={isMd ? 'row' : 'column'}>
-        <Grid item container alignItems={'center'} xs={12} md={6}>
+      <Grid container spacing={4} direction={isMd ? "row" : "column"}>
+        <Grid item container alignItems="center" xs={12} md={6}>
           <Box>
-            <Typography variant={'h4'} gutterBottom sx={{ fontWeight: 700 }}>
+            <Typography variant="h4" gutterBottom sx={{ fontWeight: 700 }}>
               我们的职责 & 使命
             </Typography>
-            <Typography component={'p'}>
+            <Typography component="p">
               温莎大学中国学生学者联谊会是在温莎大学学生会下注册的一个非政治、非赢利的服务性组织。学生会于1985年由当时的一些中国学生、访问学者组建成立，为温莎华人提供服务将近20年。
               <br />
               <br />
@@ -51,15 +51,13 @@ const Story = (): JSX.Element => {
         >
           <Box maxWidth={500} width={1}>
             <Box
-              component={'img'}
-              src={
-                'https://uwcssats232508-production.s3.us-east-2.amazonaws.com/uwincssa_pictures/nightStar.jpg'
-              }
+              component="img"
+              src="https://uwcssats232508-production.s3.us-east-2.amazonaws.com/uwincssa_pictures/nightStar.jpg"
               width={1}
               height={1}
               sx={{
                 filter:
-                  theme.palette.mode === 'dark' ? 'brightness(0.8)' : 'none',
+                  theme.palette.mode === "dark" ? "brightness(0.8)" : "none",
               }}
             />
           </Box>
@@ -67,6 +65,6 @@ const Story = (): JSX.Element => {
       </Grid>
     </Box>
   );
-};
+}
 
 export default Story;

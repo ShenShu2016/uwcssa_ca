@@ -17,19 +17,19 @@ import {
   MenuItem,
   Tooltip,
   useTheme,
-} from '@mui/material';
-import { Link, useNavigate } from 'react-router-dom';
-import React, { useState } from 'react';
-import { useAppDispatch, useAppSelector } from 'redux/hooks';
+} from "@mui/material";
+import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { useAppDispatch, useAppSelector } from "redux/hooks";
 
-import AccountBoxIcon from '@mui/icons-material/AccountBox';
-import InsertEmoticonIcon from '@mui/icons-material/InsertEmoticon';
-import Logout from '@mui/icons-material/Logout';
-import Settings from '@mui/icons-material/Settings';
-import { blue } from '@mui/material/colors';
-import { removeMyUserProfile } from 'redux/userProfile/userProfileSlice';
-import { signOut } from 'redux/auth/authSlice';
-import { stringAvatar } from 'components/Avatar/AvatarFunction';
+import AccountBoxIcon from "@mui/icons-material/AccountBox";
+import InsertEmoticonIcon from "@mui/icons-material/InsertEmoticon";
+import Logout from "@mui/icons-material/Logout";
+import Settings from "@mui/icons-material/Settings";
+import { blue } from "@mui/material/colors";
+import { removeMyUserProfile } from "redux/userProfile/userProfileSlice";
+import { signOut } from "redux/auth/authSlice";
+import stringAvatar from "components/Avatar/AvatarFunction";
 
 export default function AccountMenu() {
   const theme = useTheme();
@@ -47,34 +47,34 @@ export default function AccountMenu() {
   };
   const handleLogout = async () => {
     const response = await dispatch(signOut());
-    if (response.meta.requestStatus === 'fulfilled') {
+    if (response.meta.requestStatus === "fulfilled") {
       dispatch(removeMyUserProfile());
-      navigate('/', { replace: true });
+      navigate("/", { replace: true });
     }
   };
   return (
-    <React.Fragment>
-      <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
+    <>
+      <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
         <Tooltip title="Account settings">
           <IconButton
             onClick={handleClick}
             size="small"
             sx={{ ml: 2 }}
-            aria-controls={open ? 'account-menu' : undefined}
+            aria-controls={open ? "account-menu" : undefined}
             aria-haspopup="true"
-            aria-expanded={open ? 'true' : undefined}
+            aria-expanded={open ? "true" : undefined}
           >
             <Avatar
               src={myUserProfile.avatarURL?.objectThumbnailURL}
               {...stringAvatar(myUserProfile.name, {
                 width: 32,
                 height: 32,
-                transition: 'all .2s ease-in-out',
-                '&:hover': {
+                transition: "all .2s ease-in-out",
+                "&:hover": {
                   borderColor: theme.palette.secondary.light,
                   background: `${theme.palette.secondary.light}!important`,
                   color: theme.palette.primary.light,
-                  '& svg': {
+                  "& svg": {
                     stroke: blue[100],
                   },
                 },
@@ -92,31 +92,31 @@ export default function AccountMenu() {
         PaperProps={{
           elevation: 0,
           sx: {
-            overflow: 'visible',
-            filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+            overflow: "visible",
+            filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
             mt: 1.5,
-            '& .MuiAvatar-root': {
+            "& .MuiAvatar-root": {
               width: 32,
               height: 32,
               ml: -0.5,
               mr: 1,
             },
-            '&:before': {
+            "&:before": {
               content: '""',
-              display: 'block',
-              position: 'absolute',
+              display: "block",
+              position: "absolute",
               top: 0,
               right: 14,
               width: 10,
               height: 10,
-              bgcolor: 'background.paper',
-              transform: 'translateY(-50%) rotate(45deg)',
+              bgcolor: "background.paper",
+              transform: "translateY(-50%) rotate(45deg)",
               zIndex: 0,
             },
           },
         }}
-        transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+        transformOrigin={{ horizontal: "right", vertical: "top" }}
+        anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         {/* <MenuItem >
           <Avatar /> My account
@@ -153,6 +153,6 @@ export default function AccountMenu() {
           Logout
         </MenuItem>
       </Menu>
-    </React.Fragment>
+    </>
   );
 }

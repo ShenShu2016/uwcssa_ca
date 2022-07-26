@@ -6,9 +6,9 @@
  * @FilePath: /uwcssa_ca/src/views/Dashboard/components/Section.tsx
  */
 
-import { Box, Card, Typography } from '@mui/material';
+import { Box, Card, Typography } from "@mui/material";
 
-import React from 'react';
+import React from "react";
 
 interface Props {
   children: React.ReactNode;
@@ -21,34 +21,36 @@ interface Props {
   [x: string]: any;
 }
 
-const Container = ({
+function Container({
   children,
   title,
   hasPadding = true,
   showTitle = true,
   component = Card,
   ...rest
-}: Props): JSX.Element => (
-  <Box {...rest} margin={'8px'}>
-    <Typography
-      display={showTitle ? 'block' : 'none'}
-      color="text.secondary"
-      sx={{ fontSize: 14, marginBottom: '4px' }}
-    >
-      {title}
-    </Typography>
-    <Box
-      component={component}
-      sx={{
-        p: hasPadding ? '8px' : '0px',
-        width: '100%',
-        height: '100%',
-        boxSizing: 'border-box',
-      }}
-    >
-      {children}
+}: Props): JSX.Element {
+  return (
+    <Box {...rest} margin="8px">
+      <Typography
+        display={showTitle ? "block" : "none"}
+        color="text.secondary"
+        sx={{ fontSize: 14, marginBottom: "4px" }}
+      >
+        {title}
+      </Typography>
+      <Box
+        component={component}
+        sx={{
+          p: hasPadding ? "8px" : "0px",
+          width: "100%",
+          height: "100%",
+          boxSizing: "border-box",
+        }}
+      >
+        {children}
+      </Box>
     </Box>
-  </Box>
-);
+  );
+}
 
 export default Container;

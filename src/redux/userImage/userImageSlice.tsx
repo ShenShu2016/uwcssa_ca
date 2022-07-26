@@ -12,21 +12,21 @@ import {
   createAsyncThunk,
   createEntityAdapter,
   createSlice,
-} from '@reduxjs/toolkit';
+} from "@reduxjs/toolkit";
 
-import API from '@aws-amplify/api';
-import { RootState } from 'redux/store';
-import { Storage } from '@aws-amplify/storage';
-import awsmobile from '../../aws-exports';
-import { createUserImage } from 'graphql/mutations';
-import { graphqlOperation } from '@aws-amplify/api-graphql';
-import { userImageSortByCreatedAt } from 'graphql/queries';
-import { v4 as uuid } from 'uuid';
+import API from "@aws-amplify/api";
+import { RootState } from "redux/store";
+import { Storage } from "@aws-amplify/storage";
+import { createUserImage } from "graphql/mutations";
+import { graphqlOperation } from "@aws-amplify/api-graphql";
+import { userImageSortByCreatedAt } from "graphql/queries";
+import { v4 as uuid } from "uuid";
+import awsmobile from "../../aws-exports";
 
 const { aws_user_files_s3_bucket, aws_user_files_s3_bucket_region } = awsmobile;
 
 export type UserImage = {
-  id: string; //id 必须要有
+  id: string; // id 必须要有
   objectURL: string;
   key: string;
   name: string;
@@ -39,7 +39,7 @@ export type UserImage = {
   targetTable: string;
   lastModified?: string | null;
   lastModifiedDate?: string | null;
-  active: 'T' | 'F';
+  active: "T" | "F";
   createdAt?: string | null;
   updatedAt?: string | null;
   owner: string;
@@ -51,22 +51,22 @@ const userImageAdapter = createEntityAdapter<UserImage>({
 
 const initialState = userImageAdapter.getInitialState({
   nextToken: null,
-  fetchUserImageListStatus: 'idle',
+  fetchUserImageListStatus: "idle",
   fetchUserImageListError: null,
-  postUserImageStatus: 'idle',
+  postUserImageStatus: "idle",
   postUserImageError: null,
 });
 
 export const fetchUserImageList = createAsyncThunk(
-  'userImage/fetchUserImageList',
+  "userImage/fetchUserImageList",
   async (undifend, { rejectWithValue }) => {
     try {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const result: any = await API.graphql({
         query: userImageSortByCreatedAt,
         variables: {
-          active: 'T',
-          sortDirection: 'DESC',
+          active: "T",
+          sortDirection: "DESC",
           limit: 20,
         },
       });
@@ -79,15 +79,15 @@ export const fetchUserImageList = createAsyncThunk(
 );
 
 export const moreUserImageList = createAsyncThunk(
-  'userImage/moreUserImageList',
+  "userImage/moreUserImageList",
   async (nextToken: string, { rejectWithValue }) => {
     try {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const result: any = await API.graphql({
         query: userImageSortByCreatedAt,
         variables: {
-          active: 'T',
-          sortDirection: 'DESC',
+          active: "T",
+          sortDirection: "DESC",
           limit: 20,
           nextToken,
         },
@@ -106,7 +106,7 @@ interface MyFile extends File {
 }
 
 export const postUserImage = createAsyncThunk(
-  'userImage/postUserImage',
+  "userImage/postUserImage",
   async (
     {
       targetTable,
@@ -116,15 +116,15 @@ export const postUserImage = createAsyncThunk(
       thumbnailWidth = 200,
     }: {
       targetTable: string;
-      file: MyFile; //自己编的一个type
-      authUser: { identityId: string; username: string }; //这个type编的也不太好
+      file: MyFile; // 自己编的一个type
+      authUser: { identityId: string; username: string }; // 这个type编的也不太好
       compressedWidth?: number;
       thumbnailWidth?: number;
     },
     { rejectWithValue },
   ) => {
     const id = uuid();
-    const fileEXT = file.name.split('.').pop();
+    const fileEXT = file.name.split(".").pop();
     const { identityId, username } = authUser;
     const key = `protected/${identityId}/${targetTable}/${id}.${fileEXT}`;
     const compressedKey = `protected/${identityId}/${targetTable}/c-${id}.${fileEXT}`;
@@ -132,30 +132,30 @@ export const postUserImage = createAsyncThunk(
     const createUserImageInput = {
       id,
       objectURL: `https://${aws_user_files_s3_bucket}.s3.${aws_user_files_s3_bucket_region}.amazonaws.com/${key}`,
-      key: key,
+      key,
       name: file.name,
       size: file.size,
       type: file.type,
-      compressedWidth: compressedWidth,
+      compressedWidth,
       objectCompressedURL: `https://${aws_user_files_s3_bucket}.s3.${aws_user_files_s3_bucket_region}.amazonaws.com/${compressedKey}`,
-      thumbnailWidth: thumbnailWidth,
+      thumbnailWidth,
       objectThumbnailURL: `https://${aws_user_files_s3_bucket}.s3.${aws_user_files_s3_bucket_region}.amazonaws.com/${thumbnailKey}`,
-      targetTable: targetTable,
+      targetTable,
       lastModified: file.lastModified,
       lastModifiedDate: file.lastModifiedDate,
-      active: 'T',
+      active: "T",
       owner: username,
     };
     // console.log(createUserImageInput);
 
     try {
       await Storage.put(`${targetTable}/${id}.${fileEXT}`, file, {
-        level: 'protected',
-        contentType: 'image/*',
+        level: "protected",
+        contentType: "image/*",
       });
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const result: any = await API.graphql(
-        graphqlOperation(createUserImage, { input: createUserImageInput }), //当这里发上去之后lambda function 会开始做两个东西，一个是压缩，一个是做thumbnail
+        graphqlOperation(createUserImage, { input: createUserImageInput }), // 当这里发上去之后lambda function 会开始做两个东西，一个是压缩，一个是做thumbnail
       );
       return result.data.createUserImage;
     } catch (error) {
@@ -166,20 +166,20 @@ export const postUserImage = createAsyncThunk(
 );
 
 const userImageSlice = createSlice({
-  name: 'userImage',
+  name: "userImage",
   initialState,
   reducers: {},
   extraReducers(builder) {
     builder // Cases for status of fetchArticleList (pending, fulfilled, and rejected)
       .addCase(fetchUserImageList.pending, (state) => {
-        state.fetchUserImageListStatus = 'loading';
+        state.fetchUserImageListStatus = "loading";
       })
       .addCase(fetchUserImageList.fulfilled, (state, action) => {
         userImageAdapter.setAll(state, action.payload.items);
         state.nextToken = action.payload.nextToken;
       })
       .addCase(fetchUserImageList.rejected, (state, action) => {
-        state.fetchUserImageListStatus = 'failed';
+        state.fetchUserImageListStatus = "failed";
         state.fetchUserImageListError = action.payload;
       })
       .addCase(moreUserImageList.fulfilled, (state, action) => {
@@ -188,14 +188,14 @@ const userImageSlice = createSlice({
       })
       // Cases for status of postUserImage (pending, fulfilled, and rejected)
       .addCase(postUserImage.pending, (state) => {
-        state.postUserImageStatus = 'loading';
+        state.postUserImageStatus = "loading";
       })
       .addCase(postUserImage.fulfilled, (state, action) => {
-        state.postUserImageStatus = 'succeed';
+        state.postUserImageStatus = "succeed";
         userImageAdapter.addOne(state, action.payload);
       })
       .addCase(postUserImage.rejected, (state, action) => {
-        state.postUserImageStatus = 'failed';
+        state.postUserImageStatus = "failed";
         state.postUserImageError = action.payload;
       });
   },

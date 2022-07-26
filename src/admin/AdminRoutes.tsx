@@ -1,28 +1,25 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-28 16:58:31
- * @LastEditTime: 2022-07-21 23:08:54
+ * @LastEditTime: 2022-07-26 15:53:21
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/admin/AdminRoutes.tsx
  */
 
-import {
-  AdminDashboard as AdminDashboardView,
-  ArticleEdit as ArticleEditView,
-  ArticleManagement as ArticleManagementView,
-  ArticlePublish as ArticlePublishView,
-  DepartmentDashboard as DepartmentDashboardView,
-  EventCreate as EventCreateView,
-  EventManagement as EventManagementView,
-  FormTest as FormTestView,
-  ResearchDevelopmentTeamDashboard as ResearchDevelopmentTeamDashboardView,
-  UserProfileDashboard as UserProfileDashboardView,
-  UwcssaMemberDashboard as UwcssaMemberDashboardView,
-} from 'admin';
-
-import React from 'react';
-import { getIsAdmin } from 'redux/auth/authSlice';
-import { useAppSelector } from 'redux/hooks';
+import React from "react";
+import { getIsAdmin } from "redux/auth/authSlice";
+import { useAppSelector } from "redux/hooks";
+import ArticleEdit from "./Article/ArticleEdit/ArticleEdit";
+import ArticleManagement from "./Article/ArticleManagement/ArticleManagement";
+import ArticlePublish from "./Article/ArticlePublish/ArticlePublish";
+import DepartmentDashboard from "./Department/DepartmentDashboard/DepartmentDashboard";
+import EventCreate from "./Event/EventCreate/EventCreate";
+import EventManagement from "./Event/EventManagement/EventManagement";
+import EventParticipant from "./Event/EventParticipant/EventParticipant";
+import FormTest from "./Event/Form/FormTest";
+import ResearchDevelopmentTeamDashboard from "./ResearchDevelopmentTeam/ResearchDevelopmentTeamDashboard/ResearchDevelopmentTeamDashboard";
+import UserProfileDashboard from "./UserProfile/UserProfileDashboard";
+import UwcssaMemberDashboard from "./UwcssaMember/UwcssaMemberDashboard/UwcssaMemberDashboard";
 
 function AdminRoutes(): Array<{
   path: string;
@@ -31,7 +28,7 @@ function AdminRoutes(): Array<{
   isAllowed: boolean | void;
   redirectPath: string | undefined;
 }> {
-  //const isAuth = useAppSelector(getAuthState);
+  // const isAuth = useAppSelector(getAuthState);
   const isAdmin = useAppSelector(getIsAdmin);
 
   return [
@@ -44,66 +41,72 @@ function AdminRoutes(): Array<{
     //   redirectPath: '/404',
     // },
     {
-      path: '/admin/users',
+      path: "/admin/users",
       renderer: (params = {}): JSX.Element => (
-        <UserProfileDashboardView {...params} />
+        <UserProfileDashboard {...params} />
       ),
       isAllowed: isAdmin,
-      redirectPath: '/404',
+      redirectPath: "/404",
     },
     {
-      path: '/admin/article-publish',
-      renderer: (): JSX.Element => <ArticlePublishView />,
+      path: "/admin/article-publish",
+      renderer: (): JSX.Element => <ArticlePublish />,
       isAllowed: isAdmin,
-      redirectPath: '/404',
+      redirectPath: "/404",
     },
     {
-      path: '/admin/article-edit',
-      renderer: (): JSX.Element => <ArticleManagementView />,
+      path: "/admin/article-edit",
+      renderer: (): JSX.Element => <ArticleManagement />,
       isAllowed: isAdmin,
-      redirectPath: '/404',
+      redirectPath: "/404",
     },
     {
-      path: '/admin/article-edit/:id',
-      renderer: (): JSX.Element => <ArticleEditView />,
+      path: "/admin/article-edit/:id",
+      renderer: (): JSX.Element => <ArticleEdit />,
       isAllowed: isAdmin,
-      redirectPath: '/404',
+      redirectPath: "/404",
     },
     {
-      path: '/admin/event',
-      renderer: (): JSX.Element => <EventManagementView />,
+      path: "/admin/event",
+      renderer: (): JSX.Element => <EventManagement />,
       isAllowed: isAdmin,
-      redirectPath: '/404',
+      redirectPath: "/404",
     },
     {
-      path: '/admin/activity-create',
-      renderer: (): JSX.Element => <EventCreateView />,
+      path: "/admin/event/eventParticipant/:eventId/:formFormItemsId",
+      renderer: (): JSX.Element => <EventParticipant />,
       isAllowed: isAdmin,
-      redirectPath: '/404',
+      redirectPath: "/404",
     },
     {
-      path: '/admin/activity-form-test',
-      renderer: (): JSX.Element => <FormTestView />,
+      path: "/admin/activity-create",
+      renderer: (): JSX.Element => <EventCreate />,
       isAllowed: isAdmin,
-      redirectPath: '/404',
+      redirectPath: "/404",
     },
     {
-      path: '/admin/uwcssa-department',
-      renderer: (): JSX.Element => <DepartmentDashboardView />,
+      path: "/admin/activity-form-test",
+      renderer: (): JSX.Element => <FormTest />,
       isAllowed: isAdmin,
-      redirectPath: '/404',
+      redirectPath: "/404",
     },
     {
-      path: '/admin/uwcssa-member',
-      renderer: (): JSX.Element => <UwcssaMemberDashboardView />,
+      path: "/admin/uwcssa-department",
+      renderer: (): JSX.Element => <DepartmentDashboard />,
       isAllowed: isAdmin,
-      redirectPath: '/404',
+      redirectPath: "/404",
     },
     {
-      path: '/admin/uwcssa-research-development',
-      renderer: (): JSX.Element => <ResearchDevelopmentTeamDashboardView />,
+      path: "/admin/uwcssa-member",
+      renderer: (): JSX.Element => <UwcssaMemberDashboard />,
       isAllowed: isAdmin,
-      redirectPath: '/404',
+      redirectPath: "/404",
+    },
+    {
+      path: "/admin/uwcssa-research-development",
+      renderer: (): JSX.Element => <ResearchDevelopmentTeamDashboard />,
+      isAllowed: isAdmin,
+      redirectPath: "/404",
     },
   ];
 }

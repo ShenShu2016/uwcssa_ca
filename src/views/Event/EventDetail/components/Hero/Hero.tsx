@@ -8,24 +8,24 @@
  *
  */
 
-import { Avatar, Box, ListItemText, Typography, alpha } from '@mui/material';
-import React, { useEffect } from 'react';
+import { Avatar, Box, ListItemText, Typography, alpha } from "@mui/material";
+import React, { useEffect } from "react";
 
-import Container from 'components/Container';
-import { Event } from 'redux/event/eventSlice';
-import moment from 'moment';
-import { stringAvatar } from 'components/Avatar/AvatarFunction';
+import Container from "components/Container";
+import { Event } from "redux/event/eventSlice";
+import moment from "moment";
+import stringAvatar from "components/Avatar/AvatarFunction";
 
-const Hero = ({ event }: { event: Event }): JSX.Element => {
+function Hero({ event }: { event: Event }): JSX.Element {
   console.log(event.user);
   useEffect(() => {
     const jarallaxInit = async () => {
-      const jarallaxElems = document.querySelectorAll('.jarallax');
+      const jarallaxElems = document.querySelectorAll(".jarallax");
       if (!jarallaxElems || (jarallaxElems && jarallaxElems.length === 0)) {
         return;
       }
 
-      const { jarallax } = await import('jarallax');
+      const { jarallax } = await import("jarallax");
       jarallax(jarallaxElems, { speed: 0.2 });
     };
 
@@ -34,92 +34,90 @@ const Hero = ({ event }: { event: Event }): JSX.Element => {
 
   return (
     <Box
-      className={'jarallax'}
+      className="jarallax"
       data-jarallax
       data-speed="0.2"
-      position={'relative'}
+      position="relative"
       minHeight={{ xs: 400, sm: 500, md: 600 }}
-      display={'flex'}
+      display="flex"
       marginTop={-13}
       paddingTop={13}
-      alignItems={'center'}
+      alignItems="center"
       id="agency__portfolio-item--js-scroll"
     >
       <Box
-        className={'jarallax-img'}
+        className="jarallax-img"
         sx={{
-          position: 'absolute',
-          objectFit: 'cover',
+          position: "absolute",
+          objectFit: "cover",
           /* support for plugin https://github.com/bfred-it/object-fit-images */
-          fontFamily: 'object-fit: cover;',
+          fontFamily: "object-fit: cover;",
           top: 0,
           left: 0,
-          width: '100%',
-          height: '100%',
+          width: "100%",
+          height: "100%",
           zIndex: -1,
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center center',
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          backgroundPosition: "center center",
           backgroundImage: `url(${event.coverPageImgURL})`,
         }}
       />
       <Box
         sx={{
-          position: 'absolute',
+          position: "absolute",
           top: 0,
           left: 0,
           right: 0,
           bottom: 0,
           width: 1,
           height: 1,
-          background: alpha('#161c2d', 0.6),
+          background: alpha("#161c2d", 0.6),
           zIndex: 1,
         }}
       />
-      <Container position={'relative'} zIndex={2}>
+      <Container position="relative" zIndex={2}>
         <Box>
           <Typography
             variant="h4"
             sx={{
               fontWeight: 400,
-              color: 'common.white',
+              color: "common.white",
               marginBottom: 2,
             }}
           >
             {event.title}
           </Typography>
-          {
-            event && event.user ? 
-              <Box display={'flex'} alignItems={'center'}>
-                <Avatar
-                  src={event.user.avatarURL?.objectThumbnailURL}
-                  {...stringAvatar(event.user.name, {
-                    width: 60,
-                    height: 60,
-                    marginRight: '1rem',
-                  })}
-                />
-                <ListItemText
-                  sx={{ margin: 0 }}
-                  primary={event.user.name}
-                  secondary={moment(event.createdAt).format(
-                    'dddd, MMMM Do YYYY, h:mm:ss a',
-                  )} //https://momentjs.com/docs/#/displaying/format/
-                  primaryTypographyProps={{
-                    variant: 'h6',
-                    sx: { color: 'common.white' },
-                  }}
-                  secondaryTypographyProps={{
-                    sx: { color: alpha('#ffffff', 0.8) },
-                  }}
-                />
-              </Box>
-              : null
-          }
+          {event && event.user ? (
+            <Box display="flex" alignItems="center">
+              <Avatar
+                src={event.user.avatarURL?.objectThumbnailURL}
+                {...stringAvatar(event.user.name, {
+                  width: 60,
+                  height: 60,
+                  marginRight: "1rem",
+                })}
+              />
+              <ListItemText
+                sx={{ margin: 0 }}
+                primary={event.user.name}
+                secondary={moment(event.createdAt).format(
+                  "dddd, MMMM Do YYYY, h:mm:ss a",
+                )} // https://momentjs.com/docs/#/displaying/format/
+                primaryTypographyProps={{
+                  variant: "h6",
+                  sx: { color: "common.white" },
+                }}
+                secondaryTypographyProps={{
+                  sx: { color: alpha("#ffffff", 0.8) },
+                }}
+              />
+            </Box>
+          ) : null}
         </Box>
       </Container>
     </Box>
   );
-};
+}
 
 export default Hero;

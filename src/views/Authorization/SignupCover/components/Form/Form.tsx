@@ -9,7 +9,7 @@
  */
 /* eslint-disable react/no-unescaped-entities */
 
-import * as yup from 'yup';
+import * as yup from "yup";
 
 import {
   Alert,
@@ -19,56 +19,56 @@ import {
   Link as MUILink,
   TextField,
   Typography,
-} from '@mui/material';
-import { Link, useNavigate } from 'react-router-dom';
-import React, { useState } from 'react';
+} from "@mui/material";
+import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
 
-import { signUp } from 'redux/auth/authSlice';
-import { useAppDispatch } from 'redux/hooks';
-import { useFormik } from 'formik';
+import { signUp } from "redux/auth/authSlice";
+import { useAppDispatch } from "redux/hooks";
+import { useFormik } from "formik";
 
 const validationSchema = yup.object({
   name: yup
     .string()
     .trim()
-    .min(2, 'Please enter a valid name')
-    .max(50, 'Please enter a valid name')
-    .required('Please specify your first name'),
+    .min(2, "Please enter a valid name")
+    .max(50, "Please enter a valid name")
+    .required("Please specify your first name"),
   username: yup
     .string()
     .trim()
-    .email('Please enter a valid email address')
-    .required('Email is required.'),
+    .email("Please enter a valid email address")
+    .required("Email is required."),
   password: yup
     .string()
-    .required('Please specify your password')
-    .min(8, 'Password must be at least 8 characters long.')
+    .required("Please specify your password")
+    .min(8, "Password must be at least 8 characters long.")
     .matches(
       /^(?=.*[a-z])(?=.*[A-Z])/,
-      'Must Contain One Uppercase, One Lowercase',
+      "Must Contain One Uppercase, One Lowercase",
     )
     .matches(
       // eslint-disable-next-line no-useless-escape
       /^[0-9A-Za-z]*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?][0-9a-zA-Z]*$/,
-      'Need one special character',
+      "Need one special character",
     )
-    .matches(/^(?=.{8,}$)\D*\d/, 'Must Contain One Number'),
+    .matches(/^(?=.{8,}$)\D*\d/, "Must Contain One Number"),
 });
 
-const Form = (): JSX.Element => {
+function Form(): JSX.Element {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const [signInError, setSignInError] = useState('');
+  const [signInError, setSignInError] = useState("");
   const initialValues = {
-    name: '',
-    username: '',
-    password: '',
+    name: "",
+    username: "",
+    password: "",
   };
 
   const onSubmit = async (values) => {
     const response: any = await dispatch(signUp(values));
 
-    if (response.meta.requestStatus === 'fulfilled') {
+    if (response.meta.requestStatus === "fulfilled") {
       navigate(`/auth/emailConfirmation/${values.username}`);
     } else {
       setSignInError(response.error.message);
@@ -79,7 +79,7 @@ const Form = (): JSX.Element => {
 
   const formik = useFormik({
     initialValues,
-    validationSchema: validationSchema,
+    validationSchema,
     onSubmit,
   });
 
@@ -88,11 +88,11 @@ const Form = (): JSX.Element => {
       <Box marginBottom={4}>
         <Typography
           sx={{
-            textTransform: 'uppercase',
-            fontWeight: 'medium',
+            textTransform: "uppercase",
+            fontWeight: "medium",
           }}
           gutterBottom
-          color={'text.secondary'}
+          color="text.secondary"
         >
           注册
         </Typography>
@@ -117,7 +117,7 @@ const Form = (): JSX.Element => {
             <TextField
               label="请输入用户名 *"
               variant="outlined"
-              name={'name'}
+              name="name"
               fullWidth
               value={formik.values.name}
               onChange={formik.handleChange}
@@ -132,7 +132,7 @@ const Form = (): JSX.Element => {
             <TextField
               label="请输入邮箱 *"
               variant="outlined"
-              name={'username'}
+              name="username"
               fullWidth
               value={formik.values.username}
               onChange={formik.handleChange}
@@ -147,8 +147,8 @@ const Form = (): JSX.Element => {
             <TextField
               label="请输入密码 *"
               variant="outlined"
-              name={'password'}
-              type={'password'}
+              name="password"
+              type="password"
               fullWidth
               value={formik.values.password}
               onChange={formik.handleChange}
@@ -162,27 +162,27 @@ const Form = (): JSX.Element => {
           <Grid item container xs={12}>
             <Box
               display="flex"
-              flexDirection={{ xs: 'column', sm: 'row' }}
-              alignItems={{ xs: 'stretched', sm: 'center' }}
-              justifyContent={'space-between'}
+              flexDirection={{ xs: "column", sm: "row" }}
+              alignItems={{ xs: "stretched", sm: "center" }}
+              justifyContent="space-between"
               width={1}
               maxWidth={600}
-              margin={'0 auto'}
+              margin="0 auto"
             >
               <Box marginBottom={{ xs: 1, sm: 0 }}>
-                <Typography variant={'subtitle2'}>
-                  已有账号？{' '}
+                <Typography variant="subtitle2">
+                  已有账号？{" "}
                   <MUILink
                     component={Link}
-                    color={'primary'}
-                    to={'/auth/signIn'}
-                    underline={'none'}
+                    color="primary"
+                    to="/auth/signIn"
+                    underline="none"
                   >
                     登录
                   </MUILink>
                 </Typography>
               </Box>
-              <Button size={'large'} variant={'contained'} type={'submit'}>
+              <Button size="large" variant="contained" type="submit">
                 注册
               </Button>
             </Box>
@@ -191,20 +191,20 @@ const Form = (): JSX.Element => {
             item
             container
             xs={12}
-            justifyContent={'center'}
-            alignItems={'center'}
+            justifyContent="center"
+            alignItems="center"
           >
             <Typography
-              variant={'subtitle2'}
-              color={'text.secondary'}
-              align={'center'}
+              variant="subtitle2"
+              color="text.secondary"
+              align="center"
             >
-              By clicking "Sign up" button you agree with our{' '}
+              By clicking "Sign up" button you agree with our{" "}
               <MUILink
                 component={Link}
-                color={'primary'}
-                to={'/terms'}
-                underline={'none'}
+                color="primary"
+                to="/terms"
+                underline="none"
               >
                 company terms and conditions.
               </MUILink>
@@ -214,6 +214,6 @@ const Form = (): JSX.Element => {
       </form>
     </Box>
   );
-};
+}
 
 export default Form;

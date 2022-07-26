@@ -6,10 +6,10 @@
  * @FilePath: /uwcssa_ca/src/admin/AdminDashboard/AdminDashboard.tsx
  */
 
-import React from 'react';
+import React from "react";
 
-const AdminDashboard = (): React.ReactElement => {
+function AdminDashboard(): React.ReactElement {
   return <>这是后台管理的dashboard页面</>;
-};
+}
 
 export default AdminDashboard;

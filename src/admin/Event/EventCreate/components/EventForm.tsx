@@ -1,15 +1,16 @@
-/* eslint-disable indent */
+/* eslint-disable @typescript-eslint/no-unused-expressions */
+/* eslint-disable no-nested-ternary */
 /*
  * @Author: 李佳修
  * @Date: 2022-06-08 10:31:57
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-07-21 23:24:00
+ * @LastEditTime: 2022-07-24 15:39:40
  * @FilePath: /uwcssa_ca/src/admin/Event/EventCreate/components/EventForm.tsx
  * @Description:
  *
  */
 
-import * as yup from 'yup';
+import * as yup from "yup";
 
 import {
   Box,
@@ -19,82 +20,77 @@ import {
   FormControlLabel,
   Grid,
   TextField,
-} from '@mui/material';
-import React, { useState } from 'react';
+} from "@mui/material";
+import React, { useState } from "react";
 
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
-import FieldLabel from './FieldLabel';
-import GoogleMapDialog from './GoogleMapDialog';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import RichTextEditor from 'components/RichTextEditor';
-import { setBasicInfo } from 'redux/form/formSlice';
-import { useAppDispatch } from 'redux/hooks';
-import { useFormik } from 'formik';
-import { useSwiper } from 'swiper/react';
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { setBasicInfo } from "redux/form/formSlice";
+import { useAppDispatch } from "redux/hooks";
+import { useFormik } from "formik";
+import { useSwiper } from "swiper/react";
+import RichTextEditor from "components/RichTextEditor/RichTextEditor";
+import GoogleMapDialog from "./GoogleMapDialog";
+import FieldLabel from "./FieldLabel";
 
 enum FieldType {
-  title = 'title',
-  online = 'online',
-  startDateTime = 'startDateTime',
-  endDateTime = 'endDateTime',
-  address = 'address',
-  limit = 'limit',
-  description = 'description',
-  content = 'content',
+  title = "title",
+  online = "online",
+  startDateTime = "startDateTime",
+  endDateTime = "endDateTime",
+  address = "address",
+  limit = "limit",
+  description = "description",
+  content = "content",
 }
 
 const validationSchema = yup.object({
-  title: yup.string().trim().required('请输入活动标题'),
-  startDateTime: yup.date().nullable().required('请选择活动时间'),
-  address: yup.string().trim().required('请输入活动地点'),
-  limit: yup.number().min(0, '输入人数无效').required('请输入活动最多限制人数'),
-  description: yup.string().trim().required('请输入活动描述'),
+  title: yup.string().trim().required("请输入活动标题"),
+  startDateTime: yup.date().nullable().required("请选择活动时间"),
+  address: yup.string().trim().required("请输入活动地点"),
+  limit: yup.number().min(0, "输入人数无效").required("请输入活动最多限制人数"),
+  description: yup.string().trim().required("请输入活动描述"),
 });
-
-const EventForm: React.FC = () => {
-  const [description, setDescription] = useState<string>('');
+function EventForm() {
+  const [description, setDescription] = useState<string>("");
   const [googleMapDialog, setGoogleMapDialog] = useState<boolean>(false);
   const swiper = useSwiper();
   // const activityForm = useAppSelector(state => state.form.createData.basicInfo);
   const [data, setData] = useState({
-    title: '',
+    title: "",
     startDateTime: null,
     endDateTime: null,
     online: false,
-    address: '',
+    address: "",
     limit: 0,
-    description: '',
-    content: '',
+    description: "",
+    content: "",
   });
   const dispatch = useAppDispatch();
 
-  const onSubmit = (values) => {
-    return values;
-  };
+  const onSubmit = (values) => values;
 
   const formik = useFormik({
     initialValues: data,
-    validationSchema: validationSchema,
+    validationSchema,
     onSubmit,
   });
 
   const handleFieldValueChange = (e, type: FieldType) => {
-    setData((prev) => {
-      return {
-        ...prev,
-        [type]:
-          type === FieldType.online
-            ? e.target.checked
-            : type === FieldType.startDateTime ||
-              type === FieldType.endDateTime ||
-              type === FieldType.content ||
-              type === FieldType.address
-            ? e
-            : e.target.value,
-      };
-    });
+    setData((prev) => ({
+      ...prev,
+      [type]:
+        type === FieldType.online
+          ? e.target.checked
+          : type === FieldType.startDateTime ||
+            type === FieldType.endDateTime ||
+            type === FieldType.content ||
+            type === FieldType.address
+          ? e
+          : e.target.value,
+    }));
     // 如果是rte传过来的内容 还需要设置一下description 是用于这个组件里显示内容的
     // 设置完之后就可以return了 因为rte和formik没关系
     if (type === FieldType.content) {
@@ -111,7 +107,7 @@ const EventForm: React.FC = () => {
 
   const onLocationSelect = (location) => {
     if (location) {
-      formik.setFieldValue('address', location.formatted_address);
+      formik.setFieldValue("address", location.formatted_address);
       handleFieldValueChange(location.place_id, FieldType.address);
     }
   };
@@ -122,17 +118,17 @@ const EventForm: React.FC = () => {
   };
 
   return (
-    <Box p={'2px'}>
+    <Box p="2px">
       <GoogleMapDialog
         open={googleMapDialog}
         setOpen={setGoogleMapDialog}
         onLocationSelect={onLocationSelect}
       />
       <form onSubmit={formik.handleSubmit}>
-        <Box sx={{ float: 'right' }}>
+        <Box sx={{ float: "right" }}>
           <Button
             variant="contained"
-            type={'submit'}
+            type="submit"
             endIcon={<ArrowForwardIcon />}
             onClick={handleSwiperNext}
           >
@@ -145,7 +141,7 @@ const EventForm: React.FC = () => {
             <TextField
               label="Title"
               variant="outlined"
-              name={'title'}
+              name="title"
               fullWidth
               size="small"
               value={formik.values.title}
@@ -157,11 +153,11 @@ const EventForm: React.FC = () => {
           <Grid item xs={12} sm={3}>
             <FieldLabel name="线上活动" />
             <FormControlLabel
-              name={'online'}
+              name="online"
               value={formik.values.online}
               onChange={(e) => handleFieldValueChange(e, FieldType.online)}
               control={<Checkbox size="small" />}
-              label={'该活动为线上活动'}
+              label="该活动为线上活动"
             />
           </Grid>
           <Grid item xs={12} sm={3}>
@@ -179,7 +175,7 @@ const EventForm: React.FC = () => {
                     {...params}
                     size="small"
                     fullWidth
-                    name={'startDateTime'}
+                    name="startDateTime"
                     error={
                       formik.touched.startDateTime &&
                       Boolean(formik.errors.startDateTime)
@@ -211,7 +207,7 @@ const EventForm: React.FC = () => {
                     {...params}
                     size="small"
                     fullWidth
-                    name={'endDateTime'}
+                    name="endDateTime"
                   />
                 )}
               />
@@ -222,7 +218,7 @@ const EventForm: React.FC = () => {
             <TextField
               label="Address"
               variant="outlined"
-              name={'address'}
+              name="address"
               fullWidth
               size="small"
               value={formik.values.address}
@@ -237,7 +233,7 @@ const EventForm: React.FC = () => {
             <TextField
               label="Member limitation"
               variant="outlined"
-              name={'limit'}
+              name="limit"
               type="number"
               fullWidth
               size="small"
@@ -253,7 +249,7 @@ const EventForm: React.FC = () => {
               label="Description"
               variant="outlined"
               rows={3}
-              name={'description'}
+              name="description"
               fullWidth
               multiline
               size="small"
@@ -282,6 +278,6 @@ const EventForm: React.FC = () => {
       </form>
     </Box>
   );
-};
+}
 
 export default EventForm;

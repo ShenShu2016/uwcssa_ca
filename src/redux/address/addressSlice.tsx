@@ -9,18 +9,18 @@
  * address: addressReducer,
  */
 
-import { CreateAddressInput, UpdateAddressInput } from 'API';
-import { createAddress, deleteAddress, updateAddress } from 'graphql/mutations';
+import { CreateAddressInput, UpdateAddressInput } from "API";
+import { createAddress, deleteAddress, updateAddress } from "graphql/mutations";
 import {
   createAsyncThunk,
   createEntityAdapter,
   createSlice,
-} from '@reduxjs/toolkit';
-import { getAddress, listAddresses } from 'graphql/queries';
+} from "@reduxjs/toolkit";
+import { getAddress, listAddresses } from "graphql/queries";
 
-import API from '@aws-amplify/api';
-import { RootState } from 'redux/store';
-import { graphqlOperation } from '@aws-amplify/api-graphql';
+import API from "@aws-amplify/api";
+import { RootState } from "redux/store";
+import { graphqlOperation } from "@aws-amplify/api-graphql";
 
 export type Address = {
   id: string;
@@ -44,23 +44,23 @@ const addressAdapter = createEntityAdapter<Address>({
 });
 
 const initialState = addressAdapter.getInitialState({
-  fetchAddressListStatus: 'idle',
+  fetchAddressListStatus: "idle",
   fetchAddressListError: null,
-  fetchAddressStatus: 'idle',
+  fetchAddressStatus: "idle",
   fetchAddressError: null,
-  postAddressStatus: 'idle',
+  postAddressStatus: "idle",
   postAddressError: null,
-  postAddressImgStatus: 'idle',
+  postAddressImgStatus: "idle",
   postAddressImgError: null,
-  updateAddressDetailStatus: 'idle',
+  updateAddressDetailStatus: "idle",
   updateAddressDetailError: null,
-  removeAddressStatus: 'idle',
+  removeAddressStatus: "idle",
   removeAddressError: null,
   eventCreateAddress: null,
 });
 
 export const fetchAddressList = createAsyncThunk(
-  'address/fetchAddressList',
+  "address/fetchAddressList",
   async ({ isAuth }: { isAuth: boolean }, { rejectWithValue }) => {
     try {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -70,7 +70,7 @@ export const fetchAddressList = createAsyncThunk(
         //   active: 'T',
         //   sortDirection: 'DESC',
         // },
-        authMode: isAuth ? undefined : 'AWS_IAM',
+        authMode: isAuth ? undefined : "AWS_IAM",
       });
       return result.data.listAddresses.items;
     } catch (error) {
@@ -81,7 +81,7 @@ export const fetchAddressList = createAsyncThunk(
 );
 
 export const fetchAddress = createAsyncThunk(
-  'address/fetchAddress',
+  "address/fetchAddress",
   async (
     {
       addressId,
@@ -97,10 +97,10 @@ export const fetchAddress = createAsyncThunk(
       const result: any = await API.graphql({
         query: getAddress,
         variables: { id: addressId },
-        authMode: isAuth ? undefined : 'AWS_IAM',
+        authMode: isAuth ? undefined : "AWS_IAM",
       });
       if (result.data.getAddress === null) {
-        return { id: addressId, description: 'not-found' };
+        return { id: addressId, description: "not-found" };
       }
       return result.data.getAddress;
     } catch (error) {
@@ -111,7 +111,7 @@ export const fetchAddress = createAsyncThunk(
 );
 
 export const postAddress = createAsyncThunk(
-  'address/postAddress',
+  "address/postAddress",
   async (
     {
       createAddressInput,
@@ -122,7 +122,7 @@ export const postAddress = createAsyncThunk(
   ) => {
     try {
       Object.keys(createAddressInput).forEach((key) =>
-        createAddressInput[key] === null || createAddressInput[key] === ''
+        createAddressInput[key] === null || createAddressInput[key] === ""
           ? delete createAddressInput[key]
           : {},
       ); // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -140,7 +140,7 @@ export const postAddress = createAsyncThunk(
 );
 
 export const updateAddressDetail = createAsyncThunk(
-  'address/updateAddressDetail',
+  "address/updateAddressDetail",
   async (
     {
       updateAddressInput,
@@ -150,7 +150,7 @@ export const updateAddressDetail = createAsyncThunk(
     { rejectWithValue },
   ) => {
     Object.keys(updateAddressInput).forEach((key) =>
-      updateAddressInput[key] === null || updateAddressInput[key] === ''
+      updateAddressInput[key] === null || updateAddressInput[key] === ""
         ? delete updateAddressInput[key]
         : {},
     );
@@ -170,7 +170,7 @@ export const updateAddressDetail = createAsyncThunk(
 );
 
 export const removeAddress = createAsyncThunk(
-  'address/removeAddress',
+  "address/removeAddress",
   async ({ id }: { id: string }, { rejectWithValue }) => {
     try {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -189,7 +189,7 @@ export const removeAddress = createAsyncThunk(
 );
 
 const addressSlice = createSlice({
-  name: 'address',
+  name: "address",
   initialState,
   reducers: {
     setEventCreateAddress(state, action) {
@@ -200,69 +200,69 @@ const addressSlice = createSlice({
     builder
       // Cases for status of fetchAddressList (pending, fulfilled, and rejected)
       .addCase(fetchAddressList.pending, (state) => {
-        state.fetchAddressListStatus = 'loading';
+        state.fetchAddressListStatus = "loading";
       })
       .addCase(fetchAddressList.fulfilled, (state, action) => {
-        state.fetchAddressListStatus = 'succeed';
-        //addressAdapter.removeAll(state);
+        state.fetchAddressListStatus = "succeed";
+        // addressAdapter.removeAll(state);
         addressAdapter.upsertMany(state, action.payload);
       })
       .addCase(fetchAddressList.rejected, (state, action) => {
-        state.fetchAddressListStatus = 'failed';
+        state.fetchAddressListStatus = "failed";
         state.fetchAddressListError = action.payload;
       })
       // Cases for status of selectedAddress (pending, fulfilled, and rejected)
       .addCase(fetchAddress.pending, (state) => {
-        state.fetchAddressStatus = 'loading';
+        state.fetchAddressStatus = "loading";
       })
       .addCase(fetchAddress.fulfilled, (state, action) => {
-        state.fetchAddressStatus = 'succeed';
+        state.fetchAddressStatus = "succeed";
         addressAdapter.upsertOne(state, action.payload);
-        //console.log(action.payload.comments.items);
+        // console.log(action.payload.comments.items);
         // store.dispatch(insertAllComments(action.payload.comments.items));
       })
       .addCase(fetchAddress.rejected, (state, action) => {
-        state.fetchAddressStatus = 'failed';
+        state.fetchAddressStatus = "failed";
         state.fetchAddressError = action.payload;
       })
       // Cases for status of postAddress (pending, fulfilled, and rejected)
       .addCase(postAddress.pending, (state) => {
-        state.postAddressStatus = 'loading';
+        state.postAddressStatus = "loading";
       })
       .addCase(postAddress.fulfilled, (state, action) => {
-        state.postAddressStatus = 'succeed';
+        state.postAddressStatus = "succeed";
         // state.addresss.unshift(action.payload.data.createAddress);
         addressAdapter.addOne(state, action.payload);
         // state.postAddressStatus = "idle";
       })
       .addCase(postAddress.rejected, (state, action) => {
-        state.postAddressStatus = 'failed';
+        state.postAddressStatus = "failed";
         state.postAddressError = action.payload;
       })
       // Cases for status of updateAddress (pending, fulfilled, and rejected)
       .addCase(updateAddressDetail.pending, (state) => {
-        state.updateAddressDetailStatus = 'loading';
+        state.updateAddressDetailStatus = "loading";
       })
       .addCase(updateAddressDetail.fulfilled, (state, action) => {
-        state.updateAddressDetailStatus = 'succeed';
-        addressAdapter.upsertOne(state, action.payload); //!! 這裏有問題，比如説我update了，頭像會沒
+        state.updateAddressDetailStatus = "succeed";
+        addressAdapter.upsertOne(state, action.payload); //! ! 這裏有問題，比如説我update了，頭像會沒
       })
       .addCase(updateAddressDetail.rejected, (state, action) => {
-        state.updateAddressDetailStatus = 'failed';
+        state.updateAddressDetailStatus = "failed";
         state.updateAddressDetailError = action.payload;
       })
       .addCase(removeAddress.pending, (state) => {
-        state.removeAddressStatus = 'loading';
+        state.removeAddressStatus = "loading";
       })
       .addCase(removeAddress.fulfilled, (state, action) => {
-        state.removeAddressStatus = 'succeed';
+        state.removeAddressStatus = "succeed";
         console.log(action.payload);
-        //state.uwcssaMembers.unshift(action.payload.data.createUwcssaMember);
+        // state.uwcssaMembers.unshift(action.payload.data.createUwcssaMember);
         addressAdapter.removeOne(state, action.payload);
         // state.updateUwcssaMemberStatus = "idle";
       })
       .addCase(removeAddress.rejected, (state, action) => {
-        state.removeAddressStatus = 'failed';
+        state.removeAddressStatus = "failed";
         state.removeAddressError = action.payload;
       });
   },

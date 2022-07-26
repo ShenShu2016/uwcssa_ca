@@ -2,13 +2,13 @@
  * @Author: Shen Shu
  * @Date: 2022-06-21 22:26:42
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-25 17:28:35
+ * @LastEditTime: 2022-07-24 16:39:04
  * @FilePath: /uwcssa_ca/src/views/Authorization/PreSignUpResetPassWord/components/Form/Form.tsx
  * @Description:
  *
  */
 
-import * as yup from 'yup';
+import * as yup from "yup";
 
 import {
   Alert,
@@ -18,55 +18,56 @@ import {
   Link as MUILink,
   TextField,
   Typography,
-} from '@mui/material';
-import { Link, useNavigate } from 'react-router-dom';
-import React, { useState } from 'react';
-import { useAppDispatch, useAppSelector } from 'redux/hooks';
+} from "@mui/material";
+import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { useAppDispatch, useAppSelector } from "redux/hooks";
 
-import { completeNewPassword } from 'redux/auth/authSlice';
-import { useFormik } from 'formik';
+import { completeNewPassword } from "redux/auth/authSlice";
+import { useFormik } from "formik";
 
 const validationSchema = yup.object({
   new_password: yup
     .string()
-    .required('Please specify your password')
-    .min(8, 'Password must be at least 8 characters long.')
+    .required("Please specify your password")
+    .min(8, "Password must be at least 8 characters long.")
     .matches(
       /^(?=.*[a-z])(?=.*[A-Z])/,
-      'Must Contain One Uppercase, One Lowercase',
+      "Must Contain One Uppercase, One Lowercase",
     )
     .matches(
       // eslint-disable-next-line no-useless-escape
       /^[0-9A-Za-z]*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?][0-9a-zA-Z]*$/,
-      'Need one special character',
+      "Need one special character",
     )
-    .matches(/^(?=.{8,}$)\D*\d/, 'Must Contain One Number'),
+    .matches(/^(?=.{8,}$)\D*\d/, "Must Contain One Number"),
 
   passwordConfirmation: yup
     .string()
-    .oneOf([yup.ref('new_password'), null], 'Passwords must match'),
+    .oneOf([yup.ref("new_password"), null], "Passwords must match"),
 });
 
-const Form = (): JSX.Element => {
+function Form(): JSX.Element {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const [signInError, setSignInError] = useState('');
+  const [signInError, setSignInError] = useState("");
   const user = useAppSelector((state) => state.auth.NEW_PASSWORD_REQUIRED_user);
   console.log(user);
   const initialValues = {
-    new_password: '',
-    passwordConfirmation: '',
+    new_password: "",
+    passwordConfirmation: "",
   };
 
   const onSubmit = async (values) => {
     console.log(values);
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     const { new_password } = values;
 
     const response: any = await dispatch(
       completeNewPassword({ user, new_password }),
     );
-    if (response.meta.requestStatus === 'fulfilled') {
-      navigate('/auth/signIn');
+    if (response.meta.requestStatus === "fulfilled") {
+      navigate("/auth/signIn");
     } else {
       setSignInError(response.error.message);
       return false;
@@ -78,7 +79,7 @@ const Form = (): JSX.Element => {
   const formik = useFormik({
     initialValues,
     enableReinitialize: true,
-    validationSchema: validationSchema,
+    validationSchema,
     onSubmit,
   });
 
@@ -87,11 +88,11 @@ const Form = (): JSX.Element => {
       <Box marginBottom={4}>
         <Typography
           sx={{
-            textTransform: 'uppercase',
-            fontWeight: 'medium',
+            textTransform: "uppercase",
+            fontWeight: "medium",
           }}
           gutterBottom
-          color={'text.secondary'}
+          color="text.secondary"
         >
           Email Confirmation
         </Typography>
@@ -110,14 +111,14 @@ const Form = (): JSX.Element => {
           <Grid item xs={12}>
             <Box
               display="flex"
-              flexDirection={{ xs: 'column', sm: 'row' }}
-              alignItems={{ xs: 'stretched', sm: 'center' }}
-              justifyContent={'space-between'}
+              flexDirection={{ xs: "column", sm: "row" }}
+              alignItems={{ xs: "stretched", sm: "center" }}
+              justifyContent="space-between"
               width={1}
               marginBottom={2}
             >
               <Box marginBottom={{ xs: 1, sm: 0 }}>
-                <Typography variant={'subtitle2'}>
+                <Typography variant="subtitle2">
                   Enter your new password
                 </Typography>
               </Box>
@@ -135,8 +136,8 @@ const Form = (): JSX.Element => {
             <TextField
               label="New Password *"
               variant="outlined"
-              name={'new_password'}
-              type={'password'}
+              name="new_password"
+              type="password"
               fullWidth
               value={formik.values.new_password}
               onChange={formik.handleChange}
@@ -152,14 +153,14 @@ const Form = (): JSX.Element => {
           <Grid item xs={12}>
             <Box
               display="flex"
-              flexDirection={{ xs: 'column', sm: 'row' }}
-              alignItems={{ xs: 'stretched', sm: 'center' }}
-              justifyContent={'space-between'}
+              flexDirection={{ xs: "column", sm: "row" }}
+              alignItems={{ xs: "stretched", sm: "center" }}
+              justifyContent="space-between"
               width={1}
               marginBottom={2}
             >
               <Box marginBottom={{ xs: 1, sm: 0 }}>
-                <Typography variant={'subtitle2'}>
+                <Typography variant="subtitle2">
                   Enter your new password
                 </Typography>
               </Box>
@@ -177,8 +178,8 @@ const Form = (): JSX.Element => {
             <TextField
               label="Confirm Password *"
               variant="outlined"
-              name={'passwordConfirmation'}
-              type={'password'}
+              name="passwordConfirmation"
+              type="password"
               fullWidth
               value={formik.values.passwordConfirmation}
               onChange={formik.handleChange}
@@ -198,28 +199,28 @@ const Form = (): JSX.Element => {
           <Grid item container xs={12}>
             <Box
               display="flex"
-              flexDirection={{ xs: 'column', sm: 'row' }}
-              alignItems={{ xs: 'stretched', sm: 'center' }}
-              justifyContent={'space-between'}
+              flexDirection={{ xs: "column", sm: "row" }}
+              alignItems={{ xs: "stretched", sm: "center" }}
+              justifyContent="space-between"
               width={1}
               maxWidth={600}
-              margin={'0 auto'}
+              margin="0 auto"
             >
               <Box marginBottom={{ xs: 1, sm: 0 }}>
-                <Typography variant={'subtitle2'}>
+                <Typography variant="subtitle2">
                   {/* eslint-disable-next-line react/no-unescaped-entities */}
-                  Don't have an account yet?{' '}
+                  Don't have an account yet?{" "}
                   <MUILink
                     component={Link}
-                    color={'primary'}
-                    to={'/auth/signUp'}
-                    underline={'none'}
+                    color="primary"
+                    to="/auth/signUp"
+                    underline="none"
                   >
                     Sign up here.
                   </MUILink>
                 </Typography>
               </Box>
-              <Button size={'large'} variant={'contained'} type={'submit'}>
+              <Button size="large" variant="contained" type="submit">
                 Confirm
               </Button>
             </Box>
@@ -228,6 +229,6 @@ const Form = (): JSX.Element => {
       </form>
     </Box>
   );
-};
+}
 
 export default Form;

@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-07-21 23:02:26
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-07-21 23:07:38
+ * @LastEditTime: 2022-07-26 15:53:55
  * @FilePath: /uwcssa_ca/src/admin/Event/EventManagement/EventManagement.tsx
  * @Description:
  *
@@ -18,17 +18,17 @@ import {
   Container,
   Grid,
   Typography,
-} from '@mui/material';
-import React, { useEffect } from 'react';
-import { fetchEventList, selectAllEvents } from 'redux/event/eventSlice';
-import { getAuthState, getOwnerUserName } from 'redux/auth/authSlice';
-import { useAppDispatch, useAppSelector } from 'redux/hooks';
+} from "@mui/material";
+import React, { useEffect } from "react";
+import { fetchEventList, selectAllEvents } from "redux/event/eventSlice";
+import { getAuthState, getOwnerUserName } from "redux/auth/authSlice";
+import { useAppDispatch, useAppSelector } from "redux/hooks";
 
-import { Link } from 'react-router-dom';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import { useTheme } from '@mui/material/styles';
+import { Link } from "react-router-dom";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
 
-const EventManagement = () => {
+function EventManagement() {
   const dispatch = useAppDispatch();
   const isAuth = useAppSelector(getAuthState);
   const ownerUsername = useAppSelector(getOwnerUserName);
@@ -37,18 +37,15 @@ const EventManagement = () => {
   const { fetchEventListStatus } = useAppSelector((state) => state.event);
 
   const theme = useTheme();
-  const isMd = useMediaQuery(theme.breakpoints.up('md'), {
+  const isMd = useMediaQuery(theme.breakpoints.up("md"), {
     defaultMatches: true,
   });
 
   useEffect(() => {
-    const getEvents = async () => {
-      if (isAuth !== null && fetchEventListStatus === 'idle') {
-        await dispatch(fetchEventList({ isAuth, ownerUsername }));
-      }
-    };
-    getEvents();
-  }, [isAuth, fetchEventListStatus]);
+    if (fetchEventListStatus === "idle") {
+      dispatch(fetchEventList({ isAuth, ownerUsername }));
+    }
+  }, [isAuth, fetchEventListStatus, dispatch, ownerUsername]);
 
   return (
     <Container>
@@ -65,21 +62,21 @@ const EventManagement = () => {
           >
             <Box
               component={Card}
-              display={'flex'}
-              flexDirection={{ xs: 'column', sm: 'row' }}
+              display="flex"
+              flexDirection={{ xs: "column", sm: "row" }}
             >
               <CardMedia
                 title={item.title}
                 image={
                   item.coverPageImgURL ||
-                  'https://uwcssabucket53243-master.s3.us-east-2.amazonaws.com/public/user/BackGround/6d328ddc-08d7-4f7d-8527-2173349796a7.jpg'
+                  "https://uwcssabucket53243-master.s3.us-east-2.amazonaws.com/public/user/BackGround/6d328ddc-08d7-4f7d-8527-2173349796a7.jpg"
                 }
                 sx={{
-                  height: { xs: 240, sm: 'auto' },
+                  height: { xs: 240, sm: "auto" },
                   width: { xs: 1, sm: 300 },
                 }}
               />
-              <CardContent sx={{ width: { xs: '100%', sm: '60%' } }}>
+              <CardContent sx={{ width: { xs: "100%", sm: "60%" } }}>
                 <Box>
                   <Typography variant="h6" gutterBottom color="text.primary">
                     {item.title}
@@ -92,12 +89,18 @@ const EventManagement = () => {
                     {item.coverPageDescription}
                   </Typography>
                 </Box>
-                <CardActions sx={{ justifyContent: 'space-between' }}>
+                <CardActions sx={{ justifyContent: "space-between" }}>
                   <Button component={Link} to={`/admin/event-edit/${item.id}`}>
                     编辑
                   </Button>
                   <Button component={Link} to={`/event/${item.id}`}>
                     查看详情
+                  </Button>
+                  <Button
+                    component={Link}
+                    to={`/admin/event/EventParticipant/${item.id}/${item.form.id}`}
+                  >
+                    报名情况
                   </Button>
                 </CardActions>
               </CardContent>
@@ -107,6 +110,6 @@ const EventManagement = () => {
       </Grid>
     </Container>
   );
-};
+}
 
 export default EventManagement;

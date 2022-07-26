@@ -8,50 +8,50 @@
  *
  */
 
-import { Box, Typography } from '@mui/material';
+import { Box, Typography } from "@mui/material";
 
-import Container from 'components/Container';
-import React from 'react';
-import ReactPlayer from 'react-player';
+import Container from "components/Container";
+import React from "react";
+import ReactPlayer from "react-player";
 
-const Video = (): JSX.Element => {
+function Video(): JSX.Element {
   return (
     <Box
       sx={{
-        position: 'relative',
+        position: "relative",
         backgroundImage:
-          'url(https://uwcssats232508-production.s3.us-east-2.amazonaws.com/uwincssa_pictures/blackShadowWithBridge.jpg)',
-        backgroundPosition: 'center center',
-        '&:after': {
+          "url(https://uwcssats232508-production.s3.us-east-2.amazonaws.com/uwincssa_pictures/blackShadowWithBridge.jpg)",
+        backgroundPosition: "center center",
+        "&:after": {
           content: '""',
-          position: 'absolute',
+          position: "absolute",
           top: 0,
           left: 0,
           right: 0,
           bottom: 0,
-          bgcolor: '#11092d',
+          bgcolor: "#11092d",
           opacity: 0.7,
           zIndex: 1,
         },
       }}
     >
-      <Container position={'relative'} zIndex={3}>
+      <Container position="relative" zIndex={3}>
         <Box>
           <Box marginBottom={4}>
             <Typography
-              variant={'h4'}
+              variant="h4"
               gutterBottom
-              align={'center'}
-              sx={{ fontWeight: 700, color: 'common.white' }}
+              align="center"
+              sx={{ fontWeight: 700, color: "common.white" }}
             >
               Watch the video
             </Typography>
             <Typography
-              variant={'h6'}
-              component={'p'}
-              color={'text.secondary'}
-              align={'center'}
-              sx={{ color: 'common.white' }}
+              variant="h6"
+              component="p"
+              color="text.secondary"
+              align="center"
+              sx={{ color: "common.white" }}
             >
               After 3 days all of your offers will arrive and you will have
               another 7 days to select your new company.
@@ -60,24 +60,24 @@ const Video = (): JSX.Element => {
           <Box
             sx={{
               backgroundImage:
-                'url(https://assets.maccarianagency.com/backgrounds/img50.jpg)',
-              backgroundPosition: 'center center',
+                "url(https://assets.maccarianagency.com/backgrounds/img50.jpg)",
+              backgroundPosition: "center center",
               height: 324,
               maxWidth: 600,
-              margin: '0 auto',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
+              margin: "0 auto",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
             }}
           >
             <ReactPlayer
-              url={'https://www.youtube.com/watch?v=e6Tys8ZuF_k'}
+              url="https://www.youtube.com/watch?v=e6Tys8ZuF_k"
               config={{
                 youtube: {
                   playerVars: { showinfo: 1 },
                 },
                 facebook: {
-                  appId: '12345',
+                  appId: "12345",
                 },
               }}
               controls
@@ -87,6 +87,6 @@ const Video = (): JSX.Element => {
       </Container>
     </Box>
   );
-};
+}
 
 export default Video;

@@ -2,43 +2,43 @@
  * @Author: Shikai Jin
  * @Date: 2022-06-01 00:01:32
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-11 17:39:57
+ * @LastEditTime: 2022-07-24 00:23:59
  * @FilePath: /uwcssa_ca/src/views/ResearchDevelopment/components/Partners/Partners.tsx
  * @Description:
  *
  */
 
-import { Box, useMediaQuery, useTheme } from '@mui/material';
+import { Box, useMediaQuery, useTheme } from "@mui/material";
 
-import React from 'react';
-import Slider from 'react-slick';
+import React from "react";
+import Slider from "react-slick";
 
 const mock = [
-  'https://www.logo.wine/a/logo/Amazon_Web_Services/Amazon_Web_Services-Logo.wine.svg',
-  //'https://www.logo.wine/a/logo/Node.js/Node.js-Logo.wine.svg',
-  'https://www.svgrepo.com/show/303360/nodejs-logo.svg',
-  'https://www.logo.wine/a/logo/TypeScript/TypeScript-Logo.wine.svg',
+  "https://www.logo.wine/a/logo/Amazon_Web_Services/Amazon_Web_Services-Logo.wine.svg",
+  // 'https://www.logo.wine/a/logo/Node.js/Node.js-Logo.wine.svg',
+  "https://www.svgrepo.com/show/303360/nodejs-logo.svg",
+  "https://www.logo.wine/a/logo/TypeScript/TypeScript-Logo.wine.svg",
 
-  //'https://www.logo.wine/a/logo/React_(web_framework)/React_(web_framework)-Logo.wine.svg',
-  'https://www.logo.wine/a/logo/GitHub/GitHub-Logo.wine.svg',
+  // 'https://www.logo.wine/a/logo/React_(web_framework)/React_(web_framework)-Logo.wine.svg',
+  "https://www.logo.wine/a/logo/GitHub/GitHub-Logo.wine.svg",
 
-  'https://seeklogo.com/images/A/aws-amplify-logo-D68DDB5AB1-seeklogo.com.png',
-  'https://i.pinimg.com/originals/66/ec/d4/66ecd45c7b6a7a76cd3c2c1e16b14ea0.png',
-  'https://www.freelogovectors.net/wp-content/uploads/2018/12/react-logo.png',
+  "https://seeklogo.com/images/A/aws-amplify-logo-D68DDB5AB1-seeklogo.com.png",
+  "https://i.pinimg.com/originals/66/ec/d4/66ecd45c7b6a7a76cd3c2c1e16b14ea0.png",
+  "https://www.freelogovectors.net/wp-content/uploads/2018/12/react-logo.png",
 ];
 
-const Partners = (): JSX.Element => {
+function Partners(): JSX.Element {
   const theme = useTheme();
-  const isXs = useMediaQuery(theme.breakpoints.up('xs'), {
+  const isXs = useMediaQuery(theme.breakpoints.up("xs"), {
     defaultMatches: true,
   });
-  const isSm = useMediaQuery(theme.breakpoints.up('sm'), {
+  const isSm = useMediaQuery(theme.breakpoints.up("sm"), {
     defaultMatches: true,
   });
-  const isMd = useMediaQuery(theme.breakpoints.up('md'), {
+  const isMd = useMediaQuery(theme.breakpoints.up("md"), {
     defaultMatches: true,
   });
-  const isLg = useMediaQuery(theme.breakpoints.up('lg'), {
+  const isLg = useMediaQuery(theme.breakpoints.up("lg"), {
     defaultMatches: true,
   });
 
@@ -65,21 +65,21 @@ const Partners = (): JSX.Element => {
     arrows: false,
     autoplay: true,
     autoplaySpeed: 2000,
-    with: '100%',
+    with: "100%",
   };
 
   return (
     <Box>
       <Slider {...sliderOpts}>
-        {mock.map((item, i) => (
-          <Box key={i} sx={{ height: '90px', width: '100%' }}>
+        {mock.map((item) => (
+          <Box key={item} sx={{ height: "90px", width: "100%" }}>
             <Box
               component="img"
               height={1}
               src={item}
               alt="..."
               sx={{
-                filter: 'brightness(0) invert(1)',
+                filter: "brightness(0) invert(1)",
               }}
             />
           </Box>
@@ -87,6 +87,6 @@ const Partners = (): JSX.Element => {
       </Slider>
     </Box>
   );
-};
+}
 
 export default Partners;

@@ -8,7 +8,7 @@
  *
  */
 
-import * as yup from 'yup';
+import * as yup from "yup";
 
 import {
   Alert,
@@ -18,41 +18,41 @@ import {
   Link as MUILink,
   TextField,
   Typography,
-} from '@mui/material';
-import { Link, useNavigate, useParams } from 'react-router-dom';
-import React, { useState } from 'react';
+} from "@mui/material";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import React, { useState } from "react";
 
-import { emailConfirm } from 'redux/auth/authSlice';
-import { useAppDispatch } from 'redux/hooks';
-import { useFormik } from 'formik';
+import { emailConfirm } from "redux/auth/authSlice";
+import { useAppDispatch } from "redux/hooks";
+import { useFormik } from "formik";
 
 const validationSchema = yup.object({
   username: yup
     .string()
     .trim()
-    .email('Please enter a valid email address')
-    .required('Email is required.'),
+    .email("Please enter a valid email address")
+    .required("Email is required."),
   authenticationCode: yup
     .string()
-    .required('Please specify your code')
-    .min(6, 'The code should have at minimum length of 6')
-    .max(6, 'The code should have at maximum length of 6'),
+    .required("Please specify your code")
+    .min(6, "The code should have at minimum length of 6")
+    .max(6, "The code should have at maximum length of 6"),
 });
 
-const Form = (): JSX.Element => {
+function Form(): JSX.Element {
   const navigate = useNavigate();
   const { username } = useParams();
   const dispatch = useAppDispatch();
-  const [signInError, setSignInError] = useState('');
+  const [signInError, setSignInError] = useState("");
   const initialValues = {
-    username: username,
-    authenticationCode: '',
+    username,
+    authenticationCode: "",
   };
 
   const onSubmit = async (values) => {
     const response: any = await dispatch(emailConfirm(values));
-    if (response.meta.requestStatus === 'fulfilled') {
-      navigate('/auth/signIn');
+    if (response.meta.requestStatus === "fulfilled") {
+      navigate("/auth/signIn");
     } else {
       setSignInError(response.error.message);
       return false;
@@ -63,7 +63,7 @@ const Form = (): JSX.Element => {
 
   const formik = useFormik({
     initialValues,
-    validationSchema: validationSchema,
+    validationSchema,
     onSubmit,
   });
 
@@ -72,11 +72,11 @@ const Form = (): JSX.Element => {
       <Box marginBottom={4}>
         <Typography
           sx={{
-            textTransform: 'uppercase',
-            fontWeight: 'medium',
+            textTransform: "uppercase",
+            fontWeight: "medium",
           }}
           gutterBottom
-          color={'text.secondary'}
+          color="text.secondary"
         >
           Email Confirmation
         </Typography>
@@ -93,13 +93,13 @@ const Form = (): JSX.Element => {
       <form onSubmit={formik.handleSubmit}>
         <Grid container spacing={4}>
           <Grid item xs={12}>
-            <Typography variant={'subtitle2'} sx={{ marginBottom: 2 }}>
+            <Typography variant="subtitle2" sx={{ marginBottom: 2 }}>
               Enter your email
             </Typography>
             <TextField
               label="Email *"
               variant="outlined"
-              name={'username'}
+              name="username"
               fullWidth
               value={formik.values.username}
               onChange={formik.handleChange}
@@ -110,23 +110,23 @@ const Form = (): JSX.Element => {
           <Grid item xs={12}>
             <Box
               display="flex"
-              flexDirection={{ xs: 'column', sm: 'row' }}
-              alignItems={{ xs: 'stretched', sm: 'center' }}
-              justifyContent={'space-between'}
+              flexDirection={{ xs: "column", sm: "row" }}
+              alignItems={{ xs: "stretched", sm: "center" }}
+              justifyContent="space-between"
               width={1}
               marginBottom={2}
             >
               <Box marginBottom={{ xs: 1, sm: 0 }}>
-                <Typography variant={'subtitle2'}>
+                <Typography variant="subtitle2">
                   Enter your verification code
                 </Typography>
               </Box>
-              <Typography variant={'subtitle2'}>
+              <Typography variant="subtitle2">
                 <MUILink
                   component={Link}
-                  color={'primary'}
-                  to={'/auth/passwordReset'}
-                  underline={'none'}
+                  color="primary"
+                  to="/auth/passwordReset"
+                  underline="none"
                 >
                   Forgot your password?
                 </MUILink>
@@ -135,8 +135,8 @@ const Form = (): JSX.Element => {
             <TextField
               label="Authentication Code *"
               variant="outlined"
-              name={'authenticationCode'}
-              type={'string'}
+              name="authenticationCode"
+              type="string"
               fullWidth
               value={formik.values.authenticationCode}
               onChange={formik.handleChange}
@@ -156,28 +156,28 @@ const Form = (): JSX.Element => {
           <Grid item container xs={12}>
             <Box
               display="flex"
-              flexDirection={{ xs: 'column', sm: 'row' }}
-              alignItems={{ xs: 'stretched', sm: 'center' }}
-              justifyContent={'space-between'}
+              flexDirection={{ xs: "column", sm: "row" }}
+              alignItems={{ xs: "stretched", sm: "center" }}
+              justifyContent="space-between"
               width={1}
               maxWidth={600}
-              margin={'0 auto'}
+              margin="0 auto"
             >
               <Box marginBottom={{ xs: 1, sm: 0 }}>
-                <Typography variant={'subtitle2'}>
+                <Typography variant="subtitle2">
                   {/* eslint-disable-next-line react/no-unescaped-entities */}
-                  Don't have an account yet?{' '}
+                  Don't have an account yet?{" "}
                   <MUILink
                     component={Link}
-                    color={'primary'}
-                    to={'/auth/signUp'}
-                    underline={'none'}
+                    color="primary"
+                    to="/auth/signUp"
+                    underline="none"
                   >
                     Sign up here.
                   </MUILink>
                 </Typography>
               </Box>
-              <Button size={'large'} variant={'contained'} type={'submit'}>
+              <Button size="large" variant="contained" type="submit">
                 Confirm
               </Button>
             </Box>
@@ -186,6 +186,6 @@ const Form = (): JSX.Element => {
       </form>
     </Box>
   );
-};
+}
 
 export default Form;

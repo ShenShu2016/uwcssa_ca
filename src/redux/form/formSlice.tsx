@@ -1,8 +1,8 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-06-02 17:10:21
- * @LastEditors: 李佳修
- * @LastEditTime: 2022-06-16 15:19:03
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-07-26 16:12:16
  * @FilePath: /uwcssa_ca/src/redux/form/formSlice.tsx
  * @Description:
  *
@@ -13,26 +13,26 @@ import {
   CreateFormItemInput,
   UpdateFormInput,
   UpdateFormItemInput,
-} from 'API';
+} from "API";
 import {
   createAsyncThunk,
   createEntityAdapter,
   createSlice,
-} from '@reduxjs/toolkit';
+} from "@reduxjs/toolkit";
 import {
   createForm,
   createFormItem,
   updateForm,
   updateFormItem,
-} from 'graphql/mutations';
-import { getForm, getFormItem, listForms } from 'graphql/queries';
+} from "graphql/mutations";
+import { getForm, getFormItem, listForms } from "graphql/queries";
 
-import API from '@aws-amplify/api';
-import { RootState } from 'redux/store';
-import { UserProfile } from 'redux/userProfile/userProfileSlice';
-import { graphqlOperation } from '@aws-amplify/api-graphql';
-import { listFormItems } from './custom_q_m_s';
-import { v4 as uuid } from 'uuid';
+import API from "@aws-amplify/api";
+import { RootState } from "redux/store";
+import { UserProfile } from "redux/userProfile/userProfileSlice";
+import { graphqlOperation } from "@aws-amplify/api-graphql";
+import { v4 as uuid } from "uuid";
+import { listFormItems } from "./custom_q_m_s";
 
 export type Form = {
   id: string;
@@ -67,26 +67,26 @@ export type FormItem = {
 };
 
 export enum FormType {
-  TextFieldShort = 'TextFieldShort',
-  TextFieldLong = 'TextFieldLong',
-  Checkbox = 'Checkbox',
-  Select = 'Select',
-  Boolean = 'Boolean',
-  MultipleSelect = 'MultipleSelect',
-  FileUpload = 'FileUpload',
-  RadioGroupH = 'RadioGroupH',
-  RadioGroupV = 'RadioGroupV',
-  DatePicker = 'DatePicker',
-  DateTimePicker = 'DateTimePicker',
-  TimePicker = 'TimePicker',
+  TextFieldShort = "TextFieldShort",
+  TextFieldLong = "TextFieldLong",
+  Checkbox = "Checkbox",
+  Select = "Select",
+  Boolean = "Boolean",
+  MultipleSelect = "MultipleSelect",
+  FileUpload = "FileUpload",
+  RadioGroupH = "RadioGroupH",
+  RadioGroupV = "RadioGroupV",
+  DatePicker = "DatePicker",
+  DateTimePicker = "DateTimePicker",
+  TimePicker = "TimePicker",
 }
 
 export enum EventStatus {
-  ComingSoon = 'ComingSoon',
-  InProgress = 'InProgress',
-  SignUpClosed = 'SignUpClosed',
-  Finished = 'Finished',
-  Canceled = 'Canceled',
+  ComingSoon = "ComingSoon",
+  InProgress = "InProgress",
+  SignUpClosed = "SignUpClosed",
+  Finished = "Finished",
+  Canceled = "Canceled",
 }
 
 const formAdapter = createEntityAdapter<Form>({
@@ -98,26 +98,26 @@ const formItemAdapter = createEntityAdapter<FormItem>({
 });
 
 const initialState = formAdapter.getInitialState({
-  fetchFormListStatus: 'idle',
+  fetchFormListStatus: "idle",
   fetchFormListError: null,
-  fetchFormStatus: 'idle',
+  fetchFormStatus: "idle",
   fetchFormError: null,
-  postFormStatus: 'idle',
+  postFormStatus: "idle",
   postFormError: null,
-  postFormImgStatus: 'idle',
+  postFormImgStatus: "idle",
   postFormImgError: null,
-  updateFormDetailStatus: 'idle',
+  updateFormDetailStatus: "idle",
   updateFormDetailError: null,
   formItem: formItemAdapter.getInitialState({
-    fetchFormItemListStatus: 'idle',
+    fetchFormItemListStatus: "idle",
     fetchFormItemListError: null,
-    fetchFormItemStatus: 'idle',
+    fetchFormItemStatus: "idle",
     fetchFormItemError: null,
-    postFormItemStatus: 'idle',
+    postFormItemStatus: "idle",
     postFormItemError: null,
-    postFormItemImgStatus: 'idle',
+    postFormItemImgStatus: "idle",
     postFormItemImgError: null,
-    updateFormItemDetailStatus: 'idle',
+    updateFormItemDetailStatus: "idle",
     updateFormItemDetailError: null,
   }),
   createData: {
@@ -128,22 +128,22 @@ const initialState = formAdapter.getInitialState({
       EventPreview: false,
     },
     basicInfo: {
-      title: '',
+      title: "",
       startDateTime: null,
       endDateTime: null,
       online: false,
-      address: '',
+      address: "",
       limit: 0,
-      description: '',
-      content: '',
+      description: "",
+      content: "",
     },
-    posterImage: '',
+    posterImage: "",
     selectedQuestions: [],
   },
 });
 
 export const fetchFormList = createAsyncThunk(
-  'form/fetchFormList',
+  "form/fetchFormList",
   async ({ isAuth }: { isAuth: boolean }, { rejectWithValue }) => {
     try {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -152,7 +152,7 @@ export const fetchFormList = createAsyncThunk(
         variables: {
           limit: 10,
         },
-        authMode: isAuth ? undefined : 'AWS_IAM',
+        authMode: isAuth ? undefined : "AWS_IAM",
       });
       return result.data.listForms.items;
     } catch (error) {
@@ -163,7 +163,7 @@ export const fetchFormList = createAsyncThunk(
 );
 
 export const fetchForm = createAsyncThunk(
-  'form/fetchForm',
+  "form/fetchForm",
   async (
     { formId, isAuth }: { formId: string; isAuth: boolean },
     { rejectWithValue },
@@ -173,10 +173,10 @@ export const fetchForm = createAsyncThunk(
       const result: any = await API.graphql({
         query: getForm,
         variables: { id: formId },
-        authMode: isAuth ? undefined : 'AWS_IAM',
+        authMode: isAuth ? undefined : "AWS_IAM",
       });
       if (result.data.getForm === null) {
-        return { id: formId, description: 'not-found' };
+        return { id: formId, description: "not-found" };
       }
       return result.data.getForm;
     } catch (error) {
@@ -187,7 +187,7 @@ export const fetchForm = createAsyncThunk(
 );
 
 export const postForm = createAsyncThunk(
-  'form/postForm',
+  "form/postForm",
   async (
     { createFormInput }: { createFormInput: CreateFormInput },
     { rejectWithValue },
@@ -206,7 +206,7 @@ export const postForm = createAsyncThunk(
 );
 
 export const updateFormDetail = createAsyncThunk(
-  'form/updateFormDetail',
+  "form/updateFormDetail",
   async (
     { updateFormInput }: { updateFormInput: UpdateFormInput },
     { rejectWithValue },
@@ -225,17 +225,19 @@ export const updateFormDetail = createAsyncThunk(
 );
 
 export const fetchFormItemList = createAsyncThunk(
-  'form/formItem/fetchFormItemList',
-  async ({ isAuth }: { isAuth: boolean }, { rejectWithValue }) => {
+  "form/formItem/fetchFormItemList",
+  async (
+    { isAuth, filter }: { isAuth: boolean; filter: any },
+    { rejectWithValue },
+  ) => {
     try {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const result: any = await API.graphql({
         query: listFormItems,
         // 改成动态的之后 不用再限制条目了
         variables: {
-          filter: { isExample: { eq: true } },
+          filter,
         },
-        authMode: isAuth ? undefined : 'AWS_IAM',
+        authMode: isAuth ? undefined : "AWS_IAM",
       });
       return result.data.listFormItems.items;
     } catch (error) {
@@ -246,7 +248,7 @@ export const fetchFormItemList = createAsyncThunk(
 );
 
 export const fetchFormItem = createAsyncThunk(
-  'form/formItem/fetchFormItem',
+  "form/formItem/fetchFormItem",
   async (
     { formItemId, isAuth }: { formItemId: string; isAuth: boolean },
     { rejectWithValue },
@@ -256,10 +258,10 @@ export const fetchFormItem = createAsyncThunk(
       const result: any = await API.graphql({
         query: getFormItem,
         variables: { id: formItemId },
-        authMode: isAuth ? undefined : 'AWS_IAM',
+        authMode: isAuth ? undefined : "AWS_IAM",
       });
       if (result.data.getFormItem === null) {
-        return { id: formItemId, description: 'not-found' };
+        return { id: formItemId, description: "not-found" };
       }
       return result.data.getFormItem;
     } catch (error) {
@@ -270,7 +272,7 @@ export const fetchFormItem = createAsyncThunk(
 );
 
 export const postFormItem = createAsyncThunk(
-  'form/formItem/postFormItem',
+  "form/formItem/postFormItem",
   async (
     {
       createFormItemInput,
@@ -294,7 +296,7 @@ export const postFormItem = createAsyncThunk(
 );
 
 export const updateFormItemDetail = createAsyncThunk(
-  'form/formItem/updateFormItemDetail',
+  "form/formItem/updateFormItemDetail",
   async (
     {
       updateFormItemInput,
@@ -317,7 +319,7 @@ export const updateFormItemDetail = createAsyncThunk(
 );
 
 const formSlice = createSlice({
-  name: 'form',
+  name: "form",
   initialState,
   reducers: {
     setBasicInfo(state, action) {
@@ -329,8 +331,8 @@ const formSlice = createSlice({
       // 检查basicInfo中是否所有字段都不为空
       const complete = Object.keys(state.createData.basicInfo).every(
         (key) =>
-          key === 'online' ||
-          key === 'endDateTime' ||
+          key === "online" ||
+          key === "endDateTime" ||
           !!state.createData.basicInfo[key] ||
           state.createData.basicInfo[key] === 0,
       );
@@ -392,125 +394,128 @@ const formSlice = createSlice({
       current.forEach((item, index) => (item.order = index + 1));
       state.createData.selectedQuestions = current;
     },
+    removeAllFormItems(state) {
+      formItemAdapter.removeAll(state.formItem);
+    },
   },
   extraReducers(builder) {
     builder
       // Cases for status of fetchFormList (pending, fulfilled, and rejected)
       .addCase(fetchFormList.pending, (state) => {
-        state.fetchFormListStatus = 'loading';
+        state.fetchFormListStatus = "loading";
       })
       .addCase(fetchFormList.fulfilled, (state, action) => {
-        state.fetchFormListStatus = 'succeed';
-        //formAdapter.removeAll(state);
+        state.fetchFormListStatus = "succeed";
+        // formAdapter.removeAll(state);
         formAdapter.upsertMany(state, action.payload);
       })
       .addCase(fetchFormList.rejected, (state, action) => {
-        state.fetchFormListStatus = 'failed';
+        state.fetchFormListStatus = "failed";
         state.fetchFormListError = action.payload;
       })
       // Cases for status of selectedForm (pending, fulfilled, and rejected)
       .addCase(fetchForm.pending, (state) => {
-        state.fetchFormStatus = 'loading';
+        state.fetchFormStatus = "loading";
       })
       .addCase(fetchForm.fulfilled, (state, action) => {
-        state.fetchFormStatus = 'succeed';
+        state.fetchFormStatus = "succeed";
         formAdapter.upsertOne(state, action.payload);
         // commentAdapter.upsertMany(
         //   state.comments,
         //   action.payload.comments.items,
         // );
-        //console.log(action.payload.comments.items);
+        // console.log(action.payload.comments.items);
         // store.dispatch(insertAllComments(action.payload.comments.items));
       })
       .addCase(fetchForm.rejected, (state, action) => {
-        state.fetchFormStatus = 'failed';
+        state.fetchFormStatus = "failed";
         state.fetchFormError = action.payload;
       })
       // Cases for status of postForm (pending, fulfilled, and rejected)
       .addCase(postForm.pending, (state) => {
-        state.postFormStatus = 'loading';
+        state.postFormStatus = "loading";
       })
       .addCase(postForm.fulfilled, (state, action) => {
-        state.postFormStatus = 'succeed';
+        state.postFormStatus = "succeed";
         // state.forms.unshift(action.payload.data.createForm);
         formAdapter.addOne(state, action.payload);
         // state.postFormStatus = "idle";
       })
       .addCase(postForm.rejected, (state, action) => {
-        state.postFormStatus = 'failed';
+        state.postFormStatus = "failed";
         state.postFormError = action.payload;
       })
       // Cases for status of updateForm (pending, fulfilled, and rejected)
       .addCase(updateFormDetail.pending, (state) => {
-        state.updateFormDetailStatus = 'loading';
+        state.updateFormDetailStatus = "loading";
       })
       .addCase(updateFormDetail.fulfilled, (state) => {
-        state.updateFormDetailStatus = 'succeed';
-        //state.forms.unshift(action.payload.data.createForm);
-        //formAdapter.upsertOne(state, action.payload);
+        state.updateFormDetailStatus = "succeed";
+        // state.forms.unshift(action.payload.data.createForm);
+        // formAdapter.upsertOne(state, action.payload);
         // state.updateFormStatus = "idle";
       })
       .addCase(updateFormDetail.rejected, (state, action) => {
-        state.updateFormDetailStatus = 'failed';
+        state.updateFormDetailStatus = "failed";
         state.updateFormDetailError = action.payload;
       })
       // Cases for status of fetchFormItemList (pending, fulfilled, and rejected)
       .addCase(fetchFormItemList.pending, (state) => {
-        state.formItem.fetchFormItemListStatus = 'loading';
+        state.formItem.fetchFormItemListStatus = "loading";
       })
       .addCase(fetchFormItemList.fulfilled, (state, action) => {
-        state.formItem.fetchFormItemListStatus = 'succeed';
-        //formItemAdapter.removeAll(state);
+        state.formItem.fetchFormItemListStatus = "succeed";
+        // formItemAdapter.removeAll(state);
         formItemAdapter.upsertMany(state.formItem, action.payload);
       })
       .addCase(fetchFormItemList.rejected, (state, action) => {
-        state.formItem.fetchFormItemListStatus = 'failed';
+        state.formItem.fetchFormItemListStatus = "failed";
         state.formItem.fetchFormItemListError = action.payload;
       })
       // Cases for status of selectedFormItem (pending, fulfilled, and rejected)
       .addCase(fetchFormItem.pending, (state) => {
-        state.formItem.fetchFormItemStatus = 'loading';
+        state.formItem.fetchFormItemStatus = "loading";
       })
       .addCase(fetchFormItem.fulfilled, (state, action) => {
-        state.formItem.fetchFormItemStatus = 'succeed';
+        state.formItem.fetchFormItemStatus = "succeed";
         formItemAdapter.upsertOne(state.formItem, action.payload);
         // commentAdapter.upsertMany(
         //   state.comments,
         //   action.payload.comments.items,
         // );
-        //console.log(action.payload.comments.items);
+        // console.log(action.payload.comments.items);
         // store.dispatch(insertAllComments(action.payload.comments.items));
       })
       .addCase(fetchFormItem.rejected, (state, action) => {
-        state.formItem.fetchFormItemStatus = 'failed';
+        state.formItem.fetchFormItemStatus = "failed";
         state.formItem.fetchFormItemError = action.payload;
       })
       // Cases for status of postFormItem (pending, fulfilled, and rejected)
       .addCase(postFormItem.pending, (state) => {
-        state.formItem.postFormItemStatus = 'loading';
+        state.formItem.postFormItemStatus = "loading";
       })
       .addCase(postFormItem.fulfilled, (state, action) => {
-        state.formItem.postFormItemStatus = 'succeed';
+        state.formItem.postFormItemStatus = "succeed";
         // state.formItems.unshift(action.payload.data.createFormItem);
         formItemAdapter.addOne(state.formItem, action.payload);
         // state.postFormItemStatus = "idle";
       })
       .addCase(postFormItem.rejected, (state, action) => {
-        state.formItem.postFormItemStatus = 'failed';
+        state.formItem.postFormItemStatus = "failed";
         state.formItem.postFormItemError = action.payload;
       })
       // Cases for status of updateFormItem (pending, fulfilled, and rejected)
       .addCase(updateFormItemDetail.pending, (state) => {
-        state.formItem.updateFormItemDetailStatus = 'loading';
+        state.formItem.updateFormItemDetailStatus = "loading";
       })
       .addCase(updateFormItemDetail.fulfilled, (state) => {
-        state.formItem.updateFormItemDetailStatus = 'succeed';
-        //state.formItems.unshift(action.payload.data.createFormItem);
-        //formItemAdapter.upsertOne(state, action.payload);
+        state.formItem.updateFormItemDetailStatus = "succeed";
+        // state.formItems.unshift(action.payload.data.createFormItem);
+        // formItemAdapter.upsertOne(state, action.payload);
         // state.updateFormItemStatus = "idle";
       })
       .addCase(updateFormItemDetail.rejected, (state, action) => {
-        state.formItem.updateFormItemDetailStatus = 'failed';
+        state.formItem.updateFormItemDetailStatus = "failed";
         state.formItem.updateFormItemDetailError = action.payload;
       });
   },
@@ -523,6 +528,7 @@ export const {
   removeQuestion,
   reorderQuestion,
   setPosterImage,
+  removeAllFormItems,
 } = formSlice.actions;
 
 export const {

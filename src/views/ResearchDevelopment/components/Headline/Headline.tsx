@@ -7,28 +7,28 @@
  * @Description:
  *
  */
-import { alpha, useTheme } from '@mui/material/styles';
+import { alpha, useTheme } from "@mui/material/styles";
 
-import Box from '@mui/material/Box';
-import React from 'react';
-import Typography from '@mui/material/Typography';
+import Box from "@mui/material/Box";
+import React from "react";
+import Typography from "@mui/material/Typography";
 
-const Headline = (): JSX.Element => {
+function Headline(): JSX.Element {
   const theme = useTheme();
 
   return (
     <Box
       sx={{
-        position: 'relative',
-        '&::after': {
-          position: 'absolute',
+        position: "relative",
+        "&::after": {
+          position: "absolute",
           content: '""',
-          width: '30%',
+          width: "30%",
           zIndex: 1,
           top: 0,
           right: 0,
-          height: '100%',
-          backgroundSize: '18px 18px',
+          height: "100%",
+          backgroundSize: "18px 18px",
           backgroundImage: `radial-gradient(${alpha(
             theme.palette.primary.dark,
             0.4,
@@ -38,20 +38,15 @@ const Headline = (): JSX.Element => {
       }}
     >
       <Box position="relative" zIndex={2}>
-        <Typography
-          fontWeight={600}
-          variant={'h2'}
-          gutterBottom
-          align={'center'}
-        >
+        <Typography fontWeight={600} variant="h2" gutterBottom align="center">
           Engineering at UWCSSA
         </Typography>
-        <Typography variant="h6" color={'text.secondary'} align={'center'}>
+        <Typography variant="h6" color="text.secondary" align="center">
           We Work Together toward a Common Vision
         </Typography>
       </Box>
     </Box>
   );
-};
+}
 
 export default Headline;

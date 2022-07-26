@@ -2,13 +2,13 @@
  * @Author: Shen Shu
  * @Date: 2022-05-18 15:31:43
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-25 17:28:26
+ * @LastEditTime: 2022-07-24 16:39:27
  * @FilePath: /uwcssa_ca/src/views/Authorization/ForgotPassWordSubmit/components/Form/Form.tsx
  * @Description:
  *
  */
 
-import * as yup from 'yup';
+import * as yup from "yup";
 
 import {
   Alert,
@@ -20,80 +20,81 @@ import {
   TextField,
   Typography,
   useTheme,
-} from '@mui/material';
-import React, { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+} from "@mui/material";
+import React, { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
-import { forgotPassWordSubmit } from 'redux/auth/authSlice';
-import { useAppDispatch } from 'redux/hooks';
-import { useFormik } from 'formik';
+import { forgotPassWordSubmit } from "redux/auth/authSlice";
+import { useAppDispatch } from "redux/hooks";
+import { useFormik } from "formik";
 
 const validationSchema = yup.object({
   username: yup
     .string()
     .trim()
-    .email('Please enter a valid email address')
-    .required('Email is required.'),
+    .email("Please enter a valid email address")
+    .required("Email is required."),
   code: yup
     .string()
-    .required('Please specify your code')
-    .min(6, 'The code should have at minimum length of 6')
-    .max(6, 'The code should have at maximum length of 6'),
+    .required("Please specify your code")
+    .min(6, "The code should have at minimum length of 6")
+    .max(6, "The code should have at maximum length of 6"),
   new_password: yup
     .string()
-    .required('Please specify your password')
-    .min(8, 'Password must be at least 8 characters long.')
+    .required("Please specify your password")
+    .min(8, "Password must be at least 8 characters long.")
     .matches(
       /^(?=.*[a-z])(?=.*[A-Z])/,
-      'Must Contain One Uppercase, One Lowercase',
+      "Must Contain One Uppercase, One Lowercase",
     )
     .matches(
       // eslint-disable-next-line no-useless-escape
       /^[0-9A-Za-z]*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?][0-9a-zA-Z]*$/,
-      'Need one special character',
+      "Need one special character",
     )
-    .matches(/^(?=.{8,}$)\D*\d/, 'Must Contain One Number'),
+    .matches(/^(?=.{8,}$)\D*\d/, "Must Contain One Number"),
 
   passwordConfirmation: yup
     .string()
-    .oneOf([yup.ref('new_password'), null], 'Passwords must match'),
+    .oneOf([yup.ref("new_password"), null], "Passwords must match"),
 });
 
-const Form = (): JSX.Element => {
+function Form(): JSX.Element {
   const theme = useTheme();
   const navigate = useNavigate();
   const { username } = useParams();
   console.log(username);
   const dispatch = useAppDispatch();
-  const [signInError, setSignInError] = useState('');
+  const [signInError, setSignInError] = useState("");
   const initialValues = {
-    username: username,
-    code: '',
-    new_password: '',
+    username,
+    code: "",
+    new_password: "",
   };
 
   const onSubmit = async (values) => {
     const response: any = await dispatch(forgotPassWordSubmit(values));
     console.log(response);
-    if (response.meta.requestStatus === 'fulfilled') {
-      navigate('/auth/signIn');
+    if (response.meta.requestStatus === "fulfilled") {
+      navigate("/auth/signIn");
     } else {
       setSignInError(response.error.message);
       return false;
     }
+    return false;
   };
 
   const formik = useFormik({
     initialValues,
     enableReinitialize: true,
-    validationSchema: validationSchema,
+    validationSchema,
     onSubmit,
   });
 
   return (
     <Box padding={{ xs: 3, sm: 6 }} width={1} component={Card} boxShadow={1}>
       <form onSubmit={formik.handleSubmit} autoComplete="off">
-        <Box display="flex" flexDirection={'column'}>
+        <Box display="flex" flexDirection="column">
           <Box marginBottom={4}>
             <TextField
               sx={{ height: 54 }}
@@ -180,7 +181,7 @@ const Form = (): JSX.Element => {
               color="primary"
               size="medium"
               fullWidth
-              type={'submit'}
+              type="submit"
             >
               Create an account
             </Button>
@@ -190,30 +191,30 @@ const Form = (): JSX.Element => {
           </Box>
           <Box>
             <Typography component="p" variant="body2" align="left">
-              By creating you account you agree to our{' '}
+              By creating you account you agree to our{" "}
               <Box
                 component="a"
                 href="#"
                 color={theme.palette.text.primary}
-                fontWeight={'700'}
+                fontWeight="700"
               >
                 Privacy Policy
               </Box>
-              ,{' '}
+              ,{" "}
               <Box
                 component="a"
                 href="#"
                 color={theme.palette.text.primary}
-                fontWeight={'700'}
+                fontWeight="700"
               >
                 Data Policy
-              </Box>{' '}
-              and{' '}
+              </Box>{" "}
+              and{" "}
               <Box
                 component="a"
                 href="#"
                 color={theme.palette.text.primary}
-                fontWeight={'700'}
+                fontWeight="700"
               >
                 Cookie Policy
               </Box>
@@ -224,6 +225,6 @@ const Form = (): JSX.Element => {
       </form>
     </Box>
   );
-};
+}
 
 export default Form;

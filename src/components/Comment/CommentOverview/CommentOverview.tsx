@@ -2,37 +2,37 @@
  * @Author: Shen Shu
  * @Date: 2022-05-26 16:50:34
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-08 19:26:18
+ * @LastEditTime: 2022-07-24 15:33:19
  * @FilePath: /uwcssa_ca/src/components/Comment/CommentOverview/CommentOverview.tsx
  * @Description:
  *
  */
 
-import { Avatar, Box, Button, Divider, Grid, Typography } from '@mui/material';
-import React, { useState } from 'react';
+import { Avatar, Box, Button, Divider, Grid, Typography } from "@mui/material";
+import React, { useState } from "react";
 
-import { Comment } from 'redux/comment/commentSlice';
-import CommentGroupButton from './components/CommentGroupButton';
-import Container from 'components/Container';
-import { Count } from 'redux/count/countSlice';
-import { FeedbackForm } from '../CommentDialog/components';
-import moment from 'moment';
-import { stringAvatar } from 'components/Avatar/AvatarFunction';
+import { Comment } from "redux/comment/commentSlice";
+import Container from "components/Container";
+import { Count } from "redux/count/countSlice";
+import moment from "moment";
+import stringAvatar from "components/Avatar/AvatarFunction";
+import CommentGroupButton from "./components/CommentGroupButton";
+import FeedbackForm from "../CommentDialog/components/FeedbackForm/FeedbackForm";
 
 interface Props {
   comments: Array<Comment>;
   count: Count;
 }
 
-const CommentOverview = ({ comments, count }: Props): JSX.Element => {
+function CommentOverview({ comments, count }: Props): JSX.Element {
   const [open, setOpen] = useState(false);
   const [commentCount, setCommentCount] = useState(count.commentCount);
-  //console.log('comments', comments);
+  // console.log('comments', comments);
   return (
     <Container
-      display={'flex'}
-      justifyContent={'center'}
-      alignItems={'center'}
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
       sx={{ p: 0 }}
     >
       <FeedbackForm
@@ -45,17 +45,17 @@ const CommentOverview = ({ comments, count }: Props): JSX.Element => {
         <Grid item xs={12}>
           <Box
             sx={{
-              display: 'flex',
-              flexDirection: { xs: 'column', md: 'row' },
-              alignItems: { xs: 'flex-start', md: 'center' },
-              justifyContent: { md: 'space-between' },
+              display: "flex",
+              flexDirection: { xs: "column", md: "row" },
+              alignItems: { xs: "flex-start", md: "center" },
+              justifyContent: { md: "space-between" },
             }}
           >
             <Box>
-              <Typography variant={'h4'} fontWeight={700} marginBottom={1}>
+              <Typography variant="h4" fontWeight={700} marginBottom={1}>
                 Comments ({commentCount || 0})
               </Typography>
-              <Box display={'flex'} alignItems={'center'}>
+              <Box display="flex" alignItems="center">
                 {/* <Box display={'flex'} alignItems={'center'}>
                   {[1, 2, 3, 4, 5].map((r) => (
                     <Box
@@ -82,8 +82,8 @@ const CommentOverview = ({ comments, count }: Props): JSX.Element => {
               </Box>
             </Box>
             <Button
-              size={'large'}
-              variant={'contained'}
+              size="large"
+              variant="contained"
               sx={{
                 marginTop: { xs: 2, md: 0 },
               }}
@@ -118,7 +118,7 @@ const CommentOverview = ({ comments, count }: Props): JSX.Element => {
                 </Box>
               ))}
             </Box> */}
-            <Box display={'flex'}>
+            <Box display="flex">
               <Box mt="8px">
                 <Avatar
                   src={item.user.avatarURL?.objectThumbnailURL}
@@ -128,16 +128,16 @@ const CommentOverview = ({ comments, count }: Props): JSX.Element => {
                   })}
                 />
               </Box>
-              <Box sx={{ ml: '1rem' }}>
-                <Box sx={{ pl: '8px' }}>
-                  <Typography variant={'caption'} color={'text.secondary'}>
-                    {item.user.name} - {moment(item.createdAt).fromNow()}
+              <Box sx={{ ml: "1rem" }}>
+                <Box sx={{ pl: "8px" }}>
+                  <Typography variant="caption" color="text.secondary">
+                    {item.user.name} -{moment(item.createdAt).fromNow()}
                   </Typography>
                   {/* <Typography marginY={1}></Typography> */}
                   <Typography
                     style={{
-                      whiteSpace: 'pre-wrap',
-                      wordBreak: 'break-word',
+                      whiteSpace: "pre-wrap",
+                      wordBreak: "break-word",
                     }}
                   >
                     {item.content}
@@ -148,10 +148,10 @@ const CommentOverview = ({ comments, count }: Props): JSX.Element => {
             </Box>
           </Grid>
         ))}
-        <Grid container item xs={12} justifyContent={'center'}>
+        <Grid container item xs={12} justifyContent="center">
           <Button
-            size={'large'}
-            variant={'outlined'}
+            size="large"
+            variant="outlined"
             endIcon={
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -174,6 +174,6 @@ const CommentOverview = ({ comments, count }: Props): JSX.Element => {
       </Grid>
     </Container>
   );
-};
+}
 
 export default CommentOverview;

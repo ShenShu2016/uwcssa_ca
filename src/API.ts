@@ -889,7 +889,7 @@ export type UpdateLikeInput = {
   articleLikesId?: string | null,
   commentLikesId?: string | null,
   eventLikesId?: string | null,
-  likeCountId?: string | null,
+  likeCountId: string,
 };
 
 export type DeleteLikeInput = {

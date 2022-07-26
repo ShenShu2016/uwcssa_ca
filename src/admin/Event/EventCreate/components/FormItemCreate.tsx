@@ -1,14 +1,13 @@
-/* eslint-disable indent */
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-use-before-define */
 /*
  * @Author: 李佳修
  * @Date: 2022-06-03 09:32:30
- * @LastEditTime: 2022-06-25 23:49:26
+ * @LastEditTime: 2022-07-25 22:30:23
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/admin/Event/EventCreate/components/FormItemCreate.tsx
  */
 
-import * as yup from 'yup';
+import * as yup from "yup";
 
 import {
   Box,
@@ -25,18 +24,18 @@ import {
   Radio,
   RadioGroup,
   TextField,
-} from '@mui/material';
-import React, { useEffect, useState } from 'react';
-import { addQuestion, updateQuestion } from 'redux/form/formSlice';
-import { useAppDispatch, useAppSelector } from 'redux/hooks';
+} from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { addQuestion, updateQuestion, FormType } from "redux/form/formSlice";
+import { useAppDispatch, useAppSelector } from "redux/hooks";
 
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import FieldLabel from './FieldLabel';
-import { FormType } from 'redux/form/formSlice';
-import HighlightOffIcon from '@mui/icons-material/HighlightOff';
-import { getOwnerUserName } from 'redux/auth/authSlice';
-import { useFormik } from 'formik';
-import { useSnackbar } from 'notistack';
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+
+import HighlightOffIcon from "@mui/icons-material/HighlightOff";
+import { getOwnerUserName } from "redux/auth/authSlice";
+import { useFormik } from "formik";
+import { useSnackbar } from "notistack";
+import FieldLabel from "./FieldLabel";
 
 // import { postFormItem, updateFormItemDetail } from 'redux/form/formSlice';
 
@@ -59,16 +58,15 @@ interface Option {
   label: string;
   key: string;
 }
-
-const FormItemCreate: React.FC<FormItemCreateProp> = ({
+function FormItemCreate({
   type,
   editItem = null,
   open,
   setOpen,
-  // completeCreate,
-}) => {
+}: // completeCreate,
+FormItemCreateProp): JSX.Element {
   const [options, setOptions] = useState<Array<Option>>([]);
-  const [newOption, setNewOption] = useState<string>('');
+  const [newOption, setNewOption] = useState<string>("");
   const ownerUserName = useAppSelector(getOwnerUserName);
   const dispatch = useAppDispatch();
   const { enqueueSnackbar } = useSnackbar();
@@ -90,20 +88,20 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({
       resetForm();
     }
     if (type === DialogType.edit && editItem) {
-      let inputType = '';
-      if (editItem.isString) inputType = 'string';
-      if (editItem.isEmail) inputType = 'email';
-      if (editItem.isNumber) inputType = 'number';
-      formik.setFieldValue('formType', editItem.formType);
-      formik.setFieldValue('title', editItem.question);
-      formik.setFieldValue('placeholder', editItem.placeholder || '');
-      formik.setFieldValue('description', editItem.description || '');
-      formik.setFieldValue('label', editItem.label || '');
-      formik.setFieldValue('helperText', editItem.helperText || '');
-      formik.setFieldValue('minLength', editItem.minLength || 0);
-      formik.setFieldValue('maxLength', editItem.maxLength || 0);
-      formik.setFieldValue('inputType', inputType || '');
-      formik.setFieldValue('isRequired', editItem.isRequired ? 1 : 0);
+      let inputType = "";
+      if (editItem.isString) inputType = "string";
+      if (editItem.isEmail) inputType = "email";
+      if (editItem.isNumber) inputType = "number";
+      formik.setFieldValue("formType", editItem.formType);
+      formik.setFieldValue("title", editItem.question);
+      formik.setFieldValue("placeholder", editItem.placeholder || "");
+      formik.setFieldValue("description", editItem.description || "");
+      formik.setFieldValue("label", editItem.label || "");
+      formik.setFieldValue("helperText", editItem.helperText || "");
+      formik.setFieldValue("minLength", editItem.minLength || 0);
+      formik.setFieldValue("maxLength", editItem.maxLength || 0);
+      formik.setFieldValue("inputType", inputType || "");
+      formik.setFieldValue("isRequired", editItem.isRequired ? 1 : 0);
       if (editItem.formSelectChoices?.length) {
         setOptions(() => {
           const current = editItem.formSelectChoices.map((item) => ({
@@ -119,7 +117,7 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({
   const handleAddOption = () => {
     const exist = options.find((item) => item.label === newOption);
     if (exist) {
-      enqueueSnackbar(`选项${newOption}已存在`, { variant: 'warning' });
+      enqueueSnackbar(`选项${newOption}已存在`, { variant: "warning" });
       return;
     }
     setOptions((prev: Option[]) => {
@@ -130,7 +128,7 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({
       });
       return current;
     });
-    setNewOption('');
+    setNewOption("");
   };
 
   const handleRemoveOption = (option: Option) => {
@@ -139,20 +137,20 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({
   };
 
   const validationSchema = yup.object({
-    title: yup.string().trim().required('请输入问题名称'),
-    formType: yup.string().trim().required('请选择问题类型'),
+    title: yup.string().trim().required("请输入问题名称"),
+    formType: yup.string().trim().required("请选择问题类型"),
   });
 
   const initialValues = {
-    title: '',
-    placeholder: '',
-    description: '',
-    label: '',
-    formType: '',
-    helperText: '',
+    title: "",
+    placeholder: "",
+    description: "",
+    label: "",
+    formType: "",
+    helperText: "",
     minLength: 0,
     maxLength: 0,
-    inputType: '',
+    inputType: "",
     isRequired: 0,
   };
 
@@ -164,7 +162,7 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({
         formik.values.formType === FormType.RadioGroupV) &&
       !options.length
     ) {
-      enqueueSnackbar('请完成选项配置', { variant: 'warning' });
+      enqueueSnackbar("请完成选项配置", { variant: "warning" });
       return;
     }
     const param = {
@@ -174,9 +172,9 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({
       isDate: false,
       isTrim: true,
       isBoolean: values.formType === FormType.Boolean,
-      isString: values.inputType === 'string',
-      isEmail: values.inputType === 'email',
-      isNumber: values.inputType === 'number',
+      isString: values.inputType === "string",
+      isEmail: values.inputType === "email",
+      isNumber: values.inputType === "number",
       minLength: values.minLength,
       maxLength: values.maxLength,
       isRequired: !!values.isRequired,
@@ -225,8 +223,8 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({
       ? dispatch(addQuestion(param))
       : dispatch(updateQuestion(param));
     enqueueSnackbar(
-      type === DialogType.create ? '问题创建成功' : '修改问题配置成功',
-      { variant: 'success' },
+      type === DialogType.create ? "问题创建成功" : "修改问题配置成功",
+      { variant: "success" },
     );
     setOpen(false);
     // completeCreate();
@@ -237,7 +235,7 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({
 
   const formik = useFormik({
     initialValues,
-    validationSchema: validationSchema,
+    validationSchema,
     onSubmit,
   });
 
@@ -253,25 +251,25 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({
   };
 
   return (
-    <Dialog maxWidth={false} open={open} onClose={handleClose} scroll={'paper'}>
+    <Dialog maxWidth={false} open={open} onClose={handleClose} scroll="paper">
       {/* <FullScreenLoading
         message={fullScreenLoading.message}
         loading={fullScreenLoading.loading}
       /> */}
       <form onSubmit={formik.handleSubmit}>
         <DialogTitle>
-          {type === DialogType.create ? '创建问题' : '编辑问题'}
+          {type === DialogType.create ? "创建问题" : "编辑问题"}
         </DialogTitle>
         <DialogContent dividers>
-          <Box width={'50vw'}>
+          <Box width="50vw">
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <FieldLabel name="问题类型" isRequired />
                 <TextField
                   label="Type"
                   variant="outlined"
-                  name={'formType'}
-                  select={true}
+                  name="formType"
+                  select
                   size="small"
                   fullWidth
                   value={formik.values.formType}
@@ -315,7 +313,7 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({
               container
               spacing={2}
               sx={{
-                display: formik.values.formType ? 'flex' : 'none',
+                display: formik.values.formType ? "flex" : "none",
               }}
             >
               <Grid item xs={12}>
@@ -330,7 +328,7 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({
                 <TextField
                   label="Title"
                   variant="outlined"
-                  name={'title'}
+                  name="title"
                   fullWidth
                   size="small"
                   value={formik.values.title}
@@ -349,8 +347,8 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({
                     formik.values.formType !== FormType.RadioGroupH &&
                     formik.values.formType !== FormType.RadioGroupV &&
                     formik.values.formType !== FormType.Checkbox
-                      ? 'block'
-                      : 'none',
+                      ? "block"
+                      : "none",
                 }}
               >
                 <FieldLabel
@@ -360,7 +358,7 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({
                 <TextField
                   label="Placeholder"
                   variant="outlined"
-                  name={'placeholder'}
+                  name="placeholder"
                   placeholder="提示文字"
                   size="small"
                   fullWidth
@@ -377,22 +375,22 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({
                     formik.values.formType !== FormType.Boolean &&
                     formik.values.formType !== FormType.RadioGroupH &&
                     formik.values.formType !== FormType.RadioGroupV
-                      ? 'block'
-                      : 'none',
+                      ? "block"
+                      : "none",
                 }}
               >
                 <FieldLabel
                   name="问题标签"
                   description={
                     formik.values.formType === FormType.Checkbox
-                      ? 'checkbox后面显示的文字'
-                      : '输入框未聚焦时显示的文字'
+                      ? "checkbox后面显示的文字"
+                      : "输入框未聚焦时显示的文字"
                   }
                 />
                 <TextField
                   label="问题标签"
                   variant="outlined"
-                  name={'label'}
+                  name="label"
                   placeholder="提示文字"
                   size="small"
                   fullWidth
@@ -408,7 +406,7 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({
                 <TextField
                   label="Description"
                   variant="outlined"
-                  name={'description'}
+                  name="description"
                   size="small"
                   fullWidth
                   value={formik.values.description}
@@ -434,14 +432,14 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({
                     name="是否必填"
                     description={
                       formik.values.formType === FormType.Checkbox
-                        ? 'checkbox类型不支持配置是否必填，不填写时默认为不勾选'
-                        : ''
+                        ? "checkbox类型不支持配置是否必填，不填写时默认为不勾选"
+                        : ""
                     }
                   />
                   <RadioGroup
                     row
                     aria-labelledby="demo-row-radio-buttons-group-label"
-                    name={'isRequired'}
+                    name="isRequired"
                     value={formik.values.isRequired}
                     onChange={(e) => handleFieldValueChange(e)}
                   >
@@ -471,8 +469,8 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({
                   formik.values.formType === FormType.MultipleSelect ||
                   formik.values.formType === FormType.RadioGroupH ||
                   formik.values.formType === FormType.RadioGroupV
-                    ? 'block'
-                    : 'none',
+                    ? "block"
+                    : "none",
               }}
             >
               {/* 选项配置 当选择select或checkbox的时候显示 */}
@@ -484,41 +482,41 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({
                     width="fit-content"
                     padding="6px 24px"
                     display="flex"
-                    alignItems={'center'}
+                    alignItems="center"
                     key={option.key}
                     mb="4px"
                     borderRadius="8px"
                     sx={{
-                      '&:hover': {
-                        backgroundColor: '#e3f2fd',
+                      "&:hover": {
+                        backgroundColor: "#e3f2fd",
                       },
                     }}
                   >
-                    {index + 1}. {option.label}
+                    {index + 1}.{option.label}
                     <HighlightOffIcon
                       onClick={() => handleRemoveOption(option)}
                       sx={{
-                        marginLeft: '24px',
-                        color: '#9e9e9e',
-                        cursor: 'pointer',
+                        marginLeft: "24px",
+                        color: "#9e9e9e",
+                        cursor: "pointer",
                       }}
                     />
                   </Box>
                 ))}
-                <Box display="flex" mt="24px" alignItems={'center'}>
+                <Box display="flex" mt="24px" alignItems="center">
                   <Input
                     value={newOption}
                     onChange={(e) => setNewOption(e.target.value)}
-                    sx={{ ml: '24px' }}
+                    sx={{ ml: "24px" }}
                     placeholder="输入选项"
                     onKeyDown={handleInputKeyDown}
                   />
                   <AddCircleOutlineIcon
                     onClick={handleAddOption}
                     sx={{
-                      marginLeft: '12px',
-                      color: '#9e9e9e',
-                      cursor: 'pointer',
+                      marginLeft: "12px",
+                      color: "#9e9e9e",
+                      cursor: "pointer",
                     }}
                   />
                 </Box>
@@ -535,8 +533,8 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({
                 display:
                   formik.values.formType === FormType.TextFieldLong ||
                   formik.values.formType === FormType.TextFieldShort
-                    ? 'flex'
-                    : 'none',
+                    ? "flex"
+                    : "none",
               }}
             >
               <Grid item xs={12}>
@@ -551,7 +549,7 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({
                   label="Min length"
                   type="number"
                   variant="outlined"
-                  name={'minLength'}
+                  name="minLength"
                   size="small"
                   fullWidth
                   helperText="仅允许输入数字"
@@ -567,7 +565,7 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({
                 <TextField
                   label="Max length"
                   variant="outlined"
-                  name={'maxLength'}
+                  name="maxLength"
                   size="small"
                   type="number"
                   fullWidth
@@ -581,22 +579,22 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({
                 <RadioGroup
                   row
                   aria-labelledby="demo-row-radio-buttons-group-label"
-                  name={'inputType'}
+                  name="inputType"
                   value={formik.values.inputType}
                   onChange={(e) => handleFieldValueChange(e)}
                 >
                   <FormControlLabel
-                    value={'string'}
+                    value="string"
                     control={<Radio />}
                     label="无限制"
                   />
                   <FormControlLabel
-                    value={'number'}
+                    value="number"
                     control={<Radio />}
                     label="仅数字"
                   />
                   <FormControlLabel
-                    value={'email'}
+                    value="email"
                     control={<Radio />}
                     label="Email"
                   />
@@ -607,13 +605,13 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>取消</Button>
-          <Button type={'submit'}>
-            {type === DialogType.create ? '创建' : '编辑'}
+          <Button type="submit">
+            {type === DialogType.create ? "创建" : "编辑"}
           </Button>
         </DialogActions>
       </form>
     </Dialog>
   );
-};
+}
 
 export default FormItemCreate;

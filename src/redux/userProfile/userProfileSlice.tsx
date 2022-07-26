@@ -12,15 +12,15 @@ import {
   createAsyncThunk,
   createEntityAdapter,
   createSlice,
-} from '@reduxjs/toolkit';
+} from "@reduxjs/toolkit";
 
-import API from '@aws-amplify/api';
-import { RootState } from 'redux/store';
-import { UpdateUserProfileInput } from 'API';
-import { getUserProfile } from 'graphql/queries';
-import { graphqlOperation } from '@aws-amplify/api-graphql';
-import { updateUserProfile } from 'graphql/mutations';
-import { userProfileSortByCreatedAt } from './custom_q_m_s';
+import API from "@aws-amplify/api";
+import { RootState } from "redux/store";
+import { UpdateUserProfileInput } from "API";
+import { getUserProfile } from "graphql/queries";
+import { graphqlOperation } from "@aws-amplify/api-graphql";
+import { updateUserProfile } from "graphql/mutations";
+import { userProfileSortByCreatedAt } from "./custom_q_m_s";
 
 export type UserProfile = {
   id: string;
@@ -68,63 +68,63 @@ const userProfileAdapter = createEntityAdapter<UserProfile>({
 
 const initialState = userProfileAdapter.getInitialState({
   myUserProfile: {
-    id: '',
-    name: '',
-    fullName: '',
-    contactEmail: '',
-    title: '',
-    about: '',
-    uWindsorEmail: '',
-    windsorStudent: '',
+    id: "",
+    name: "",
+    fullName: "",
+    contactEmail: "",
+    title: "",
+    about: "",
+    uWindsorEmail: "",
+    windsorStudent: "",
     emailSubscription: true,
     avatarURL: {
-      id: '',
-      objectURL: '',
-      key: '',
-      name: '',
-      size: '',
-      type: '',
-      lastModified: '',
-      lastModifiedDate: '',
-      compressedWidth: '',
-      objectCompressedURL: '',
-      thumbnailWidth: '',
-      objectThumbnailURL: '',
-      targetTable: '',
-      active: '',
-      createdAt: '',
-      updatedAt: '',
-      owner: '',
+      id: "",
+      objectURL: "",
+      key: "",
+      name: "",
+      size: "",
+      type: "",
+      lastModified: "",
+      lastModifiedDate: "",
+      compressedWidth: "",
+      objectCompressedURL: "",
+      thumbnailWidth: "",
+      objectThumbnailURL: "",
+      targetTable: "",
+      active: "",
+      createdAt: "",
+      updatedAt: "",
+      owner: "",
     },
-    userProfileAvatarURLId: '',
-    website: '',
-    createdAt: '',
-    updatedAt: '',
-    owner: '',
+    userProfileAvatarURLId: "",
+    website: "",
+    createdAt: "",
+    updatedAt: "",
+    owner: "",
   },
-  fetchUserProfileListStatus: 'idle',
+  fetchUserProfileListStatus: "idle",
   fetchUserProfileListError: null,
-  fetchUserProfileStatus: 'idle',
+  fetchUserProfileStatus: "idle",
   fetchUserProfileError: null,
-  updateUserProfileDetailStatus: 'idle',
+  updateUserProfileDetailStatus: "idle",
   updateUserProfileDetailError: null,
 });
 
 export const fetchUserProfileList = createAsyncThunk(
-  'userProfile/fetchUserProfileList',
+  "userProfile/fetchUserProfileList",
   async ({ isAuth }: { isAuth: boolean }, { rejectWithValue }) => {
     try {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const result: any = await API.graphql({
         query: userProfileSortByCreatedAt,
         variables: {
-          active: 'T',
-          sortDirection: 'DESC',
+          active: "T",
+          sortDirection: "DESC",
           limit: 20,
         },
-        authMode: isAuth ? undefined : 'AWS_IAM',
+        authMode: isAuth ? undefined : "AWS_IAM",
       });
-      console.log('result', result);
+      console.log("result", result);
       return result.data.userProfileSortByCreatedAt.items;
     } catch (error) {
       console.log(error);
@@ -134,7 +134,7 @@ export const fetchUserProfileList = createAsyncThunk(
 );
 
 export const fetchUserProfile = createAsyncThunk(
-  'userProfile/fetchUserProfile',
+  "userProfile/fetchUserProfile",
   async (username: string, { rejectWithValue }) => {
     try {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -151,13 +151,13 @@ export const fetchUserProfile = createAsyncThunk(
 );
 
 export const updateUserProfileData = createAsyncThunk(
-  'userProfile/updateUserProfile',
+  "userProfile/updateUserProfile",
   async (
     updateUserProfileInput: UpdateUserProfileInput,
     { rejectWithValue },
   ) => {
     Object.keys(updateUserProfileInput).forEach((key) =>
-      updateUserProfileInput[key] === null || updateUserProfileInput[key] === ''
+      updateUserProfileInput[key] === null || updateUserProfileInput[key] === ""
         ? delete updateUserProfileInput[key]
         : {},
     );
@@ -169,7 +169,7 @@ export const updateUserProfileData = createAsyncThunk(
           input: updateUserProfileInput,
         }),
       );
-      console.log('response', response);
+      console.log("response", response);
       return response.data.updateUserProfile;
     } catch (error) {
       console.log(error);
@@ -179,10 +179,10 @@ export const updateUserProfileData = createAsyncThunk(
 );
 
 const userProfileSlice = createSlice({
-  name: 'userProfile',
+  name: "userProfile",
   initialState,
   reducers: {
-    //有API call 的不能放这里
+    // 有API call 的不能放这里
     removeMyUserProfile(state) {
       state.myUserProfile = initialState.myUserProfile;
       state.fetchUserProfileStatus = initialState.fetchUserProfileStatus;
@@ -191,36 +191,36 @@ const userProfileSlice = createSlice({
   extraReducers(builder) {
     builder
       .addCase(fetchUserProfileList.pending, (state) => {
-        state.fetchUserProfileListStatus = 'loading';
+        state.fetchUserProfileListStatus = "loading";
       })
       .addCase(fetchUserProfileList.fulfilled, (state, action) => {
-        state.fetchUserProfileListStatus = 'succeed';
-        //eventAdapter.removeAll(state);
+        state.fetchUserProfileListStatus = "succeed";
+        // eventAdapter.removeAll(state);
         userProfileAdapter.upsertMany(state, action.payload);
       })
       .addCase(fetchUserProfileList.rejected, (state, action) => {
-        state.fetchUserProfileListStatus = 'failed';
+        state.fetchUserProfileListStatus = "failed";
         state.fetchUserProfileListError = action.payload;
       })
       // Cases for status of getProfile (pending, fulfilled, and rejected)
       .addCase(fetchUserProfile.pending, (state) => {
-        state.fetchUserProfileStatus = 'loading';
+        state.fetchUserProfileStatus = "loading";
       })
       .addCase(fetchUserProfile.fulfilled, (state, action) => {
-        state.fetchUserProfileStatus = 'succeeded';
-        //console.log(action);
+        state.fetchUserProfileStatus = "succeeded";
+        // console.log(action);
         state.myUserProfile = action.payload;
       })
       .addCase(fetchUserProfile.rejected, (state, action) => {
-        state.fetchUserProfileStatus = 'failed';
+        state.fetchUserProfileStatus = "failed";
         state.fetchUserProfileError = action.payload;
       })
       // Cases for status of putUserProfile (pending, fulfilled, and rejected)
       .addCase(updateUserProfileData.pending, (state) => {
-        state.updateUserProfileDetailStatus = 'loading';
+        state.updateUserProfileDetailStatus = "loading";
       })
       .addCase(updateUserProfileData.fulfilled, (state, action) => {
-        state.updateUserProfileDetailStatus = 'succeeded';
+        state.updateUserProfileDetailStatus = "succeeded";
         state.myUserProfile = action.payload;
         if (action.payload.avatarURL) {
           state.myUserProfile.avatarURL.objectCompressedURL =
@@ -230,7 +230,7 @@ const userProfileSlice = createSlice({
         }
       })
       .addCase(updateUserProfileData.rejected, (state, action) => {
-        state.updateUserProfileDetailStatus = 'failed';
+        state.updateUserProfileDetailStatus = "failed";
         state.updateUserProfileDetailError = action.payload;
       });
   },

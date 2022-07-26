@@ -8,18 +8,18 @@
  *
  */
 
-import { IconButton, Stack, Tooltip } from '@mui/material';
-import React, { useState } from 'react';
-import { postLike, removeLike } from 'redux/like/likeSlice';
-import { useAppDispatch, useAppSelector } from 'redux/hooks';
+import { IconButton, Stack, Tooltip } from "@mui/material";
+import React, { useState } from "react";
+import { postLike, removeLike } from "redux/like/likeSlice";
+import { useAppDispatch, useAppSelector } from "redux/hooks";
 
-import { Count } from 'redux/count/countSlice';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ThumbDownIcon from '@mui/icons-material/ThumbDown';
-import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
-import { getOwnerUserName } from 'redux/auth/authSlice';
-import { useSnackbar } from 'notistack';
+import { Count } from "redux/count/countSlice";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import ThumbDownIcon from "@mui/icons-material/ThumbDown";
+import ThumbDownOffAltIcon from "@mui/icons-material/ThumbDownOffAlt";
+import { getOwnerUserName } from "redux/auth/authSlice";
+import { useSnackbar } from "notistack";
 
 function CommentGroupButton({ count, likes }: { count: Count; likes: any }) {
   const dispatch = useAppDispatch();
@@ -35,7 +35,7 @@ function CommentGroupButton({ count, likes }: { count: Count; likes: any }) {
     if (isFavorite === false) {
       setIsFavorite(true);
       const createLikeInput = {
-        id: ownerUserName + '_' + count.id,
+        id: `${ownerUserName}_${count.id}`,
         articleLikesId: count.countArticleId || undefined,
         commentLikesId: count.countCommentId || undefined,
         eventLikesId: count.countEventId || undefined,
@@ -45,23 +45,23 @@ function CommentGroupButton({ count, likes }: { count: Count; likes: any }) {
       console.log(createLikeInput);
       const response = await dispatch(postLike({ createLikeInput }));
       console.log(response);
-      if (response.meta.requestStatus === 'fulfilled') {
+      if (response.meta.requestStatus === "fulfilled") {
         setLikeCount(likeCount + 1);
-        enqueueSnackbar('点赞成功', { variant: 'success' });
+        enqueueSnackbar("点赞成功", { variant: "success" });
       } else {
-        enqueueSnackbar('点赞失败', { variant: 'error' });
+        enqueueSnackbar("点赞失败", { variant: "error" });
       }
     } else if (isFavorite === true) {
       setIsFavorite(false);
       const response = await dispatch(
-        removeLike({ id: ownerUserName + '_' + count.id }),
+        removeLike({ id: `${ownerUserName}_${count.id}` }),
       );
       console.log(response);
-      if (response.meta.requestStatus === 'fulfilled') {
+      if (response.meta.requestStatus === "fulfilled") {
         setLikeCount(likeCount - 1);
-        enqueueSnackbar('取消点赞成功', { variant: 'info' });
+        enqueueSnackbar("取消点赞成功", { variant: "info" });
       } else {
-        enqueueSnackbar('取消点赞失败', { variant: 'error' });
+        enqueueSnackbar("取消点赞失败", { variant: "error" });
       }
     }
   }
@@ -79,7 +79,7 @@ function CommentGroupButton({ count, likes }: { count: Count; likes: any }) {
         }}
       >
         {isFavorite ? (
-          <FavoriteIcon sx={{ color: '#e91e63' }} />
+          <FavoriteIcon sx={{ color: "#e91e63" }} />
         ) : (
           <FavoriteBorderIcon />
         )}

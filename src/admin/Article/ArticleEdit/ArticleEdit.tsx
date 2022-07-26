@@ -2,7 +2,7 @@
  * @Author: 李佳修
  * @Date: 2022-06-26 15:41:46
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-26 19:44:26
+ * @LastEditTime: 2022-07-25 22:28:55
  * @FilePath: /uwcssa_ca/src/admin/Article/ArticleEdit/ArticleEdit.tsx
  * @Description:
  *
@@ -12,27 +12,27 @@ import {
   Article,
   fetchArticle,
   updateArticleDetail,
-} from 'redux/article/articleSlice';
-import React, { useEffect, useState } from 'react';
-import { postTag, postUpdateArticleTags } from 'redux/tag/tagSlice';
-import { useAppDispatch, useAppSelector } from 'redux/hooks';
-import { useNavigate, useParams } from 'react-router-dom';
+} from "redux/article/articleSlice";
+import React, { useEffect, useState } from "react";
+import { postTag, postUpdateArticleTags } from "redux/tag/tagSlice";
+import { useAppDispatch, useAppSelector } from "redux/hooks";
+import { useNavigate, useParams } from "react-router-dom";
 
-import { ActiveType } from 'API';
-import ArticleCommon from '../ArticleCommon';
-import { getOwnerUserName } from 'redux/auth/authSlice';
-import { useSnackbar } from 'notistack';
+import { ActiveType } from "API";
+import { getOwnerUserName } from "redux/auth/authSlice";
+import { useSnackbar } from "notistack";
+import ArticleCommon from "../ArticleCommon";
 
-const ArticleEdit: React.FC = () => {
+function ArticleEdit(): JSX.Element {
   const { enqueueSnackbar } = useSnackbar();
   const { id: editArticleId } = useParams();
   const navigate = useNavigate();
   const [fullScreenLoading, setFullScreenLoading] = useState({
     loading: false,
-    message: '',
+    message: "",
   });
   const [initData, setInitData] = useState(null);
-  const [originOwner, setOriginOwner] = useState<string>('');
+  const [originOwner, setOriginOwner] = useState<string>("");
   const dispatch = useAppDispatch();
   const username = useAppSelector(getOwnerUserName);
 
@@ -40,7 +40,7 @@ const ArticleEdit: React.FC = () => {
     const getCurrentArticle = async () => {
       setFullScreenLoading({
         loading: true,
-        message: '正在获取文章信息',
+        message: "正在获取文章信息",
       });
       const res = await dispatch(
         fetchArticle({
@@ -49,7 +49,7 @@ const ArticleEdit: React.FC = () => {
           ownerUsername: username,
         }),
       );
-      if (res.meta.requestStatus === 'fulfilled') {
+      if (res.meta.requestStatus === "fulfilled") {
         const articleInfo = res.payload;
         setInitData({
           title: articleInfo.title,
@@ -61,11 +61,11 @@ const ArticleEdit: React.FC = () => {
 
         setOriginOwner(articleInfo.owner);
       } else {
-        enqueueSnackbar('获取文章失败', { variant: 'error' });
+        enqueueSnackbar("获取文章失败", { variant: "error" });
       }
       setFullScreenLoading({
         loading: false,
-        message: '',
+        message: "",
       });
       console.log(res);
     };
@@ -77,7 +77,7 @@ const ArticleEdit: React.FC = () => {
   const handleSubmitArticle = async (data) => {
     setFullScreenLoading({
       loading: true,
-      message: '正在更新标签和文章',
+      message: "正在更新标签和文章",
     });
     // 创建tag 和 创建文章异步进行 因为此时tag和文章之间没有依赖关系
     const [tagCreate, articleCommit] = await Promise.all([
@@ -86,7 +86,7 @@ const ArticleEdit: React.FC = () => {
     ]);
     setFullScreenLoading({
       loading: true,
-      message: '正在关联文章和标签',
+      message: "正在关联文章和标签",
     });
     // 都完成后进行tag与文章的关联
     if (tagCreate.status && articleCommit.status) {
@@ -95,27 +95,27 @@ const ArticleEdit: React.FC = () => {
         tagCreate.tags,
       );
       if (isConnected) {
-        enqueueSnackbar('更新完成', { variant: 'success' });
+        enqueueSnackbar("更新完成", { variant: "success" });
         setFullScreenLoading({
           loading: true,
-          message: '操作成功，即将跳转',
+          message: "操作成功，即将跳转",
         });
         setTimeout(() => {
           setFullScreenLoading({
             loading: false,
-            message: '',
+            message: "",
           });
-          navigate('/dashboard', { replace: true });
+          navigate("/dashboard", { replace: true });
         }, 1000);
       } else {
-        enqueueSnackbar('文章操作有误', { variant: 'warning' });
+        enqueueSnackbar("文章操作有误", { variant: "warning" });
       }
     } else {
-      console.error('文章上传或标签上传出现错误');
-      enqueueSnackbar('文章上传或标签上传出现错误', { variant: 'error' });
+      console.error("文章上传或标签上传出现错误");
+      enqueueSnackbar("文章上传或标签上传出现错误", { variant: "error" });
       setFullScreenLoading({
         loading: false,
-        message: '',
+        message: "",
       });
     }
   };
@@ -135,11 +135,11 @@ const ArticleEdit: React.FC = () => {
     const articlePostRes = await dispatch(
       updateArticleDetail({ updateArticleInput: params }),
     );
-    const isPosted = articlePostRes.meta.requestStatus === 'fulfilled';
+    const isPosted = articlePostRes.meta.requestStatus === "fulfilled";
     if (isPosted) {
-      enqueueSnackbar('文章已更新', { variant: 'success' });
+      enqueueSnackbar("文章已更新", { variant: "success" });
     } else {
-      enqueueSnackbar('文章更新错误', { variant: 'error' });
+      enqueueSnackbar("文章更新错误", { variant: "error" });
     }
     return {
       status: isPosted,
@@ -158,16 +158,16 @@ const ArticleEdit: React.FC = () => {
       ),
     );
     const tagUploadRes = await Promise.all(tagsPromises);
-    //console.log(tagUploadRes);
+    // console.log(tagUploadRes);
     const isAllTagCreated = tagUploadRes.every(
       (res) =>
-        res.meta.requestStatus === 'fulfilled' ||
-        res.payload[0].errorType === 'DynamoDB:ConditionalCheckFailedException',
+        res.meta.requestStatus === "fulfilled" ||
+        res.payload[0].errorType === "DynamoDB:ConditionalCheckFailedException",
     );
     if (isAllTagCreated) {
-      enqueueSnackbar('标签已创建', { variant: 'success' });
+      enqueueSnackbar("标签已创建", { variant: "success" });
     } else {
-      enqueueSnackbar('标签创建错误', { variant: 'warning' });
+      enqueueSnackbar("标签创建错误", { variant: "warning" });
     }
     return {
       tags: tagUploadRes.map((tag) => tag.meta.arg.createTagInput.id),
@@ -191,6 +191,6 @@ const ArticleEdit: React.FC = () => {
       onCommit={handleSubmitArticle}
     />
   );
-};
+}
 
 export default ArticleEdit;

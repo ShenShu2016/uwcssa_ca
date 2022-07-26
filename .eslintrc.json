@@ -1,0 +1,54 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "jest": true
+  },
+  "extends": [
+    "react-app",
+    "react-app/jest",
+    "airbnb",
+    "airbnb-typescript",
+    "plugin:import/typescript",
+    "plugin:prettier/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    "project": "./tsconfig.json"
+  },
+  "plugins": ["react", "@typescript-eslint", "prettier"],
+  "rules": {
+    "react/react-in-jsx-scope": ["off"],
+    "react/jsx-uses-react": ["off"],
+    "react/jsx-props-no-spreading": ["off"],
+    "react/no-unescaped-entities": ["off"],
+    "no-console": "off",
+    "no-param-reassign": [
+      "warn",
+      {
+        "props": true,
+        "ignorePropertyModificationsFor": ["state"]
+      }
+    ],
+    "react/require-default-props": "warn",
+    "@typescript-eslint/naming-convention": ["warn"],
+    "import/prefer-default-export": "warn",
+    "no-return-assign": "warn",
+    "@typescript-eslint/no-unused-vars": "warn",
+    "@typescript-eslint/no-shadow": ["warn"],
+    "@typescript-eslint/no-unused-expressions": "warn",
+    "consistent-return": "warn",
+    "no-plusplus": "warn",
+    "@typescript-eslint/no-use-before-define": "warn",
+    "react/function-component-definition": "warn",
+    "no-nested-ternary": "warn",
+    "jsx-a11y/click-events-have-key-events": "warn",
+    "jsx-a11y/no-static-element-interactions": "warn",
+    "jsx-a11y/label-has-associated-control": "warn"
+  }
+}
