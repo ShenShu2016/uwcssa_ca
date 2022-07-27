@@ -1,9 +1,9 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-06-02 17:10:21
- * @LastEditors: Shen Shu
- * @LastEditTime: 2022-07-26 16:12:16
- * @FilePath: /uwcssa_ca/src/redux/form/formSlice.tsx
+ * @LastEditors: Leo
+ * @LastEditTime: 2022-07-27 15:43:29
+ * @FilePath: \uwcssa_ca\src\redux\form\formSlice.tsx
  * @Description:
  *
  */
@@ -375,7 +375,10 @@ const formSlice = createSlice({
       const current = state.createData.selectedQuestions.filter(
         (item) => item.id !== action.payload.id,
       );
-      current.forEach((item, index) => (item.order = index + 1));
+      current.forEach((item, index) => {
+        // eslint-disable-next-line no-param-reassign
+        item.order = index + 1;
+      });
       state.createData.selectedQuestions = current;
       state.createData.completeStatus.EventConfig =
         !!state.createData.selectedQuestions.length;
@@ -391,7 +394,10 @@ const formSlice = createSlice({
       // 然后再把他插入到相应的位置
       current.splice(newOrder, 0, currentItem);
       // 最后重新给order
-      current.forEach((item, index) => (item.order = index + 1));
+      current.forEach((item, index) => {
+        // eslint-disable-next-line no-param-reassign
+        item.order = index + 1;
+      });
       state.createData.selectedQuestions = current;
     },
     removeAllFormItems(state) {

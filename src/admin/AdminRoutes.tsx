@@ -1,9 +1,9 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-28 16:58:31
- * @LastEditTime: 2022-07-26 15:53:21
- * @LastEditors: Shen Shu
- * @FilePath: /uwcssa_ca/src/admin/AdminRoutes.tsx
+ * @LastEditTime: 2022-07-27 15:25:21
+ * @LastEditors: Leo
+ * @FilePath: \uwcssa_ca\src\admin\AdminRoutes.tsx
  */
 
 import React from "react";
@@ -81,6 +81,12 @@ function AdminRoutes(): Array<{
     {
       path: "/admin/activity-create",
       renderer: (): JSX.Element => <EventCreate />,
+      isAllowed: isAdmin,
+      redirectPath: "/404",
+    },
+    {
+      path: "/admin/event-edit/:eventId",
+      renderer: (): JSX.Element => <EventCreate isEdit />,
       isAllowed: isAdmin,
       redirectPath: "/404",
     },

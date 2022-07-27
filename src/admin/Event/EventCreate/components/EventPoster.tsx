@@ -1,13 +1,18 @@
+/* eslint-disable react/require-default-props */
+/* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable no-nested-ternary */
 /*
  * @Author: 李佳修
  * @Date: 2022-06-01 09:18:34
- * @LastEditTime: 2022-07-25 22:26:59
- * @LastEditors: Shen Shu
- * @FilePath: /uwcssa_ca/src/admin/Event/EventCreate/components/EventPoster.tsx
+ * @LastEditTime: 2022-07-27 16:21:35
+ * @LastEditors: Leo
+ * @FilePath: \uwcssa_ca\src\admin\Event\EventCreate\components\EventPoster.tsx
  */
 
 import { Box, Button, LinearProgress, Typography, styled } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "redux/hooks";
 
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
@@ -24,7 +29,7 @@ const Input = styled("input")({
   display: "none",
 });
 
-function EventPoster() {
+function EventPoster({ poster = "" }: { poster?: string }) {
   const swiper = useSwiper();
   const { enqueueSnackbar } = useSnackbar();
   const dispatch = useAppDispatch();
@@ -34,6 +39,13 @@ function EventPoster() {
     (state) => state.form.createData.posterImage,
   );
   const authUser = useAppSelector((state) => state.auth.user);
+
+  useEffect(() => {
+    if (poster) {
+      dispatch(setPosterImage(poster));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [poster]);
 
   const handleImgUpload = async (e) => {
     // input点击取消之后 change事件仍有可能触发

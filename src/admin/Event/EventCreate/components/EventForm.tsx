@@ -1,11 +1,12 @@
+/* eslint-disable react/require-default-props */
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable no-nested-ternary */
 /*
  * @Author: 李佳修
  * @Date: 2022-06-08 10:31:57
- * @LastEditors: Shen Shu
- * @LastEditTime: 2022-07-24 15:39:40
- * @FilePath: /uwcssa_ca/src/admin/Event/EventCreate/components/EventForm.tsx
+ * @LastEditors: Leo
+ * @LastEditTime: 2022-07-27 16:23:35
+ * @FilePath: \uwcssa_ca\src\admin\Event\EventCreate\components\EventForm.tsx
  * @Description:
  *
  */
@@ -21,7 +22,7 @@ import {
   Grid,
   TextField,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
@@ -53,7 +54,7 @@ const validationSchema = yup.object({
   limit: yup.number().min(0, "输入人数无效").required("请输入活动最多限制人数"),
   description: yup.string().trim().required("请输入活动描述"),
 });
-function EventForm() {
+function EventForm({ basicInfo = null }: { basicInfo?: any }) {
   const [description, setDescription] = useState<string>("");
   const [googleMapDialog, setGoogleMapDialog] = useState<boolean>(false);
   const swiper = useSwiper();
@@ -68,6 +69,7 @@ function EventForm() {
     description: "",
     content: "",
   });
+
   const dispatch = useAppDispatch();
 
   const onSubmit = (values) => values;
@@ -77,6 +79,15 @@ function EventForm() {
     validationSchema,
     onSubmit,
   });
+
+  useEffect(() => {
+    if (basicInfo) {
+      dispatch(setBasicInfo(basicInfo));
+      formik.setValues(basicInfo);
+      setDescription(basicInfo.content);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [basicInfo]);
 
   const handleFieldValueChange = (e, type: FieldType) => {
     setData((prev) => ({
