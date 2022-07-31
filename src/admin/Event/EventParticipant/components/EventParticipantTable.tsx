@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-06-01 00:31:43
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-07-26 16:15:03
+ * @LastEditTime: 2022-07-30 23:40:01
  * @FilePath: /uwcssa_ca/src/admin/Event/EventParticipant/components/EventParticipantTable.tsx
  * @Description:
  *
@@ -12,12 +12,17 @@ import {
   Avatar,
   Box,
   Card,
+  Fade,
+  styled,
   Table,
   TableBody,
   TableCell,
   TableHead,
   TablePagination,
   TableRow,
+  Tooltip,
+  tooltipClasses,
+  TooltipProps,
   Typography,
 } from "@mui/material";
 
@@ -27,6 +32,14 @@ import React, { useState } from "react";
 import stringAvatar from "components/Avatar/AvatarFunction";
 import { EventParticipant } from "redux/eventParticipant/eventParticipantSlice";
 import { FormItem } from "redux/form/formSlice";
+
+const NoMaxWidthTooltip = styled(({ className, ...props }: TooltipProps) => (
+  <Tooltip {...props} classes={{ popper: className }} />
+))({
+  [`& .${tooltipClasses.tooltip}`]: {
+    maxWidth: "none",
+  },
+});
 
 function EventParticipantTable({
   eventParticipantList,
@@ -74,11 +87,25 @@ function EventParticipantTable({
                         display: "flex",
                       }}
                     >
-                      <Avatar
-                        src={participant.user.avatarURL?.objectCompressedURL}
-                        {...stringAvatar(participant.user.name, { mr: 2 })}
-                      />
-
+                      <NoMaxWidthTooltip
+                        disableInteractive
+                        TransitionComponent={Fade}
+                        TransitionProps={{ timeout: 600 }}
+                        title={
+                          <Typography
+                            color="inherit"
+                            variant="body2"
+                            sx={{ whiteSpace: "pre" }}
+                          >
+                            {JSON.stringify(participant.user, null, "\t")}
+                          </Typography>
+                        }
+                      >
+                        <Avatar
+                          src={participant.user.avatarURL?.objectCompressedURL}
+                          {...stringAvatar(participant.user.name, { mr: 2 })}
+                        />
+                      </NoMaxWidthTooltip>
                       <Typography color="textPrimary" variant="body1">
                         {participant.user.name}
                         {participant.user.id.slice(0, 6) === "google" && (

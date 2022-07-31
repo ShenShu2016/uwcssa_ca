@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-06-04 22:41:09
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-07-24 15:19:53
+ * @LastEditTime: 2022-07-30 23:40:05
  * @FilePath: /uwcssa_ca/src/admin/UwcssaMember/UwcssaMemberDashboard/components/SimpleStriped/SimpleStriped.tsx
  * @Description:
  *
@@ -10,13 +10,18 @@
 import {
   Avatar,
   Button,
+  Fade,
   Paper,
+  styled,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
   TableRow,
+  Tooltip,
+  tooltipClasses,
+  TooltipProps,
   Typography,
   useTheme,
 } from "@mui/material";
@@ -35,6 +40,13 @@ import { useAppDispatch } from "redux/hooks";
 import { useConfirm } from "material-ui-confirm";
 import EditUwcssaMemberForm from "./components/EditUwcssaMember/EditUwcssaMemberForm/EditUwcssaMemberForm";
 
+const NoMaxWidthTooltip = styled(({ className, ...props }: TooltipProps) => (
+  <Tooltip {...props} classes={{ popper: className }} />
+))({
+  [`& .${tooltipClasses.tooltip}`]: {
+    maxWidth: "none",
+  },
+});
 function SimpleStriped({
   uwcssaMemberList,
 }: {
@@ -79,6 +91,15 @@ function SimpleStriped({
                   sx={{ textTransform: "uppercase" }}
                 >
                   User
+                </Typography>
+              </TableCell>
+              <TableCell>
+                <Typography
+                  variant="caption"
+                  fontWeight={700}
+                  sx={{ textTransform: "uppercase" }}
+                >
+                  昵称
                 </Typography>
               </TableCell>
               <TableCell>
@@ -183,13 +204,33 @@ function SimpleStriped({
                 }}
               >
                 <TableCell component="th" scope="row">
-                  <Avatar
-                    src={item.user?.avatarURL?.objectThumbnailURL}
-                    {...stringAvatar(item.user?.name, {
-                      width: 40,
-                      height: 40,
-                    })}
-                  />
+                  <NoMaxWidthTooltip
+                    TransitionComponent={Fade}
+                    TransitionProps={{ timeout: 600 }}
+                    disableInteractive
+                    title={
+                      <Typography
+                        color="inherit"
+                        variant="body2"
+                        sx={{ whiteSpace: "pre" }}
+                      >
+                        {JSON.stringify(item.user, null, "\t")}
+                      </Typography>
+                    }
+                  >
+                    <Avatar
+                      src={item.user?.avatarURL?.objectThumbnailURL}
+                      {...stringAvatar(item.user?.name, {
+                        width: 40,
+                        height: 40,
+                      })}
+                    />
+                  </NoMaxWidthTooltip>
+                </TableCell>
+                <TableCell>
+                  <Typography variant="subtitle2" fontWeight={700}>
+                    {item.user.name}
+                  </Typography>
                 </TableCell>
                 <TableCell>
                   <Typography variant="subtitle2" fontWeight={700}>
