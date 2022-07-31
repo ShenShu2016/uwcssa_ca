@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-06-01 00:31:43
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-10 13:53:59
+ * @LastEditTime: 2022-07-30 23:40:04
  * @FilePath: /uwcssa_ca/src/admin/UserProfile/components/CustomerListResults.tsx
  * @Description:
  *
@@ -12,12 +12,17 @@ import {
   Avatar,
   Box,
   Card,
+  Fade,
+  styled,
   Table,
   TableBody,
   TableCell,
   TableHead,
   TablePagination,
   TableRow,
+  Tooltip,
+  tooltipClasses,
+  TooltipProps,
   Typography,
 } from "@mui/material";
 
@@ -41,6 +46,15 @@ type UserProfileType = {
   updatedAt: string;
   owner: string;
 };
+
+const NoMaxWidthTooltip = styled(({ className, ...props }: TooltipProps) => (
+  <Tooltip {...props} classes={{ popper: className }} />
+))({
+  [`& .${tooltipClasses.tooltip}`]: {
+    maxWidth: "none",
+  },
+});
+
 function CustomerListResults({
   userProfileList,
   ...rest
@@ -81,11 +95,25 @@ function CustomerListResults({
                         display: "flex",
                       }}
                     >
-                      <Avatar
-                        src={customer.avatarURL?.objectCompressedURL}
-                        {...stringAvatar(customer.name, { mr: 2 })}
-                      />
-
+                      <NoMaxWidthTooltip
+                        TransitionComponent={Fade}
+                        TransitionProps={{ timeout: 600 }}
+                        disableInteractive
+                        title={
+                          <Typography
+                            color="inherit"
+                            variant="body2"
+                            sx={{ whiteSpace: "pre" }}
+                          >
+                            {JSON.stringify(customer, null, "\t")}
+                          </Typography>
+                        }
+                      >
+                        <Avatar
+                          src={customer.avatarURL?.objectCompressedURL}
+                          {...stringAvatar(customer.name, { mr: 2 })}
+                        />
+                      </NoMaxWidthTooltip>
                       <Typography color="textPrimary" variant="body1">
                         {customer.name}
                         {customer.id.slice(0, 6) === "google" && (
