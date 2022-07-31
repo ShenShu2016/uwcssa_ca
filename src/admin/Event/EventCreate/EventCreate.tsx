@@ -3,9 +3,9 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-31 10:20:04
- * @LastEditTime: 2022-07-24 15:40:36
- * @LastEditors: Shen Shu
- * @FilePath: /uwcssa_ca/src/admin/Event/EventCreate/EventCreate.tsx
+ * @LastEditTime: 2022-07-27 16:20:55
+ * @LastEditors: Leo
+ * @FilePath: \uwcssa_ca\src\admin\Event\EventCreate\EventCreate.tsx
  */
 
 import "swiper/css";
@@ -15,7 +15,9 @@ import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
 
 import PageTitle from "admin/components/pageTitle";
-import { useAppSelector } from "redux/hooks";
+import { useAppSelector, useAppDispatch } from "redux/hooks";
+import { useParams } from "react-router-dom";
+import { fetchEvent } from "redux/event/eventSlice";
 import FullScreenLoading from "components/FullScreenLoading/FullScreenLoading";
 import EventConfig from "./components/EventConfig";
 import EventForm from "./components/EventForm";
@@ -60,11 +62,16 @@ function SwipeCommiter({ activeStep }: any) {
 
   useEffect(() => {
     swiper.slideTo(activeStep);
-  }, [activeStep]);
+  }, [activeStep, swiper]);
   // eslint-disable-next-line react/jsx-no-useless-fragment
   return <></>;
 }
-function EventCreate(): React.ReactElement {
+function EventCreate({
+  isEdit = false,
+}: {
+  // eslint-disable-next-line react/require-default-props
+  isEdit?: boolean;
+}): React.ReactElement {
   const completed = useAppSelector(
     (state) => state.form.createData.completeStatus,
   );
@@ -73,6 +80,35 @@ function EventCreate(): React.ReactElement {
     status: false,
     message: "",
   });
+  const { eventId } = useParams<any>();
+  const dispatch = useAppDispatch();
+  const [basicInfo, setBasicInfo] = useState(null);
+  const [poster, setPoster] = useState("");
+
+  useEffect(() => {
+    async function getEventById() {
+      // 如果isEdit为true 发请求通过eventId获取event的数据
+      if (isEdit) {
+        const res = await dispatch(fetchEvent({ isAuth: true, eventId }));
+        // 把event的数据写进redux中
+        const basicInfo = {
+          title: res.payload.title,
+          startDateTime: res.payload.startDate,
+          endDateTime: res.payload.endDate,
+          online: res.payload.online,
+          address: res.payload.eventLocation.formatted_address,
+          limit: 0,
+          description: res.payload.coverPageDescription,
+          content: res.payload.content,
+        };
+        setBasicInfo(basicInfo);
+        setPoster(res.payload.coverPageImgURL);
+        console.log(res.payload);
+      }
+    }
+
+    getEventById();
+  }, [isEdit, eventId, dispatch]);
 
   return (
     <PageTitle
@@ -131,10 +167,10 @@ function EventCreate(): React.ReactElement {
           >
             <SwipeCommiter activeStep={activeStep} />
             <SwiperSlide>
-              <EventForm />
+              <EventForm basicInfo={basicInfo} />
             </SwiperSlide>
             <SwiperSlide>
-              <EventPoster />
+              <EventPoster poster={poster} />
             </SwiperSlide>
             <SwiperSlide>
               <EventConfig />

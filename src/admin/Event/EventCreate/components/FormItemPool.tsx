@@ -2,9 +2,9 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-03 16:11:08
- * @LastEditTime: 2022-07-26 16:15:37
- * @LastEditors: Shen Shu
- * @FilePath: /uwcssa_ca/src/admin/Event/EventCreate/components/FormItemPool.tsx
+ * @LastEditTime: 2022-07-27 14:34:23
+ * @LastEditors: Leo
+ * @FilePath: \uwcssa_ca\src\admin\Event\EventCreate\components\FormItemPool.tsx
  */
 
 import { Box, Button, Card } from "@mui/material";
@@ -50,7 +50,7 @@ function FormItemPool() {
     dispatch(
       fetchFormItemList({ isAuth: true, filter: { isExample: { eq: true } } }),
     );
-  }, []);
+  }, [dispatch]);
 
   const handleAddQuestion = (data) => {
     dispatch(addQuestion(data));

@@ -81,7 +81,7 @@ function EventParticipantTable({
 
                       <Typography color="textPrimary" variant="body1">
                         {participant.user.name}
-                        {participant.id.slice(0, 6) === "google" && (
+                        {participant.user.id.slice(0, 6) === "google" && (
                           <Box
                             component={LazyLoadImage}
                             effect="blur"

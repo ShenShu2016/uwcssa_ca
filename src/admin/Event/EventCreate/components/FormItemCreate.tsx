@@ -1,10 +1,14 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable consistent-return */
+/* eslint-disable @typescript-eslint/no-unused-expressions */
+/* eslint-disable react/require-default-props */
 /* eslint-disable @typescript-eslint/no-use-before-define */
 /*
  * @Author: 李佳修
  * @Date: 2022-06-03 09:32:30
- * @LastEditTime: 2022-07-25 22:30:23
- * @LastEditors: Shen Shu
- * @FilePath: /uwcssa_ca/src/admin/Event/EventCreate/components/FormItemCreate.tsx
+ * @LastEditTime: 2022-07-27 16:22:21
+ * @LastEditors: Leo
+ * @FilePath: \uwcssa_ca\src\admin\Event\EventCreate\components\FormItemCreate.tsx
  */
 
 import * as yup from "yup";

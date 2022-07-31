@@ -1,10 +1,11 @@
+/* eslint-disable react/function-component-definition */
 /* eslint-disable indent */
 /*
  * @Author: 李佳修
  * @Date: 2022-06-05 14:38:23
- * @LastEditTime: 2022-06-09 16:26:20
- * @LastEditors: Shen Shu
- * @FilePath: /uwcssa_ca/src/admin/Event/EventCreate/components/FormItemDetail.tsx
+ * @LastEditTime: 2022-07-27 15:17:35
+ * @LastEditors: Leo
+ * @FilePath: \uwcssa_ca\src\admin\Event\EventCreate\components\FormItemDetail.tsx
  */
 
 import {

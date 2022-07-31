@@ -1,9 +1,9 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-20 21:02:00
- * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-24 00:34:48
- * @FilePath: /uwcssa_ca/src/redux/event/eventSlice.tsx
+ * @LastEditors: Leo
+ * @LastEditTime: 2022-07-27 15:33:25
+ * @FilePath: \uwcssa_ca\src\redux\event\eventSlice.tsx
  * @Description:
  *
  */
@@ -194,7 +194,7 @@ export const fetchEvent = createAsyncThunk(
       eventId,
       isAuth,
       ownerUsername = null,
-    }: { eventId: string; isAuth: boolean; ownerUsername: string },
+    }: { eventId: string; isAuth: boolean; ownerUsername?: string },
     { rejectWithValue },
   ) => {
     try {

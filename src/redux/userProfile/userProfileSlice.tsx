@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-28 01:04:11
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-12 21:57:34
+ * @LastEditTime: 2022-07-30 23:03:12
  * @FilePath: /uwcssa_ca/src/redux/userProfile/userProfileSlice.tsx
  * @Description:
  *
@@ -120,7 +120,7 @@ export const fetchUserProfileList = createAsyncThunk(
         variables: {
           active: "T",
           sortDirection: "DESC",
-          limit: 20,
+          limit: 200, //! 以后这里要改一改
         },
         authMode: isAuth ? undefined : "AWS_IAM",
       });

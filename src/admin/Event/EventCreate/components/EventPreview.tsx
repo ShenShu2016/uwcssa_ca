@@ -1,10 +1,12 @@
+/* eslint-disable consistent-return */
+/* eslint-disable @typescript-eslint/no-use-before-define */
 /* eslint-disable indent */
 /*
  * @Author: 李佳修
  * @Date: 2022-06-01 09:18:34
- * @LastEditTime: 2022-07-24 17:12:27
- * @LastEditors: Shen Shu
- * @FilePath: /uwcssa_ca/src/admin/Event/EventCreate/components/EventPreview.tsx
+ * @LastEditTime: 2022-07-27 14:31:12
+ * @LastEditors: Leo
+ * @FilePath: \uwcssa_ca\src\admin\Event\EventCreate\components\EventPreview.tsx
  */
 
 import { Box, Button, Card, Dialog, DialogTitle } from "@mui/material";
@@ -140,7 +142,6 @@ function EventPreview({ setLoading }: EventPreviewProp) {
       active: ActiveType.T,
       owner: ownerUsername,
     };
-    console.log(98989, createEventInput);
     setLoading({
       status: true,
       message: "正在创建活动",
@@ -172,7 +173,7 @@ function EventPreview({ setLoading }: EventPreviewProp) {
       }),
     );
     if (formRes.meta.requestStatus === "fulfilled") {
-      console.log(formRes);
+      // console.log(formRes);
       const formId = formRes.payload.id;
       const reqList = createData.selectedQuestions.map((item) => ({
         ...item,
@@ -205,7 +206,7 @@ function EventPreview({ setLoading }: EventPreviewProp) {
   };
 
   return (
-    <Box height="80vh">
+    <Box height="110vh" overflow="auto">
       <Dialog
         open={open}
         maxWidth="xs"
@@ -242,7 +243,7 @@ function EventPreview({ setLoading }: EventPreviewProp) {
               fromPreview
             />
           </Card>
-          <Box mt={2} p={2} component={Card} height="60vh" overflow="auto">
+          <Box mt={2} p={2} component={Card}>
             <EventDetail
               fromPreview
               previewEvent={previewData}
