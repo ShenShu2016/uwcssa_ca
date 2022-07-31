@@ -7,6 +7,7 @@
  * @Description:
  *
  */
+// eslint-disable-next-line import/prefer-default-export
 export const userProfileSortByCreatedAt = /* GraphQL */ `
   query UserProfileSortByCreatedAt(
     $active: ActiveType!
