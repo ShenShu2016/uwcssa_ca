@@ -2,13 +2,13 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-07-23 14:58:58
+ * @LastEditTime: 2022-08-03 14:48:06
  * @FilePath: /uwcssa_ca/src/index.tsx
  * @Description:
  *
  */
 
-import { Amplify } from "aws-amplify";
+import { Amplify, Storage } from "aws-amplify";
 import { Provider } from "react-redux";
 import React from "react";
 import ReactDOM from "react-dom";
@@ -17,7 +17,6 @@ import App from "./App";
 import config from "./aws-exports";
 import reportWebVitals from "./reportWebVitals";
 import { store } from "./redux/store";
-
 // import Message from 'components/Message';
 
 function getUri() {
@@ -46,6 +45,12 @@ const updatedAwsConfig = {
 };
 
 Amplify.configure(updatedAwsConfig);
+Storage.configure({
+  region: config.aws_user_files_s3_bucket_region,
+  bucket: config.aws_user_files_s3_bucket,
+  identityPoolId: config.aws_user_pools_id,
+  level: "protected",
+});
 
 ReactDOM.render(
   <Provider store={store}>
