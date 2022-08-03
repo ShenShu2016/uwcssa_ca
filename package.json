@@ -1,7 +1,7 @@
 {
   "name": "uwcssa_ca",
   "email": "shushen2013@gmail.com",
-  "version": "0.0.1",
+  "version": "1.0.1",
   "private": true,
   "scripts": {
     "start": "react-scripts start",
@@ -31,14 +31,7 @@
       "last 1 safari version"
     ]
   },
-  "resolutions": {
-    "@types/react": "17.0.37"
-  },
   "dependencies": {
-    "@aws-amplify/api": "^4.0.46",
-    "@aws-amplify/api-graphql": "^2.3.10",
-    "@aws-amplify/auth": "^4.5.10",
-    "@aws-amplify/storage": "^4.4.29",
     "@ckeditor/ckeditor5-alignment": "^18.0.0",
     "@ckeditor/ckeditor5-build-classic": "^34.0.0",
     "@ckeditor/ckeditor5-react": "^5.0.1",
@@ -59,7 +52,7 @@
     "@reduxjs/toolkit": "^1.8.1",
     "@types/jest": "^27.5.1",
     "aos": "^2.3.4",
-    "aws-amplify": "^4.3.22",
+    "aws-amplify": "^4.3.30",
     "card-validator": "^8.1.1",
     "ckeditor5-custom-build": "file:ckeditor5",
     "date-fns": "^2.28.0",
