@@ -2,7 +2,7 @@
  * @Author: 李佳修
  * @Date: 2022-05-19 17:21:06
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-26 18:31:07
+ * @LastEditTime: 2022-08-03 19:08:35
  * @FilePath: /uwcssa_ca/src/components/BlogWithLargeImage/BlogWithLargeImage.tsx
  * @Description:
  *
@@ -28,6 +28,18 @@ import moment from "moment";
 import { selectAllArticles } from "redux/article/articleSlice";
 import { useAppSelector } from "redux/hooks";
 
+const dataAosEffect = [
+  "fade",
+  "fade-up",
+  "fade-down",
+  "fade-left",
+  "fade-right",
+  "fade-up-right",
+  "fade-up-left",
+  "fade-down-right",
+  "fade-down-left",
+];
+
 function BlogWithLargeImage() {
   const articles = useAppSelector(selectAllArticles); // redux 有这种用法
 
@@ -35,16 +47,19 @@ function BlogWithLargeImage() {
     <Box>
       <Grid container>
         {articles.length
-          ? articles.map((item, index) => (
+          ? articles.map((item) => (
               <Grid
                 key={item.id}
                 item
                 width="100%"
                 mb="8px"
-                data-aos="fade-up"
-                data-aos-delay={index * 200}
-                data-aos-offset={100}
-                data-aos-duration={600}
+                data-aos={
+                  dataAosEffect[
+                    Math.floor(Math.random() * dataAosEffect.length)
+                  ]
+                }
+                data-aos-offset={200}
+                data-aos-duration={500}
               >
                 <Box
                   component={Card}
