@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-07-23 14:58:58
+ * @LastEditTime: 2022-08-03 18:21:28
  * @FilePath: /uwcssa_ca/src/index.tsx
  * @Description:
  *
@@ -17,7 +17,6 @@ import App from "./App";
 import config from "./aws-exports";
 import reportWebVitals from "./reportWebVitals";
 import { store } from "./redux/store";
-
 // import Message from 'components/Message';
 
 function getUri() {

@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-22 15:10:30
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-11 01:34:32
+ * @LastEditTime: 2022-08-03 11:03:05
  * @FilePath: /uwcssa_ca/src/redux/userImage/userImageSlice.tsx
  * @Description:
  *
@@ -23,7 +23,11 @@ import { userImageSortByCreatedAt } from "graphql/queries";
 import { v4 as uuid } from "uuid";
 import awsmobile from "../../aws-exports";
 
-const { aws_user_files_s3_bucket, aws_user_files_s3_bucket_region } = awsmobile;
+const {
+  aws_user_files_s3_bucket,
+  aws_user_files_s3_bucket_region,
+  aws_project_region,
+} = awsmobile;
 
 export type UserImage = {
   id: string; // id 必须要有
@@ -146,7 +150,10 @@ export const postUserImage = createAsyncThunk(
       active: "T",
       owner: username,
     };
-    // console.log(createUserImageInput);
+    console.log(aws_project_region);
+    console.log(createUserImageInput);
+    console.log(`${targetTable}/${id}.${fileEXT}`);
+    console.log(file);
 
     try {
       await Storage.put(`${targetTable}/${id}.${fileEXT}`, file, {

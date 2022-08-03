@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-20 21:02:00
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-07-25 22:11:29
+ * @LastEditTime: 2022-08-03 18:19:56
  * @FilePath: /uwcssa_ca/src/redux/article/articleSlice.tsx
  * @Description:
  *
@@ -90,7 +90,7 @@ export const fetchArticleList = createAsyncThunk(
         variables: {
           active: "T",
           sortDirection: "DESC",
-          limit: 10,
+          //! 以后搞个换页啥的 limit: 10,
         },
         authMode: isAuth ? undefined : "AWS_IAM",
       });
