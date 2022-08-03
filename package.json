@@ -34,9 +34,6 @@
   "resolutions": {
     "@types/react": "17.0.37"
   },
-  "overrides": {
-    "@types/react": "17.0.37"
-  },
   "dependencies": {
     "@aws-amplify/api": "^4.0.46",
     "@aws-amplify/api-graphql": "^2.3.10",
