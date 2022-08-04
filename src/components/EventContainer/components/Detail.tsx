@@ -2,7 +2,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-13 09:15:49
- * @LastEditTime: 2022-07-22 15:54:10
+ * @LastEditTime: 2022-08-04 12:42:06
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/components/EventContainer/components/Detail.tsx
  */
@@ -27,12 +27,7 @@ interface DetailProp {
   fromPreview?: boolean;
   onJoin: () => void;
 }
-
-const Details: React.FC<DetailProp> = ({
-  info,
-  fromPreview = false,
-  onJoin,
-}): JSX.Element => {
+function Details({ info, fromPreview = false, onJoin }: DetailProp) {
   // console.log(info);
   const ownerUsername = useAppSelector(getOwnerUserName);
   // console.log(ownerUsername);
@@ -123,7 +118,12 @@ const Details: React.FC<DetailProp> = ({
             你已经报名
           </Button>
         ) : ownerUsername ? (
-          <Button variant="contained" sx={{ width: "100px" }} onClick={onJoin}>
+          <Button
+            variant="contained"
+            sx={{ width: "100px" }}
+            onClick={onJoin}
+            disabled={moment().isAfter(info.endDate)}
+          >
             快速报名
           </Button>
         ) : (
@@ -134,6 +134,6 @@ const Details: React.FC<DetailProp> = ({
       </Box>
     </Box>
   );
-};
+}
 
 export default Details;

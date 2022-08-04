@@ -4,7 +4,7 @@
  * @Author: Shen Shu
  * @Date: 2022-06-18 17:26:14
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-07-26 13:31:52
+ * @LastEditTime: 2022-08-04 12:44:44
  * @FilePath: /uwcssa_ca/src/views/Event/EventDetail/EventDetail.tsx
  * @Description:
  *
@@ -30,7 +30,7 @@ import {
   selectAllComments,
 } from "redux/comment/commentSlice";
 import { useAppDispatch, useAppSelector } from "redux/hooks";
-
+import moment from "moment";
 import EventJoinForm from "components/EventContainer/components/EventJoinForm";
 import CommentOverview from "components/Comment/CommentOverview/CommentOverview";
 import Hero from "./components/Hero/Hero";
@@ -116,8 +116,10 @@ function EventDetail({
                   variant="contained"
                   fullWidth
                   disabled={
-                    ownerUsername &&
-                    event?.eventParticipants?.items[0]?.owner === ownerUsername
+                    (ownerUsername &&
+                      event?.eventParticipants?.items[0]?.owner ===
+                        ownerUsername) ||
+                    moment().isAfter(event.endDate)
                   }
                   onClick={() => {
                     if (fromPreview) {
