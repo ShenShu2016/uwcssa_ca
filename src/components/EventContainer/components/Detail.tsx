@@ -2,7 +2,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-13 09:15:49
- * @LastEditTime: 2022-08-04 12:42:06
+ * @LastEditTime: 2022-08-04 12:58:19
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/components/EventContainer/components/Detail.tsx
  */
@@ -122,7 +122,7 @@ function Details({ info, fromPreview = false, onJoin }: DetailProp) {
             variant="contained"
             sx={{ width: "100px" }}
             onClick={onJoin}
-            disabled={moment().isAfter(info.endDate)}
+            disabled={moment().isAfter(info?.endDate)}
           >
             快速报名
           </Button>

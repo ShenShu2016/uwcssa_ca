@@ -4,7 +4,7 @@
  * @Author: Shen Shu
  * @Date: 2022-06-18 17:26:14
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-08-04 12:44:44
+ * @LastEditTime: 2022-08-04 12:58:08
  * @FilePath: /uwcssa_ca/src/views/Event/EventDetail/EventDetail.tsx
  * @Description:
  *
@@ -119,7 +119,7 @@ function EventDetail({
                     (ownerUsername &&
                       event?.eventParticipants?.items[0]?.owner ===
                         ownerUsername) ||
-                    moment().isAfter(event.endDate)
+                    moment().isAfter(event?.endDate)
                   }
                   onClick={() => {
                     if (fromPreview) {
