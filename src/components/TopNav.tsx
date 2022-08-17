@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-18 09:12:03
- * @LastEditTime: 2022-07-25 22:31:58
+ * @LastEditTime: 2022-08-17 19:29:10
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/components/TopNav.tsx
  */
@@ -66,6 +66,26 @@ function TopNav({ colorInvert = false }: Props): JSX.Element {
         >
           Issue
         </GitHubButton>
+      </Box>
+      <Box marginRight={{ xs: 1, sm: 2 }}>
+        <IconButton
+          size="small"
+          onClick={() => window.open("https://discord.gg/uWA4XFgbsB")}
+          sx={{
+            color: colorInvert ? blue[50] : blue[700],
+            border: "1px solid #bdbdbd",
+            borderRadius: "10px",
+          }}
+        >
+          <img
+            src="/assets/images/icons/Discord_Icon.svg"
+            alt="discord"
+            style={{
+              height: "20px",
+              width: "20px",
+            }}
+          />
+        </IconButton>
       </Box>
       <Box marginRight={{ xs: 1, sm: 2 }}>
         <IconButton
